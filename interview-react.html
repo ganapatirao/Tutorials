@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React Interview Preparation Guide</title>
-        <style>
+                <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
         
         * {
@@ -81,16 +81,6 @@
         .back-button svg {
             width: 20px;
             height: 20px;
-        }
-        @media (max-width: 768px) {
-            .back-button {
-                padding: 10px 18px;
-                font-size: 14px;
-            }
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
         }
         
         h1 {
@@ -174,6 +164,8 @@
             position: relative;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         
         .question:hover {
@@ -201,6 +193,8 @@
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
             position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         
         .answer:hover {
@@ -225,6 +219,7 @@
             padding: 40px;
             border-radius: 18px;
             overflow-x: auto;
+            overflow-y: auto;
             font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
             font-size: 14px;
             margin: 30px 0;
@@ -232,6 +227,21 @@
             border-left: 6px solid #dd0031;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
             position: relative;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            max-width: 100%;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+        }
+        
+        .code-block code {
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
         
         .code-block::before {
@@ -243,6 +253,7 @@
             color: #888;
             letter-spacing: 3px;
             font-weight: 600;
+            z-index: 10;
         }
         
         .toc {
@@ -292,6 +303,8 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             border-radius: 15px;
             overflow: hidden;
+            overflow-x: auto;
+            display: block;
         }
         
         th {
@@ -301,12 +314,15 @@
             padding: 18px;
             text-align: left;
             font-size: 15px;
+            white-space: nowrap;
         }
         
         td {
             padding: 18px;
             border-bottom: 1px solid #e9ecef;
             color: #4a4a68;
+            word-wrap: break-word;
+            max-width: 300px;
         }
         
         tr:nth-child(even) {
@@ -336,6 +352,7 @@
             margin: 25px 0;
             font-weight: 500;
             box-shadow: 0 6px 20px rgba(255, 193, 7, 0.2);
+            word-wrap: break-word;
         }
         
         .important {
@@ -346,6 +363,7 @@
             margin: 25px 0;
             font-weight: 500;
             box-shadow: 0 6px 20px rgba(23, 162, 184, 0.2);
+            word-wrap: break-word;
         }
         
         .page-break {
@@ -372,9 +390,16 @@
             h3 { font-size: 20px; padding-left: 15px; }
             .question { padding: 25px; font-size: 16px; }
             .answer { padding: 25px; }
-            .code-block { padding: 25px; font-size: 13px; }
+            .code-block { padding: 25px; font-size: 13px; overflow-x: auto; }
             .toc { padding: 25px; }
             .toc h3 { font-size: 22px; }
+            .toc li { font-size: 14px; }
+            table { margin: 20px 0; overflow-x: auto; }
+            th, td { padding: 12px; font-size: 13px; }
+            td { max-width: 200px; }
+            .tip, .important { padding: 20px; }
+            ul, ol { padding-left: 25px; }
+            li { font-size: 14px; }
         }
         
         @media (max-width: 480px) {
@@ -386,14 +411,29 @@
             h3 { font-size: 18px; }
             .question { padding: 20px; font-size: 15px; }
             .answer { padding: 20px; }
-            .code-block { padding: 20px; font-size: 12px; }
+            .code-block { padding: 20px; font-size: 12px; overflow-x: auto; }
             .toc { padding: 20px; }
+            .toc h3 { font-size: 20px; }
+            .toc li { font-size: 13px; }
+            table { margin: 15px 0; overflow-x: auto; }
+            th, td { padding: 10px; font-size: 12px; }
+            td { max-width: 150px; }
+            .tip, .important { padding: 18px; font-size: 13px; }
+            ul, ol { padding-left: 20px; }
+            li { font-size: 13px; }
         }
         
         @media (max-width: 360px) {
             h1 { font-size: 26px; }
             h2 { font-size: 20px; }
             h3 { font-size: 17px; }
+            .question { font-size: 14px; }
+            .answer { padding: 18px; }
+            .code-block { padding: 18px; font-size: 11px; overflow-x: auto; }
+            .toc { padding: 18px; }
+            .toc h3 { font-size: 18px; }
+            th, td { padding: 8px; font-size: 11px; }
+            td { max-width: 120px; }
         }
     </style></head>
 <body>
