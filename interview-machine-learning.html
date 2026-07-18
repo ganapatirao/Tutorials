@@ -127,7 +127,83 @@
             margin: 5px 0;
         }
         @media print {
-            body { background: white; }
+            body { background: white; }        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+                max-width: 100%;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            h2 {
+                font-size: 20px;
+                margin-top: 30px;
+            }
+            h3 {
+                font-size: 16px;
+            }
+            .question {
+                font-size: 14px;
+                padding: 15px;
+            }
+            .answer {
+                padding: 15px;
+            }
+            .code-block {
+                padding: 15px;
+                font-size: 12px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .code-block pre {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+            table {
+                font-size: 12px;
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            th, td {
+                padding: 8px;
+            }
+            .toc {
+                padding: 15px;
+            }
+            .toc ol {
+                column-count: 1;
+            }
+            ul, ol {
+                padding-left: 20px;
+            }
+            .important, .tip {
+                padding: 15px;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px 10px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            h2 {
+                font-size: 18px;
+            }
+            .question {
+                font-size: 13px;
+                padding: 12px;
+            }
+            .code-block {
+                padding: 12px;
+                font-size: 11px;
+            }
+            th, td {
+                padding: 6px;
+                font-size: 11px;
+            }
+        }
             .container { padding: 20px; }
             .question { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .tip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -1117,5 +1193,6 @@ P(y=1) = 1 / (1 + e^(-z))
     </div>
 </body>
 </html>
+
 
 
