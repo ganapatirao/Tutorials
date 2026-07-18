@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Interview Preparation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+        }
+        h1 {
+            color: #2496ed;
+            border-bottom: 4px solid #2496ed;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-left: 5px solid #2496ed;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .question {
+            background: linear-gradient(135deg, #2496ed 0%, #0d6efd 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .answer {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0 25px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        .important {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .tip {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #2496ed;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .toc {
+            background: #e7f3ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #2496ed;
+        }
+        .toc ol {
+            column-count: 2;
+        }
+        .toc li {
+            margin: 5px 0;
+        }
+        @media print {
+            body { background: white; }
+            .container { padding: 20px; }
+            .question { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .tip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .important { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        .page-break {
+            page-break-before: always;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Docker Interview Preparation Guide</h1>
+        <p style="font-size: 18px; color: #666; margin-bottom: 30px;"><strong>Comprehensive Interview Preparation with In-Depth Concepts, Code Examples, and Best Practices</strong></p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>Docker Fundamentals</li>
+                <li>Docker Architecture</li>
+                <li>Docker Images and Containers</li>
+                <li>Dockerfile and Building Images</li>
+                <li>Docker Compose</li>
+                <li>Docker Networking</li>
+                <li>Docker Storage and Volumes</li>
+                <li>Docker Registry</li>
+                <li>Docker Security</li>
+                <li>Docker Orchestration</li>
+                <li>Docker Performance Optimization</li>
+                <li>Docker Multi-Stage Builds</li>
+                <li>Docker Best Practices</li>
+                <li>Common Interview Questions</li>
+            </ol>
+        </div>
+
+        <h2>1. Docker Fundamentals</h2>
+
+        <div class="question">
+            Q1: What is Docker and why is it used?
+        </div>
+        <div class="answer">
+            <p><strong>Docker</strong> is an open-source platform for developing, shipping, and running applications in containers. It enables application isolation, portability, and consistency across environments.</p>
+            
+            <h3>Key Benefits:</h3>
+            <ul>
+                <li><strong>Consistency:</strong> Same environment across development, testing, and production</li>
+                <li><strong>Isolation:</strong> Applications run in isolated containers</li>
+                <li><strong>Portability:</strong> Containers run anywhere (Linux, Windows, Cloud)</li>
+                <li><strong>Efficiency:</strong> Lightweight compared to VMs</li>
+                <li><strong>Speed:</strong> Fast startup and deployment</li>
+                <li><strong>Scalability:</strong> Easy to scale horizontally</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q2: What is a container?
+        </div>
+        <div class="answer">
+            <p><strong>Container</strong> is a lightweight, standalone package that includes everything needed to run an application: code, runtime, system tools, libraries, and settings.</p>
+            
+            <h3>Key Characteristics:</h3>
+            <ul>
+                <li>Shares host OS kernel</li>
+                <li>Isolated from other containers</li>
+                <li>Portable across environments</li>
+                <li>Lightweight and fast</li>
+                <li>Immutable infrastructure</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q3: What is the difference between container and virtual machine?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Container</th>
+                    <th>Virtual Machine</th>
+                </tr>
+                <tr>
+                    <td>OS</td>
+                    <td>Shares host OS</td>
+                    <td>Has own OS</td>
+                </tr>
+                <tr>
+                    <td>Size</td>
+                    <td>Lightweight (MBs)</td>
+                    <td>Heavy (GBs)</td>
+                </tr>
+                <tr>
+                    <td>Startup</td>
+                    <td>Fast (seconds)</td>
+                    <td>Slow (minutes)</td>
+                </tr>
+                <tr>
+                    <td>Isolation</td>
+                    <td>Process-level</td>
+                    <td>Hardware-level</td>
+                </tr>
+                <tr>
+                    <td>Portability</td>
+                    <td>High</td>
+                    <td>Lower</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>2. Docker Architecture</h2>
+
+        <div class="question">
+            Q4: What are the key components of Docker architecture?
+        </div>
+        <div class="answer">
+            <h3>Docker Components:</h3>
+            <ul>
+                <li><strong>Docker Daemon (dockerd):</strong> Background service that manages Docker objects (images, containers, networks, volumes)</li>
+                <li><strong>Docker Client (docker):</strong> CLI tool that communicates with Docker Daemon</li>
+                <li><strong>Docker Registry:</strong> Stores and distributes Docker images (Docker Hub, private registries)</li>
+                <li><strong>Docker Objects:</strong> Images, containers, networks, volumes, services</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q5: What is the difference between Docker Daemon and Docker Client?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Docker Daemon:</strong> Background service that manages Docker objects. Listens for Docker API requests. Performs container operations.</li>
+                <li><strong>Docker Client:</strong> CLI tool that sends commands to Docker Daemon. Provides user interface. Communicates via REST API.</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>3. Docker Images and Containers</h2>
+
+        <div class="question">
+            Q6: What is a Docker image?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Image</strong> is a read-only template for creating containers. It contains the application code, libraries, dependencies, and runtime.</p>
+            
+            <h3>Key Characteristics:</h3>
+            <ul>
+                <li>Read-only</li>
+                <li>Layered file system</li>
+                <li>Immutable</li>
+                <li>Can be versioned</li>
+                <li>Stored in registries</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q7: What is the difference between Docker image and container?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Docker Image:</strong> Read-only template. Blueprint for containers. Can be shared and stored.</li>
+                <li><strong>Docker Container:</strong> Running instance of an image. Writable layer. Isolated runtime environment.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q8: What are Docker image layers?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Image Layers</strong> are read-only filesystems stacked on top of each other to form the final image.</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li><strong>Efficiency:</strong> Layers are cached and reused</li>
+                <li><strong>Speed:</strong> Only changed layers need to be rebuilt</li>
+                <li><strong>Size:</strong> Shared layers reduce storage</li>
+                <li><strong>Versioning:</strong> Each layer has a unique ID</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>4. Dockerfile and Building Images</h2>
+
+        <div class="question">
+            Q9: What is a Dockerfile?
+        </div>
+        <div class="answer">
+            <p><strong>Dockerfile</strong> is a text document that contains all the commands to assemble a Docker image. It's like a recipe for building images.</p>
+            
+            <div class="code-block">`r`n# Example Dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]</div>
+        </div>
+
+        <div class="question">
+            Q10: What are the common Dockerfile instructions?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Instruction</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>FROM</td>
+                    <td>Base image to build from</td>
+                </tr>
+                <tr>
+                    <td>RUN</td>
+                    <td>Execute commands during build</td>
+                </tr>
+                <tr>
+                    <td>CMD</td>
+                    <td>Default command to run on container start</td>
+                </tr>
+                <tr>
+                    <td>ENTRYPOINT</td>
+                    <td>Executable that runs on container start</td>
+                </tr>
+                <tr>
+                    <td>COPY</td>
+                    <td>Copy files from host to image</td>
+                </tr>
+                <tr>
+                    <td>ADD</td>
+                    <td>Copy files and URLs, auto-extract</td>
+                </tr>
+                <tr>
+                    <td>ENV</td>
+                    <td>Set environment variables</td>
+                </tr>
+                <tr>
+                    <td>EXPOSE</td>
+                    <td>Document exposed ports</td>
+                </tr>
+                <tr>
+                    <td>VOLUME</td>
+                    <td>Create mount point for volumes</td>
+                </tr>
+                <tr>
+                    <td>WORKDIR</td>
+                    <td>Set working directory</td>
+                </tr>
+                <tr>
+                    <td>USER</td>
+                    <td>Set user for RUN, CMD, ENTRYPOINT</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q11: What is the difference between CMD and ENTRYPOINT?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>CMD:</strong> Default command that can be overridden. Provides default arguments. Can be replaced at runtime.</li>
+                <li><strong>ENTRYPOINT:</strong> Main executable that cannot be overridden. Provides entry point. Can only be overridden with --entrypoint flag.</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>5. Docker Compose</h2>
+
+        <div class="question">
+            Q12: What is Docker Compose?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Compose</strong> is a tool for defining and running multi-container Docker applications. It uses YAML files to configure application services.</p>
+            
+            <div class="code-block">`r`n# docker-compose.yml
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_PASSWORD: example</div>
+        </div>
+
+        <div class="question">
+            Q13: What are the common Docker Compose commands?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker-compose up:</strong> Create and start containers</li>
+                <li><strong>docker-compose down:</strong> Stop and remove containers</li>
+                <li><strong>docker-compose build:</strong> Build or rebuild services</li>
+                <li><strong>docker-compose ps:</strong> List containers</li>
+                <li><strong>docker-compose logs:</strong> View output from containers</li>
+                <li><strong>docker-compose exec:</strong> Execute command in running container</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>6. Docker Networking</h2>
+
+        <div class="question">
+            Q14: What are Docker network types?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Bridge:</strong> Default network for containers. Isolated on host. Containers can communicate via IP.</li>
+                <li><strong>Host:</strong> No network isolation. Container uses host network. Good for high performance.</li>
+                <li><strong>None:</strong> No network access. Completely isolated. Good for security.</li>
+                <li><strong>Overlay:</strong> Multi-host networking. Connects containers across multiple hosts. Used in Swarm.</li>
+                <li><strong>Macvlan:</strong> Assign MAC address to container. Direct access to physical network.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q15: What is the difference between bridge and overlay networks?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Bridge</th>
+                    <th>Overlay</th>
+                </tr>
+                <tr>
+                    <td>Scope</td>
+                    <td>Single host</td>
+                    <td>Multi-host</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Local development</td>
+                    <td>Swarm, multi-host</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Better</td>
+                    <td>Slightly lower</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>7. Docker Storage and Volumes</h2>
+
+        <div class="question">
+            Q16: What are Docker storage drivers?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Storage Drivers</strong> manage how containers store and access data on the host filesystem.</p>
+            
+            <h3>Common Drivers:</h3>
+            <ul>
+                <li><strong>overlay2:</strong> Default for Linux. Best performance.</li>
+                <li><strong>btrfs:</strong> Btrfs filesystem support.</li>
+                <li><strong>zfs:</strong> ZFS filesystem support.</li>
+                <li><strong>vfs:</strong> For testing, no copy-on-write.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q17: What is a Docker volume?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Volume</strong> is a persistent data storage mechanism that exists independently of containers. It allows data to survive container deletion.</p>
+            
+            <h3>Volume Types:</h3>
+            <ul>
+                <li><strong>Named volumes:</strong> Managed by Docker. Created with docker volume create.</li>
+                <li><strong>Bind mounts:</strong> Map host directory to container. Managed by user.</li>
+                <li><strong>tmpfs mounts:</strong> Stored in host memory. Non-persistent.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q18: What is the difference between volume and bind mount?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Volume</th>
+                    <th>Bind Mount</th>
+                </tr>
+                <tr>
+                    <td>Management</td>
+                    <td>Docker managed</td>
+                    <td>User managed</td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td>Var/lib/docker/volumes</td>
+                    <td>User-specified path</td>
+                </tr>
+                <tr>
+                    <td>Portability</td>
+                    <td>High</td>
+                    <td>Low</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Production</td>
+                    <td>Development</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>8. Docker Registry</h2>
+
+        <div class="question">
+            Q19: What is a Docker registry?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Registry</strong> is a storage and distribution system for Docker images. It stores and serves Docker images.</p>
+            
+            <h3>Types:</h3>
+            <ul>
+                <li><strong>Docker Hub:</strong> Public registry by Docker. Free and private repositories.</li>
+                <li><strong>Private Registry:</strong> Self-hosted registry. For security and compliance.</li>
+                <li><strong>Third-party registries:</strong> AWS ECR, Azure Container Registry, Google GCR.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q20: What are the common Docker registry commands?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker login:</strong> Authenticate with registry</li>
+                <li><strong>docker pull:</strong> Pull image from registry</li>
+                <li><strong>docker push:</strong> Push image to registry</li>
+                <li><strong>docker search:</strong> Search for images in Docker Hub</li>
+                <li><strong>docker tag:</strong> Tag image for registry</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>9. Docker Security</h2>
+
+        <div class="question">
+            Q21: What are Docker security best practices?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Use official images:</strong> Prefer official images from Docker Hub</li>
+                <li><strong>Scan images:</strong> Use tools like Trivy, Clair to scan for vulnerabilities</li>
+                <li><strong>Use non-root user:</strong> Run containers as non-root user</li>
+                <li><strong>Minimize image size:</strong> Use alpine images, multi-stage builds</li>
+                <li><strong>Use secrets management:</strong> Don't hardcode secrets in images</li>
+                <li><strong>Enable Content Trust:</strong> Verify image signatures</li>
+                <li><strong>Use Docker Bench:</strong> Run Docker security benchmark</li>
+                <li><strong>Limit capabilities:</strong> Drop unnecessary Linux capabilities</li>
+                <li><strong>Use read-only filesystem:</strong> Make container filesystem read-only</li>
+                <li><strong>Network isolation:</strong> Use proper network segmentation</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q22: What is Docker Content Trust?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Content Trust (DCT)</strong> enables digital signing of Docker images. It ensures the integrity and authenticity of images pulled from or pushed to registries.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li>Image signing</li>
+                <li>Signature verification</li>
+                <li>Prevents image tampering</li>
+                <li>Ensures image authenticity</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>10. Docker Orchestration</h2>
+
+        <div class="question">
+            Q23: What is Docker Swarm?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Swarm</strong> is Docker's native clustering and orchestration tool. It turns a pool of Docker hosts into a single virtual host.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li>Native Docker integration</li>
+                <li>Declarative service model</li>
+                <li>Load balancing</li>
+                <li>Rolling updates</li>
+                <li>Service discovery</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q24: What is the difference between Docker Swarm and Kubernetes?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Docker Swarm</th>
+                    <th>Kubernetes</th>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>Simple</td>
+                    <td>Complex</td>
+                </tr>
+                <tr>
+                    <td>Scalability</td>
+                    <td>Limited</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>Ecosystem</td>
+                    <td>Smaller</td>
+                    <td>Larger</td>
+                </tr>
+                <tr>
+                    <td>Learning Curve</td>
+                    <td>Gentle</td>
+                    <td>Steep</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Simple deployments</td>
+                    <td>Enterprise, complex</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>11. Docker Performance Optimization</h2>
+
+        <div class="question">
+            Q25: How do you optimize Docker image size?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Use alpine images:</strong> Smaller base images</li>
+                <li><strong>Multi-stage builds:</strong> Separate build and runtime environments</li>
+                <li><strong>Minimize layers:</strong> Combine RUN commands</li>
+                <li><strong>Use .dockerignore:</strong> Exclude unnecessary files</li>
+                <li><strong>Clean up package cache:</strong> Remove cache after installation</li>
+                <li><strong>Use specific versions:</strong> Avoid latest tag</li>
+                <li><strong>Remove unnecessary files:</strong> Delete temp files, documentation</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q26: What is .dockerignore?
+        </div>
+        <div class="answer">
+            <p><strong>.dockerignore</strong> is a file that specifies patterns to exclude when building a Docker image. Similar to .gitignore.</p>
+            
+            <div class="code-block">`r`n# .dockerignore example
+node_modules
+npm-debug.log
+.git
+.env
+.DS_Store
+*.md</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>12. Docker Multi-Stage Builds</h2>
+
+        <div class="question">
+            Q27: What are multi-stage builds?
+        </div>
+        <div class="answer">
+            <p><strong>Multi-stage builds</strong> allow you to use multiple FROM statements in a Dockerfile. Each FROM starts a new build stage, and you can copy artifacts from one stage to another.</p>
+            
+            <div class="code-block">`r`n# Multi-stage build example
+# Build stage
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Runtime stage
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY package*.json ./
+RUN npm install --production
+EXPOSE 3000
+CMD ["npm", "start"]</div>
+        </div>
+
+        <div class="question">
+            Q28: What are the benefits of multi-stage builds?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Smaller final image:</strong> Only runtime dependencies included</li>
+                <li><strong>Better security:</strong> Build tools not in final image</li>
+                <li><strong>Faster deployment:</strong> Smaller images download faster</li>
+                <li><strong>Clean separation:</strong> Build and runtime environments separate</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>13. Docker Best Practices</h2>
+
+        <div class="question">
+            Q29: What are Docker best practices for production?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Use specific image tags:</strong> Avoid latest tag</li>
+                <li><strong>Scan images for vulnerabilities:</strong> Use security scanning tools</li>
+                <li><strong>Use non-root user:</strong> Run containers as non-root</li>
+                <li><strong>Limit container resources:</strong> Set CPU and memory limits</li>
+                <li><strong>Use health checks:</strong> Implement container health checks</li>
+                <li><strong>Log to stdout/stderr:</strong> Centralized logging</li>
+                <li><strong>Use volumes for persistent data:</strong> Don't store data in containers</li>
+                <li><strong>Use .dockerignore:</strong> Exclude unnecessary files</li>
+                <li><strong>Minimize image layers:</strong> Combine RUN commands</li>
+                <li><strong>Use multi-stage builds:</strong> Optimize image size</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q30: What are Docker best practices for development?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Use Docker Compose:</strong> Manage multi-container applications</li>
+                <li><strong>Use bind mounts:</strong> Live code reloading</li>
+                <li><strong>Use volume mounts:</strong> Persist database data</li>
+                <li><strong>Use environment variables:</strong> Configure applications</li>
+                <li><strong>Use Dockerfile for dev:</strong> Include dev tools</li>
+                <li><strong>Use .env files:</strong> Manage environment variables</li>
+                <li><strong>Use docker-compose.override.yml:</strong> Local overrides</li>
+                <li><strong>Use hot reloading:</strong> Enable live reload in development</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>14. Common Interview Questions</h2>
+
+        <div class="question">
+            Q31: What is the difference between docker run and docker start?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker run:</strong> Creates a new container and starts it. Combines create and start. Used for first time.</li>
+                <li><strong>docker start:</strong> Starts an existing stopped container. Used for restarting containers.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q32: What is the difference between docker stop and docker kill?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker stop:</strong> Gracefully stops container. Sends SIGTERM, then SIGTERM after timeout. Allows cleanup.</li>
+                <li><strong>docker kill:</strong> Immediately stops container. Sends SIGKILL. No cleanup.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q33: What is the difference between docker pause and docker stop?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker pause:</strong> Suspends all processes in container. Keeps container running but frozen. Can be resumed.</li>
+                <li><strong>docker stop:</strong> Stops container completely. Processes terminated. Cannot be resumed, only restarted.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q34: What is the difference between docker exec and docker attach?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker exec:</strong> Run command in running container. Starts new process. Good for debugging.</li>
+                <li><strong>docker attach:</strong> Attach to container's main process. View container output. Good for monitoring.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q35: What is the difference between docker ps and docker inspect?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker ps:</strong> List running containers. Shows basic information. Good for overview.</li>
+                <li><strong>docker inspect:</strong> Detailed information about container. Shows configuration, state. Good for debugging.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q36: What is the difference between docker logs and docker events?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker logs:</strong> View container logs. Shows stdout/stderr. Good for application debugging.</li>
+                <li><strong>docker events:</strong> View Docker daemon events. Shows container lifecycle events. Good for monitoring.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q37: What is the difference between docker commit and docker build?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker commit:</strong> Create image from container. Captures container state. Not reproducible.</li>
+                <li><strong>docker build:</strong> Build image from Dockerfile. Reproducible builds. Best practice.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q38: What is the difference between docker export and docker save?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker export:</strong> Export container filesystem to tar. Creates flat image. Loses history and metadata.</li>
+                <li><strong>docker save:</strong> Save image to tar. Preserves layers and metadata. Can be loaded back.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q39: What is the difference between docker import and docker load?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker import:</strong> Import tar as image. Creates new image from export. No layers.</li>
+                <li><strong>docker load:</strong> Load image from tar. Restores saved image with layers.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q40: What is the difference between docker rmi and docker rm?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker rmi:</strong> Remove Docker image. Deletes image from local storage. Must stop containers first.</li>
+                <li><strong>docker rm:</strong> Remove Docker container. Deletes container. Must stop container first.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q41: What is the difference between COPY and ADD in Dockerfile?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>COPY:</strong> Copy files from host to image. Simple and transparent. Recommended for most cases.</li>
+                <li><strong>ADD:</strong> Copy files and URLs. Auto-extracts archives. Can download from URLs. More complex.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q42: What is the difference between ENTRYPOINT and CMD in Dockerfile?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>ENTRYPOINT:</strong> Executable that runs on container start. Cannot be overridden easily. Defines container's main process.</li>
+                <li><strong>CMD:</strong> Default arguments for ENTRYPOINT. Can be overridden. Provides default command.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q43: What is the difference between ENV and ARG in Dockerfile?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>ENV:</strong> Environment variable available at runtime. Persists in container. Can be overridden at runtime.</li>
+                <li><strong>ARG:</strong> Build-time variable. Only available during build. Not available at runtime.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q44: What is the difference between ONBUILD and STOPSIGNAL in Dockerfile?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>ONBUILD:</strong> Trigger instruction when image used as base. Good for base images. Deferred execution.</li>
+                <li><strong>STOPSIGNAL:</strong> Signal to send to container on stop. Default is SIGTERM. Can be overridden.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q45: What is the difference between HEALTHCHECK and SHELL in Dockerfile?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>HEALTHCHECK:</strong> Define health check command. Monitors container health. Can trigger restarts.</li>
+                <li><strong>SHELL:</strong> Override default shell. Changes shell used for RUN, CMD, ENTRYPOINT.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q46: What are the common Docker troubleshooting scenarios?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Container won't start:</strong> Check image, logs, resource limits</li>
+                <li><strong>Container exits immediately:</strong> Check entrypoint, command, logs</li>
+                <li><strong>Network issues:</strong> Check network configuration, DNS, firewall</li>
+                <li><strong>Volume mounting issues:</strong> Check permissions, paths, SELinux</li>
+                <li><strong>Image pull failures:</strong> Check registry, authentication, network</li>
+                <li><strong>Resource exhaustion:</strong> Check CPU, memory, disk space</li>
+                <li><strong>Permission denied:</strong> Check user permissions, SELinux</li>
+                <li><strong>Port conflicts:</strong> Check port bindings, host ports</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q47: What is Docker Bench Security?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Bench Security</strong> is a script that checks for common security best practices in Docker deployments. It's based on the CIS Docker Benchmark.</p>
+            
+            <h3>Checks:</h3>
+            <ul>
+                <li>Host configuration</li>
+                <li>Docker daemon configuration</li>
+                <li>Docker daemon configuration files</li>
+                <li>Container images and build files</li>
+                <li>Container runtime</li>
+                <li>Docker security operations</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q48: What is Docker Scout?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Scout</strong> is a tool for analyzing and securing Docker images. It provides vulnerability scanning, image analysis, and best practice recommendations.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li>Vulnerability scanning</li>
+                <li>Image analysis</li>
+                <li>Base image recommendations</li>
+                <li>License compliance</li>
+                <li>CI/CD integration</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q49: What is Docker BuildKit?
+        </div>
+        <div class="answer">
+            <p><strong>Docker BuildKit</strong> is the next-generation builder for Docker. It provides improved performance, better caching, and more features.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li>Parallel build execution</li>
+                <li>Better caching</li>
+                <li>Secret management</li>
+                <li>SSH agent forwarding</li>
+                <li>Custom build outputs</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q50: What are the common Docker monitoring tools?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>cAdvisor:</strong> Container metrics collection</li>
+                <li><strong>Prometheus:</strong> Metrics storage and querying</li>
+                <li><strong>Grafana:</strong> Visualization and dashboards</li>
+                <li><strong>ELK Stack:</strong> Log aggregation and analysis</li>
+                <li><strong>Docker Stats:</strong> Built-in container stats</li>
+                <li><strong>Portainer:</strong> Docker management UI</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <strong>Interview Tip:</strong> When discussing Docker, emphasize understanding of core concepts (images, containers, volumes), practical experience with Docker commands, and knowledge of security best practices. Be prepared to discuss real-world scenarios like multi-stage builds, Docker Compose, and troubleshooting.
+        </div>
+
+        <div class="important">
+            <strong>Key Takeaways for Interview:</strong>
+            <ul>
+                <li>Understand Docker architecture and components</li>
+                <li>Know the difference between images and containers</li>
+                <li>Understand Dockerfile instructions and best practices</li>
+                <li>Know Docker Compose for multi-container apps</li>
+                <li>Understand Docker networking and storage</li>
+                <li>Know Docker security best practices</li>
+                <li>Understand multi-stage builds and optimization</li>
+                <li>Know Docker registry and image management</li>
+                <li>Understand Docker troubleshooting strategies</li>
+                <li>Know Docker monitoring and logging</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 50px; padding: 20px; background: #2496ed; color: white; border-radius: 8px; text-align: center;">
+            <h3>End of Docker Interview Preparation Guide</h3>
+            <p>Comprehensive coverage with detailed questions and answers</p>
+        </div>
+    </div>
+</body>
+</html>

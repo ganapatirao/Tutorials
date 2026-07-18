@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Preparation Library - Complete Tech Library</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #512bd4;
+            border-bottom: 4px solid #512bd4;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            font-size: 36px;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .category {
+            margin-bottom: 40px;
+        }
+        .category h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-left: 5px solid #512bd4;
+            padding-left: 15px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 2px solid #dee2e6;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-color: #512bd4;
+        }
+        .card h3 {
+            color: #512bd4;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .card p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .card .badge {
+            display: inline-block;
+            background: #512bd4;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .card .questions {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #28a745;
+            font-weight: 600;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #dee2e6;
+            color: #666;
+            font-size: 14px;
+        }
+        @media print {
+            body { background: white; }
+            .container { padding: 20px; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Interview Preparation Library</h1>
+        <p class="subtitle">Comprehensive Interview Preparation Guides for 4-13 Years Experience | Beginner to Expert Level</p>
+
+        <div class="category">
+            <h2>🌐 Cloud & DevOps</h2>
+            <div class="grid">
+                <a href="interview-azure.html" class="card">
+                    <h3>Microsoft Azure</h3>
+                    <p>Complete Azure interview guide covering compute, storage, networking, security, and advanced architecture patterns.</p>
+                    <span class="badge">50 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-aws.html" class="card">
+                    <h3>AWS (Amazon Web Services)</h3>
+                    <p>Comprehensive AWS interview preparation covering all major services, architecture patterns, and cost management.</p>
+                    <span class="badge">50 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-cicd.html" class="card">
+                    <h3>CI/CD Pipeline</h3>
+                    <p>Complete CI/CD guide covering Jenkins, GitLab, GitHub Actions, GitOps, and multi-cloud strategies.</p>
+                    <span class="badge">50 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>💻 .NET & Backend Development</h2>
+            <div class="grid">
+                <a href="interview-aspnet-core.html" class="card">
+                    <h3>ASP.NET Core</h3>
+                    <p>Complete ASP.NET Core guide covering middleware, dependency injection, hosting, security, and performance.</p>
+                    <span class="badge">50 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-mvc-core.html" class="card">
+                    <h3>ASP.NET Core MVC</h3>
+                    <p>Comprehensive MVC guide covering controllers, views, routing, filters, and advanced patterns.</p>
+                    <span class="badge">50 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-dotnet-api.html" class="card">
+                    <h3>.NET Core API</h3>
+                    <p>Complete Web API guide covering REST, GraphQL, gRPC, authentication, and API security.</p>
+                    <span class="badge">50 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-linq.html" class="card">
+                    <h3>LINQ</h3>
+                    <p>Comprehensive LINQ guide covering queries, operators, performance, and advanced patterns.</p>
+                    <span class="badge">90 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-entity-framework.html" class="card">
+                    <h3>Entity Framework</h3>
+                    <p>Complete EF Core guide covering DbContext, migrations, relationships, and performance optimization.</p>
+                    <span class="badge">80 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-database-integration.html" class="card">
+                    <h3>Database & Integration</h3>
+                    <p>Comprehensive guide covering SQL, NoSQL, integration patterns, and database optimization.</p>
+                    <span class="badge">60 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>🎨 Frontend Development</h2>
+            <div class="grid">
+                <a href="interview-angular.html" class="card">
+                    <h3>Angular</h3>
+                    <p>Complete Angular guide covering components, services, routing, RxJS, and advanced patterns.</p>
+                    <span class="badge">60 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-react.html" class="card">
+                    <h3>React</h3>
+                    <p>Comprehensive React guide covering hooks, state management, performance, and advanced patterns.</p>
+                    <span class="badge">60 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-lit.html" class="card">
+                    <h3>Lit</h3>
+                    <p>Complete Lit guide covering web components, reactive properties, and Lit 3+ features.</p>
+                    <span class="badge">50 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>🚀 Market Trending Technologies</h2>
+            <div class="grid">
+                <a href="interview-kubernetes.html" class="card">
+                    <h3>Kubernetes</h3>
+                    <p>Complete Kubernetes guide covering pods, deployments, services, security, and orchestration.</p>
+                    <span class="badge">50 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-docker.html" class="card">
+                    <h3>Docker</h3>
+                    <p>Comprehensive Docker guide covering containers, images, Dockerfile, Compose, and best practices.</p>
+                    <span class="badge">50 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-genai.html" class="card">
+                    <h3>Generative AI</h3>
+                    <p>Complete GenAI guide covering LLMs, Transformers, RAG, prompt engineering, and AI safety.</p>
+                    <span class="badge">50 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-machine-learning.html" class="card">
+                    <h3>Machine Learning</h3>
+                    <p>Comprehensive ML guide covering algorithms, neural networks, MLOps, and model deployment.</p>
+                    <span class="badge">50 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-cybersecurity.html" class="card">
+                    <h3>Cybersecurity</h3>
+                    <p>Complete security guide covering network security, cryptography, compliance, and threat intelligence.</p>
+                    <span class="badge">50 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+                <a href="interview-microservices.html" class="card">
+                    <h3>Microservices Architecture</h3>
+                    <p>Comprehensive microservices guide covering patterns, communication, observability, and deployment.</p>
+                    <span class="badge">50 Questions</span>
+                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Total Questions:</strong> 1000+ Questions Across All Technologies</p>
+            <p><strong>Experience Level:</strong> Beginner to Expert (4-13 Years)</p>
+            <p><strong>Format:</strong> HTML with Print-Ready Styling for PDF Conversion</p>
+            <p style="margin-top: 20px;">© 2024 Complete Tech Library - Interview Preparation Series</p>
+        </div>
+    </div>
+</body>
+</html>

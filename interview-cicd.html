@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD Pipeline Interview Preparation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+        }
+        h1 {
+            color: #512bd4;
+            border-bottom: 4px solid #512bd4;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-left: 5px solid #512bd4;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .question {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .answer {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0 25px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        .important {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .tip {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #512bd4;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .toc {
+            background: #e7f3ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #512bd4;
+        }
+        .toc ol {
+            column-count: 2;
+        }
+        .toc li {
+            margin: 5px 0;
+        }
+        @media print {
+            body { background: white; }
+            .container { padding: 20px; }
+            .question { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .tip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .important { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        .page-break {
+            page-break-before: always;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CI/CD Pipeline Interview Preparation Guide</h1>
+        <p style="font-size: 18px; color: #666; margin-bottom: 30px;"><strong>Comprehensive Interview Preparation for CI/CD Pipelines on AWS, Azure, and Google Cloud</strong></p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>CI/CD Fundamentals</li>
+                <li>CI Pipeline Concepts</li>
+                <li>CD Pipeline Concepts</li>
+                <li>Infrastructure as Code</li>
+                <li>AWS CI/CD Services</li>
+                <li>Azure CI/CD Services</li>
+                <li>Google Cloud CI/CD Services</li>
+                <li>Container Orchestration</li>
+                <li>Testing in CI/CD</li>
+                <li>Security in CI/CD</li>
+                <li>Advanced CI/CD Patterns</li>
+                <li>CI/CD Monitoring and Observability</li>
+                <li>Multi-Cloud CI/CD</li>
+                <li>Common Interview Questions</li>
+            </ol>
+        </div>
+
+        <h2>1. CI/CD Fundamentals</h2>
+
+        <div class="question">
+            Q1: What is CI/CD and why is it important?
+        </div>
+        <div class="answer">
+            <p><strong>CI/CD (Continuous Integration/Continuous Deployment)</strong> is a practice to automate the integration and deployment of code changes.</p>
+            
+            <h3>Continuous Integration (CI):</h3>
+            <ul>
+                <li>Developers frequently merge code changes</li>
+                <li>Automated builds and tests run on every commit</li>
+                <li>Early detection of integration issues</li>
+                <li>Reduced integration problems</li>
+            </ul>
+            
+            <h3>Continuous Deployment (CD):</h3>
+            <ul>
+                <li>Automated deployment of code changes</li>
+                <li>Code changes automatically deployed to production</li>
+                <li>Faster time to market</li>
+                <li>Reduced manual errors</li>
+            </ul>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li>Faster development cycles</li>
+                <li>Higher code quality</li>
+                <li>Reduced deployment risks</li>
+                <li>Improved collaboration</li>
+                <li>Faster time to market</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q2: What is the difference between CI, CD, and CD?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>CI (Continuous Integration):</strong> Frequent code integration with automated builds and tests. Focus on code quality and early bug detection.</li>
+                <li><strong>CD (Continuous Delivery):</strong> Code changes are automatically built, tested, and prepared for release to production. Manual approval required for deployment.</li>
+                <li><strong>CD (Continuous Deployment):</strong> Code changes are automatically deployed to production without manual intervention. Fully automated pipeline.</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>2. CI Pipeline Concepts</h2>
+
+        <div class="question">
+            Q3: What are the key stages in a CI pipeline?
+        </div>
+        <div class="answer">
+            <ol>
+                <li><strong>Source:</strong> Code commit to version control</li>
+                <li><strong>Build:</strong> Compile code, resolve dependencies</li>
+                <li><strong>Unit Tests:</strong> Run automated unit tests</li>
+                <li><strong>Code Analysis:</strong> Static code analysis, security scanning</li>
+                <li><strong>Package:</strong> Create deployable artifacts</li>
+                <li><strong>Publish:</strong> Store artifacts for deployment</li>
+            </ol>
+            
+            <div class="code-block">// Example CI pipeline (GitHub Actions)
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    
+    - name: Test
+      run: dotnet test --no-build --configuration Release
+    
+    - name: Publish
+      run: dotnet publish --configuration Release --no-build -o ./publish</div>
+        </div>
+
+        <div class="question">
+            Q4: What is a build artifact?
+        </div>
+        <div class="answer">
+            <p>A <strong>build artifact</strong> is the output of the build process that can be deployed. Examples include:</p>
+            <ul>
+                <li>Compiled binaries (DLL, JAR, WAR)</li>
+                <li>Docker images</li>
+                <li>Package files (npm, NuGet, pip)</li>
+                <li>Static assets (HTML, CSS, JS)</li>
+                <li>Infrastructure templates (CloudFormation, Terraform)</li>
+            </ul>
+            
+            <div class="important">
+                <strong>Important:</strong> Artifacts should be versioned and stored in a repository for traceability and rollback capability.
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>3. CD Pipeline Concepts</h2>
+
+        <div class="question">
+            Q5: What are the key stages in a CD pipeline?
+        </div>
+        <div class="answer">
+            <ol>
+                <li><strong>Retrieve Artifact:</strong> Get build artifact from repository</li>
+                <li><strong>Deploy to Staging:</strong> Deploy to staging environment</li>
+                <li><strong>Integration Tests:</strong> Run integration tests</li>
+                <li><strong>UI/End-to-End Tests:</strong> Run automated UI tests</li>
+                <li><strong>Performance Tests:</strong> Run performance tests</li>
+                <li><strong>Security Scans:</strong> Run security scans</li>
+                <li><strong>Manual Approval:</strong> Manual approval (if required)</li>
+                <li><strong>Deploy to Production:</strong> Deploy to production</li>
+                <li><strong>Smoke Tests:</strong> Run smoke tests</li>
+                <li><strong>Rollback:</strong> Automatic rollback on failure</li>
+            </ol>
+        </div>
+
+        <div class="question">
+            Q6: What are different deployment strategies?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Strategy</th>
+                    <th>Description</th>
+                    <th>Pros</th>
+                    <th>Cons</th>
+                </tr>
+                <tr>
+                    <td>Recreate</td>
+                    <td>Stop old, start new</td>
+                    <td>Simple</td>
+                    <td>Downtime</td>
+                </tr>
+                <tr>
+                    <td>Rolling</td>
+                    <td>Replace instances one by one</td>
+                    <td>No downtime</td>
+                    <td>Slower</td>
+                </tr>
+                <tr>
+                    <td>Blue/Green</td>
+                    <td>Two identical environments</td>
+                    <td>Instant rollback</td>
+                    <td>Double resources</td>
+                </tr>
+                <tr>
+                    <td>Canary</td>
+                    <td>Gradual rollout to subset</td>
+                    <td>Risk mitigation</td>
+                    <td>Complex</td>
+                </tr>
+                <tr>
+                    <td>A/B Testing</td>
+                    <td>Route based on features</td>
+                    <td>Testing in production</td>
+                    <td>Complex</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>4. Infrastructure as Code</h2>
+
+        <div class="question">
+            Q7: What is Infrastructure as Code (IaC)?
+        </div>
+        <div class="answer">
+            <p><strong>Infrastructure as Code (IaC)</strong> is the practice of managing and provisioning infrastructure through code rather than manual processes.</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li><strong>Consistency:</strong> Same infrastructure every time</li>
+                <li><strong>Version control:</strong> Infrastructure in version control</li>
+                <li><strong>Reusability:</strong> Reuse infrastructure templates</li>
+                <li><strong>Speed:</strong> Quick provisioning</li>
+                <li><strong>Documentation:</strong> Code serves as documentation</li>
+            </ul>
+            
+            <h3>IaC Tools:</h3>
+            <ul>
+                <li><strong>Terraform:</strong> Multi-cloud IaC tool</li>
+                <li><strong>CloudFormation:</strong> AWS native IaC</li>
+                <li><strong>ARM Templates:</strong> Azure native IaC</li>
+                <li><strong>Kubernetes YAML:</strong> Container orchestration</li>
+                <li><strong>Ansible:</strong> Configuration management</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q8: What is the difference between imperative and declarative IaC?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Imperative:</strong> Define how to achieve desired state (step-by-step). Example: Ansible, Chef, Puppet.</li>
+                <li><strong>Declarative:</strong> Define desired state, tool figures out how to achieve it. Example: Terraform, CloudFormation, ARM Templates.</li>
+            </ul>
+            
+            <div class="code-block">// Declarative (Terraform)
+resource "aws_instance" "web" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+  tags = {
+    Name = "WebServer"
+  }
+}
+
+// Imperative (Ansible)
+- name: Launch EC2 instance
+  ec2:
+    image: ami-0c55b159cbfafe1f0
+    instance_type: t2.micro
+    tags:
+      Name: WebServer</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>5. AWS CI/CD Services</h2>
+
+        <div class="question">
+            Q9: What are the AWS CI/CD services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>CodeCommit:</strong> Git-based source control</li>
+                <li><strong>CodeBuild:</strong> Build service</li>
+                <li><strong>CodeDeploy:</strong> Deployment service</li>
+                <li><strong>CodePipeline:</strong> CI/CD orchestration</li>
+                <li><strong>CodeStar:</strong> Unified development experience</li>
+                <li><strong>CloudFormation:</strong> Infrastructure as code</li>
+                <li><strong>Elastic Beanstalk:</strong> PaaS deployment</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q10: How do you set up a CI/CD pipeline in AWS?
+        </div>
+        <div class="answer">
+            <div class="code-block">// CloudFormation template for CodePipeline
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  Pipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      Name: MyPipeline
+      RoleArn: !GetAtt PipelineRole.Arn
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: Source
+              ActionTypeId:
+                Category: Source
+                Owner: AWS
+                Provider: CodeCommit
+                Version: '1'
+              Configuration:
+                RepositoryName: my-repo
+                BranchName: main
+              OutputArtifacts:
+                - Name: SourceArtifact
+        - Name: Build
+          Actions:
+            - Name: Build
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: '1'
+              Configuration:
+                ProjectName: my-build-project
+              InputArtifacts:
+                - Name: SourceArtifact
+              OutputArtifacts:
+                - Name: BuildArtifact
+        - Name: Deploy
+          Actions:
+            - Name: Deploy
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Provider: CodeDeploy
+                Version: '1'
+              Configuration:
+                ApplicationName: my-app
+                DeploymentGroupName: my-deployment-group
+              InputArtifacts:
+                - Name: BuildArtifact</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>6. Azure CI/CD Services</h2>
+
+        <div class="question">
+            Q11: What are the Azure CI/CD services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Azure Repos:</strong> Git repositories</li>
+                <li><strong>Azure Pipelines:</strong> CI/CD pipelines</li>
+                <li><strong>Azure Artifacts:</strong> Package management</li>
+                <li><strong>Azure DevOps:</strong> Complete DevOps platform</li>
+                <li><strong>GitHub Actions:</strong> CI/CD with Azure integration</li>
+                <li><strong>Azure Resource Manager:</strong> Infrastructure as code</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q12: How do you set up a CI/CD pipeline in Azure?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Azure Pipeline YAML
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'MyAzureServiceConnection'
+    appType: 'webApp'
+    appName: 'my-web-app'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>7. Google Cloud CI/CD Services</h2>
+
+        <div class="question">
+            Q13: What are the Google Cloud CI/CD services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Cloud Build:</strong> CI/CD service</li>
+                <li><strong>Cloud Deploy:</strong> Managed deployment to GKE</li>
+                <li><strong>Cloud Source Repositories:</strong> Git repositories</li>
+                <li><strong>Artifact Registry:</strong> Container and package registry</li>
+                <li><strong>GitHub Actions:</strong> CI/CD with GCP integration</li>
+                <li><strong>Terraform:</strong> IaC for GCP</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q14: How do you set up a CI/CD pipeline in Google Cloud?
+        </div>
+        <div class="answer">
+            <div class="code-block">// cloudbuild.yaml
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/my-app:$SHORT_SHA', '.' ]
+  
+  # Push the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'push', 'gcr.io/$PROJECT_ID/my-app:$SHORT_SHA' ]
+  
+  # Deploy to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'my-app'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/my-app:$SHORT_SHA'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+
+# Store images in Artifact Registry
+images:
+  - 'gcr.io/$PROJECT_ID/my-app:$SHORT_SHA'</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>8. Container Orchestration</h2>
+
+        <div class="question">
+            Q15: How do you deploy containers in CI/CD?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Dockerfile
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["MyApp.csproj", "./"]
+RUN dotnet restore "MyApp.csproj"
+COPY . .
+RUN dotnet build "MyApp.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "MyApp.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "MyApp.dll"]
+
+// Build and push in CI/CD
+docker build -t myregistry.azurecr.io/myapp:${tag} .
+docker push myregistry.azurecr.io/myapp:${tag}</div>
+        </div>
+
+        <div class="question">
+            Q16: How do you deploy to Kubernetes in CI/CD?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Kubernetes deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: myregistry.azurecr.io/myapp:${IMAGE_TAG}
+        ports:
+        - containerPort: 80
+
+// CI/CD steps
+- name: Set up kubectl
+  uses: azure/setup-kubectl@v1
+
+- name: Deploy to Kubernetes
+  run: |
+    kubectl apply -f k8s/deployment.yaml
+    kubectl set image deployment/myapp myapp=myregistry.azurecr.io/myapp:${IMAGE_TAG}
+    kubectl rollout status deployment/myapp</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>9. Testing in CI/CD</h2>
+
+        <div class="question">
+            Q17: What types of tests should be in a CI/CD pipeline?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Test Type</th>
+                    <th>Stage</th>
+                    <th>Execution Time</th>
+                    <th>Scope</th>
+                </tr>
+                <tr>
+                    <td>Unit Tests</td>
+                    <td>CI</td>
+                    <td>Fast (seconds)</td>
+                    <td>Individual functions/classes</td>
+                </tr>
+                <tr>
+                    <td>Integration Tests</td>
+                    <td>CI/CD</td>
+                    <td>Medium (minutes)</td>
+                    <td>Component interactions</td>
+                </tr>
+                <tr>
+                    <td>Contract Tests</td>
+                    <td>CI</td>
+                    <td>Medium</td>
+                    <td>API contracts</td>
+                </tr>
+                <tr>
+                    <td>UI Tests</td>
+                    <td>CD</td>
+                    <td>Slow (10+ minutes)</td>
+                    <td>User flows</td>
+                </tr>
+                <tr>
+                    <td>Performance Tests</td>
+                    <td>CD</td>
+                    <td>Slow</td>
+                    <td>Load, stress</td>
+                </tr>
+                <tr>
+                    <td>Security Tests</td>
+                    <td>CI/CD</td>
+                    <td>Medium</td>
+                    <td>Vulnerabilities</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>10. Security in CI/CD</h2>
+
+        <div class="question">
+            Q18: How do you secure CI/CD pipelines?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Secrets Management:</strong> Use vaults (AWS Secrets Manager, Azure Key Vault)</li>
+                <li><strong>Least Privilege:</strong> Minimum required permissions</li>
+                <li><strong>Branch Protection:</strong> Protect main branch</li>
+                <li><strong>Code Reviews:</strong> Required pull request reviews</li>
+                <li><strong>Security Scanning:</strong> SAST, DAST, dependency scanning</li>
+                <li><strong>Image Scanning:</strong> Container vulnerability scanning</li>
+                <li><strong>Signing:</strong> Code and artifact signing</li>
+                <li><strong>Audit Logging:</strong> Log all pipeline activities</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q19: What is DevSecOps?
+        </div>
+        <div class="answer">
+            <p><strong>DevSecOps</strong> integrates security practices into DevOps processes. Key principles:</p>
+            <ul>
+                <li><strong>Shift Left:</strong> Security early in development</li>
+                <li><strong>Automation:</strong> Automated security testing</li>
+                <li><strong>Collaboration:</strong> Security, Dev, Ops collaboration</li>
+                <li><strong>Continuous Monitoring:</strong> Ongoing security monitoring</li>
+                <li><strong>Compliance as Code:</strong> Automated compliance checks</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>11. Common Interview Questions</h2>
+
+        <div class="question">
+            Q20: What is the difference between Git Merge and Git Rebase?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Git Merge:</strong> Creates a merge commit. Preserves history. Non-linear history. Safe for shared branches.</li>
+                <li><strong>Git Rebase:</strong> Rewrites history. Linear history. Can cause conflicts. Not recommended for shared branches.</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use merge for shared branches (main, develop). Use rebase for local feature branches before merging.
+            </div>
+        </div>
+
+        <div class="question">
+            Q21: What is a pull request?
+        </div>
+        <div class="answer">
+            <p>A <strong>pull request (PR)</strong> is a mechanism to propose changes to a codebase. It:</p>
+            <ul>
+                <li>Allows code review before merging</li>
+                <li>Runs CI checks automatically</li>
+                <li>Enables discussion about changes</li>
+                <li>Provides traceability</li>
+                <li>Can include approvals from team members</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q22: What is the difference between branch protection rules and branch policies?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Branch Protection Rules:</strong> GitHub/GitLab. Protect branches from force pushes, deletions, and require reviews, status checks, and approvals.</li>
+                <li><strong>Branch Policies:</strong> Azure DevOps. Similar functionality with additional options like build validation and work item linking.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q23: What is a pipeline as code?
+        </div>
+        <div class="answer">
+            <p><strong>Pipeline as Code</strong> is the practice of defining CI/CD pipelines in code files stored in version control alongside application code.</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li>Version control for pipeline definitions</li>
+                <li>Code review for pipeline changes</li>
+                <li>Reusability and modularity</li>
+                <li>Documentation through code</li>
+                <li>Consistency across environments</li>
+            </ul>
+            
+            <div class="code-block">// Examples
+// GitHub Actions: .github/workflows/ci.yml
+// GitLab CI: .gitlab-ci.yml
+// Azure Pipelines: azure-pipelines.yml
+// Jenkins: Jenkinsfile
+// CircleCI: .circleci/config.yml</div>
+        </div>
+
+        <div class="question">
+            Q24: What is the difference between blue/green and canary deployment?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Blue/Green:</strong> Two identical environments. Switch traffic instantly. Full cutover. Good for low-risk deployments.</li>
+                <li><strong>Canary:</strong> Gradual rollout to subset of users. Monitor metrics before full rollout. Good for high-risk changes.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q25: What is feature flagging?
+        </div>
+        <div class="answer">
+            <p><strong>Feature flagging</strong> is a technique that enables teams to modify system behavior without changing code. It allows:</p>
+            <ul>
+                <li>Gradual feature rollout</li>
+                <li>A/B testing</li>
+                <li>Instant rollback</li>
+                <li>Testing in production</li>
+                <li>Targeted user segments</li>
+            </ul>
+            
+            <div class="code-block">// Feature flag example
+if (featureFlags.isEnabled('new-feature')) {
+  // New feature code
+} else {
+  // Old feature code
+}</div>
+        </div>
+
+        <div class="question">
+            Q26: What is the difference between synchronous and asynchronous deployment?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Synchronous:</strong> Pipeline waits for deployment to complete before proceeding. Slower but sequential. Good for critical deployments.</li>
+                <li><strong>Asynchronous:</strong> Pipeline continues without waiting for deployment. Faster but harder to track. Good for non-critical deployments.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q27: What is a rollback strategy?
+        </div>
+        <div class="answer">
+            <p><strong>Rollback strategies</strong> ensure you can revert to a previous version if deployment fails:</p>
+            <ul>
+                <li><strong>Versioned artifacts:</strong> Keep previous versions available</li>
+                <li><strong>Database migrations:</strong> Reversible migrations</li>
+                <li><strong>Blue/Green:</strong> Switch back to previous environment</li>
+                <li><strong>Canary:</strong> Stop canary and revert</li>
+                <li><strong>Feature flags:</strong> Disable feature</li>
+                <li><strong>Automated rollback:</strong> Rollback on health check failure</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q28: What is the difference between monorepo and polyrepo?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Monorepo</th>
+                    <th>Polyrepo</th>
+                </tr>
+                <tr>
+                    <td>Structure</td>
+                    <td>Single repository for all projects</td>
+                    <td>Separate repository per project</td>
+                </tr>
+                <tr>
+                    <td>CI/CD</td>
+                    <td>Complex (need to trigger only affected)</td>
+                    <td>Simple (one pipeline per repo)</td>
+                </tr>
+                <tr>
+                    <td>Sharing</td>
+                    <td>Easy code sharing</td>
+                    <td>Requires packages</td>
+                </tr>
+                <tr>
+                    <td>Build Time</td>
+                    <td>Can be slower</td>
+                    <td>Faster per project</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q29: What is the difference between Docker and Kubernetes?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Docker:</strong> Container runtime. Packages applications into containers. Runs on single host. Good for development and simple deployments.</li>
+                <li><strong>Kubernetes:</strong> Container orchestration. Manages containers across multiple hosts. Provides scaling, load balancing, self-healing. Good for production deployments.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q30: What is the difference between stateful and stateless applications in CI/CD?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Stateless:</strong> No local state. Easy to deploy and scale. Each instance is identical. Ideal for CI/CD.</li>
+                <li><strong>Stateful:</strong> Maintains state locally. Harder to deploy and scale. Requires careful state management. Requires special deployment strategies.</li>
+            </ul>
+            
+            <div class="important">
+                <strong>Important:</strong> Design applications to be stateless for easier CI/CD. Store state in external services (databases, caches).
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>11. Advanced CI/CD Patterns (Expert Level)</h2>
+
+        <div class="question">
+            Q31: What is GitOps?
+        </div>
+        <div class="answer">
+            <p><strong>GitOps</strong> is a methodology for operating and managing infrastructure and applications using Git as the single source of truth.</p>
+            
+            <h3>Key Principles:</h3>
+            <ul>
+                <li><strong>Declarative:</strong> Infrastructure defined in Git</li>
+                <li><strong>Versioned:</strong> All changes tracked in Git</li>
+                <li><strong>Pulled:</strong> Agents pull changes from Git</li>
+                <li><strong>Continuous reconciliation:</strong> Desired state vs actual state</li>
+            </ul>
+            
+            <h3>Tools:</h3>
+            <ul>
+                <li>ArgoCD</li>
+                <li>Flux</li>
+                <li>Jenkins X</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q32: What is Trunk-Based Development?
+        </div>
+        <div class="answer">
+            <p><strong>Trunk-Based Development</strong> is a branching model where developers work on a single branch called "trunk".</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li>No long-lived branches</li>
+                <li>Continuous integration</li>
+                <li>Faster feedback</li>
+                <li>Reduced merge conflicts</li>
+            </ul>
+            
+            <h3>Practices:</h3>
+            <ul>
+                <li>Feature flags for incomplete features</li>
+                <li>Small, frequent commits</li>
+                <li>Automated testing on every commit</li>
+                <li>Continuous deployment to production</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q33: What is Progressive Delivery?
+        </div>
+        <div class="answer">
+            <p><strong>Progressive Delivery</strong> is the practice of releasing new features to a subset of users gradually.</p>
+            
+            <h3>Techniques:</h3>
+            <ul>
+                <li><strong>Canary deployments:</strong> Roll out to small percentage of users</li>
+                <li><strong>A/B testing:</strong> Compare different versions</li>
+                <li><strong>Feature flags:</strong> Enable/disable features without deployment</li>
+                <li><strong>Dark launching:</strong> Deploy without user visibility</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q34: What is the difference between CI/CD and DevOps?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>CI/CD</th>
+                    <th>DevOps</th>
+                </tr>
+                <tr>
+                    <td>Scope</td>
+                    <td>Automation of integration and deployment</td>
+                    <td>Culture and practices across development and operations</td>
+                </tr>
+                <tr>
+                    <td>Focus</td>
+                    <td>Pipeline automation</td>
+                    <td>Collaboration, culture, automation</td>
+                </tr>
+                <tr>
+                    <td>Components</td>
+                    <td>CI, CD, testing, deployment</td>
+                    <td>CI/CD, monitoring, culture, collaboration</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>12. CI/CD Monitoring and Observability (Expert Level)</h2>
+
+        <div class="question">
+            Q35: How do you monitor CI/CD pipelines?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Pipeline metrics:</strong> Build duration, success rate, failure rate</li>
+                <li><strong>Deployment metrics:</strong> Deployment frequency, lead time, change failure rate</li>
+                <li><strong>Alerting:</strong> Notify on pipeline failures</li>
+                <li><strong>Dashboards:</strong> Visualize pipeline health</li>
+                <li><strong>Logs:</strong> Collect and analyze pipeline logs</li>
+                <li><strong>SLA/SLO:</strong> Define and track service level objectives</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q36: What are DORA metrics?
+        </div>
+        <div class="answer">
+            <p><strong>DORA (DevOps Research and Assessment) metrics</strong> measure software delivery performance:</p>
+            
+            <ul>
+                <li><strong>Deployment Frequency:</strong> How often you deploy</li>
+                <li><strong>Lead Time for Changes:</strong> Time from commit to deployment</li>
+                <li><strong>Time to Restore Service:</strong> Time to recover from failure</li>
+                <li><strong>Change Failure Rate:</strong> Percentage of deployments that fail</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q37: How do you implement observability in CI/CD?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Structured logging:</strong> Consistent log format with metadata</li>
+                <li><strong>Distributed tracing:</strong> Track requests across services</li>
+                <li><strong>Metrics:</strong> Collect performance and business metrics</li>
+                <li><strong>Alerting:</strong> Proactive notification of issues</li>
+                <li><strong>APM tools:</strong> Application Performance Monitoring</li>
+                <li><strong>Log aggregation:</strong> Centralized log collection</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q38: What is the difference between logs, metrics, and traces?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Purpose</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Logs</td>
+                    <td>Discrete events with context</td>
+                    <td>"User logged in at 10:00"</td>
+                </tr>
+                <tr>
+                    <td>Metrics</td>
+                    <td>Numerical measurements over time</td>
+                    <td>Request rate, error rate</td>
+                </tr>
+                <tr>
+                    <td>Traces</td>
+                    <td>Request path across services</td>
+                    <td>Request flow through microservices</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>13. Multi-Cloud CI/CD (Expert Level)</h2>
+
+        <div class="question">
+            Q39: How do you implement multi-cloud CI/CD?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Cloud-agnostic tools:</strong> Use tools that work across clouds (Jenkins, GitLab CI)</li>
+                <li><strong>Infrastructure abstraction:</strong> Use Terraform or Pulumi for multi-cloud IaC</li>
+                <li><strong>Containerization:</strong> Docker for portable deployments</li>
+                <li><strong>Kubernetes:</strong> Consistent orchestration across clouds</li>
+                <li><strong>Service mesh:</strong> Istio for cross-cloud communication</li>
+                <li><strong>Multi-region deployment:</strong> Deploy to multiple cloud regions</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q40: What are the challenges of multi-cloud CI/CD?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Tool fragmentation:</strong> Different tools per cloud</li>
+                <li><strong>Complexity:</strong> Managing multiple cloud providers</li>
+                <li><strong>Cost:</strong> Higher costs across multiple clouds</li>
+                <li><strong>Skills:</strong> Need expertise in multiple clouds</li>
+                <li><strong>Integration:</strong> Integrating cloud-specific services</li>
+                <li><strong>Consistency:</strong> Maintaining consistency across clouds</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>14. Common Interview Questions (All Levels)</h2>
+
+        <div class="question">
+            Q41: What is the difference between Jenkins and GitHub Actions?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Jenkins</th>
+                    <th>GitHub Actions</th>
+                </tr>
+                <tr>
+                    <td>Setup</td>
+                    <td>Self-hosted, requires maintenance</td>
+                    <td>Hosted, no maintenance</td>
+                </tr>
+                <tr>
+                    <td>Integration</td>
+                    <td>Requires plugins</td>
+                    <td>Native GitHub integration</td>
+                </tr>
+                <tr>
+                    <td>YAML</td>
+                    <td>Jenkinsfile (Groovy)</td>
+                    <td>Workflow YAML</td>
+                </tr>
+                <tr>
+                    <td>Cost</td>
+                    <td>Infrastructure cost</td>
+                    <td>Free for public repos, paid for private</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q42: What is the difference between GitLab CI and CircleCI?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>GitLab CI</th>
+                    <th>CircleCI</th>
+                </tr>
+                <tr>
+                    <td>Integration</td>
+                    <td>Built into GitLab</td>
+                    <td>Requires integration</td>
+                </tr>
+                <tr>
+                    <td>Self-hosted</td>
+                    <td>Yes</td>
+                    <td>Yes (CircleCI Server)</td>
+                </tr>
+                <tr>
+                    <td>Docker</td>
+                    <td>Native support</td>
+                    <td>Native support</td>
+                </tr>
+                <tr>
+                    <td>Pricing</td>
+                    <td>Free tier available</td>
+                    <td>Free tier available</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q43: What is the difference between Terraform and CloudFormation?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Terraform</th>
+                    <th>CloudFormation</th>
+                </tr>
+                <tr>
+                    <td>Cloud support</td>
+                    <td>Multi-cloud</td>
+                    <td>AWS only</td>
+                </tr>
+                <tr>
+                    <td>Language</td>
+                    <td>HCL</td>
+                    <td>JSON/YAML</td>
+                </tr>
+                <tr>
+                    <td>State</td>
+                    <td>State file</td>
+                    <td>AWS-managed</td>
+                </tr>
+                <tr>
+                    <td>Community</td>
+                    <td>Large community</td>
+                    <td>AWS-focused</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q44: What is the difference between Helm and Kustomize?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Helm</th>
+                    <th>Kustomize</th>
+                </tr>
+                <tr>
+                    <td>Approach</td>
+                    <td>Template-based</td>
+                    <td>Patch-based</td>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>Higher learning curve</td>
+                    <td>Simpler</td>
+                </tr>
+                <tr>
+                    <td>Package management</td>
+                    <td>Charts</td>
+                    <td>No packaging</td>
+                </tr>
+                <tr>
+                    <td>Native</td>
+                    <td>External tool</td>
+                    <td>Kubernetes native</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q45: What is the difference between ArgoCD and Flux?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>ArgoCD</th>
+                    <th>Flux</th>
+                </tr>
+                <tr>
+                    <td>UI</td>
+                    <td>Built-in UI</td>
+                    <td>No built-in UI</td>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>More features, more complex</td>
+                    <td>Simpler, focused</td>
+                </tr>
+                <tr>
+                    <td>Ecosystem</td>
+                    <td>Larger ecosystem</td>
+                    <td>Weave GitOps ecosystem</td>
+                </tr>
+                <tr>
+                    <td>Multi-cluster</td>
+                    <td>App of Apps pattern</td>
+                    <td>Multi-cluster support</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q46: What is the difference between Prometheus and Grafana?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Prometheus</th>
+                    <th>Grafana</th>
+                </tr>
+                <tr>
+                    <td>Purpose</td>
+                    <td>Metrics collection and storage</td>
+                    <td>Visualization and dashboards</td>
+                </tr>
+                <tr>
+                    <td>Data model</td>
+                    <td>Time-series database</td>
+                    <td>Queries multiple sources</td>
+                </tr>
+                <tr>
+                    <td>Alerting</td>
+                    <td>Built-in Alertmanager</td>
+                    <td>Grafana Alerting</td>
+                </tr>
+                <tr>
+                    <td>Integration</td>
+                    <td>Pull-based scraping</td>
+                    <td>Multiple data sources</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q47: What is the difference between ELK Stack and Splunk?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>ELK Stack</th>
+                    <th>Splunk</th>
+                </tr>
+                <tr>
+                    <td>Cost</td>
+                    <td>Open source, free</td>
+                    <td>Commercial, expensive</td>
+                </tr>
+                <tr>
+                    <td>Ease of use</td>
+                    <td>Requires configuration</td>
+                    <td>Easier to use</td>
+                </tr>
+                <tr>
+                    <td>Features</td>
+                    <td>Basic features</td>
+                    <td>Advanced features</td>
+                </tr>
+                <tr>
+                    <td>Support</td>
+                    <td>Community support</td>
+                    <td>Enterprise support</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q48: What is the difference between SonarQube and Codecov?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>SonarQube</th>
+                    <th>Codecov</th>
+                </tr>
+                <tr>
+                    <td>Focus</td>
+                    <td>Code quality and security</td>
+                    <td>Code coverage</td>
+                </tr>
+                <tr>
+                    <td>Metrics</td>
+                    <td>Bugs, vulnerabilities, code smells</td>
+                    <td>Line and branch coverage</td>
+                </tr>
+                <tr>
+                    <td>Self-hosted</td>
+                    <td>Yes</td>
+                    <td>Yes (Enterprise)</td>
+                </tr>
+                <tr>
+                    <td>Languages</td>
+                    <td>30+ languages</td>
+                    <td>All languages</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q49: What are the best practices for CI/CD security?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Secrets management:</strong> Use vaults, never hardcode secrets</li>
+                <li><strong>Least privilege:</strong> Minimize pipeline permissions</li>
+                <li><strong>SCA:</strong> Software Composition Analysis for dependencies</li>
+                <li><strong>SAST:</strong> Static Application Security Testing</li>
+                <li><strong>DAST:</strong> Dynamic Application Security Testing</li>
+                <li><strong>Container scanning:</strong> Scan images for vulnerabilities</li>
+                <li><strong>SBOM:</strong> Software Bill of Materials</li>
+                <li><strong>Supply chain security:</strong> Verify artifact integrity</li>
+                <li><strong>Compliance:</strong> Enforce security policies</li>
+                <li><strong>Auditing:</strong> Log all pipeline activities</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q50: What are the best practices for CI/CD performance?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Parallel execution:</strong> Run tests and builds in parallel</li>
+                <li><strong>Caching:</strong> Cache dependencies and build artifacts</li>
+                <li><strong>Incremental builds:</strong> Build only changed components</li>
+                <li><strong>Resource optimization:</strong> Right-size build agents</li>
+                <li><strong>Pipeline optimization:</strong> Minimize pipeline stages</li>
+                <li><strong>Artifact management:</strong> Efficient artifact storage</li>
+                <li><strong>Network optimization:</strong> Use local mirrors</li>
+                <li><strong>Test selection:</strong> Run only relevant tests</li>
+                <li><strong>Build matrix:</strong> Optimize build matrix</li>
+                <li><strong>Monitoring:</strong> Track and optimize pipeline performance</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <strong>Interview Tip:</strong> When discussing CI/CD, emphasize automation, security, testing, and reliability. Be prepared to discuss real-world scenarios, tool choices, and best practices for different cloud platforms. For senior positions, demonstrate knowledge of GitOps, progressive delivery, multi-cloud strategies, and observability.
+        </div>
+
+        <div class="important">
+            <strong>Key Takeaways for Interview (Beginner to Expert):</strong>
+            <ul>
+                <li><strong>Beginner (0-3 years):</strong> Understand CI vs CD vs CD, know deployment strategies (blue/green, canary, rolling), understand IaC benefits, know basic CI/CD tools (Jenkins, GitHub Actions), understand container basics (Docker), know testing fundamentals.</li>
+                <li><strong>Intermediate (4-7 years):</strong> Know AWS CI/CD services (CodePipeline, CodeBuild, CodeDeploy), know Azure CI/CD services (Azure Pipelines, Azure DevOps), know GCP CI/CD services (Cloud Build, Cloud Deploy), implement container deployment with Kubernetes, understand feature flags, implement basic security in CI/CD.</li>
+                <li><strong>Advanced (8-10 years):</strong> Implement GitOps with ArgoCD or Flux, design progressive delivery strategies, implement advanced testing (SAST, DAST, SCA), optimize pipeline performance, implement observability (logs, metrics, traces), understand DORA metrics, design multi-cloud CI/CD strategies.</li>
+                <li><strong>Expert (11-13 years):</strong> Design enterprise-grade CI/CD architecture, implement advanced GitOps patterns, design multi-cloud and multi-region deployment strategies, implement advanced security (supply chain security, SBOM), optimize CI/CD at scale, design observability strategies, implement advanced monitoring and alerting, design disaster recovery for CI/CD.</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 50px; padding: 20px; background: #512bd4; color: white; border-radius: 8px; text-align: center;">
+            <h3>End of CI/CD Pipeline Interview Preparation Guide</h3>
+            <p>Comprehensive coverage from beginner to expert level (4-13 years experience)</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative AI Interview Preparation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+        }
+        h1 {
+            color: #8e44ad;
+            border-bottom: 4px solid #8e44ad;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-left: 5px solid #8e44ad;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .question {
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .answer {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0 25px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        .important {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .tip {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #8e44ad;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .toc {
+            background: #e7f3ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #8e44ad;
+        }
+        .toc ol {
+            column-count: 2;
+        }
+        .toc li {
+            margin: 5px 0;
+        }
+        @media print {
+            body { background: white; }
+            .container { padding: 20px; }
+            .question { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .tip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .important { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        .page-break {
+            page-break-before: always;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generative AI Interview Preparation Guide</h1>
+        <p style="font-size: 18px; color: #666; margin-bottom: 30px;"><strong>Comprehensive Interview Preparation with In-Depth Concepts, Code Examples, and Best Practices</strong></p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>Generative AI Fundamentals</li>
+                <li>Large Language Models</li>
+                <li>Transformer Architecture</li>
+                <li>Training and Fine-tuning</li>
+                <li>Prompt Engineering</li>
+                <li>RAG (Retrieval-Augmented Generation)</li>
+                <li>Vector Databases</li>
+                <li>LLM Deployment and Scaling</li>
+                <li>AI Safety and Ethics</li>
+                <li>Popular LLM Frameworks</li>
+                <li>Generative AI Applications</li>
+                <li>Model Evaluation</li>
+                <li>Advanced Topics</li>
+                <li>Common Interview Questions</li>
+            </ol>
+        </div>
+
+        <h2>1. Generative AI Fundamentals</h2>
+
+        <div class="question">
+            Q1: What is Generative AI?
+        </div>
+        <div class="answer">
+            <p><strong>Generative AI</strong> is a type of artificial intelligence that can create new content, including text, images, audio, and code, by learning patterns from existing data.</p>
+            
+            <h3>Key Characteristics:</h3>
+            <ul>
+                <li><strong>Content Creation:</strong> Generates new, original content</li>
+                <li><strong>Pattern Learning:</strong> Learns from large datasets</li>
+                <li><strong>Probabilistic Output:</strong> Produces probabilistic results</li>
+                <li><strong>Context Awareness:</strong> Understands and maintains context</li>
+                <li><strong>Multi-modal:</strong> Can handle text, images, audio, video</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q2: What is the difference between Generative AI and Discriminative AI?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Generative AI</th>
+                    <th>Discriminative AI</th>
+                </tr>
+                <tr>
+                    <td>Purpose</td>
+                    <td>Create new content</td>
+                    <td>Classify or predict</td>
+                </tr>
+                <tr>
+                    <td>Output</td>
+                    <td>New data samples</td>
+                    <td>Labels or predictions</td>
+                </tr>
+                <tr>
+                    <td>Examples</td>
+                    <td>GPT, DALL-E, Midjourney</td>
+                    <td>Classification, Regression</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Content generation</td>
+                    <td>Decision making</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q3: What are the types of Generative AI models?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Text Generation:</strong> GPT, BERT, T5, LLaMA</li>
+                <li><strong>Image Generation:</strong> DALL-E, Midjourney, Stable Diffusion</li>
+                <li><strong>Audio Generation:</strong> WaveNet, Tacotron, VALL-E</li>
+                <li><strong>Video Generation:</strong> Sora, Runway, Pika</li>
+                <li><strong>Code Generation:</strong> Codex, CodeLlama, StarCoder</li>
+                <li><strong>Multi-modal:</strong> GPT-4V, Gemini, CLIP</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>2. Large Language Models</h2>
+
+        <div class="question">
+            Q4: What is a Large Language Model (LLM)?
+        </div>
+        <div class="answer">
+            <p><strong>Large Language Model (LLM)</strong> is a neural network trained on vast amounts of text data to understand and generate human-like text.</p>
+            
+            <h3>Key Characteristics:</h3>
+            <ul>
+                <li><strong>Scale:</strong> Billions of parameters</li>
+                <li><strong>Training Data:</strong> Trained on internet-scale text</li>
+                <li><strong>Capabilities:</strong> Translation, summarization, question answering</li>
+                <li><strong>Few-shot Learning:</strong> Can learn from few examples</li>
+                <li><strong>Emergent Abilities:</strong> Unexpected capabilities at scale</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q5: What are the popular LLMs?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Model</th>
+                    <th>Developer</th>
+                    <th>Parameters</th>
+                    <th>Type</th>
+                </tr>
+                <tr>
+                    <td>GPT-4</td>
+                    <td>OpenAI</td>
+                    <td>~1.8T</td>
+                    <td>Proprietary</td>
+                </tr>
+                <tr>
+                    <td>Claude 3</td>
+                    <td>Anthropic</td>
+                    <td>~400B</td>
+                    <td>Proprietary</td>
+                </tr>
+                <tr>
+                    <td>LLaMA 3</td>
+                    <td>Meta</td>
+                    <td>70B, 8B</td>
+                    <td>Open</td>
+                </tr>
+                <tr>
+                    <td>Mistral</td>
+                    <td>Mistral AI</td>
+                    <td>7B, 8x7B</td>
+                    <td>Open</td>
+                </tr>
+                <tr>
+                    <td>Gemini</td>
+                    <td>Google</td>
+                    <td>~1.5T</td>
+                    <td>Proprietary</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q6: What is the difference between GPT and BERT?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>GPT</th>
+                    <th>BERT</th>
+                </tr>
+                <tr>
+                    <td>Architecture</td>
+                    <td>Decoder-only</td>
+                    <td>Encoder-only</td>
+                </tr>
+                <tr>
+                    <td>Training</td>
+                    <td>Causal (left-to-right)</td>
+                    <td>Masked (bidirectional)</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Text generation</td>
+                    <td>Text understanding</td>
+                </tr>
+                <tr>
+                    <td>Output</td>
+                    <td>Generative</td>
+                    <td>Classification</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>3. Transformer Architecture</h2>
+
+        <div class="question">
+            Q7: What is the Transformer architecture?
+        </div>
+        <div class="answer">
+            <p><strong>Transformer</strong> is a neural network architecture introduced in "Attention Is All You Need" (2017). It uses self-attention mechanisms to process sequential data.</p>
+            
+            <h3>Key Components:</h3>
+            <ul>
+                <li><strong>Self-Attention:</strong> Weighs importance of different words</li>
+                <li><strong>Multi-Head Attention:</strong> Multiple attention heads</li>
+                <li><strong>Positional Encoding:</strong> Encodes word position</li>
+                <li><strong>Feed-Forward Networks:</strong> Non-linear transformations</li>
+                <li><strong>Layer Normalization:</strong> Stabilizes training</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q8: What is self-attention?
+        </div>
+        <div class="answer">
+            <p><strong>Self-Attention</strong> is a mechanism that allows the model to weigh the importance of different words in a sequence when processing a particular word.</p>
+            
+            <div class="code-block">`r`n# Self-attention formula
+Attention(Q, K, V) = softmax(QK^T / sqrt(d_k))V
+
+# Where:
+# Q = Query matrix
+# K = Key matrix
+# V = Value matrix
+# d_k = Dimension of keys</div>
+        </div>
+
+        <div class="question">
+            Q9: What is the difference between encoder and decoder in Transformer?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Encoder</th>
+                    <th>Decoder</th>
+                </tr>
+                <tr>
+                    <td>Purpose</td>
+                    <td>Process input</td>
+                    <td>Generate output</td>
+                </tr>
+                <tr>
+                    <td>Attention</td>
+                    <td>Self-attention</td>
+                    <td>Cross-attention + self-attention</td>
+                </tr>
+                <tr>
+                    <td>Masking</td>
+                    <td>No masking</td>
+                    <td>Causal masking</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Understanding</td>
+                    <td>Generation</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>4. Training and Fine-tuning</h2>
+
+        <div class="question">
+            Q10: What is pre-training?
+        </div>
+        <div class="answer">
+            <p><strong>Pre-training</strong> is the process of training a model on a large corpus of unlabeled data to learn general language patterns and knowledge.</p>
+            
+            <h3>Key Aspects:</h3>
+            <ul>
+                <li><strong>Large Dataset:</strong> Trained on internet-scale text</li>
+                <li><strong>Self-Supervised:</strong> No manual labeling required</li>
+                <li><strong>General Knowledge:</strong> Learns broad language patterns</li>
+                <li><strong>Computationally Expensive:</strong> Requires massive compute</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q11: What is fine-tuning?
+        </div>
+        <div class="answer">
+            <p><strong>Fine-tuning</strong> is the process of adapting a pre-trained model to a specific task or domain by training on a smaller, task-specific dataset.</p>
+            
+            <h3>Types of Fine-tuning:</h3>
+            <ul>
+                <li><strong>Full Fine-tuning:</strong> Update all model parameters</li>
+                <li><strong>Partial Fine-tuning:</strong> Update only some layers</li>
+                <li><strong>LoRA (Low-Rank Adaptation):</strong> Efficient fine-tuning with low-rank matrices</li>
+                <li><strong>QLoRA:</strong> Quantized LoRA for memory efficiency</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q12: What is LoRA?
+        </div>
+        <div class="answer">
+            <p><strong>LoRA (Low-Rank Adaptation)</strong> is a parameter-efficient fine-tuning method that adds trainable low-rank matrices to the model instead of updating all parameters.</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li><strong>Memory Efficient:</strong> Reduces memory usage significantly</li>
+                <li><strong>Faster Training:</strong> Fewer parameters to update</li>
+                <li><strong>Modular:</strong> Can swap LoRA adapters</li>
+                <li><strong>Storage Efficient:</strong> Only store LoRA weights</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>5. Prompt Engineering</h2>
+
+        <div class="question">
+            Q13: What is prompt engineering?
+        </div>
+        <div class="answer">
+            <p><strong>Prompt Engineering</strong> is the art of designing and optimizing prompts to get the best possible output from language models.</p>
+            
+            <h3>Key Techniques:</h3>
+            <ul>
+                <li><strong>Zero-shot:</strong> No examples provided</li>
+                <li><strong>One-shot:</strong> One example provided</li>
+                <li><strong>Few-shot:</strong> Multiple examples provided</li>
+                <li><strong>Chain-of-Thought:</strong> Step-by-step reasoning</li>
+                <li><strong>Role-playing:</strong> Assign specific role to model</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q14: What is chain-of-thought prompting?
+        </div>
+        <div class="answer">
+            <p><strong>Chain-of-Thought (CoT)</strong> prompting encourages the model to break down complex problems into intermediate steps, improving reasoning performance.</p>
+            
+            <div class="code-block">`r`n# Example of Chain-of-Thought prompting
+Prompt: "Solve this step by step: If a store sells 5 apples for $3, 
+how much do 12 apples cost?"
+
+Response: "Step 1: Find the cost per apple. $3 / 5 = $0.60 per apple.
+Step 2: Calculate cost for 12 apples. 12 * $0.60 = $7.20.
+Answer: 12 apples cost $7.20."</div>
+        </div>
+
+        <div class="question">
+            Q15: What is the difference between zero-shot, one-shot, and few-shot learning?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Examples</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td>Zero-shot</td>
+                    <td>None</td>
+                    <td>General tasks</td>
+                </tr>
+                <tr>
+                    <td>One-shot</td>
+                    <td>One</td>
+                    <td>Task clarification</td>
+                </tr>
+                <tr>
+                    <td>Few-shot</td>
+                    <td>Multiple</td>
+                    <td>Complex tasks</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>6. RAG (Retrieval-Augmented Generation)</h2>
+
+        <div class="question">
+            Q16: What is RAG?
+        </div>
+        <div class="answer">
+            <p><strong>RAG (Retrieval-Augmented Generation)</strong> is a technique that combines retrieval-based and generation-based approaches by retrieving relevant information from a knowledge base and using it to generate responses.</p>
+            
+            <h3>Components:</h3>
+            <ul>
+                <li><strong>Retriever:</strong> Searches knowledge base for relevant documents</li>
+                <li><strong>Generator:</strong> LLM that generates response using retrieved context</li>
+                <li><strong>Knowledge Base:</strong> Vector database of documents</li>
+                <li><strong>Embedding Model:</strong> Converts text to vector embeddings</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q17: What are the benefits of RAG?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Reduced Hallucination:</strong> Grounded in retrieved facts</li>
+                <li><strong>Up-to-date Information:</strong> Can access latest data</li>
+                <li><strong>Domain Specific:</strong> Can use domain-specific knowledge</li>
+                <li><strong>Transparent:</strong> Can show source documents</li>
+                <li><strong>Cost Effective:</strong> No need to fine-tune for new knowledge</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q18: What is the difference between RAG and fine-tuning?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>RAG</th>
+                    <th>Fine-tuning</th>
+                </tr>
+                <tr>
+                    <td>Purpose</td>
+                    <td>Add external knowledge</td>
+                    <td>Adapt model behavior</td>
+                </tr>
+                <tr>
+                    <td>Cost</td>
+                    <td>Lower</td>
+                    <td>Higher</td>
+                </tr>
+                <tr>
+                    <td>Updates</td>
+                    <td>Easy (update KB)</td>
+                    <td>Requires retraining</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Knowledge-intensive</td>
+                    <td>Style/format adaptation</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>7. Vector Databases</h2>
+
+        <div class="question">
+            Q19: What is a vector database?
+        </div>
+        <div class="answer">
+            <p><strong>Vector Database</strong> is a specialized database designed to store, index, and query high-dimensional vector embeddings efficiently.</p>
+            
+            <h3>Popular Vector Databases:</h3>
+            <ul>
+                <li><strong>Pinecone:</strong> Managed vector database service</li>
+                <li><strong>Weaviate:</strong> Open-source vector database</li>
+                <li><strong>Chroma:</strong> Open-source embedding database</li>
+                <li><strong>Milvus:</strong> Open-source vector database</li>
+                <li><strong>Qdrant:</strong> Open-source vector similarity search</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q20: What is an embedding?
+        </div>
+        <div class="answer">
+            <p><strong>Embedding</strong> is a numerical representation of text, images, or other data in a high-dimensional vector space where similar items are close together.</p>
+            
+            <h3>Key Characteristics:</h3>
+            <ul>
+                <li><strong>High-dimensional:</strong> Typically 256-4096 dimensions</li>
+                <li><strong>Dense:</strong> Most dimensions are non-zero</li>
+                <li><strong>Semantic:</strong> Captures semantic meaning</li>
+                <li><strong>Comparable:</strong> Can use similarity metrics</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q21: What are the common similarity metrics?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Cosine Similarity:</strong> Measures angle between vectors. Range: -1 to 1. Most common.</li>
+                <li><strong>Euclidean Distance:</strong> Measures straight-line distance. Range: 0 to infinity.</li>
+                <li><strong>Dot Product:</strong> Measures magnitude and direction. Range: -infinity to infinity.</li>
+                <li><strong>Manhattan Distance:</strong> Sum of absolute differences. Range: 0 to infinity.</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>8. LLM Deployment and Scaling</h2>
+
+        <div class="question">
+            Q22: What are the methods for deploying LLMs?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>API Services:</strong> OpenAI API, Anthropic API, Google AI</li>
+                <li><strong>Self-hosting:</strong> vLLM, Text Generation Inference (TGI)</li>
+                <li><strong>Serverless:</strong> AWS Lambda, Azure Functions</li>
+                <li><strong>Edge Deployment:</strong> ONNX, TensorRT for edge devices</li>
+                <li><strong>Managed Services:</strong> AWS Bedrock, Azure OpenAI, GCP Vertex AI</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q23: What is vLLM?
+        </div>
+        <div class="answer">
+            <p><strong>vLLM</strong> is a high-throughput and memory-efficient LLM serving engine that uses PagedAttention to optimize memory usage.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>PagedAttention:</strong> Efficient attention computation</li>
+                <li><strong>High Throughput:</strong> Optimized for serving</li>
+                <li><strong>Memory Efficient:</strong> Reduces memory usage</li>
+                <li><strong>Continuous Batching:</strong> Dynamic batching</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q24: What is quantization?
+        </div>
+        <div class="answer">
+            <p><strong>Quantization</strong> is the process of reducing the precision of model weights (e.g., from 16-bit to 8-bit or 4-bit) to reduce memory usage and improve inference speed.</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li><strong>Reduced Memory:</strong> Smaller model size</li>
+                <li><strong>Faster Inference:</strong> Faster computation</li>
+                <li><strong>Lower Cost:</strong> Reduced hardware requirements</li>
+                <li><strong>Edge Deployment:</strong> Enables edge deployment</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>9. AI Safety and Ethics</h2>
+
+        <div class="question">
+            Q25: What is AI alignment?
+        </div>
+        <div class="answer">
+            <p><strong>AI Alignment</strong> is the field of ensuring AI systems act in accordance with human values, intentions, and interests.</p>
+            
+            <h3>Key Approaches:</h3>
+            <ul>
+                <li><strong>RLHF:</strong> Reinforcement Learning from Human Feedback</li>
+                <li><strong>Constitutional AI:</strong> AI governed by principles</li>
+                <li><strong>Value Learning:</strong> Learning human values</li>
+                <li><strong>Interpretability:</strong> Understanding model decisions</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q26: What is RLHF?
+        </div>
+        <div class="answer">
+            <p><strong>RLHF (Reinforcement Learning from Human Feedback)</strong> is a technique for training AI models using human feedback to align model outputs with human preferences.</p>
+            
+            <h3>Process:</h3>
+            <ul>
+                <li><strong>Collect Feedback:</strong> Humans rate model outputs</li>
+                <li><strong>Train Reward Model:</strong> Model learns to predict human preferences</li>
+                <li><strong>Optimize Policy:</strong> Use RL to optimize for reward</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q27: What are the common AI safety concerns?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Hallucination:</strong> Generating false information</li>
+                <li><strong>Bias:</strong> Perpetuating societal biases</li>
+                <li><strong>Privacy:</strong> Leaking sensitive information</li>
+                <li><strong>Misuse:</strong> Malicious use of AI</li>
+                <li><strong>Autonomy:</strong> Unintended autonomous behavior</li>
+                <li><strong>Transparency:</strong> Lack of explainability</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>10. Popular LLM Frameworks</h2>
+
+        <div class="question">
+            Q28: What is LangChain?
+        </div>
+        <div class="answer">
+            <p><strong>LangChain</strong> is a framework for developing applications powered by language models. It provides tools for chaining, memory, agents, and retrieval.</p>
+            
+            <h3>Key Components:</h3>
+            <ul>
+                <li><strong>Chains:</strong> Sequences of operations</li>
+                <li><strong>Agents:</strong> Autonomous decision-making</li>
+                <li><strong>Memory:</strong> State management</li>
+                <li><strong>Retrievers:</strong> Information retrieval</li>
+                <li><strong>Tools:</strong> External API integrations</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q29: What is LlamaIndex?
+        </div>
+        <div class="answer">
+            <p><strong>LlamaIndex</strong> is a data framework for LLM applications, focused on connecting custom data sources to LLMs for RAG applications.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Data Connectors:</strong> Ingest data from various sources</li>
+                <li><strong>Indices:</strong> Structure data for retrieval</li>
+                <li><strong>Query Engines:</strong> Query and retrieve data</li>
+                <li><strong>Chat Engines:</strong> Conversational interfaces</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q30: What is the difference between LangChain and LlamaIndex?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>LangChain</th>
+                    <th>LlamaIndex</th>
+                </tr>
+                <tr>
+                    <td>Focus</td>
+                    <td>General LLM applications</td>
+                    <td>Data-focused applications</td>
+                </tr>
+                <tr>
+                    <td>Strength</td>
+                    <td>Chains, agents, tools</td>
+                    <td>Data indexing, retrieval</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Complex workflows</td>
+                    <td>RAG applications</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>11. Generative AI Applications</h2>
+
+        <div class="question">
+            Q31: What are common use cases for Generative AI?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Content Creation:</strong> Writing, copywriting, creative writing</li>
+                <li><strong>Code Generation:</strong> Code completion, code review</li>
+                <li><strong>Customer Support:</strong> Chatbots, virtual assistants</li>
+                <li><strong>Summarization:</strong> Document summarization, meeting notes</li>
+                <li><strong>Translation:</strong> Language translation</li>
+                <li><strong>Image Generation:</strong> Art, design, marketing</li>
+                <li><strong>Video Generation:</strong> Content creation, editing</li>
+                <li><strong>Research:</strong> Literature review, data analysis</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q32: What is an AI agent?
+        </div>
+        <div class="answer">
+            <p><strong>AI Agent</strong> is an autonomous system that can perceive its environment, reason about it, and take actions to achieve goals.</p>
+            
+            <h3>Types of Agents:</h3>
+            <ul>
+                <li><strong>Reactive Agents:</strong> Respond to current state</li>
+                <li><strong>Proactive Agents:</strong> Anticipate future states</li>
+                <li><strong>Multi-Agent Systems:</strong> Multiple agents collaborating</li>
+                <li><strong>Autonomous Agents:</strong> Self-directed goal achievement</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>12. Model Evaluation</h2>
+
+        <div class="question">
+            Q33: How do you evaluate LLM performance?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Perplexity:</strong> Measures prediction quality</li>
+                <li><strong>BLEU Score:</strong> Machine translation quality</li>
+                <li><strong>ROUGE Score:</strong> Summarization quality</li>
+                <li><strong>Human Evaluation:</strong> Human raters assess quality</li>
+                <li><strong>Benchmark Tests:</strong> Standardized tests (MMLU, GSM8K)</li>
+                <li><strong>Task-Specific Metrics:</strong> Domain-specific evaluations</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q34: What is MMLU?
+        </div>
+        <div class="answer">
+            <p><strong>MMLU (Massive Multitask Language Understanding)</strong> is a benchmark for evaluating LLMs across 57 subjects including STEM, humanities, and social sciences.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Multi-domain:</strong> Covers diverse subjects</li>
+                <li><strong>Multiple Choice:</strong> Standardized format</li>
+                <li><strong>Zero-shot and Few-shot:</strong> Different evaluation modes</li>
+                <li><strong>Widely Used:</strong> Industry standard benchmark</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>13. Advanced Topics</h2>
+
+        <div class="question">
+            Q35: What is a multimodal model?
+        </div>
+        <div class="answer">
+            <p><strong>Multimodal Model</strong> is an AI model that can process and generate multiple types of data such as text, images, audio, and video.</p>
+            
+            <h3>Examples:</h3>
+            <ul>
+                <li><strong>GPT-4V:</strong> Text and image understanding</li>
+                <li><strong>Gemini:</strong> Text, image, audio, video</li>
+                <li><strong>CLIP:</strong> Text and image similarity</li>
+                <li><strong>DALL-E 3:</strong> Text to image generation</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q36: What is parameter-efficient fine-tuning (PEFT)?
+        </div>
+        <div class="answer">
+            <p><strong>PEFT (Parameter-Efficient Fine-Tuning)</strong> refers to methods that fine-tune only a small subset of parameters or add new parameters while keeping most of the model frozen.</p>
+            
+            <h3>Methods:</h3>
+            <ul>
+                <li><strong>LoRA:</strong> Low-Rank Adaptation</li>
+                <li><strong>Prefix Tuning:</strong> Learn prompt prefixes</li>
+                <li><strong>P-Tuning:</strong> Learn prompt embeddings</li>
+                <li><strong>Adapters:</strong> Add adapter layers</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q37: What is model distillation?
+        </div>
+        <div class="answer">
+            <p><strong>Model Distillation</strong> is the process of training a smaller, more efficient model (student) to mimic the behavior of a larger, more complex model (teacher).</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li><strong>Smaller Size:</strong> Reduced model size</li>
+                <li><strong>Faster Inference:</strong> Improved speed</li>
+                <li><strong>Lower Cost:</strong> Reduced deployment cost</li>
+                <li><strong>Edge Deployment:</strong> Enables edge use</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>14. Common Interview Questions</h2>
+
+        <div class="question">
+            Q38: What is the difference between temperature and top-p sampling?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Temperature:</strong> Controls randomness of output. Higher = more random, Lower = more deterministic. Range: 0-2.</li>
+                <li><strong>Top-p (Nucleus Sampling):</strong> Samples from top p probability mass. Filters low-probability tokens. Range: 0-1.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q39: What is the difference between tokenization and embedding?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Tokenization:</strong> Converting text to tokens (words, subwords). First step in processing. Creates discrete units.</li>
+                <li><strong>Embedding:</strong> Converting tokens to vectors. Second step in processing. Creates continuous representations.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q40: What is the difference between context window and context length?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Context Window:</strong> Maximum input + output tokens model can handle. Fixed limit determined by model architecture.</li>
+                <li><strong>Context Length:</strong> Actual number of tokens in current input. Can vary up to context window limit.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q41: What is the difference between inference and training?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Training:</strong> Learning model parameters from data. Computationally expensive. Requires large datasets. Updates model weights.</li>
+                <li><strong>Inference:</strong> Using trained model to make predictions. Computationally lighter. Uses fixed weights. Generates output.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q42: What is the difference between batch size and sequence length?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Batch Size:</strong> Number of samples processed in parallel. Affects memory usage and training speed. Larger = faster but more memory.</li>
+                <li><strong>Sequence Length:</strong> Number of tokens in each sample. Affects context and memory. Longer = more context but more memory.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q43: What is the difference between greedy decoding and beam search?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Greedy Decoding:</strong> Always pick highest probability token. Fast but can miss better sequences. No exploration.</li>
+                <li><strong>Beam Search:</strong> Keep top k sequences at each step. Slower but finds better sequences. Explores multiple paths.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q44: What is the difference between BPE and WordPiece tokenization?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>BPE (Byte Pair Encoding):</strong> Merges most frequent byte pairs. Simple and effective. Used by GPT.</li>
+                <li><strong>WordPiece:</strong> Similar to BPE but different merge criteria. Maximizes likelihood. Used by BERT.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q45: What is the difference between causal and masked language modeling?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Causal Language Modeling:</strong> Predict next token given previous. Left-to-right only. Used by GPT. Good for generation.</li>
+                <li><strong>Masked Language Modeling:</strong> Predict masked tokens given context. Bidirectional. Used by BERT. Good for understanding.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q46: What is the difference between attention and self-attention?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Attention:</strong> General mechanism for focusing on relevant parts. Can be between different sequences. Used in encoder-decoder.</li>
+                <li><strong>Self-Attention:</strong> Attention within same sequence. All positions attend to all positions. Used in Transformers.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q47: What is the difference between position encoding and positional embedding?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Position Encoding:</strong> Add position information to embeddings. Can be sinusoidal or learned. Added to token embeddings.</li>
+                <li><strong>Positional Embedding:</strong> Learned position vectors. Similar to word embeddings. Can be absolute or relative.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q48: What are the best practices for prompt engineering?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Be Specific:</strong> Provide clear, detailed instructions</li>
+                <li><strong>Use Examples:</strong> Provide few-shot examples</li>
+                <li><strong>Chain-of-Thought:</strong> Encourage step-by-step reasoning</li>
+                <li><strong>Role Assignment:</strong> Assign specific role to model</li>
+                <li><strong>Format Requirements:</strong> Specify output format</li>
+                <li><strong>Context:</strong> Provide relevant context</li>
+                <li><strong>Iterate:</strong> Refine prompts based on results</li>
+                <li><strong>Test:</strong> Test prompts with various inputs</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q49: What are the best practices for RAG implementation?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Chunking Strategy:</strong> Optimal chunk size for retrieval</li>
+                <li><strong>Embedding Model:</strong> Choose appropriate embedding model</li>
+                <li><strong>Vector Database:</strong> Use efficient vector database</li>
+                <li><strong>Retrieval Strategy:</strong> Hybrid search (keyword + semantic)</li>
+                <li><strong>Reranking:</strong> Rerank retrieved documents</li>
+                <li><strong>Citation:</strong> Include source citations</li>
+                <li><strong>Evaluation:</strong> Evaluate retrieval quality</li>
+                <li><strong>Update Strategy:</strong> Regular knowledge base updates</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q50: What are the common challenges in Generative AI?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Hallucination:</strong> Generating false information</li>
+                <li><strong>Bias:</strong> Perpetuating societal biases</li>
+                <li><strong>Cost:</strong> High computational costs</li>
+                <li><strong>Latency:</strong> Slow inference times</li>
+                <li><strong>Privacy:</strong> Data privacy concerns</li>
+                <li><strong>Security:</strong> Prompt injection attacks</li>
+                <li><strong>Regulation:</strong> Evolving regulatory landscape</li>
+                <li><strong>Evaluation:</strong> Difficult to evaluate quality</li>
+                <li><strong>Integration:</strong> Integration with existing systems</li>
+                <li><strong>Maintenance:</strong> Ongoing model updates</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <strong>Interview Tip:</strong> When discussing Generative AI, emphasize understanding of core concepts (LLMs, Transformers, RAG), practical experience with frameworks (LangChain, LlamaIndex), and knowledge of deployment and optimization strategies. Be prepared to discuss real-world scenarios like prompt engineering, RAG implementation, and AI safety.
+        </div>
+
+        <div class="important">
+            <strong>Key Takeaways for Interview:</strong>
+            <ul>
+                <li>Understand Generative AI fundamentals and types</li>
+                <li>Know LLM architecture and popular models</li>
+                <li>Understand Transformer architecture and attention</li>
+                <li>Know training, fine-tuning, and PEFT methods</li>
+                <li>Understand prompt engineering techniques</li>
+                <li>Know RAG and vector databases</li>
+                <li>Understand LLM deployment and optimization</li>
+                <li>Know AI safety and ethical considerations</li>
+                <li>Understand popular frameworks (LangChain, LlamaIndex)</li>
+                <li>Know evaluation methods and benchmarks</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 50px; padding: 20px; background: #8e44ad; color: white; border-radius: 8px; text-align: center;">
+            <h3>End of Generative AI Interview Preparation Guide</h3>
+            <p>Comprehensive coverage with detailed questions and answers</p>
+        </div>
+    </div>
+</body>
+</html>

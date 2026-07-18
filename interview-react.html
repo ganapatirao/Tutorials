@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Interview Preparation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+        }
+        h1 {
+            color: #512bd4;
+            border-bottom: 4px solid #512bd4;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-left: 5px solid #512bd4;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .question {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .answer {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0 25px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        .important {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .tip {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #512bd4;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .toc {
+            background: #e7f3ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #512bd4;
+        }
+        .toc ol {
+            column-count: 2;
+        }
+        .toc li {
+            margin: 5px 0;
+        }
+        @media print {
+            body { background: white; }
+            .container { padding: 20px; }
+            .question { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .tip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .important { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        .page-break {
+            page-break-before: always;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>React Interview Preparation Guide</h1>
+        <p style="font-size: 18px; color: #666; margin-bottom: 30px;"><strong>Comprehensive Interview Preparation with In-Depth Concepts, Code Examples, and Best Practices</strong></p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>React Fundamentals</li>
+                <li>Components and Props</li>
+                <li>State and Lifecycle</li>
+                <li>Hooks</li>
+                <li>Context API</li>
+                <li>Redux</li>
+                <li>Routing</li>
+                <li>Forms</li>
+                <li>Performance Optimization</li>
+                <li>Testing</li>
+                <li>State Management Patterns</li>
+                <li>Advanced React Patterns</li>
+                <li>Server-Side Rendering</li>
+                <li>React 18+ Features</li>
+                <li>Common Interview Questions</li>
+            </ol>
+        </div>
+
+        <h2>1. React Fundamentals</h2>
+
+        <div class="question">
+            Q1: What is React and what are its key features?
+        </div>
+        <div class="answer">
+            <p><strong>React</strong> is a JavaScript library for building user interfaces, maintained by Facebook. It focuses on building reusable UI components.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Component-based:</strong> Build encapsulated components that manage their own state</li>
+                <li><strong>Virtual DOM:</strong> Efficient updates through virtual DOM diffing</li>
+                <li><strong>Declarative:</strong> Describe what the UI should look like</li>
+                <li><strong>Unidirectional data flow:</strong> Data flows down from parent to child</li>
+                <li><strong>JSX:</strong> HTML-like syntax for writing components</li>
+                <li><strong>Hooks:</strong> Use state and other React features without classes</li>
+                <li><strong>React Native:</strong> Build native mobile apps with React</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q2: What is the Virtual DOM?
+        </div>
+        <div class="answer">
+            <p>The <strong>Virtual DOM</strong> is a lightweight JavaScript representation of the actual DOM. React uses it to:</p>
+            <ul>
+                <li>Minimize direct DOM manipulation (expensive)</li>
+                <li>Compare the virtual DOM with the actual DOM (diffing)</li>
+                <li>Calculate the minimum number of changes needed</li>
+                <li>Batch updates for better performance</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Tip:</strong> The Virtual DOM is not always faster than direct DOM manipulation. Its benefit comes from minimizing reflows and repaints through efficient diffing.
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>2. Components and Props</h2>
+
+        <div class="question">
+            Q3: What is the difference between functional and class components?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Functional Components</th>
+                    <th>Class Components</th>
+                </tr>
+                <tr>
+                    <td>Syntax</td>
+                    <td>Function</td>
+                    <td>Class extending React.Component</td>
+                </tr>
+                <tr>
+                    <td>State</td>
+                    <td>Hooks (useState)</td>
+                    <td>this.state</td>
+                </tr>
+                <tr>
+                    <td>Lifecycle</td>
+                    <td>Hooks (useEffect)</td>
+                    <td>Lifecycle methods</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Generally faster</td>
+                    <td>Slightly slower</td>
+                </tr>
+                <tr>
+                    <td>Recommendation</td>
+                    <td>Preferred (modern)</td>
+                    <td>Legacy</td>
+                </tr>
+            </table>
+            
+            <div class="code-block">// Functional component
+function Welcome({ name }) {
+  return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
+}
+
+// Class component
+class Welcome extends React.Component {
+  render() {
+    return &lt;h1&gt;Hello, {this.props.name}!&lt;/h1&gt;;
+  }
+}</div>
+        </div>
+
+        <div class="question">
+            Q4: What are props in React?
+        </div>
+        <div class="answer">
+            <p><strong>Props</strong> (properties) are read-only data passed from parent to child components. They enable component composition and data flow.</p>
+            
+            <div class="code-block">// Parent component
+function App() {
+  return &lt;ProductCard name="Laptop" price={999.99} inStock={true} /&gt;;
+}
+
+// Child component
+function ProductCard({ name, price, inStock }) {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;{name}&lt;/h2&gt;
+      &lt;p&gt;Price: ${price}&lt;/p&gt;
+      {inStock ? &lt;p&gt;In Stock&lt;/p&gt; : &lt;p&gt;Out of Stock&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>3. State and Lifecycle</h2>
+
+        <div class="question">
+            Q5: What is state in React?
+        </div>
+        <div class="answer">
+            <p><strong>State</strong> is an object that holds component-specific data that can change over time. When state changes, React re-renders the component.</p>
+            
+            <div class="code-block">// Using useState hook
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={() => setCount(count + 1)}&gt;Increment&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</div>
+        </div>
+
+        <div class="question">
+            Q6: What is the difference between state and props?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>State</th>
+                    <th>Props</th>
+                </tr>
+                <tr>
+                    <td>Mutability</td>
+                    <td>Mutable (component can change)</td>
+                    <td>Immutable (read-only)</td>
+                </tr>
+                <tr>
+                    <td>Source</td>
+                    <td>Internal to component</td>
+                    <td>Passed from parent</td>
+                </tr>
+                <tr>
+                    <td>Changes</td>
+                    <td>Triggers re-render</td>
+                    <td>Triggers re-render</td>
+                </tr>
+                <tr>
+                    <td>Control</td>
+                    <td>Controlled by component</td>
+                    <td>Controlled by parent</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>4. Hooks</h2>
+
+        <div class="question">
+            Q7: What are React Hooks and why were they introduced?
+        </div>
+        <div class="answer">
+            <p><strong>Hooks</strong> are functions that let you use state and other React features in functional components. They were introduced to:</p>
+            <ul>
+                <li>Reuse stateful logic between components</li>
+                <li>Combine related logic in one place</li>
+                <li>Eliminate class components complexity</li>
+                <li>Make code more readable and maintainable</li>
+            </ul>
+            
+            <h3>Common Hooks:</h3>
+            <ul>
+                <li><strong>useState:</strong> Manage component state</li>
+                <li><strong>useEffect:</strong> Handle side effects</li>
+                <li><strong>useContext:</strong> Consume context</li>
+                <li><strong>useReducer:</strong> Manage complex state</li>
+                <li><strong>useCallback:</strong> Memoize functions</li>
+                <li><strong>useMemo:</strong> Memoize values</li>
+                <li><strong>useRef:</strong> Persist values across renders</li>
+                <li><strong>useCustom:</strong> Create custom hooks</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q8: How does useEffect work?
+        </div>
+        <div class="answer">
+            <p><strong>useEffect</strong> handles side effects in functional components. It runs after every render by default, but can be configured with dependencies.</p>
+            
+            <div class="code-block">// Run on every render
+useEffect(() => {
+  console.log('Component rendered');
+});
+
+// Run only on mount
+useEffect(() => {
+  console.log('Component mounted');
+}, []);
+
+// Run when count changes
+useEffect(() => {
+  console.log('Count changed:', count);
+}, [count]);
+
+// Cleanup on unmount
+useEffect(() => {
+  const timer = setInterval(() => console.log('Tick'), 1000);
+  return () => clearInterval(timer);
+}, []);</div>
+        </div>
+
+        <div class="question">
+            Q9: What is the difference between useEffect and useLayoutEffect?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>useEffect:</strong> Runs asynchronously after paint. Non-blocking. Use for most side effects.</li>
+                <li><strong>useLayoutEffect:</strong> Runs synchronously before paint. Blocking. Use for DOM measurements or mutations.</li>
+            </ul>
+            
+            <div class="important">
+                <strong>Important:</strong> Prefer useEffect over useLayoutEffect unless you need to measure or mutate the DOM before the browser paints.
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>5. Context API</h2>
+
+        <div class="question">
+            Q10: What is the Context API?
+        </div>
+        <div class="answer">
+            <p>The <strong>Context API</strong> provides a way to pass data through the component tree without having to pass props manually at every level. It's designed for sharing data that can be considered "global" for a tree of components.</p>
+            
+            <div class="code-block">// Create context
+const ThemeContext = createContext('light');
+
+// Provider
+function App() {
+  return (
+    &lt;ThemeContext.Provider value="dark"&gt;
+      &lt;Toolbar /&gt;
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+// Consumer
+function ThemedButton() {
+  const theme = useContext(ThemeContext);
+  return &lt;button className={theme}&gt;Click me&lt;/button&gt;;
+}</div>
+        </div>
+
+        <div class="question">
+            Q11: When should you use Context vs Redux?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Context:</strong> Use for low-frequency updates like theme, language, or user authentication. Not optimized for high-frequency updates.</li>
+                <li><strong>Redux:</strong> Use for complex state management, high-frequency updates, middleware support, and time-travel debugging.</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>6. Redux</h2>
+
+        <div class="question">
+            Q12: What is Redux and how does it work?
+        </div>
+        <div class="answer">
+            <p><strong>Redux</strong> is a predictable state container for JavaScript apps. It follows three principles:</p>
+            <ul>
+                <li><strong>Single source of truth:</strong> All state is stored in a single store</li>
+                <li><strong>State is read-only:</strong> State can only be changed by emitting actions</li>
+                <li><strong>Changes are made with pure functions:</strong> Reducers specify how state changes</li>
+            </ul>
+            
+            <div class="code-block">// Action
+const increment = () => ({ type: 'INCREMENT' });
+
+// Reducer
+function counter(state = 0, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1;
+    default:
+      return state;
+  }
+}
+
+// Store
+const store = createStore(counter);
+
+// Dispatch
+store.dispatch(increment());</div>
+        </div>
+
+        <div class="question">
+            Q13: What is the difference between Redux Toolkit and Redux?
+        </div>
+        <div class="answer">
+            <p><strong>Redux Toolkit</strong> is the official recommended way to write Redux logic. It simplifies Redux development by:</p>
+            <ul>
+                <li>Providing simplified configuration</li>
+                <li>Immutability helpers (Immer)</li>
+                <li>Thunks included by default</li>
+                <li>Simplified action creators</li>
+                <li>Better TypeScript support</li>
+            </ul>
+            
+            <div class="code-block">// Redux Toolkit
+import { createSlice } from '@reduxjs/toolkit';
+
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState: 0,
+  reducers: {
+    increment: (state) => state + 1,
+    decrement: (state) => state - 1
+  }
+});
+
+export const { increment, decrement } = counterSlice.actions;
+export default counterSlice.reducer;</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>7. Routing</h2>
+
+        <div class="question">
+            Q14: How does React Router work?
+        </div>
+        <div class="answer">
+            <p><strong>React Router</strong> enables client-side routing in React applications. It uses the HTML5 History API to keep the UI in sync with the URL.</p>
+            
+            <div class="code-block">// Basic routing
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
+function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;nav&gt;
+        &lt;Link to="/"&gt;Home&lt;/Link&gt;
+        &lt;Link to="/about"&gt;About&lt;/Link&gt;
+      &lt;/nav&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/" element=&lt;Home /&gt; /&gt;
+        &lt;Route path="/about" element=&lt;About /&gt; /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}</div>
+        </div>
+
+        <div class="question">
+            Q15: What is the difference between BrowserRouter and HashRouter?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>BrowserRouter:</strong> Uses HTML5 History API. Cleaner URLs. Requires server configuration for SPA support.</li>
+                <li><strong>HashRouter:</strong> Uses URL hash (#). Works without server configuration. Less clean URLs.</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>8. Forms</h2>
+
+        <div class="question">
+            Q16: What is the difference between controlled and uncontrolled components?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Controlled</th>
+                    <th>Uncontrolled</th>
+                </tr>
+                <tr>
+                    <td>Data source</td>
+                    <td>React state</td>
+                    <td>DOM</td>
+                </tr>
+                <tr>
+                    <td>Value</td>
+                    <td>Controlled by React</td>
+                    <td>Controlled by DOM</td>
+                </tr>
+                <tr>
+                    <td>Validation</td>
+                    <td>Easier</td>
+                    <td>Harder</td>
+                </tr>
+                <tr>
+                    <td>Code</td>
+                    <td>More verbose</td>
+                    <td>Less verbose</td>
+                </tr>
+            </table>
+            
+            <div class="code-block">// Controlled component
+function ControlledForm() {
+  const [value, setValue] = useState('');
+  
+  return (
+    &lt;input
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    /&gt;
+  );
+}
+
+// Uncontrolled component
+function UncontrolledForm() {
+  const inputRef = useRef();
+  
+  const handleSubmit = () => {
+    console.log(inputRef.current.value);
+  };
+  
+  return (
+    &lt;input ref={inputRef} /&gt;
+  );
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>9. Performance Optimization</h2>
+
+        <div class="question">
+            Q17: How do you optimize React performance?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>React.memo:</strong> Memoize components to prevent unnecessary re-renders</li>
+                <li><strong>useMemo:</strong> Memoize expensive calculations</li>
+                <li><strong>useCallback:</strong> Memoize functions to prevent recreation</li>
+                <li><strong>Code splitting:</strong> Lazy load components with React.lazy</li>
+                <li><strong>Virtualization:</strong> Render only visible items for long lists</li>
+                <li><strong>Avoid inline functions:</strong> Use useCallback or define outside render</li>
+                <li><strong>Key prop:</strong> Provide stable keys for lists</li>
+            </ul>
+            
+            <div class="code-block">// React.memo
+const ExpensiveComponent = React.memo(function ExpensiveComponent({ data }) {
+  return &lt;div&gt;{data}&lt;/div&gt;;
+});
+
+// useMemo
+const expensiveValue = useMemo(() => {
+  return computeExpensiveValue(a, b);
+}, [a, b]);
+
+// useCallback
+const handleClick = useCallback(() => {
+  doSomething(dependency);
+}, [dependency]);
+
+// Code splitting
+const LazyComponent = React.lazy(() => import('./LazyComponent'));
+
+// Keys
+{items.map(item => (
+  &lt;Item key={item.id} item={item} /&gt;
+))}</div>
+        </div>
+
+        <div class="question">
+            Q18: What is the key prop and why is it important?
+        </div>
+        <div class="answer">
+            <p>The <strong>key prop</strong> helps React identify which items have changed, been added, or been removed. Keys should be:</p>
+            <ul>
+                <li>Stable across re-renders</li>
+                <li>Unique among siblings</li>
+                <li>Not array index (unless list is static)</li>
+            </ul>
+            
+            <div class="important">
+                <strong>Important:</strong> Using array indices as keys can cause issues with reordering, leading to incorrect component state and performance problems.
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>10. Testing</h2>
+
+        <div class="question">
+            Q19: How do you test React components?
+        </div>
+        <div class="answer">
+            <p>React components are typically tested with Jest and React Testing Library.</p>
+            
+            <div class="code-block">// Component test
+import { render, screen, fireEvent } from '@testing-library/react';
+import Counter from './Counter';
+
+test('increments counter when button is clicked', () => {
+  render(&lt;Counter /&gt;);
+  
+  const button = screen.getByText('Increment');
+  const count = screen.getByText('Count: 0');
+  
+  fireEvent.click(button);
+  
+  expect(screen.getByText('Count: 1')).toBeInTheDocument();
+});</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>11. Common Interview Questions</h2>
+
+        <div class="question">
+            Q20: What is the difference between createElement and JSX?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>createElement:</strong> React's built-in method to create elements. Verbose and less readable.</li>
+                <li><strong>JSX:</strong> Syntax extension that looks like HTML. Transpiled to createElement by Babel. More readable and maintainable.</li>
+            </ul>
+            
+            <div class="code-block">// createElement
+React.createElement('h1', null, 'Hello World');
+
+// JSX
+&lt;h1&gt;Hello World&lt;/h1&gt;</div>
+        </div>
+
+        <div class="question">
+            Q21: What is the difference between state and refs?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>State:</strong> Triggers re-render when changed. Use for data that affects rendering.</li>
+                <li><strong>Refs:</strong> Does not trigger re-render. Use for DOM access, focus management, or storing values that don't affect rendering.</li>
+            </ul>
+            
+            <div class="code-block">// State - triggers re-render
+const [count, setCount] = useState(0);
+
+// Ref - doesn't trigger re-render
+const inputRef = useRef(null);
+inputRef.current.focus();</div>
+        </div>
+
+        <div class="question">
+            Q22: What is the difference between useCallback and useMemo?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>useCallback:</strong> Memoizes a function. Returns the same function instance unless dependencies change.</li>
+                <li><strong>useMemo:</strong> Memoizes a value. Returns the cached value unless dependencies change.</li>
+            </ul>
+            
+            <div class="code-block">// useCallback - memoizes function
+const memoizedCallback = useCallback(() => {
+  doSomething(a, b);
+}, [a, b]);
+
+// useMemo - memoizes value
+const memoizedValue = useMemo(() => {
+  return computeExpensiveValue(a, b);
+}, [a, b]);</div>
+        </div>
+
+        <div class="question">
+            Q23: What is the difference between shallow rendering and full rendering?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Shallow rendering:</strong> Renders only the component one level deep. Doesn't render child components. Faster, isolated testing.</li>
+                <li><strong>Full rendering:</strong> Renders the entire component tree including children. More realistic integration testing.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q24: What is the difference between useEffect and componentDidMount?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>componentDidMount:</strong> Class lifecycle method. Runs once after initial render.</li>
+                <li><strong>useEffect:</strong> Hook. Can run on mount, update, or unmount depending on dependencies. More flexible.</li>
+            </ul>
+            
+            <div class="code-block">// componentDidMount equivalent
+useEffect(() => {
+  // Runs on mount
+}, []);</div>
+        </div>
+
+        <div class="question">
+            Q25: What is the difference between React.PureComponent and React.Component?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>React.Component:</strong> Doesn't implement shouldComponentUpdate. Re-renders on every state/prop change.</li>
+                <li><strong>React.PureComponent:</strong> Implements shallow prop and state comparison. Only re-renders if props or state change shallowly.</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use React.PureComponent or React.memo for performance optimization when components receive the same props frequently.
+            </div>
+        </div>
+
+        <div class="question">
+            Q26: What is the difference between synthetic events and native events?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Synthetic events:</strong> React's cross-browser wrapper around native events. Consistent API across browsers. Pooled for performance.</li>
+                <li><strong>Native events:</strong> Browser's native event objects. Browser-specific APIs.</li>
+            </ul>
+            
+            <div class="code-block">// Access native event
+function handleClick(event) {
+  const nativeEvent = event.nativeEvent;
+  console.log(nativeEvent);
+}</div>
+        </div>
+
+        <div class="question">
+            Q27: What is the difference between useReducer and useState?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>useState:</strong> Simple state management. Good for independent state pieces.</li>
+                <li><strong>useReducer:</strong> Complex state management with reducer pattern. Good for related state pieces or complex state logic.</li>
+            </ul>
+            
+            <div class="code-block">// useState - simple
+const [count, setCount] = useState(0);
+
+// useReducer - complex
+const [state, dispatch] = useReducer(reducer, initialState);</div>
+        </div>
+
+        <div class="question">
+            Q28: What is the difference between forwardRef and useRef?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>useRef:</strong> Create a ref within a component to access DOM elements or persist values.</li>
+                <li><strong>forwardRef:</strong> Forward a ref from parent to child component. Used when parent needs to access child's DOM element.</li>
+            </ul>
+            
+            <div class="code-block">// forwardRef
+const FancyButton = forwardRef((props, ref) => (
+  &lt;button ref={ref}&gt;{props.children}&lt;/button&gt;
+));
+
+// Usage
+const buttonRef = useRef();
+&lt;FancyButton ref={buttonRef}&gt;Click me&lt;/FancyButton&gt;;</div>
+        </div>
+
+        <div class="question">
+            Q29: What is the difference between React.lazy and Suspense?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>React.lazy:</strong> Dynamically import a component. Returns a promise that resolves to the component.</li>
+                <li><strong>Suspense:</strong> Displays a fallback while waiting for lazy-loaded components or data fetching.</li>
+            </ul>
+            
+            <div class="code-block">const LazyComponent = React.lazy(() => import('./LazyComponent'));
+
+function App() {
+  return (
+    &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+      &lt;LazyComponent /&gt;
+    &lt;/Suspense&gt;
+  );
+}</div>
+        </div>
+
+        <div class="question">
+            Q30: What is the difference between server-side rendering and client-side rendering?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>SSR</th>
+                    <th>CSR</th>
+                </tr>
+                <tr>
+                    <td>Rendering</td>
+                    <td>Server renders HTML</td>
+                    <td>Browser renders HTML</td>
+                </tr>
+                <tr>
+                    <td>Initial Load</td>
+                    <td>Faster (HTML ready)</td>
+                    <td>Slower (JS loads first)</td>
+                </tr>
+                <tr>
+                    <td>SEO</td>
+                    <td>Better</td>
+                    <td>Worse</td>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>Higher</td>
+                    <td>Lower</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>11. State Management Patterns (Expert Level)</h2>
+
+        <div class="question">
+            Q31: What are the different state management approaches in React?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Component State:</strong> Local state using useState/useReducer</li>
+                <li><strong>Context API:</strong> Global state for component tree</li>
+                <li><strong>Redux:</strong> Predictable state container with actions and reducers</li>
+                <li><strong>Redux Toolkit:</strong> Simplified Redux with utilities</li>
+                <li><strong>Zustand:</strong> Lightweight state management</li>
+                <li><strong>Jotai:</strong> Atomic state management</li>
+                <li><strong>Recoil:</strong> Facebook's state management library</li>
+                <li><strong>React Query:</strong> Server state management</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q32: How do you implement Redux Toolkit?
+        </div>
+        <div class="answer">
+            <div class="code-block"> store.js
+import { configureStore, createSlice } from '@reduxjs/toolkit';
+
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState: { value: 0 },
+  reducers: {
+    increment: (state) => {
+      state.value += 1;
+    },
+    decrement: (state) => {
+      state.value -= 1;
+    },
+    incrementByAmount: (state, action) => {
+      state.value += action.payload;
+    }
+  }
+});
+
+export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const store = configureStore({
+  reducer: {
+    counter: counterSlice.reducer
+  }
+});
+
+// Component
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement } from './store';
+
+function Counter() {
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={() => dispatch(decrement())}&gt;-&lt;/button&gt;
+      &lt;span&gt;{count}&lt;/span&gt;
+      &lt;button onClick={() => dispatch(increment())}&gt;+&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</div>
+        </div>
+
+        <div class="question">
+            Q33: How do you use React Query for server state?
+        </div>
+        <div class="answer">
+            <div class="code-block">`r`nimport { useQuery, useMutation, useQueryClient, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
+
+function App() {
+  return (
+    &lt;QueryClientProvider client={queryClient}&gt;
+      &lt;Posts /&gt;
+    &lt;/QueryClientProvider&gt;
+  );
+}
+
+function Posts() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['posts'],
+    queryFn: () => fetch('https://api.example.com/posts').then(res => res.json())
+  });
+
+  if (isLoading) return &lt;div&gt;Loading...&lt;/div&gt;;
+  if (error) return &lt;div&gt;Error: {error.message}&lt;/div&gt;;
+
+  return (
+    &lt;ul&gt;
+      {data.map(post => (
+        &lt;li key={post.id}&gt;{post.title}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}
+
+function CreatePost() {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (newPost) => fetch('https://api.example.com/posts', {
+      method: 'POST',
+      body: JSON.stringify(newPost)
+    }).then(res => res.json()),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+    }
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    mutation.mutate({ title: 'New Post' });
+  };
+
+  return &lt;form onSubmit={handleSubmit}&gt;&lt;button type="submit"&gt;Create&lt;/button&gt;&lt;/form&gt;;
+}</div>
+        </div>
+
+        <div class="question">
+            Q34: How do you implement Zustand for state management?
+        </div>
+        <div class="answer">
+            <div class="code-block">`r`nimport create from 'zustand';
+
+const useStore = create((set) => ({
+  count: 0,
+  increment: () => set((state) => ({ count: state.count + 1 })),
+  decrement: () => set((state) => ({ count: state.count - 1 })),
+  reset: () => set({ count: 0 })
+}));
+
+function Counter() {
+  const { count, increment, decrement, reset } = useStore();
+  return (
+    &lt;div&gt;
+      &lt;span&gt;{count}&lt;/span&gt;
+      &lt;button onClick={increment}&gt;+&lt;/button&gt;
+      &lt;button onClick={decrement}&gt;-&lt;/button&gt;
+      &lt;button onClick={reset}&gt;Reset&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+// Async actions
+const usePostsStore = create((set) => ({
+  posts: [],
+  loading: false,
+  fetchPosts: async () => {
+    set({ loading: true });
+    const response = await fetch('https://api.example.com/posts');
+    const posts = await response.json();
+    set({ posts, loading: false });
+  }
+}));</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>12. Advanced React Patterns (Expert Level)</h2>
+
+        <div class="question">
+            Q35: What are compound components?
+        </div>
+        <div class="answer">
+            <div class="code-block"> Compound components pattern
+const Tabs = ({ children }) => {
+  const [activeTab, setActiveTab] = useState(0);
+  
+  return (
+    &lt;TabsContext.Provider value={{ activeTab, setActiveTab }}&gt;
+      {children}
+    &lt;/TabsContext.Provider&gt;
+  );
+};
+
+const TabList = ({ children }) => {
+  return &lt;div className="tab-list"&gt;{children}&lt;/div&gt;;
+};
+
+const Tab = ({ children, index }) => {
+  const { activeTab, setActiveTab } = useContext(TabsContext);
+  
+  return (
+    &lt;button
+      className={activeTab === index ? 'active' : ''}
+      onClick={() => setActiveTab(index)}
+    &gt;
+      {children}
+    &lt;/button&gt;
+  );
+};
+
+const TabPanels = ({ children }) => {
+  return &lt;div className="tab-panels"&gt;{children}&lt;/div&gt;;
+};
+
+const TabPanel = ({ children, index }) => {
+  const { activeTab } = useContext(TabsContext);
+  
+  return activeTab === index ? &lt;div&gt;{children}&lt;/div&gt; : null;
+};
+
+// Usage
+&lt;Tabs&gt;
+  &lt;TabList&gt;
+    &lt;Tab index={0}&gt;Tab 1&lt;/Tab&gt;
+    &lt;Tab index={1}&gt;Tab 2&lt;/Tab&gt;
+  &lt;/TabList&gt;
+  &lt;TabPanels&gt;
+    &lt;TabPanel index={0}&gt;Content 1&lt;/TabPanel&gt;
+    &lt;TabPanel index={1}&gt;Content 2&lt;/TabPanel&gt;
+  &lt;/TabPanels&gt;
+&lt;/Tabs&gt;</div>
+        </div>
+
+        <div class="question">
+            Q36: What are render props?
+        </div>
+        <div class="answer">
+            <div class="code-block"> Render props pattern
+const MouseTracker = ({ render }) => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    setPosition({ x: e.clientX, y: e.clientY });
+  };
+
+  return (
+    &lt;div onMouseMove={handleMouseMove}&gt;
+      {render(position)}
+    &lt;/div&gt;
+  );
+};
+
+// Usage
+&lt;MouseTracker
+  render={({ x, y }) => (
+    &lt;p&gt;Mouse position: {x}, {y}&lt;/p&gt;
+  )}
+/&gt;
+
+// Using children as render prop
+&lt;MouseTracker&gt;
+  {({ x, y }) => &lt;p&gt;Mouse: {x}, {y}&lt;/p&gt;}
+&lt;/MouseTracker&gt;</div>
+        </div>
+
+        <div class="question">
+            Q37: What are higher-order components (HOCs)?
+        </div>
+        <div class="answer">
+            <div class="code-block"> HOC pattern
+const withLoading = (WrappedComponent) => {
+  return (props) => {
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+      fetchData().then(result => {
+        setData(result);
+        setLoading(false);
+      });
+    }, []);
+
+    if (loading) return &lt;div&gt;Loading...&lt;/div&gt;;
+    return &lt;WrappedComponent data={data} {...props} /&gt;;
+  };
+};
+
+// Usage
+const UserProfile = ({ data }) => {
+  return &lt;div&gt;{data.name}&lt;/div&gt;;
+};
+
+const UserProfileWithLoading = withLoading(UserProfile);
+
+// HOC with authentication
+const withAuth = (WrappedComponent) => {
+  return (props) => {
+    const isAuthenticated = useAuth();
+    
+    if (!isAuthenticated) {
+      return &lt;Navigate to="/login" /&gt;;
+    }
+    
+    return &lt;WrappedComponent {...props} /&gt;;
+  };
+};</div>
+        </div>
+
+        <div class="question">
+            Q38: What are custom hooks?
+        </div>
+        <div class="answer">
+            <div class="code-block"> Custom hook for localStorage
+function useLocalStorage(key, initialValue) {
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      return initialValue;
+    }
+  });
+
+  const setValue = (value) => {
+    try {
+      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return [storedValue, setValue];
+}
+
+// Usage
+const [name, setName] = useLocalStorage('name', 'John');
+
+// Custom hook for debouncing
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+// Usage
+const [searchTerm, setSearchTerm] = useState('');
+const debouncedSearchTerm = useDebounce(searchTerm, 500);</div>
+        </div>
+
+        <div class="question">
+            Q39: What is the difference between controlled and uncontrolled components?
+        </div>
+        <div class="answer">
+            <div class="code-block"> Controlled component
+function ControlledForm() {
+  const [value, setValue] = useState('');
+
+  return (
+    &lt;input
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    /&gt;
+  );
+}
+
+// Uncontrolled component
+function UncontrolledForm() {
+  const inputRef = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputRef.current.value);
+  };
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;input ref={inputRef} defaultValue="initial" /&gt;
+      &lt;button type="submit"&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}
+
+// When to use each:
+// Controlled: Form validation, dynamic inputs, real-time formatting
+// Uncontrolled: Simple forms, integrating with non-React code, performance</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>13. Server-Side Rendering (Expert Level)</h2>
+
+        <div class="question">
+            Q40: How do you implement SSR with Next.js?
+        </div>
+        <div class="answer">
+            <div class="code-block"> pages/index.js (SSR)
+export async function getServerSideProps(context) {
+  const res = await fetch('https://api.example.com/data');
+  const data = await res.json();
+
+  return {
+    props: { data }
+  };
+}
+
+function HomePage({ data }) {
+  return &lt;div&gt;{data.title}&lt;/div&gt;;
+}
+
+export default HomePage;
+
+// Static generation (SSG)
+export async function getStaticProps() {
+  const res = await fetch('https://api.example.com/data');
+  const data = await res.json();
+
+  return {
+    props: { data },
+    revalidate: 60 // Revalidate every 60 seconds
+  };
+}
+
+// Incremental Static Regeneration (ISR)
+export async function getStaticPaths() {
+  const res = await fetch('https://api.example.com/posts');
+  const posts = await res.json();
+
+  return {
+    paths: posts.map(post => ({ params: { id: post.id } })),
+    fallback: 'blocking'
+  };
+}</div>
+        </div>
+
+        <div class="question">
+            Q41: How do you implement SSR with React 18?
+        </div>
+        <div class="answer">
+            <div class="code-block"> server.js
+import express from 'express';
+import { renderToPipeableStream } from 'react-dom/server';
+import App from './App';
+
+const app = express();
+
+app.get('/', (req, res) => {
+  const { pipe } = renderToPipeableStream(
+    &lt;App /&gt;,
+    {
+      bootstrapScripts: ['/client.js'],
+      onShellReady() {
+        res.statusCode = 200;
+        res.setHeader('Content-type', 'text/html');
+        pipe(res);
+      },
+      onShellError(error) {
+        res.statusCode = 500;
+        res.send('Error!');
+      }
+    }
+  );
+});
+
+app.listen(3000);
+
+// client.js
+import { hydrateRoot } from 'react-dom/client';
+import App from './App';
+
+hydrateRoot(document.getElementById('root'), &lt;App /&gt;);</div>
+        </div>
+
+        <div class="question">
+            Q42: What is the difference between SSR and SSG?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>SSR</th>
+                    <th>SSG</th>
+                </tr>
+                <tr>
+                    <td>When HTML is generated</td>
+                    <td>On each request</td>
+                    <td>At build time</td>
+                </tr>
+                <tr>
+                    <td>Data freshness</td>
+                    <td>Always fresh</td>
+                    <td>Stale until rebuild</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Slower (server renders)</td>
+                    <td>Faster (served from CDN)</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Dynamic content</td>
+                    <td>Static content</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>14. React 18+ Features (Expert Level)</h2>
+
+        <div class="question">
+            Q43: What are the new features in React 18?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Concurrent Rendering:</strong> React can prepare multiple versions of UI simultaneously</li>
+                <li><strong>Automatic Batching:</strong> Multiple state updates are batched automatically</li>
+                <li><strong>Transitions:</strong> Mark non-urgent updates with useTransition</li>
+                <li><strong>Suspense on Server:</strong> Suspense works with SSR</li>
+                <li><strong>New Hooks:</strong> useId, useDeferredValue, useSyncExternalStore</li>
+                <li><strong>New Root API:</strong> createRoot replaces ReactDOM.render</li>
+                <li><strong>Strict Mode Changes:</strong> Components mount twice in development</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q44: How do you use concurrent features in React 18?
+        </div>
+        <div class="answer">
+            <div class="code-block"> useTransition for non-urgent updates
+function SearchResults() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [isPending, startTransition] = useTransition();
+
+  const handleChange = (e) => {
+    // Urgent update
+    setQuery(e.target.value);
+    
+    // Non-urgent update
+    startTransition(() => {
+      setResults(search(e.target.value));
+    });
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;input value={query} onChange={handleChange} /&gt;
+      {isPending ? &lt;Spinner /&gt; : &lt;ResultsList results={results} /&gt;}
+    &lt;/div&gt;
+  );
+}
+
+// useDeferredValue for expensive UI
+function ProductList({ products }) {
+  const deferredProducts = useDeferredValue(products);
+  
+  return (
+    &lt;div&gt;
+      {deferredProducts.map(product => (
+        &lt;ProductCard key={product.id} product={product} /&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</div>
+        </div>
+
+        <div class="question">
+            Q45: How do you use the new root API?
+        </div>
+        <div class="answer">
+            <div class="code-block"> Old way (React 17)
+import ReactDOM from 'react-dom';
+import App from './App';
+
+ReactDOM.render(&lt;App /&gt;, document.getElementById('root'));
+
+// New way (React 18+)
+import { createRoot } from 'react-dom/client';
+import App from './App';
+
+const root = createRoot(document.getElementById('root'));
+root.render(&lt;App /&gt;);
+
+// Unmounting
+root.unmount();
+
+// Concurrent features enabled by default
+root.render(
+  &lt;StrictMode&gt;
+    &lt;App /&gt;
+  &lt;/StrictMode&gt;
+);</div>
+        </div>
+
+        <div class="question">
+            Q46: What is automatic batching in React 18?
+        </div>
+        <div class="answer">
+            <div class="code-block"> React 18 automatically batches state updates
+// even in async operations, promises, timeouts
+
+function handleClick() {
+  setCount(c => c + 1);
+  setFlag(f => !f);
+  // Both updates are batched - only one re-render
+}
+
+// In async operations
+async function fetchData() {
+  const data = await fetch('/api/data');
+  setLoading(false);
+  setData(data);
+  setError(null);
+  // All three updates are batched
+}
+
+// In event handlers
+setTimeout(() => {
+  setCount(c => c + 1);
+  setFlag(f => !f);
+  // Batched in React 18, not in React 17
+}, 1000);
+
+// To opt out of batching
+import { flushSync } from 'react-dom';
+
+function handleClick() {
+  flushSync(() => {
+    setCount(c => c + 1);
+  });
+  // Re-renders immediately
+  setFlag(f => !f);
+  // Re-renders again
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>15. Common Interview Questions (All Levels)</h2>
+
+        <div class="question">
+            Q47: What is the difference between useEffect and useLayoutEffect?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>useEffect:</strong> Runs after paint. Non-blocking. Use for most side effects.</li>
+                <li><strong>useLayoutEffect:</strong> Runs before paint. Blocking. Use for DOM measurements.</li>
+            </ul>
+            
+            <div class="code-block"> useEffect (non-blocking)
+useEffect(() => {
+  document.title = `Count: ${count}`;
+}, [count]);
+
+// useLayoutEffect (blocking, for DOM measurements)
+useLayoutEffect(() => {
+  const rect = ref.current.getBoundingClientRect();
+  setPosition(rect.top);
+}, []);</div>
+        </div>
+
+        <div class="question">
+            Q48: How do you handle errors in React?
+        </div>
+        <div class="answer">
+            <div class="code-block"> Error boundary
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('Error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return &lt;h1&gt;Something went wrong.&lt;/h1&gt;;
+    }
+    return this.props.children;
+  }
+}
+
+// Usage
+&lt;ErrorBoundary&gt;
+  &lt;MyComponent /&gt;
+&lt;/ErrorBoundary&gt;
+
+// Error handling in async operations
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const data = await fetch('/api/data');
+      setData(data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  fetchData();
+}, []);</div>
+        </div>
+
+        <div class="question">
+            Q49: How do you optimize React application performance?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>useMemo:</strong> Memoize expensive calculations</li>
+                <li><strong>useCallback:</strong> Memoize functions to prevent re-renders</li>
+                <li><strong>React.memo:</strong> Memoize components</li>
+                <li><strong>Code splitting:</strong> Use React.lazy and Suspense</li>
+                <li><strong>Virtualization:</strong> Use react-window for large lists</li>
+                <li><strong>Avoid inline functions:</strong> Define functions outside render</li>
+                <li><strong>Use keys properly:</strong> Stable keys for lists</li>
+                <li><strong>Debounce/Throttle:</strong> For event handlers</li>
+                <li><strong>Optimize images:</strong> Lazy loading, WebP format</li>
+                <li><strong>Bundle analysis:</strong> Use webpack-bundle-analyzer</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q50: What is the difference between useMemo and useCallback?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>useMemo:</strong> Memoizes a value. Returns the memoized value.</li>
+                <li><strong>useCallback:</strong> Memoizes a function. Returns the memoized function.</li>
+            </ul>
+            
+            <div class="code-block"> useMemo
+const expensiveValue = useMemo(() => {
+  return computeExpensiveValue(a, b);
+}, [a, b]);
+
+// useCallback
+const handleClick = useCallback(() => {
+  doSomething(a, b);
+}, [a, b]);
+
+// useCallback is essentially useMemo with a function
+const handleClick = useMemo(() => () => {
+  doSomething(a, b);
+}, [a, b]);</div>
+        </div>
+
+        <div class="question">
+            Q51: How do you implement infinite scroll?
+        </div>
+        <div class="answer">
+            <div class="code-block">`r`nimport { useEffect, useState, useRef } from 'react';
+
+function InfiniteScroll() {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const observerRef = useRef();
+
+  const loadMore = async () => {
+    setLoading(true);
+    const newItems = await fetchItems(page);
+    setItems(prev => [...prev, ...newItems]);
+    setPage(prev => prev + 1);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !loading) {
+          loadMore();
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [loading, page]);
+
+  return (
+    &lt;div&gt;
+      {items.map(item => &lt;Item key={item.id} item={item} /&gt;)}
+      {loading && &lt;div&gt;Loading...&lt;/div&gt;}
+      &lt;div ref={observerRef} /&gt;
+    &lt;/div&gt;
+  );
+}</div>
+        </div>
+
+        <div class="question">
+            Q52: How do you implement a custom hook for API calls?
+        </div>
+        <div class="answer">
+            <div class="code-block">`r`nfunction useApi(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(url);
+        const json = await response.json();
+        setData(json);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [url]);
+
+  return { data, loading, error };
+}
+
+// Usage
+function Users() {
+  const { data: users, loading, error } = useApi('/api/users');
+
+  if (loading) return &lt;div&gt;Loading...&lt;/div&gt;;
+  if (error) return &lt;div&gt;Error: {error}&lt;/div&gt;;
+
+  return (
+    &lt;ul&gt;
+      {users.map(user => &lt;li key={user.id}&gt;{user.name}&lt;/li&gt;)}
+    &lt;/ul&gt;
+  );
+}</div>
+        </div>
+
+        <div class="question">
+            Q53: What are the best practices for React development?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Functional components:</strong> Use functional components with hooks</li>
+                <li><strong>Component composition:</strong> Build small, reusable components</li>
+                <li><strong>Prop drilling:</strong> Use Context API to avoid prop drilling</li>
+                <li><strong>State management:</strong> Choose appropriate state management solution</li>
+                <li><strong>Performance:</strong> Use useMemo, useCallback, React.memo</li>
+                <li><strong>Error handling:</strong> Implement error boundaries</li>
+                <li><strong>Code splitting:</strong> Lazy load components and routes</li>
+                <li><strong>TypeScript:</strong> Use TypeScript for type safety</li>
+                <li><strong>Testing:</strong> Write unit and integration tests</li>
+                <li><strong>Linting:</strong> Use ESLint and Prettier</li>
+                <li><strong>Accessibility:</strong> Implement ARIA labels and keyboard navigation</li>
+                <li><strong>Security:</strong> Sanitize user input, use HTTPS</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q54: How do you implement authentication in React?
+        </div>
+        <div class="answer">
+            <div class="code-block"> Auth context
+const AuthContext = createContext();
+
+function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+
+  const login = async (credentials) => {
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      body: JSON.stringify(credentials)
+    });
+    const user = await response.json();
+    setUser(user);
+    localStorage.setItem('token', user.token);
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('token');
+  };
+
+  return (
+    &lt;AuthContext.Provider value={{ user, login, logout }}&gt;
+      {children}
+    &lt;/AuthContext.Provider&gt;
+  );
+}
+
+// Protected route
+function ProtectedRoute({ children }) {
+  const { user } = useAuth();
+  
+  if (!user) {
+    return &lt;Navigate to="/login" /&gt;;
+  }
+  
+  return children;
+}
+
+// Usage
+&lt;AuthProvider&gt;
+  &lt;Routes&gt;
+    &lt;Route path="/login" element=&lt;Login /&gt; /&gt;
+    &lt;Route
+      path="/dashboard"
+      element={
+        &lt;ProtectedRoute&gt;
+          &lt;Dashboard /&gt;
+        &lt;/ProtectedRoute&gt;
+      }
+    /&gt;
+  &lt;/Routes&gt;
+&lt;/AuthProvider&gt;</div>
+        </div>
+
+        <div class="question">
+            Q55: How do you implement file upload in React?
+        </div>
+        <div class="answer">
+            <div class="code-block">`r`nfunction FileUpload() {
+  const [file, setFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (!file) return;
+
+    setUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const xhr = new XMLHttpRequest();
+      
+      xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable) {
+          setProgress((e.loaded / e.total) * 100);
+        }
+      };
+
+      xhr.onload = () => {
+        setUploading(false);
+        setProgress(0);
+      };
+
+      xhr.open('POST', '/api/upload');
+      xhr.send(formData);
+    } catch (error) {
+      console.error('Upload failed:', error);
+      setUploading(false);
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;input type="file" onChange={handleFileChange} /&gt;
+      &lt;button onClick={handleUpload} disabled={uploading}&gt;
+        {uploading ? 'Uploading...' : 'Upload'}
+      &lt;/button&gt;
+      {uploading && &lt;progress value={progress} max={100} /&gt;}
+    &lt;/div&gt;
+  );
+}</div>
+        </div>
+
+        <div class="question">
+            Q56: How do you implement real-time updates in React?
+        </div>
+        <div class="answer">
+            <div class="code-block"> Using WebSocket
+function RealTimeChat() {
+  const [messages, setMessages] = useState([]);
+  const wsRef = useRef(null);
+
+  useEffect(() => {
+    wsRef.current = new WebSocket('ws://localhost:8080');
+
+    wsRef.current.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      setMessages(prev => [...prev, message]);
+    };
+
+    return () => {
+      wsRef.current.close();
+    };
+  }, []);
+
+  const sendMessage = (message) => {
+    wsRef.current.send(JSON.stringify(message));
+  };
+
+  return (
+    &lt;div&gt;
+      {messages.map(msg => (
+        &lt;div key={msg.id}&gt;{msg.text}&lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+
+// Using Server-Sent Events
+function SseComponent() {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const eventSource = new EventSource('/api/events');
+
+    eventSource.onmessage = (event) => {
+      setEvents(prev => [...prev, JSON.parse(event.data)]);
+    };
+
+    return () => eventSource.close();
+  }, []);
+
+  return &lt;div&gt;{events.length} events&lt;/div&gt;;
+}</div>
+        </div>
+
+        <div class="question">
+            Q57: How do you implement internationalization (i18n) in React?
+        </div>
+        <div class="answer">
+            <div class="code-block"> Using react-i18next
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+
+i18n
+  .use(initReactI18next)
+  .init({
+    resources: {
+      en: {
+        translation: {
+          welcome: 'Welcome',
+          greeting: 'Hello {{name}}'
+        }
+      },
+      fr: {
+        translation: {
+          welcome: 'Bienvenue',
+          greeting: 'Bonjour {{name}}'
+        }
+      }
+    },
+    lng: 'en'
+  });
+
+function MyComponent() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{t('welcome')}&lt;/h1&gt;
+      &lt;p&gt;{t('greeting', { name: 'John' })}&lt;/p&gt;
+      &lt;button onClick={() => changeLanguage('fr')}&gt;Français&lt;/button&gt;
+      &lt;button onClick={() => changeLanguage('en')}&gt;English&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</div>
+        </div>
+
+        <div class="question">
+            Q58: How do you implement dark mode in React?
+        </div>
+        <div class="answer">
+            <div class="code-block"> Theme context
+const ThemeContext = createContext();
+
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
+  return (
+    &lt;ThemeContext.Provider value={{ theme, toggleTheme }}&gt;
+      {children}
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+// CSS variables
+:root {
+  --bg-color: white;
+  --text-color: black;
+}
+
+[data-theme='dark'] {
+  --bg-color: #1a1a1a;
+  --text-color: white;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+// Usage
+function App() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={toggleTheme}&gt;
+        {theme === 'light' ? 'Dark' : 'Light'} Mode
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</div>
+        </div>
+
+        <div class="question">
+            Q59: How do you implement drag and drop in React?
+        </div>
+        <div class="answer">
+            <div class="code-block"> Using react-beautiful-dnd
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
+function KanbanBoard() {
+  const [columns, setColumns] = useState(initialData);
+
+  const onDragEnd = (result) => {
+    const { source, destination } = result;
+
+    if (!destination) return;
+
+    const sourceCol = columns[source.droppableId];
+    const destCol = columns[destination.droppableId];
+
+    if (source.droppableId === destination.droppableId) {
+      // Reorder within same column
+      const newItems = Array.from(sourceCol.items);
+      const [removed] = newItems.splice(source.index, 1);
+      newItems.splice(destination.index, 0, removed);
+
+      setColumns({
+        ...columns,
+        [source.droppableId]: {
+          ...sourceCol,
+          items: newItems
+        }
+      });
+    } else {
+      // Move between columns
+      const sourceItems = [...sourceCol.items];
+      const destItems = [...destCol.items];
+      const [removed] = sourceItems.splice(source.index, 1);
+      destItems.splice(destination.index, 0, removed);
+
+      setColumns({
+        ...columns,
+        [source.droppableId]: {
+          ...sourceCol,
+          items: sourceItems
+        },
+        [destination.droppableId]: {
+          ...destCol,
+          items: destItems
+        }
+      });
+    }
+  };
+
+  return (
+    &lt;DragDropContext onDragEnd={onDragEnd}&gt;
+      {Object.entries(columns).map(([colId, col]) => (
+        &lt;Droppable key={colId} droppableId={colId}&gt;
+          {(provided) =&gt; (
+            &lt;div ref={provided.innerRef} {...provided.droppableProps}&gt;
+              {col.items.map((item, index) =&gt; (
+                &lt;Draggable key={item.id} draggableId={item.id} index={index}&gt;
+                  {(provided) =&gt; (
+                    &lt;div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    &gt;
+                      {item.content}
+                    &lt;/div&gt;
+                  )}
+                &lt;/Draggable&gt;
+              ))}
+              {provided.placeholder}
+            &lt;/div&gt;
+          )}
+        &lt;/Droppable&gt;
+      ))}
+    &lt;/DragDropContext&gt;
+  );
+}</div>
+        </div>
+
+        <div class="question">
+            Q60: What are the common React performance issues and solutions?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Unnecessary re-renders:</strong> Use React.memo, useMemo, useCallback</li>
+                <li><strong>Large bundle size:</strong> Code splitting, tree shaking, lazy loading</li>
+                <li><strong>Slow initial load:</strong> Server-side rendering, static generation</li>
+                <li><strong>Slow list rendering:</strong> Virtualization with react-window</li>
+                <li><strong>Memory leaks:</strong> Clean up subscriptions, event listeners</li>
+                <li><strong>Slow calculations:</strong> Memoize with useMemo</li>
+                <li><strong>Prop drilling:</strong> Use Context API or state management</li>
+                <li><strong>Too many state updates:</strong> Batch updates, useReducer</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <strong>Interview Tip:</strong> When discussing React, always emphasize hooks, functional components, and performance optimization. Be prepared to discuss real-world scenarios like state management (Redux, React Query, Zustand), routing, testing, and modern React features like concurrent rendering. For senior positions, demonstrate knowledge of SSR with Next.js, performance optimization techniques, custom hooks, and advanced patterns like compound components and render props.
+        </div>
+
+        <div class="important">
+            <strong>Key Takeaways for Interview (Beginner to Expert):</strong>
+            <ul>
+                <li><strong>Beginner (0-3 years):</strong> Understand Virtual DOM and reconciliation, know hooks deeply (useState, useEffect), understand component lifecycle, know JSX and component structure, understand props and state, know controlled vs uncontrolled components, understand basic event handling.</li>
+                <li><strong>Intermediate (4-7 years):</strong> Understand Context API and when to use it, know Redux principles and Redux Toolkit, understand routing with React Router, know performance optimization basics (useMemo, useCallback, React.memo), implement custom hooks, understand form handling, know error boundaries.</li>
+                <li><strong>Advanced (8-10 years):</strong> Implement advanced state management (Zustand, Jotai, React Query), write comprehensive tests with Jest and React Testing Library, optimize performance with virtualization and code splitting, implement SSR with Next.js, understand compound components and render props, implement HOCs and custom hooks patterns.</li>
+                <li><strong>Expert (11-13 years):</strong> Implement React 18 concurrent features (useTransition, useDeferredValue), design scalable architecture with state management patterns, implement advanced React patterns (compound components, render props, HOCs), use Server Components with Next.js 13+, implement real-time features with WebSockets, design component libraries, implement advanced testing strategies, optimize bundle size and performance.</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 50px; padding: 20px; background: #512bd4; color: white; border-radius: 8px; text-align: center;">
+            <h3>End of React Interview Preparation Guide</h3>
+            <p>Comprehensive coverage from beginner to expert level (4-13 years experience)</p>
+        </div>
+    </div>
+</body>
+</html>

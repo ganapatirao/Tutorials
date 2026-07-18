@@ -1,0 +1,3368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entity Framework Interview Preparation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+        }
+        h1 {
+            color: #512bd4;
+            border-bottom: 4px solid #512bd4;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-left: 5px solid #512bd4;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .question {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .answer {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0 25px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        .important {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .tip {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #512bd4;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .toc {
+            background: #e7f3ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #512bd4;
+        }
+        .toc ol {
+            column-count: 2;
+        }
+        .toc li {
+            margin: 5px 0;
+        }
+        @media print {
+            body { background: white; }
+            .container { padding: 20px; }
+            .question { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .tip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .important { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        .page-break {
+            page-break-before: always;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Entity Framework Interview Preparation Guide</h1>
+        <p style="font-size: 18px; color: #666; margin-bottom: 30px;"><strong>Comprehensive Interview Preparation with In-Depth Concepts, Code Examples, and Best Practices</strong></p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>Entity Framework Fundamentals</li>
+                <li>DbContext and DbSet</li>
+                <li>Entity Relationships</li>
+                <li>Migrations</li>
+                <li>Change Tracking</li>
+                <li>LINQ to Entities</li>
+                <li>Performance Optimization</li>
+                <li>Advanced Features</li>
+                <li>EF Core vs EF6</li>
+                <li>Database Design Patterns</li>
+                <li>Multi-Tenancy and Global Filters</li>
+                <li>Concurrency and Transactions</li>
+                <li>Testing and Mocking</li>
+                <li>Real-World Scenarios</li>
+                <li>Common Interview Questions</li>
+            </ol>
+        </div>
+
+        <h2>1. Entity Framework Fundamentals</h2>
+
+        <div class="question">
+            Q1: What is Entity Framework and what are its benefits?
+        </div>
+        <div class="answer">
+            <p><strong>Entity Framework (EF)</strong> is an Object-Relational Mapper (ORM) that enables .NET developers to work with relational data using domain-specific objects. It eliminates the need for most of the data-access code that developers usually need to write.</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li><strong>Productivity:</strong> Reduces data access code</li>
+                <li><strong>Maintainability:</strong> Less code to maintain</li>
+                <li><strong>Type Safety:</strong> Compile-time checking</li>
+                <li><strong>Abstraction:</strong> Database agnostic</li>
+                <li><strong>Change Tracking:</strong> Automatic change detection</li>
+                <li><strong>LINQ Support:</strong> Query using LINQ</li>
+                <li><strong>Migrations:</strong> Database schema management</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q2: What is the difference between EF6 and EF Core?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>EF6</th>
+                    <th>EF Core</th>
+                </tr>
+                <tr>
+                    <td>Platform</td>
+                    <td>.NET Framework only</td>
+                    <td>Cross-platform (.NET Core/.NET 5+)</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Good</td>
+                    <td>Significantly faster</td>
+                </tr>
+                <tr>
+                    <td>Features</td>
+                    <td>More features</td>
+                    <td>Subset of features, growing</td>
+                </tr>
+                <tr>
+                    <td>Database Support</td>
+                    <td>SQL Server, Oracle, etc.</td>
+                    <td>SQL Server, PostgreSQL, MySQL, SQLite, etc.</td>
+                </tr>
+                <tr>
+                    <td>Migrations</td>
+                    <td>Yes</td>
+                    <td>Yes, improved</td>
+                </tr>
+                <tr>
+                    <td>Lazy Loading</td>
+                    <td>Default</td>
+                    <td>Opt-in</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>2. DbContext and DbSet</h2>
+
+        <div class="question">
+            Q3: What is DbContext?
+        </div>
+        <div class="answer">
+            <p><strong>DbContext</strong> is the primary class that coordinates the Entity Framework functionality for a given data model. It:</p>
+            <ul>
+                <li>Manages entity objects during runtime</li>
+                <li>Handles database connections</li>
+                <li>Tracks changes to entities</li>
+                <li>Saves changes to the database</li>
+                <li>Executes LINQ queries against the database</li>
+            </ul>
+            
+            <div class="code-block">public class AppDbContext : DbContext
+{
+    public AppDbContext(DbContextOptions&lt;AppDbContext&gt; options)
+        : base(options)
+    {
+    }
+    
+    public DbSet&lt;Product&gt; Products { get; set; }
+    public DbSet&lt;Category&gt; Categories { get; set; }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Fluent API configuration
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q4: What is DbSet?
+        </div>
+        <div class="answer">
+            <p><strong>DbSet&lt;TEntity&gt;</strong> represents a collection of entities of a specific type that can be queried from the database. It:</p>
+            <ul>
+                <li>Represents a table in the database</li>
+                <li>Enables CRUD operations</li>
+                <li>Supports LINQ queries</li>
+                <li>Tracks changes to entities</li>
+            </ul>
+            
+            <div class="code-block">// CRUD operations
+// Create
+context.Products.Add(new Product { Name = "Laptop" });
+await context.SaveChangesAsync();
+
+// Read
+var products = await context.Products.ToListAsync();
+var product = await context.Products.FindAsync(1);
+
+// Update
+product.Name = "Updated Laptop";
+await context.SaveChangesAsync();
+
+// Delete
+context.Products.Remove(product);
+await context.SaveChangesAsync();</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>3. Entity Relationships</h2>
+
+        <div class="question">
+            Q5: What are the different types of entity relationships?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Relationship</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>One-to-One</td>
+                    <td>Each entity in A relates to one entity in B</td>
+                    <td>User - Profile</td>
+                </tr>
+                <tr>
+                    <td>One-to-Many</td>
+                    <td>Each entity in A relates to many entities in B</td>
+                    <td>Category - Products</td>
+                </tr>
+                <tr>
+                    <td>Many-to-Many</td>
+                    <td>Entities in A relate to many in B and vice versa</td>
+                    <td>Students - Courses</td>
+                </tr>
+            </table>
+            
+            <div class="code-block">// One-to-Many
+public class Category
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ICollection&lt;Product&gt; Products { get; set; }
+}
+
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int CategoryId { get; set; }
+    public Category Category { get; set; }
+}
+
+// Many-to-Many
+public class Student
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ICollection&lt;Enrollment&gt; Enrollments { get; set; }
+}
+
+public class Course
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ICollection&lt;Enrollment&gt; Enrollments { get; set; }
+}
+
+public class Enrollment
+{
+    public int StudentId { get; set; }
+    public int CourseId { get; set; }
+    public Student Student { get; set; }
+    public Course Course { get; set; }
+}</div>
+        </div>
+
+        <div class="question">
+            Q6: What is the difference between Data Annotations and Fluent API?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Data Annotations</th>
+                    <th>Fluent API</th>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td>On entity classes</td>
+                    <td>In OnModelCreating</td>
+                </tr>
+                <tr>
+                    <td>Readability</td>
+                    <td>More readable</td>
+                    <td>More verbose</td>
+                </tr>
+                <tr>
+                    <td>Flexibility</td>
+                    <td>Limited</td>
+                    <td>More flexible</td>
+                </tr>
+                <tr>
+                    <td>Separation</td>
+                    <td>Mixes concerns</td>
+                    <td>Separates concerns</td>
+                </tr>
+                <tr>
+                    <td>Features</td>
+                    <td>Basic</td>
+                    <td>Advanced</td>
+                </tr>
+            </table>
+            
+            <div class="code-block">// Data Annotations
+public class Product
+{
+    [Key]
+    public int Id { get; set; }
+    
+    [Required]
+    [StringLength(100)]
+    public string Name { get; set; }
+    
+    [Range(0.01, 10000)]
+    public decimal Price { get; set; }
+}
+
+// Fluent API
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Product&gt;(entity =>
+    {
+        entity.HasKey(e => e.Id);
+        entity.Property(e => e.Name)
+            .IsRequired()
+            .HasMaxLength(100);
+        entity.Property(e => e.Price)
+            .HasPrecision(18, 2);
+    });
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>4. Migrations</h2>
+
+        <div class="question">
+            Q7: What are Entity Framework migrations?
+        </div>
+        <div class="answer">
+            <p><strong>Migrations</strong> enable you to apply incremental changes to the database schema to keep it in sync with your EF Core model.</p>
+            
+            <h3>Migration Commands:</h3>
+            <div class="code-block">// Add migration
+dotnet ef migrations add InitialCreate
+
+// Update database
+dotnet ef database update
+
+// Remove last migration
+dotnet ef migrations remove
+
+// List migrations
+dotnet ef migrations list
+
+// Generate SQL script
+dotnet ef migrations script</div>
+            
+            <h3>Migration Steps:</h3>
+            <ol>
+                <li>Define or modify your entity classes</li>
+                <li>Add a migration to capture the changes</li>
+                <li>Update the database to apply the migration</li>
+            </ol>
+        </div>
+
+        <div class="question">
+            Q8: How do you handle migrations in production?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Generate SQL script for production
+dotnet ef migrations script 2023-01-01-InitialCreate --output migration.sql
+
+// Apply migrations programmatically
+public static void ApplyMigrations(IApplicationBuilder app)
+{
+    using var scope = app.ApplicationServices.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService&lt;AppDbContext&gt;();
+    context.Database.Migrate();
+}
+
+// In Program.cs
+var app = builder.Build();
+ApplyMigrations(app);</div>
+            
+            <div class="important">
+                <strong>Important:</strong> Never use automatic migrations in production. Always generate SQL scripts and review them before applying.
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>5. Change Tracking</h2>
+
+        <div class="question">
+            Q9: How does Entity Framework track changes?
+        </div>
+        <div class="answer">
+            <p>EF Core tracks changes to entities using a change tracker. When you query entities, EF Core:</p>
+            <ul>
+                <li>Takes a snapshot of the entity's original values</li>
+                <li>Monitors the entity for changes</li>
+                <li>Detects changes when SaveChanges is called</li>
+                <li>Generates appropriate SQL UPDATE/INSERT/DELETE statements</li>
+            </ul>
+            
+            <div class="code-block">// Change tracking states
+var entry = context.Entry(product);
+Console.WriteLine(entry.State); // Added, Modified, Deleted, Unchanged, Detached
+
+// Detect changes manually
+context.ChangeTracker.DetectChanges();
+
+// Query change tracker
+var modifiedEntities = context.ChangeTracker.Entries()
+    .Where(e => e.State == EntityState.Modified)
+    .ToList();</div>
+        </div>
+
+        <div class="question">
+            Q10: What are the different entity states?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>State</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Added</td>
+                    <td>Entity is new and will be inserted</td>
+                </tr>
+                <tr>
+                    <td>Unchanged</td>
+                    <td>Entity hasn't been modified</td>
+                </tr>
+                <tr>
+                    <td>Modified</td>
+                    <td>Entity has been modified</td>
+                </tr>
+                <tr>
+                    <td>Deleted</td>
+                    <td>Entity is marked for deletion</td>
+                </tr>
+                <tr>
+                    <td>Detached</td>
+                    <td>Entity is not being tracked</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>6. LINQ to Entities</h2>
+
+        <div class="question">
+            Q11: How does LINQ work with Entity Framework?
+        </div>
+        <div class="answer">
+            <p>LINQ queries in EF Core are translated to SQL queries. The query is executed when:</p>
+            <ul>
+                <li>You iterate over the results (foreach)</li>
+                <li>You call a conversion operator (ToList, ToArray, etc.)</li>
+                <li>You call an aggregate operator (Count, Sum, etc.)</li>
+            </ul>
+            
+            <div class="code-block">// Query is translated to SQL
+var products = context.Products
+    .Where(p => p.Price > 100)
+    .OrderBy(p => p.Name)
+    .ToList();
+
+// Translated SQL:
+// SELECT * FROM Products
+// WHERE Price > 100
+// ORDER BY Name</div>
+            
+            <div class="important">
+                <strong>Important:</strong> Not all LINQ operators are supported in LINQ to Entities. Unsupported operators will throw NotSupportedException.
+            </div>
+        </div>
+
+        <div class="question">
+            Q12: What is the difference between eager loading, lazy loading, and explicit loading?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Loading Type</th>
+                    <th>Description</th>
+                    <th>When to Use</th>
+                </tr>
+                <tr>
+                    <td>Eager Loading</td>
+                    <td>Load related entities with the main query</td>
+                    <td>When you know you need the data</td>
+                </tr>
+                <tr>
+                    <td>Lazy Loading</td>
+                    <td>Load related entities when accessed</td>
+                    <td>When you might not need the data</td>
+                </tr>
+                <tr>
+                    <td>Explicit Loading</td>
+                    <td>Load related entities on demand</td>
+                    <td>When you need fine-grained control</td>
+                </tr>
+            </table>
+            
+            <div class="code-block">// Eager loading with Include
+var products = await context.Products
+    .Include(p => p.Category)
+    .Include(p => p.Reviews)
+    .ToListAsync();
+
+// Lazy loading (requires virtual navigation properties)
+public class Product
+{
+    public virtual Category Category { get; set; }
+}
+
+// Explicit loading
+var product = await context.Products.FindAsync(1);
+await context.Entry(product)
+    .Reference(p => p.Category)
+    .LoadAsync();</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>7. Performance Optimization</h2>
+
+        <div class="question">
+            Q13: How do you optimize Entity Framework performance?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Use AsNoTracking:</strong> For read-only queries</li>
+                <li><strong>Select only needed columns:</strong> Avoid fetching unnecessary data</li>
+                <li><strong>Use eager loading wisely:</strong> Avoid over-including</li>
+                <li><strong>Use pagination:</strong> For large datasets</li>
+                <li><strong>Use compiled queries:</strong> For frequently executed queries</li>
+                <li><strong>Batch updates:</strong> Reduce round-trips</li>
+                <li><strong>Use connection pooling:</strong> Optimize connection settings</li>
+                <li><strong>Average query complexity:</strong> Keep queries simple</li>
+            </ul>
+            
+            <div class="code-block">// AsNoTracking for read-only
+var products = await context.Products
+    .AsNoTracking()
+    .ToListAsync();
+
+// Select specific columns
+var names = await context.Products
+    .Select(p => p.Name)
+    .ToListAsync();
+
+// Pagination
+var page = await context.Products
+    .Skip((page - 1) * pageSize)
+    .Take(pageSize)
+    .ToListAsync();
+
+// Compiled query
+private static readonly Func&lt;AppDbContext, int, Task&lt;Product&gt;&gt; GetProductById =
+    EF.CompileAsyncQuery((AppDbContext db, int id) =>
+        db.Products.FirstOrDefault(p => p.Id == id));
+
+var product = await GetProductById(context, 1);</div>
+        </div>
+
+        <div class="question">
+            Q14: What is the N+1 query problem?
+        </div>
+        <div class="answer">
+            <p>The <strong>N+1 query problem</strong> occurs when you execute N additional queries to fetch related data for each of N entities returned by the main query.</p>
+            
+            <div class="code-block">// Problematic - N+1 queries
+var categories = context.Categories.ToList();
+foreach (var category in categories)
+{
+    var products = context.Products
+        .Where(p => p.CategoryId == category.Id)
+        .ToList(); // N additional queries
+}
+
+// Solution - eager loading
+var categories = context.Categories
+    .Include(c => c.Products)
+    .ToList(); // Single query with JOIN</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>8. Advanced Features</h2>
+
+        <div class="question">
+            Q15: What are global query filters?
+        </div>
+        <div class="answer">
+            <p><strong>Global query filters</strong> apply a filter to all queries for a given entity type. They're useful for implementing soft delete, multi-tenancy, and data isolation.</p>
+            
+            <div class="code-block">// Configure global query filter
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Product&gt;()
+        .HasQueryFilter(p => !p.IsDeleted);
+        
+    modelBuilder.Entity&lt;Product&gt;()
+        .HasQueryFilter(p => p.TenantId == _currentTenantId);
+}
+
+// Ignore filter when needed
+var allProducts = await context.Products
+    .IgnoreQueryFilters()
+    .ToListAsync();</div>
+        </div>
+
+        <div class="question">
+            Q16: What are owned entities?
+        </div>
+        <div class="answer">
+            <p><strong>Owned entities</strong> are entity types that don't have their own identity and are always mapped to the same table as their owner. They're useful for value objects.</p>
+            
+            <div class="code-block">// Owned entity
+public class Address
+{
+    public string Street { get; set; }
+    public string City { get; set; }
+    public string ZipCode { get; set; }
+}
+
+public class User
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public Address Address { get; set; }
+}
+
+// Configuration
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;User&gt;()
+        .OwnsOne(u => u.Address);
+}</div>
+        </div>
+
+        <div class="question">
+            Q17: What is shadow property?
+        </div>
+        <div class="answer">
+            <p><strong>Shadow properties</strong> are properties that are not defined in your .NET entity class but are defined in the EF Core model. They're useful for data that doesn't need to be exposed in the domain model.</p>
+            
+            <div class="code-block">// Configure shadow property
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Product&gt;()
+        .Property&lt;DateTime&gt;("LastModified");
+}
+
+// Access shadow property
+var lastModified = context.Entry(product)
+    .Property&lt;DateTime&gt;("LastModified")
+    .CurrentValue;
+
+// Query using shadow property
+var products = context.Products
+    .Where(p => EF.Property&lt;DateTime&gt;(p, "LastModified") > DateTime.Now.AddDays(-7))
+    .ToList();</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>9. Common Interview Questions</h2>
+
+        <div class="question">
+            Q18: What is the difference between Add, Attach, and Update?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Add:</strong> Marks entity as Added (will be inserted)</li>
+                <li><strong>Attach:</strong> Marks entity as Unchanged (no changes)</li>
+                <li><strong>Update:</strong> Marks entity as Modified (will be updated)</li>
+            </ul>
+            
+            <div class="code-block">// Add - inserts new entity
+context.Products.Add(new Product { Name = "New" });
+
+// Attach - tracks existing entity without changes
+context.Products.Attach(existingProduct);
+
+// Update - tracks as modified
+context.Products.Update(existingProduct);</div>
+        </div>
+
+        <div class="question">
+            Q19: How do you handle concurrency conflicts?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Configure concurrency token
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    
+    [Timestamp]
+    public byte[] RowVersion { get; set; }
+}
+
+// Handle concurrency exception
+try
+{
+    await context.SaveChangesAsync();
+}
+catch (DbUpdateConcurrencyException ex)
+{
+    var entry = ex.Entries.Single();
+    var databaseValues = await entry.GetDatabaseValuesAsync();
+    var clientValues = entry.CurrentValues;
+    
+    // Resolve conflict
+    entry.OriginalValues.SetValues(databaseValues);
+    await context.SaveChangesAsync();
+}</div>
+        </div>
+
+        <div class="question">
+            Q20: What is the difference between HasData and Seed Data?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>HasData:</strong> Used in OnModelCreating for seed data that is part of the model</li>
+                <li><strong>Seed Data (Migration):</strong> Used in migrations for initial data population</li>
+            </ul>
+            
+            <div class="code-block">// HasData in OnModelCreating
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Category&gt;().HasData(
+        new Category { Id = 1, Name = "Electronics" },
+        new Category { Id = 2, Name = "Books" }
+    );
+}
+
+// Seed data in migration
+protected override void Up(MigrationBuilder migrationBuilder)
+{
+    migrationBuilder.Sql("INSERT INTO Categories (Name) VALUES ('Electronics'), ('Books')");
+}</div>
+        </div>
+
+        <div class="question">
+            Q21: How do you implement repository pattern with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Generic repository interface
+public interface IRepository&lt;T&gt; where T : class
+{
+    Task&lt;T&gt; GetByIdAsync(int id);
+    Task&lt;IEnumerable&lt;T&gt;&gt; GetAllAsync();
+    Task AddAsync(T entity);
+    Task UpdateAsync(T entity);
+    Task DeleteAsync(T entity);
+}
+
+// Generic repository implementation
+public class Repository&lt;T&gt; : IRepository&lt;T&gt; where T : class
+{
+    private readonly AppDbContext _context;
+    private readonly DbSet&lt;T&gt; _dbSet;
+    
+    public Repository(AppDbContext context)
+    {
+        _context = context;
+        _dbSet = context.Set&lt;T&gt;();
+    }
+    
+    public async Task&lt;T&gt; GetByIdAsync(int id)
+    {
+        return await _dbSet.FindAsync(id);
+    }
+    
+    public async Task&lt;IEnumerable&lt;T&gt;&gt; GetAllAsync()
+    {
+        return await _dbSet.ToListAsync();
+    }
+    
+    public async Task AddAsync(T entity)
+    {
+        await _dbSet.AddAsync(entity);
+        await _context.SaveChangesAsync();
+    }
+    
+    // ... other methods
+}</div>
+        </div>
+
+        <div class="question">
+            Q22: What is the difference between Find and SingleOrDefault?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Find:</strong> First checks the context for the entity before querying the database. Returns null if not found.</li>
+                <li><strong>SingleOrDefault:</strong> Always queries the database. Throws if more than one match.</li>
+            </ul>
+            
+            <div class="code-block">// Find - checks context first
+var product = await context.Products.FindAsync(1);
+
+// SingleOrDefault - always queries database
+var product = await context.Products.SingleOrDefaultAsync(p => p.Id == 1);</div>
+        </div>
+
+        <div class="question">
+            Q23: How do you execute raw SQL queries?
+        </div>
+        <div class="answer">
+            <div class="code-block">// FromSqlRaw for entity types
+var products = await context.Products
+    .FromSqlRaw("SELECT * FROM Products WHERE Price > {0}", 100)
+    .ToListAsync();
+
+// ExecuteSqlRaw for non-query
+await context.Database.ExecuteSqlRawAsync(
+    "UPDATE Products SET Price = Price * 1.1 WHERE CategoryId = {0}", 
+    categoryId);
+
+// ExecuteSqlInterpolated (safer)
+var price = 100;
+var products = await context.Products
+    .FromSqlInterpolated($"SELECT * FROM Products WHERE Price > {price}")
+    .ToListAsync();</div>
+            
+            <div class="important">
+                <strong>Important:</strong> Always use parameterized queries to prevent SQL injection. Never concatenate user input into SQL strings.
+            </div>
+        </div>
+
+        <div class="question">
+            Q24: How do you implement soft delete?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Add IsDeleted property
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public bool IsDeleted { get; set; }
+}
+
+// Global query filter
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Product&gt;()
+        .HasQueryFilter(p => !p.IsDeleted);
+}
+
+// Soft delete
+public async Task DeleteAsync(int id)
+{
+    var product = await context.Products.FindAsync(id);
+    if (product != null)
+    {
+        product.IsDeleted = true;
+        await context.SaveChangesAsync();
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q25: What is the difference between DbContext scope and lifetime?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Scoped:</strong> Default lifetime - one DbContext per HTTP request</li>
+                <li><strong>Transient:</strong> New DbContext each time - not recommended</li>
+                <li><strong>Singleton:</strong> Single DbContext for app lifetime - not recommended (context not thread-safe)</li>
+            </ul>
+            
+            <div class="code-block">// Scoped (recommended)
+builder.Services.AddDbContext&lt;AppDbContext&gt;(options =>
+    options.UseSqlServer(connectionString));
+
+// For background services, create scoped context
+using var scope = serviceProvider.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService&lt;AppDbContext&gt;();</div>
+        </div>
+
+        <div class="question">
+            Q26: How do you implement multi-tenancy with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Add TenantId to entities
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int TenantId { get; set; }
+}
+
+// Global query filter for tenant isolation
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Product&gt;()
+        .HasQueryFilter(p => p.TenantId == _currentTenantId);
+}
+
+// Set tenant ID on save
+public override async Task SaveChangesAsync(CancellationToken cancellationToken = default)
+{
+    foreach (var entry in ChangeTracker.Entries&lt;Product&gt;())
+    {
+        if (entry.State == EntityState.Added)
+        {
+            entry.Entity.TenantId = _currentTenantId;
+        }
+    }
+    return await base.SaveChangesAsync(cancellationToken);
+}</div>
+        </div>
+
+        <div class="question">
+            Q27: What is the difference between Include and ThenInclude?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Include:</strong> Loads related entities at the first level</li>
+                <li><strong>ThenInclude:</strong> Loads related entities at deeper levels</li>
+            </ul>
+            
+            <div class="code-block">// Include - first level
+var products = await context.Products
+    .Include(p => p.Category)
+    .ToListAsync();
+
+// ThenInclude - deeper levels
+var products = await context.Products
+    .Include(p => p.Category)
+    .ThenInclude(c => c.Products)
+    .ToListAsync();</div>
+        </div>
+
+        <div class="question">
+            Q28: How do you implement audit fields?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Base entity with audit fields
+public abstract class AuditableEntity
+{
+    public DateTime CreatedAt { get; set; }
+    public string CreatedBy { get; set; }
+    public DateTime? UpdatedAt { get; set; }
+    public string UpdatedBy { get; set; }
+}
+
+// Override SaveChanges
+public override async Task SaveChangesAsync(CancellationToken cancellationToken = default)
+{
+    foreach (var entry in ChangeTracker.Entries&lt;AuditableEntity&gt;())
+    {
+        if (entry.State == EntityState.Added)
+        {
+            entry.Entity.CreatedAt = DateTime.UtcNow;
+            entry.Entity.CreatedBy = _currentUser;
+        }
+        else if (entry.State == EntityState.Modified)
+        {
+            entry.Entity.UpdatedAt = DateTime.UtcNow;
+            entry.Entity.UpdatedBy = _currentUser;
+        }
+    }
+    return await base.SaveChangesAsync(cancellationToken);
+}</div>
+        </div>
+
+        <div class="question">
+            Q29: What is the difference between HasDefaultSchema and ToTable?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>HasDefaultSchema:</strong> Sets the default schema for all tables in the context</li>
+                <li><strong>ToTable:</strong> Sets the table name for a specific entity</li>
+            </ul>
+            
+            <div class="code-block">// Set default schema for all tables
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.HasDefaultSchema("dbo");
+}
+
+// Set table name for specific entity
+modelBuilder.Entity&lt;Product&gt;()
+    .ToTable("Products", "dbo");</div>
+        </div>
+
+        <div class="question">
+            Q30: How do you implement database view mapping?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Create entity for view
+public class ProductSummary
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal AveragePrice { get; set; }
+}
+
+// Map to view
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;ProductSummary&gt;()
+        .ToView("vw_ProductSummary")
+        .HasNoKey();
+}
+
+// Query the view
+var summaries = await context.ProductSummaries.ToListAsync();</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>10. Database Design Patterns (Expert Level)</h2>
+
+        <div class="question">
+            Q31: What is the Repository pattern and how do you implement it with EF Core?
+        </div>
+        <div class="answer">
+            <p>The <strong>Repository pattern</strong> mediates between the domain and data mapping layers, acting like an in-memory domain object collection.</p>
+            
+            <div class="code-block">// Generic repository interface
+public interface IRepository&lt;T&gt; where T : class
+{
+    Task&lt;T&gt; GetByIdAsync(int id);
+    Task&lt;IEnumerable&lt;T&gt;&gt; GetAllAsync();
+    Task&lt;IEnumerable&lt;T&gt;&gt; FindAsync(Expression&lt;Func&lt;T, bool&gt;&gt; predicate);
+    Task&lt;T&gt; AddAsync(T entity);
+    Task UpdateAsync(T entity);
+    Task DeleteAsync(T entity);
+}
+
+// Generic repository implementation
+public class Repository&lt;T&gt; : IRepository&lt;T&gt; where T : class
+{
+    protected readonly DbContext Context;
+    protected readonly DbSet&lt;T&gt; DbSet;
+
+    public Repository(DbContext context)
+    {
+        Context = context;
+        DbSet = context.Set&lt;T&gt;();
+    }
+
+    public async Task&lt;T&gt; GetByIdAsync(int id)
+    {
+        return await DbSet.FindAsync(id);
+    }
+
+    public async Task&lt;IEnumerable&lt;T&gt;&gt; GetAllAsync()
+    {
+        return await DbSet.ToListAsync();
+    }
+
+    public async Task&lt;IEnumerable&lt;T&gt;&gt; FindAsync(Expression&lt;Func&lt;T, bool&gt;&gt; predicate)
+    {
+        return await DbSet.Where(predicate).ToListAsync();
+    }
+
+    public async Task&lt;T&gt; AddAsync(T entity)
+    {
+        await DbSet.AddAsync(entity);
+        await Context.SaveChangesAsync();
+        return entity;
+    }
+
+    public async Task UpdateAsync(T entity)
+    {
+        DbSet.Update(entity);
+        await Context.SaveChangesAsync();
+    }
+
+    public async Task DeleteAsync(T entity)
+    {
+        DbSet.Remove(entity);
+        await Context.SaveChangesAsync();
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q32: What is the Unit of Work pattern and how does it relate to EF Core?
+        </div>
+        <div class="answer">
+            <p>The <strong>Unit of Work pattern</strong> maintains a list of objects affected by a business transaction and coordinates the writing out of changes. EF Core's DbContext is essentially a Unit of Work implementation.</p>
+            
+            <div class="code-block">// DbContext is already a Unit of Work
+// It tracks changes and commits them in a single transaction
+
+// Custom Unit of Work wrapper
+public class UnitOfWork : IUnitOfWork
+{
+    private readonly AppDbContext _context;
+    private bool _disposed = false;
+
+    public UnitOfWork(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task&lt;int&gt; CommitAsync()
+    {
+        return await _context.SaveChangesAsync();
+    }
+
+    public async Task&lt;IDbContextTransaction&gt; BeginTransactionAsync()
+    {
+        return await _context.Database.BeginTransactionAsync();
+    }
+
+    public async Task RollbackAsync()
+    {
+        await _context.Database.RollbackTransactionAsync();
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+            _disposed = true;
+        }
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q33: What is the Specification pattern and how do you implement it with EF Core?
+        </div>
+        <div class="answer">
+            <p>The <strong>Specification pattern</strong> encapsulates business rules as reusable, composable predicates.</p>
+            
+            <div class="code-block">// Specification interface
+public interface ISpecification&lt;T&gt;
+{
+    Expression&lt;Func&lt;T, bool&gt;&gt; ToExpression();
+}
+
+// Base specification
+public abstract class Specification&lt;T&gt; : ISpecification&lt;T&gt;
+{
+    public abstract Expression&lt;Func&lt;T, bool&gt;&gt; ToExpression();
+
+    public bool IsSatisfiedBy(T entity)
+    {
+        var predicate = ToExpression().Compile();
+        return predicate(entity);
+    }
+}
+
+// Concrete specifications
+public class ExpensiveProductSpecification : Specification&lt;Product&gt;
+{
+    private readonly decimal _minPrice;
+
+    public ExpensiveProductSpecification(decimal minPrice)
+    {
+        _minPrice = minPrice;
+    }
+
+    public override Expression&lt;Func&lt;Product, bool&gt;&gt; ToExpression()
+    {
+        return p => p.Price > _minPrice;
+    }
+}
+
+// Usage
+var spec = new ExpensiveProductSpecification(100);
+var products = await context.Products
+    .Where(spec.ToExpression())
+    .ToListAsync();</div>
+        </div>
+
+        <div class="question">
+            Q34: What is the CQRS pattern and how do you implement it with EF Core?
+        </div>
+        <div class="answer">
+            <p><strong>CQRS (Command Query Responsibility Segregation)</strong> separates read and write operations.</p>
+            
+            <div class="code-block">// Command side (write)
+public interface ICommand&lt;TResult&gt; { }
+
+public interface ICommandHandler&lt;TCommand, TResult&gt; where TCommand : ICommand&lt;TResult&gt;
+{
+    Task&lt;TResult&gt; HandleAsync(TCommand command);
+}
+
+// Query side (read)
+public interface IQuery&lt;TResult&gt; { }
+
+public interface IQueryHandler&lt;TQuery, TResult&gt; where TQuery : IQuery&lt;TResult&gt;
+{
+    Task&lt;TResult&gt; HandleAsync(TQuery query);
+}
+
+// Command example
+public class CreateProductCommand : ICommand&lt;int&gt;
+{
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+}
+
+public class CreateProductCommandHandler : ICommandHandler&lt;CreateProductCommand, int&gt;
+{
+    private readonly AppDbContext _context;
+
+    public CreateProductCommandHandler(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task&lt;int&gt; HandleAsync(CreateProductCommand command)
+    {
+        var product = new Product
+        {
+            Name = command.Name,
+            Price = command.Price
+        };
+
+        _context.Products.Add(product);
+        await _context.SaveChangesAsync();
+
+        return product.Id;
+    }
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>11. Multi-Tenancy and Global Filters (Expert Level)</h2>
+
+        <div class="question">
+            Q35: How do you implement multi-tenancy in EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Tenant entity
+public class Tenant
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+
+// Base entity with tenant ID
+public abstract class TenantAwareEntity
+{
+    public int TenantId { get; set; }
+    public Tenant Tenant { get; set; }
+}
+
+// DbContext with tenant filtering
+public class AppDbContext : DbContext
+{
+    private readonly int _currentTenantId;
+
+    public AppDbContext(DbContextOptions&lt;AppDbContext&gt; options, ITenantProvider tenantProvider)
+        : base(options)
+    {
+        _currentTenantId = tenantProvider.GetTenantId();
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Apply global query filter for all tenant-aware entities
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            if (typeof(TenantAwareEntity).IsAssignableFrom(entityType.ClrType))
+            {
+                modelBuilder.Entity(entityType.ClrType)
+                    .HasQueryFilter(e => EF.Property&lt;int&gt;(e, "TenantId") == _currentTenantId);
+            }
+        }
+    }
+
+    public override async Task&lt;int&gt; SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        // Set tenant ID on new entities
+        foreach (var entry in ChangeTracker.Entries&lt;TenantAwareEntity&gt;())
+        {
+            if (entry.State == EntityState.Added)
+            {
+                entry.Entity.TenantId = _currentTenantId;
+            }
+        }
+
+        return await base.SaveChangesAsync(cancellationToken);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q36: How do you implement soft delete with global filters?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Soft delete entity
+public abstract class SoftDeleteEntity
+{
+    public bool IsDeleted { get; set; }
+    public DateTime? DeletedAt { get; set; }
+    public string DeletedBy { get; set; }
+}
+
+// DbContext with soft delete filter
+public class AppDbContext : DbContext
+{
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Apply global query filter for soft delete
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            if (typeof(SoftDeleteEntity).IsAssignableFrom(entityType.ClrType))
+            {
+                modelBuilder.Entity(entityType.ClrType)
+                    .HasQueryFilter(e => EF.Property&lt;bool&gt;(e, "IsDeleted") == false);
+            }
+        }
+    }
+
+    public override async Task&lt;int&gt; SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        // Handle soft delete
+        foreach (var entry in ChangeTracker.Entries&lt;SoftDeleteEntity&gt;())
+        {
+            if (entry.State == EntityState.Deleted)
+            {
+                entry.State = EntityState.Modified;
+                entry.Entity.IsDeleted = true;
+                entry.Entity.DeletedAt = DateTime.UtcNow;
+                entry.Entity.DeletedBy = _currentUser;
+            }
+        }
+
+        return await base.SaveChangesAsync(cancellationToken);
+    }
+}
+
+// Include deleted entities when needed
+var allProducts = await context.Products
+    .IgnoreQueryFilters()
+    .Where(p => p.IsDeleted)
+    .ToListAsync();</div>
+        </div>
+
+        <div class="question">
+            Q37: How do you implement audit trails with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Audit entity
+public class AuditLog
+{
+    public int Id { get; set; }
+    public string EntityName { get; set; }
+    public string EntityId { get; set; }
+    public string Action { get; set; }
+    public string Changes { get; set; }
+    public string ChangedBy { get; set; }
+    public DateTime ChangedAt { get; set; }
+}
+
+// DbContext with audit logging
+public class AppDbContext : DbContext
+{
+    private readonly string _currentUser;
+
+    public DbSet&lt;AuditLog&gt; AuditLogs { get; set; }
+
+    public override async Task&lt;int&gt; SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        var auditEntries = OnBeforeSaveChanges();
+        var result = await base.SaveChangesAsync(cancellationToken);
+        await OnAfterSaveChanges(auditEntries);
+        return result;
+    }
+
+    private List&lt;AuditEntry&gt; OnBeforeSaveChanges()
+    {
+        ChangeTracker.DetectChanges();
+        var entries = ChangeTracker.Entries()
+            .Where(e => e.State == EntityState.Added || 
+                       e.State == EntityState.Modified || 
+                       e.State == EntityState.Deleted)
+            .ToList();
+
+        var auditEntries = new List&lt;AuditEntry&gt;();
+
+        foreach (var entry in entries)
+        {
+            var auditEntry = new AuditEntry(entry)
+            {
+                TableName = entry.Metadata.GetTableName(),
+                UserId = _currentUser,
+                Action = entry.State.ToString(),
+                Time = DateTime.UtcNow
+            };
+
+            foreach (var property in entry.Properties)
+            {
+                string propertyName = property.Metadata.Name;
+                if (property.Metadata.IsPrimaryKey())
+                {
+                    auditEntry.KeyValues[propertyName] = property.CurrentValue;
+                    continue;
+                }
+
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        auditEntry.NewValues[propertyName] = property.CurrentValue;
+                        break;
+                    case EntityState.Deleted:
+                        auditEntry.OldValues[propertyName] = property.OriginalValue;
+                        break;
+                    case EntityState.Modified:
+                        if (property.IsModified)
+                        {
+                            auditEntry.OldValues[propertyName] = property.OriginalValue;
+                            auditEntry.NewValues[propertyName] = property.CurrentValue;
+                        }
+                        break;
+                }
+            }
+
+            auditEntries.Add(auditEntry);
+        }
+
+        foreach (var auditEntry in auditEntries)
+        {
+            AuditLogs.Add(auditEntry.ToAuditLog());
+        }
+
+        return auditEntries;
+    }
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>12. Concurrency and Transactions (Expert Level)</h2>
+
+        <div class="question">
+            Q38: How do you handle concurrency conflicts in EF Core?
+        </div>
+        <div class="answer">
+            <p><strong>Optimistic Concurrency</strong> assumes conflicts are rare and checks for them when saving.</p>
+            
+            <div class="code-block">// Add concurrency token
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    
+    [Timestamp]
+    public byte[] RowVersion { get; set; }
+}
+
+// Handle concurrency exception
+try
+{
+    await context.SaveChangesAsync();
+}
+catch (DbUpdateConcurrencyException ex)
+{
+    var entry = ex.Entries.Single();
+    var databaseValues = await entry.GetDatabaseValuesAsync();
+    var clientValues = entry.CurrentValues;
+
+    // Resolve conflict
+    foreach (var property in entry.Metadata.GetProperties())
+    {
+        var proposedValue = clientValues[property];
+        var databaseValue = databaseValues[property];
+
+        // Choose which value to keep
+        if (property.Name == "Price")
+        {
+            // Keep database value
+            clientValues[property] = databaseValue;
+        }
+    }
+
+    // Refresh original values to avoid next concurrency issue
+    entry.OriginalValues.SetValues(databaseValues);
+    await context.SaveChangesAsync();
+}</div>
+        </div>
+
+        <div class="question">
+            Q39: How do you implement transactions in EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Explicit transaction
+using var transaction = await context.Database.BeginTransactionAsync();
+try
+{
+    // Multiple operations
+    var product = new Product { Name = "Laptop", Price = 999.99 };
+    context.Products.Add(product);
+    
+    var category = new Category { Name = "Electronics" };
+    context.Categories.Add(category);
+    
+    await context.SaveChangesAsync();
+    
+    await transaction.CommitAsync();
+}
+catch
+{
+    await transaction.RollbackAsync();
+    throw;
+}
+
+// Transaction with isolation level
+using var transaction = await context.Database.BeginTransactionAsync(
+    IsolationLevel.Serializable);</div>
+        </div>
+
+        <div class="question">
+            Q40: What are the different isolation levels and when should you use each?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Isolation Level</th>
+                    <th>Description</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td>Read Uncommitted</td>
+                    <td>Can read uncommitted data (dirty reads)</td>
+                    <td>Rarely used - only for non-critical data</td>
+                </tr>
+                <tr>
+                    <td>Read Committed</td>
+                    <td>Cannot read uncommitted data</td>
+                    <td>Default for most databases</td>
+                </tr>
+                <tr>
+                    <td>Repeatable Read</td>
+                    <td>Same query returns same data within transaction</td>
+                    <td>When data consistency is critical</td>
+                </tr>
+                <tr>
+                    <td>Serializable</td>
+                    <td>Highest isolation - prevents all concurrency issues</td>
+                    <td>Critical financial operations</td>
+                </tr>
+                <tr>
+                    <td>Snapshot</td>
+                    <td>Reads from snapshot of committed data</td>
+                    <td>High concurrency read scenarios</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>13. Testing and Mocking (Expert Level)</h2>
+
+        <div class="question">
+            Q41: How do you test EF Core code?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Use in-memory database for unit tests
+public class ProductRepositoryTests
+{
+    [Fact]
+    public async Task GetProductById_ReturnsProduct()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder&lt;AppDbContext&gt;()
+            .UseInMemoryDatabase(databaseName: "TestDb")
+            .Options;
+
+        using (var context = new AppDbContext(options))
+        {
+            context.Products.Add(new Product { Id = 1, Name = "Laptop" });
+            await context.SaveChangesAsync();
+        }
+
+        // Act
+        using (var context = new AppDbContext(options))
+        {
+            var repository = new ProductRepository(context);
+            var product = await repository.GetByIdAsync(1);
+
+            // Assert
+            Assert.NotNull(product);
+            Assert.Equal("Laptop", product.Name);
+        }
+    }
+}
+
+// Use SQLite for more realistic testing
+public class ProductRepositoryTests
+{
+    [Fact]
+    public async Task GetProductById_ReturnsProduct()
+    {
+        // Arrange
+        var connection = new SqliteConnection("DataSource=:memory:");
+        await connection.OpenAsync();
+
+        var options = new DbContextOptionsBuilder&lt;AppDbContext&gt;()
+            .UseSqlite(connection)
+            .Options;
+
+        using (var context = new AppDbContext(options))
+        {
+            await context.Database.EnsureCreatedAsync();
+            context.Products.Add(new Product { Id = 1, Name = "Laptop" });
+            await context.SaveChangesAsync();
+        }
+
+        // Act
+        using (var context = new AppDbContext(options))
+        {
+            var repository = new ProductRepository(context);
+            var product = await repository.GetByIdAsync(1);
+
+            // Assert
+            Assert.NotNull(product);
+            Assert.Equal("Laptop", product.Name);
+        }
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q42: How do you mock DbContext for unit testing?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using Moq to mock DbContext
+public class ProductServiceTests
+{
+    [Fact]
+    public async Task GetExpensiveProducts_ReturnsCorrectProducts()
+    {
+        // Arrange
+        var mockContext = new Mock&lt;AppDbContext&gt;();
+        var mockProducts = new Mock&lt;DbSet&lt;Product&gt;&gt;();
+
+        var data = new List&lt;Product&gt;
+        {
+            new Product { Id = 1, Name = "Laptop", Price = 999.99 },
+            new Product { Id = 2, Name = "Mouse", Price = 29.99 }
+        }.AsQueryable();
+
+        mockProducts.As&lt;IQueryable&lt;Product&gt;&gt;()
+            .Setup(m => m.Provider).Returns(data.Provider);
+        mockProducts.As&lt;IQueryable&lt;Product&gt;&gt;()
+            .Setup(m => m.Expression).Returns(data.Expression);
+        mockProducts.As&lt;IQueryable&lt;Product&gt;&gt;()
+            .Setup(m => m.ElementType).Returns(data.ElementType);
+        mockProducts.As&lt;IQueryable&lt;Product&gt;&gt;()
+            .Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+        mockContext.Setup(c => c.Products).Returns(mockProducts.Object);
+
+        var service = new ProductService(mockContext.Object);
+
+        // Act
+        var result = await service.GetExpensiveProductsAsync(100);
+
+        // Assert
+        Assert.Single(result);
+        Assert.Equal("Laptop", result.First().Name);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q43: How do you implement integration tests with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using TestContainers for integration tests
+public class ProductRepositoryIntegrationTests : IClassFixture&lt;DatabaseFixture&gt;
+{
+    private readonly DatabaseFixture _fixture;
+
+    public ProductRepositoryIntegrationTests(DatabaseFixture fixture)
+    {
+        _fixture = fixture;
+    }
+
+    [Fact]
+    public async Task AddProduct_SavesToDatabase()
+    {
+        // Arrange
+        using var context = _fixture.CreateContext();
+        var repository = new ProductRepository(context);
+        var product = new Product { Name = "Laptop", Price = 999.99 };
+
+        // Act
+        await repository.AddAsync(product);
+
+        // Assert
+        using var assertContext = _fixture.CreateContext();
+        var savedProduct = await assertContext.Products.FindAsync(product.Id);
+        Assert.NotNull(savedProduct);
+        Assert.Equal("Laptop", savedProduct.Name);
+    }
+}
+
+public class DatabaseFixture : IDisposable
+{
+    private readonly string _connectionString;
+    private readonly DockerContainer _container;
+
+    public DatabaseFixture()
+    {
+        // Start PostgreSQL container
+        _container = new PostgreSqlTestcontainerConfiguration()
+            .WithDatabase("testdb")
+            .WithUsername("test")
+            .WithPassword("test")
+            .Build();
+
+        _container.StartAsync().Wait();
+
+        _connectionString = _container.GetConnectionString();
+    }
+
+    public AppDbContext CreateContext()
+    {
+        var options = new DbContextOptionsBuilder&lt;AppDbContext&gt;()
+            .UseNpgsql(_connectionString)
+            .Options;
+
+        var context = new AppDbContext(options);
+        context.Database.EnsureCreated();
+        return context;
+    }
+
+    public void Dispose()
+    {
+        _container.StopAsync().Wait();
+        _container.DisposeAsync().Wait();
+    }
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>14. Real-World Scenarios (Expert Level)</h2>
+
+        <div class="question">
+            Q44: How do you implement bulk operations efficiently in EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using EF Core Bulk Extensions (third-party library)
+// Install: EFCore.BulkExtensions
+
+// Bulk insert
+var products = new List&lt;Product&gt;();
+for (int i = 0; i < 10000; i++)
+{
+    products.Add(new Product { Name = $"Product {i}", Price = i * 10 });
+}
+
+await context.BulkInsertAsync(products);
+
+// Bulk update
+var productsToUpdate = await context.Products.Where(p => p.Price < 100).ToListAsync();
+foreach (var product in productsToUpdate)
+{
+    product.Price *= 1.1;
+}
+
+await context.BulkUpdateAsync(productsToUpdate);
+
+// Bulk delete
+var productsToDelete = await context.Products.Where(p => p.Price > 1000).ToListAsync();
+await context.BulkDeleteAsync(productsToDelete);
+
+// Using raw SQL for bulk operations
+await context.Database.ExecuteSqlRawAsync(
+    "INSERT INTO Products (Name, Price) VALUES (@Name, @Price)",
+    products.Select(p => new { p.Name, p.Price }));</div>
+        </div>
+
+        <div class="question">
+            Q45: How do you implement database sharding with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Sharding by tenant ID
+public class ShardingDbContextFactory
+{
+    private readonly string _connectionStringTemplate;
+
+    public ShardingDbContextFactory(string connectionStringTemplate)
+    {
+        _connectionStringTemplate = connectionStringTemplate;
+    }
+
+    public AppDbContext CreateContext(int tenantId)
+    {
+        var connectionString = string.Format(_connectionStringTemplate, tenantId);
+        var options = new DbContextOptionsBuilder&lt;AppDbContext&gt;()
+            .UseSqlServer(connectionString)
+            .Options;
+
+        return new AppDbContext(options);
+    }
+}
+
+// Usage
+var factory = new ShardingDbContextFactory("Server=.;Database=Shard_{0};...");
+var context = factory.CreateContext(tenantId);
+
+var products = await context.Products.ToListAsync();
+
+// Cross-shard query (requires manual aggregation)
+var allProducts = new List&lt;Product&gt;();
+foreach (var tenantId in tenantIds)
+{
+    var context = factory.CreateContext(tenantId);
+    var products = await context.Products.ToListAsync();
+    allProducts.AddRange(products);
+}</div>
+        </div>
+
+        <div class="question">
+            Q46: How do you implement read/write splitting with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Custom DbContext with read/write splitting
+public class AppDbContext : DbContext
+{
+    private readonly IConnectionStringProvider _connectionStringProvider;
+
+    public AppDbContext(
+        DbContextOptions&lt;AppDbContext&gt; options,
+        IConnectionStringProvider connectionStringProvider)
+        : base(options)
+    {
+        _connectionStringProvider = connectionStringProvider;
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            // Use read replica for queries, primary for writes
+            optionsBuilder.UseSqlServer(_connectionStringProvider.GetReadConnectionString());
+        }
+    }
+
+    public override async Task&lt;int&gt; SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        // Switch to primary connection for writes
+        var writeConnectionString = _connectionStringProvider.GetWriteConnectionString();
+        
+        // Reconfigure for write operation
+        var options = new DbContextOptionsBuilder&lt;AppDbContext&gt;()
+            .UseSqlServer(writeConnectionString)
+            .Options;
+
+        using var writeContext = new AppDbContext(options, _connectionStringProvider);
+        
+        // Copy changes to write context
+        foreach (var entry in ChangeTracker.Entries())
+        {
+            writeContext.Entry(entry.Entity).State = entry.State;
+        }
+
+        return await writeContext.SaveChangesAsync(cancellationToken);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q47: How do you implement database failover with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using execution strategy for retry logic
+public class AppDbContext : DbContext
+{
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(
+            connectionString,
+            options => options.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(30),
+                errorNumbersToAdd: null));
+    }
+}
+
+// Custom execution strategy
+public class CustomExecutionStrategy : ExecutionStrategy
+{
+    public CustomExecutionStrategy(
+        ExecutionStrategyDependencies dependencies,
+        int maxRetryCount,
+        TimeSpan maxRetryDelay)
+        : base(dependencies, maxRetryCount, maxRetryDelay)
+    {
+    }
+
+    protected override bool ShouldRetryOn(Exception exception)
+    {
+        // Retry on specific exceptions
+        return exception is SqlException sqlEx && 
+               (sqlEx.Number == 4060 || // Login failed
+                sqlEx.Number == 11001); // Connection timeout
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q48: How do you implement database migration seeding?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using OnModelCreating for seeding
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Category&gt;().HasData(
+        new Category { Id = 1, Name = "Electronics" },
+        new Category { Id = 2, Name = "Clothing" },
+        new Category { Id = 3, Name = "Books" }
+    );
+}
+
+// Using migration for seeding
+public partial class SeedInitialData : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.Sql(
+            "INSERT INTO Categories (Name) VALUES ('Electronics'), ('Clothing'), ('Books')");
+    }
+
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.Sql("DELETE FROM Categories WHERE Name IN ('Electronics', 'Clothing', 'Books')");
+    }
+}
+
+// Using custom seeding service
+public class DataSeeder
+{
+    private readonly AppDbContext _context;
+
+    public DataSeeder(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task SeedAsync()
+    {
+        if (!await _context.Categories.AnyAsync())
+        {
+            var categories = new List&lt;Category&gt;
+            {
+                new Category { Name = "Electronics" },
+                new Category { Name = "Clothing" },
+                new Category { Name = "Books" }
+            };
+
+            await _context.Categories.AddRangeAsync(categories);
+            await _context.SaveChangesAsync();
+        }
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q49: How do you implement database connection pooling with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Configure connection pooling in connection string
+var connectionString = "Server=.;Database=MyDb;Pooling=true;Min Pool Size=5;Max Pool Size=100;Connection Lifetime=300;";
+
+// Configure in DbContext
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+    optionsBuilder.UseSqlServer(connectionString);
+}
+
+// Configure in ASP.NET Core
+builder.Services.AddDbContext&lt;AppDbContext&gt;(options =>
+    options.UseSqlServer(
+        configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure();
+            sqlOptions.CommandTimeout(30);
+        }));</div>
+        </div>
+
+        <div class="question">
+            Q50: How do you implement database health checks with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Add health check in ASP.NET Core
+builder.Services.AddHealthChecks()
+    .AddDbContextCheck&lt;AppDbContext&gt;("database");
+
+// Configure health check endpoint
+app.MapHealthChecks("/health");
+
+// Custom health check
+public class DatabaseHealthCheck : IHealthCheck
+{
+    private readonly AppDbContext _context;
+
+    public DatabaseHealthCheck(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task&lt;HealthCheckResult&gt; CheckHealthAsync(
+        HealthCheckContext context,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            // Check if database is accessible
+            await _context.Database.CanConnectAsync(cancellationToken);
+
+            // Check if migrations are applied
+            var pendingMigrations = await _context.Database.GetPendingMigrationsAsync(cancellationToken);
+            if (pendingMigrations.Any())
+            {
+                return HealthCheckResult.Degraded("Pending migrations");
+            }
+
+            return HealthCheckResult.Healthy("Database is healthy");
+        }
+        catch (Exception ex)
+        {
+            return HealthCheckResult.Unhealthy("Database is unhealthy", ex);
+        }
+    }
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>15. Common Interview Questions (All Levels)</h2>
+
+        <div class="question">
+            Q51: What is the difference between Add, Attach, and Update?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Add:</strong> Marks entity as Added. Will be inserted on SaveChanges.</li>
+                <li><strong>Attach:</strong> Attaches entity to context in Unchanged state. No changes tracked.</li>
+                <li><strong>Update:</strong> Marks entity as Modified. All properties will be updated on SaveChanges.</li>
+            </ul>
+            
+            <div class="code-block">// Add - new entity
+context.Products.Add(new Product { Name = "Laptop" });
+
+// Attach - existing entity, no changes
+var product = new Product { Id = 1, Name = "Laptop" };
+context.Products.Attach(product);
+
+// Update - existing entity, mark all as modified
+var product = new Product { Id = 1, Name = "Laptop" };
+context.Products.Update(product);
+
+// Update specific properties
+var product = await context.Products.FindAsync(1);
+product.Price = 999.99;
+context.Entry(product).Property(p => p.Price).IsModified = true;</div>
+        </div>
+
+        <div class="question">
+            Q52: How do you handle many-to-many relationships in EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// EF Core 5.0+ - skip navigation property
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ICollection&lt;Category&gt; Categories { get; set; }
+}
+
+public class Category
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ICollection&lt;Product&gt; Products { get; set; }
+}
+
+// Configure relationship
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Product&gt;()
+        .HasMany(p => p.Categories)
+        .WithMany(c => c.Products);
+}
+
+// Query
+var products = await context.Products
+    .Include(p => p.Categories)
+    .ToListAsync();
+
+// Add relationship
+var product = await context.Products.FindAsync(1);
+var category = await context.Categories.FindAsync(1);
+product.Categories.Add(category);
+await context.SaveChangesAsync();</div>
+        </div>
+
+        <div class="question">
+            Q53: What is the difference between HasIndex and Index attribute?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>HasIndex:</strong> Fluent API method for configuring indexes. More flexible, supports composite indexes, filters, and options.</li>
+                <li><strong>Index attribute:</strong> Data annotation for simple indexes. Less flexible but more declarative.</li>
+            </ul>
+            
+            <div class="code-block">// Using Index attribute
+[Index(nameof(Name))]
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+
+// Using HasIndex (fluent API)
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Product&gt;()
+        .HasIndex(p => p.Name);
+
+    // Composite index
+    modelBuilder.Entity&lt;Product&gt;()
+        .HasIndex(p => new { p.CategoryId, p.Price });
+
+    // Unique index
+    modelBuilder.Entity&lt;Product&gt;()
+        .HasIndex(p => p.Sku)
+        .IsUnique();
+
+    // Filtered index
+    modelBuilder.Entity&lt;Product&gt;()
+        .HasIndex(p => p.Price)
+        .HasFilter("Price > 0");
+}</div>
+        </div>
+
+        <div class="question">
+            Q54: How do you implement value objects with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using owned entities (EF Core 2.0+)
+public class Address
+{
+    public string Street { get; set; }
+    public string City { get; set; }
+    public string ZipCode { get; set; }
+}
+
+public class Customer
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public Address ShippingAddress { get; set; }
+    public Address BillingAddress { get; set; }
+}
+
+// Configure owned entity
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Customer&gt;()
+        .OwnsOne(c => c.ShippingAddress, a =>
+        {
+            a.Property(p => p.Street).HasColumnName("ShippingStreet");
+            a.Property(p => p.City).HasColumnName("ShippingCity");
+            a.Property(p => p.ZipCode).HasColumnName("ShippingZipCode");
+        });
+
+    modelBuilder.Entity&lt;Customer&gt;()
+        .OwnsOne(c => c.BillingAddress, a =>
+        {
+            a.Property(p => p.Street).HasColumnName("BillingStreet");
+            a.Property(p => p.City).HasColumnName("BillingCity");
+            a.Property(p => p.ZipCode).HasColumnName("BillingZipCode");
+        });
+}</div>
+        </div>
+
+        <div class="question">
+            Q55: How do you implement inheritance in EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// TPH (Table Per Hierarchy) - default
+public class Person
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+
+public class Student : Person
+{
+    public string Grade { get; set; }
+}
+
+public class Teacher : Person
+{
+    public string Subject { get; set; }
+}
+
+// TPT (Table Per Type)
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Student&gt;().ToTable("Students");
+    modelBuilder.Entity&lt;Teacher&gt;().ToTable("Teachers");
+}
+
+// TPC (Table Per Concrete) - EF Core 7.0+
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Student&gt;().UseTpcMappingStrategy();
+    modelBuilder.Entity&lt;Teacher&gt;().UseTpcMappingStrategy();
+}</div>
+        </div>
+
+        <div class="question">
+            Q56: How do you implement spatial data with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Install: Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite
+
+public class Location
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public Point Coordinates { get; set; }
+}
+
+// Configure
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Location&gt;()
+        .Property(l => l.Coordinates)
+        .HasGeometricDimension(srid: 4326);
+}
+
+// Query spatial data
+var nearbyLocations = await context.Locations
+    .Where(l => l.Coordinates.Distance(myLocation) < 1000)
+    .ToListAsync();
+
+// Within polygon
+var polygon = new Polygon(new[] { new[] { new Coordinate(0, 0), new Coordinate(0, 10), new Coordinate(10, 10), new Coordinate(10, 0), new Coordinate(0, 0) } });
+var locationsInPolygon = await context.Locations
+    .Where(l => polygon.Contains(l.Coordinates))
+    .ToListAsync();</div>
+        </div>
+
+        <div class="question">
+            Q57: How do you implement JSON columns with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// EF Core 7.0+ has built-in JSON support
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ProductDetails Details { get; set; }
+}
+
+public class ProductDetails
+{
+    public string Description { get; set; }
+    public List&lt;string&gt; Features { get; set; }
+    public Dictionary&lt;string, string&gt; Specifications { get; set; }
+}
+
+// Configure JSON column
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Product&gt;()
+        .OwnsOne(p => p.Details, builder =>
+        {
+            builder.ToJson();
+        });
+}
+
+// Query JSON properties
+var products = await context.Products
+    .Where(p => p.Details.Features.Contains("Waterproof"))
+    .ToListAsync();
+
+// Update JSON property
+var product = await context.Products.FindAsync(1);
+product.Details.Features.Add("New Feature");
+await context.SaveChangesAsync();</div>
+        </div>
+
+        <div class="question">
+            Q58: How do you implement database functions in EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Define custom function
+public static class DbFunctions
+{
+    [DbFunction("FullName")]
+    public static string FullName(string firstName, string lastName)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+// Register function
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.HasDbFunction(typeof(DbFunctions)
+        .GetMethod(nameof(DbFunctions.FullName)))
+        .HasName("FullName");
+}
+
+// Use in query
+var customers = await context.Customers
+    .Where(c => DbFunctions.FullName(c.FirstName, c.LastName) == "John Doe")
+    .ToListAsync();
+
+// Built-in EF.Functions
+var products = await context.Products
+    .Where(p => EF.Functions.Like(p.Name, "%Laptop%"))
+    .ToListAsync();
+
+var customers = await context.Customers
+    .Where(c => EF.Functions.DateDiffDay(c.CreatedAt, DateTime.Now) > 30)
+    .ToListAsync();</div>
+        </div>
+
+        <div class="question">
+            Q59: How do you implement computed columns with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using fluent API
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Product&gt;()
+        .Property(p => p.TotalPrice)
+        .HasComputedColumnSql("[Price] * [Quantity] + [Tax]");
+
+    // Stored computed column
+    modelBuilder.Entity&lt;Product&gt;()
+        .Property(p => p.TotalPrice)
+        .HasComputedColumnSql("[Price] * [Quantity] + [Tax]", stored: true);
+}
+
+// Using data annotation
+public class Product
+{
+    public decimal Price { get; set; }
+    public decimal Tax { get; set; }
+    
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    public decimal TotalPrice { get; set; }
+}</div>
+        </div>
+
+        <div class="question">
+            Q60: How do you implement default values with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using fluent API
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Product&gt;()
+        .Property(p => p.CreatedAt)
+        .HasDefaultValueSql("GETUTCDATE()");
+
+    modelBuilder.Entity&lt;Product&gt;()
+        .Property(p => p.IsActive)
+        .HasDefaultValue(true);
+}
+
+// Using data annotation
+public class Product
+{
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    public bool IsActive { get; set; } = true;
+}</div>
+        </div>
+
+        <div class="question">
+            Q61: How do you implement shadow properties with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Shadow properties - not defined in entity class
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity&lt;Product&gt;()
+        .Property&lt;DateTime&gt;("CreatedAt")
+        .HasDefaultValueSql("GETUTCDATE()");
+
+    modelBuilder.Entity&lt;Product&gt;()
+        .Property&lt;string&gt;("CreatedBy")
+        .HasMaxLength(100);
+}
+
+// Set shadow property
+context.Entry(product).Property("CreatedAt").CurrentValue = DateTime.UtcNow;
+
+// Query shadow property
+var products = await context.Products
+    .Where(p => EF.Property&lt;DateTime&gt;(p, "CreatedAt") > DateTime.Now.AddDays(-7))
+    .ToListAsync();</div>
+        </div>
+
+        <div class="question">
+            Q62: How do you implement database triggers with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Create trigger in migration
+public partial class AddUpdateTrigger : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.Sql(@"
+            CREATE TRIGGER TR_Product_Update
+            ON Products
+            AFTER UPDATE
+            AS
+            BEGIN
+                UPDATE Products
+                SET UpdatedAt = GETUTCDATE()
+                WHERE Id IN (SELECT Id FROM inserted)
+            END");
+    }
+
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.Sql("DROP TRIGGER TR_Product_Update");
+    }
+}
+
+// Note: EF Core doesn't directly support triggers
+// Use raw SQL in migrations</div>
+        </div>
+
+        <div class="question">
+            Q63: How do you implement row-level security with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Row-level security using global filters
+public class AppDbContext : DbContext
+{
+    private readonly int _currentUserId;
+    private readonly List&lt;string&gt; _userRoles;
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Filter by user
+        modelBuilder.Entity&lt;Document&gt;()
+            .HasQueryFilter(d => d.OwnerId == _currentUserId || 
+                               d.IsPublic ||
+                               _userRoles.Contains("Admin"));
+
+        // Filter by organization
+        modelBuilder.Entity&lt;Document&gt;()
+            .HasQueryFilter(d => d.OrganizationId == _userOrganizationId);
+    }
+}
+
+// Using database-level RLS (SQL Server)
+// Create in migration
+migrationBuilder.Sql(@"
+    CREATE SECURITY POLICY DocumentSecurity
+    ADD FILTER PREDICATE dbo.UserAccessPredicate(UserId) ON Documents,
+    ADD BLOCK PREDICATE dbo.UserAccessPredicate(UserId) ON Documents
+    WITH (STATE = ON)");</div>
+        </div>
+
+        <div class="question">
+            Q64: How do you implement temporal tables with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Create temporal table in migration
+public partial class AddTemporalTable : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.Sql(@"
+            CREATE TABLE Products (
+                Id INT PRIMARY KEY,
+                Name NVARCHAR(100),
+                Price DECIMAL(18,2),
+                SysStart DATETIME2 GENERATED ALWAYS AS ROW START NOT NULL,
+                SysEnd DATETIME2 GENERATED ALWAYS AS ROW END NOT NULL,
+                PERIOD FOR SYSTEM_TIME (SysStart, SysEnd)
+            )
+            
+            ALTER TABLE Products
+            SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = ProductsHistory))");
+    }
+
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.Sql(@"
+            ALTER TABLE Products
+            SET (SYSTEM_VERSIONING = OFF)
+            
+            DROP TABLE ProductsHistory
+            DROP TABLE Products");
+    }
+}
+
+// Query historical data
+// Use raw SQL or create separate DbContext for history table
+var historicalProducts = await context.Database
+    .SqlQueryRaw&lt;Product&gt;(@"
+        SELECT * FROM Products 
+        FOR SYSTEM_TIME BETWEEN '2024-01-01' AND '2024-12-31'")
+    .ToListAsync();</div>
+        </div>
+
+        <div class="question">
+            Q65: How do you implement database encryption with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using Always Encrypted (SQL Server)
+// Configure in connection string
+var connectionString = "Server=.;Database=MyDb;Column Encryption Setting=Enabled;";
+
+// Using value converters for application-level encryption
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    var converter = new ValueConverter&lt;string, string&gt;(
+        v => Encrypt(v),
+        v => Decrypt(v));
+
+    modelBuilder.Entity&lt;CreditCard&gt;()
+        .Property(c => c.CardNumber)
+        .HasConversion(converter);
+}
+
+private string Encrypt(string value)
+{
+    // Use encryption library
+    return Convert.ToBase64String(
+        DataProtectionProvider.Create("MyApp")
+            .CreateProtector("CreditCard")
+            .Protect(Encoding.UTF8.GetBytes(value)));
+}
+
+private string Decrypt(string value)
+{
+    return Encoding.UTF8.GetString(
+        DataProtectionProvider.Create("MyApp")
+            .CreateProtector("CreditCard")
+            .Unprotect(Convert.FromBase64String(value)));
+}</div>
+        </div>
+
+        <div class="question">
+            Q66: How do you implement database backup and restore with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using raw SQL for backup
+public async Task BackupDatabaseAsync(string backupPath)
+{
+    var sql = $@"BACKUP DATABASE MyDb TO DISK = '{backupPath}'";
+    await context.Database.ExecuteSqlRawAsync(sql);
+}
+
+// Using raw SQL for restore
+public async Task RestoreDatabaseAsync(string backupPath)
+{
+    var sql = $@"RESTORE DATABASE MyDb FROM DISK = '{backupPath}' WITH REPLACE";
+    await context.Database.ExecuteSqlRawAsync(sql);
+}
+
+// Using SQL Server Management Objects (SMO)
+public async Task BackupDatabaseAsync(string serverName, string databaseName, string backupPath)
+{
+    var server = new Server(serverName);
+    var backup = new Backup
+    {
+        Database = databaseName,
+        Action = BackupActionType.Database,
+        BackupSetDescription = $"Backup of {databaseName}",
+        BackupSetName = $"{databaseName} Backup",
+        Devices = BackupDeviceItem.Create(backupPath, DeviceType.File)
+    };
+
+    server.ConnectionContext.LoginSecure = false;
+    server.ConnectionContext.Login = "username";
+    server.ConnectionContext.Password = "password";
+
+    await Task.Run(() => backup.SqlBackup(server));
+}</div>
+        </div>
+
+        <div class="question">
+            Q67: How do you implement database monitoring with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using interceptors for logging
+public class QueryLoggingInterceptor : DbCommandInterceptor
+{
+    public override InterceptionResult&lt;DbDataReader&gt; ReaderExecuting(
+        DbCommand command,
+        CommandEventData eventData,
+        InterceptionResult&lt;DbDataReader&gt; result)
+    {
+        Console.WriteLine($"Executing SQL: {command.CommandText}");
+        Console.WriteLine($"Parameters: {string.Join(", ", command.Parameters.Cast&lt;DbParameter&gt;().Select(p => $"{p.ParameterName}={p.Value}"))}");
+        
+        return base.ReaderExecuting(command, eventData, result);
+    }
+}
+
+// Register interceptor
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+    optionsBuilder.AddInterceptors(new QueryLoggingInterceptor());
+}
+
+// Using EF Core's built-in logging
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+    optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
+}
+
+// Using Application Insights
+builder.Services.AddDbContext&lt;AppDbContext&gt;(options =>
+{
+    options.UseSqlServer(connectionString);
+    options.LogTo(message =>
+    {
+        var telemetryClient = new TelemetryClient();
+        telemetryClient.TrackTrace(message);
+    });
+});</div>
+        </div>
+
+        <div class="question">
+            Q68: How do you implement database partitioning with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Create partitioned table in migration
+public partial class AddPartitionedTable : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.Sql(@"
+            CREATE PARTITION FUNCTION PartitionByYear (int)
+            AS RANGE RIGHT FOR VALUES (2020, 2021, 2022, 2023, 2024)
+            
+            CREATE PARTITION SCHEME PartitionScheme
+            AS PARTITION PartitionByYear
+            ALL TO ([PRIMARY])
+            
+            CREATE TABLE Orders (
+                Id INT PRIMARY KEY,
+                OrderDate DATETIME,
+                Amount DECIMAL(18,2),
+                Year AS YEAR(OrderDate) PERSISTED
+            ) ON PartitionScheme(Year)");
+    }
+
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.Sql(@"
+            DROP TABLE Orders
+            DROP PARTITION SCHEME PartitionScheme
+            DROP PARTITION FUNCTION PartitionByYear");
+    }
+}
+
+// Query partitioned table normally
+var orders = await context.Orders
+    .Where(o => o.OrderDate >= DateTime.Now.AddYears(-1))
+    .ToListAsync();</div>
+        </div>
+
+        <div class="question">
+            Q69: How do you implement database caching with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using second-level cache (EFCoreSecondLevelCacheInterceptor)
+builder.Services.AddDbContext&lt;AppDbContext&gt;(options =>
+{
+    options.UseSqlServer(connectionString);
+    options.AddInterceptors(new SecondLevelCacheInterceptor());
+});
+
+// Configure cache
+builder.Services.AddEFSecondLevelCache(options =>
+    options.UseMemoryCacheProvider().ConfigureLogging(true));
+
+// Cache query results
+var products = await context.Products
+    .Cacheable()
+    .ToListAsync();
+
+// Using Redis as cache provider
+builder.Services.AddEFSecondLevelCache(options =>
+    options.UseRedisCacheProvider("localhost:6379")
+        .ConfigureLogging(true));
+
+// Custom caching with IMemoryCache
+public class CachedProductRepository
+{
+    private readonly AppDbContext _context;
+    private readonly IMemoryCache _cache;
+
+    public CachedProductRepository(AppDbContext context, IMemoryCache cache)
+    {
+        _context = context;
+        _cache = cache;
+    }
+
+    public async Task&lt;IEnumerable&lt;Product&gt;&gt; GetProductsAsync()
+    {
+        return await _cache.GetOrCreateAsync("products", async entry =>
+        {
+            entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
+            return await _context.Products.ToListAsync();
+        });
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q70: How do you implement database schema versioning with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Store schema version in database
+public class SchemaVersion
+{
+    public int Id { get; set; }
+    public string Version { get; set; }
+    public DateTime AppliedAt { get; set; }
+}
+
+// Check schema version on startup
+public class SchemaVersionChecker
+{
+    private readonly AppDbContext _context;
+
+    public SchemaVersionChecker(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task CheckSchemaVersionAsync()
+    {
+        var currentVersion = await _context.SchemaVersions
+            .OrderByDescending(v => v.AppliedAt)
+            .FirstOrDefaultAsync();
+
+        var expectedVersion = "2.0.0";
+
+        if (currentVersion == null || currentVersion.Version != expectedVersion)
+        {
+            throw new InvalidOperationException(
+                $"Schema version mismatch. Expected: {expectedVersion}, Actual: {currentVersion?.Version}");
+        }
+    }
+}
+
+// Update schema version after migration
+public partial class UpdateSchemaVersion : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.Sql(@"
+            INSERT INTO SchemaVersions (Version, AppliedAt)
+            VALUES ('2.0.0', GETUTCDATE())");
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q71: How do you implement database data masking with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using value converters for masking
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    var emailConverter = new ValueConverter&lt;string, string&gt;(
+        v => v,
+        v => MaskEmail(v));
+
+    modelBuilder.Entity&lt;User&gt;()
+        .Property(u => u.Email)
+        .HasConversion(emailConverter);
+}
+
+private string MaskEmail(string email)
+{
+    if (string.IsNullOrEmpty(email))
+        return email;
+
+    var parts = email.Split('@');
+    if (parts.Length != 2)
+        return email;
+
+    var username = parts[0];
+    var domain = parts[1];
+
+    var maskedUsername = username.Length > 2
+        ? username.Substring(0, 2) + new string('*', username.Length - 2)
+        : new string('*', username.Length);
+
+    return $"{maskedUsername}@{domain}";
+}
+
+// Using Dynamic Data Masking (SQL Server)
+// Configure in migration
+migrationBuilder.Sql(@"
+    ALTER TABLE Users
+    ALTER COLUMN Email ADD MASKED WITH (FUNCTION = 'email()')");</div>
+        </div>
+
+        <div class="question">
+            Q72: How do you implement database archiving with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Archive old data to separate table
+public class DataArchiver
+{
+    private readonly AppDbContext _context;
+    private readonly AppDbContext _archiveContext;
+
+    public DataArchiver(AppDbContext context, AppDbContext archiveContext)
+    {
+        _context = context;
+        _archiveContext = archiveContext;
+    }
+
+    public async Task ArchiveOldOrdersAsync(DateTime cutoffDate)
+    {
+        var oldOrders = await _context.Orders
+            .Where(o => o.OrderDate < cutoffDate)
+            .ToListAsync();
+
+        // Add to archive context
+        _archiveContext.Orders.AddRange(oldOrders);
+
+        // Remove from main context
+        _context.Orders.RemoveRange(oldOrders);
+
+        // Save both
+        await _archiveContext.SaveChangesAsync();
+        await _context.SaveChangesAsync();
+    }
+}
+
+// Using partition switching for fast archiving
+public async Task ArchivePartitionAsync(int year)
+{
+    var sql = $@"
+        ALTER TABLE Orders SWITCH PARTITION {year}
+        TO OrdersArchive PARTITION {year}";
+
+    await _context.Database.ExecuteSqlRawAsync(sql);
+}</div>
+        </div>
+
+        <div class="question">
+            Q73: How do you implement database purging with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Soft delete then purge
+public class DataPurger
+{
+    private readonly AppDbContext _context;
+
+    public DataPurger(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task PurgeSoftDeletedDataAsync(int daysToKeep)
+    {
+        var cutoffDate = DateTime.UtcNow.AddDays(-daysToKeep);
+
+        var softDeletedEntities = await _context.Products
+            .IgnoreQueryFilters()
+            .Where(p => p.IsDeleted && p.DeletedAt < cutoffDate)
+            .ToListAsync();
+
+        _context.Products.RemoveRange(softDeletedEntities);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task PurgeOldDataAsync(DateTime cutoffDate)
+    {
+        // Use raw SQL for better performance
+        var sql = "DELETE FROM Logs WHERE CreatedAt < @cutoffDate";
+        var parameter = new SqlParameter("@cutoffDate", cutoffDate);
+
+        await _context.Database.ExecuteSqlRawAsync(sql, parameter);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q74: How do you implement database replication with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Read from replica, write to primary
+public class ReplicationDbContextFactory
+{
+    private readonly string _primaryConnectionString;
+    private readonly string _replicaConnectionString;
+
+    public AppDbContext CreateReadContext()
+    {
+        var options = new DbContextOptionsBuilder&lt;AppDbContext&gt;()
+            .UseSqlServer(_replicaConnectionString)
+            .Options;
+
+        return new AppDbContext(options);
+    }
+
+    public AppDbContext CreateWriteContext()
+    {
+        var options = new DbContextOptionsBuilder&lt;AppDbContext&gt;()
+            .UseSqlServer(_primaryConnectionString)
+            .Options;
+
+        return new AppDbContext(options);
+    }
+}
+
+// Using Change Data Capture (CDC)
+// Configure in migration
+migrationBuilder.Sql(@"
+    EXEC sys.sp_cdc_enable_table
+        @source_schema = 'dbo',
+        @source_name = 'Products',
+        @role_name = NULL");
+
+// Query CDC tables
+var changes = await context.Database
+    .SqlQueryRaw&lt;ProductChange&gt;(@"
+        SELECT * FROM cdc.dbo_Products_CT
+        WHERE __$operation IN (1, 2, 3, 4)")
+    .ToListAsync();</div>
+        </div>
+
+        <div class="question">
+            Q75: How do you implement database high availability with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using Always On Availability Groups
+// Configure connection string with failover
+var connectionString = "Server=ag_listener;Database=MyDb;MultiSubnetFailover=True;";
+
+// Configure retry logic
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+    optionsBuilder.UseSqlServer(connectionString, options =>
+    {
+        options.EnableRetryOnFailure(
+            maxRetryCount: 5,
+            maxRetryDelay: TimeSpan.FromSeconds(30));
+    });
+}
+
+// Manual failover detection
+public class FailoverDetector
+{
+    private readonly AppDbContext _context;
+
+    public async Task&lt;bool&gt; IsPrimaryAvailableAsync()
+    {
+        try
+        {
+            await _context.Database.CanConnectAsync();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public async Task SwitchToSecondaryAsync()
+    {
+        // Update connection string to point to secondary
+        // Note: Secondary is read-only in AG
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q76: How do you implement database disaster recovery with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Automated backup service
+public class BackupService
+{
+    private readonly AppDbContext _context;
+    private readonly string _backupPath;
+
+    public BackupService(AppDbContext context, IConfiguration configuration)
+    {
+        _context = context;
+        _backupPath = configuration["BackupPath"];
+    }
+
+    public async Task CreateBackupAsync()
+    {
+        var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+        var backupFile = Path.Combine(_backupPath, $"backup_{timestamp}.bak");
+
+        var sql = $@"BACKUP DATABASE MyDb TO DISK = '{backupFile}'";
+        await _context.Database.ExecuteSqlRawAsync(sql);
+    }
+
+    public async Task RestoreBackupAsync(string backupFile)
+    {
+        var sql = $@"RESTORE DATABASE MyDb FROM DISK = '{backupFile}' WITH REPLACE";
+        await _context.Database.ExecuteSqlRawAsync(sql);
+    }
+}
+
+// Point-in-time restore
+public async Task RestoreToPointInTimeAsync(DateTime pointInTime)
+{
+    var sql = $@"
+        RESTORE DATABASE MyDb FROM DISK = 'backup_file.bak'
+        WITH NORECOVERY, STOPAT = '{pointInTime:yyyy-MM-dd HH:mm:ss}'";
+
+    await _context.Database.ExecuteSqlRawAsync(sql);
+}</div>
+        </div>
+
+        <div class="question">
+            Q77: How do you implement database security with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Secure connection string
+var connectionString = configuration.GetConnectionString("DefaultConnection");
+var secureConnectionString = new SqlConnectionStringBuilder(connectionString)
+{
+    Encrypt = true,
+    TrustServerCertificate = false,
+    ConnectTimeout = 30
+}.ToString();
+
+// Use managed identity for Azure SQL
+builder.Services.AddDbContext&lt;AppDbContext&gt;(options =>
+{
+    var connectionString = configuration.GetConnectionString("AzureSqlConnection");
+    var azureTokenProvider = new AzureServiceTokenProvider();
+    var accessToken = await azureTokenProvider.GetAccessTokenAsync("https://database.windows.net/");
+
+    var connection = new SqlConnection(connectionString);
+    connection.AccessToken = accessToken;
+
+    options.UseSqlServer(connection);
+});
+
+// Implement data access policies
+public class DataAccessPolicy
+{
+    public static bool CanAccess(string userId, string resource, string action)
+    {
+        // Implement RBAC logic
+        return true;
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q78: How do you implement database performance monitoring with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using EF Core's built-in diagnostics
+public class PerformanceMonitor
+{
+    private readonly AppDbContext _context;
+
+    public PerformanceMonitor(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task&lt;PerformanceMetrics&gt; MonitorQueryAsync(Func&lt;Task&gt; query)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        
+        try
+        {
+            await query();
+            stopwatch.Stop();
+            
+            return new PerformanceMetrics
+            {
+                Duration = stopwatch.Elapsed,
+                Success = true
+            };
+        }
+        catch (Exception ex)
+        {
+            stopwatch.Stop();
+            
+            return new PerformanceMetrics
+            {
+                Duration = stopwatch.Elapsed,
+                Success = false,
+                Error = ex.Message
+            };
+        }
+    }
+}
+
+// Using Application Insights for monitoring
+builder.Services.AddApplicationInsightsTelemetry();
+builder.Services.AddDbContext&lt;AppDbContext&gt;(options =>
+{
+    options.UseSqlServer(connectionString);
+    options.LogTo(message =>
+    {
+        var telemetryClient = new TelemetryClient();
+        telemetryClient.TrackDependency("EF Core", "Query", DateTime.Now, TimeSpan.Zero, true);
+    });
+});</div>
+        </div>
+
+        <div class="question">
+            Q79: How do you implement database connection resilience with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Custom execution strategy with circuit breaker
+public class CircuitBreakerExecutionStrategy : ExecutionStrategy
+{
+    private readonly CircuitBreaker _circuitBreaker;
+
+    public CircuitBreakerExecutionStrategy(
+        ExecutionStrategyDependencies dependencies,
+        int maxRetryCount,
+        TimeSpan maxRetryDelay)
+        : base(dependencies, maxRetryCount, maxRetryDelay)
+    {
+        _circuitBreaker = new CircuitBreaker(maxRetryCount, maxRetryDelay);
+    }
+
+    protected override bool ShouldRetryOn(Exception exception)
+    {
+        if (_circuitBreaker.IsOpen())
+        {
+            return false; // Circuit is open, don't retry
+        }
+
+        var shouldRetry = exception is SqlException sqlEx && 
+                          (sqlEx.Number == 4060 || sqlEx.Number == 11001);
+
+        if (!shouldRetry)
+        {
+            _circuitBreaker.RecordFailure();
+        }
+
+        return shouldRetry;
+    }
+}
+
+// Configure circuit breaker
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+    var strategy = new CircuitBreakerExecutionStrategy(
+        new ExecutionStrategyDependencies(
+            new LoggerFactory(),
+            new List&lt;IInterceptor&gt;()),
+        maxRetryCount: 3,
+        maxRetryDelay: TimeSpan.FromSeconds(10));
+
+    optionsBuilder.UseSqlServer(connectionString);
+    optionsBuilder.ExecutionStrategy(strategy);
+}</div>
+        </div>
+
+        <div class="question">
+            Q80: How do you implement database schema evolution with EF Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Using migrations for schema evolution
+// Create migration
+dotnet ef migrations add AddNewColumn
+
+// Apply migration
+dotnet ef database update
+
+// Rollback migration
+dotnet ef database update AddNewColumn
+dotnet ef migrations remove
+
+// Custom migration script
+public partial class CustomMigration : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.Sql(@"
+            -- Custom SQL script
+            IF NOT EXISTS (SELECT * FROM sys.columns WHERE name = 'NewColumn')
+            BEGIN
+                ALTER TABLE Products ADD NewColumn NVARCHAR(100)
+            END");
+    }
+
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.Sql("ALTER TABLE Products DROP COLUMN NewColumn");
+    }
+}
+
+// Data migration during schema change
+public partial class MigrateData : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        // Add new column
+        migrationBuilder.AddColumn&lt;string&gt;("NewColumn", "Products");
+
+        // Migrate existing data
+        migrationBuilder.Sql(@"
+            UPDATE Products
+            SET NewColumn = OldColumn
+            WHERE NewColumn IS NULL");
+    }
+}</div>
+        </div>
+
+        <div class="tip">
+            <strong>Interview Tip:</strong> When discussing Entity Framework, always mention performance considerations, the difference between loading strategies, and how to handle migrations in production. Be prepared to discuss real-world scenarios like soft delete, multi-tenancy, audit trails, and advanced patterns like CQRS and Specification pattern. For senior positions, demonstrate knowledge of testing strategies, database optimization, and enterprise-level features.
+        </div>
+
+        <div class="important">
+            <strong>Key Takeaways for Interview (Beginner to Expert):</strong>
+            <ul>
+                <li><strong>Beginner (0-3 years):</strong> Understand DbContext and DbSet lifecycle, know the difference between loading strategies (eager, lazy, explicit), understand change tracking and entity states, be familiar with migrations and their management.</li>
+                <li><strong>Intermediate (4-7 years):</strong> Know performance optimization techniques, understand the N+1 query problem, be familiar with advanced features (global filters, owned entities), know how to handle concurrency conflicts, understand raw SQL execution.</li>
+                <li><strong>Advanced (8-10 years):</strong> Be familiar with repository pattern implementation, understand Unit of Work pattern, implement Specification pattern, use CQRS pattern, handle multi-tenancy and global filters, implement audit trails and soft delete.</li>
+                <li><strong>Expert (11-13 years):</strong> Implement testing strategies (unit, integration, mocking), handle bulk operations efficiently, implement database sharding and read/write splitting, configure failover and disaster recovery, implement database security and encryption, monitor and optimize database performance, handle schema evolution and versioning.</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 50px; padding: 20px; background: #512bd4; color: white; border-radius: 8px; text-align: center;">
+            <h3>End of Entity Framework Interview Preparation Guide</h3>
+            <p>Comprehensive coverage from beginner to expert level (4-13 years experience)</p>
+        </div>
+    </div>
+</body>
+</html>

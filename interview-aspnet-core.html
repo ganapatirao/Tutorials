@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP.NET Core Interview Preparation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+        }
+        h1 {
+            color: #512bd4;
+            border-bottom: 4px solid #512bd4;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-left: 5px solid #512bd4;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .question {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .answer {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0 25px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        .important {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .tip {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #512bd4;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .toc {
+            background: #e7f3ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #512bd4;
+        }
+        .toc ol {
+            column-count: 2;
+        }
+        .toc li {
+            margin: 5px 0;
+        }
+        @media print {
+            body { background: white; }
+            .container { padding: 20px; }
+            .question { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .tip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .important { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        .page-break {
+            page-break-before: always;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ASP.NET Core Interview Preparation Guide</h1>
+        <p style="font-size: 18px; color: #666; margin-bottom: 30px;"><strong>Comprehensive Interview Preparation with In-Depth Concepts, Code Examples, and Best Practices</strong></p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>Introduction to ASP.NET Core</li>
+                <li>ASP.NET Core Architecture</li>
+                <li>Dependency Injection</li>
+                <li>Middleware Pipeline</li>
+                <li>Configuration Management</li>
+                <li>Startup vs Program.cs</li>
+                <li>Kestrel Web Server</li>
+                <li>Hosting Models</li>
+                <li>Request Processing Pipeline</li>
+                <li>Filters and Attributes</li>
+                <li>Logging and Monitoring</li>
+                <li>Performance Optimization</li>
+                <li>Security in ASP.NET Core</li>
+                <li>Advanced Topics</li>
+                <li>Common Interview Questions</li>
+            </ol>
+        </div>
+
+        <h2>1. Introduction to ASP.NET Core</h2>
+
+        <div class="question">
+            Q1: What is ASP.NET Core and how does it differ from ASP.NET?
+        </div>
+        <div class="answer">
+            <p><strong>ASP.NET Core</strong> is a cross-platform, high-performance, open-source framework for building modern, cloud-based, Internet-connected applications. It is a complete rewrite of ASP.NET 4.x.</p>
+            
+            <h3>Key Differences from ASP.NET:</h3>
+            <ul>
+                <li><strong>Cross-platform:</strong> Runs on Windows, Linux, and macOS</li>
+                <li><strong>High performance:</strong> Significantly faster than ASP.NET 4.x</li>
+                <li><strong>Modular:</strong> Uses NuGet packages for dependencies</li>
+                <li><strong>Unified:</strong> MVC and Web API are combined into a single framework</li>
+                <li><strong>Open-source:</strong> Developed and maintained by Microsoft and the community</li>
+                <li><strong>Cloud-ready:</strong> Designed for cloud deployment and containerization</li>
+                <li><strong>No System.Web dependency:</strong> Lightweight and optimized</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q2: What are the key features of ASP.NET Core?
+        </div>
+        <div class="answer">
+            <ul>
+                <li>Cross-platform support (Windows, Linux, macOS)</li>
+                <li>Built-in dependency injection</li>
+                <li>Unified MVC and Web API framework</li>
+                <li>Async/await support throughout</li>
+                <li>Self-hosting with Kestrel web server</li>
+                <li>Modular HTTP request pipeline with middleware</li>
+                <li>Cloud-ready configuration system</li>
+                <li>Built-in logging framework</li>
+                <li>Support for multiple hosting models</li>
+                <li>Side-by-side versioning</li>
+                <li>Improved performance and scalability</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q3: What is the difference between .NET Core, .NET Framework, and .NET 5/6/7/8?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>.NET Framework</th>
+                    <th>.NET Core</th>
+                    <th>.NET 5+</th>
+                </tr>
+                <tr>
+                    <td>Platform</td>
+                    <td>Windows only</td>
+                    <td>Cross-platform</td>
+                    <td>Cross-platform</td>
+                </tr>
+                <tr>
+                    <td>Open Source</td>
+                    <td>Partial</td>
+                    <td>Full</td>
+                    <td>Full</td>
+                </tr>
+                <tr>
+                    <td>Deployment</td>
+                    <td>System-wide</td>
+                    <td>Self-contained or framework-dependent</td>
+                    <td>Self-contained or framework-dependent</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Good</td>
+                    <td>Excellent</td>
+                    <td>Excellent</td>
+                </tr>
+                <tr>
+                    <td>API Surface</td>
+                    <td>Large</td>
+                    <td>Smaller, modular</td>
+                    <td>Unified</td>
+                </tr>
+            </table>
+            <p><strong>.NET 5+</strong> is the successor to .NET Core, unifying .NET Core, .NET Framework, and Xamarin into a single platform.</p>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>2. ASP.NET Core Architecture</h2>
+
+        <div class="question">
+            Q4: Explain the ASP.NET Core request processing pipeline.
+        </div>
+        <div class="answer">
+            <p>The ASP.NET Core request processing pipeline consists of the following components:</p>
+            <ol>
+                <li><strong>HTTP Server:</strong> Kestrel (default) or IIS receives the HTTP request</li>
+                <li><strong>Middleware Pipeline:</strong> Request passes through configured middleware components</li>
+                <li><strong>Routing:</strong> URL is matched to route templates</li>
+                <li><strong>Controller/Endpoint Selection:</strong> Appropriate controller or endpoint is selected</li>
+                <li><strong>Action Execution:</strong> Controller action or endpoint delegate executes</li>
+                <li><strong>Response Generation:</strong> Response is created and sent back through middleware</li>
+            </ol>
+            
+            <div class="code-block">// Middleware pipeline example
+var app = builder.Build();
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+
+app.Run();</div>
+        </div>
+
+        <div class="question">
+            Q5: What is the role of Kestrel in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p><strong>Kestrel</strong> is a cross-platform web server for ASP.NET Core. It is:</p>
+            <ul>
+                <li>The default web server included in ASP.NET Core</li>
+                <li>Built from scratch for high performance and scalability</li>
+                <li>Can run standalone or behind a reverse proxy (IIS, Nginx, Apache)</li>
+                <li>Supports HTTP/1.1, HTTP/2, and HTTP/3</li>
+                <li>Designed to be secure by default</li>
+            </ul>
+            
+            <div class="important">
+                <strong>Important:</strong> In production, Kestrel should be used behind a reverse proxy (IIS, Nginx, or Apache) for additional security, SSL termination, and load balancing.
+            </div>
+        </div>
+
+        <div class="question">
+            Q6: What are the different hosting models in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <ol>
+                <li><strong>In-Process Hosting:</strong> Application runs in the same process as IIS (IISHttpServer)</li>
+                <li><strong>Out-of-Process Hosting:</strong> Application runs in a separate process (Kestrel) behind IIS</li>
+                <li><strong>Self-Contained Deployment:</strong> Includes .NET runtime with the application</li>
+                <li><strong>Framework-Dependent Deployment:</strong> Relies on .NET runtime installed on the target machine</li>
+                <li><strong>Docker Container:</strong> Application runs in a containerized environment</li>
+            </ol>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>3. Dependency Injection</h2>
+
+        <div class="question">
+            Q7: Explain Dependency Injection in ASP.NET Core.
+        </div>
+        <div class="answer">
+            <p><strong>Dependency Injection (DI)</strong> is a design pattern that implements Inversion of Control (IoC) for resolving dependencies between objects. ASP.NET Core includes a built-in DI container.</p>
+            
+            <h3>Service Lifetimes:</h3>
+            <ul>
+                <li><strong>Transient:</strong> Created each time they're requested</li>
+                <li><strong>Scoped:</strong> Created once per HTTP request</li>
+                <li><strong>Singleton:</strong> Created the first time they're requested and never disposed</li>
+            </ul>
+            
+            <div class="code-block">// Service registration
+builder.Services.AddTransient&lt;IMyService, MyService&gt;();
+builder.Services.AddScoped&lt;IRepository, Repository&gt;();
+builder.Services.AddSingleton&lt;ILoggerService, LoggerService&gt;();
+
+// Constructor injection
+public class MyController : ControllerBase
+{
+    private readonly IMyService _service;
+    
+    public MyController(IMyService service)
+    {
+        _service = service;
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q8: What is the difference between Transient, Scoped, and Singleton lifetimes?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Lifetime</th>
+                    <th>Behavior</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td>Transient</td>
+                    <td>New instance for every request</td>
+                    <td>Lightweight, stateless services</td>
+                </tr>
+                <tr>
+                    <td>Scoped</td>
+                    <td>Same instance within a request</td>
+                    <td>Repositories, DbContext</td>
+                </tr>
+                <tr>
+                    <td>Singleton</td>
+                    <td>Same instance for entire application</td>
+                    <td>Caching, configuration, logging</td>
+                </tr>
+            </table>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Never inject a Scoped service into a Singleton service, as it can lead to captive dependency problems.
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>4. Middleware Pipeline</h2>
+
+        <div class="question">
+            Q9: What is middleware in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p><strong>Middleware</strong> are software components that are assembled into an application pipeline to handle requests and responses. Each component:</p>
+            <ul>
+                <li>Chooses whether to pass the request to the next component</li>
+                <li>Can perform work before and after the next component</li>
+                <li>Is added to the pipeline in the Program.cs file</li>
+            </ul>
+            
+            <div class="code-block">// Custom middleware example
+public class CustomMiddleware
+{
+    private readonly RequestDelegate _next;
+    
+    public CustomMiddleware(RequestDelegate next)
+    {
+        _next = next;
+    }
+    
+    public async Task InvokeAsync(HttpContext context)
+    {
+        // Before next middleware
+        await context.Response.WriteAsync("Before next middleware<br>");
+        
+        await _next(context);
+        
+        // After next middleware
+        await context.Response.WriteAsync("After next middleware<br>");
+    }
+}
+
+// Extension method for registration
+public static class CustomMiddlewareExtensions
+{
+    public static IApplicationBuilder UseCustomMiddleware(this IApplicationBuilder builder)
+    {
+        return builder.UseMiddleware&lt;CustomMiddleware&gt;();
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q10: What is the order of middleware execution?
+        </div>
+        <div class="answer">
+            <p>Middleware executes in the order they are added to the pipeline:</p>
+            <ol>
+                <li><strong>Exception Handler/Developer Exception Page</strong> (first)</li>
+                <li><strong>HTTPS Redirection</strong></li>
+                <li><strong>Static Files</strong></li>
+                <li><strong>Routing</strong></li>
+                <li><strong>CORS</strong></li>
+                <li><strong>Authentication</strong></li>
+                <li><strong>Authorization</strong></li>
+                <li><strong>Custom Middleware</strong></li>
+                <li><strong>Endpoints</strong> (last)</li>
+            </ol>
+            
+            <div class="important">
+                <strong>Important:</strong> The order matters! Authentication must come before Authorization, and Exception handling should be first.
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>5. Configuration Management</h2>
+
+        <div class="question">
+            Q11: How does configuration work in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p>ASP.NET Core uses a flexible configuration system that supports multiple sources:</p>
+            <ul>
+                <li>appsettings.json and appsettings.{Environment}.json</li>
+                <li>Environment variables</li>
+                <li>Command-line arguments</li>
+                <li>User secrets (for development)</li>
+                <li>Key Vault (for production)</li>
+                <li>Custom providers</li>
+            </ul>
+            
+            <div class="code-block">// Configuration access
+var builder = WebApplication.CreateBuilder(args);
+
+// Add configuration providers
+builder.Configuration.AddJsonFile("appsettings.json", optional: false);
+builder.Configuration.AddEnvironmentVariables();
+
+// Access configuration
+var myValue = builder.Configuration["MySetting"];
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// Options pattern
+builder.Services.Configure&lt;MyOptions&gt;(
+    builder.Configuration.GetSection("MyOptions"));</div>
+        </div>
+
+        <div class="question">
+            Q12: What is the Options pattern in configuration?
+        </div>
+        <div class="answer">
+            <p>The <strong>Options pattern</strong> uses classes to represent groups of related settings:</p>
+            
+            <div class="code-block">// Options class
+public class MyOptions
+{
+    public const string SectionName = "MyOptions";
+    
+    public string Setting1 { get; set; }
+    public int Setting2 { get; set; }
+    public bool Setting3 { get; set; }
+}
+
+// appsettings.json
+{
+  "MyOptions": {
+    "Setting1": "value1",
+    "Setting2": 100,
+    "Setting3": true
+  }
+}
+
+// Registration
+builder.Services.Configure&lt;MyOptions&gt;(
+    builder.Configuration.GetSection(MyOptions.SectionName));
+
+// Usage
+public class MyService
+{
+    private readonly MyOptions _options;
+    
+    public MyService(IOptions&lt;MyOptions&gt; options)
+    {
+        _options = options.Value;
+    }
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>6. Startup vs Program.cs</h2>
+
+        <div class="question">
+            Q13: What is the difference between Startup.cs and Program.cs in .NET 6+?
+        </div>
+        <div class="answer">
+            <p>In .NET 6+, the minimal hosting model combines Startup.cs functionality into Program.cs:</p>
+            
+            <h3>.NET 5 and earlier (Startup.cs):</h3>
+            <div class="code-block">`npublic class Startup
+{
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
+    
+    public IConfiguration Configuration { get; }
+    
+    public void ConfigureServices(IServiceCollection services)
+    {
+        // Service registration
+    }
+    
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        // Middleware pipeline
+    }
+}</div>
+            
+            <h3>.NET 6+ (Minimal hosting model):</h3>
+            <div class="code-block">`nvar builder = WebApplication.CreateBuilder(args);
+
+// Service registration (ConfigureServices)
+builder.Services.AddControllers();
+builder.Services.AddDbContext&lt;AppDbContext&gt;(...);
+
+var app = builder.Build();
+
+// Middleware pipeline (Configure)
+app.UseHttpsRedirection();
+app.UseRouting();
+app.MapControllers();
+
+app.Run();</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>7. Filters and Attributes</h2>
+
+        <div class="question">
+            Q14: What are filters in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p><strong>Filters</strong> enable running code before or after specific stages in the request processing pipeline:</p>
+            
+            <h3>Filter Types:</h3>
+            <ul>
+                <li><strong>Authorization filters:</strong> Run first to determine if user is authorized</li>
+                <li><strong>Resource filters:</strong> Run after authorization, can short-circuit pipeline</li>
+                <li><strong>Action filters:</strong> Run before and after action execution</li>
+                <li><strong>Exception filters:</strong> Handle exceptions globally</li>
+                <li><strong>Result filters:</strong> Run before and after result execution</li>
+            </ul>
+            
+            <div class="code-block">// Action filter example
+public class LogActionFilter : ActionFilterAttribute
+{
+    private readonly ILogger&lt;LogActionFilter&gt; _logger;
+    
+    public LogActionFilter(ILogger&lt;LogActionFilter&gt; logger)
+    {
+        _logger = logger;
+    }
+    
+    public override void OnActionExecuting(ActionExecutingContext context)
+    {
+        _logger.LogInformation($"Executing: {context.ActionDescriptor.DisplayName}");
+    }
+    
+    public override void OnActionExecuted(ActionExecutedContext context)
+    {
+        _logger.LogInformation($"Executed: {context.ActionDescriptor.DisplayName}");
+    }
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>8. Logging and Monitoring</h2>
+
+        <div class="question">
+            Q15: How does logging work in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p>ASP.NET Core includes a built-in logging framework that supports multiple providers:</p>
+            
+            <h3>Log Levels:</h3>
+            <ul>
+                <li>Trace - Most detailed</li>
+                <li>Debug - Debugging information</li>
+                <li>Information - General information</li>
+                <li>Warning - Warning messages</li>
+                <li>Error - Error messages</li>
+                <li>Critical - Critical failure messages</li>
+            </ul>
+            
+            <div class="code-block">// Logging in controller
+public class ProductsController : ControllerBase
+{
+    private readonly ILogger&lt;ProductsController&gt; _logger;
+    
+    public ProductsController(ILogger&lt;ProductsController&gt; logger)
+    {
+        _logger = logger;
+    }
+    
+    [HttpGet("{id}")]
+    public async Task&lt;ActionResult&lt;Product&gt; Get(int id)
+    {
+        _logger.LogInformation("Getting product with ID: {ProductId}", id);
+        
+        try
+        {
+            var product = await _repository.GetByIdAsync(id);
+            if (product == null)
+            {
+                _logger.LogWarning("Product not found: {ProductId}", id);
+                return NotFound();
+            }
+            return Ok(product);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting product: {ProductId}", id);
+            throw;
+        }
+    }
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>9. Performance Optimization</h2>
+
+        <div class="question">
+            Q16: What are some performance optimization techniques in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Response Compression:</strong> Use Gzip/Brotli compression</li>
+                <li><strong>Async/Await:</strong> Use async for all I/O operations</li>
+                <li><strong>Caching:</strong> Implement in-memory and distributed caching</li>
+                <li><strong>Connection Pooling:</strong> Optimize database connection pool size</li>
+                <li><strong>Object Pooling:</strong> Reuse frequently allocated objects</li>
+                <li><strong>Minimize Allocations:</strong> Reduce memory allocations in hot paths</li>
+                <li><strong>Use Span&lt;T&gt;:</strong> For string manipulation without allocations</li>
+                <li><strong>Lazy Loading:</strong> Load data only when needed</li>
+                <li><strong>Pagination:</strong> Implement pagination for large datasets</li>
+                <li><strong>Database Indexing:</strong> Proper indexing for queries</li>
+            </ul>
+            
+            <div class="code-block">// Response compression
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.Providers.Add&lt;GzipCompressionProvider&gt;();
+});
+
+app.UseResponseCompression();
+
+// Async best practice
+public async Task&lt;IActionResult&gt; Get(int id)
+{
+    var product = await _repository.GetByIdAsync(id);
+    return Ok(product);
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>10. Security in ASP.NET Core</h2>
+
+        <div class="question">
+            Q17: What security features are built into ASP.NET Core?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Authentication:</strong> Cookie, JWT, Windows, External providers</li>
+                <li><strong>Authorization:</strong> Role-based, Policy-based, Resource-based</li>
+                <li><strong>Data Protection:</strong> Encryption API for sensitive data</li>
+                <li><strong>HTTPS Enforcement:</strong> HSTS and HTTPS redirection</li>
+                <li><strong>CORS:</strong> Cross-Origin Resource Sharing configuration</li>
+                <li><strong>CSRF Protection:</strong> Anti-forgery tokens</li>
+                <li><strong>Security Headers:</strong> CSP, X-Frame-Options, etc.</li>
+                <li><strong>Secret Management:</strong> User secrets, Key Vault</li>
+            </ul>
+            
+            <div class="code-block">// JWT Authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtSettings.Issuer,
+            ValidAudience = jwtSettings.Audience,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(jwtSettings.Secret))
+        };
+    });</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>11. Common Interview Questions</h2>
+
+        <div class="question">
+            Q18: What is the difference between IApplicationBuilder and IWebHostBuilder?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>IWebHostBuilder:</strong> Used to build and configure the web host. It's responsible for setting up the server, configuration, logging, and dependency injection container.</li>
+                <li><strong>IApplicationBuilder:</strong> Used to configure the HTTP request pipeline. It's used to add middleware components to the pipeline.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q19: What is the purpose of the launchSettings.json file?
+        </div>
+        <div class="answer">
+            <p>launchSettings.json defines different launch profiles for development, including:</p>
+            <ul>
+                <li>Application URLs</li>
+                <li>Environment variables</li>
+                <li>Command to run (IIS Express, Kestrel)</li>
+                <li>Browser launch settings</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q20: How do you handle errors in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Developer Exception Page:</strong> Detailed error information in development</li>
+                <li><strong>Exception Handler Middleware:</strong> Custom error handling in production</li>
+                <li><strong>Exception Filters:</strong> Handle exceptions at controller/action level</li>
+                <li><strong>Try-Catch:</strong> Handle exceptions in code</li>
+                <li><strong>Global Exception Handler:</strong> Centralized error handling</li>
+            </ul>
+            
+            <div class="code-block">// Exception handling middleware
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}</div>
+        </div>
+
+        <div class="question">
+            Q21: What is the difference between AddTransient, AddScoped, and AddSingleton?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>AddTransient:</strong> Services are created each time they're requested from the service container. This is suitable for lightweight, stateless services.</li>
+                <li><strong>AddScoped:</strong> Services are created once per client request (within a scope). This is suitable for services that should be shared within a single HTTP request, like DbContext.</li>
+                <li><strong>AddSingleton:</strong> Services are created the first time they're requested and remain the same for all subsequent requests. This is suitable for stateless services that are expensive to create.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q22: What is the purpose of the ConfigureServices method?
+        </div>
+        <div class="answer">
+            <p>The ConfigureServices method is used to configure the dependency injection container. It's where you register services like:</p>
+            <ul>
+                <li>Database contexts</li>
+                <li>Application services</li>
+                <li>Authentication and authorization</li>
+                <li>MVC services</li>
+                <li>CORS policies</li>
+                <li>Health checks</li>
+                <li>Any other application services</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q23: How do you implement CORS in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Add CORS services
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("https://example.com")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
+
+// Use CORS middleware
+app.UseCors("AllowSpecificOrigin");
+
+// Enable CORS on controller
+[EnableCors("AllowSpecificOrigin")]
+public class MyController : ControllerBase
+{
+    // ...
+}</div>
+        </div>
+
+        <div class="question">
+            Q24: What is the difference between app.Use and app.Map in middleware?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>app.Use:</strong> Adds middleware to the pipeline that processes all requests. The middleware can choose whether to pass the request to the next middleware.</li>
+                <li><strong>app.Map:</strong> Branches the pipeline based on request path matching. It's used to create sub-pipelines for specific paths.</li>
+            </ul>
+            
+            <div class="code-block">// Use - processes all requests
+app.Use(async (context, next) =>
+{
+    // Code before next middleware
+    await next();
+    // Code after next middleware
+});
+
+// Map - branches based on path
+app.Map("/api", apiApp =>
+{
+    apiApp.UseRouting();
+    apiApp.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+    });
+});</div>
+        </div>
+
+        <div class="question">
+            Q25: How do you implement health checks in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <div class="code-block">// Add health check services
+builder.Services.AddHealthChecks()
+    .AddCheck&lt;DatabaseHealthCheck&gt;("database")
+    .AddCheck&lt;ExternalApiHealthCheck&gt;("external-api")
+    .AddDbContextCheck&lt;AppDbContext&gt;("database-context");
+
+// Map health check endpoint
+app.MapHealthChecks("/health");
+
+// Health check implementation
+public class DatabaseHealthCheck : IHealthCheck
+{
+    public async Task&lt;HealthCheckResult&gt; CheckHealthAsync(
+        HealthCheckContext context,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            // Check database connectivity
+            await using var connection = new SqlConnection(_connectionString);
+            await connection.OpenAsync(cancellationToken);
+            return HealthCheckResult.Healthy("Database is accessible");
+        }
+        catch (Exception ex)
+        {
+            return HealthCheckResult.Unhealthy("Database is not accessible", ex);
+        }
+    }
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>15. Common Interview Questions (All Levels)</h2>
+
+        <div class="question">
+            Q26: What is the difference between IApplicationBuilder and IWebHostBuilder?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>IWebHostBuilder:</strong> Used to build and configure the web host. Responsible for setting up the hosting environment, configuration, and services. Used in Program.cs to create the host.</li>
+                <li><strong>IApplicationBuilder:</strong> Used to configure the HTTP request pipeline. Responsible for adding middleware components. Used in Startup.cs or Program.cs to configure the application pipeline.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q27: What is the difference between AddTransient, AddScoped, and AddSingleton?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Lifetime</th>
+                    <th>Description</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td>Transient</td>
+                    <td>New instance each time requested</td>
+                    <td>Lightweight, stateless services</td>
+                </tr>
+                <tr>
+                    <td>Scoped</td>
+                    <td>New instance per HTTP request</td>
+                    <td>Request-specific services, DbContext</td>
+                </tr>
+                <tr>
+                    <td>Singleton</td>
+                    <td>Single instance for app lifetime</td>
+                    <td>Stateless services, caching</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q28: What is the difference between async/await and Task.Run?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>async/await:</strong> Used for I/O-bound operations. Doesn't block threads. Efficient for network, file, database operations.</li>
+                <li><strong>Task.Run:</strong> Offloads work to ThreadPool. Used for CPU-bound operations. Can cause thread pool starvation if overused.</li>
+            </ul>
+            
+            <div class="code-block"> Good - async/await for I/O
+public async Task&lt;User&gt; GetUserAsync(int id)
+{
+    return await _context.Users.FindAsync(id);
+}
+
+// Good - Task.Run for CPU-bound
+public async Task&lt;string&gt; ProcessDataAsync(string data)
+{
+    return await Task.Run(() => HeavyComputation(data));
+}</div>
+        </div>
+
+        <div class="question">
+            Q29: What is the difference between IActionResult and ActionResult?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>IActionResult:</strong> Interface for action results. Can return any type that implements IActionResult. More flexible.</li>
+                <li><strong>ActionResult&lt;T&gt;:</strong> Can return either T or IActionResult. Provides type safety and better API documentation. Recommended for API controllers.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q30: What is the difference between appsettings.json and appsettings.Development.json?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>appsettings.json:</strong> Base configuration file. Contains default settings. Used in all environments.</li>
+                <li><strong>appsettings.Development.json:</strong> Environment-specific file. Overrides base settings in Development environment. Not deployed to production.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q31: What is the difference between AddMvc and AddControllers?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>AddMvc:</strong> Adds full MVC support including controllers, views, Razor pages, and API features. Use for web applications with views.</li>
+                <li><strong>AddControllers:</strong> Adds only API controller support. Lightweight, no view support. Use for API-only applications.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q32: What is the difference between [FromRoute] and [FromQuery]?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>[FromRoute]:</strong> Binds parameter from route data (URL path). Used for required identifiers.</li>
+                <li><strong>[FromQuery]:</strong> Binds parameter from query string. Used for optional parameters, filters, pagination.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q33: What is the difference between IFormFile and byte[]?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>IFormFile:</strong> Represents a file sent with the HttpRequest. Provides stream access, file metadata. Efficient for large files.</li>
+                <li><strong>byte[]:</strong> Loads entire file into memory. Not recommended for large files. Can cause memory issues.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q34: What is the difference between OnGet and OnPost in Razor Pages?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>OnGet:</strong> Called when page is requested via GET. Used to initialize page data. Should not modify data.</li>
+                <li><strong>OnPost:</strong> Called when form is submitted via POST. Used to process form data. Can modify data.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q35: What is the difference between ViewComponent and Partial View?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>ViewComponent:</strong> Has its own logic and model. More powerful, can have dependencies. Good for reusable components with logic.</li>
+                <li><strong>Partial View:</strong> Simple view fragment. No logic, just rendering. Good for static or simple reusable UI.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q36: What is the difference between Tag Helpers and HTML Helpers?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Tag Helpers:</strong> HTML-like syntax, more readable. Work with HTML elements. More modern approach.</li>
+                <li><strong>HTML Helpers:</strong> C# method syntax, less readable. Generate HTML strings. Legacy approach.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q37: What is the difference between [Authorize] and [AllowAnonymous]?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>[Authorize]:</strong> Requires user to be authenticated. Can specify roles/policies. Applied at controller or action level.</li>
+                <li><strong>[AllowAnonymous]:</strong> Bypasses authorization. Allows unauthenticated access. Used for login/register pages.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q38: What is the difference between Authentication and Authorization?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Authentication:</strong> Verifies who the user is. Process of identifying the user. Examples: login, JWT, cookies.</li>
+                <li><strong>Authorization:</strong> Verifies what the user can do. Process of granting permissions. Examples: roles, policies, claims.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q39: What is the difference between AddIdentity and AddIdentityCore?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>AddIdentity:</strong> Adds full identity system including UI, cookie authentication, role management. Use for web applications with UI.</li>
+                <li><strong>AddIdentityCore:</strong> Adds only core identity features without UI. Use for API-only applications.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q40: What is the difference between AddJwtBearer and AddCookie?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>AddJwtBearer:</strong> JWT token authentication. Stateless, suitable for APIs. Token sent in Authorization header.</li>
+                <li><strong>AddCookie:</strong> Cookie-based authentication. Stateful, suitable for web apps. Cookie stored in browser.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q41: What is the difference between ResponseCache and OutputCache?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>ResponseCache:</strong> ASP.NET Core attribute for HTTP caching. Configures cache headers. Works with client and proxy caches.</li>
+                <li><strong>OutputCache:</strong> ASP.NET 4.x feature. Not available in ASP.NET Core. Use ResponseCache instead.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q42: What is the difference between IMemoryCache and IDistributedCache?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>IMemoryCache:</strong> In-memory cache. Fast, but not distributed. Lost on app restart. Good for single-server apps.</li>
+                <li><strong>IDistributedCache:</strong> Distributed cache (Redis, SQL). Slower, but shared across servers. Good for multi-server apps.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q43: What is the difference between AddMemoryCache and AddDistributedMemoryCache?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>AddMemoryCache:</strong> Adds IMemoryCache service. Local in-memory cache. Not distributed.</li>
+                <li><strong>AddDistributedMemoryCache:</strong> Adds IDistributedCache using memory. For development/testing only. Not production-ready.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q44: What is the difference between BackgroundService and IHostedService?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>IHostedService:</strong> Base interface for background services. Requires implementing StartAsync and StopAsync. More control but more boilerplate.</li>
+                <li><strong>BackgroundService:</strong> Abstract base class for long-running tasks. Implements IHostedService. Provides ExecuteAsync method. Simpler to use.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q45: What is the difference between SignalR and WebSocket?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>SignalR:</strong> High-level abstraction for real-time communication. Handles connection management, fallbacks, scaling. Built on top of WebSockets.</li>
+                <li><strong>WebSocket:</strong> Low-level protocol for bidirectional communication. Requires manual connection management. No built-in fallbacks.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q46: What is the difference between gRPC and REST API?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>gRPC</th>
+                    <th>REST API</th>
+                </tr>
+                <tr>
+                    <td>Protocol</td>
+                    <td>HTTP/2, Protocol Buffers</td>
+                    <td>HTTP/1.1, JSON/XML</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Faster, binary format</td>
+                    <td>Slower, text format</td>
+                </tr>
+                <tr>
+                    <td>Code Generation</td>
+                    <td>Automatic from .proto</td>
+                    <td>Manual</td>
+                </tr>
+                <tr>
+                    <td>Browsers</td>
+                    <td>Requires gRPC-Web</td>
+                    <td>Native support</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q47: What is the difference between Blazor Server and Blazor WebAssembly?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Blazor Server</th>
+                    <th>Blazor WebAssembly</th>
+                </tr>
+                <tr>
+                    <td>Execution</td>
+                    <td>Server-side</td>
+                    <td>Client-side (browser)</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Faster initial load</td>
+                    <td>Slower initial load</td>
+                </tr>
+                <tr>
+                    <td>Offline</td>
+                    <td>Requires connection</td>
+                    <td>Works offline</td>
+                </tr>
+                <tr>
+                    <td>Size</td>
+                    <td>Smaller download</td>
+                    <td>Larger download</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q48: What is the difference between Minimal APIs and MVC?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Minimal APIs:</strong> Lightweight, simple syntax. Good for small APIs, microservices. Less boilerplate, fewer features.</li>
+                <li><strong>MVC:</strong> Full-featured framework. Good for large applications. More structure, filters, conventions.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q49: What are the best practices for ASP.NET Core performance?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Use async/await:</strong> Avoid blocking threads</li>
+                <li><strong>Cache responses:</strong> Use ResponseCache and IMemoryCache</li>
+                <li><strong>Optimize database queries:</strong> Use EF Core efficiently, avoid N+1</li>
+                <li><strong>Use compression:</strong> Enable response compression</li>
+                <li><strong>Minimize allocations:</strong> Use object pooling, span&lt;T&gt;</li>
+                <li><strong>Use streaming:</strong> Stream large files instead of loading into memory</li>
+                <li><strong>Enable HTTP/2:</strong> Use Kestrel with HTTP/2</li>
+                <li><strong>Use CDN:</strong> Serve static files from CDN</li>
+                <li><strong>Optimize middleware order:</strong> Put expensive middleware last</li>
+                <li><strong>Use connection pooling:</strong> Configure connection limits</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q50: What are the best practices for ASP.NET Core security?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Use HTTPS:</strong> Enforce HTTPS in production</li>
+                <li><strong>Validate input:</strong> Use data annotations and FluentValidation</li>
+                <li><strong>Use parameterized queries:</strong> Prevent SQL injection</li>
+                <li><strong>Encode output:</strong> Prevent XSS attacks</li>
+                <li><strong>Use CORS properly:</strong> Restrict cross-origin requests</li>
+                <li><strong>Secure secrets:</strong> Use Azure Key Vault or user secrets</li>
+                <li><strong>Use authentication:</strong> Implement proper auth mechanisms</li>
+                <li><strong>Use authorization:</strong> Implement role-based and policy-based auth</li>
+                <li><strong>Enable security headers:</strong> Use HSTS, CSP, X-Frame-Options</li>
+                <li><strong>Keep dependencies updated:</strong> Regularly update NuGet packages</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <strong>Interview Tip:</strong> Always emphasize that you understand the "why" behind concepts, not just the "how". Interviewers want to see that you understand the architectural decisions and trade-offs. For senior positions, demonstrate knowledge of performance optimization, security best practices, and advanced patterns like SignalR, gRPC, and Blazor.
+        </div>
+
+        <div class="important">
+            <strong>Key Takeaways for Interview (Beginner to Expert):</strong>
+            <ul>
+                <li><strong>Beginner (0-3 years):</strong> Understand the request pipeline and middleware order, know the difference between service lifetimes (Transient, Scoped, Singleton), be able to explain dependency injection principles, understand configuration management and options pattern, know basic security (authentication, authorization), be familiar with MVC basics.</li>
+                <li><strong>Intermediate (4-7 years):</strong> Understand hosting models and deployment options, know how to implement health checks, understand async/await best practices, know the difference between IActionResult and ActionResult&lt;T&gt;, implement caching with IMemoryCache, use filters and attributes, understand CORS configuration.</li>
+                <li><strong>Advanced (8-10 years):</strong> Implement background services with IHostedService, use SignalR for real-time communication, implement gRPC services, understand Blazor Server vs WebAssembly, implement distributed caching with Redis, optimize performance with compression and HTTP/2, implement advanced security with JWT and policies.</li>
+                <li><strong>Expert (11-13 years):</strong> Design high-performance architectures with minimal APIs, implement advanced caching strategies, design scalable real-time solutions with SignalR, implement gRPC for microservices, optimize application performance at scale, design secure authentication and authorization systems, implement advanced monitoring and observability, design cloud-native ASP.NET Core applications.</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 50px; padding: 20px; background: #512bd4; color: white; border-radius: 8px; text-align: center;">
+            <h3>End of ASP.NET Core Interview Preparation Guide</h3>
+            <p>Comprehensive coverage from beginner to expert level (4-13 years experience)</p>
+        </div>
+    </div>
+</body>
+</html>

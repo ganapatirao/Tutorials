@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Azure Interview Preparation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+        }
+        h1 {
+            color: #512bd4;
+            border-bottom: 4px solid #512bd4;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-left: 5px solid #512bd4;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .question {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .answer {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0 25px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        .important {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .tip {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #512bd4;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .toc {
+            background: #e7f3ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #512bd4;
+        }
+        .toc ol {
+            column-count: 2;
+        }
+        .toc li {
+            margin: 5px 0;
+        }
+        @media print {
+            body { background: white; }
+            .container { padding: 20px; }
+            .question { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .tip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .important { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        .page-break {
+            page-break-before: always;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Microsoft Azure Interview Preparation Guide</h1>
+        <p style="font-size: 18px; color: #666; margin-bottom: 30px;"><strong>Comprehensive Interview Preparation with In-Depth Concepts, Code Examples, and Best Practices</strong></p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>Azure Fundamentals</li>
+                <li>Azure Compute Services</li>
+                <li>Azure Storage</li>
+                <li>Azure Networking</li>
+                <li>Azure Database Services</li>
+                <li>Azure App Services</li>
+                <li>Azure Functions</li>
+                <li>Azure DevOps</li>
+                <li>Azure Security</li>
+                <li>Azure Monitoring</li>
+                <li>Azure Architecture Patterns</li>
+                <li>Azure Cost Management</li>
+                <li>Azure Hybrid Solutions</li>
+                <li>Common Interview Questions</li>
+            </ol>
+        </div>
+
+        <h2>1. Azure Fundamentals</h2>
+
+        <div class="question">
+            Q1: What is Microsoft Azure and what are its key features?
+        </div>
+        <div class="answer">
+            <p><strong>Microsoft Azure</strong> is a cloud computing platform with services including analytics, storage, and networking. It offers Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS).</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Global presence:</strong> Data centers in 60+ regions</li>
+                <li><strong>Hybrid cloud:</strong> Seamless on-premises integration</li>
+                <li><strong>Compliance:</strong> Industry-leading compliance certifications</li>
+                <li><strong>Scalability:</strong> Auto-scaling capabilities</li>
+                <li><strong>Security:</strong> Advanced security features</li>
+                <li><strong>Integration:</strong> Microsoft ecosystem integration</li>
+                <li><strong>Cost management:</strong> Flexible pricing models</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q2: What are the different Azure service models?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Model</th>
+                    <th>Description</th>
+                    <th>Examples</th>
+                </tr>
+                <tr>
+                    <td>IaaS</td>
+                    <td>Infrastructure as a Service</td>
+                    <td>Virtual Machines, Virtual Machine Scale Sets</td>
+                </tr>
+                <tr>
+                    <td>PaaS</td>
+                    <td>Platform as a Service</td>
+                    <td>App Service, Azure Functions, Azure SQL</td>
+                </tr>
+                <tr>
+                    <td>SaaS</td>
+                    <td>Software as a Service</td>
+                    <td>Office 365, Dynamics 365</td>
+                </tr>
+                <tr>
+                    <td>FaaS</td>
+                    <td>Function as a Service</td>
+                    <td>Azure Functions, Event Grid</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>2. Azure Compute Services</h2>
+
+        <div class="question">
+            Q3: What are the main Azure compute services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Azure Virtual Machines (VM):</strong> IaaS offering for Windows/Linux VMs</li>
+                <li><strong>Azure App Service:</strong> PaaS offering for web and mobile apps</li>
+                <li><strong>Azure Functions:</strong> Serverless compute</li>
+                <li><strong>Azure Kubernetes Service (AKS):</strong> Managed Kubernetes</li>
+                <li><strong>Azure Container Instances (ACI):</strong> Containerized applications</li>
+                <li><strong>Azure Batch:</strong> Large-scale parallel computing</li>
+                <li><strong>Azure Service Fabric:</strong> Distributed systems platform</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q4: What is the difference between Azure VM and App Service?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Azure VM</th>
+                    <th>Azure App Service</th>
+                </tr>
+                <tr>
+                    <td>Model</td>
+                    <td>IaaS</td>
+                    <td>PaaS</td>
+                </tr>
+                <tr>
+                    <td>Control</td>
+                    <td>Full control over OS</td>
+                    <td>Managed platform</td>
+                </tr>
+                <tr>
+                    <td>Maintenance</td>
+                    <td>Manual OS updates</td>
+                    <td>Automatic updates</td>
+                </tr>
+                <tr>
+                    <td>Scaling</td>
+                    <td>Manual or scale sets</td>
+                    <td>Auto-scaling</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Custom OS requirements</td>
+                    <td>Web/mobile apps</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>3. Azure Storage</h2>
+
+        <div class="question">
+            Q5: What are the different Azure storage types?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Storage Type</th>
+                    <th>Description</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td>Blob Storage</td>
+                    <td>Object storage for unstructured data</td>
+                    <td>Images, videos, documents</td>
+                </tr>
+                <tr>
+                    <td>Table Storage</td>
+                    <td>NoSQL key-value store</td>
+                    <td>Structured data, caching</td>
+                </tr>
+                <tr>
+                    <td>Queue Storage</td>
+                    <td>Message queue service</td>
+                    <td>Decoupling components</td>
+                </tr>
+                <tr>
+                    <td>File Storage</td>
+                    <td>Fully managed file shares</td>
+                    <td>Legacy apps, file sharing</td>
+                </tr>
+                <tr>
+                    <td>Disk Storage</td>
+                    <td>Block storage for VMs</td>
+                    <td>VM disks, databases</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q6: What is the difference between Blob storage tiers?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Hot tier:</strong> Frequently accessed data. Higher cost, lowest latency.</li>
+                <li><strong>Cool tier:</strong> Infrequently accessed data (30+ days). Lower cost, higher latency.</li>
+                <li><strong>Archive tier:</strong> Rarely accessed data (180+ days). Lowest cost, highest latency.</li>
+            </ul>
+            
+            <div class="important">
+                <strong>Important:</strong> Choose the appropriate tier based on access patterns to optimize costs. Data can be moved between tiers.
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>4. Azure Networking</h2>
+
+        <div class="question">
+            Q7: What are the key Azure networking services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Virtual Network (VNet):</strong> Isolated network in Azure</li>
+                <li><strong>Subnet:</strong> Segmentation within VNet</li>
+                <li><strong>VPN Gateway:</strong> Cross-premises connectivity</li>
+                <li><strong>ExpressRoute:</strong> Private, dedicated connection</li>
+                <li><strong>Load Balancer:</strong> Layer 4 load balancing</li>
+                <li><strong>Application Gateway:</strong> Layer 7 load balancing, WAF</li>
+                <li><strong>CDN:</strong> Content Delivery Network</li>
+                <li><strong>Traffic Manager:</strong> DNS-based traffic routing</li>
+                <li><strong>DNS:</strong> DNS hosting service</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q8: What is the difference between Load Balancer and Application Gateway?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Load Balancer</th>
+                    <th>Application Gateway</th>
+                </tr>
+                <tr>
+                    <td>Layer</td>
+                    <td>Layer 4 (Transport)</td>
+                    <td>Layer 7 (Application)</td>
+                </tr>
+                <tr>
+                    <td>Protocol</td>
+                    <td>TCP, UDP</td>
+                    <td>HTTP, HTTPS, WebSocket</td>
+                </tr>
+                <tr>
+                    <td>Features</td>
+                    <td>Basic load balancing</td>
+                    <td>WAF, SSL termination, URL routing</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Internal load balancing</td>
+                    <td>Web application traffic</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>5. Azure Database Services</h2>
+
+        <div class="question">
+            Q9: What are the main Azure database services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Azure SQL Database:</strong> Managed SQL Server database</li>
+                <li><strong>Azure Cosmos DB:</strong> Multi-model NoSQL database</li>
+                <li><strong>Azure Database for PostgreSQL:</strong> Managed PostgreSQL</li>
+                <li><strong>Azure Database for MySQL:</strong> Managed MySQL</li>
+                <li><strong>Azure Database for MariaDB:</strong> Managed MariaDB</li>
+                <li><strong>Azure Synapse Analytics:</strong> Data warehousing</li>
+                <li><strong>Azure Cache for Redis:</strong> In-memory cache</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q10: What is Azure Cosmos DB?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Cosmos DB</strong> is a globally distributed, multi-model database service. It offers:</p>
+            <ul>
+                <li><strong>Multi-model:</strong> SQL (Core API), MongoDB, Cassandra, Gremlin, Table</li>
+                <li><strong>Global distribution:</strong> Replicate data across regions</li>
+                <li><strong>Turnkey global distribution:</strong> Multi-master replication</li>
+                <li><strong>Low latency:</strong> Single-digit millisecond latency</li>
+                <li><strong>Automatic indexing:</strong> No schema required</li>
+                <li><strong>SLA:</strong> 99.999% availability SLA</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>6. Azure App Services</h2>
+
+        <div class="question">
+            Q11: What is Azure App Service?
+        </div>
+        <div class="answer">
+            <p><strong>Azure App Service</strong> is a fully managed platform for building, deploying, and scaling web apps and APIs.</p>
+            
+            <h3>App Service Plans:</h3>
+            <ul>
+                <li><strong>Free:</strong> Development and testing</li>
+                <li><strong>Shared:</strong> Low-cost, shared resources</li>
+                <li><strong>Basic:</strong> Production apps with auto-scale</li>
+                <li><strong>Standard:</strong> More powerful, staging slots</li>
+                <li><strong>Premium:</strong> Most powerful, VNET integration</li>
+            </ul>
+            
+            <h3>Deployment Slots:</h3>
+            <ul>
+                <li>Separate staging environments</li>
+                <li>Zero-downtime deployments</li>
+                <li>Swap with production</li>
+                <li>Available in Standard and Premium tiers</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>7. Azure Functions</h2>
+
+        <div class="question">
+            Q12: What is Azure Functions?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Functions</strong> is a serverless compute service that enables you to run event-triggered code without managing infrastructure.</p>
+            
+            <h3>Trigger Types:</h3>
+            <ul>
+                <li><strong>HTTP triggers:</strong> HTTP endpoints</li>
+                <li><strong>Timer triggers:</strong> Scheduled execution</li>
+                <li><strong>Blob triggers:</strong> Blob storage events</li>
+                <li><strong>Queue triggers:</strong> Queue messages</li>
+                <li><strong>Service Bus triggers:</strong> Service Bus messages</li>
+                <li><strong>Event Grid triggers:</strong> Event-driven</li>
+                <li><strong>Cosmos DB triggers:</strong> Database changes</li>
+            </ul>
+            
+            <div class="code-block">// C# Azure Function
+[FunctionName("HttpTrigger")]
+public static async Task<IActionResult> Run(
+    [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req,
+    ILogger log)
+{
+    log.LogInformation("C# HTTP trigger function processed a request.");
+    
+    string name = req.Query["name"];
+    
+    return name != null
+        ? (ActionResult)new OkObjectResult($"Hello, {name}")
+        : new BadRequestObjectResult("Please pass a name on the query string");
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>8. Azure DevOps</h2>
+
+        <div class="question">
+            Q13: What is Azure DevOps?
+        </div>
+        <div class="answer">
+            <p><strong>Azure DevOps</strong> is a suite of DevOps services for planning, developing, delivering, and maintaining applications.</p>
+            
+            <h3>Azure DevOps Services:</h3>
+            <ul>
+                <li><strong>Azure Boards:</strong> Project planning and tracking</li>
+                <li><strong>Azure Repos:</strong> Git repositories and code hosting</li>
+                <li><strong>Azure Pipelines:</strong> CI/CD pipelines</li>
+                <li><strong>Azure Test Plans:</strong> Manual and automated testing</li>
+                <li><strong>Azure Artifacts:</strong> Package management</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q14: What is the difference between Azure Pipelines and GitHub Actions?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Azure Pipelines</th>
+                    <th>GitHub Actions</th>
+                </tr>
+                <tr>
+                    <td>Integration</td>
+                    <td>Azure DevOps</td>
+                    <td>GitHub</td>
+                </tr>
+                <tr>
+                    <td>YAML Support</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>Marketplace</td>
+                    <td>Azure DevOps Marketplace</td>
+                    <td>GitHub Marketplace</td>
+                </tr>
+                <tr>
+                    <td>Free Tier</td>
+                    <td>Limited</td>
+                    <td>Generous</td>
+                </tr>
+                <tr>
+                    <td>Azure Integration</td>
+                    <td>Native</td>
+                    <td>Requires configuration</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>9. Azure Security</h2>
+
+        <div class="question">
+            Q15: What are the key Azure security services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Azure Active Directory (Azure AD):</strong> Identity and access management</li>
+                <li><strong>Azure Key Vault:</strong> Secure secrets management</li>
+                <li><strong>Azure Security Center:</strong> Security posture management</li>
+                <li><strong>Azure Firewall:</strong> Network security</li>
+                <li><strong>Azure DDoS Protection:</strong> DDoS mitigation</li>
+                <li><strong>Azure Information Protection:</strong> Data classification and protection</li>
+                <li><strong>Azure Sentinel:</strong> SIEM and security analytics</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q16: What is Azure Key Vault?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Key Vault</strong> is a cloud service for securely storing and accessing secrets, keys, and certificates.</p>
+            
+            <h3>Key Vault Features:</h3>
+            <ul>
+                <li><strong>Secrets:</strong> Store connection strings, API keys</li>
+                <li><strong>Keys:</strong> Encryption keys (RSA, EC)</li>
+                <li><strong>Certificates:</strong> SSL/TLS certificates</li>
+                <li><strong>Managed HSM:</strong> Hardware security module</li>
+                <li><strong>Soft Delete:</strong> Recovery capability</li>
+                <li><strong>Access Policies:</strong> Fine-grained access control</li>
+            </ul>
+            
+            <div class="code-block">// Access Key Vault from .NET
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+
+var client = new SecretClient(
+    new Uri("https://my-vault.vault.azure.net/"),
+    new DefaultAzureCredential());
+
+var secret = await client.GetSecretAsync("my-secret");
+Console.WriteLine(secret.Value.Value);</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>10. Azure Monitoring</h2>
+
+        <div class="question">
+            Q17: What are the Azure monitoring services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Azure Monitor:</strong> Centralized monitoring service</li>
+                <li><strong>Application Insights:</strong> Application performance monitoring</li>
+                <li><strong>Log Analytics:</strong> Log analysis and querying</li>
+                <li><strong>Azure Metrics:</strong> Performance metrics</li>
+                <li><strong>Azure Alerts:</strong> Alerting based on conditions</li>
+                <li><strong>Azure Network Watcher:</strong> Network monitoring</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q18: What is Application Insights?
+        </div>
+        <div class="answer">
+            <p><strong>Application Insights</strong> is an extensible Application Performance Management (APM) service for developers and DevOps professionals.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>Performance monitoring:</strong> Response times, dependencies</li>
+                <li><strong>Error tracking:</strong> Exceptions, failed requests</li>
+                <li><strong>User analytics:</strong> User sessions, page views</li>
+                <li><strong>Custom metrics:</strong> Business metrics</li>
+                <li><strong>Distributed tracing:</strong> End-to-end tracing</li>
+                <li><strong>Live metrics:</strong> Real-time monitoring</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>11. Common Interview Questions</h2>
+
+        <div class="question">
+            Q19: What is the difference between Azure Storage and Azure Files?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Azure Blob Storage:</strong> Object storage for unstructured data. Best for images, videos, documents.</li>
+                <li><strong>Azure Files:</strong> Fully managed file shares. Best for legacy applications, file sharing, SMB protocol.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q20: What is Azure Resource Manager (ARM)?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Resource Manager</strong> is the deployment and management service for Azure. It provides:</p>
+            <ul>
+                <li><strong>Declarative templates:</strong> Infrastructure as code</li>
+                <li><strong>Resource grouping:</strong> Logical grouping of resources</li>
+                <li><strong>Role-based access control:</strong> Security management</li>
+                <li><strong>Dependency management:</strong> Automatic dependency resolution</li>
+                <li><strong>Tagging:</strong> Resource organization and billing</li>
+            </ul>
+            
+            <div class="code-block">// ARM Template example
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2019-04-01",
+      "name": "[parameters('storageAccountName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Standard_LRS"
+      }
+    }
+  ]
+}</div>
+        </div>
+
+        <div class="question">
+            Q21: What is the difference between Azure AD B2C and Azure AD?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Azure AD</th>
+                    <th>Azure AD B2C</th>
+                </tr>
+                <tr>
+                    <td>Purpose</td>
+                    <td>Enterprise identity</td>
+                    <td>Consumer identity</td>
+                </tr>
+                <tr>
+                    <td>Users</td>
+                    <td>Employees, partners</td>
+                    <td>Customers, consumers</td>
+                </tr>
+                <tr>
+                    <td>Branding</td>
+                    <td>Limited</td>
+                    <td>Full customization</td>
+                </tr>
+                <tr>
+                    <td>Social Logins</td>
+                    <td>Limited</td>
+                    <td>Extensive (Google, Facebook, etc.)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q22: What is Azure Service Bus?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Service Bus</strong> is a fully managed enterprise integration message broker. It provides:</p>
+            <ul>
+                <li><strong>Queues:</strong> FIFO messaging</li>
+                <li><strong>Topics:</strong> Publish/subscribe messaging</li>
+                <li><strong>Reliable messaging:</strong> At-least-once, at-most-once, exactly-once</li>
+                <li><strong>Dead-letter queues:</strong> Failed message handling</li>
+                <li><strong>Message sessions:</strong> Message grouping</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q23: What is the difference between Azure Functions and Logic Apps?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Azure Functions</th>
+                    <th>Logic Apps</th>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>Code-based</td>
+                    <td>Low-code/no-code</td>
+                </tr>
+                <tr>
+                    <td>Focus</td>
+                    <td>Custom logic</td>
+                    <td>Workflow orchestration</td>
+                </tr>
+                <tr>
+                    <td>Integration</td>
+                    <td>Code-level</td>
+                    <td>200+ connectors</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Custom processing</td>
+                    <td>Business process automation</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q24: What is Azure Kubernetes Service (AKS)?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Kubernetes Service (AKS)</strong> is a managed Kubernetes service that simplifies deploying and managing containerized applications.</p>
+            
+            <h3>AKS Features:</h3>
+            <ul>
+                <li><strong>Managed control plane:</strong> Azure manages Kubernetes master</li>
+                <li><strong>Auto-scaling:</strong> Cluster and node auto-scaling</li>
+                <li><strong>Integration:</strong> Azure AD, Azure Monitor</li>
+                <li><strong>Updates:</strong> Automated cluster upgrades</li>
+                <li><strong>Node pools:</strong> Multiple node pools for different workloads</li>
+                <li><strong>Serverless:</strong> AKS virtual nodes</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q25: What is the difference between Azure SQL Database and SQL Server on Azure VM?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Azure SQL Database</th>
+                    <th>SQL Server on Azure VM</th>
+                </tr>
+                <tr>
+                    <td>Model</td>
+                    <td>PaaS</td>
+                    <td>IaaS</td>
+                </tr>
+                <tr>
+                    <td>Management</td>
+                    <td>Fully managed</td>
+                    <td>Self-managed</td>
+                </tr>
+                <tr>
+                    <td>Scaling</td>
+                    <td>Automatic</td>
+                    <td>Manual</td>
+                </tr>
+                <tr>
+                    <td>Features</td>
+                    <td>Managed features only</td>
+                    <td>Full SQL Server features</td>
+                </tr>
+                <tr>
+                    <td>Cost</td>
+                    <td>Pay per usage</td>
+                    <td>Pay for VM</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q26: What is Azure Traffic Manager?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Traffic Manager</strong> is a DNS-based traffic load balancer that distributes traffic to Azure services across global regions.</p>
+            
+            <h3>Traffic Routing Methods:</h3>
+            <ul>
+                <li><strong>Priority:</strong> Route to primary endpoint, failover to secondary</li>
+                <li><strong>Weighted:</strong> Distribute traffic based on weights</li>
+                <li><strong>Performance:</strong> Route to closest endpoint</li>
+                <li><strong>Geographic:</strong> Route based on user location</li>
+                <li><strong>Multi-value:</strong>Route to multiple endpoints</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q27: What is Azure CDN?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Content Delivery Network (CDN)</strong> is a global CDN solution for delivering high-bandwidth content to users worldwide.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>Global edge network:</strong> 100+ edge locations</li>
+                <li><strong>Caching:</strong> Static content caching</li>
+                <li><strong>Dynamic site acceleration:</strong> Dynamic content optimization</li>
+                <li><strong>SSL/TLS:</strong> Custom SSL certificates</li>
+                <li><strong>Rules engine:</strong> URL rewriting, caching rules</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q28: What is the difference between Azure SQL Database Single Database and Elastic Pool?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Single Database:</strong> Dedicated resources for a single database. Predictable performance. Good for production workloads.</li>
+                <li><strong>Elastic Pool:</strong> Shared resources across multiple databases. Cost-effective for multiple databases with variable usage patterns.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q29: What is Azure Event Grid?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Event Grid</strong> is a fully managed event routing service that enables event-driven architectures.</p>
+            
+            <h3>Features:</h>
+            <ul>
+                <li><strong>Event-based:</strong> Publish-subscribe model</li>
+                <li><strong>Reliable:</strong> At-least-once delivery</li>
+                <li><strong>Pay-per-event:</strong> Cost-effective</li>
+                <li><strong>Integration:</strong> 100+ Azure services</li>
+                <li><strong>Event domains:</strong> Tenant isolation</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q30: What is the difference between Azure AD and Azure AD B2C?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Azure AD:</strong> Identity and access management for enterprise applications. Focus on employee and partner identities.</li>
+                <li><strong>Azure AD B2C:</strong> Consumer identity management. Focus on customer identities with customizable branding and social logins.</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>11. Azure Architecture Patterns (Expert Level)</h2>
+
+        <div class="question">
+            Q31: What are common Azure architecture patterns?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Web-Queue-Worker:</strong> Decouple web tier from background processing using queues</li>
+                <li><strong>CQRS:</strong> Command Query Responsibility Segregation for read/write separation</li>
+                <li><strong>Event Sourcing:</strong> Store state as sequence of events</li>
+                <li><strong>Microservices:</strong> Small, independent services communicating via APIs</li>
+                <li><strong>N-Tier:</strong> Separation into presentation, application, and data layers</li>
+                <li><strong>Space-Based:</strong> Distributed caching for high scalability</li>
+                <li><strong>Leader Election:</strong> Coordinate distributed tasks</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q32: How do you implement a serverless architecture in Azure?
+        </div>
+        <div class="answer">
+            <div class="code-block"> Azure Functions + Azure Cosmos DB + Azure Service Bus
+// Function triggered by HTTP request
+module.exports = async function (context, req) {
+    const message = req.body;
+    
+    // Add message to Service Bus queue
+    context.bindings.outputQueue = message;
+    
+    context.res = {
+        status: 202,
+        body: "Message queued"
+    };
+};
+
+// Function triggered by Service Bus queue
+module.exports = async function (context, myQueueItem) {
+    // Process message and store in Cosmos DB
+    context.bindings.outputDocument = {
+        id: myQueueItem.id,
+        data: myQueueItem,
+        timestamp: new Date().toISOString()
+    };
+};
+
+// function.json bindings
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "serviceBus",
+      "direction": "out",
+      "name": "outputQueue",
+      "queueName": "messages"
+    }
+  ]
+}</div>
+        </div>
+
+        <div class="question">
+            Q33: What is Azure API Management?
+        </div>
+        <div class="answer">
+            <p><strong>Azure API Management (APIM)</strong> is a hybrid, multi-cloud API management platform for publishing, securing, transforming, and monitoring APIs.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>API Gateway:</strong> Single entry point for all APIs</li>
+                <li><strong>Security:</strong> OAuth 2.0, JWT validation, IP restrictions</li>
+                <li><strong>Throttling:</strong> Rate limiting and quotas</li>
+                <li><strong>Caching:</strong> Response caching for performance</li>
+                <li><strong>Transformation:</strong> Request/response transformation policies</li>
+                <li><strong>Analytics:</strong> API usage analytics and monitoring</li>
+                <li><strong>Developer Portal:</strong> Self-service API documentation</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q34: What is Azure Service Fabric?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Service Fabric</strong> is a distributed systems platform for deploying and managing microservices and containers.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Reliable Services:</strong> Stateful and stateless services</li>
+                <li><strong>Reliable Actors:</strong> Actor-based programming model</li>
+                <li><strong>Container Orchestration:</strong> Docker and Windows container support</li>
+                <li><strong>Auto-scaling:</strong> Automatic scaling based on metrics</li>
+                <li><strong>Rolling Upgrades:</strong> Zero-downtime deployments</li>
+                <li><strong>Service Discovery:</strong> Automatic service registration</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>12. Azure Cost Management (Expert Level)</h2>
+
+        <div class="question">
+            Q35: How do you optimize Azure costs?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Right-sizing:</strong> Choose appropriate VM sizes based on workload</li>
+                <li><strong>Reserved Instances:</strong> Commit to 1-3 years for significant discounts</li>
+                <li><strong>Spot Instances:</strong> Use unused capacity at up to 90% discount</li>
+                <li><strong>Auto-shutdown:</strong> Automatically shut down non-production resources</li>
+                <li><strong>Scaling:</strong> Scale down during off-peak hours</li>
+                <li><strong>Storage tiers:</strong> Use appropriate storage tiers (Hot, Cool, Archive)</li>
+                <li><strong>Azure Hybrid Benefit:</strong> Use on-premises Windows Server licenses</li>
+                <li><strong>Cost analysis:</strong> Monitor and analyze spending patterns</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q36: What is Azure Cost Management?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Cost Management</strong> is a suite of tools for monitoring, allocating, and optimizing Azure spending.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>Cost Analysis:</strong> View and analyze costs by resource, tag, or department</li>
+                <li><strong>Budgets:</strong> Set spending limits and alerts</li>
+                <li><strong>Recommendations:</strong> Get cost optimization recommendations</li>
+                <li><strong>Forecasting:</strong> Predict future spending</li>
+                <li><strong>Export data:</strong> Export cost data to external tools</li>
+                <li><strong>Policies:</strong> Enforce cost governance policies</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q37: What is Azure Pricing Calculator?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Pricing Calculator</strong> is a tool for estimating costs before deploying resources.</p>
+            
+            <h3>Usage:</h3>
+            <ul>
+                <li>Select services and configurations</li>
+                <li>Estimate monthly costs</li>
+                <li>Compare different regions</li>
+                <li>Export estimates to Excel</li>
+                <li>Share estimates with team</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>13. Azure Hybrid Solutions (Expert Level)</h2>
+
+        <div class="question">
+            Q38: What is Azure Stack?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Stack</strong> is an extension of Azure that brings Azure services to on-premises environments.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Consistent Azure experience:</strong> Same APIs and tools as Azure</li>
+                <li><strong>Hybrid cloud:</strong> Seamlessly connect Azure and on-premises</li>
+                <li><strong>Disconnected scenarios:</strong> Work without internet connectivity</li>
+                <li><strong>Compliance:</strong> Keep data in specific geographic locations</li>
+                <li><strong>Azure Stack Hub:</strong> Integrated system for datacenter deployment</li>
+                <li><strong>Azure Stack Edge:</strong> Edge computing device</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q39: What is Azure Arc?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Arc</strong> extends Azure management to on-premises, multi-cloud, and edge environments.</p>
+            
+            <h3>Capabilities:</h3>
+            <ul>
+                <li><strong>Arc-enabled servers:</strong> Manage Windows and Linux servers</li>
+                <li><strong>Arc-enabled Kubernetes:</strong> Manage Kubernetes clusters anywhere</li>
+                <li><strong>Arc-enabled data services:</strong> Run Azure data services on-premises</li>
+                <li><strong>Arc-enabled SQL:</strong> Manage SQL Server instances</li>
+                <li><strong>Unified management:</strong> Single pane of glass for all resources</li>
+                <li><strong>Policy enforcement:</strong> Apply Azure policies across environments</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q40: What is Azure ExpressRoute?
+        </div>
+        <div class="answer">
+            <p><strong>Azure ExpressRoute</strong> is a private connection between your on-premises network and Azure datacenters.</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li><strong>Private connection:</strong> Doesn't traverse public internet</li>
+                <li><strong>Higher reliability:</strong> 99.95% SLA</li>
+                <li><strong>Lower latency:</strong> Faster than internet connection</li>
+                <li><strong>Higher security:</strong> Isolated from public internet</li>
+                <li><strong>Consistent performance:</strong> Predictable bandwidth</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>14. Common Interview Questions (All Levels)</h2>
+
+        <div class="question">
+            Q41: What is the difference between Azure Storage Account types?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td>General-purpose v2</td>
+                    <td>All storage types (Blob, File, Queue, Table)</td>
+                    <td>Most scenarios</td>
+                </tr>
+                <tr>
+                    <td>BlockBlobStorage</td>
+                    <td>Premium block blobs</td>
+                    <td>High-performance workloads</td>
+                </tr>
+                <tr>
+                    <td>FileStorage</td>
+                    <td>Premium file shares</td>
+                    <td>SMB file shares</td>
+                </tr>
+                <tr>
+                    <td>BlobStorage</td>
+                    <td>Blob storage only</td>
+                    <td>Data lake, analytics</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q42: What is Azure Policy?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Policy</strong> is a service for creating, assigning, and managing policies to enforce rules and ensure compliance.</p>
+            
+            <h3>Key Concepts:</h3>
+            <ul>
+                <li><strong>Policy definitions:</strong> Rules for resources</li>
+                <li><strong>Policy assignments:</strong> Apply policies to scopes</li>
+                <li><strong>Policy parameters:</strong> Customize policy behavior</li>
+                <li><strong>Initiatives:</strong> Group of policies</li>
+                <li><strong>Compliance:</strong> Monitor policy compliance</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q43: What is Azure Blueprints?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Blueprints</strong> is a declarative way to orchestrate deployment of Azure resources and other artifacts.</p>
+            
+            <h3>Components:</h3>
+            <ul>
+                <li><strong>Resource groups:</strong> Organize resources</li>
+                <li><strong>ARM templates:</strong> Infrastructure as code</li>
+                <li><strong>Role assignments:</strong> Access control</li>
+                <li><strong>Policy assignments:</strong> Governance rules</li>
+                <li><strong>Azure RBAC:</strong> Role-based access control</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q44: What is Azure Resource Manager (ARM)?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Resource Manager (ARM)</strong> is the deployment and management service for Azure.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Declarative templates:</strong> Define desired state</li>
+                <li><strong>Idempotent deployments:</strong> Same result on repeated deployments</li>
+                <li><strong>Dependency management:</strong> Handle resource dependencies</li>
+                <li><strong>Rollback:</strong> Rollback on deployment failure</li>
+                <li><strong>Security:</strong> RBAC integration</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q45: What is Azure CLI vs Azure PowerShell?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Azure CLI</th>
+                    <th>Azure PowerShell</th>
+                </tr>
+                <tr>
+                    <td>Cross-platform</td>
+                    <td>Yes (Linux, Mac, Windows)</td>
+                    <td>Windows-focused</td>
+                </tr>
+                <tr>
+                    <td>Learning curve</td>
+                    <td>Lower</td>
+                    <td>Higher</td>
+                </tr>
+                <tr>
+                    <td>Output format</td>
+                    <td>JSON, TSV, Table</td>
+                    <td>Objects</td>
+                </tr>
+                <tr>
+                    <td>Scripting</td>
+                    <td>Bash, Python</td>
+                    <td>PowerShell</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q46: What is Azure DevOps?
+        </div>
+        <div class="answer">
+            <p><strong>Azure DevOps</strong> is a suite of DevOps services for planning, developing, delivering, and maintaining software.</p>
+            
+            <h3>Services:</h3>
+            <ul>
+                <li><strong>Azure Boards:</strong> Work tracking and project management</li>
+                <li><strong>Azure Repos:</strong> Git repositories and pull requests</li>
+                <li><strong>Azure Pipelines:</strong> CI/CD pipelines</li>
+                <li><strong>Azure Test Plans:</strong> Manual and automated testing</li>
+                <li><strong>Azure Artifacts:</strong> Package management</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q47: What is Azure Container Registry (ACR)?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Container Registry (ACR)</strong> is a managed Docker registry for storing and managing container images.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>Private registry:</strong> Secure image storage</li>
+                <li><strong>Geo-replication:</strong> Distribute images globally</li>
+                <li><strong>Image signing:</strong> Sign and verify images</li>
+                <li><strong>Webhooks:</strong> Trigger actions on image push</li>
+                <li><strong>Integration:</strong> Integrate with AKS, Azure DevOps</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q48: What is Azure Front Door?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Front Door</strong> is a global Application Delivery Network (ADN) and load balancer.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>Global load balancing:</strong> Distribute traffic across regions</li>
+                <li><strong>SSL termination:</strong> Offload SSL processing</li>
+                <li><strong>WAF integration:</strong> Web Application Firewall</li>
+                <li><strong>URL routing:</strong> Path-based routing</li>
+                <li><strong>Caching:</strong> Static content caching</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q49: What is Azure Bastion?
+        </div>
+        <div class="answer">
+            <p><strong>Azure Bastion</strong> is a fully managed PaaS service that provides secure RDP/SSH access to VMs.</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li><strong>No public IP:</strong> Access without exposing public IP</li>
+                <li><strong>Browser-based:</strong> Access via Azure portal</li>
+                <li><strong>Secure:</strong> TLS 1.2 encryption</li>
+                <li><strong>Centralized:</strong> Manage access centrally</li>
+                <li><strong>Azure AD integration:</strong> Use Azure AD for authentication</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q50: What are the best practices for Azure security?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Use Azure AD:</strong> Centralized identity management</li>
+                <li><strong>Implement MFA:</strong> Multi-factor authentication</li>
+                <li><strong>Use Key Vault:</strong> Securely store secrets</li>
+                <li><strong>Network security groups:</strong> Restrict network access</li>
+                <li><strong>Encryption:</strong> Encrypt data at rest and in transit</li>
+                <li><strong>Monitoring:</strong> Monitor and audit resources</li>
+                <li><strong>Patch management:</strong> Keep systems updated</li>
+                <li><strong>Least privilege:</strong> Use RBAC with minimal permissions</li>
+                <li><strong>Security Center:</strong> Use Azure Security Center for recommendations</li>
+                <li><strong>Backup:</strong> Implement backup and disaster recovery</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <strong>Interview Tip:</strong> When discussing Azure, emphasize understanding of service models (IaaS, PaaS, SaaS), networking concepts, security best practices, and cost optimization. Be prepared to discuss real-world scenarios and architecture decisions. For senior positions, demonstrate knowledge of hybrid solutions, cost management strategies, and advanced architecture patterns.
+        </div>
+
+        <div class="important">
+            <strong>Key Takeaways for Interview (Beginner to Expert):</strong>
+            <ul>
+                <li><strong>Beginner (0-3 years):</strong> Understand Azure service models (IaaS, PaaS, SaaS), know compute services (VM, App Service, Functions), understand storage options and tiers, know networking basics (VNet, Load Balancer), understand database services (SQL, Cosmos DB), know Azure AD basics.</li>
+                <li><strong>Intermediate (4-7 years):</strong> Understand ARM templates and IaC, know Azure DevOps services (Pipelines, Repos), implement monitoring with Azure Monitor, use Azure Key Vault for secrets, understand Azure Policy for governance, know App Service deployment slots, implement Azure Functions triggers and bindings.</li>
+                <li><strong>Advanced (8-10 years):</strong> Design serverless architectures with Functions and Event Grid, implement API Management for API gateway, use Service Fabric for microservices, implement Azure Security Center recommendations, optimize costs with Reserved Instances and Spot Instances, implement hybrid solutions with Azure Stack and ExpressRoute.</li>
+                <li><strong>Expert (11-13 years):</strong> Design complex hybrid architectures with Azure Arc, implement multi-region disaster recovery strategies, design cost optimization strategies at scale, implement advanced security with Zero Trust architecture, design enterprise-grade API strategies with APIM, implement Azure Policy and Blueprints for governance, design cloud migration strategies.</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 50px; padding: 20px; background: #512bd4; color: white; border-radius: 8px; text-align: center;">
+            <h3>End of Microsoft Azure Interview Preparation Guide</h3>
+            <p>Comprehensive coverage from beginner to expert level (4-13 years experience)</p>
+        </div>
+    </div>
+</body>
+</html>

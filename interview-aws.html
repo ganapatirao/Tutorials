@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Interview Preparation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+        }
+        h1 {
+            color: #ff9900;
+            border-bottom: 4px solid #ff9900;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-left: 5px solid #ff9900;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .question {
+            background: linear-gradient(135deg, #ff9900 0%, #ff7700 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .answer {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0 25px 0;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+        .important {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .tip {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #ff9900;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .toc {
+            background: #e7f3ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #ff9900;
+        }
+        .toc ol {
+            column-count: 2;
+        }
+        .toc li {
+            margin: 5px 0;
+        }
+        @media print {
+            body { background: white; }
+            .container { padding: 20px; }
+            .question { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .tip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .important { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        .page-break {
+            page-break-before: always;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AWS Interview Preparation Guide</h1>
+        <p style="font-size: 18px; color: #666; margin-bottom: 30px;"><strong>Comprehensive Interview Preparation with In-Depth Concepts, Code Examples, and Best Practices</strong></p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>AWS Fundamentals</li>
+                <li>AWS Compute Services</li>
+                <li>AWS Storage</li>
+                <li>AWS Networking</li>
+                <li>AWS Database Services</li>
+                <li>AWS Security</li>
+                <li>AWS Serverless</li>
+                <li>AWS DevOps</li>
+                <li>AWS Monitoring</li>
+                <li>AWS Architecture Patterns</li>
+                <li>AWS Cost Management</li>
+                <li>AWS Hybrid Solutions</li>
+                <li>Common Interview Questions</li>
+            </ol>
+        </div>
+
+        <h2>1. AWS Fundamentals</h2>
+
+        <div class="question">
+            Q1: What is AWS and what are its key features?
+        </div>
+        <div class="answer">
+            <p><strong>Amazon Web Services (AWS)</strong> is a comprehensive cloud platform offering over 200 fully featured services from data centers globally.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Global infrastructure:</strong> Regions, Availability Zones, Edge Locations</li>
+                <li><strong>Pay-as-you-go:</strong> Pay only for what you use</li>
+                <li><strong>Scalability:</strong> Auto-scaling capabilities</li>
+                <li><strong>Security:</strong> Shared responsibility model</li>
+                <li><strong>Reliability:</strong> 99.99% SLA for many services</li>
+                <li><strong>Flexibility:</strong> Wide range of services</li>
+                <li><strong>Ecosystem:</strong> Large partner network</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q2: What are the different AWS service models?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Model</th>
+                    <th>Description</th>
+                    <th>Examples</th>
+                </tr>
+                <tr>
+                    <td>IaaS</td>
+                    <td>Infrastructure as a Service</td>
+                    <td>EC2, EBS, VPC</td>
+                </tr>
+                <tr>
+                    <td>PaaS</td>
+                    <td>Platform as a Service</td>
+                    <td>Elastic Beanstalk, Lambda</td>
+                </tr>
+                <tr>
+                    <td>SaaS</td>
+                    <td>Software as a Service</td>
+                    <td>WorkSpaces, Chime</td>
+                </tr>
+                <tr>
+                    <td>FaaS</td>
+                    <td>Function as a Service</td>
+                    <td>Lambda, EventBridge</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>2. AWS Compute Services</h2>
+
+        <div class="question">
+            Q3: What are the main AWS compute services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>EC2 (Elastic Compute Cloud):</strong> Virtual servers in the cloud</li>
+                <li><strong>Lambda:</strong> Serverless compute</li>
+                <li><strong>Elastic Beanstalk:</strong> PaaS for web applications</li>
+                <li><strong>ECS (Elastic Container Service):</strong> Container orchestration</li>
+                <li><strong>EKS (Elastic Kubernetes Service):</strong> Managed Kubernetes</li>
+                <li><strong>Fargate:</strong> Serverless container compute</li>
+                <li><strong>Batch:</strong> Batch computing</li>
+                <li><strong>Auto Scaling:</strong> Automatic scaling of resources</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q4: What is the difference between EC2 and Lambda?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>EC2</th>
+                    <th>Lambda</th>
+                </tr>
+                <tr>
+                    <td>Model</td>
+                    <td>IaaS</td>
+                    <td>FaaS</td>
+                </tr>
+                <tr>
+                    <td>Pricing</td>
+                    <td>Per hour/second</td>
+                    <td>Per request + duration</td>
+                </tr>
+                <tr>
+                    <td>Scaling</td>
+                    <td>Manual or Auto Scaling</td>
+                    <td>Automatic</td>
+                </tr>
+                <tr>
+                    <td>Management</td>
+                    <td>OS management required</td>
+                    <td>No management</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Long-running processes</td>
+                    <td>Event-driven workloads</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>3. AWS Storage</h2>
+
+        <div class="question">
+            Q5: What are the different AWS storage services?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Service</th>
+                    <th>Description</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td>S3</td>
+                    <td>Object storage</td>
+                    <td>Images, videos, backups</td>
+                </tr>
+                <tr>
+                    <td>EBS</td>
+                    <td>Block storage</td>
+                    <td>EC2 volumes, databases</td>
+                </tr>
+                <tr>
+                    <td>EFS</td>
+                    <td>File storage</td>
+                    <td>Shared file systems</td>
+                </tr>
+                <tr>
+                    <td>S3 Glacier</td>
+                    <td>Archive storage</td>
+                    <td>Long-term archives</td>
+                </tr>
+                <tr>
+                    <td>Storage Gateway</td>
+                    <td>Hybrid storage</td>
+                    <td>On-premises integration</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q6: What are the different S3 storage classes?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Standard:</strong> Frequently accessed data</li>
+                <li><strong>Intelligent-Tiering:</strong> Automatic cost optimization</li>
+                <li><strong>Standard-IA:</strong> Infrequently accessed data</li>
+                <li><strong>One Zone-IA:</strong> Infrequently accessed, single AZ</li>
+                <li><strong>Glacier:</strong> Long-term archival (minutes retrieval)</li>
+                <li><strong>Glacier Deep Archive:</strong> Long-term archival (hours retrieval)</li>
+            </ul>
+            
+            <div class="important">
+                <strong>Important:</strong> Choose the appropriate storage class based on access patterns and cost requirements. S3 lifecycle policies can automatically move data between classes.
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>4. AWS Networking</h2>
+
+        <div class="question">
+            Q7: What are the key AWS networking services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>VPC (Virtual Private Cloud):</strong> Isolated network in AWS</li>
+                <li><strong>Subnet:</strong> Segmentation within VPC (public/private)</li>
+                <li><strong>Route Tables:</strong> Network routing rules</li>
+                <li><strong>Internet Gateway:</strong> Internet access for VPC</li>
+                <li><strong>NAT Gateway:</strong> Internet access for private subnets</li>
+                <li><strong>VPC Peering:</strong> Connect VPCs</li>
+                <li><strong>Direct Connect:</strong> Dedicated connection to AWS</li>
+                <li><strong>VPN:</strong> Site-to-site VPN</li>
+                <li><strong>ELB (Elastic Load Balancer):</strong> Load balancing</li>
+                <li><strong>CloudFront:</strong> CDN</li>
+                <li><strong>Route 53:</strong> DNS service</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q8: What is the difference between Application Load Balancer and Network Load Balancer?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>ALB</th>
+                    <th>NLB</th>
+                </tr>
+                <tr>
+                    <td>Layer</td>
+                    <td>Layer 7 (Application)</td>
+                    <td>Layer 4 (Transport)</td>
+                </tr>
+                <tr>
+                    <td>Protocol</td>
+                    <td>HTTP, HTTPS, WebSocket</td>
+                    <td>TCP, UDP, TLS</td>
+                </tr>
+                <tr>
+                    <td>Features</td>
+                    <td>Content-based routing, WAF</td>
+                    <td>High performance, static IP</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Web applications</td>
+                    <td>TCP/UDP traffic</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>5. AWS Database Services</h2>
+
+        <div class="question">
+            Q9: What are the main AWS database services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>RDS:</strong> Relational Database Service (SQL Server, MySQL, PostgreSQL, Oracle, MariaDB, Aurora)</li>
+                <li><strong>DynamoDB:</strong> NoSQL key-value and document database</li>
+                <li><strong>ElastiCache:</strong> In-memory cache (Redis, Memcached)</li>
+                <li><strong>Neptune:</strong> Graph database</li>
+                <li><strong>DocumentDB:</strong> MongoDB-compatible document database</li>
+                <li><strong>Keyspaces:</strong> Cassandra-compatible</li>
+                <li><strong>Redshift:</strong> Data warehousing</li>
+                <li><strong>TimeStream:</strong> Time series database</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q10: What is DynamoDB?
+        </div>
+        <div class="answer">
+            <p><strong>DynamoDB</strong> is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Key-value and document:</strong> Flexible data model</li>
+                <li><strong>Single-digit millisecond latency:</strong> Fast performance</li>
+                <li><strong>Automatic scaling:</strong> Handles traffic spikes</li>
+                <li><strong>Global tables:</strong> Multi-region replication</li>
+                <li><strong>DAX:</strong> In-memory acceleration</li>
+                <li><strong>TTL:</strong> Automatic data expiration</li>
+                <li><strong>Streams:</strong> Change data capture</li>
+            </ul>
+            
+            <div class="code-block">// DynamoDB example with AWS SDK
+import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
+
+const client = new DynamoDBClient({ region: "us-east-1" });
+
+const command = new PutItemCommand({
+  TableName: "Users",
+  Item: {
+    UserId: { S: "user123" },
+    Name: { S: "John Doe" },
+    Email: { S: "john@example.com" }
+  }
+});
+
+await client.send(command);</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>6. AWS Security</h2>
+
+        <div class="question">
+            Q11: What are the key AWS security services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>IAM (Identity and Access Management):</strong> Access control</li>
+                <li><strong>KMS (Key Management Service):</strong> Encryption keys</li>
+                <li><strong>Secrets Manager:</strong> Secrets management</li>
+                <li><strong>Shield:</strong> DDoS protection</li>
+                <li><strong>WAF (Web Application Firewall):</strong> Web application protection</li>
+                <li><strong>GuardDuty:</strong> Threat detection</li>
+                <li><strong>Security Hub:</strong> Security posture management</li>
+                <li><strong>Macie:</strong> Data classification</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q12: What is the Shared Responsibility Model?
+        </div>
+        <div class="answer">
+            <p>The <strong>Shared Responsibility Model</strong> defines security responsibilities between AWS and the customer.</p>
+            
+            <h3>AWS Responsibilities:</h3>
+            <ul>
+                <li>Physical security of data centers</li>
+                <li>Network infrastructure</li>
+                <li>Virtualization layer</li>
+                <li>Region and AZ security</li>
+            </ul>
+            
+            <h3>Customer Responsibilities:</h3>
+            <ul>
+                <li>Data encryption</li>
+                <li>Operating system security</li>
+                <li>Network configuration (VPC, security groups)</li>
+                <li>Identity and access management (IAM)</li>
+                <li>Application security</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>7. AWS Serverless</h2>
+
+        <div class="question">
+            Q13: What is AWS Lambda?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Lambda</strong> is a serverless compute service that runs code in response to events and automatically manages the underlying compute resources.</p>
+            
+            <h3>Trigger Types:</h3>
+            <ul>
+                <li><strong>S3:</strong> Object events</li>
+                <li><strong>DynamoDB Streams:</strong> Database changes</li>
+                <li><strong>Kinesis:</strong> Streaming data</li>
+                <li><strong>SNS:</strong> Pub/sub messaging</li>
+                <li><strong>SQS:</strong> Queue messages</li>
+                <li><strong>API Gateway:</strong> HTTP endpoints</li>
+                <li><strong>CloudWatch Events:</strong> Scheduled events</li>
+            </ul>
+            
+            <div class="code-block">// Node.js Lambda function
+exports.handler = async (event) => {
+  console.log('Event:', JSON.stringify(event, null, 2));
+  
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: 'Hello from Lambda!',
+      input: event
+    })
+  };
+  
+  return response;
+};</div>
+        </div>
+
+        <div class="question">
+            Q14: What is API Gateway?
+        </div>
+        <div class="answer">
+            <p><strong>AWS API Gateway</strong> is a fully managed service that makes it easy to create, publish, maintain, monitor, and secure APIs.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>REST APIs:</strong> RESTful API endpoints</li>
+                <li><strong>HTTP APIs:</strong> Low-latency REST APIs</li>
+                <li><strong>WebSocket APIs:</strong> Real-time communication</li>
+                <li><strong>Throttling:</strong> Request throttling</li>
+                <li><strong>Authorization:</strong> IAM, Cognito, Lambda authorizers</li>
+                <li><strong>Caching:</strong> API response caching</li>
+                <li><strong>Stage variables:</strong> Environment-specific configuration</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>8. AWS DevOps</h2>
+
+        <div class="question">
+            Q15: What are the AWS DevOps services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>CodeCommit:</strong> Git-based source control</li>
+                <li><strong>CodeBuild:</strong> Build service</li>
+                <li><strong>CodeDeploy:</strong> Deployment service</li>
+                <li><strong>CodePipeline:</strong> CI/CD orchestration</li>
+                <li><strong>CodeStar:</strong> Unified development experience</li>
+                <li><strong>CloudFormation:</strong> Infrastructure as code</li>
+                <li><strong>Terraform:</strong> IaC (third-party)</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q16: What is CloudFormation?
+        </div>
+        <div class="answer">
+            <p><strong>AWS CloudFormation</strong> is a service that helps you model and set up your Amazon Web Services resources so that you can spend less time managing those resources and more time focusing on your applications.</p>
+            
+            <h3>Key Concepts:</h3>
+            <ul>
+                <li><strong>Templates:</strong> JSON or YAML files describing resources</li>
+                <li><strong>Stacks:</strong> Collection of resources</li>
+                <li><strong>Change Sets:</strong> Preview changes before applying</li>
+                <li><strong>Drift Detection:</strong> Detect configuration drift</li>
+                <li><strong>Nested Stacks:</strong> Stack within a stack</li>
+            </ul>
+            
+            <div class="code-block">// CloudFormation template example
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MyBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: my-unique-bucket-name
+      
+  MyFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: nodejs14.x
+      Handler: index.handler
+      Code:
+        ZipFile: |
+          exports.handler = async (event) => {
+            return 'Hello';
+          }
+      Role: !GetAtt MyRole.Arn</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>9. AWS Monitoring</h2>
+
+        <div class="question">
+            Q17: What are the AWS monitoring services?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>CloudWatch:</strong> Monitoring and observability</li>
+                <li><strong>X-Ray:</strong> Distributed tracing</li>
+                <li><strong>VPC Flow Logs:</strong> Network traffic logging</li>
+                <li><strong>AWS Config:</strong> Configuration tracking</li>
+                <li><strong>CloudTrail:</strong> API call logging</li>
+                <li><strong>Trusted Advisor:</strong> Best practices recommendations</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q18: What is CloudWatch?
+        </div>
+        <div class="answer">
+            <p><strong>Amazon CloudWatch</strong> is a monitoring and observability service built for DevOps engineers, developers, site reliability engineers (SREs), and IT managers.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>Metrics:</strong> Performance metrics</li>
+                <li><strong>Logs:</strong> Log aggregation and analysis</li>
+                <li><strong>Alarms:</strong> Alerting based on metrics</li>
+                <li><strong>Events:</strong> Event-driven architecture</li>
+                <li><strong>Dashboards:</strong> Visualizations</li>
+                <li><strong>Synthetics:</strong> Canary testing</li>
+                <li><strong>RUM:</strong> Real user monitoring</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>10. Common Interview Questions</h2>
+
+        <div class="question">
+            Q19: What is the difference between S3 and EBS?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>S3:</strong> Object storage, unlimited size, accessible from anywhere, pay per GB/month. Best for static assets, backups.</li>
+                <li><strong>EBS:</strong> Block storage, attached to EC2, limited size per volume, pay per GB/month + IOPS. Best for OS, databases.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q20: What is the difference between public and private subnets?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Public subnet:</strong> Has route to Internet Gateway. Resources can access internet directly. Used for web servers, load balancers.</li>
+                <li><strong>Private subnet:</strong> No route to Internet Gateway. Resources access internet via NAT Gateway. Used for databases, application servers.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q21: What is the difference between NAT Gateway and Internet Gateway?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Internet Gateway</th>
+                    <th>NAT Gateway</th>
+                </tr>
+                <tr>
+                    <td>Direction</td>
+                    <td>Bidirectional</td>
+                    <td>Outbound only</td>
+                </tr>
+                <tr>
+                    <td>Subnet</td>
+                    <td>Public subnets</td>
+                    <td>Private subnets</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Internet access for public resources</td>
+                    <td>Internet access for private resources</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q22: What is the difference between Spot Instances and Reserved Instances?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Spot Instances</th>
+                    <th>Reserved Instances</th>
+                </tr>
+                <tr>
+                    <td>Pricing</td>
+                    <td>Up to 90% discount</td>
+                    <td>Up to 75% discount</td>
+                </tr>
+                <tr>
+                    <td>Reliability</td>
+                    <td>Can be interrupted</td>
+                    <td>Guaranteed capacity</td>
+                </tr>
+                <tr>
+                    <td>Term</td>
+                    <td>No term</td>
+                    <td>1 or 3 year term</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Fault-tolerant workloads</td>
+                    <td>Steady-state workloads</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q23: What is the difference between RDS and DynamoDB?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>RDS</th>
+                    <th>DynamoDB</th>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>Relational</td>
+                    <td>NoSQL</td>
+                </tr>
+                <tr>
+                    <td>Schema</td>
+                    <td>Fixed schema</td>
+                    <td>Schema-less</td>
+                </tr>
+                <tr>
+                    <td>Scaling</td>
+                    <td>Vertical scaling</td>
+                    <td>Horizontal scaling</td>
+                </tr>
+                <tr>
+                    <td>Consistency</td>
+                    <td>ACID</td>
+                    <td>Eventual consistency (default)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q24: What is the difference between SQS and SNS?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>SQS</th>
+                    <th>SNS</th>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>Message queue</td>
+                    <td>Pub/sub</td>
+                </tr>
+                <tr>
+                    <td>Pattern</td>
+                    <td>Point-to-point</td>
+                    <td>Fan-out</td>
+                </tr>
+                <tr>
+                    <td>Retention</td>
+                    <td>Up to 14 days</td>
+                    <td>Immediate delivery</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Decoupling, buffering</td>
+                    <td>Broadcasting, notifications</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q25: What is the difference between CloudFront and ELB?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>CloudFront:</strong> Global CDN that caches content at edge locations. Reduces latency for static content.</li>
+                <li><strong>ELB:</strong> Load balancer that distributes traffic across multiple targets in a region. Provides health checks and scaling.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q26: What is the difference between IAM role and IAM user?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>IAM User:</strong> Represents a person or application. Has long-term credentials (access keys, password). Used for programmatic access or console access.</li>
+                <li><strong>IAM Role:</strong> Temporary credentials. Used by AWS services or applications to assume permissions. No long-term credentials.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q27: What is the difference between ECS and EKS?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>ECS</th>
+                    <th>EKS</th>
+                </tr>
+                <tr>
+                    <td>Orchestrator</td>
+                    <td>AWS proprietary</td>
+                    <td>Kubernetes</td>
+                </tr>
+                <tr>
+                    <td>Portability</td>
+                    <td>AWS only</td>
+                    <td>Portable</td>
+                </tr>
+                <tr>
+                    <td>Ecosystem</td>
+                    <td>AWS ecosystem</td>
+                    <td>Kubernetes ecosystem</td>
+                </tr>
+                <tr>
+                    <td>Learning Curve</td>
+                    <td>Lower</td>
+                    <td>Higher</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q28: What is the difference between Kinesis and SQS?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Kinesis:</strong> Streaming data service. Real-time processing. Ordered data. Good for analytics, real-time processing.</li>
+                <li><strong>SQS:</strong> Message queue service. Decoupling. No order guarantee. Good for buffering, task queues.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q29: What is the difference between CloudTrail and CloudWatch?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>CloudTrail:</strong> Logs API calls for auditing and compliance. Who did what and when. Focus on security and compliance.</li>
+                <li><strong>CloudWatch:</strong> Monitoring and observability. Metrics, logs, alarms. Focus on operational health and performance.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q30: What is the difference between Elastic IP and Public IP?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Public IP:</strong> Dynamic IP assigned to instance. Changes when instance is stopped/started. Free while instance is running.</li>
+                <li><strong>Elastic IP:</strong> Static IP that you own. Can be remapped to different instances. Charged when not attached to running instance.</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>10. AWS Architecture Patterns (Expert Level)</h2>
+
+        <div class="question">
+            Q31: What are common AWS architecture patterns?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Serverless:</strong> Lambda + API Gateway + DynamoDB</li>
+                <li><strong>Microservices:</strong> ECS/EKS + Service Discovery</li>
+                <li><strong>Event-driven:</strong> EventBridge + Lambda + SQS/SNS</li>
+                <li><strong>Multi-tier:</strong> Web tier + App tier + Database tier</li>
+                <li><strong>Hybrid:</strong> Direct Connect + VPN + AWS Storage Gateway</li>
+                <li><strong>High availability:</strong> Multi-AZ + Auto Scaling + Route53</li>
+                <li><strong>Disaster recovery:</strong> Multi-region + S3 cross-region replication</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q32: How do you implement a serverless architecture in AWS?
+        </div>
+        <div class="answer">
+            <div class="code-block"> Lambda function
+import json
+
+def lambda_handler(event, context):
+    # Process event
+    response = {
+        'statusCode': 200,
+        'body': json.dumps({'message': 'Hello from Lambda!'})
+    }
+    return response
+
+// SAM template
+Resources:
+  MyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.lambda_handler
+      Runtime: python3.9
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+
+  MyTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: MyTable
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST</div>
+        </div>
+
+        <div class="question">
+            Q33: What is AWS Well-Architected Framework?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Well-Architected Framework</strong> provides best practices for designing and operating reliable, secure, efficient, and cost-effective systems.</p>
+            
+            <h3>Six Pillars:</h3>
+            <ul>
+                <li><strong>Operational Excellence:</strong> Operations, monitoring, automation</li>
+                <li><strong>Security:</strong> Identity, data protection, infrastructure protection</li>
+                <li><strong>Reliability:</strong> Recovery, scalability, distributed systems</li>
+                <li><strong>Performance Efficiency:</strong> Selection, review, monitoring, trade-offs</li>
+                <li><strong>Cost Optimization:</strong> Cost-awareness, optimization, resource management</li>
+                <li><strong>Sustainability:</strong> Reduce environmental impact</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q34: What is AWS Step Functions?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Step Functions</strong> is a serverless orchestration service that lets you coordinate distributed applications using visual workflows.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Visual workflows:</strong> State machine definition</li>
+                <li><strong>Integration:</strong> 200+ AWS service integrations</li>
+                <li><strong>Error handling:</strong> Built-in retry and catch</li>
+                <li><strong>Parallel execution:</strong> Parallel and dynamic parallel</li>
+                <li><strong>Serverless:</strong> No infrastructure to manage</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>11. AWS Cost Management (Expert Level)</h2>
+
+        <div class="question">
+            Q35: How do you optimize AWS costs?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Right-sizing:</strong> Choose appropriate instance types</li>
+                <li><strong>Reserved Instances:</strong> Commit to 1-3 years for discounts</li>
+                <li><strong>Savings Plans:</strong> Flexible pricing model for compute</li>
+                <li><strong>Spot Instances:</strong> Use unused capacity at up to 90% discount</li>
+                <li><strong>Auto-scaling:</strong> Scale down during off-peak hours</li>
+                <li><strong>S3 lifecycle policies:</strong> Move data to cheaper storage tiers</li>
+                <li><strong>EBS snapshots:</strong> Delete old snapshots</li>
+                <li><strong>Cost allocation tags:</strong> Track costs by department/project</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q36: What is AWS Cost Explorer?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Cost Explorer</strong> is a tool for visualizing, understanding, and managing your AWS costs and usage.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>Cost analysis:</strong> View costs by service, region, tag</li>
+                <li><strong>Forecasting:</strong> Predict future spending</li>
+                <li><strong>Anomalies:</strong> Detect unusual spending patterns</li>
+                <li><strong>Recommendations:</strong> Get cost optimization recommendations</li>
+                <li><strong>Reports:</strong> Generate custom reports</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q37: What is AWS Budgets?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Budgets</strong> allows you to set custom budgets that alert you when your costs or usage exceed your thresholds.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>Cost budgets:</strong> Set spending limits</li>
+                <li><strong>Usage budgets:</strong> Set usage limits</li>
+                <li><strong>Alerts:</strong> Email and SNS notifications</li>
+                <li><strong>Actions:</strong> Automate responses to budget breaches</li>
+                <li><strong>Forecasting:</strong> Include forecasted costs</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>12. AWS Hybrid Solutions (Expert Level)</h2>
+
+        <div class="question">
+            Q38: What is AWS Direct Connect?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Direct Connect</strong> is a dedicated network connection between your on-premises network and AWS.</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li><strong>Consistent performance:</strong> Lower latency and jitter</li>
+                <li><strong>Higher bandwidth:</strong> Up to 100 Gbps</li>
+                <li><strong>Private connection:</strong> Doesn't traverse public internet</li>
+                <li><strong>Cost savings:</strong> Reduced data transfer costs</li>
+                <li><strong>Security:</strong> Private, encrypted connection</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q39: What is AWS Storage Gateway?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Storage Gateway</strong> is a hybrid cloud storage service that connects on-premises applications with cloud storage.</p>
+            
+            <h3>Types:</h3>
+            <ul>
+                <li><strong>File Gateway:</strong> NFS/SMB file share to S3</li>
+                <li><strong>Volume Gateway:</strong> iSCSI block storage to S3/EBS</li>
+                <li><strong>Tape Gateway:</strong> Virtual tape library to S3/Glacier</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q40: What is AWS Outposts?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Outposts</strong> is a fully managed service that extends AWS infrastructure, services, APIs, and tools to customer premises.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Consistent AWS experience:</strong> Same APIs and services</li>
+                <li><strong>Low latency:</strong> On-premises for latency-sensitive workloads</li>
+                <li><strong>Data residency:</strong> Keep data on-premises</li>
+                <li><strong>Hybrid cloud:</strong> Seamless integration with AWS</li>
+                <li><strong>Managed service:</strong> AWS manages hardware and software</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>13. Common Interview Questions (All Levels)</h2>
+
+        <div class="question">
+            Q41: What is the difference between S3 storage classes?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Class</th>
+                    <th>Use Case</th>
+                    <th>Cost</th>
+                </tr>
+                <tr>
+                    <td>Standard</td>
+                    <td>Frequently accessed data</td>
+                    <td>Higher</td>
+                </tr>
+                <tr>
+                    <td>Intelligent-Tiering</td>
+                    <td>Unknown access patterns</td>
+                    <td>Medium</td>
+                </tr>
+                <tr>
+                    <td>Standard-IA</td>
+                    <td>Infrequently accessed data</td>
+                    <td>Lower</td>
+                </tr>
+                <tr>
+                    <td>One Zone-IA</td>
+                    <td>Infrequently accessed, single AZ</td>
+                    <td>Lowest</td>
+                </tr>
+                <tr>
+                    <td>Glacier</td>
+                    <td>Long-term archival</td>
+                    <td>Very low</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q42: What is AWS Organizations?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Organizations</strong> is a service for consolidating multiple AWS accounts into an organization that you create and centrally manage.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>Consolidated billing:</strong> Single payment for all accounts</li>
+                <li><strong>Organizational Units (OUs):</strong> Group accounts</li>
+                <li><strong>Service Control Policies (SCPs):</strong> Control access across accounts</li>
+                <li><strong>Account management:</strong> Create and manage accounts</li>
+                <li><strong>Tag policies:</strong> Enforce consistent tagging</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q43: What is AWS CloudFormation?
+        </div>
+        <div class="answer">
+            <p><strong>AWS CloudFormation</strong> is a service for infrastructure as code (IaC) that lets you model and provision AWS resources.</p>
+            
+            <h3>Key Concepts:</h3>
+            <ul>
+                <li><strong>Templates:</strong> JSON or YAML resource definitions</li>
+                <li><strong>Stacks:</strong> Collection of resources</li>
+                <li><strong>Change sets:</strong> Preview changes before applying</li>
+                <li><strong>Drift detection:</strong> Detect configuration drift</li>
+                <li><strong>Nested stacks:</strong> Reusable template components</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q44: What is AWS CDK vs CloudFormation?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>CloudFormation</th>
+                    <th>CDK</th>
+                </tr>
+                <tr>
+                    <td>Language</td>
+                    <td>JSON/YAML</td>
+                    <td>TypeScript, Python, Java, etc.</td>
+                </tr>
+                <tr>
+                    <td>Abstraction</td>
+                    <td>Low-level</td>
+                    <td>High-level constructs</td>
+                </tr>
+                <tr>
+                    <td>Testing</td>
+                    <td>Limited</td>
+                    <td>Unit testing support</td>
+                </tr>
+                <tr>
+                    <td>Learning curve</td>
+                    <td>Lower</td>
+                    <td>Higher</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q45: What is AWS CodePipeline?
+        </div>
+        <div class="answer">
+            <p><strong>AWS CodePipeline</strong> is a fully managed continuous integration and continuous delivery (CI/CD) service.</p>
+            
+            <h3>Stages:</h3>
+            <ul>
+                <li><strong>Source:</strong> CodeCommit, GitHub, Bitbucket</li>
+                <li><strong>Build:</strong> CodeBuild, Jenkins</li>
+                <li><strong>Test:</strong> CodeBuild, third-party tools</li>
+                <li><strong>Deploy:</strong> CodeDeploy, ECS, Lambda, S3</li>
+                <li><strong>Approval:</strong> Manual approval stages</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q46: What is AWS ECR?
+        </div>
+        <div class="answer">
+            <p><strong>Amazon Elastic Container Registry (ECR)</strong> is a fully managed Docker container registry.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>Private registry:</strong> Secure image storage</li>
+                <li><strong>Image scanning:</strong> Vulnerability scanning</li>
+                <li><strong>Lifecycle policies:</strong> Auto-delete old images</li>
+                <li><strong>Cross-region replication:</strong> Replicate images across regions</li>
+                <li><strong>Integration:</strong> ECS, EKS, CodeBuild</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q47: What is AWS Global Accelerator?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Global Accelerator</strong> is a service that improves the availability and performance of your applications with static IP addresses.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>Static IP addresses:</strong> Fixed IPs for your applications</li>
+                <li><strong>Global network:</strong> AWS global network backbone</li>
+                <li><strong>Health checks:</strong> Automatic failover</li>
+                <li><strong>Traffic steering:</strong> Route traffic to closest endpoint</li>
+                <li><strong>DNS independence:</strong> No DNS changes needed</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q48: What is AWS WAF?
+        </div>
+        <div class="answer">
+            <p><strong>AWS WAF (Web Application Firewall)</strong> protects web applications from common web exploits.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li><strong>Rules:</strong> Define custom rules for traffic filtering</li>
+                <li><strong>Managed rules:</strong> Pre-configured rule groups</li>
+                <li><strong>Bot control:</strong> Block malicious bots</li>
+                <li><strong>Rate limiting:</strong> Limit request rates</li>
+                <li><strong>Integration:</strong> CloudFront, ALB, API Gateway</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q49: What is AWS Shield?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Shield</strong> is a managed Distributed Denial of Service (DDoS) protection service.</p>
+            
+            <h3>Tiers:</h3>
+            <ul>
+                <li><strong>Shield Standard:</strong> Automatic protection at no extra cost</li>
+                <li><strong>Shield Advanced:</strong> Advanced protection with DDoS Response Team (DRT)</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q50: What are the best practices for AWS security?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Use IAM roles:</strong> Avoid long-term credentials</li>
+                <li><strong>Enable MFA:</strong> Multi-factor authentication for root and IAM users</li>
+                <li><strong>Least privilege:</strong> Grant minimum required permissions</li>
+                <li><strong>Encrypt data:</strong> Use KMS for encryption at rest and in transit</li>
+                <li><strong>Network security:</strong> Use security groups and NACLs</li>
+                <li><strong>Enable CloudTrail:</strong> Log all API calls</li>
+                <li><strong>Use GuardDuty:</strong> Threat detection</li>
+                <li><strong>Security Hub:</strong> Centralized security management</li>
+                <li><strong>Patch management:</strong> Keep systems updated</li>
+                <li><strong>Backup:</strong> Implement backup and disaster recovery</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <strong>Interview Tip:</strong> When discussing AWS, emphasize understanding of the shared responsibility model, service selection based on use cases, cost optimization strategies, and security best practices. Be prepared to discuss real-world architectures and design decisions. For senior positions, demonstrate knowledge of hybrid solutions, cost management strategies, and advanced architecture patterns.
+        </div>
+
+        <div class="important">
+            <strong>Key Takeaways for Interview (Beginner to Expert):</strong>
+            <ul>
+                <li><strong>Beginner (0-3 years):</strong> Understand AWS service models (IaaS, PaaS, SaaS), know compute services (EC2, Lambda), understand storage options (S3, EBS), know networking basics (VPC, subnets, security groups), understand database services (RDS, DynamoDB), know IAM basics.</li>
+                <li><strong>Intermediate (4-7 years):</strong> Understand CloudFormation and IaC, know DevOps services (CodePipeline, CodeBuild), implement monitoring with CloudWatch, use KMS for encryption, understand VPC peering and VPN, implement Lambda triggers and API Gateway, know S3 lifecycle policies.</li>
+                <li><strong>Advanced (8-10 years):</strong> Design serverless architectures with Lambda and EventBridge, implement ECS/EKS for container orchestration, use Step Functions for workflow orchestration, implement AWS Security Hub and GuardDuty, optimize costs with Reserved Instances and Savings Plans, implement hybrid solutions with Direct Connect and Storage Gateway.</li>
+                <li><strong>Expert (11-13 years):</strong> Design multi-region architectures for disaster recovery, implement complex hybrid solutions with Outposts, design cost optimization strategies at scale, implement Zero Trust architecture with AWS services, design enterprise-grade landing zones with Organizations and Control Tower, implement advanced networking with Transit Gateway, design cloud migration strategies.</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 50px; padding: 20px; background: #ff9900; color: white; border-radius: 8px; text-align: center;">
+            <h3>End of AWS Interview Preparation Guide</h3>
+            <p>Comprehensive coverage from beginner to expert level (4-13 years experience)</p>
+        </div>
+    </div>
+</body>
+</html>
