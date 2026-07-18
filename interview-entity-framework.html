@@ -60,15 +60,45 @@
             border-left: 4px solid #28a745;
         }
         .code-block {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 8px;
+            background: #2d2d2d;
+            color: #e0e0e0;
+            padding: 25px;
+            border-radius: 12px;
             overflow-x: auto;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 13px;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
             margin: 15px 0;
-            line-height: 1.5;
+            line-height: 1.7;
+            border-left: 4px solid #512bd4;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .code-block::before {
+            content: '';
+            display: block;
+            margin-bottom: 10px;
+        }
+        .code-block .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        .code-block .keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+        .code-block .string {
+            color: #ce9178;
+        }
+        .code-block .function {
+            color: #dcdcaa;
+        }
+        .code-block .number {
+            color: #b5cea8;
+        }
+        .code-block .variable {
+            color: #9cdcfe;
+        }
+        .code-block .type {
+            color: #4ec9b0;
         }
         .important {
             background: #fff3cd;
@@ -3341,6 +3371,955 @@ public partial class MigrateData : Migration
             UPDATE Products
             SET NewColumn = OldColumn
             WHERE NewColumn IS NULL");
+    }
+}</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>15. Advanced Topics (4-13 Years Experience)</h2>
+
+        <div class="question">
+            Q51: How do you implement bulk operations efficiently in EF Core?
+        </div>
+        <div class="answer">
+            <p><strong>Bulk operations</strong> are essential for performance when dealing with large datasets.</p>
+            
+            <div class="code-block">// Using EF Core Bulk Extensions
+using EFCore.BulkExtensions;
+
+// Bulk insert
+var products = new List&lt;Product&gt;();
+// ... populate products
+
+await context.BulkInsertAsync(products);
+
+// Bulk update
+await context.BulkUpdateAsync(products);
+
+// Bulk delete
+await context.BulkDeleteAsync(products);
+
+// Custom bulk configuration
+await context.BulkInsertAsync(products, new BulkConfig
+{
+    BatchSize = 5000,
+    SqlBulkCopyOptions = SqlBulkCopyOptions.CheckConstraints,
+    SetOutputIdentity = true,
+    CalculateStats = true
+});
+
+// Manual bulk insert with raw SQL
+var sql = @"
+    INSERT INTO Products (Name, Price, CategoryId)
+    VALUES (@Name, @Price, @CategoryId)";
+
+await context.Database.ExecuteSqlRawAsync(sql, parameters);
+
+// Split large operations into batches
+public async Task BulkInsertAsync&lt;T&gt;(IEnumerable&lt;T&gt; entities, int batchSize = 1000)
+{
+    var batches = entities.Batch(batchSize);
+    
+    foreach (var batch in batches)
+    {
+        await context.BulkInsertAsync(batch.ToList());
+        await context.SaveChangesAsync();
+    }
+}</div>
+            
+            <div class="important">
+                <strong>Important:</strong> For very large datasets, consider using bulk copy operations (SqlBulkCopy) or bulk extension libraries for better performance.
+            </div>
+        </div>
+
+        <div class="question">
+            Q52: How do you implement the Specification pattern with EF Core?
+        </div>
+        <div class="answer">
+            <p><strong>Specification pattern</strong> encapsulates business rules and query logic.</p>
+            
+            <div class="code-block">// Specification interface
+public interface ISpecification&lt;T&gt;
+{
+    Expression&lt;Func&lt;T, bool&gt;&gt; ToExpression();
+    bool IsSatisfiedBy(T entity);
+}
+
+// Base specification
+public abstract class Specification&lt;T&gt; : ISpecification&lt;T&gt;
+{
+    public abstract Expression&lt;Func&lt;T, bool&gt;&gt; ToExpression();
+    
+    public bool IsSatisfiedBy(T entity)
+    {
+        var predicate = ToExpression();
+        return predicate.Compile()(entity);
+    }
+}
+
+// Concrete specifications
+public class ActiveProductSpecification : Specification&lt;Product&gt;
+{
+    public override Expression&lt;Func&lt;Product, bool&gt;&gt; ToExpression()
+    {
+        return p => !p.IsDeleted && p.IsActive;
+    }
+}
+
+public class ExpensiveProductSpecification : Specification&lt;Product&gt;
+{
+    private readonly decimal _minPrice;
+    
+    public ExpensiveProductSpecification(decimal minPrice)
+    {
+        _minPrice = minPrice;
+    }
+    
+    public override Expression&lt;Func&lt;Product, bool&gt;&gt; ToExpression()
+    {
+        return p => p.Price >= _minPrice;
+    }
+}
+
+// Composite specification (AND)
+public class AndSpecification&lt;T&gt; : Specification&lt;T&gt;
+{
+    private readonly ISpecification&lt;T&gt; _left;
+    private readonly ISpecification&lt;T&gt; _right;
+    
+    public AndSpecification(ISpecification&lt;T&gt; left, ISpecification&lt;T&gt; right)
+    {
+        _left = left;
+        _right = right;
+    }
+    
+    public override Expression&lt;Func&lt;T, bool&gt;&gt; ToExpression()
+    {
+        var leftExpr = _left.ToExpression();
+        var rightExpr = _right.ToExpression();
+        
+        var parameter = Expression.Parameter(typeof(T));
+        var leftBody = Expression.Invoke(leftExpr, parameter);
+        var rightBody = Expression.Invoke(rightExpr, parameter);
+        
+        return Expression.Lambda&lt;Func&lt;T, bool&gt;&gt;(
+            Expression.AndAlso(leftBody, rightBody),
+            parameter
+        );
+    }
+}
+
+// Repository with specification
+public async Task&lt;IEnumerable&lt;T&gt;&gt; FindAsync(ISpecification&lt;T&gt; specification)
+{
+    var query = context.Set&lt;T&gt;().Where(specification.ToExpression());
+    return await query.ToListAsync();
+}
+
+// Usage
+var spec = new AndSpecification&lt;Product&gt;(
+    new ActiveProductSpecification(),
+    new ExpensiveProductSpecification(100)
+);
+
+var products = await repository.FindAsync(spec);</div>
+        </div>
+
+        <div class="question">
+            Q53: How do you implement audit trails with EF Core?
+        </div>
+        <div class="answer">
+            <p><strong>Audit trails</strong> track changes to entities for compliance and debugging.</p>
+            
+            <div class="code-block">// Audit entity
+public class Audit
+{
+    public int Id { get; set; }
+    public string TableName { get; set; }
+    public string RecordId { get; set; }
+    public string Action { get; set; } // Insert, Update, Delete
+    public string ChangedBy { get; set; }
+    public DateTime ChangedAt { get; set; }
+    public string OldValues { get; set; } // JSON
+    public string NewValues { get; set; } // JSON
+}
+
+// Audit configuration
+public class AuditConfiguration : IEntityTypeConfiguration&lt;Audit&gt;
+{
+    public void Configure(EntityTypeBuilder&lt;Audit&gt; builder)
+    {
+        builder.ToTable("Audits");
+        builder.HasKey(a => a.Id);
+        builder.Property(a => a.TableName).IsRequired().HasMaxLength(100);
+        builder.Property(a => a.Action).IsRequired().HasMaxLength(10);
+    }
+}
+
+// SaveChanges override in DbContext
+public override async Task&lt;int&gt; SaveChangesAsync(CancellationToken cancellationToken = default)
+{
+    var auditEntries = OnBeforeSaveChanges();
+    var result = await base.SaveChangesAsync(cancellationToken);
+    await OnAfterSaveChangesAsync(auditEntries);
+    return result;
+}
+
+private List&lt;AuditEntry&gt; OnBeforeSaveChanges()
+{
+    ChangeTracker.DetectChanges();
+    var entries = ChangeTracker.Entries()
+        .Where(e => e.State == EntityState.Added || 
+                    e.State == EntityState.Modified || 
+                    e.State == EntityState.Deleted)
+        .ToList();
+    
+    var auditEntries = new List&lt;AuditEntry&gt;();
+    
+    foreach (var entry in entries)
+    {
+        var auditEntry = new AuditEntry(entry)
+        {
+            TableName = entry.Entity.GetType().Name,
+            UserId = _currentUserService.UserId,
+            Action = entry.State.ToString(),
+            Timestamp = DateTime.UtcNow
+        };
+        
+        foreach (var property in entry.Properties)
+        {
+            string propertyName = property.Metadata.Name;
+            
+            if (property.Metadata.IsPrimaryKey)
+            {
+                auditEntry.KeyValues[propertyName] = property.CurrentValue;
+                continue;
+            }
+            
+            switch (entry.State)
+            {
+                case EntityState.Added:
+                    auditEntry.NewValues[propertyName] = property.CurrentValue;
+                    break;
+                case EntityState.Deleted:
+                    auditEntry.OldValues[propertyName] = property.OriginalValue;
+                    break;
+                case EntityState.Modified:
+                    if (property.IsModified)
+                    {
+                        auditEntry.OldValues[propertyName] = property.OriginalValue;
+                        auditEntry.NewValues[propertyName] = property.CurrentValue;
+                    }
+                    break;
+            }
+        }
+        
+        auditEntries.Add(auditEntry);
+    }
+    
+    foreach (var auditEntry in auditEntries)
+    {
+        Audits.Add(auditEntry.ToAudit());
+    }
+    
+    return auditEntries.Where(e => e.HasTemporaryProperties).ToList();
+}
+
+private Task OnAfterSaveChangesAsync(List&lt;AuditEntry&gt; auditEntries)
+{
+    if (auditEntries == null || auditEntries.Count == 0)
+        return Task.CompletedTask;
+    
+    foreach (var auditEntry in auditEntries)
+    {
+        // Get final values
+        foreach (var prop in auditEntry.Entry.Properties)
+        {
+            if (prop.IsTemporary)
+            {
+                auditEntry.KeyValues[prop.Metadata.Name] = prop.CurrentValue;
+            }
+        }
+    }
+    
+    // Save audits
+    return SaveChangesAsync();
+}</div>
+        </div>
+
+        <div class="question">
+            Q54: How do you implement multi-tenancy with EF Core?
+        </div>
+        <div class="answer">
+            <p><strong>Multi-tenancy</strong> allows a single application to serve multiple tenants.</p>
+            
+            <div class="code-block">// Tenant interface
+public interface ITenantEntity
+{
+    int TenantId { get; set; }
+}
+
+// Tenant entity
+public class Product : ITenantEntity
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int TenantId { get; set; }
+}
+
+// Tenant resolver service
+public interface ITenantResolver
+{
+    int GetCurrentTenantId();
+}
+
+public class TenantResolver : ITenantResolver
+{
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    
+    public int GetCurrentTenantId()
+    {
+        var tenantId = _httpContextAccessor.HttpContext?.Request.Headers["X-Tenant-Id"];
+        return int.Parse(tenantId);
+    }
+}
+
+// Global query filter for multi-tenancy
+public class AppDbContext : DbContext
+{
+    private readonly ITenantResolver _tenantResolver;
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Apply global filter to all tenant entities
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            if (typeof(ITenantEntity).IsAssignableFrom(entityType.ClrType))
+            {
+                modelBuilder.Entity(entityType.ClrType)
+                    .HasQueryFilter(e => EF.Property&lt;int&gt;(e, "TenantId") == _tenantResolver.GetCurrentTenantId());
+            }
+        }
+    }
+    
+    public override async Task&lt;int&gt; SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        // Set tenant ID for new entities
+        foreach (var entry in ChangeTracker.Entries&lt;ITenantEntity&gt;())
+        {
+            if (entry.State == EntityState.Added)
+            {
+                entry.Entity.TenantId = _tenantResolver.GetCurrentTenantId();
+            }
+        }
+        
+        return await base.SaveChangesAsync(cancellationToken);
+    }
+}
+
+// Per-tenant DbContext factory
+public class TenantDbContextFactory
+{
+    private readonly IServiceProvider _serviceProvider;
+    
+    public AppDbContext CreateDbContext(int tenantId)
+    {
+        var options = new DbContextOptionsBuilder&lt;AppDbContext&gt;()
+            .UseSqlServer(GetConnectionString(tenantId))
+            .Options;
+        
+        return new AppDbContext(options, tenantId);
+    }
+    
+    private string GetConnectionString(int tenantId)
+    {
+        // Return tenant-specific connection string
+        return $"Server=.;Database=Tenant_{tenantId};...";
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q55: How do you implement database failover and disaster recovery?
+        </div>
+        <div class="answer">
+            <p><strong>Failover and disaster recovery</strong> ensure high availability and data protection.</p>
+            
+            <div class="code-block">// Connection string with failover
+"DefaultConnection": "Server=primary.database.windows.net;Database=myDb;" +
+    "Failover Partner=secondary.database.windows.net;" +
+    "User Id=myUser;Password=myPassword;" +
+    "Connect Timeout=30;"
+
+// Custom execution strategy for retry
+public class CustomExecutionStrategy : ExecutionStrategy
+{
+    public CustomExecutionStrategy(DbContextOptions contextOptions)
+        : base(contextOptions, 5, TimeSpan.FromSeconds(30))
+    {
+    }
+    
+    protected override bool ShouldRetryOn(Exception exception)
+    {
+        // Retry on transient errors
+        if (exception is SqlException sqlEx)
+        {
+            return sqlEx.Number == -2 || // Timeout
+                   sqlEx.Number == 4060 || // Login failed
+                   sqlEx.Number == 40197 || // Connection error
+                   sqlEx.Number == 40501 || // Service busy
+                   sqlEx.Number == 40613; // Database not available
+        }
+        
+        return base.ShouldRetryOn(exception);
+    }
+}
+
+// Configure execution strategy
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+    optionsBuilder.UseSqlServer(connectionString, options =>
+    {
+        options.EnableRetryOnFailure(
+            maxRetryCount: 5,
+            maxRetryDelay: TimeSpan.FromSeconds(30)
+        );
+        
+        // Or use custom execution strategy
+        options.ExecutionStrategy(c => new CustomExecutionStrategy(c));
+    });
+}
+
+// Health check for database availability
+public class DatabaseHealthCheck : IHealthCheck
+{
+    private readonly AppDbContext _context;
+    
+    public async Task&lt;HealthCheckResult&gt; CheckHealthAsync(
+        HealthCheckContext context,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await _context.Database.CanConnectAsync(cancellationToken);
+            
+            var result = await _context.Database.SqlQueryRaw&lt;string&gt;(
+                "SELECT @@VERSION"
+            ).FirstOrDefaultAsync(cancellationToken);
+            
+            return HealthCheckResult.Healthy("Database is accessible");
+        }
+        catch (Exception ex)
+        {
+            return HealthCheckResult.Unhealthy("Database is not accessible", ex);
+        }
+    }
+}
+
+// Backup and restore service
+public class DatabaseBackupService
+{
+    public async Task BackupDatabaseAsync(string backupPath)
+    {
+        var sql = $@"
+            BACKUP DATABASE MyDatabase
+            TO DISK = '{backupPath}'
+            WITH FORMAT,
+            MEDIANAME = 'SQLServerBackups',
+            NAME = 'Full Backup of MyDatabase'";
+        
+        await context.Database.ExecuteSqlRawAsync(sql);
+    }
+    
+    public async Task RestoreDatabaseAsync(string backupPath)
+    {
+        var sql = $@"
+            RESTORE DATABASE MyDatabase
+            FROM DISK = '{backupPath}'
+            WITH REPLACE,
+             RECOVERY";
+        
+        await context.Database.ExecuteSqlRawAsync(sql);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q56: How do you implement database encryption and security?
+        </div>
+        <div class="answer">
+            <p><strong>Database security</strong> protects sensitive data at rest and in transit.</p>
+            
+            <div class="code-block">// Always Encrypted (SQL Server)
+// Configure entity with encrypted column
+public class User
+{
+    public int Id { get; set; }
+    public string Email { get; set; }
+    
+    [Required]
+    [Encrypted]
+    public string SSN { get; set; }
+    
+    [Encrypted]
+    public string CreditCardNumber { get; set; }
+}
+
+// Connection string with encryption
+"DefaultConnection": "Server=.;Database=MyDb;User Id=myUser;Password=myPassword;" +
+    "Column Encryption Setting=Enabled;Encrypt=True;TrustServerCertificate=False;"
+
+// Application-level encryption
+public class EncryptionService
+{
+    private readonly byte[] _encryptionKey;
+    private readonly byte[] _iv;
+    
+    public string Encrypt(string plainText)
+    {
+        using var aes = Aes.Create();
+        aes.Key = _encryptionKey;
+        aes.IV = _iv;
+        
+        using var encryptor = aes.CreateEncryptor();
+        using var msEncrypt = new MemoryStream();
+        
+        using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+        using (var swEncrypt = new StreamWriter(csEncrypt))
+        {
+            swEncrypt.Write(plainText);
+        }
+        
+        return Convert.ToBase64String(msEncrypt.ToArray());
+    }
+    
+    public string Decrypt(string cipherText)
+    {
+        using var aes = Aes.Create();
+        aes.Key = _encryptionKey;
+        aes.IV = _iv;
+        
+        using var decryptor = aes.CreateDecryptor();
+        using var msDecrypt = new MemoryStream(Convert.FromBase64String(cipherText));
+        
+        using var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read);
+        using var srDecrypt = new StreamReader(csDecrypt);
+        
+        return srDecrypt.ReadToEnd();
+    }
+}
+
+// Value converter for encrypted properties
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    var converter = new ValueConverter&lt;string, string&gt;(
+        v => _encryptionService.Encrypt(v),
+        v => _encryptionService.Decrypt(v)
+    );
+    
+    modelBuilder.Entity&lt;User&gt;()
+        .Property(e => e.SSN)
+        .HasConversion(converter);
+}
+
+// Row-level security
+public class RowSecurityService
+{
+    public void ApplyRowSecurity(AppDbContext context, string userId)
+    {
+        // Apply row-level security filter
+        context.Database.ExecuteSqlRaw(
+            "EXEC sp_set_session_context @key = N'UserId', @value = @userId",
+            new SqlParameter("@userId", userId)
+        );
+    }
+}
+
+// SQL Server Row-Level Security
+-- Create security policy
+CREATE SECURITY POLICY UserFilterPolicy
+ADD FILTER Predicate dbo.UserSecurityPredicate(@UserId)
+ON dbo.Users
+WITH (STATE = ON);</div>
+        </div>
+
+        <div class="question">
+            Q57: How do you implement database monitoring and performance optimization?
+        </div>
+        <div class="answer">
+            <p><strong>Database monitoring</strong> helps identify and resolve performance issues.</p>
+            
+            <div class="code-block">// Query performance logging
+public class QueryLogger
+{
+    private readonly ILogger&lt;QueryLogger&gt; _logger;
+    
+    public void LogQueryPerformance(string sql, TimeSpan duration, int rowCount)
+    {
+        if (duration.TotalMilliseconds > 1000)
+        {
+            _logger.LogWarning(
+                "Slow query detected: {Sql} took {Duration}ms and returned {RowCount} rows",
+                sql,
+                duration.TotalMilliseconds,
+                rowCount
+            );
+        }
+    }
+}
+
+// EF Core interceptors for monitoring
+public class PerformanceInterceptor : DbCommandInterceptor
+{
+    private readonly QueryLogger _logger;
+    
+    public override InterceptionResult&lt;DbDataReader&gt; ReaderExecuting(
+        DbCommand command,
+        CommandEventData eventData,
+        InterceptionResult&lt;DbDataReader&gt; result)
+    {
+        _logger.LogQueryStart(command.CommandText);
+        return base.ReaderExecuting(command, eventData, result);
+    }
+    
+    public override DbDataReader ReaderExecuted(
+        DbCommand command,
+        CommandExecutedEventData eventData,
+        DbDataReader result)
+    {
+        _logger.LogQueryPerformance(
+            command.CommandText,
+            eventData.Duration,
+            eventData.Result?.RecordsAffected ?? 0
+        );
+        return base.ReaderExecuted(command, eventData, result);
+    }
+}
+
+// Register interceptor
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+    optionsBuilder.AddInterceptors(new PerformanceInterceptor(_logger));
+}
+
+// Database statistics collection
+public class DatabaseStatistics
+{
+    public async Task&lt;DatabaseStats&gt; GetStatisticsAsync(AppDbContext context)
+    {
+        var stats = new DatabaseStats
+        {
+            TableSizes = await GetTableSizesAsync(context),
+            IndexUsage = await GetIndexUsageAsync(context),
+            QueryPerformance = await GetQueryPerformanceAsync(context),
+            ConnectionCount = await GetConnectionCountAsync(context)
+        };
+        
+        return stats;
+    }
+    
+    private async Task&lt;Dictionary&lt;string, long&gt;&gt; GetTableSizesAsync(AppDbContext context)
+    {
+        var sql = @"
+            SELECT 
+                t.name as TableName,
+                SUM(p.rows) as RowCounts,
+                SUM(a.total_pages) * 8 as TotalSpaceKB
+            FROM sys.tables t
+            INNER JOIN sys.indexes i ON t.object_id = i.object_id
+            INNER JOIN sys.partitions p ON i.object_id = p.object_id
+            INNER JOIN sys.allocation_units a ON p.partition_id = a.container_id
+            GROUP BY t.name";
+        
+        return await context.Database.SqlQueryRaw&lt;TableSize&gt;(sql)
+            .ToDictionaryAsync(t => t.TableName, t => t.TotalSpaceKB);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q58: How do you implement CQRS with EF Core read and write models?
+        </div>
+        <div class="answer">
+            <p><strong>CQRS with EF Core</strong> separates read and write models for better scalability.</p>
+            
+            <div class="code-block">// Write model (domain)
+public class Order
+{
+    public Guid Id { get; private set; }
+    public List&lt;OrderItem&gt; Items { get; private set; }
+    public OrderStatus Status { get; private set; }
+    
+    public void AddItem(OrderItem item)
+    {
+        Items.Add(item);
+    }
+    
+    public void Confirm()
+    {
+        Status = OrderStatus.Confirmed;
+    }
+}
+
+// Write DbContext
+public class WriteDbContext : DbContext
+{
+    public DbSet&lt;Order&gt; Orders { get; set; }
+    public DbSet&lt;OrderItem&gt; OrderItems { get; set; }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Domain model configuration
+        modelBuilder.Entity&lt;Order&gt;()
+            .OwnsMany(o => o.Items);
+    }
+}
+
+// Read model (optimized for queries)
+public class OrderReadModel
+{
+    public Guid Id { get; set; }
+    public string CustomerName { get; set; }
+    public decimal TotalAmount { get; set; }
+    public string Status { get; set; }
+    public DateTime CreatedAt { get; set; }
+}
+
+// Read DbContext
+public class ReadDbContext : DbContext
+{
+    public DbSet&lt;OrderReadModel&gt; Orders { get; set; }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Read model configuration - denormalized for performance
+        modelBuilder.Entity&lt;OrderReadModel&gt;()
+            .HasIndex(o => o.CustomerName)
+            .HasIndex(o => o.Status)
+            .HasIndex(o => o.CreatedAt);
+    }
+}
+
+// Synchronization service
+public class OrderSynchronizationService
+{
+    private readonly WriteDbContext _writeContext;
+    private readonly ReadDbContext _readContext;
+    
+    public async Task SyncOrderAsync(Guid orderId)
+    {
+        var order = await _writeContext.Orders
+            .Include(o => o.Items)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+        
+        if (order == null) return;
+        
+        var readModel = new OrderReadModel
+        {
+            Id = order.Id,
+            CustomerName = order.CustomerName,
+            TotalAmount = order.Items.Sum(i => i.Quantity * i.Price),
+            Status = order.Status.ToString(),
+            CreatedAt = order.CreatedAt
+        };
+        
+        var existing = await _readContext.Orders.FindAsync(orderId);
+        if (existing != null)
+        {
+            _readContext.Entry(existing).CurrentValues.SetValues(readModel);
+        }
+        else
+        {
+            _readContext.Orders.Add(readModel);
+        }
+        
+        await _readContext.SaveChangesAsync();
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q59: How do you implement database versioning and schema evolution?
+        </div>
+        <div class="answer">
+            <p><strong>Schema evolution</strong> manages database changes over time with minimal downtime.</p>
+            
+            <div class="code-block">// Version tracking table
+public class DatabaseVersion
+{
+    public int Id { get; set; }
+    public string Version { get; set; }
+    public DateTime AppliedAt { get; set; }
+    public string Description { get; set; }
+}
+
+// Migration runner service
+public class MigrationRunner
+{
+    private readonly AppDbContext _context;
+    
+    public async Task RunMigrationsAsync()
+    {
+        var appliedVersions = await _context.DatabaseVersions
+            .OrderBy(v => v.Id)
+            .Select(v => v.Version)
+            .ToListAsync();
+        
+        var pendingMigrations = GetPendingMigrations(appliedVersions);
+        
+        foreach (var migration in pendingMigrations)
+        {
+            await ExecuteMigrationAsync(migration);
+            
+            _context.DatabaseVersions.Add(new DatabaseVersion
+            {
+                Version = migration.Version,
+                AppliedAt = DateTime.UtcNow,
+                Description = migration.Description
+            });
+            
+            await _context.SaveChangesAsync();
+        }
+    }
+    
+    private async Task ExecuteMigrationAsync(MigrationScript migration)
+    {
+        try
+        {
+            await _context.Database.ExecuteSqlRawAsync(migration.UpScript);
+        }
+        catch (Exception ex)
+        {
+            // Rollback
+            await _context.Database.ExecuteSqlRawAsync(migration.DownScript);
+            throw;
+        }
+    }
+}
+
+// Blue-green deployment strategy
+public class DatabaseDeploymentService
+{
+    public async Task DeployWithZeroDowntimeAsync(string newVersion)
+    {
+        // 1. Create new database copy
+        await CreateDatabaseCopyAsync($"MyDb_{newVersion}");
+        
+        // 2. Apply migrations to new database
+        await ApplyMigrationsAsync($"MyDb_{newVersion}");
+        
+        // 3. Sync data from old to new database
+        await SyncDataAsync("MyDb", $"MyDb_{newVersion}");
+        
+        // 4. Switch connection string
+        await SwitchDatabaseAsync($"MyDb_{newVersion}");
+        
+        // 5. Keep old database for rollback
+    }
+    
+    private async Task SyncDataAsync(string sourceDb, string targetDb)
+    {
+        var syncScript = $@"
+            INSERT INTO {targetDb}.dbo.Products
+            SELECT * FROM {sourceDb}.dbo.Products
+            WHERE NOT EXISTS (
+                SELECT 1 FROM {targetDb}.dbo.Products 
+                WHERE Id = {sourceDb}.dbo.Products.Id
+            )";
+        
+        await _context.Database.ExecuteSqlRawAsync(syncScript);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q60: How do you implement testing strategies for EF Core?
+        </div>
+        <div class="answer">
+            <p><strong>Testing strategies</strong> include unit tests, integration tests, and mocking.</p>
+            
+            <div class="code-block">// Unit test with in-memory database
+public class RepositoryTests
+{
+    private DbContextOptions&lt;AppDbContext&gt; _options;
+    
+    public RepositoryTests()
+    {
+        _options = new DbContextOptionsBuilder&lt;AppDbContext&gt;()
+            .UseInMemoryDatabase(databaseName: "TestDb")
+            .Options;
+    }
+    
+    [Fact]
+    public async Task AddProduct_ShouldAddToDatabase()
+    {
+        using var context = new AppDbContext(_options);
+        var repository = new ProductRepository(context);
+        
+        var product = new Product { Name = "Test", Price = 100 };
+        await repository.AddAsync(product);
+        
+        var result = await context.Products.FindAsync(product.Id);
+        Assert.NotNull(result);
+        Assert.Equal("Test", result.Name);
+    }
+}
+
+// Integration test with SQL Server
+public class IntegrationTests : IClassFixture&lt;SqlServerFixture&gt;
+{
+    private readonly SqlServerFixture _fixture;
+    
+    public IntegrationTests(SqlServerFixture fixture)
+    {
+        _fixture = fixture;
+    }
+    
+    [Fact]
+    public async Task ComplexQuery_ShouldReturnCorrectResults()
+    {
+        using var context = _fixture.CreateContext();
+        
+        var results = await context.Products
+            .Where(p => p.Price > 100)
+            .Include(p => p.Category)
+            .ToListAsync();
+        
+        Assert.NotEmpty(results);
+    }
+}
+
+// Mock DbContext with Moq
+public class ServiceTests
+{
+    [Fact]
+    public async Task GetProducts_ShouldReturnProducts()
+    {
+        var mockContext = new Mock&lt;AppDbContext&gt;();
+        var mockProducts = new Mock&lt;DbSet&lt;Product&gt;&gt;();
+        
+        var products = new List&lt;Product&gt;
+        {
+            new Product { Id = 1, Name = "Product 1" },
+            new Product { Id = 2, Name = "Product 2" }
+        }.AsQueryable();
+        
+        mockProducts.As&lt;IQueryable&lt;Product&gt;&gt;()
+            .Setup(m => m.Provider).Returns(products.Provider);
+        mockProducts.As&lt;IQueryable&lt;Product&gt;&gt;()
+            .Setup(m => m.Expression).Returns(products.Expression);
+        mockProducts.As&lt;IQueryable&lt;Product&gt;&gt;()
+            .Setup(m => m.ElementType).Returns(products.ElementType);
+        mockProducts.As&lt;IQueryable&lt;Product&gt;&gt;()
+            .Setup(m => m.GetEnumerator()).Returns(products.GetEnumerator());
+        
+        mockContext.Setup(c => c.Products).Returns(mockProducts.Object);
+        
+        var service = new ProductService(mockContext.Object);
+        var result = await service.GetProductsAsync();
+        
+        Assert.Equal(2, result.Count());
     }
 }</div>
         </div>

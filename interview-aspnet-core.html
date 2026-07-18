@@ -60,15 +60,45 @@
             border-left: 4px solid #28a745;
         }
         .code-block {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 8px;
+            background: #2d2d2d;
+            color: #e0e0e0;
+            padding: 25px;
+            border-radius: 12px;
             overflow-x: auto;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 13px;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
             margin: 15px 0;
-            line-height: 1.5;
+            line-height: 1.7;
+            border-left: 4px solid #4a90e2;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .code-block::before {
+            content: '';
+            display: block;
+            margin-bottom: 10px;
+        }
+        .code-block .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        .code-block .keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+        .code-block .string {
+            color: #ce9178;
+        }
+        .code-block .function {
+            color: #dcdcaa;
+        }
+        .code-block .number {
+            color: #b5cea8;
+        }
+        .code-block .variable {
+            color: #9cdcfe;
+        }
+        .code-block .type {
+            color: #4ec9b0;
         }
         .important {
             background: #fff3cd;
@@ -1263,6 +1293,1340 @@ public async Task&lt;string&gt; ProcessDataAsync(string data)
                 <li><strong>Advanced (8-10 years):</strong> Implement background services with IHostedService, use SignalR for real-time communication, implement gRPC services, understand Blazor Server vs WebAssembly, implement distributed caching with Redis, optimize performance with compression and HTTP/2, implement advanced security with JWT and policies.</li>
                 <li><strong>Expert (11-13 years):</strong> Design high-performance architectures with minimal APIs, implement advanced caching strategies, design scalable real-time solutions with SignalR, implement gRPC for microservices, optimize application performance at scale, design secure authentication and authorization systems, implement advanced monitoring and observability, design cloud-native ASP.NET Core applications.</li>
             </ul>
+        </div>
+
+        <h2>16. Advanced Topics (4-13 Years Experience)</h2>
+
+        <div class="question">
+            Q51: How do you implement Circuit Breaker pattern in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p>The <strong>Circuit Breaker pattern</strong> prevents cascading failures by stopping requests to a failing service after a threshold is reached.</p>
+            
+            <div class="code-block">// Using Polly for Circuit Breaker
+builder.Services.AddHttpClient("ExternalApi")
+    .AddTransientHttpErrorPolicy(policy =>
+        policy.OrResult(response => response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+              .CircuitBreakerAsync(
+                  handledEventsAllowedBeforeBreaking: 3,
+                  durationOfBreak: TimeSpan.FromSeconds(30)));
+
+// Usage in service
+public class ExternalService
+{
+    private readonly IHttpClientFactory _httpClientFactory;
+    
+    public ExternalService(IHttpClientFactory httpClientFactory)
+    {
+        _httpClientFactory = httpClientFactory;
+    }
+    
+    public async Task&lt;string&gt; GetDataAsync()
+    {
+        var client = _httpClientFactory.CreateClient("ExternalApi");
+        return await client.GetStringAsync("/api/data");
+    }
+}</div>
+            
+            <div class="important">
+                <strong>Important:</strong> Combine Circuit Breaker with Retry pattern for resilience. Use different thresholds for different services based on their criticality.
+            </div>
+        </div>
+
+        <div class="question">
+            Q52: How do you implement distributed tracing in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p><strong>Distributed tracing</strong> helps track requests across multiple services in microservices architecture.</p>
+            
+            <div class="code-block">// Using OpenTelemetry
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource =>
+        resource.AddService("MyService"))
+    .AddAspNetCoreInstrumentation()
+    .AddHttpClientInstrumentation()
+    .AddSource("MyService")
+    .AddZipkinExporter(options =>
+    {
+        options.Endpoint = new Uri("http://zipkin:9411/api/v2/spans");
+    })
+    .AddJaegerExporter(options =>
+    {
+        options.AgentHost = "jaeger";
+        options.AgentPort = 6831;
+    });
+
+// Adding custom spans
+using var activity = _activitySource.StartActivity("CustomOperation");
+activity?.SetTag("operation.name", "ProcessData");
+activity?.SetTag("user.id", userId);
+
+// Process data
+await ProcessDataAsync(data);
+
+activity?.SetTag("operation.status", "success");
+activity?.Stop();</div>
+        </div>
+
+        <div class="question">
+            Q53: How do you implement rate limiting in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p><strong>Rate limiting</strong> prevents API abuse by limiting the number of requests a client can make.</p>
+            
+            <div class="code-block">// UsingAspNetCoreRateLimit package
+builder.Services.Configure&lt;IpRateLimitOptions&gt;(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.Configure&lt;IpRateLimitPolicies&gt;(builder.Configuration.GetSection("IpRateLimitPolicies"));
+builder.Services.AddMemoryCache();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton&lt;IRateLimitConfiguration, RateLimitConfiguration&gt;();
+builder.Services.AddInMemoryRateLimiting();
+
+// appsettings.json
+{
+  "IpRateLimiting": {
+    "EnableEndpointRateLimiting": true,
+    "StackBlockedRequests": false,
+    "RealIpHeader": "X-Real-IP",
+    "HttpStatusCode": 429,
+    "GeneralRules": [
+      {
+        "Endpoint": "*",
+        "Period": "1s",
+        "Limit": 10
+      },
+      {
+        "Endpoint": "/api/*",
+        "Period": "1m",
+        "Limit": 100
+      }
+    ]
+  }
+}
+
+// Custom rate limit attribute
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+public class RateLimitAttribute : Attribute, IAsyncActionFilter
+{
+    private readonly IRateLimitService _rateLimitService;
+    
+    public async Task OnActionExecutionAsync(
+        ActionExecutingContext context,
+        ActionExecutionDelegate next)
+    {
+        var clientId = GetClientId(context.HttpContext);
+        var limit = 100; // per minute
+        
+        if (await _rateLimitService.IsAllowedAsync(clientId, limit))
+        {
+            await next();
+        }
+        else
+        {
+            context.Result = new StatusCodeResult(429);
+        }
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q54: How do you implement API versioning in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p><strong>API versioning</strong> allows you to evolve your API without breaking existing clients.</p>
+            
+            <div class="code-block">// URL versioning
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+});
+
+// Controller versioning
+[ApiController]
+[Route("api/v{version:apiVersion}/[controller]")]
+[ApiVersion("1.0")]
+[ApiVersion("2.0")]
+public class ProductsController : ControllerBase
+{
+    [HttpGet]
+    [MapToApiVersion("1.0")]
+    public IActionResult GetV1()
+    {
+        // V1 implementation
+    }
+    
+    [HttpGet]
+    [MapToApiVersion("2.0")]
+    public IActionResult GetV2()
+    {
+        // V2 implementation
+    }
+}
+
+// Header versioning
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.ApiVersionReader = new HeaderApiVersionReader("api-version");
+});</div>
+        </div>
+
+        <div class="question">
+            Q55: How do you implement event-driven architecture with ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p><strong>Event-driven architecture</strong> enables loose coupling between services through events.</p>
+            
+            <div class="code-block">// Using MassTransit for event bus
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer&lt;OrderCreatedConsumer&gt;();
+    
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+        
+        cfg.ConfigureEndpoints(context);
+    });
+});
+
+// Event definition
+public record OrderCreatedEvent(
+    Guid OrderId,
+    string CustomerEmail,
+    decimal TotalAmount
+);
+
+// Event publisher
+public class OrderService
+{
+    private readonly IPublishEndpoint _publishEndpoint;
+    
+    public OrderService(IPublishEndpoint publishEndpoint)
+    {
+        _publishEndpoint = publishEndpoint;
+    }
+    
+    public async Task CreateOrderAsync(Order order)
+    {
+        // Create order logic
+        await _repository.AddAsync(order);
+        
+        // Publish event
+        await _publishEndpoint.Publish(new OrderCreatedEvent(
+            order.Id,
+            order.CustomerEmail,
+            order.TotalAmount
+        ));
+    }
+}
+
+// Event consumer
+public class OrderCreatedConsumer : IConsumer&lt;OrderCreatedEvent&gt;
+{
+    public async Task Consume(ConsumeContext&lt;OrderCreatedEvent&gt; context)
+    {
+        var @event = context.Message;
+        
+        // Send confirmation email
+        await _emailService.SendOrderConfirmationAsync(
+            @event.CustomerEmail,
+            @event.OrderId,
+            @event.TotalAmount
+        );
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q56: How do you implement CQRS pattern in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p><strong>CQRS (Command Query Responsibility Segregation)</strong> separates read and write operations for better scalability.</p>
+            
+            <div class="code-block">// Command interface
+public interface ICommand&lt;TResult&gt;
+{
+}
+
+public interface ICommandHandler&lt;TCommand, TResult&gt;
+    where TCommand : ICommand&lt;TResult&gt;
+{
+    Task&lt;TResult&gt; Handle(TCommand command);
+}
+
+// Query interface
+public interface IQuery&lt;TResult&gt;
+{
+}
+
+public interface IQueryHandler&lt;TQuery, TResult&gt;
+    where TQuery : IQuery&lt;TResult&gt;
+{
+    Task&lt;TResult&gt; Handle(TQuery query);
+}
+
+// Command implementation
+public record CreateProductCommand(
+    string Name,
+    decimal Price,
+    int CategoryId
+) : ICommand&lt;int&gt;;
+
+public class CreateProductCommandHandler 
+    : ICommandHandler&lt;CreateProductCommand, int&gt;
+{
+    private readonly AppDbContext _context;
+    
+    public async Task&lt;int&gt; Handle(CreateProductCommand command)
+    {
+        var product = new Product
+        {
+            Name = command.Name,
+            Price = command.Price,
+            CategoryId = command.CategoryId
+        };
+        
+        _context.Products.Add(product);
+        await _context.SaveChangesAsync();
+        
+        return product.Id;
+    }
+}
+
+// Query implementation
+public record GetProductsQuery(
+    int Page,
+    int PageSize,
+    string? SearchTerm
+) : IQuery&lt;PagedResult&lt;ProductDto&gt;&gt;;
+
+public class GetProductsQueryHandler 
+    : IQueryHandler&lt;GetProductsQuery, PagedResult&lt;ProductDto&gt;&gt;
+{
+    private readonly AppDbContext _context;
+    
+    public async Task&lt;PagedResult&lt;ProductDto&gt;&gt; Handle(
+        GetProductsQuery query)
+    {
+        var queryable = _context.Products.AsQueryable();
+        
+        if (!string.IsNullOrEmpty(query.SearchTerm))
+        {
+            queryable = queryable.Where(p => 
+                p.Name.Contains(query.SearchTerm));
+        }
+        
+        var total = await queryable.CountAsync();
+        var items = await queryable
+            .Skip((query.Page - 1) * query.PageSize)
+            .Take(query.PageSize)
+            .Select(p => new ProductDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price
+            })
+            .ToListAsync();
+        
+        return new PagedResult&lt;ProductDto&gt;(items, total, query.Page, query.PageSize);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q57: How do you implement retry policies with exponential backoff?
+        </div>
+        <div class="answer">
+            <p><strong>Retry policies with exponential backoff</strong> handle transient failures gracefully.</p>
+            
+            <div class="code-block">// Using Polly for retry with exponential backoff
+builder.Services.AddHttpClient("ResilientHttpClient")
+    .AddTransientHttpErrorPolicy(policy =>
+        policy.WaitAndRetryAsync(
+            retryCount: 5,
+            sleepDurationProvider: retryAttempt =>
+                TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+            onRetry: (outcome, timespan, retryAttempt, context) =>
+            {
+                _logger.LogWarning(
+                    "Retry {RetryAttempt} after {Delay}s due to {Exception}",
+                    retryAttempt,
+                    timespan.TotalSeconds,
+                    outcome.Exception?.Message);
+            }));
+
+// Custom retry policy
+var retryPolicy = Policy
+    .Handle&lt;HttpRequestException&gt;()
+    .OrResult&lt;HttpResponseMessage&gt;(r => !r.IsSuccessStatusCode)
+    .WaitAndRetryAsync(
+        retryCount: 3,
+        sleepDurationProvider: retryAttempt => 
+            TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)) + 
+            TimeSpan.FromMilliseconds(new Random().Next(0, 1000)),
+        onRetry: (outcome, delay, retryCount, context) =>
+        {
+            _logger.LogWarning(
+                "Retry {RetryCount} after {Delay}s",
+                retryCount,
+                delay.TotalSeconds);
+        });
+
+// Usage
+var response = await retryPolicy.ExecuteAsync(async () =>
+{
+    return await httpClient.GetAsync("/api/data");
+});</div>
+        </div>
+
+        <div class="question">
+            Q58: How do you implement feature flags in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p><strong>Feature flags</strong> enable you to roll out features gradually without deploying new code.</p>
+            
+            <div class="code-block">// Using Microsoft.FeatureManagement
+builder.Services.AddFeatureManagement()
+    .AddFeatureFilter("PercentageFilter");
+
+// appsettings.json
+{
+  "FeatureManagement": {
+    "NewDashboard": true,
+    "AdvancedSearch": false,
+    "BetaFeatures": {
+        "EnabledFor": [
+            {
+                "Name": "Percentage",
+                "Parameters": {
+                    "Value": 50
+                }
+            }
+        ]
+    }
+  }
+}
+
+// Controller with feature flags
+[ApiController]
+[Route("api/[controller]")]
+public class FeaturesController : ControllerBase
+{
+    private readonly IFeatureManager _featureManager;
+    
+    [HttpGet("dashboard")]
+    public async Task&lt;IActionResult&gt; GetDashboard()
+    {
+        if (await _featureManager.IsEnabledAsync("NewDashboard"))
+        {
+            return Ok(new { version = "v2", features = new[] { "analytics", "reports" } });
+        }
+        
+        return Ok(new { version = "v1", features = new[] { "basic" } });
+    }
+}
+
+// Custom feature filter
+[FilterAlias("PercentageFilter")]
+public class PercentageFilter : IFeatureFilter
+{
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    
+    public Task&lt;bool&gt; EvaluateAsync(FeatureFilterEvaluationContext context)
+    {
+        var settings = context.Parameters.Get&lt;PercentageFilterSettings&gt;();
+        var userId = _httpContextAccessor.HttpContext?.User?.FindFirst("sub")?.Value;
+        
+        // Use consistent hashing for percentage rollout
+        var hash = ComputeHash(userId);
+        var percentage = (hash % 100) + 1;
+        
+        return Task.FromResult(percentage &lt;= settings.Value);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q59: How do you implement database sharding in ASP.NET Core with EF Core?
+        </div>
+        <div class="answer">
+            <p><strong>Database sharding</strong> distributes data across multiple databases for horizontal scaling.</p>
+            
+            <div class="code-block">// Sharding strategy based on tenant ID
+public interface IShardingStrategy
+{
+    string GetShardKey(object entity);
+    string GetConnectionString(string shardKey);
+}
+
+public class TenantShardingStrategy : IShardingStrategy
+{
+    private readonly IConfiguration _configuration;
+    
+    public string GetShardKey(object entity)
+    {
+        if (entity is ITenantEntity tenantEntity)
+        {
+            return tenantEntity.TenantId.ToString();
+        }
+        throw new ArgumentException("Entity must implement ITenantEntity");
+    }
+    
+    public string GetConnectionString(string shardKey)
+    {
+        return _configuration.GetConnectionString($"Shard_{shardKey}");
+    }
+}
+
+// Sharded DbContext factory
+public class ShardedDbContextFactory
+{
+    private readonly IShardingStrategy _shardingStrategy;
+    private readonly IServiceScopeFactory _scopeFactory;
+    
+    public async Task&lt;AppDbContext&gt; CreateDbContextAsync(object entity)
+    {
+        var shardKey = _shardingStrategy.GetShardKey(entity);
+        var connectionString = _shardingStrategy.GetConnectionString(shardKey);
+        
+        var optionsBuilder = new DbContextOptionsBuilder&lt;AppDbContext&gt;();
+        optionsBuilder.UseSqlServer(connectionString);
+        
+        return new AppDbContext(optionsBuilder.Options);
+    }
+}
+
+// Repository with sharding
+public class ShardedRepository&lt;T&gt; where T : class, ITenantEntity
+{
+    private readonly ShardedDbContextFactory _contextFactory;
+    
+    public async Task AddAsync(T entity)
+    {
+        using var context = await _contextFactory.CreateDbContextAsync(entity);
+        context.Set&lt;T&gt;().Add(entity);
+        await context.SaveChangesAsync();
+    }
+    
+    public async Task&lt;T&gt; GetByIdAsync(int id, string tenantId)
+    {
+        var entity = new T { Id = id, TenantId = tenantId };
+        using var context = await _contextFactory.CreateDbContextAsync(entity);
+        return await context.Set&lt;T&gt;().FindAsync(id);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q60: How do you implement read replicas for database scaling?
+        </div>
+        <div class="answer">
+            <p><strong>Read replicas</strong> offload read operations to separate database copies.</p>
+            
+            <div class="code-block">// DbContext with read replica support
+public class AppDbContext : DbContext
+{
+    private readonly bool _isReadOnly;
+    
+    public AppDbContext(DbContextOptions&lt;AppDbContext&gt; options, bool isReadOnly = false)
+        : base(options)
+    {
+        _isReadOnly = isReadOnly;
+    }
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var connectionString = _isReadOnly 
+                ? _configuration.GetConnectionString("ReadReplica")
+                : _configuration.GetConnectionString("Primary");
+            
+            optionsBuilder.UseSqlServer(connectionString);
+        }
+    }
+}
+
+// Service for read/write operations
+public class ProductService
+{
+    private readonly IDbContextFactory&lt;AppDbContext&gt; _contextFactory;
+    
+    public async Task&lt;Product&gt; GetByIdAsync(int id)
+    {
+        // Use read replica
+        using var context = await _contextFactory.CreateDbContextAsync(true);
+        return await context.Products.FindAsync(id);
+    }
+    
+    public async Task UpdateProductAsync(Product product)
+    {
+        // Use primary database
+        using var context = await _contextFactory.CreateDbContextAsync(false);
+        context.Products.Update(product);
+        await context.SaveChangesAsync();
+    }
+}
+
+// Registration
+builder.Services.AddDbContextFactory&lt;AppDbContext&gt;(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Primary")));
+
+builder.Services.AddScoped&lt;IReadOnlyDbContext, ReadOnlyDbContext&gt;();</div>
+        </div>
+
+        <div class="question">
+            Q61: How do you implement API gateway pattern with ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p><strong>API gateway</strong> provides a single entry point for multiple microservices.</p>
+            
+            <div class="code-block">// Using YARP (Yet Another Reverse Proxy)
+builder.Services.AddReverseProxy()
+    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+
+// appsettings.json
+{
+  "ReverseProxy": {
+    "Routes": {
+      "products-route": {
+        "ClusterId": "products-cluster",
+        "Match": {
+          "Path": "/api/products/{**catch-all}"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/api" }
+        ]
+      },
+      "orders-route": {
+        "ClusterId": "orders-cluster",
+        "Match": {
+          "Path": "/api/orders/{**catch-all}"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/api" }
+        ]
+      }
+    },
+    "Clusters": {
+      "products-cluster": {
+        "Destinations": {
+          "products-primary": {
+            "Address": "https://products-service:5001"
+          },
+          "products-secondary": {
+            "Address": "https://products-service-backup:5001"
+          }
+        }
+      },
+      "orders-cluster": {
+        "Destinations": {
+          "orders-primary": {
+            "Address": "https://orders-service:5002"
+          }
+        }
+      }
+    }
+  }
+}
+
+// Program.cs
+var app = builder.Build();
+
+app.MapReverseProxy();
+
+app.Run();</div>
+        </div>
+
+        <div class="question">
+            Q62: How do you implement OAuth 2.0 and OpenID Connect in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p><strong>OAuth 2.0</strong> and <strong>OpenID Connect</strong> provide secure authentication and authorization.</p>
+            
+            <div class="code-block">// Using OpenID Connect
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+})
+.AddCookie()
+.AddOpenIdConnect(options =>
+{
+    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.Authority = "https://identityserver.example.com";
+    options.ClientId = "my-client";
+    options.ClientSecret = "my-secret";
+    options.ResponseType = "code";
+    options.SaveTokens = true;
+    options.GetClaimsFromUserInfoEndpoint = true;
+    options.Scope.Add("openid");
+    options.Scope.Add("profile");
+    options.Scope.Add("email");
+    options.Scope.Add("api1");
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        NameClaimType = "name",
+        RoleClaimType = "role"
+    };
+});
+
+// Resource server configuration
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "https://identityserver.example.com";
+        options.Audience = "api1";
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+
+// Protected API endpoint
+[Authorize]
+[HttpGet("profile")]
+public IActionResult GetProfile()
+{
+    var claims = User.Claims.Select(c => new { c.Type, c.Value });
+    return Ok(claims);
+}</div>
+        </div>
+
+        <div class="question">
+            Q63: How do you implement GraphQL in ASP.NET Core?
+        </div>
+        <div class="answer">
+            <p><strong>GraphQL</strong> provides a flexible query language for APIs.</p>
+            
+            <div class="code-block">// Using HotChocolate
+builder.Services
+    .AddGraphQLServer()
+    .AddQueryType&lt;Query&gt;()
+    .AddMutationType&lt;Mutation&gt;()
+    .AddSubscriptionType&lt;Subscription&gt;()
+    .AddType&lt;ProductType&gt;()
+    .AddProjections()
+    .AddFiltering()
+    .AddSorting();
+
+// Query type
+public class Query
+{
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable&lt;Product&gt; GetProducts([Service] AppDbContext context)
+    {
+        return context.Products;
+    }
+    
+    public async Task&lt;Product&gt; GetProductAsync(
+        int id, 
+        [Service] AppDbContext context)
+    {
+        return await context.Products.FindAsync(id);
+    }
+}
+
+// Mutation type
+public class Mutation
+{
+    public async Task&lt;Product&gt; CreateProductAsync(
+        CreateProductInput input,
+        [Service] AppDbContext context)
+    {
+        var product = new Product
+        {
+            Name = input.Name,
+            Price = input.Price,
+            CategoryId = input.CategoryId
+        };
+        
+        context.Products.Add(product);
+        await context.SaveChangesAsync();
+        
+        return product;
+    }
+}
+
+// Input type
+public class CreateProductInput
+{
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public int CategoryId { get; set; }
+}
+
+// Program.cs
+app.MapGraphQL();
+app.UseWebSockets();</div>
+        </div>
+
+        <div class="question">
+            Q64: How do you implement real-time analytics with SignalR and Redis?
+        </div>
+        <div class="answer">
+            <p><strong>SignalR with Redis backplane</strong> enables real-time communication across multiple servers.</p>
+            
+            <div class="code-block">// Configure SignalR with Redis backplane
+builder.Services.AddSignalR()
+    .AddStackExchangeRedis(connectionString, options =>
+    {
+        options.Configuration.ChannelPrefix = "MyApp";
+    });
+
+// Hub for real-time analytics
+public class AnalyticsHub : Hub
+{
+    private readonly IAnalyticsService _analyticsService;
+    
+    public async Task JoinGroup(string groupName)
+    {
+        await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+    }
+    
+    public async Task LeaveGroup(string groupName)
+    {
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
+    }
+    
+    public async Task SubscribeToMetric(string metricName)
+    {
+        await Groups.AddToGroupAsync(Context.ConnectionId, $"metric-{metricName}");
+    }
+}
+
+// Analytics service
+public class AnalyticsService
+{
+    private readonly IHubContext&lt;AnalyticsHub&gt; _hubContext;
+    
+    public async Task PublishMetricAsync(string metricName, object value)
+    {
+        await _hubContext.Clients.Group($"metric-{metricName}")
+            .SendAsync("MetricUpdate", new
+            {
+                Metric = metricName,
+                Value = value,
+                Timestamp = DateTime.UtcNow
+            });
+    }
+    
+    public async Task PublishDashboardUpdateAsync(DashboardData data)
+    {
+        await _hubContext.Clients.Group("dashboard")
+            .SendAsync("DashboardUpdate", data);
+    }
+}
+
+// Background service for metrics collection
+public class MetricsCollectorService : BackgroundService
+{
+    private readonly IAnalyticsService _analyticsService;
+    
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            var metrics = await CollectMetricsAsync();
+            
+            foreach (var metric in metrics)
+            {
+                await _analyticsService.PublishMetricAsync(metric.Name, metric.Value);
+            }
+            
+            await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
+        }
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q65: How do you implement database connection pooling optimization?
+        </div>
+        <div class="answer">
+            <p><strong>Connection pooling optimization</strong> reduces connection overhead and improves performance.</p>
+            
+            <div class="code-block">// Configure connection pooling
+builder.Services.AddDbContext&lt;AppDbContext&gt;(options =>
+{
+    options.UseSqlServer(connectionString, sqlOptions =>
+    {
+        sqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 5,
+            maxRetryDelay: TimeSpan.FromSeconds(30),
+            errorNumbersToAdd: null);
+        
+        // Configure command timeout
+        sqlOptions.CommandTimeout(30);
+        
+        // Configure connection resiliency
+        sqlOptions.EnableRetryOnFailure();
+    });
+    
+    // Configure connection pool size
+    options.UseSqlServer(connectionString, sqlOptions =>
+    {
+        sqlOptions.MaxBatchSize(100);
+    });
+});
+
+// Custom connection pool management
+public class ConnectionPoolMonitor
+{
+    private readonly ILogger&lt;ConnectionPoolMonitor&gt; _logger;
+    
+    public void MonitorConnectionPool(DbConnection connection)
+    {
+        var stats = ((SqlConnection)connection).GetStatistics();
+        
+        _logger.LogInformation(
+            "Connection Pool Stats - " +
+            "Connections: {Total}, " +
+            "Active: {Active}, " +
+            "Idle: {Idle}, " +
+            "Broken: {Broken}",
+            stats.Connections,
+            stats.ActiveConnections,
+            stats.IdleConnections,
+            stats.BrokenConnections);
+    }
+}
+
+// Connection string optimization
+"DefaultConnection": "Server=myServer;Database=myDb;User Id=myUser;Password=myPassword;" +
+    "Max Pool Size=100;Min Pool Size=10;Connection Timeout=30;" +
+    "Pooling=true;Connection Lifetime=300;"</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>17. Architecture and Design Patterns (Senior Level)</h2>
+
+        <div class="question">
+            Q66: Explain the Hexagonal Architecture (Ports and Adapters) pattern.
+        </div>
+        <div class="answer">
+            <p><strong>Hexagonal Architecture</strong> separates the core domain logic from external concerns like databases, UI, and external services.</p>
+            
+            <div class="code-block">// Domain layer (core)
+public class Order
+{
+    public Guid Id { get; private set; }
+    public List&lt;OrderItem&gt; Items { get; private set; }
+    public OrderStatus Status { get; private set; }
+    
+    public void AddItem(OrderItem item)
+    {
+        // Domain logic
+        if (Status != OrderStatus.Draft)
+            throw new InvalidOperationException("Cannot add items to non-draft order");
+        
+        Items.Add(item);
+    }
+    
+    public void Confirm()
+    {
+        // Domain logic
+        if (Items.Count == 0)
+            throw new InvalidOperationException("Cannot confirm empty order");
+        
+        Status = OrderStatus.Confirmed;
+    }
+}
+
+// Port (interface)
+public interface IOrderRepository
+{
+    Task&lt;Order&gt; GetByIdAsync(Guid id);
+    Task SaveAsync(Order order);
+}
+
+// Adapter (infrastructure)
+public class OrderRepository : IOrderRepository
+{
+    private readonly AppDbContext _context;
+    
+    public async Task&lt;Order&gt; GetByIdAsync(Guid id)
+    {
+        return await _context.Orders.FindAsync(id);
+    }
+    
+    public async Task SaveAsync(Order order)
+    {
+        await _context.SaveChangesAsync();
+    }
+}
+
+// Application service
+public class OrderService
+{
+    private readonly IOrderRepository _repository;
+    private readonly INotificationService _notificationService;
+    
+    public async Task ConfirmOrderAsync(Guid orderId)
+    {
+        var order = await _repository.GetByIdAsync(orderId);
+        order.Confirm();
+        await _repository.SaveAsync(order);
+        
+        await _notificationService.SendOrderConfirmationAsync(order);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q67: Explain the Domain-Driven Design (DDD) concepts in ASP.NET Core.
+        </div>
+        <div class="answer">
+            <p><strong>Domain-Driven Design</strong> focuses on core domain logic and domain models.</p>
+            
+            <div class="code-block">// Value Object (immutable)
+public record Money
+{
+    public decimal Amount { get; }
+    public string Currency { get; }
+    
+    public Money(decimal amount, string currency)
+    {
+        if (amount &lt; 0)
+            throw new ArgumentException("Amount cannot be negative");
+        
+        Amount = amount;
+        Currency = currency;
+    }
+    
+    public Money Add(Money other)
+    {
+        if (Currency != other.Currency)
+            throw new ArgumentException("Cannot add different currencies");
+        
+        return new Money(Amount + other.Amount, Currency);
+    }
+}
+
+// Entity (has identity)
+public class Product : IAggregateRoot
+{
+    public Guid Id { get; private set; }
+    public string Name { get; private set; }
+    public Money Price { get; private set; }
+    
+    private readonly List&lt;DomainEvent&gt; _domainEvents = new();
+    public IReadOnlyCollection&lt;DomainEvent&gt; DomainEvents => _domainEvents.AsReadOnly();
+    
+    public Product(Guid id, string name, Money price)
+    {
+        Id = id;
+        Name = name;
+        Price = price;
+    }
+    
+    public void UpdatePrice(Money newPrice)
+    {
+        var oldPrice = Price;
+        Price = newPrice;
+        
+        _domainEvents.Add(new PriceUpdatedEvent(Id, oldPrice, newPrice));
+    }
+    
+    public void ClearDomainEvents()
+    {
+        _domainEvents.Clear();
+    }
+}
+
+// Domain Event
+public record PriceUpdatedEvent(
+    Guid ProductId,
+    Money OldPrice,
+    Money NewPrice
+) : DomainEvent;
+
+// Repository
+public interface IProductRepository
+{
+    Task&lt;Product&gt; GetByIdAsync(Guid id);
+    Task AddAsync(Product product);
+    Task SaveAsync();
+}
+
+// Application Service with Unit of Work
+public class ProductService
+{
+    private readonly IProductRepository _repository;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IDomainEventDispatcher _eventDispatcher;
+    
+    public async Task UpdatePriceAsync(Guid productId, Money newPrice)
+    {
+        var product = await _repository.GetByIdAsync(productId);
+        product.UpdatePrice(newPrice);
+        
+        await _unitOfWork.SaveChangesAsync();
+        await _eventDispatcher.DispatchAsync(product.DomainEvents);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q68: How do you implement the Saga pattern for distributed transactions?
+        </div>
+        <div class="answer">
+            <p><strong>Saga pattern</strong> manages distributed transactions by breaking them into local transactions with compensating actions.</p>
+            
+            <div class="code-block">// Saga orchestration
+public class OrderSaga
+{
+    private readonly IOrderRepository _orderRepository;
+    private readonly IInventoryService _inventoryService;
+    private readonly IPaymentService _paymentService;
+    private readonly IShippingService _shippingService;
+    
+    public async Task ExecuteAsync(CreateOrderCommand command)
+    {
+        var order = new Order(command.CustomerId, command.Items);
+        await _orderRepository.AddAsync(order);
+        
+        try
+        {
+            // Step 1: Reserve inventory
+            await _inventoryService.ReserveAsync(order.Id, order.Items);
+            
+            // Step 2: Process payment
+            var paymentResult = await _paymentService.ProcessAsync(
+                order.Id, 
+                order.TotalAmount);
+            
+            if (!paymentResult.Success)
+            {
+                // Compensate: Release inventory
+                await _inventoryService.ReleaseAsync(order.Id, order.Items);
+                order.MarkAsFailed("Payment failed");
+                await _orderRepository.UpdateAsync(order);
+                return;
+            }
+            
+            // Step 3: Create shipment
+            await _shippingService.CreateShipmentAsync(order.Id, order.ShippingAddress);
+            
+            order.MarkAsCompleted();
+            await _orderRepository.UpdateAsync(order);
+        }
+        catch (Exception ex)
+        {
+            // Compensate: Rollback all steps
+            await CompensateAsync(order);
+            order.MarkAsFailed(ex.Message);
+            await _orderRepository.UpdateAsync(order);
+        }
+    }
+    
+    private async Task CompensateAsync(Order order)
+    {
+        await _inventoryService.ReleaseAsync(order.Id, order.Items);
+        await _paymentService.RefundAsync(order.Id, order.TotalAmount);
+        await _shippingService.CancelShipmentAsync(order.Id);
+    }
+}
+
+// Choreography-based saga using events
+public class OrderCreatedSagaHandler : IConsumer&lt;OrderCreatedEvent&gt;
+{
+    public async Task Consume(ConsumeContext&lt;OrderCreatedEvent&gt; context)
+    {
+        // Reserve inventory
+        await _inventoryService.ReserveAsync(context.Message.OrderId, context.Message.Items);
+        
+        // Publish next event
+        await context.Publish(new InventoryReservedEvent(context.Message.OrderId));
+    }
+}
+
+public class InventoryReservedSagaHandler : IConsumer&lt;InventoryReservedEvent&gt;
+{
+    public async Task Consume(ConsumeContext&lt;InventoryReservedEvent&gt; context)
+    {
+        // Process payment
+        var result = await _paymentService.ProcessAsync(context.Message.OrderId);
+        
+        if (result.Success)
+        {
+            await context.Publish(new PaymentProcessedEvent(context.Message.OrderId));
+        }
+        else
+        {
+            await context.Publish(new PaymentFailedEvent(context.Message.OrderId));
+        }
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q69: How do you implement the Strangler Fig pattern for legacy migration?
+        </div>
+        <div class="answer">
+            <p><strong>Strangler Fig pattern</strong> gradually replaces legacy systems by building new functionality around the old system.</p>
+            
+            <div class="code-block">// API gateway that routes to legacy or new service
+public class MigrationGateway
+{
+    private readonly ILegacyServiceClient _legacyClient;
+    private readonly INewServiceClient _newClient;
+    private readonly IMigrationConfiguration _config;
+    
+    public async Task&lt;OrderDto&gt; GetOrderAsync(int orderId)
+    {
+        // Check if this order is migrated
+        if (await _config.IsMigratedAsync("Order", orderId))
+        {
+            return await _newClient.GetOrderAsync(orderId);
+        }
+        
+        // Fall back to legacy system
+        return await _legacyClient.GetOrderAsync(orderId);
+    }
+    
+    public async Task&lt;OrderDto&gt; CreateOrderAsync(CreateOrderRequest request)
+    {
+        // Always create in new system
+        var order = await _newClient.CreateOrderAsync(request);
+        
+        // Mark as migrated
+        await _config.MarkAsMigratedAsync("Order", order.Id);
+        
+        return order;
+    }
+}
+
+// Feature flag for gradual rollout
+public class FeatureBasedRouter
+{
+    private readonly IFeatureManager _featureManager;
+    private readonly ILegacyService _legacyService;
+    private readonly INewService _newService;
+    
+    public async Task&lt;T&gt; ExecuteAsync&lt;T&gt;(string featureName, Func&lt;ILegacyService, Task&lt;T&gt;&gt; legacy, Func&lt;INewService, Task&lt;T&gt;&gt; @new)
+    {
+        if (await _featureManager.IsEnabledAsync(featureName))
+        {
+            return await @new(_newService);
+        }
+        
+        return await legacy(_legacyService);
+    }
+}
+
+// Data synchronization
+public class DataSyncService : BackgroundService
+{
+    private readonly ILegacyRepository _legacyRepo;
+    private readonly INewRepository _newRepo;
+    
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            // Sync data from legacy to new system
+            var legacyOrders = await _legacyRepo.GetOrdersModifiedSinceAsync(_lastSyncTime);
+            
+            foreach (var order in legacyOrders)
+            {
+                if (!await _newRepo.ExistsAsync(order.Id))
+                {
+                    await _newRepo.AddAsync(MapToNewModel(order));
+                }
+                else
+                {
+                    await _newRepo.UpdateAsync(MapToNewModel(order));
+                }
+            }
+            
+            _lastSyncTime = DateTime.UtcNow;
+            await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
+        }
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q70: How do you implement the Bulkhead pattern for resource isolation?
+        </div>
+        <div class="answer">
+            <p><strong>Bulkhead pattern</strong> isolates resources to prevent cascading failures.</p>
+            
+            <div class="code-block">// Using Polly for bulkhead isolation
+builder.Services.AddHttpClient("ExternalApi")
+    .AddPolicyHandler(Policy.BulkheadAsync(
+        maxParallelization: 10,
+        maxQueuingActions: 20,
+        onBulkheadRejectedAsync: context =>
+        {
+            _logger.LogWarning("Bulkhead rejected - too many concurrent requests");
+            return Task.CompletedTask;
+        }));
+
+// Custom bulkhead implementation
+public class BulkheadSemaphore
+{
+    private readonly SemaphoreSlim _semaphore;
+    private readonly ILogger&lt;BulkheadSemaphore&gt; _logger;
+    
+    public BulkheadSemaphore(int maxConcurrent, ILogger&lt;BulkheadSemaphore&gt; logger)
+    {
+        _semaphore = new SemaphoreSlim(maxConcurrent, maxConcurrent);
+        _logger = logger;
+    }
+    
+    public async Task&lt;T&gt; ExecuteAsync&lt;T&gt;(Func&lt;Task&lt;T&gt;&gt; operation)
+    {
+        if (!await _semaphore.WaitAsync(TimeSpan.FromSeconds(5)))
+        {
+            _logger.LogWarning("Bulkhead rejected - timeout waiting for semaphore");
+            throw new BulkheadRejectedException("Operation rejected due to bulkhead limit");
+        }
+        
+        try
+        {
+            return await operation();
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
+    }
+}
+
+// Usage in service
+public class ExternalApiService
+{
+    private readonly BulkheadSemaphore _bulkhead;
+    
+    public ExternalApiService(BulkheadSemaphore bulkhead)
+    {
+        _bulkhead = bulkhead;
+    }
+    
+    public async Task&lt;Data&gt; GetDataAsync()
+    {
+        return await _bulkhead.ExecuteAsync(async () =>
+        {
+            return await _httpClient.GetAsync("/api/data");
+        });
+    }
+}</div>
         </div>
 
         <div style="margin-top: 50px; padding: 20px; background: #512bd4; color: white; border-radius: 8px; text-align: center;">

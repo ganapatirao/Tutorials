@@ -60,15 +60,45 @@
             border-left: 4px solid #28a745;
         }
         .code-block {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 8px;
+            background: #2d2d2d;
+            color: #e0e0e0;
+            padding: 25px;
+            border-radius: 12px;
             overflow-x: auto;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 13px;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
             margin: 15px 0;
-            line-height: 1.5;
+            line-height: 1.7;
+            border-left: 4px solid #326ce5;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .code-block::before {
+            content: '';
+            display: block;
+            margin-bottom: 10px;
+        }
+        .code-block .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        .code-block .keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+        .code-block .string {
+            color: #ce9178;
+        }
+        .code-block .function {
+            color: #dcdcaa;
+        }
+        .code-block .number {
+            color: #b5cea8;
+        }
+        .code-block .variable {
+            color: #9cdcfe;
+        }
+        .code-block .type {
+            color: #4ec9b0;
         }
         .important {
             background: #fff3cd;
@@ -1203,6 +1233,1309 @@ spec:
                 <li><strong>Authentication issues:</strong> Check RBAC, service accounts, tokens</li>
                 <li><strong>Scheduling issues:</strong> Check taints, tolerations, node affinity</li>
             </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>15. Advanced Topics (4-13 Years Experience)</h2>
+
+        <div class="question">
+            Q51: How do you implement Custom Resource Definitions (CRDs) and Operators?
+        </div>
+        <div class="answer">
+            <p><strong>CRDs and Operators</strong> extend Kubernetes with custom resources and automation.</p>
+            
+            <div class="code-block"># Custom Resource Definition
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: databases.myapp.com
+spec:
+  group: myapp.com
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                size:
+                  type: integer
+                engine:
+                  type: string
+  scope: Namespaced
+  names:
+    plural: databases
+    singular: database
+    kind: Database
+    shortNames:
+    - db
+
+# Custom Resource instance
+apiVersion: myapp.com/v1alpha1
+kind: Database
+metadata:
+  name: mydb
+spec:
+  size: 10
+  engine: postgres
+
+# Operator controller (Kubebuilder/Operator SDK)
+package controllers
+
+import (
+    "context"
+    "k8s.io/apimachinery/pkg/runtime"
+    ctrl "sigs.k8s.io/controller-runtime"
+    "sigs.k8s.io/controller-runtime/pkg/client"
+)
+
+type DatabaseReconciler struct {
+    client.Client
+    Scheme *runtime.Scheme
+}
+
+func (r *DatabaseReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+    // Fetch the Database resource
+    var db myappv1alpha1.Database
+    if err := r.Get(ctx, req.NamespacedName, &db); err != nil {
+        return ctrl.Result{}, client.IgnoreNotFound(err)
+    }
+    
+    // Implement reconciliation logic
+    // Create/Update database instances
+    
+    return ctrl.Result{RequeueAfter: time.Minute * 10}, nil
+}</div>
+        </div>
+
+        <div class="question">
+            Q52: How do you implement service mesh with Istio?
+        </div>
+        <div class="answer">
+            <p><strong>Service mesh</strong> provides traffic management, security, and observability.</p>
+            
+            <div class="code-block"># Install Istio
+istioctl install --set profile=demo
+
+# Enable automatic sidecar injection
+kubectl label namespace default istio-injection=enabled
+
+# VirtualService for traffic routing
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: reviews
+spec:
+  hosts:
+  - reviews
+  http:
+  - match:
+    - headers:
+        x-canary:
+          exact: "true"
+    route:
+    - destination:
+        host: reviews
+        subset: v2
+  - route:
+    - destination:
+        host: reviews
+        subset: v1
+      weight: 95
+    - destination:
+        host: reviews
+        subset: v2
+      weight: 5
+
+# DestinationRule for load balancing
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: reviews
+spec:
+  host: reviews
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+
+# PeerAuthentication for mTLS
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+spec:
+  mtls:
+    mode: STRICT
+
+# AuthorizationPolicy for access control
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-get-orders
+spec:
+  selector:
+    matchLabels:
+      app: order-service
+  rules:
+  - to:
+    - operation:
+        methods: ["GET"]
+        paths: ["/api/orders/*"]
+    when:
+    - key: request.auth.claims[role]
+      values: ["user", "admin"]</div>
+        </div>
+
+        <div class="question">
+            Q53: How do you implement multi-cluster Kubernetes management?
+        </div>
+        <div class="answer">
+            <p><strong>Multi-cluster management</strong> enables applications across multiple Kubernetes clusters.</p>
+            
+            <div class="code-block"># Cluster configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubeconfig
+  namespace: crossplane-system
+data:
+  cluster1: |
+    apiVersion: v1
+    clusters:
+    - name: cluster1
+      cluster:
+        server: https://cluster1.example.com
+    contexts:
+    - name: cluster1
+      context:
+        cluster: cluster1
+
+# Using kubectl with multiple contexts
+kubectl config get-contexts
+kubectl config use-context cluster1
+kubectl config use-context cluster2
+
+# Federation v2 for multi-cluster
+apiVersion: types.kubefed.io/v1beta1
+kind: KubeFedCluster
+metadata:
+  name: cluster2
+spec:
+  apiEndpoint: https://cluster2.example.com
+  caBundle: LS0tLS1CRUdJTi...
+  secretRef:
+    name: cluster2-secret
+
+# Propagate resources across clusters
+apiVersion: types.kubefed.io/v1beta1
+kind: FederatedDeployment
+metadata:
+  name: myapp
+  namespace: default
+spec:
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      replicas: 3
+  placement:
+    clusters:
+    - name: cluster1
+    - name: cluster2
+  overrides:
+  - clusterName: cluster2
+    clusterOverrides:
+    - path: spec.replicas
+      value: 5</div>
+        </div>
+
+        <div class="question">
+            Q54: How do you implement Kubernetes autoscaling strategies?
+        </div>
+        <div class="answer">
+            <p><strong>Autoscaling</strong> automatically adjusts resources based on workload.</p>
+            
+            <div class="code-block"># Horizontal Pod Autoscaler (HPA)
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutcaler
+metadata:
+  name: myapp-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: myapp
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Pods
+    pods:
+      metric:
+        name: http_requests_per_second
+      target:
+        type: AverageValue
+        averageValue: "1000"
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 50
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+
+# Vertical Pod Autoscaler (VPA)
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutcaler
+metadata:
+  name: myapp-vpa
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: myapp
+  updatePolicy:
+    updateMode: Auto
+  resourcePolicy:
+    containerPolicies:
+    - containerName: myapp
+      minAllowed:
+        cpu: 100m
+        memory: 100Mi
+      maxAllowed:
+        cpu: 1
+        memory: 1Gi
+      controlledResources: ["cpu", "memory"]
+
+# Cluster Autoscaler
+# Enable via cloud provider or Helm
+helm install cluster-autoscaler stable/cluster-autoscaler \
+  --set cloudProvider=aws \
+  --set autoDiscovery.clusterName=my-cluster \
+  --set awsRegion=us-west-2</div>
+        </div>
+
+        <div class="question">
+            Q55: How do you implement Kubernetes security policies?
+        </div>
+        <div class="answer">
+            <p><strong>Security policies</strong> enforce security constraints on pods and containers.</p>
+            
+            <div class="code-block"># Pod Security Policy (deprecated, use Pod Security Admission)
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: restricted
+spec:
+  privileged: false
+  allowPrivilegeEscalation: false
+  requiredDropCapabilities:
+    - ALL
+  volumes:
+    - 'configMap'
+    - 'emptyDir'
+    - 'projected'
+    - 'secret'
+    - 'downwardAPI'
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+  runAsUser:
+    rule: MustRunAsNonRoot
+  seLinux:
+    rule: RunAsAny
+  fsGroup:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+
+# Pod Security Admission (Kubernetes 1.25+)
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-namespace
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+
+# OPA Gatekeeper for policy enforcement
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8srequiredlabels
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequiredLabels
+  targets:
+    - target: admission.k8s.gatekeeper.sh/v1
+      rego: |
+        package k8srequiredlabels
+        violation[{"msg": msg, "details": {"missing_labels": missing}}] {
+          required := input.parameters.labels
+          provided := input.review.object.metadata.labels
+          missing := [label | label := required[label] | not provided[label]]
+          count(missing) > 0
+          msg := sprintf("missing required labels: %v", [missing])
+        }
+
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredLabels
+metadata:
+  name: require-labels
+spec:
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+  parameters:
+    labels:
+      - "app"
+      - "environment"</div>
+        </div>
+
+        <div class="question">
+            Q56: How do you implement Kubernetes network policies?
+        </div>
+        <div class="answer">
+            <p><strong>Network policies</strong> control traffic flow between pods.</p>
+            
+            <div class="code-block"># Deny all traffic
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+
+# Allow traffic from specific namespace
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-from-frontend
+  namespace: backend
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: frontend
+    - podSelector:
+        matchLabels:
+          app: frontend
+
+# Allow specific ports and protocols
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-web-traffic
+spec:
+  podSelector:
+    matchLabels:
+      app: web
+  policyTypes:
+  - Ingress
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 80
+    - protocol: TCP
+      port: 443
+  - from:
+    - ipBlock:
+        cidr: 10.0.0.0/8
+        except:
+        - 10.0.1.0/24
+
+# Egress policy to external services
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector: {}
+    ports:
+    - protocol: UDP
+      port: 53</div>
+        </div>
+
+        <div class="question">
+            Q57: How do you implement Kubernetes storage classes and dynamic provisioning?
+        </div>
+        <div class="answer">
+            <p><strong>Storage classes</strong> define different storage backends and provisioning policies.</p>
+            
+            <div class="code-block"># StorageClass for AWS EBS
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp3
+  iops: "3000"
+  throughput: "125"
+  encrypted: "true"
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+
+# StorageClass for Azure Disk
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: azure-disk
+provisioner: disk.csi.azure.com
+parameters:
+  storageaccounttype: StandardSSD_LRS
+  kind: Managed
+  cachingmode: ReadOnly
+volumeBindingMode: WaitForFirstConsumer
+
+# StorageClass with custom topology
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast-ssd
+provisioner: csi-driver.example.com
+parameters:
+  type: ssd
+  iops: "10000"
+allowedTopologies:
+- matchLabelExpressions:
+  - key: topology.kubernetes.io/zone
+    values:
+    - us-east-1a
+    - us-east-1b
+
+# PVC using StorageClass
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mypvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: ebs-sc
+  resources:
+    requests:
+      storage: 10Gi</div>
+        </div>
+
+        <div class="question">
+            Q58: How do you implement Kubernetes admission controllers?
+        </div>
+        <div class="answer">
+            <p><strong>Admission controllers</strong> intercept and modify requests to the API server.</p>
+            
+            <div class="code-block"># Validating webhook
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: my-validator
+webhooks:
+- name: myapp.example.com
+  rules:
+  - operations: ["CREATE", "UPDATE"]
+    apiGroups: ["apps"]
+    apiVersions: ["v1"]
+    resources: ["deployments"]
+  clientConfig:
+    service:
+      name: my-webhook-service
+      namespace: default
+      path: /validate
+    caBundle: LS0tLS1CRUdJTi...
+  admissionReviewVersions: ["v1"]
+  sideEffects: None
+  timeoutSeconds: 5
+
+# Mutating webhook
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: my-mutator
+webhooks:
+- name: myapp.example.com
+  rules:
+  - operations: ["CREATE"]
+    apiGroups: [""]
+    apiVersions: ["v1"]
+    resources: ["pods"]
+  clientConfig:
+    service:
+      name: my-webhook-service
+      namespace: default
+      path: /mutate
+  admissionReviewVersions: ["v1"]
+  sideEffects: None
+
+# Admission webhook server (Go)
+package main
+
+import (
+    "net/http"
+    "k8s.io/api/admission/v1"
+    "k8s.io/apimachinery/pkg/runtime"
+)
+
+func admit(w http.ResponseWriter, r *http.Request) {
+    var admissionReview v1.AdmissionReview
+    body, _ := ioutil.ReadAll(r.Body)
+    json.Unmarshal(body, &admissionReview)
+    
+    // Validate or mutate the request
+    admissionReview.Response = &v1.AdmissionResponse{
+        Allowed: true,
+    }
+    
+    resp, _ := json.Marshal(admissionReview)
+    w.Write(resp)
+}</div>
+        </div>
+
+        <div class="question">
+            Q59: How do you implement Kubernetes backup and disaster recovery?
+        </div>
+        <div class="answer">
+            <p><strong>Backup and DR</strong> ensure cluster and application recoverability.</p>
+            
+            <div class="code-block"># Velero for cluster backup
+# Install Velero
+velero install --provider aws --plugins velero/velero-plugin-for-aws:v1.5.0 \
+  --bucket velero-backups --secret-file ./credentials-velero \
+  --backup-location-config region=us-west-2
+
+# Schedule backups
+velero schedule create daily-backup \
+  --schedule="0 2 * * *" \
+  --ttl=720h0m0s
+
+# Backup specific resources
+velero backup create myapp-backup \
+  --include-namespaces default \
+  --selector app=myapp
+
+# Restore from backup
+velero restore create myapp-restore \
+  --from-backup myapp-backup
+
+# Etcd backup
+ETCDCTL_API=3 etcdctl snapshot save \
+  /tmp/etcd-backup.db \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key
+
+# Restore etcd
+ETCDCTL_API=3 etcdctl snapshot restore \
+  /tmp/etcd-backup.db \
+  --data-dir=/var/lib/etcd
+
+# Volume snapshot using CSI
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: pvc-snapshot
+spec:
+  volumeSnapshotClassName: csi-snapclass
+  source:
+    persistentVolumeClaimName: mypvc</div>
+        </div>
+
+        <div class="question">
+            Q60: How do you implement Kubernetes monitoring and observability?
+        </div>
+        <div class="answer">
+            <p><strong>Observability stack</strong> provides metrics, logs, and traces.</p>
+            
+            <div class="code-block"># Prometheus Operator
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus
+spec:
+  serviceMonitorSelectorNilUsesHelmValues: false
+  serviceMonitorSelector:
+    matchLabels:
+      release: prometheus
+  resources:
+    requests:
+      memory: 400Mi
+      cpu: 100m
+  retention: 30d
+
+# ServiceMonitor for application metrics
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: myapp-metrics
+  labels:
+    app: myapp
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  endpoints:
+  - port: metrics
+    interval: 30s
+    path: /metrics
+
+# Grafana dashboard provisioning
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name: myapp-dashboard
+spec:
+    json: |
+      {
+        "dashboard": {
+          "title": "My Application",
+          "panels": [...]
+        }
+      }
+
+# Loki for log aggregation
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: loki-config
+data:
+  loki-config.yaml: |
+    server:
+      http_listen_port: 3100
+    storage:
+      type: s3
+      s3:
+        endpoint: s3.amazonaws.com
+        bucket: loki-logs
+    schema_config:
+      configs:
+      - from: 2020-10-24
+        store: boltdb-shipper
+        object_store: s3
+        schema: v11
+
+# Tempo for distributed tracing
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tempo-config
+data:
+  tempo.yaml: |
+    server:
+      http_listen_port: 3100
+    storage:
+      trace:
+        backend: local
+        local:
+          path: /tmp/traces</div>
+        </div>
+
+        <div class="question">
+            Q61: How do you implement Kubernetes resource quotas and limits?
+        </div>
+        <div class="answer">
+            <p><strong>Resource quotas</strong> limit resource consumption per namespace.</p>
+            
+            <div class="code-block"># ResourceQuota for namespace
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-quota
+  namespace: mynamespace
+spec:
+  hard:
+    requests.cpu: "10"
+    requests.memory: 20Gi
+    limits.cpu: "20"
+    limits.memory: 40Gi
+    persistentvolumeclaims: "5"
+    requests.storage: "100Gi"
+
+# LimitRange to set default resource limits
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: default-limits
+  namespace: mynamespace
+spec:
+  limits:
+  - default:
+      cpu: 500m
+      memory: 512Mi
+    defaultRequest:
+      cpu: 250m
+      memory: 256Mi
+    type: Container
+
+# Pod resource limits
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: myapp
+    image: myapp:latest
+    resources:
+      requests:
+        cpu: 250m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+
+# PriorityClass for resource allocation
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: high-priority
+value: 1000
+globalDefault: false
+description: "High priority pods"</div>
+        </div>
+
+        <div class="question">
+            Q62: How do you implement Kubernetes scheduling and affinity?
+        </div>
+        <div class="answer">
+            <p><strong>Scheduling controls</strong> determine where pods are placed.</p>
+            
+            <div class="code-block"># Node affinity
+apiVersion: v1
+kind: Pod
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - ssd
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+          - key: zone
+            operator: In
+            values:
+            - us-west-1a
+
+# Pod affinity and anti-affinity
+apiVersion: v1
+kind: Pod
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - web
+        topologyKey: "kubernetes.io/hostname"
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - web
+          topologyKey: "kubernetes.io/hostname"
+
+# Taints and tolerations
+kubectl taint nodes node1 key=value:NoSchedule
+
+apiVersion: v1
+kind: Pod
+spec:
+  tolerations:
+  - key: "key"
+    operator: "Equal"
+    value: "value"
+    effect: "NoSchedule"
+
+# Node selector
+apiVersion: v1
+kind: Pod
+spec:
+  nodeSelector:
+    disktype: ssd
+    zone: us-west-1a</div>
+        </div>
+
+        <div class="question">
+            Q63: How do you implement Kubernetes Helm charts?
+        </div>
+        <div class="answer">
+            <p><strong>Helm</strong> is a package manager for Kubernetes applications.</p>
+            
+            <div class="code-block"># Chart.yaml
+apiVersion: v2
+name: myapp
+description: A Helm chart for my application
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+
+# values.yaml
+replicaCount: 3
+image:
+  repository: myapp
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+# deployment.yaml template
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "myapp.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "myapp.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "myapp.name" . }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+
+# Install chart
+helm install myapp ./myapp-chart
+
+# Upgrade chart
+helm upgrade myapp ./myapp-chart --set replicaCount=5
+
+# Rollback
+helm rollback myapp</div>
+        </div>
+
+        <div class="question">
+            Q64: How do you implement Kubernetes CI/CD pipelines?
+        </div>
+        <div class="answer">
+            <p><strong>CI/CD pipelines</strong> automate deployment to Kubernetes.</p>
+            
+            <div class="code-block"># ArgoCD for GitOps
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/user/myapp.git
+    targetRevision: HEAD
+    path: kubernetes
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+# GitHub Actions workflow
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Configure kubectl
+      uses: azure/k8s-set-context@v3
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+    
+    - name: Build and push image
+      run: |
+        docker build -t myapp:${{ github.sha }} .
+        docker push myapp:${{ github.sha }}
+    
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl set image deployment/myapp myapp=myapp:${{ github.sha }}
+        kubectl rollout status deployment/myapp</div>
+        </div>
+
+        <div class="question">
+            Q65: How do you implement Kubernetes secrets management?
+        </div>
+        <div class="answer">
+            <p><strong>Secrets management</strong> securely stores sensitive data.</p>
+            
+            <div class="code-block"># Kubernetes Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-secret
+type: Opaque
+data:
+  username: YWRtaW4=
+  password: cGFzc3dvcmQ=
+
+# External Secrets Operator
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: my-external-secret
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: aws-secrets-manager
+    kind: SecretStore
+  target:
+    name: my-secret
+    creationPolicy: Owner
+  data:
+  - secretKey: password
+    remoteRef:
+      key: myapp/password
+
+# Secret from AWS Secrets Manager
+apiVersion: external-secrets.io/v1beta1
+kind: SecretStore
+metadata:
+  name: aws-secrets-manager
+spec:
+  provider:
+    aws:
+      service: SecretsManager
+      region: us-west-2
+      auth:
+        jwt:
+          serviceAccountRef:
+            name: external-secrets-sa
+
+# HashiCorp Vault integration
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: myapp
+    image: myapp:latest
+    env:
+    - name: DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: vault-secret
+          key: password</div>
+        </div>
+
+        <div class="question">
+            Q66: How do you implement Kubernetes troubleshooting strategies?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced troubleshooting</strong> techniques for complex issues.</p>
+            
+            <div class="code-block"># Debug pods
+kubectl run debug-pod --image=busybox --rm -it --restart=Never -- sh
+
+# Network debugging
+kubectl run network-debug --image=nicolaka/netshoot --rm -it --restart=Never -- bash
+
+# Check DNS resolution
+kubectl run dnsutils --image=nicolaka/netshoot --rm -it --restart=Never -- nslookup kubernetes.default
+
+# Port forwarding for debugging
+kubectl port-forward pod/myapp 8080:80
+
+# Check resource usage
+kubectl top nodes
+kubectl top pods
+
+# Inspect pod events
+kubectl describe pod myapp
+
+# Check container logs
+kubectl logs myapp --previous
+kubectl logs myapp -c container-name
+
+# Exec into container
+kubectl exec -it myapp -- /bin/bash
+
+# Check node conditions
+kubectl describe node node1
+
+# Check network policies
+kubectl get networkpolicies -A
+
+# Check CRD status
+kubectl get crd
+kubectl get customresources -A</div>
+        </div>
+
+        <div class="question">
+            Q67: How do you implement Kubernetes for Windows containers?
+        </div>
+        <div class="answer">
+            <p><strong>Windows nodes</strong> support Windows containers in Kubernetes.</p>
+            
+            <div class="code-block"># Windows node configuration
+apiVersion: v1
+kind: Node
+metadata:
+  name: windows-node1
+  labels:
+    kubernetes.io/os: windows
+    node.kubernetes.io/windows-build: "10.0.19041"
+
+# Windows pod spec
+apiVersion: v1
+kind: Pod
+spec:
+  nodeSelector:
+    kubernetes.io/os: windows
+  containers:
+  - name: myapp
+    image: myapp:latest-windows
+    resources:
+      limits:
+        cpu: 2
+        memory: 4Gi
+
+# Windows-specific networking
+# Requires CNI plugin with Windows support
+# Example: Calico, Flannel (Windows mode)
+
+# Windows storage
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mypvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: windows-disk
+  resources:
+    requests:
+      storage: 10Gi</div>
+        </div>
+
+        <div class="question">
+            Q68: How do you implement Kubernetes for GPU workloads?
+        </div>
+        <div class="answer">
+            <p><strong>GPU workloads</strong> require special scheduling and device plugins.</p>
+            
+            <div class="code-block"># GPU-enabled node
+# Install NVIDIA device plugin
+kubectl apply -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.12.0/nvidia-device-plugin.yml
+
+# Request GPU resources
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: myapp
+    image: myapp:latest
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+
+# GPU sharing (Time Slicing)
+# ConfigMap for NVIDIA device plugin
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nvidia-device-plugin-config
+  namespace: kube-system
+data:
+  config: |
+    version: v1
+    sharing:
+      timeSlicing:
+        renameBy: false
+        failRequestsGreaterThanOne: false
+        resources:
+        - name: nvidia.com/gpu
+          replicas: 4
+
+# MIG (Multi-Instance GPU) for isolation
+# Requires NVIDIA A100/H100 GPUs
+# Configure MIG on the node
+nvidia-smi mig -cgi 1g.5gb -c 9
+
+# Request MIG device
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: myapp
+    image: myapp:latest
+    resources:
+      limits:
+        nvidia.com/mig-1g.5gb: 1</div>
+        </div>
+
+        <div class="question">
+            Q69: How do you implement Kubernetes for stateful applications?
+        </div>
+        <div class="answer">
+            <p><strong>Stateful applications</strong> require persistent identity and storage.</p>
+            
+            <div class="code-block"># StatefulSet
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  serviceName: postgres
+  replicas: 3
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: fast-ssd
+      resources:
+        requests:
+          storage: 10Gi
+
+# Headless service for StatefulSet
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  clusterIP: None
+  selector:
+    app: postgres
+  ports:
+  - port: 5432
+    name: postgres</div>
+        </div>
+
+        <div class="question">
+            Q70: How do you implement Kubernetes for edge computing?
+        </div>
+        <div class="answer">
+            <p><strong>Edge computing</strong> extends Kubernetes to edge locations.</p>
+            
+            <div class="code-block"># K3s for lightweight edge deployments
+# Install K3s
+curl -sfL https://get.k3s.io | sh -
+
+# KubeEdge for edge orchestration
+# Install CloudCore on master
+keadm init --kubeconfig=/root/.kube/config
+
+# Install EdgeCore on edge node
+keadm join --cloudcore-ipport=<ip>:10000 --edgenode-name=<name>
+
+# Fleet for multi-cluster management
+# GitOps at scale across edge clusters
+apiVersion: fleet.cattle.io/v1alpha1
+kind: Cluster
+metadata:
+  name: edge-cluster-1
+spec:
+  kubeConfigRef:
+    name: edge-cluster-1-config
+
+# Bundle for deployment
+apiVersion: fleet.cattle.io/v1alpha1
+kind: Bundle
+metadata:
+  name: myapp
+spec:
+  resources:
+  - name: deployment
+    content:
+      - apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: myapp
+        spec:
+          replicas: 1
+  targets:
+  - clusterGroup: edge-clusters</div>
         </div>
 
         <div class="tip">

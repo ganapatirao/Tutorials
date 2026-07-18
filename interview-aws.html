@@ -60,15 +60,45 @@
             border-left: 4px solid #28a745;
         }
         .code-block {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 8px;
+            background: #2d2d2d;
+            color: #e0e0e0;
+            padding: 25px;
+            border-radius: 12px;
             overflow-x: auto;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 13px;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
             margin: 15px 0;
-            line-height: 1.5;
+            line-height: 1.7;
+            border-left: 4px solid #ff9900;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .code-block::before {
+            content: '';
+            display: block;
+            margin-bottom: 10px;
+        }
+        .code-block .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        .code-block .keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+        .code-block .string {
+            color: #ce9178;
+        }
+        .code-block .function {
+            color: #dcdcaa;
+        }
+        .code-block .number {
+            color: #b5cea8;
+        }
+        .code-block .variable {
+            color: #9cdcfe;
+        }
+        .code-block .type {
+            color: #4ec9b0;
         }
         .important {
             background: #fff3cd;
@@ -1264,6 +1294,1011 @@ Resources:
                 <li><strong>Patch management:</strong> Keep systems updated</li>
                 <li><strong>Backup:</strong> Implement backup and disaster recovery</li>
             </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>15. Advanced Topics (4-13 Years Experience)</h2>
+
+        <div class="question">
+            Q51: How do you implement AWS Organizations and Control Tower for multi-account management?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Organizations</strong> enables centralized management of multiple AWS accounts.</p>
+            
+            <div class="code-block"># Create Organization
+aws organizations create-organization
+
+# Create Organizational Unit (OU)
+aws organizations create-organizational-unit --parent-id r-1234 --name "Production"
+
+# Create account in OU
+aws organizations create-account --email admin@example.com --account-name "Prod Account"
+
+# Control Tower landing zone
+# Enable Control Tower
+aws controltower enable-landing-zone --landing-zone-configuration file://landing-zone-config.json
+
+# SCP (Service Control Policy)
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyS3PublicAccess",
+      "Effect": "Deny",
+      "Action": [
+        "s3:PutBucketPublicAccessBlock",
+        "s3:PutAccountPublicAccessBlock"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+
+# Apply SCP to OU
+aws organizations put-policy --policy-id p-1234 --target-id ou-1234</div>
+        </div>
+
+        <div class="question">
+            Q52: How do you implement AWS Transit Gateway for multi-VPC networking?
+        </div>
+        <div class="answer">
+            <p><strong>Transit Gateway</strong> provides hub-and-spoke networking across VPCs and on-premise.</p>
+            
+            <div class="code-block"># Create Transit Gateway
+aws ec2 create-transit-gateway \
+  --description "Main Transit Gateway" \
+  --options AmazonSideAsn=64512
+
+# Create VPC attachment
+aws ec2 create-transit-gateway-vpc-attachment \
+  --transit-gateway-id tgw-1234 \
+  --vpc-id vpc-1234 \
+  --subnet-ids subnet-1234 subnet-5678
+
+# Create VPN attachment
+aws ec2 create-transit-gateway-vpn-attachment \
+  --transit-gateway-id tgw-1234 \
+  --vpn-connection-id vpn-1234
+
+# Route table association
+aws ec2 associate-transit-gateway-route-table \
+  --transit-gateway-route-table-id tgw-rt-1234 \
+  --transit-gateway-attachment-id tgw-attach-1234
+
+# Static route
+aws ec2 create-transit-gateway-route \
+  --transit-gateway-route-table-id tgw-rt-1234 \
+  --destination-cidr 10.0.0.0/16 \
+  --transit-gateway-attachment-id tgw-attach-1234</div>
+        </div>
+
+        <div class="question">
+            Q53: How do you implement AWS Step Functions for workflow orchestration?
+        </div>
+        <div class="answer">
+            <p><strong>Step Functions</strong> orchestrates AWS services into visual workflows.</p>
+            
+            <div class="code-block">// ASL (Amazon States Language) definition
+{
+  "Comment": "Order processing workflow",
+  "StartAt": "ValidateOrder",
+  "States": {
+    "ValidateOrder": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:123456789012:function:ValidateOrder",
+      "Next": "CheckInventory"
+    },
+    "CheckInventory": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:123456789012:function:CheckInventory",
+      "Next": "ProcessPayment",
+      "Catch": [
+        {
+          "ErrorEquals": ["InventoryUnavailable"],
+          "Next": "NotifyCustomer"
+        }
+      ]
+    },
+    "ProcessPayment": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Parameters": {
+        "TopicArn": "arn:aws:sns:us-east-1:123456789012:PaymentTopic",
+        "Message": "Process payment for order"
+      },
+      "Next": "ShipOrder"
+    },
+    "ShipOrder": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "ShipOrder",
+        "Payload": {
+          "Order.$": "$"
+        }
+      },
+      "End": true
+    },
+    "NotifyCustomer": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Parameters": {
+        "TopicArn": "arn:aws:sns:us-east-1:123456789012:NotificationTopic",
+        "Message": "Order out of stock"
+      },
+      "End": true
+    }
+  }
+}
+
+// Parallel processing
+{
+  "Type": "Parallel",
+  "Branches": [
+    {
+      "StartAt": "ProcessA",
+      "States": {
+        "ProcessA": {
+          "Type": "Task",
+          "Resource": "arn:aws:lambda:us-east-1:123456789012:function:ProcessA",
+          "End": true
+        }
+      }
+    },
+    {
+      "StartAt": "ProcessB",
+      "States": {
+        "ProcessB": {
+          "Type": "Task",
+          "Resource": "arn:aws:lambda:us-east-1:123456789012:function:ProcessB",
+          "End": true
+        }
+      }
+    }
+  ]
+}</div>
+        </div>
+
+        <div class="question">
+            Q54: How do you implement AWS EventBridge for event-driven architecture?
+        </div>
+        <div class="answer">
+            <p><strong>EventBridge</strong> enables event-driven architecture with real-time event routing.</p>
+            
+            <div class="code-block"># Create event bus
+aws events create-event-bus --name "OrderEvents"
+
+# Create rule
+aws events put-rule \
+  --name "OrderCreatedRule" \
+  --event-bus-name "OrderEvents" \
+  --event-pattern file://event-pattern.json
+
+# Event pattern
+{
+  "source": ["com.myapp.orders"],
+  "detail-type": ["OrderCreated"],
+  "detail": {
+    "status": ["pending"]
+  }
+}
+
+# Add target to rule
+aws events put-targets \
+  --rule "OrderCreatedRule" \
+  --event-bus-name "OrderEvents" \
+  --targets file://targets.json
+
+# Targets configuration
+[
+  {
+    "Id": "1",
+    "Arn": "arn:aws:lambda:us-east-1:123456789012:function:ProcessOrder",
+    "InputTransformer": {
+      "InputPathsMap": {
+        "orderId": "$.detail.orderId"
+      },
+      "InputTemplate": "{\"orderId\": <orderId>}"
+    }
+  }
+]
+
+# Cross-account event routing
+aws events put-rule \
+  --name "CrossAccountRule" \
+  --event-bus-name "default" \
+  --event-pattern '{"account":["123456789012"]}'
+
+# Archive events
+aws events put-archive-policy \
+  --event-bus-name "OrderEvents" \
+  --retention-days 30</div>
+        </div>
+
+        <div class="question">
+            Q55: How do you implement AWS App Runner for containerized applications?
+        </div>
+        <div class="answer">
+            <p><strong>App Runner</strong> provides fully managed container application deployment.</p>
+            
+            <div class="code-block"># Create App Runner service
+aws apprunner create-service \
+  --service-name "myapp-service" \
+  --source-configuration file://source-config.json \
+  --instance-configuration file://instance-config.json
+
+# Source configuration
+{
+  "ImageRepository": {
+    "ImageIdentifier": "123456789012.dkr.ecr.us-east-1.amazonaws.com/myapp:latest",
+    "ImageConfiguration": {
+      "Port": "8080"
+    },
+    "AutoDeploymentsEnabled": true
+  }
+}
+
+# Instance configuration
+{
+  "Cpu": "1 vCPU",
+  "Memory": "2 GB",
+  "MaxConcurrency": 100,
+  "MinConcurrency": 10
+}
+
+# Environment variables
+aws apprunner update-service \
+  --service-arn "arn:aws:apprunner:us-east-1:123456789012:service/myapp-service/12345678" \
+  --source-configuration file://env-config.json
+
+# Environment configuration
+{
+  "ImageRepository": {
+    "ImageConfiguration": {
+      "EnvironmentVariables": [
+        {
+          "Name": "DATABASE_URL",
+          "Value": "postgresql://db.example.com/mydb"
+        }
+      ]
+    }
+  }
+}</div>
+        </div>
+
+        <div class="question">
+            Q56: How do you implement AWS Fargate for serverless containers?
+        </div>
+        <div class="answer">
+            <p><strong>Fargate</strong> provides serverless compute for containers without managing servers.</p>
+            
+            <div class="code-block"># ECS task definition with Fargate
+{
+  "family": "myapp-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "containerDefinitions": [
+    {
+      "name": "myapp",
+      "image": "123456789012.dkr.ecr.us-east-1.amazonaws.com/myapp:latest",
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "ENVIRONMENT",
+          "value": "production"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "DATABASE_PASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:123456789012:secret:myapp-db"
+        }
+      ]
+    }
+  ]
+}
+
+# ECS service with Fargate
+aws ecs create-service \
+  --cluster myapp-cluster \
+  --service-name myapp-service \
+  --task-definition myapp-task \
+  --desired-count 2 \
+  --launch-type FARGATE \
+  --network-configuration "awsvpcConfiguration={subnets=[subnet-1234,subnet-5678],securityGroups=[sg-1234],assignPublicIp=ENABLED}"
+
+# Auto scaling for Fargate
+aws application-autoscaling register-scalable-target \
+  --service-namespace ecs \
+  --resource-id service/myapp-cluster/myapp-service \
+  --scalable-dimension ecs:service:DesiredCount \
+  --min-capacity 2 \
+  --max-capacity 10
+
+aws application-autoscaling put-scaling-policy \
+  --service-namespace ecs \
+  --resource-id service/myapp-cluster/myapp-service \
+  --scalable-dimension ecs:service:DesiredCount \
+  --policy-name myapp-scale-policy \
+  --policy-type TargetTrackingScaling \
+  --target-tracking-policy-config file://scaling-policy.json</div>
+        </div>
+
+        <div class="question">
+            Q57: How do you implement AWS CDK for infrastructure as code?
+        </div>
+        <div class="answer">
+            <p><strong>CDK (Cloud Development Kit)</strong> enables infrastructure as code with programming languages.</p>
+            
+            <div class="code-block">// TypeScript CDK example
+import * as cdk from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import * as rds from 'aws-cdk-lib/aws-rds';
+
+export class MyStack extends cdk.Stack {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    // VPC
+    const vpc = new ec2.Vpc(this, 'MyVPC', {
+      maxAzs: 2,
+      subnetConfiguration: [
+        {
+          subnetType: ec2.SubnetType.PUBLIC,
+          name: 'Public'
+        },
+        {
+          subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
+          name: 'Private'
+        }
+      ]
+    });
+
+    // RDS instance
+    const database = new rds.DatabaseInstance(this, 'Database', {
+      engine: rds.DatabaseInstanceEngine.POSTGRES,
+      instanceType: ec2.InstanceType.of(ec2.InstanceClass.BURSTABLE3, ec2.InstanceSize.MEDIUM),
+      vpc,
+      databaseName: 'mydb',
+      allocatedStorage: 100,
+      storageEncrypted: true,
+      deletionProtection: true
+    });
+
+    // Output database endpoint
+    new cdk.CfnOutput(this, 'DatabaseEndpoint', {
+      value: database.instanceEndpoint.hostname
+    });
+  }
+}
+
+// Deploy with CDK
+cdk synth
+cdk deploy</div>
+        </div>
+
+        <div class="question">
+            Q58: How do you implement AWS PrivateLink for private connectivity?
+        </div>
+        <div class="answer">
+            <p><strong>PrivateLink</strong> provides private connectivity between VPCs and AWS services.</p>
+            
+            <div class="code-block"># Create VPC endpoint for S3
+aws ec2 create-vpc-endpoint \
+  --vpc-id vpc-1234 \
+  --service-name com.amazonaws.us-east-1.s3 \
+  --vpc-endpoint-type Gateway \
+  --route-table-ids rtb-1234
+
+# Create interface endpoint for Lambda
+aws ec2 create-vpc-endpoint \
+  --vpc-id vpc-1234 \
+  --service-name com.amazonaws.us-east-1.lambda \
+  --vpc-endpoint-type Interface \
+  --subnet-ids subnet-1234 subnet-5678 \
+  --security-group-ids sg-1234
+
+# Create PrivateLink service
+aws ec2 create-vpc-endpoint-service-configuration \
+  --service-name "com.myapp.myservice" \
+  --network-load-balancer-arns "arn:aws:elasticloadbalancing:us-east-1:123456789012:loadbalancer/net/my-nlb/12345678" \
+  --acceptance-required
+
+# Accept connection request
+aws ec2 accept-vpc-endpoint-connections \
+  --service-id vpce-svc-1234 \
+  --vpc-endpoint-id vpce-5678</div>
+        </div>
+
+        <div class="question">
+            Q59: How do you implement AWS Direct Connect for hybrid connectivity?
+        </div>
+        <div class="answer">
+            <p><strong>Direct Connect</strong> provides dedicated network connection to AWS.</p>
+            
+            <div class="code-block"># Create Direct Connect connection
+aws directconnect create-connection \
+  --location "EqDC2" \
+  --bandwidth "1Gbps" \
+  --connection-name "MyDirectConnect"
+
+# Create virtual interface
+aws directconnect create-private-virtual-interface \
+  --connection-id dxcon-1234 \
+  --new-private-virtual-interface-allocation-id 123456789012 \
+  --new-private-virtual-interface-name "MyVIF"
+
+# Create public virtual interface
+aws directconnect create-public-virtual-interface \
+  --connection-id dxcon-1234 \
+  --new-public-virtual-interface-allocation-id 123456789012 \
+  --new-public-virtual-interface-name "MyPublicVIF"
+
+# Link aggregation group (LAG)
+aws directconnect create-lag \
+  --location "EqDC2" \
+  --bandwidth "10Gbps" \
+  --connection-name "MyLAG" \
+  --lag-name "MyLAG"</div>
+        </div>
+
+        <div class="question">
+            Q60: How do you implement AWS Backup for centralized backup management?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Backup</strong> provides centralized backup across AWS services.</p>
+            
+            <div class="code-block"># Create backup plan
+aws backup create-backup-plan \
+  --backup-plan file://backup-plan.json
+
+# Backup plan configuration
+{
+  "BackupPlanName": "MyBackupPlan",
+  "Rules": [
+    {
+      "RuleName": "DailyBackup",
+      "TargetBackupVaultName": "MyVault",
+      "ScheduleExpression": "cron(0 2 * * ? *)",
+      "StartWindowMinutes": 60,
+      "CompletionWindowMinutes": 180,
+      "Lifecycle": {
+        "DeleteAfterDays": 30,
+        "MoveToColdStorageAfterDays": 7
+      }
+    }
+  ]
+}
+
+# Create backup vault
+aws backup create-backup-vault \
+  --backup-vault-name "MyVault" \
+  --encryption-key-arn "arn:aws:kms:us-east-1:123456789012:key/12345678"
+
+# Tag resources for backup
+aws backup tag-resource \
+  --resource-arn "arn:aws:ec2:us-east-1:123456789012:instance/i-1234" \
+  --tags Key=Backup,Value=Enabled
+
+# On-demand backup
+aws backup start-backup-job \
+  --backup-vault-name "MyVault" \
+  --resource-arn "arn:aws:ec2:us-east-1:123456789012:volume/vol-1234"</div>
+        </div>
+
+        <div class="question">
+            Q61: How do you implement AWS Cost Explorer and cost optimization?
+        </div>
+        <div class="answer">
+            <p><strong>Cost Explorer</strong> provides visibility into AWS costs and usage.</p>
+            
+            <div class="code-block"># Get cost and usage
+aws ce get-cost-and-usage \
+  --time-period Start=2023-01-01,End=2023-01-31 \
+  --granularity MONTHLY \
+  --metrics BlendedCost \
+  --group-by Type=DIMENSION,Key=SERVICE
+
+# Create cost anomaly detection
+aws ce create-anomaly-monitor \
+  --monitor-name "CostMonitor" \
+  --monitor-type DIMENSION \
+  --monitor-specification file://monitor-spec.json
+
+# Create cost category
+aws ce create-cost-category \
+  --name "EnvironmentCosts" \
+  --rule file://cost-category-rules.json \
+  --rule-version 1
+
+# Cost category rules
+{
+  "Rules": [
+    {
+      "Value": "Production",
+      "Rule": {
+        "Filters": [
+          {
+            "Dimension": {
+              "Key": "ResourceTag",
+              "MatchOptions": ["EQUALS"],
+              "Values": ["Environment:Production"]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+
+# Savings Plans
+aws ce purchase-savings-plan \
+  --savings-plan-offering-id "12345678-1234-1234-1234-123456789012" \
+  --savings-plan-name "ComputeSavingsPlan" \
+  --commitment "10.0" \
+  --upfront-payment "1000.0"</div>
+        </div>
+
+        <div class="question">
+            Q62: How do you implement AWS Secrets Manager for secrets management?
+        </div>
+        <div class="answer">
+            <p><strong>Secrets Manager</strong> securely stores and rotates secrets.</p>
+            
+            <div class="code-block"># Create secret
+aws secretsmanager create-secret \
+  --name "myapp/database" \
+  --secret-string file://secret.json
+
+# Secret JSON
+{
+  "username": "admin",
+  "password": "SecurePassword123",
+  "host": "db.example.com",
+  "port": "5432"
+}
+
+# Rotate secret
+aws secretsmanager rotate-secret \
+  --secret-id "myapp/database" \
+  --rotation-lambda-arn "arn:aws:lambda:us-east-1:123456789012:function:RotateSecret" \
+  --rotation-rules AutomaticallyAfterDays=30
+
+# Retrieve secret
+aws secretsmanager get-secret-value \
+  --secret-id "myapp/database"
+
+# Grant access with IAM policy
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "secretsmanager:GetSecretValue"
+      ],
+      "Resource": "arn:aws:secretsmanager:us-east-1:123456789012:secret:myapp/database"
+    }
+  ]
+}</div>
+        </div>
+
+        <div class="question">
+            Q63: How do you implement AWS CloudWatch for observability?
+        </div>
+        <div class="answer">
+            <p><strong>CloudWatch</strong> provides monitoring, logging, and alerting.</p>
+            
+            <div class="code-block"># Create custom metric
+aws cloudwatch put-metric-data \
+  --namespace "MyApp" \
+  --metric-data file://metric-data.json
+
+# Metric data
+[
+  {
+    "MetricName": "OrderCount",
+    "Value": 100,
+    "Unit": "Count",
+    "Dimensions": [
+      {
+        "Name": "Environment",
+        "Value": "Production"
+      }
+    ]
+  }
+]
+
+# Create alarm
+aws cloudwatch put-metric-alarm \
+  --alarm-name "HighCPUAlarm" \
+  --alarm-description "Alarm when CPU exceeds 80%" \
+  --metric-name CPUUtilization \
+  --namespace AWS/EC2 \
+  --statistic Average \
+  --period 300 \
+  --evaluation-periods 2 \
+  --threshold 80 \
+  --comparison-operator GreaterThanThreshold
+
+# Create log group
+aws logs create-log-group \
+  --log-group-name "/aws/lambda/myapp"
+
+# Create metric filter
+aws logs put-metric-filter \
+  --log-group-name "/aws/lambda/myapp" \
+  --filter-name "ErrorCount" \
+  --filter-pattern "[timestamp, request_id, level=ERROR, ...]" \
+  --metric-transformations file://metric-transformations.json
+
+# Metric transformations
+[
+  {
+    "metricName": "ErrorCount",
+    "metricNamespace": "MyApp",
+    "metricValue": "1"
+  }
+]</div>
+        </div>
+
+        <div class="question">
+            Q64: How do you implement AWS X-Ray for distributed tracing?
+        </div>
+        <div class="answer">
+            <p><strong>X-Ray</strong> provides distributed tracing for microservices.</p>
+            
+            <div class="code-block">// Enable X-Ray in Lambda
+import boto3
+from aws_xray_sdk.core import xray_recorder
+from aws_xray_sdk.core import patch_all
+
+patch_all()
+
+def lambda_handler(event, context):
+    # Custom segment
+    subsegment = xray_recorder.begin_subsegment('custom-operation')
+    try:
+        # Business logic
+        pass
+    finally:
+        xray_recorder.end_subsegment()
+    
+    return response
+
+// X-Ray with Express.js
+const AWSXRay = require('aws-xray-sdk-core');
+const express = require('express');
+AWSXRay.captureHTTPsGlobal();
+AWSXRay.capturePromise();
+
+const app = express();
+AWSXRay.express.openSegment(app);
+
+app.get('/', (req, res) => {
+    AWSXRay.captureAsyncFunc('custom-operation', (subsegment) => {
+        // Business logic
+        subsegment.close();
+        res.send('Hello');
+    });
+});
+
+AWSXRay.express.closeSegment(app);</div>
+        </div>
+
+        <div class="question">
+            Q65: How do you implement AWS Cognito for authentication?
+        </div>
+        <div class="answer">
+            <p><strong>Cognito</strong> provides user authentication and authorization.</p>
+            
+            <div class="code-block"># Create user pool
+aws cognito-idp create-user-pool \
+  --pool-name "MyAppUsers" \
+  --auto-verified-attributes email \
+  --policies file://policies.json
+
+# Policies configuration
+{
+  "PasswordPolicy": {
+    "MinimumLength": 8,
+    "RequireUppercase": true,
+    "RequireLowercase": true,
+    "RequireNumbers": true,
+    "RequireSymbols": true
+  }
+}
+
+# Create user pool client
+aws cognito-idp create-user-pool-client \
+  --user-pool-id us-east-1_123456789 \
+  --client-name "MyAppClient" \
+  --generate-secret \
+  --explicit-auth-flows USER_PASSWORD_AUTH
+
+# Create identity pool
+aws cognito-identity create-identity-pool \
+  --identity-pool-name "MyAppIdentityPool" \
+  --allow-unauthenticated-identities false \
+  --cognito-identity-providers file://providers.json
+
+# Providers configuration
+[
+  {
+    "ProviderName": "cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789",
+    "ClientId": "1234567890abcdef",
+    "ServerSideTokenCheck": true
+  }
+]</div>
+        </div>
+
+        <div class="question">
+            Q66: How do you implement AWS Glue for ETL?
+        </div>
+        <div class="answer">
+            <p><strong>Glue</strong> provides serverless ETL for data processing.</p>
+            
+            <div class="code-block"># Create Glue job
+aws glue create-job \
+  --name "MyETLJob" \
+  --role "arn:aws:iam::123456789012:role/GlueRole" \
+  --command file://job-command.json \
+  --default-arguments file://job-arguments.json
+
+# Job command
+{
+  "Name": "glueetl",
+  "ScriptLocation": "s3://my-bucket/scripts/etl.py",
+  "PythonVersion": "3"
+}
+
+# Job arguments
+{
+  "--TempDir": "s3://my-bucket/temp/",
+  "--job-language": "python"
+}
+
+# Python ETL script
+import sys
+from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
+
+args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+sc = SparkContext()
+glueContext = GlueContext(sc)
+
+# ETL logic
+datasource = glueContext.create_dynamic_frame.from_catalog(
+    database = "mydb",
+    table_name = "source_table",
+    transformation_ctx = "datasource"
+)
+
+# Transform data
+applymapping1 = ApplyMapping.apply(
+    frame = datasource,
+    mappings = [("id", "long", "id", "long"), ("name", "string", "name", "string")],
+    transformation_ctx = "applymapping1"
+)
+
+# Write to destination
+datasink = glueContext.write_dynamic_frame.from_options(
+    frame = applymapping1,
+    connection_type = "s3",
+    connection_options = {"path": "s3://my-bucket/output/"},
+    format = "parquet",
+    transformation_ctx = "datasink"
+)</div>
+        </div>
+
+        <div class="question">
+            Q67: How do you implement AWS Athena for serverless analytics?
+        </div>
+        <div class="answer">
+            <p><strong>Athena</strong> provides serverless SQL queries on S3 data.</p>
+            
+            <div class="code-block"># Create database
+aws athena start-query-execution \
+  --query-string "CREATE DATABASE myapp_db" \
+  --result-configuration "OutputLocation=s3://my-bucket/athena-results/"
+
+# Create table
+aws athena start-query-execution \
+  --query-string file://create-table.sql \
+  --result-configuration "OutputLocation=s3://my-bucket/athena-results/"
+
+# SQL to create table
+CREATE EXTERNAL TABLE IF NOT EXISTS myapp_db.orders (
+    order_id BIGINT,
+    customer_id BIGINT,
+    order_date DATE,
+    total_amount DECIMAL(10,2)
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES (
+    'field.delim' = ','
+)
+STORED AS TEXTFILE
+LOCATION 's3://my-bucket/orders/';
+
+# Query data
+aws athena start-query-execution \
+  --query-string "SELECT * FROM myapp_db.orders WHERE order_date > '2023-01-01'" \
+  --result-configuration "OutputLocation=s3://my-bucket/athena-results/"
+
+# Get query results
+aws athena get-query-results \
+  --query-execution-id "12345678-1234-1234-1234-123456789012"</div>
+        </div>
+
+        <div class="question">
+            Q68: How do you implement AWS S3 for object storage?
+        </div>
+        <div class="answer">
+            <p><strong>S3</strong> provides scalable object storage with advanced features.</p>
+            
+            <div class="code-block"># Create bucket with encryption
+aws s3api create-bucket \
+  --bucket myapp-bucket \
+  --region us-east-1 \
+  --create-bucket-configuration LocationConstraint=us-east-1
+
+aws s3api put-bucket-encryption \
+  --bucket myapp-bucket \
+  --server-side-encryption-configuration file://encryption.json
+
+# Encryption configuration
+{
+  "Rules": [
+    {
+      "ApplyServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "AES256"
+      }
+    }
+  ]
+}
+
+# Enable versioning
+aws s3api put-bucket-versioning \
+  --bucket myapp-bucket \
+  --versioning-configuration Status=Enabled
+
+# Lifecycle policy
+aws s3api put-bucket-lifecycle-configuration \
+  --bucket myapp-bucket \
+  --lifecycle-configuration file://lifecycle.json
+
+# Lifecycle configuration
+{
+  "Rules": [
+    {
+      "ID": "MoveToGlacier",
+      "Status": "Enabled",
+      "Transition": {
+        "Days": 30,
+        "StorageClass": "GLACIER"
+      }
+    }
+  ]
+}
+
+# Presigned URL
+aws s3 presign s3://myapp-bucket/file.txt --expires-in 3600</div>
+        </div>
+
+        <div class="question">
+            Q69: How do you implement AWS Lambda for serverless compute?
+        </div>
+        <div class="answer">
+            <p><strong>Lambda</strong> provides serverless compute for event-driven applications.</p>
+            
+            <div class="code-block">// Lambda function with layers
+exports.handler = async (event) => {
+    const { MongoClient } = require('mongodb');
+    const client = new MongoClient(process.env.MONGODB_URI);
+    
+    await client.connect();
+    const db = client.db('mydb');
+    
+    const result = await db.collection('orders').insertOne(event);
+    
+    await client.close();
+    return result;
+};
+
+// Deploy with SAM
+# template.yaml
+Resources:
+  MyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./src
+      Handler: app.handler
+      Runtime: nodejs18.x
+      Layers:
+        - !Ref MyLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /orders
+            Method: POST
+
+  MyLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      ContentUri: ./layer
+      CompatibleRuntimes:
+        - nodejs18.x
+
+# Lambda with provisioned concurrency
+aws lambda put-provisioned-concurrency-config \
+  --function-name myapp-function \
+  --provisioned-concurrent-executions 10</div>
+        </div>
+
+        <div class="question">
+            Q70: How do you implement AWS CloudFront for CDN?
+        </div>
+        <div class="answer">
+            <p><strong>CloudFront</strong> provides global content delivery network.</p>
+            
+            <div class="code-block"># Create distribution
+aws cloudfront create-distribution \
+  --distribution-config file://distribution-config.json
+
+# Distribution configuration
+{
+  "CallerReference": "2023-01-01",
+  "Origins": {
+    "Quantity": 1,
+    "Items": [
+      {
+        "Id": "S3Origin",
+        "DomainName": "myapp-bucket.s3.amazonaws.com",
+        "S3OriginConfig": {
+          "OriginAccessIdentity": "origin-access-identity/cloudfront/ABCDEFGHIJKLMNO"
+        }
+      }
+    ]
+  },
+  "DefaultCacheBehavior": {
+    "TargetOriginId": "S3Origin",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "AllowedMethods": {
+      "Quantity": 2,
+      "Items": ["GET", "HEAD"]
+    },
+    "ForwardedValues": {
+      "QueryString": false,
+      "Cookies": {
+        "Forward": "none"
+      }
+    },
+    "MinTTL": 0,
+    "DefaultTTL": 86400,
+    "MaxTTL": 31536000
+  },
+  "Enabled": true,
+  "Comment": "MyApp Distribution",
+  "PriceClass": "PriceClass_100"
+}
+
+# Create invalidation
+aws cloudfront create-invalidation \
+  --distribution-id E1234567890ABC \
+  --paths /index.html /images/*</div>
         </div>
 
         <div class="tip">

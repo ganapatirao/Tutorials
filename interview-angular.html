@@ -60,15 +60,45 @@
             border-left: 4px solid #28a745;
         }
         .code-block {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 8px;
+            background: #2d2d2d;
+            color: #e0e0e0;
+            padding: 25px;
+            border-radius: 12px;
             overflow-x: auto;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 13px;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
             margin: 15px 0;
-            line-height: 1.5;
+            line-height: 1.7;
+            border-left: 4px solid #dd0031;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .code-block::before {
+            content: '';
+            display: block;
+            margin-bottom: 10px;
+        }
+        .code-block .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        .code-block .keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+        .code-block .string {
+            color: #ce9178;
+        }
+        .code-block .function {
+            color: #dcdcaa;
+        }
+        .code-block .number {
+            color: #b5cea8;
+        }
+        .code-block .variable {
+            color: #9cdcfe;
+        }
+        .code-block .type {
+            color: #4ec9b0;
         }
         .important {
             background: #fff3cd;
@@ -2350,6 +2380,906 @@ export class AppModule {
                 <li><strong>Use RxJS operators efficiently:</strong> Avoid memory leaks with unsubscribe</li>
                 <li><strong>Implement accessibility:</strong> ARIA labels, keyboard navigation</li>
             </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>15. Advanced Topics (4-13 Years Experience)</h2>
+
+        <div class="question">
+            Q61: How do you implement advanced RxJS patterns for complex data flows?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced RxJS patterns</strong> include combining multiple streams, error handling strategies, and complex transformations.</p>
+            
+            <div class="code-block">// Combining multiple streams with combineLatest
+import { combineLatest, forkJoin, withLatestFrom } from 'rxjs';
+import { switchMap, catchError, retry, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+
+// combineLatest - emits when any source emits
+combineLatest([
+  this.userService.getUser$(),
+  this.orderService.getOrders$()
+]).pipe(
+  switchMap(([user, orders]) => {
+    return this.analyticsService.getUserAnalytics(user.id, orders);
+  })
+).subscribe(analytics => {
+  this.analytics = analytics;
+});
+
+// forkJoin - waits for all to complete
+forkJoin([
+  this.productService.getProducts$(),
+  this.categoryService.getCategories$()
+]).pipe(
+  map(([products, categories]) => ({
+    products,
+    categories
+  }))
+).subscribe(data => {
+  this.data = data;
+});
+
+// withLatestFrom - combine with latest value from another observable
+searchTerms$.pipe(
+  withLatestFrom(currentUser$),
+  switchMap(([term, user]) => {
+    return this.searchService.search(term, user.preferences);
+  })
+).subscribe(results => {
+  this.results = results;
+});
+
+// Advanced error handling with retry
+apiCall$.pipe(
+  retry({
+    count: 3,
+    delay: (error, retryCount) => {
+      if (error.status === 404) return throwError(() => error);
+      return timer(Math.pow(2, retryCount) * 1000);
+    }
+  }),
+  catchError(error => {
+    if (error.status === 401) {
+      return this.authService.refreshToken().pipe(
+        switchMap(() => apiCall$)
+      );
+    }
+    return of(null);
+  })
+).subscribe();</div>
+        </div>
+
+        <div class="question">
+            Q62: How do you optimize Angular bundle size and performance?
+        </div>
+        <div class="answer">
+            <p><strong>Bundle optimization</strong> involves analyzing and reducing the size of your JavaScript bundles.</p>
+            
+            <div class="code-block">// 1. Analyze bundle size
+ng build --stats-json
+// Then use webpack-bundle-analyzer
+
+// 2. Configure angular.json for optimization
+"build": {
+  "configurations": {
+    "production": {
+      "optimization": true,
+      "buildOptimizer": true,
+      "aot": true,
+      "extractLicenses": true,
+      "sourceMap": false,
+      "namedChunks": false
+    }
+  }
+}
+
+// 3. Lazy load routes
+const routes: Routes = [
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  }
+];
+
+// 4. Preload strategies
+export class CustomPreloadingStrategy implements PreloadingStrategy {
+  preload(route: Route, load: () => Observable<any>): Observable<any> {
+    if (route.data && route.data['preload']) {
+      return load();
+    }
+    return of(null);
+  }
+}
+
+// 5. Tree-shakeable providers
+@Injectable({ providedIn: 'root' })
+export class MyService { }
+
+// 6. OnPush change detection
+@Component({
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+
+// 7. Virtual scrolling for large lists
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
+<cdk-virtual-scroll-viewport itemSize="50">
+  <div *cdkVirtualFor="let item of items">
+    {{ item.name }}
+  </div>
+</cdk-virtual-scroll-viewport>
+
+// 8. TrackBy for ngFor
+<div *ngFor="let item of items; trackBy: trackById">
+  {{ item.name }}
+</div>
+
+trackById(index: number, item: any): number {
+  return item.id;
+}</div>
+        </div>
+
+        <div class="question">
+            Q63: How do you implement micro-frontend architecture with Angular?
+        </div>
+        <div class="answer">
+            <p><strong>Micro-frontend architecture</strong> allows multiple teams to work on different parts of an application independently.</p>
+            
+            <div class="code-block">// 1. Using Angular Elements
+import { createCustomElement } from '@angular/elements';
+
+@NgModule({
+  declarations: [ProductWidgetComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class ProductWidgetModule {
+  constructor(private injector: Injector) {
+    const customElement = createCustomElement(ProductWidgetComponent, {
+      injector: this.injector
+    });
+    customElements.define('product-widget', customElement);
+  }
+}
+
+// 2. Using Module Federation (Webpack)
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      name: "product_app",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./ProductModule": "./src/app/product/product.module.ts",
+      },
+      shared: {
+        "@angular/core": { singleton: true, strictVersion: true },
+        "@angular/common": { singleton: true, strictVersion: true },
+        "@angular/router": { singleton: true, strictVersion: true },
+      },
+    }),
+  ],
+};
+
+// 3. Loading remote module
+const routes: Routes = [
+  {
+    path: 'products',
+    loadChildren: () =>
+      import('product_app/ProductModule').then(m => m.ProductModule)
+  }
+];
+
+// 4. Single-SPA integration
+import { registerApplication, start } from 'single-spa';
+
+registerApplication({
+  name: '@my-org/product',
+  app: () => System.import('@my-org/product'),
+  activeWhen: '/products'
+});
+
+start();</div>
+        </div>
+
+        <div class="question">
+            Q64: How do you implement advanced security measures in Angular?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced security</strong> includes CSRF protection, XSS prevention, and secure authentication.</p>
+            
+            <div class="code-block">// 1. CSRF Token Interceptor
+@Injectable()
+export class CsrfInterceptor implements HttpInterceptor {
+  constructor(private cookieService: CookieService) {}
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const csrfToken = this.cookieService.get('XSRF-TOKEN');
+    
+    if (csrfToken) {
+      req = req.clone({
+        setHeaders: {
+          'X-XSRF-TOKEN': csrfToken
+        }
+      });
+    }
+    
+    return next.handle(req);
+  }
+}
+
+// 2. XSS Prevention - Sanitization
+import { DomSanitizer } from '@angular/platform-browser';
+
+constructor(private sanitizer: DomSanitizer) {}
+
+sanitizeHtml(html: string) {
+  return this.sanitizer.bypassSecurityTrustHtml(html);
+}
+
+// 3. Content Security Policy
+<meta http-equiv="Content-Security-Policy" 
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';">
+
+// 4. Secure HTTP Headers Interceptor
+@Injectable()
+export class SecurityHeadersInterceptor implements HttpInterceptor {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const secureReq = req.clone({
+      setHeaders: {
+        'X-Content-Type-Options': 'nosniff',
+        'X-Frame-Options': 'DENY',
+        'X-XSS-Protection': '1; mode=block',
+        'Strict-Transport-Security': 'max-age=31536000; includeSubDomains'
+      }
+    });
+    
+    return next.handle(secureReq);
+  }
+}
+
+// 5. JWT Token Management
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  constructor(private authService: AuthService) {}
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = this.authService.getToken();
+    
+    if (token) {
+      req = req.clone({
+        setHeaders: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+    }
+    
+    return next.handle(req).pipe(
+      catchError(error => {
+        if (error.status === 401) {
+          this.authService.logout();
+        }
+        return throwError(() => error);
+      })
+    );
+  }
+}</div>
+        </div>
+
+        <div class="question">
+            Q65: How do you implement advanced testing strategies in Angular?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced testing</strong> includes integration tests, end-to-end tests, and test utilities.</p>
+            
+            <div class="code-block">// 1. Integration Testing with TestBed
+describe('ProductComponent Integration', () => {
+  let component: ProductComponent;
+  let fixture: ComponentFixture<ProductComponent>;
+  let productService: ProductService;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ProductComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [ProductService]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ProductComponent);
+    component = fixture.componentInstance;
+    productService = TestBed.inject(ProductService);
+  });
+
+  it('should load products on init', fakeAsync(() => {
+    spyOn(productService, 'getProducts').and.returnValue(of([
+      { id: 1, name: 'Product 1' }
+    ]));
+
+    component.ngOnInit();
+    tick();
+
+    expect(component.products.length).toBe(1);
+  }));
+});
+
+// 2. Component Testing with Inputs and Outputs
+it('should emit product selected event', () => {
+  const product = { id: 1, name: 'Product 1' };
+  spyOn(component.productSelected, 'emit');
+
+  component.selectProduct(product);
+
+  expect(component.productSelected.emit).toHaveBeenCalledWith(product);
+});
+
+// 3. Directive Testing
+describe('HighlightDirective', () => {
+  it('should highlight element', () => {
+    const fixture = TestBed.createComponent(HostComponent);
+    const directive = fixture.debugElement.query(By.directive(HighlightDirective));
+    
+    directive.nativeElement.dispatchEvent(new Event('mouseenter'));
+    fixture.detectChanges();
+
+    expect(directive.nativeElement.style.backgroundColor).toBe('yellow');
+  });
+});
+
+// 4. E2E Testing with Cypress
+describe('Product Page E2E', () => {
+  it('should display products', () => {
+    cy.visit('/products');
+    cy.get('.product-item').should('have.length.greaterThan', 0);
+  });
+
+  it('should add product to cart', () => {
+    cy.visit('/products');
+    cy.get('.add-to-cart').first().click();
+    cy.get('.cart-count').should('contain', '1');
+  });
+});
+
+// 5. Testing HTTP Interceptors
+describe('AuthInterceptor', () => {
+  let interceptor: AuthInterceptor;
+  let authService: AuthService;
+  let httpRequest: HttpRequest<any>;
+  let httpHandler: HttpHandler;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [AuthInterceptor, AuthService]
+    });
+
+    interceptor = TestBed.inject(AuthInterceptor);
+    authService = TestBed.inject(AuthService);
+    httpRequest = new HttpRequest('GET', '/api/data');
+    httpHandler = { handle: jasmine.createSpy('handle').and.returnValue(of(null)) };
+  });
+
+  it('should add auth header', () => {
+    spyOn(authService, 'getToken').and.returnValue('test-token');
+    
+    interceptor.intercept(httpRequest, httpHandler).subscribe();
+    
+    expect(httpHandler.handle).toHaveBeenCalledWith(
+      jasmine.objectContaining({
+        headers: jasmine.objectContaining({
+          'Authorization': 'Bearer test-token'
+        })
+      })
+    );
+  });
+});</div>
+        </div>
+
+        <div class="question">
+            Q66: How do you implement advanced component patterns and architecture?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced component patterns</strong> include container/presentational pattern, smart/dumb components, and composition patterns.</p>
+            
+            <div class="code-block">// 1. Container/Presentational Pattern
+// Presentational Component (Dumb)
+@Component({
+  selector: 'app-product-list',
+  template: `
+    <div *ngFor="let product of products">
+      <app-product-item [product]="product" (select)="onSelect($event)"></app-product-item>
+    </div>
+  `
+})
+export class ProductListComponent {
+  @Input() products: Product[];
+  @Output() select = new EventEmitter<Product>();
+  
+  onSelect(product: Product) {
+    this.select.emit(product);
+  }
+}
+
+// Container Component (Smart)
+@Component({
+  selector: 'app-product-container',
+  template: `
+    <app-product-list 
+      [products]="products$ | async" 
+      (select)="selectProduct($event)">
+    </app-product-list>
+  `
+})
+export class ProductContainerComponent {
+  products$ = this.productService.getProducts$();
+  
+  constructor(private productService: ProductService) {}
+  
+  selectProduct(product: Product) {
+    this.productService.selectProduct(product);
+  }
+}
+
+// 2. Composition Pattern with Content Projection
+@Component({
+  selector: 'app-card',
+  template: `
+    <div class="card">
+      <div class="card-header">
+        <ng-content select="[card-header]"></ng-content>
+      </div>
+      <div class="card-body">
+        <ng-content select="[card-body]"></ng-content>
+      </div>
+      <div class="card-footer">
+        <ng-content select="[card-footer]"></ng-content>
+      </div>
+    </div>
+  `
+})
+export class CardComponent {}
+
+// Usage
+<app-card>
+  <div card-header>Product Details</div>
+  <div card-body>{{ product.description }}</div>
+  <div card-footer>
+    <button (click)="buy()">Buy Now</button>
+  </div>
+</app-card>
+
+// 3. Higher-Order Component Pattern
+@Component({
+  selector: 'app-with-loading',
+  template: `
+    <ng-container *ngIf="!loading">
+      <ng-content></ng-content>
+    </ng-container>
+    <div *ngIf="loading" class="loading">Loading...</div>
+  `
+})
+export class WithLoadingComponent {
+  @Input() loading = false;
+}
+
+// Usage
+<app-with-loading [loading]="isLoading$ | async">
+  <app-product-list [products]="products$ | async"></app-product-list>
+</app-with-loading>
+
+// 4. Mixin Pattern using TypeScript
+export class DestroyMixin implements OnDestroy {
+  protected destroy$ = new Subject<void>();
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+}
+
+@Component({
+  selector: 'app-product',
+  template: '...'
+})
+export class ProductComponent extends DestroyMixin {
+  constructor() {
+    super();
+    
+    this.data$.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe();
+  }
+}</div>
+        </div>
+
+        <div class="question">
+            Q67: How do you implement advanced routing patterns?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced routing</strong> includes lazy loading, route guards, custom resolvers, and route parameters.</p>
+            
+            <div class="code-block">// 1. Custom Route Resolver
+@Injectable({ providedIn: 'root' })
+export class ProductResolver implements Resolve<Product> {
+  constructor(private productService: ProductService) {}
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product> {
+    return this.productService.getProduct(route.paramMap.get('id')).pipe(
+      catchError(error => {
+        this.router.navigate(['/error']);
+        return of(null);
+      })
+    );
+  }
+}
+
+// Route configuration
+const routes: Routes = [
+  {
+    path: 'products/:id',
+    component: ProductDetailComponent,
+    resolve: {
+      product: ProductResolver
+    }
+  }
+];
+
+// 2. Multiple Route Guards
+@Injectable({ providedIn: 'root' })
+export class AdminGuard implements CanActivate {
+  constructor(private authService: AuthService, private router: Router) {}
+
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+    if (this.authService.isAdmin()) {
+      return true;
+    }
+    this.router.navigate(['/unauthorized']);
+    return false;
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class CanDeactivateGuard implements CanDeactivate<ProductComponent> {
+  canDeactivate(component: ProductComponent): boolean {
+    if (component.hasUnsavedChanges()) {
+      return confirm('You have unsaved changes. Are you sure you want to leave?');
+    }
+    return true;
+  }
+}
+
+// 3. Dynamic Route Configuration
+const routes: Routes = [
+  {
+    path: 'admin',
+    canLoad: [AdminGuard],
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  }
+];
+
+// 4. Custom Preloading Strategy
+export class CustomPreloadingStrategy implements PreloadingStrategy {
+  preload(route: Route, load: () => Observable<any>): Observable<any> {
+    if (route.data && route.data['preload']) {
+      return load();
+    }
+    return of(null);
+  }
+}
+
+// 5. Query Parameters and Fragment
+this.router.navigate(['/products'], {
+  queryParams: { category: 'electronics', price: '100-500' },
+  fragment: 'reviews'
+});
+
+// 6. Route Reuse Strategy
+export class CustomRouteReuseStrategy extends BaseRouteReuseStrategy {
+  shouldDetach(route: ActivatedRouteSnapshot): boolean {
+    return route.data['shouldReuse'] || false;
+  }
+
+  store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
+    this.storedRoutes[route.routeConfig.path] = handle;
+  }
+
+  shouldAttach(route: ActivatedRouteSnapshot): boolean {
+    return !!route.routeConfig && !!this.storedRoutes[route.routeConfig.path];
+  }
+
+  retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
+    return this.storedRoutes[route.routeConfig.path];
+  }
+}</div>
+        </div>
+
+        <div class="question">
+            Q68: How do you implement server-side rendering (SSR) with Angular Universal?
+        </div>
+        <div class="answer">
+            <p><strong>Angular Universal</strong> enables server-side rendering for improved SEO and initial load performance.</p>
+            
+            <div class="code-block">// 1. Add Angular Universal
+ng add @nguniversal/express-engine
+
+// 2. Server Configuration
+import { ngExpressEngine } from '@nguniversal/express-engine';
+import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
+
+app.engine('html', ngExpressEngine({
+  bootstrap: AppServerModule,
+  providers: [
+    provideModuleMap(LAZY_MODULE_MAP)
+  ]
+});
+
+app.set('view engine', 'html');
+app.set('views', join(DIST_FOLDER, 'browser'));
+
+// 3. Transfer State between Server and Client
+import { TransferState, makeStateKey } from '@angular/platform-browser';
+
+const STATE_KEY = makeStateKey('products');
+
+// Server-side
+constructor(private transferState: TransferState) {}
+
+ngOnInit() {
+  if (!this.transferState.hasKey(STATE_KEY)) {
+    this.http.get('/api/products').subscribe(products => {
+      this.transferState.set(STATE_KEY, products);
+      this.products = products;
+    });
+  } else {
+    this.products = this.transferState.get(STATE_KEY, null);
+  }
+}
+
+// 4. SEO Meta Tags
+import { Meta, Title } from '@angular/platform-browser';
+
+constructor(private meta: Meta, private title: Title) {}
+
+updateMetaTags(product: Product) {
+  this.title.setTitle(product.name);
+  this.meta.updateTag({
+    name: 'description',
+    content: product.description
+  });
+  this.meta.updateTag({
+    property: 'og:title',
+    content: product.name
+  });
+  this.meta.updateTag({
+    property: 'og:image',
+    content: product.imageUrl
+  });
+}
+
+// 5. Handle Browser-Specific Code
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+
+constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+ngOnInit() {
+  if (isPlatformBrowser(this.platformId)) {
+    // Browser-only code
+    localStorage.setItem('key', 'value');
+  }
+  
+  if (isPlatformServer(this.platformId)) {
+    // Server-only code
+    console.log('Rendering on server');
+  }
+}</div>
+        </div>
+
+        <div class="question">
+            Q69: How do you implement Progressive Web App (PWA) features in Angular?
+        </div>
+        <div class="answer">
+            <p><strong>PWA features</strong> include offline support, push notifications, and app-like experience.</p>
+            
+            <div class="code-block">// 1. Add PWA support
+ng add @angular/pwa
+
+// 2. Service Worker Configuration
+{
+  "name": "angular-pwa",
+  "version": "1.0.0",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/manifest.webmanifest",
+          "/*.css",
+          "/*.js"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/*.(svg|png|jpg|jpeg|gif|webp|ico)"
+        ]
+      }
+    }
+  ]
+}
+
+// 3. Push Notifications
+this.swPush.messages.subscribe(message => {
+  console.log('Push notification received:', message);
+});
+
+this.swPush.requestSubscription({
+  serverPublicKey: this.vapidPublicKey
+}).then(subscription => {
+  this.userService.savePushSubscription(subscription);
+});
+
+// 4. Offline Detection
+this.sw.available.subscribe(event => {
+  console.log('New version available:', event);
+  this.promptUpdate();
+});
+
+this.sw.activated.subscribe(event => {
+  console.log('New version activated:', event);
+});
+
+promptUpdate() {
+  this.swActivationService.activateUpdate();
+}
+
+// 5. Background Sync
+navigator.serviceWorker.ready.then(registration => {
+  registration.sync.register('sync-data');
+});
+
+// 6. App Shell
+const routes: Routes = [
+  {
+    path: 'shell',
+    component: AppShellComponent,
+    outlet: 'shell'
+  },
+  {
+    path: 'products',
+    component: ProductsComponent
+  }
+];
+
+// 7. Install Prompt
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  this.installPrompt = event;
+  this.showInstallButton = true;
+});
+
+installApp() {
+  this.installPrompt.prompt();
+  this.installPrompt.userChoice.then(result => {
+    if (result.outcome === 'accepted') {
+      console.log('App installed');
+    }
+    this.showInstallButton = false;
+  });
+}</div>
+        </div>
+
+        <div class="question">
+            Q70: How do you implement advanced form validation and patterns?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced form patterns</strong> include custom validators, dynamic forms, and cross-field validation.</p>
+            
+            <div class="code-block">// 1. Custom Async Validator
+export function uniqueEmailValidator(userService: UserService): AsyncValidatorFn {
+  return (control: AbstractControl): Observable<ValidationErrors | null> => {
+    return userService.checkEmailExists(control.value).pipe(
+      map(exists => exists ? { uniqueEmail: true } : null),
+      catchError(() => of(null))
+    );
+  };
+}
+
+// Usage
+this.email = new FormControl('', null, [uniqueEmailValidator(this.userService)]);
+
+// 2. Cross-Field Validator
+export function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+  const password = control.get('password');
+  const confirmPassword = control.get('confirmPassword');
+  
+  if (password.value !== confirmPassword.value) {
+    return { passwordMatch: true };
+  }
+  
+  return null;
+}
+
+// Usage
+this.form = new FormGroup({
+  password: new FormControl('', Validators.required),
+  confirmPassword: new FormControl('', Validators.required)
+}, { validators: passwordMatchValidator });
+
+// 3. Dynamic Form Builder
+@Injectable()
+export class DynamicFormService {
+  buildForm(controls: FormControlConfig[]): FormGroup {
+    const group: any = {};
+    
+    controls.forEach(config => {
+      group[config.name] = this.createControl(config);
+    });
+    
+    return new FormGroup(group);
+  }
+  
+  private createControl(config: FormControlConfig): AbstractControl {
+    let validators = [];
+    let asyncValidators = [];
+    
+    if (config.required) validators.push(Validators.required);
+    if (config.minLength) validators.push(Validators.minLength(config.minLength));
+    if (config.maxLength) validators.push(Validators.maxLength(config.maxLength));
+    if (config.pattern) validators.push(Validators.pattern(config.pattern));
+    if (config.email) validators.push(Validators.email);
+    
+    if (config.uniqueEmail) {
+      asyncValidators.push(uniqueEmailValidator(this.userService));
+    }
+    
+    return new FormControl(config.value || '', validators, asyncValidators);
+  }
+}
+
+// 4. Form State Management with Signals
+@Injectable()
+export class FormStore {
+  private formState = signal<FormGroupState>({
+    values: {},
+    errors: {},
+    touched: {},
+    dirty: {}
+  });
+  
+  readonly state = this.formState.asReadonly();
+  
+  updateValue(field: string, value: any) {
+    this.formState.update(state => ({
+      ...state,
+      values: { ...state.values, [field]: value }
+    }));
+  }
+  
+  updateError(field: string, error: ValidationErrors | null) {
+    this.formState.update(state => ({
+      ...state,
+      errors: { ...state.errors, [field]: error }
+    }));
+  }
+}
+
+// 5. Form Debounce with RxJS
+this.searchControl.valueChanges.pipe(
+  debounceTime(300),
+  distinctUntilChanged(),
+  switchMap(value => this.searchService.search(value))
+).subscribe(results => {
+  this.results = results;
+});</div>
         </div>
 
         <div class="tip">

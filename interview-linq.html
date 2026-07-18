@@ -60,15 +60,45 @@
             border-left: 4px solid #28a745;
         }
         .code-block {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 8px;
+            background: #2d2d2d;
+            color: #e0e0e0;
+            padding: 25px;
+            border-radius: 12px;
             overflow-x: auto;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 13px;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
             margin: 15px 0;
-            line-height: 1.5;
+            line-height: 1.7;
+            border-left: 4px solid #512bd4;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .code-block::before {
+            content: '';
+            display: block;
+            margin-bottom: 10px;
+        }
+        .code-block .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        .code-block .keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+        .code-block .string {
+            color: #ce9178;
+        }
+        .code-block .function {
+            color: #dcdcaa;
+        }
+        .code-block .number {
+            color: #b5cea8;
+        }
+        .code-block .variable {
+            color: #9cdcfe;
+        }
+        .code-block .type {
+            color: #4ec9b0;
         }
         .important {
             background: #fff3cd;
@@ -2836,6 +2866,698 @@ public static IEnumerable&lt;(double Upper, double Middle, double Lower)&gt; Bol
         yield return (upper, middle, lower);
     }
 }</div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>15. Advanced Topics (4-13 Years Experience)</h2>
+
+        <div class="question">
+            Q91: How do you implement async LINQ operations with IAsyncEnumerable?
+        </div>
+        <div class="answer">
+            <p><strong>IAsyncEnumerable</strong> enables asynchronous streaming of data, essential for large datasets or I/O-bound operations.</p>
+            
+            <div class="code-block">// Async LINQ with System.Linq.Async
+using System.Linq.Async;
+
+// Async source
+async IAsyncEnumerable&lt;Product&gt; GetProductsAsync()
+{
+    await foreach (var product in _database.QueryAsync())
+    {
+        yield return product;
+    }
+}
+
+// Async LINQ operations
+var expensiveProducts = await GetProductsAsync()
+    .Where(p => p.Price > 100)
+    .OrderBy(p => p.Name)
+    .ToListAsync();
+
+// Custom async extension method
+public static async IAsyncEnumerable&lt;T&gt; WhereAsync&lt;T&gt;(
+    this IAsyncEnumerable&lt;T&gt; source,
+    Func&lt;T, Task&lt;bool&gt;&gt; predicate)
+{
+    await foreach (var item in source)
+    {
+        if (await predicate(item))
+        {
+            yield return item;
+        }
+    }
+}
+
+// Usage with async predicate
+var products = await GetProductsAsync()
+    .WhereAsync(async p => await IsValidAsync(p))
+    .ToListAsync();
+
+// Async aggregation
+var total = await GetProductsAsync()
+    .SumAsync(p => p.Price);
+
+// Async group by
+var grouped = await GetProductsAsync()
+    .GroupBy(p => p.Category)
+    .ToListAsync();</div>
+        </div>
+
+        <div class="question">
+            Q92: How do you implement LINQ with Span and Memory for high-performance scenarios?
+        </div>
+        <div class="answer">
+            <p><strong>Span and Memory</strong> enable zero-allocation operations for high-performance LINQ scenarios.</p>
+            
+            <div class="code-block">// LINQ with Span
+public static int Sum(this Span&lt;int&gt; source)
+{
+    int sum = 0;
+    foreach (var item in source)
+    {
+        sum += item;
+    }
+    return sum;
+}
+
+// Usage
+Span&lt;int&gt; numbers = stackalloc int[] { 1, 2, 3, 4, 5 };
+var sum = numbers.Sum(); // No allocation
+
+// LINQ with Memory
+public static double Average(this ReadOnlyMemory&lt;double&gt; source)
+{
+    var span = source.Span;
+    double sum = 0;
+    
+    for (int i = 0; i < span.Length; i++)
+    {
+        sum += span[i];
+    }
+    
+    return sum / span.Length;
+}
+
+// High-performance string processing
+public static int CountVowels(ReadOnlySpan&lt;char&gt; text)
+{
+    int count = 0;
+    for (int i = 0; i < text.Length; i++)
+    {
+        var c = char.ToLower(text[i]);
+        if (c is 'a' or 'e' or 'i' or 'o' or 'u')
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
+// Usage
+string text = "Hello World";
+var vowelCount = CountVowels(text.AsSpan());
+
+// Memory-optimized LINQ alternative
+public static IEnumerable&lt;T&gt; WhereNoAlloc&lt;T&gt;(
+    this ReadOnlySpan&lt;T&gt; source,
+    Func&lt;T, bool&gt; predicate)
+{
+    for (int i = 0; i < source.Length; i++)
+    {
+        if (predicate(source[i]))
+        {
+            yield return source[i];
+        }
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q93: How do you implement LINQ with pattern matching (C# 8.0+)?
+        </div>
+        <div class="answer">
+            <p><strong>Pattern matching</strong> in LINQ enables more expressive and type-safe queries.</p>
+            
+            <div class="code-block">// Pattern matching in LINQ
+var products = new List&lt;object&gt;
+{
+    new Product { Name = "Laptop", Price = 1000 },
+    new Service { Name = "Support", Price = 50 },
+    new Product { Name = "Mouse", Price = 20 }
+};
+
+// Filter by type with pattern matching
+var onlyProducts = products.OfType&lt;Product&gt;();
+var onlyServices = products.OfType&lt;Service&gt;();
+
+// Pattern matching in where clause
+var expensiveProducts = products
+    .Where(p => p is Product prod && prod.Price > 100)
+    .Cast&lt;Product&gt;();
+
+// Pattern matching in select
+var results = products
+    .Select(p => p switch
+    {
+        Product prod when prod.Price > 100 => $"Expensive: {prod.Name}",
+        Product prod => $"Product: {prod.Name}",
+        Service serv => $"Service: {serv.Name}",
+        _ => "Unknown"
+    });
+
+// Relational patterns
+var grades = new[] { 90, 85, 70, 60, 45 };
+var letterGrades = grades.Select(g => g switch
+{
+    >= 90 => "A",
+    >= 80 => "B",
+    >= 70 => "C",
+    >= 60 => "D",
+    _ => "F"
+});
+
+// Property patterns
+var people = new[] { 
+    new { Name = "John", Age = 30 },
+    new { Name = "Jane", Age = 25 }
+};
+
+var adults = people.Where(p => p is { Age: >= 18 });
+
+// List patterns
+var coordinates = new[] { (1, 2), (3, 4), (5, 6) };
+var onDiagonal = coordinates.Where(c => c is (int x, int y) && x == y);</div>
+        </div>
+
+        <div class="question">
+            Q94: How do you implement LINQ with records and positional patterns?
+        </div>
+        <div class="answer">
+            <p><strong>Records</strong> provide immutable data structures that work well with LINQ.</p>
+            
+            <div class="code-block">// Records for LINQ
+public record Product(int Id, string Name, decimal Price, string Category);
+public record Order(int Id, DateTime Date, List&lt;OrderItem&gt; Items);
+public record OrderItem(int ProductId, int Quantity, decimal UnitPrice);
+
+// LINQ with records
+var products = new[]
+{
+    new Product(1, "Laptop", 1000, "Electronics"),
+    new Product(2, "Mouse", 20, "Electronics"),
+    new Product(3, "Book", 15, "Books")
+};
+
+// Deconstruction with records
+var productNames = products.Select(p =>
+{
+    var (id, name, price, category) = p;
+    return name;
+});
+
+// Positional pattern matching
+var electronics = products.Where(p => p is Product(_, _, _, "Electronics"));
+
+// With expressions for transformation
+var discounted = products.Select(p => p with { Price = p.Price * 0.9m });
+
+// Record equality in LINQ
+var productSet = products.Distinct(); // Uses built-in equality
+
+// Grouping with records
+var groupedByCategory = products.GroupBy(p => p.Category);
+
+// Joining records
+var orders = new[]
+{
+    new Order(1, DateTime.Now, new[] { new OrderItem(1, 2, 1000) })
+};
+
+var orderDetails = orders
+    .Join(products,
+        o => o.Items.First().ProductId,
+        p => p.Id,
+        (o, p) => new { Order = o, Product = p });</div>
+        </div>
+
+        <div class="question">
+            Q95: How do you implement custom LINQ providers for data sources?
+        </div>
+        <div class="answer">
+            <p><strong>Custom LINQ providers</strong> allow you to query any data source using LINQ syntax.</p>
+            
+            <div class="code-block">// IQueryable provider
+public class CustomQueryProvider : IQueryProvider
+{
+    public IQueryable CreateQuery(Expression expression)
+    {
+        Type elementType = expression.Type.GetGenericArguments()[0];
+        Type queryType = typeof(CustomQuery&lt;&gt;).MakeGenericType(elementType);
+        return (IQueryable)Activator.CreateInstance(queryType, expression, this);
+    }
+
+    public IQueryable&lt;TElement&gt; CreateQuery&lt;TElement&gt;(Expression expression)
+    {
+        return new CustomQuery&lt;TElement&gt;(expression, this);
+    }
+
+    public object Execute(Expression expression)
+    {
+        return Execute&lt;object&gt;(expression);
+    }
+
+    public TResult Execute&lt;TResult&gt;(Expression expression)
+    {
+        // Translate expression to custom query language
+        var translated = Translate(expression);
+        
+        // Execute against data source
+        var result = ExecuteQuery(translated);
+        
+        return (TResult)result;
+    }
+
+    private string Translate(Expression expression)
+    {
+        // Implement expression tree translation
+        var visitor = new QueryTranslator();
+        return visitor.Translate(expression);
+    }
+
+    private object ExecuteQuery(string query)
+    {
+        // Execute against your data source
+        // e.g., REST API, file system, custom database
+        return null;
+    }
+}
+
+// Custom IQueryable
+public class CustomQuery&lt;T&gt; : IOrderedQueryable&lt;T&gt;
+{
+    public Expression Expression { get; }
+    public Type ElementType => typeof(T);
+    public IQueryProvider Provider { get; }
+
+    public CustomQuery(IQueryProvider provider)
+    {
+        Provider = provider;
+        Expression = Expression.Constant(this);
+    }
+
+    public CustomQuery(Expression expression, IQueryProvider provider)
+    {
+        Provider = provider;
+        Expression = expression;
+    }
+
+    public IEnumerator&lt;T&gt; GetEnumerator()
+    {
+        return Provider.Execute&lt;IEnumerable&lt;T&gt;&gt;(Expression).GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+}
+
+// Usage
+var queryable = new CustomQuery&lt;Product&gt;(new CustomQueryProvider());
+var results = queryable.Where(p => p.Price > 100).ToList();</div>
+        </div>
+
+        <div class="question">
+            Q96: How do you implement LINQ expression tree manipulation?
+        </div>
+        <div class="answer">
+            <p><strong>Expression trees</strong> enable dynamic query building and manipulation.</p>
+            
+            <div class="code-block">// Dynamic query builder
+public static class QueryBuilder
+{
+    public static IQueryable&lt;T&gt; BuildDynamicQuery&lt;T&gt;(
+        IQueryable&lt;T&gt; source,
+        Dictionary&lt;string, object&gt; filters)
+    {
+        var parameter = Expression.Parameter(typeof(T), "x");
+        Expression? predicate = null;
+
+        foreach (var filter in filters)
+        {
+            var property = Expression.Property(parameter, filter.Key);
+            var constant = Expression.Constant(filter.Value);
+            
+            var comparison = Expression.Equal(property, constant);
+            
+            predicate = predicate == null 
+                ? comparison 
+                : Expression.AndAlso(predicate, comparison);
+        }
+
+        if (predicate != null)
+        {
+            var lambda = Expression.Lambda&lt;Func&lt;T, bool&gt;&gt;(predicate, parameter);
+            source = source.Where(lambda);
+        }
+
+        return source;
+    }
+}
+
+// Usage
+var filters = new Dictionary&lt;string, object&gt;
+{
+    { "Category", "Electronics" },
+    { "IsActive", true }
+};
+
+var query = QueryBuilder.BuildDynamicQuery(context.Products, filters);
+
+// Expression visitor for modification
+public class ParameterReplacer : ExpressionVisitor
+{
+    private readonly ParameterExpression _oldParameter;
+    private readonly ParameterExpression _newParameter;
+
+    public ParameterReplacer(ParameterExpression oldParameter, ParameterExpression newParameter)
+    {
+        _oldParameter = oldParameter;
+        _newParameter = newParameter;
+    }
+
+    protected override Expression VisitParameter(ParameterExpression node)
+    {
+        return node == _oldParameter ? _newParameter : base.VisitParameter(node);
+    }
+}
+
+// Combining expressions
+public static Expression&lt;Func&lt;T, bool&gt;&gt; And&lt;T&gt;(
+    this Expression&lt;Func&lt;T, bool&gt;&gt; first,
+    Expression&lt;Func&lt;T, bool&gt;&gt; second)
+{
+    var parameter = Expression.Parameter(typeof(T));
+    
+    var leftVisitor = new ParameterReplacer(first.Parameters[0], parameter);
+    var left = leftVisitor.Visit(first.Body);
+    
+    var rightVisitor = new ParameterReplacer(second.Parameters[0], parameter);
+    var right = rightVisitor.Visit(second.Body);
+    
+    return Expression.Lambda&lt;Func&lt;T, bool&gt;&gt;(
+        Expression.AndAlso(left, right), parameter);
+}
+
+// Usage
+var expr1 = (Product p) => p.Price > 100;
+var expr2 = (Product p) => p.Category == "Electronics";
+var combined = expr1.And(expr2);</div>
+        </div>
+
+        <div class="question">
+            Q97: How do you implement LINQ with functional programming concepts?
+        </div>
+        <div class="answer">
+            <p><strong>Functional programming</strong> concepts like immutability and higher-order functions work well with LINQ.</p>
+            
+            <div class="code-block">// Functional LINQ patterns
+// Immutable operations
+public static IEnumerable&lt;T&gt; Append&lt;T&gt;(this IEnumerable&lt;T&gt; source, T item)
+{
+    foreach (var s in source)
+    {
+        yield return s;
+    }
+    yield return item;
+}
+
+// Currying with LINQ
+public static Func&lt;IEnumerable&lt;T&gt;, IEnumerable&lt;T&gt;&gt; Where&lt;T&gt;(Func&lt;T, bool&gt; predicate)
+{
+    return source => source.Where(predicate);
+}
+
+// Usage
+var expensiveProducts = Where&lt;Product&gt;(p => p.Price > 100);
+var electronics = Where&lt;Product&gt;(p => p.Category == "Electronics");
+
+var expensiveElectronics = products
+    .Where(expensiveProducts)
+    .Where(electronics);
+
+// Function composition
+public static Func&lt;T, TResult&gt; Compose&lt;T, TMiddle, TResult&gt;(
+    Func&lt;T, TMiddle&gt; first,
+    Func&lt;TMiddle, TResult&gt; second)
+{
+    return x => second(first(x));
+}
+
+// Memoization
+public static Func&lt;T, TResult&gt; Memoize&lt;T, TResult&gt;(Func&lt;T, TResult&gt; func)
+{
+    var cache = new Dictionary&lt;T, TResult&gt;();
+    
+    return arg =>
+    {
+        if (!cache.ContainsKey(arg))
+        {
+            cache[arg] = func(arg);
+        }
+        return cache[arg];
+    };
+}
+
+// Usage with LINQ
+var expensiveComputation = Memoize&lt;int, int&gt;(x => x * x * x);
+var cubes = Enumerable.Range(1, 1000).Select(expensiveComputation);
+
+// Pipe pattern
+public static TResult Pipe&lt;T, TResult&gt;(this T value, Func&lt;T, TResult&gt; func)
+{
+    return func(value);
+}
+
+// Chaining operations
+var result = data
+    .Pipe(d => d.Where(x => x > 0))
+    .Pipe(d => d.OrderBy(x => x))
+    .Pipe(d => d.Take(10))
+    .ToList();</div>
+        </div>
+
+        <div class="question">
+            Q98: How do you implement LINQ for real-time data streams?
+        </div>
+        <div class="answer">
+            <p><strong>Real-time LINQ</strong> processes continuous data streams using reactive extensions.</p>
+            
+            <div class="code-block">// Using System.Reactive (Rx.NET)
+using System.Reactive.Linq;
+
+// Create observable stream
+var dataStream = Observable.Interval(TimeSpan.FromSeconds(1))
+    .Select(x => new SensorReading
+    {
+        Timestamp = DateTime.Now,
+        Value = x * 10
+    });
+
+// LINQ-like operations on streams
+var alerts = dataStream
+    .Where(reading => reading.Value > 50)
+    .Throttle(TimeSpan.FromSeconds(5))
+    .Select(reading => $"Alert: {reading.Value}");
+
+// Subscribe to stream
+alerts.Subscribe(alert => Console.WriteLine(alert));
+
+// Sliding window with Rx
+var movingAverage = dataStream
+    .Buffer(TimeSpan.FromSeconds(10), 5)
+    .Select(buffer => buffer.Average(r => r.Value));
+
+// Group by time windows
+var groupedByMinute = dataStream
+    .GroupByUntil(
+        reading => reading.Timestamp.Minute,
+        group => group.Throttle(TimeSpan.FromMinutes(1))
+    )
+    .Select(group => new
+    {
+        Minute = group.Key,
+        Average = group.Average(r => r.Value)
+    });
+
+// Merge multiple streams
+var combined = Observable.Merge(stream1, stream2, stream3);
+
+// Custom LINQ to Rx bridge
+public static IObservable&lt;T&gt; ToObservable&lt;T&gt;(this IEnumerable&lt;T&gt; source)
+{
+    return source.ToObservable();
+}
+
+public static IObservable&lt;T&gt; WhereAsync&lt;T&gt;(
+    this IObservable&lt;T&gt; source,
+    Func&lt;T, Task&lt;bool&gt;&gt; predicate)
+{
+    return source.SelectMany(async item =>
+        (await predicate(item)) ? Observable.Return(item) : Observable.Empty&lt;T&gt;());
+}</div>
+        </div>
+
+        <div class="question">
+            Q99: How do you implement LINQ with nullable reference types?
+        </div>
+        <div class="answer">
+            <p><strong>Nullable reference types</strong> improve null safety in LINQ operations.</p>
+            
+            <div class="code-block">// Nullable LINQ operations
+#nullable enable
+
+public class Product
+{
+    public string? Name { get; set; }
+    public decimal? Price { get; set; }
+    public string? Category { get; set; }
+}
+
+// Safe navigation in LINQ
+var products = new List&lt;Product?&gt; { null, new Product(), null };
+
+var validProducts = products
+    .Where(p => p != null)
+    .Select(p => p!); // Null-forgiving operator after Where
+
+// Nullable property access
+var names = products
+    .Where(p => p?.Name != null)
+    .Select(p => p!.Name!);
+
+// Coalesce in LINQ
+var prices = products
+    .Select(p => p?.Price ?? 0);
+
+// Null-conditional LINQ
+var expensive = products?
+    .Where(p => p?.Price > 100)
+    .ToList();
+
+// Custom null-safe extensions
+public static IEnumerable&lt;T&gt; WhereNotNull&lt;T&gt;(this IEnumerable&lt;T?&gt; source)
+{
+    return source.Where(x => x != null)!;
+}
+
+// Usage
+var filtered = products.WhereNotNull();
+
+// Nullable value handling
+var productStats = products
+    .Select(p => new
+    {
+        Name = p?.Name ?? "Unknown",
+        Price = p?.Price ?? 0,
+        HasPrice = p?.Price.HasValue ?? false
+    });
+
+// Null-safe aggregation
+var maxPrice = products
+    .Select(p => p?.Price)
+    .Where(price => price.HasValue)
+    .Max(price => price!.Value);</div>
+        </div>
+
+        <div class="question">
+            Q100: How do you optimize LINQ performance for large datasets?
+        </div>
+        <div class="answer">
+            <p><strong>Performance optimization</strong> techniques for LINQ operations on large datasets.</p>
+            
+            <div class="code-block">// PLINQ for parallel processing
+var results = largeDataSet
+    .AsParallel()
+    .Where(x => x.Value > 100)
+    .Select(x => Process(x))
+    .ToList();
+
+// Configure parallelism
+var results = largeDataSet
+    .AsParallel()
+    .WithDegreeOfParallelism(Environment.ProcessorCount)
+    .WithExecutionMode(ParallelExecutionMode.ForceParallelism)
+    .Where(x => x.Value > 100)
+    .ToList();
+
+// Use List instead of IEnumerable for multiple enumerations
+var list = data.ToList(); // Materialize once
+var count = list.Count();
+var first = list.First();
+
+// Avoid multiple enumerations
+// Bad
+var filtered = data.Where(x => x > 0);
+if (filtered.Any()) // First enumeration
+    return filtered.First(); // Second enumeration
+
+// Good
+var filtered = data.Where(x => x > 0).ToList();
+if (filtered.Any())
+    return filtered.First();
+
+// Use HashSet for lookups
+var lookup = data.ToHashSet();
+if (lookup.Contains(target))
+    // ...
+
+// Use Dictionary for grouping
+var grouped = data.GroupBy(x => x.Category)
+    .ToDictionary(g => g.Key, g => g.ToList());
+
+// Batch processing
+public static IEnumerable&lt;IEnumerable&lt;T&gt;&gt; Batch&lt;T&gt;(
+    this IEnumerable&lt;T&gt; source,
+    int batchSize)
+{
+    var batch = new List&lt;T&gt;();
+    
+    foreach (var item in source)
+    {
+        batch.Add(item);
+        
+        if (batch.Count == batchSize)
+        {
+            yield return batch;
+            batch = new List&lt;T&gt;();
+        }
+    }
+    
+    if (batch.Count > 0)
+        yield return batch;
+}
+
+// Usage
+foreach (var batch in largeData.Batch(10000))
+{
+    ProcessBatch(batch);
+}
+
+// Lazy evaluation for early termination
+var result = largeData
+    .Where(x => x.IsValid())
+    .First(x => x.IsTarget()); // Stops after first match
+
+// Use Array instead of List for fixed-size data
+var array = data.ToArray(); // More memory efficient
+
+// Avoid closure allocations
+var threshold = 100;
+var filtered = data.Where(x => x.Value > threshold); // Captures threshold
+
+// Better - use constant or pass as parameter
+const int Threshold = 100;
+var filtered = data.Where(x => x.Value > Threshold);</div>
         </div>
 
         <div class="tip">

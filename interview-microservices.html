@@ -60,15 +60,45 @@
             border-left: 4px solid #28a745;
         }
         .code-block {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 8px;
+            background: #2d2d2d;
+            color: #e0e0e0;
+            padding: 25px;
+            border-radius: 12px;
             overflow-x: auto;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 13px;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
             margin: 15px 0;
-            line-height: 1.5;
+            line-height: 1.7;
+            border-left: 4px solid #00bcd4;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .code-block::before {
+            content: '';
+            display: block;
+            margin-bottom: 10px;
+        }
+        .code-block .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        .code-block .keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+        .code-block .string {
+            color: #ce9178;
+        }
+        .code-block .function {
+            color: #dcdcaa;
+        }
+        .code-block .number {
+            color: #b5cea8;
+        }
+        .code-block .variable {
+            color: #9cdcfe;
+        }
+        .code-block .type {
+            color: #4ec9b0;
         }
         .important {
             background: #fff3cd;
@@ -1140,6 +1170,1313 @@
                 <li><strong>Cultural Change:</strong> Requires organizational change</li>
                 <li><strong>Skill Requirements:</strong> Requires diverse skills</li>
             </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>15. Advanced Topics (4-13 Years Experience)</h2>
+
+        <div class="question">
+            Q46: How do you implement Service Mesh (Istio) in a microservices architecture?
+        </div>
+        <div class="answer">
+            <p><strong>Service Mesh</strong> provides a dedicated infrastructure layer for handling service-to-service communication.</p>
+            
+            <div class="code-block">// Istio installation and configuration
+# Install Istio
+istioctl install --set profile=demo
+
+# Enable automatic sidecar injection
+kubectl label namespace default istio-injection=enabled
+
+# VirtualService configuration
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: reviews
+spec:
+  hosts:
+  - reviews
+  http:
+  - route:
+    - destination:
+        host: reviews
+        subset: v1
+      weight: 90
+    - destination:
+        host: reviews
+        subset: v2
+      weight: 10
+
+# DestinationRule for traffic routing
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: reviews
+spec:
+  host: reviews
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+
+# Circuit breaker configuration
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: httpbin
+spec:
+  host: httpbin
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 10
+    outlierDetection:
+      consecutive5xxErrors: 3
+      interval: 30s
+      baseEjectionTime: 30s</div>
+        </div>
+
+        <div class="question">
+            Q47: How do you implement distributed tracing with OpenTelemetry?
+        </div>
+        <div class="answer">
+            <p><strong>Distributed tracing</strong> tracks requests across multiple microservices.</p>
+            
+            <div class="code-block">// OpenTelemetry configuration
+using OpenTelemetry;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+
+// Configure OpenTelemetry
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource =>
+        resource.AddService("my-service")
+            .AddAttributes(new Dictionary&lt;string, object&gt;
+            {
+                ["service.version"] = "1.0.0",
+                ["deployment.environment"] = "production"
+            }))
+    .AddAspNetCoreInstrumentation()
+    .AddHttpClientInstrumentation()
+    .AddSource("MassTransit")
+    .AddOtlpExporter(options =>
+    {
+        options.Endpoint = new Uri("http://jaeger:4317");
+    });
+
+// Custom span creation
+using var activity = _activitySource.StartActivity("ProcessOrder");
+activity?.SetTag("order.id", orderId);
+activity?.SetTag("user.id", userId);
+
+try
+{
+    await ProcessOrderAsync(orderId);
+    activity?.SetTag("process.status", "success");
+}
+catch (Exception ex)
+{
+    activity?.SetTag("process.status", "failed");
+    activity?.SetTag("error.message", ex.Message);
+    activity?.RecordException(ex);
+    throw;
+}
+finally
+{
+    activity?.Stop();
+}
+
+// Propagate context across services
+using var scope = _tracer.BuildSpan("ExternalCall")
+    .WithTag("service.name", "external-service")
+    .StartActive();
+
+await _httpClient.GetAsync("https://external-service/api/data");</div>
+        </div>
+
+        <div class="question">
+            Q48: How do you implement event-driven architecture with Kafka?
+        </div>
+        <div class="answer">
+            <p><strong>Event-driven architecture</strong> enables loose coupling through asynchronous messaging.</p>
+            
+            <div class="code-block">// Kafka producer configuration
+var config = new ProducerConfig
+{
+    BootstrapServers = "kafka:9092",
+    ClientId = Dns.GetHostName(),
+    Acks = Acks.All,
+    EnableIdempotence = true,
+    CompressionType = CompressionType.Snappy,
+    LingerMs = 10,
+    BatchSize = 16384
+};
+
+using var producer = new ProducerBuilder&lt;Null, string&gt;(config).Build();
+
+// Produce event
+await producer.ProduceAsync("orders", new Message&lt;Null, string&gt;
+{
+    Value = JsonSerializer.Serialize(orderCreatedEvent)
+});
+
+// Kafka consumer configuration
+var consumerConfig = new ConsumerConfig
+{
+    BootstrapServers = "kafka:9092",
+    GroupId = "order-processor",
+    AutoOffsetReset = AutoOffsetReset.Earliest,
+    EnableAutoCommit = false
+};
+
+using var consumer = new ConsumerBuilder&lt;Ignore, string&gt;(consumerConfig)
+    .SetKeyDeserializer(Deserializers.Ignore)
+    .SetValueDeserializer(Deserializers.Utf8)
+    .Build();
+
+consumer.Subscribe(new[] { "orders" });
+
+// Consume events
+while (true)
+{
+    var consumeResult = consumer.Consume(cancellationToken);
+    
+    try
+    {
+        var orderEvent = JsonSerializer.Deserialize&lt;OrderCreatedEvent&gt;(consumeResult.Message.Value);
+        await ProcessOrderAsync(orderEvent);
+        
+        consumer.Commit(consumeResult);
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError(ex, "Error processing order");
+    }
+}
+
+// Exactly-once semantics with transactions
+using (var transaction = producer.BeginTransaction())
+{
+    await producer.ProduceAsync("orders", new Message&lt;Null, string&gt;
+    {
+        Value = JsonSerializer.Serialize(event)
+    }, transaction);
+
+    producer.Commit(transaction());
+}</div>
+        </div>
+
+        <div class="question">
+            Q49: How do you implement canary deployment in microservices?
+        </div>
+        <div class="answer">
+            <p><strong>Canary deployment</strong> gradually rolls out new versions to a subset of users.</p>
+            
+            <div class="code-block">// Kubernetes deployment for canary
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: v2
+    spec:
+      containers:
+      - name: myapp
+        image: myapp:v2
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+  selector:
+    app: myapp
+  ports:
+  - port: 80
+    targetPort: 8080
+
+---
+# Istio VirtualService for canary routing
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: myapp
+spec:
+  hosts:
+  - myapp
+  http:
+  - match:
+    - headers:
+        x-canary:
+          exact: "true"
+    route:
+    - destination:
+        host: myapp
+        subset: v2
+  - route:
+    - destination:
+        host: myapp
+        subset: v1
+      weight: 95
+    - destination:
+        host: myapp
+        subset: v2
+      weight: 5
+
+// Gradual traffic shift script
+public async Task GradualTrafficShiftAsync(string serviceName, int targetPercentage)
+{
+    var currentPercentage = await GetCurrentPercentageAsync(serviceName);
+    
+    while (currentPercentage < targetPercentage)
+    {
+        currentPercentage = Math.Min(currentPercentage + 5, targetPercentage);
+        await UpdateVirtualServiceAsync(serviceName, currentPercentage);
+        
+        await Task.Delay(TimeSpan.FromMinutes(5));
+        
+        var metrics = await GetMetricsAsync(serviceName);
+        if (metrics.ErrorRate > 0.01)
+        {
+            await RollbackAsync(serviceName);
+            throw new Exception("Canary deployment failed, rolled back");
+        }
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q50: How do you implement chaos engineering in microservices?
+        </div>
+        <div class="answer">
+            <p><strong>Chaos engineering</strong> proactively tests system resilience by introducing failures.</p>
+            
+            <div class="code-block">// Using Chaos Mesh for chaos experiments
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: pod-failure-example
+spec:
+  mode: one
+  selector:
+    labelSelectors:
+      app: myapp
+  action: pod-kill
+  duration: "30s"
+
+---
+# Network delay chaos
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: network-delay-example
+spec:
+  mode: one
+  selector:
+    labelSelectors:
+      app: myapp
+  action: delay
+  delay:
+    latency: "10ms"
+    correlation: "25"
+    jitter: "2ms"
+  direction: to
+
+---
+# CPU stress chaos
+apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata:
+  name: cpu-stress-example
+spec:
+  mode: one
+  selector:
+    labelSelectors:
+      app: myapp
+  stressors:
+    cpu:
+      workers: 4
+      load: 80
+  duration: "60s"
+
+// Automated chaos testing
+public class ChaosTestingService
+{
+    public async Task RunChaosExperimentAsync(string experimentName)
+    {
+        // Create chaos experiment
+        await CreateChaosExperimentAsync(experimentName);
+        
+        // Monitor system health
+        var health = await MonitorSystemHealthAsync(TimeSpan.FromMinutes(5));
+        
+        if (!health.IsHealthy)
+        {
+            // Stop experiment
+            await StopChaosExperimentAsync(experimentName);
+            
+            // Generate report
+            await GenerateFailureReportAsync(experimentName, health);
+        }
+    }
+    
+    private async Task&lt;SystemHealth&gt; MonitorSystemHealthAsync(TimeSpan duration)
+    {
+        var startTime = DateTime.UtcNow;
+        var metrics = new List&lt;SystemMetrics&gt;();
+        
+        while (DateTime.UtcNow - startTime < duration)
+        {
+            var metric = await CollectMetricsAsync();
+            metrics.Add(metric);
+            
+            if (metric.ErrorRate > 0.05 || metric.Latency > TimeSpan.FromSeconds(5))
+            {
+                return new SystemHealth { IsHealthy = false, Metrics = metrics };
+            }
+            
+            await Task.Delay(TimeSpan.FromSeconds(10));
+        }
+        
+        return new SystemHealth { IsHealthy = true, Metrics = metrics };
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q51: How do you implement multi-region deployment for microservices?
+        </div>
+        <div class="answer">
+            <p><strong>Multi-region deployment</strong> provides high availability and low latency across geographic regions.</p>
+            
+            <div class="code-block">// Kubernetes multi-cluster configuration
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+      - name: myapp
+        image: myapp:latest
+        env:
+        - name: REGION
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['topology.kubernetes.io/zone']
+
+---
+# Global load balancer with Cloudflare
+const loadBalancer = new LoadBalancer({
+  name: 'global-lb',
+  regions: ['us-east', 'us-west', 'eu-west'],
+  healthCheck: {
+    path: '/health',
+    interval: 30,
+    timeout: 5
+  },
+  routing: {
+    strategy: 'geo',
+    rules: [
+      {
+        region: 'us-east',
+        weight: 40
+      },
+      {
+        region: 'us-west',
+        weight: 40
+      },
+      {
+        region: 'eu-west',
+        weight: 20
+      }
+    ]
+  }
+});
+
+// Database replication strategy
+public class MultiRegionDatabase
+{
+    public async Task ConfigureReplicationAsync()
+    {
+        // Primary region
+        await ConfigurePrimaryAsync("us-east");
+        
+        // Secondary regions (read replicas)
+        await ConfigureReadReplicaAsync("us-west", "us-east");
+        await ConfigureReadReplicaAsync("eu-west", "us-east");
+        
+        // Async replication for writes
+        await ConfigureAsyncReplicationAsync();
+    }
+    
+    public async Task&lt;DbContext&gt; GetNearestDbContextAsync(string region)
+    {
+        if (region == "us-east")
+        {
+            return new PrimaryDbContext();
+        }
+        
+        return new ReplicaDbContext(GetConnectionString(region));
+    }
+}
+
+// Cross-region service communication
+public class RegionalServiceClient
+{
+    private readonly IServiceDiscovery _discovery;
+    
+    public async Task&lt;T&gt; CallServiceAsync&lt;T&gt;(string serviceName, string region)
+    {
+        var endpoints = await _discovery.DiscoverAsync(serviceName, region);
+        
+        // Prefer local region, fallback to others
+        var localEndpoints = endpoints.Where(e => e.Region == region);
+        if (localEndpoints.Any())
+        {
+            return await CallEndpointAsync&lt;T&gt;(localEndpoints.First());
+        }
+        
+        return await CallEndpointAsync&lt;T&gt;(endpoints.OrderBy(e => e.Latency).First());
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q52: How do you implement API composition patterns in microservices?
+        </div>
+        <div class="answer">
+            <p><strong>API composition</strong> combines data from multiple services into a single response.</p>
+            
+            <div class="code-block">// API Gateway composition pattern
+public class OrderCompositionService
+{
+    private readonly IOrderService _orderService;
+    private readonly ICustomerService _customerService;
+    private readonly IProductService _productService;
+    private readonly IInventoryService _inventoryService;
+    
+    public async Task&lt;OrderDetailDto&gt; GetOrderDetailAsync(int orderId)
+    {
+        // Parallel calls to independent services
+        var orderTask = _orderService.GetOrderAsync(orderId);
+        var customerTask = _customerService.GetCustomerAsync(orderId);
+        
+        await Task.WhenAll(orderTask, customerTask);
+        
+        var order = await orderTask;
+        var customer = await customerTask;
+        
+        // Compose product details
+        var productTasks = order.Items.Select(item => 
+            _productService.GetProductAsync(item.ProductId));
+        
+        var products = await Task.WhenAll(productTasks);
+        
+        // Compose inventory information
+        var inventoryTasks = order.Items.Select(item =>
+            _inventoryService.GetInventoryAsync(item.ProductId));
+        
+        var inventories = await Task.WhenAll(inventoryTasks);
+        
+        // Compose final response
+        return new OrderDetailDto
+        {
+            Order = order,
+            Customer = customer,
+            Items = order.Items.Select((item, index) => new OrderItemDetailDto
+            {
+                Item = item,
+                Product = products[index],
+                Inventory = inventories[index]
+            }).ToList()
+        };
+    }
+}
+
+// GraphQL for flexible composition
+public class OrderQuery : ObjectGraphType
+{
+    public OrderQuery(IOrderService orderService, ICustomerService customerService)
+    {
+        Field&lt;OrderType&gt;("order")
+            .Argument&lt;IntGraphType&gt;("id", arg => arg.Description("Order ID"))
+            .ResolveAsync(async context =>
+            {
+                var orderId = context.GetArgument&lt;int&gt;("id");
+                var order = await orderService.GetOrderAsync(orderId);
+                var customer = await customerService.GetCustomerAsync(orderId);
+                
+                return new Order { ...order, Customer = customer };
+            });
+    }
+}
+
+// Backend for Frontend (BFF) pattern
+public class OrderBffController : ControllerBase
+{
+    [HttpGet("orders/{id}/detail")]
+    public async Task&lt;OrderDetailView&gt; GetOrderDetail(int id)
+    {
+        var order = await _orderService.GetOrderAsync(id);
+        var customer = await _customerService.GetCustomerAsync(id);
+        var shipping = await _shippingService.GetShippingAsync(id);
+        
+        // Compose specifically for mobile view
+        return new OrderDetailView
+        {
+            OrderId = order.Id,
+            CustomerName = customer.Name,
+            Status = order.Status,
+            ShippingAddress = shipping.Address,
+            Total = order.Total
+        };
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q53: How do you implement consumer-driven contract testing?
+        </div>
+        <div class="answer">
+            <p><strong>Consumer-driven contract testing</strong> ensures service compatibility through shared contracts.</p>
+            
+            <div class="code-block">// Pact consumer test
+public class OrderServiceConsumerTests : IClassFixture&lt;ConsumerPactFixture&gt;
+{
+    [Fact]
+    public async Task GetOrder_ReturnsValidOrder()
+    {
+        var pact = new PactBuilder()
+            .ServiceConsumer("OrderService")
+            .HasPactWith("OrderApi")
+            .UponReceiving("a request for an order")
+            .Given("order 123 exists")
+            .WithRequest(HttpMethod.Get, "/api/orders/123")
+            .WillRespondWith()
+            .WithStatus(200)
+            .WithHeader("Content-Type", "application/json")
+            .WithBody(new
+            {
+                id = 123,
+                customerId = 456,
+                total = 100.50,
+                status = "completed"
+            });
+        
+        await pact.VerifyAsync(async () =>
+        {
+            var client = new HttpClient { BaseAddress = new Uri("http://localhost:5000") };
+            var response = await client.GetAsync("/api/orders/123");
+            
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            var content = await response.Content.ReadAsStringAsync();
+            var order = JsonSerializer.Deserialize&lt;Order&gt;(content);
+            
+            order.Should().NotBeNull();
+            order.Id.Should().Be(123);
+        });
+    }
+}
+
+// Pact provider verification
+public class OrderApiProviderTests
+{
+    [Fact]
+    public async Task VerifyPacts()
+    {
+        var config = new PactVerifierConfig
+        {
+            ProviderVersion = "1.0.0",
+            PublishVerificationResults = true,
+            ProviderBranch = "main"
+        };
+        
+        using var verifier = new PactVerifier(config);
+        
+        await verifier
+            .ServiceProvider("OrderApi", new Uri("http://localhost:5000"))
+            .HonoursPactWith("OrderService")
+            .PactUri("http://pact-broker/pacts/consumer/provider/latest")
+            .VerifyAsync();
+    }
+}
+
+// Pact Broker integration
+public class PactBrokerService
+{
+    public async Task PublishPactAsync(string consumer, string provider, string pactJson)
+    {
+        var client = new HttpClient();
+        var content = new StringContent(pactJson, Encoding.UTF8, "application/json");
+        
+        await client.PutAsync(
+            $"http://pact-broker/pacts/{consumer}/{provider}/versions/1.0.0",
+            content);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q54: How do you implement rate limiting and throttling in microservices?
+        </div>
+        <div class="answer">
+            <p><strong>Rate limiting</strong> protects services from being overwhelmed by excessive requests.</p>
+            
+            <div class="code-block">// Token bucket rate limiter
+public class TokenBucketRateLimiter
+{
+    private readonly int _capacity;
+    private readonly int _refillRate;
+    private int _tokens;
+    private DateTime _lastRefill;
+    
+    public TokenBucketRateLimiter(int capacity, int refillRatePerSecond)
+    {
+        _capacity = capacity;
+        _refillRate = refillRatePerSecond;
+        _tokens = capacity;
+        _lastRefill = DateTime.UtcNow;
+    }
+    
+    public bool TryAcquire(int tokens = 1)
+    {
+        RefillTokens();
+        
+        if (_tokens >= tokens)
+        {
+            _tokens -= tokens;
+            return true;
+        }
+        
+        return false;
+    }
+    
+    private void RefillTokens()
+    {
+        var now = DateTime.UtcNow;
+        var elapsed = now - _lastRefill;
+        var tokensToAdd = (int)(elapsed.TotalSeconds * _refillRate);
+        
+        _tokens = Math.Min(_capacity, _tokens + tokensToAdd);
+        _lastRefill = now;
+    }
+}
+
+// Redis-based distributed rate limiting
+public class RedisRateLimiter
+{
+    private readonly IDatabase _redis;
+    
+    public async Task&lt;bool&gt; IsAllowedAsync(string key, int limit, TimeSpan window)
+    {
+        var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        var windowStart = now - (long)window.TotalMilliseconds;
+        
+        var transaction = _redis.CreateTransaction();
+        
+        // Remove old entries
+        transaction.AddCondition(Condition.KeyNotExists(key));
+        transaction.KeyDeleteAsync(key);
+        
+        // Add current request
+        transaction.SortedSetAddAsync(key, now, now);
+        
+        // Remove entries outside window
+        transaction.SortedSetRemoveRangeByScoreAsync(key, 0, windowStart);
+        
+        // Count requests in window
+        var countTask = transaction.SortedSetLengthAsync(key);
+        
+        await transaction.ExecuteAsync();
+        var count = await countTask;
+        
+        return count <= limit;
+    }
+}
+
+// ASP.NET Core rate limiting middleware
+public class RateLimitMiddleware
+{
+    private readonly RequestDelegate _next;
+    private readonly IRateLimiter _rateLimiter;
+    
+    public async Task InvokeAsync(HttpContext context)
+    {
+        var clientId = context.Request.Headers["X-Client-ID"].FirstOrDefault();
+        
+        if (!await _rateLimiter.IsAllowedAsync(clientId, 100, TimeSpan.FromMinutes(1)))
+        {
+            context.Response.StatusCode = 429;
+            await context.Response.WriteAsync("Rate limit exceeded");
+            return;
+        }
+        
+        await _next(context);
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q55: How do you implement service versioning strategies?
+        </div>
+        <div class="answer">
+            <p><strong>Service versioning</strong> allows multiple versions of a service to coexist.</p>
+            
+            <div class="code-block">// URL-based versioning
+[ApiController]
+[Route("api/v{version:apiVersion}/[controller]")]
+[ApiVersion("1.0")]
+[ApiVersion("2.0")]
+public class ProductsController : ControllerBase
+{
+    [HttpGet]
+    [MapToApiVersion("1.0")]
+    public IActionResult GetV1()
+    {
+        return Ok(_repository.GetAll().Select(p => new ProductDtoV1
+        {
+            Id = p.Id,
+            Name = p.Name
+        }));
+    }
+    
+    [HttpGet]
+    [MapToApiVersion("2.0")]
+    public IActionResult GetV2()
+    {
+        return Ok(_repository.GetAll().Select(p => new ProductDtoV2
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Price = p.Price,
+            Category = p.Category,
+            Stock = p.Stock
+        }));
+    }
+}
+
+// Header-based versioning
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ApiVersionReader = new HeaderApiVersionReader("X-API-Version");
+});
+
+// Content negotiation versioning
+public class ApiVersionSelector : IApiVersionSelector
+{
+    public string SelectVersion(HttpRequest request)
+    {
+        var acceptHeader = request.Headers["Accept"].FirstOrDefault();
+        
+        if (acceptHeader?.Contains("application/vnd.myapp.v2+json") == true)
+        {
+            return "2.0";
+        }
+        
+        return "1.0";
+    }
+}
+
+// Kubernetes service version routing
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: products
+spec:
+  hosts:
+  - products
+  http:
+  - match:
+    - headers:
+        x-api-version:
+          exact: "2.0"
+    route:
+    - destination:
+        host: products
+        subset: v2
+  - route:
+    - destination:
+        host: products
+        subset: v1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: products
+spec:
+  selector:
+    app: products
+  ports:
+  - port: 80</div>
+        </div>
+
+        <div class="question">
+            Q56: How do you implement database per service pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Database per service</strong> ensures each microservice has its own dedicated database.</p>
+            
+            <div class="code-block">// Service-specific DbContext
+public class OrderDbContext : DbContext
+{
+    public DbSet&lt;Order&gt; Orders { get; set; }
+    public DbSet&lt;OrderItem&gt; OrderItems { get; set; }
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer("Server=.;Database=OrderDb;...");
+    }
+}
+
+public class ProductDbContext : DbContext
+{
+    public DbSet&lt;Product&gt; Products { get; set; }
+    public DbSet&lt;Category&gt; Categories { get; set; }
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer("Server=.;Database=ProductDb;...");
+    }
+}
+
+// Cross-service data access via API
+public class OrderService
+{
+    private readonly OrderDbContext _orderContext;
+    private readonly IProductServiceClient _productClient;
+    
+    public async Task&lt;OrderDetail&gt; GetOrderDetailAsync(int orderId)
+    {
+        var order = await _orderContext.Orders
+            .Include(o => o.Items)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+        
+        // Fetch product data from product service
+        var productIds = order.Items.Select(i => i.ProductId);
+        var products = await _productClient.GetProductsAsync(productIds);
+        
+        return new OrderDetail
+        {
+            Order = order,
+            Products = products
+        };
+    }
+}
+
+// Shared database with schema separation
+public class MultiTenantDbContext : DbContext
+{
+    private readonly ITenantProvider _tenantProvider;
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        var tenantId = _tenantProvider.GetTenantId();
+        
+        modelBuilder.Entity&lt;Order&gt;()
+            .ToTable($"Orders_Tenant{tenantId}");
+        
+        modelBuilder.Entity&lt;Product&gt;()
+            .ToTable($"Products_Tenant{tenantId}");
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q57: How do you implement event sourcing in microservices?
+        </div>
+        <div class="answer">
+            <p><strong>Event sourcing</strong> stores state changes as a sequence of events.</p>
+            
+            <div class="code-block">// Event store interface
+public interface IEventStore
+{
+    Task&lt;IEnumerable&lt;IDomainEvent&gt;&gt; GetEventsAsync(string aggregateId);
+    Task SaveEventsAsync(string aggregateId, IEnumerable&lt;IDomainEvent&gt; events, int expectedVersion);
+}
+
+// Aggregate root with event sourcing
+public abstract class AggregateRoot
+{
+    private readonly List&lt;IDomainEvent&gt; _events = new();
+    public IReadOnlyCollection&lt;IDomainEvent&gt; Events => _events.AsReadOnly();
+    
+    public int Version { get; private set; }
+    
+    protected void AddEvent(IDomainEvent @event)
+    {
+        _events.Add(@event);
+    }
+    
+    public void LoadFromHistory(IEnumerable&lt;IDomainEvent&gt; events)
+    {
+        foreach (var @event in events)
+        {
+            ApplyChange(@event);
+            Version++;
+        }
+    }
+    
+    protected abstract void ApplyChange(IDomainEvent @event);
+}
+
+// Order aggregate
+public class Order : AggregateRoot
+{
+    public Guid Id { get; private set; }
+    public List&lt;OrderItem&gt; Items { get; private set; }
+    public OrderStatus Status { get; private set; }
+    
+    public void CreateOrder(List&lt;OrderItem&gt; items)
+    {
+        AddEvent(new OrderCreatedEvent
+        {
+            OrderId = Guid.NewGuid(),
+            Items = items,
+            CreatedAt = DateTime.UtcNow
+        });
+    }
+    
+    public void ConfirmOrder()
+    {
+        AddEvent(new OrderConfirmedEvent
+        {
+            OrderId = Id,
+            ConfirmedAt = DateTime.UtcNow
+        });
+    }
+    
+    protected override void ApplyChange(IDomainEvent @event)
+    {
+        switch (@event)
+        {
+            case OrderCreatedEvent e:
+                Id = e.OrderId;
+                Items = e.Items;
+                Status = OrderStatus.Created;
+                break;
+            case OrderConfirmedEvent e:
+                Status = OrderStatus.Confirmed;
+                break;
+        }
+    }
+}
+
+// Event store implementation with Kafka
+public class KafkaEventStore : IEventStore
+{
+    public async Task SaveEventsAsync(string aggregateId, IEnumerable&lt;IDomainEvent&gt; events, int expectedVersion)
+    {
+        foreach (var @event in events)
+        {
+            var message = new Message&lt;Null, string&gt;
+            {
+                Value = JsonSerializer.Serialize(@event),
+                Headers = new Headers
+                {
+                    { "aggregateId", Encoding.UTF8.GetBytes(aggregateId) },
+                    { "eventType", Encoding.UTF8.GetBytes(@event.GetType().Name) }
+                }
+            };
+            
+            await _producer.ProduceAsync("events", message);
+        }
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q58: How do you implement CQRS with event sourcing?
+        </div>
+        <div class="answer">
+            <p><strong>CQRS with event sourcing</strong> separates read and write models using events.</p>
+            
+            <div class="code-block">// Command handler
+public class CreateOrderCommandHandler : ICommandHandler&lt;CreateOrderCommand, Guid&gt;
+{
+    private readonly IEventStore _eventStore;
+    
+    public async Task&lt;Guid&gt; Handle(CreateOrderCommand command)
+    {
+        var order = new Order();
+        order.CreateOrder(command.Items);
+        
+        await _eventStore.SaveEventsAsync(order.Id.ToString(), order.Events, -1);
+        
+        return order.Id;
+    }
+}
+
+// Event handler for updating read model
+public class OrderCreatedEventHandler : IEventHandler&lt;OrderCreatedEvent&gt;
+{
+    private readonly ReadDbContext _readContext;
+    
+    public async Task Handle(OrderCreatedEvent @event)
+    {
+        var readModel = new OrderReadModel
+        {
+            OrderId = @event.OrderId,
+            Status = "Created",
+            CreatedAt = @event.CreatedAt,
+            Items = @event.Items.Select(i => new OrderItemReadModel
+            {
+                ProductId = i.ProductId,
+                Quantity = i.Quantity,
+                Price = i.Price
+            }).ToList()
+        };
+        
+        _readContext.OrderReadModels.Add(readModel);
+        await _readContext.SaveChangesAsync();
+    }
+}
+
+// Query handler
+public class GetOrderQueryHandler : IQueryHandler&lt;GetOrderQuery, OrderReadModel&gt;
+{
+    private readonly ReadDbContext _readContext;
+    
+    public async Task&lt;OrderReadModel&gt; Handle(GetOrderQuery query)
+    {
+        return await _readContext.OrderReadModels
+            .FirstOrDefaultAsync(o => o.OrderId == query.OrderId);
+    }
+}
+
+// Saga orchestrator with events
+public class OrderSaga : Saga
+{
+    public async Task Handle(OrderCreatedEvent @event)
+    {
+        // Reserve inventory
+        await _commandBus.SendAsync(new ReserveInventoryCommand(@event.OrderId, @event.Items));
+    }
+    
+    public async Task Handle(InventoryReservedEvent @event)
+    {
+        // Process payment
+        await _commandBus.SendAsync(new ProcessPaymentCommand(@event.OrderId, @event.Amount));
+    }
+    
+    public async Task Handle(PaymentProcessedEvent @event)
+    {
+        // Confirm order
+        await _commandBus.SendAsync(new ConfirmOrderCommand(@event.OrderId));
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q59: How do you implement blue-green deployment in microservices?
+        </div>
+        <div class="answer">
+            <p><strong>Blue-green deployment</strong> maintains two identical environments for zero-downtime deployments.</p>
+            
+            <div class="code-block">// Kubernetes blue-green deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-blue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: blue
+    spec:
+      containers:
+      - name: myapp
+        image: myapp:v1
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-green
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+      version: green
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: green
+    spec:
+      containers:
+      - name: myapp
+        image: myapp:v2
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+  selector:
+    app: myapp
+    version: blue
+  ports:
+  - port: 80
+
+// Deployment script
+public class BlueGreenDeploymentService
+{
+    public async Task DeployAsync(string serviceName, string newVersion)
+    {
+        // Deploy to green
+        await DeployToEnvironmentAsync(serviceName, "green", newVersion);
+        
+        // Run smoke tests on green
+        var greenHealthy = await RunSmokeTestsAsync(serviceName, "green");
+        
+        if (!greenHealthy)
+        {
+            await RollbackAsync(serviceName, "green");
+            throw new Exception("Smoke tests failed on green environment");
+        }
+        
+        // Switch traffic to green
+        await SwitchTrafficAsync(serviceName, "green");
+        
+        // Verify production
+        var productionHealthy = await VerifyProductionAsync(serviceName);
+        
+        if (!productionHealthy)
+        {
+            // Rollback to blue
+            await SwitchTrafficAsync(serviceName, "blue");
+            throw new Exception("Production verification failed");
+        }
+        
+        // Clean up old blue
+        await CleanupOldVersionAsync(serviceName, "blue");
+    }
+}</div>
+        </div>
+
+        <div class="question">
+            Q60: How do you implement security in microservices?
+        </div>
+        <div class="answer">
+            <p><strong>Security</strong> in microservices includes authentication, authorization, and secure communication.</p>
+            
+            <div class="code-block">// OAuth 2.0 / OpenID Connect with IdentityServer
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = "https://identityserver.example.com";
+        options.Audience = "myapi";
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true
+        };
+    });
+
+// Service-to-service authentication with mTLS
+public class MutualTlsAuthentication
+{
+    public void ConfigureMutualTls(KestrelServerOptions options)
+    {
+        options.ConfigureHttpsDefaults(httpsOptions =>
+        {
+            httpsOptions.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+            httpsOptions.ClientCertificateValidation = (cert, chain, errors) =>
+            {
+                // Validate client certificate
+                return cert.Subject.Contains("CN=my-service");
+            };
+        });
+    }
+}
+
+// API Gateway authentication
+public class ApiGatewayAuthenticationMiddleware
+{
+    public async Task InvokeAsync(HttpContext context)
+    {
+        var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+        
+        if (string.IsNullOrEmpty(token))
+        {
+            context.Response.StatusCode = 401;
+            return;
+        }
+        
+        var isValid = await _tokenValidator.ValidateAsync(token);
+        
+        if (!isValid)
+        {
+            context.Response.StatusCode = 401;
+            return;
+        }
+        
+        // Add user context
+        var claims = await _tokenValidator.GetClaimsAsync(token);
+        context.Items["User"] = claims;
+        
+        await _next(context);
+    }
+}
+
+// Service mesh security with Istio
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+spec:
+  mtls:
+    mode: STRICT
+
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-get-orders
+spec:
+  selector:
+    matchLabels:
+      app: order-service
+  rules:
+  - to:
+    - operation:
+        methods: ["GET"]
+        paths: ["/api/orders/*"]
+    when:
+    - key: request.auth.claims[role]
+      values: ["user", "admin"]</div>
         </div>
 
         <div class="tip">
