@@ -5,87 +5,163 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interview Preparation Library - Complete Tech Library</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #1a1a2e;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 30px 20px;
         }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 60px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2);
             position: relative;
+            overflow: hidden;
         }
+        
         .container::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #667eea 100%);
-            border-radius: 20px 20px 0 0;
+            height: 8px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #764ba2 75%, #667eea 100%);
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
         }
-        h1 {
-            color: #2c3e50;
-            font-size: 48px;
-            font-weight: 700;
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .header-section {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 50px;
             position: relative;
-            padding-bottom: 25px;
-            border-bottom: 3px solid #667eea;
         }
+        
+        h1 {
+            color: #1a1a2e;
+            font-size: 52px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            border-radius: 2px;
+        }
+        
         .subtitle {
             text-align: center;
-            font-size: 20px;
-            color: #666;
-            margin-bottom: 50px;
+            font-size: 18px;
+            color: #4a4a68;
+            margin-bottom: 15px;
             font-weight: 500;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
+        
+        .subtitle-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            margin-top: 10px;
+        }
+        
         .category {
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
+        
         .category h2 {
-            color: #2c3e50;
-            font-size: 28px;
+            color: #1a1a2e;
+            font-size: 32px;
             font-weight: 700;
-            margin-bottom: 30px;
-            padding: 20px;
+            margin-bottom: 35px;
+            padding: 25px 30px;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 6px solid #667eea;
-            border-radius: 0 12px 12px 0;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+            border-left: 8px solid #667eea;
+            border-radius: 0 16px 16px 0;
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
+        
+        .category h2::before {
+            content: '';
+            width: 4px;
+            height: 40px;
+            background: linear-gradient(180deg, #764ba2, #f093fb);
+            border-radius: 2px;
+        }
+        
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
         }
+        
         .card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            border-radius: 15px;
-            padding: 30px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid #e9ecef;
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid #f0f0f0;
             text-decoration: none;
             color: inherit;
             display: block;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         }
+        
         .card::before {
             content: '';
             position: absolute;
@@ -93,120 +169,202 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.08), transparent);
+            transition: left 0.6s;
         }
+        
         .card:hover::before {
             left: 100%;
         }
+        
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .card:hover::after {
+            transform: scaleX(1);
+        }
+        
         .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.25);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
             border-color: #667eea;
         }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.35);
+        }
+        
         .card h3 {
-            color: #667eea;
-            margin-bottom: 12px;
-            font-size: 22px;
-            font-weight: 700;
-        }
-        .card p {
-            color: #555;
-            font-size: 15px;
+            color: #1a1a2e;
             margin-bottom: 15px;
-            line-height: 1.6;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
+        
+        .card p {
+            color: #4a4a68;
+            font-size: 15px;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .card-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
         .card .badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 25px;
             font-size: 13px;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
         }
+        
         .card .questions {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #28a745;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 13px;
             font-weight: 600;
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
         }
+        
         .footer {
             text-align: center;
-            margin-top: 60px;
-            padding: 40px;
+            margin-top: 70px;
+            padding: 45px;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 15px;
-            color: #666;
+            border-radius: 20px;
+            color: #4a4a68;
             font-size: 15px;
-            border-left: 5px solid #667eea;
+            border-left: 6px solid #667eea;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
         }
+        
+        .footer strong {
+            color: #1a1a2e;
+        }
+        
+        .footer-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+        
         @media print {
-            body { background: white; }
-            .container { padding: 20px; box-shadow: none; }
+            body { background: white; animation: none; }
+            .container { padding: 20px; box-shadow: none; backdrop-filter: none; }
         }
+        
         @media (max-width: 1024px) {
             .container { padding: 40px; }
-            .grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+            .grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
         }
+        
         @media (max-width: 768px) {
             body { padding: 15px 10px; }
-            .container { padding: 30px 25px; border-radius: 15px; }
-            h1 { font-size: 32px; padding-bottom: 20px; }
-            .subtitle { font-size: 16px; margin-bottom: 35px; }
-            .category { margin-bottom: 35px; }
-            .category h2 { font-size: 22px; padding: 15px; margin-bottom: 20px; }
-            .grid { grid-template-columns: 1fr; gap: 20px; }
+            .container { padding: 35px 25px; border-radius: 20px; }
+            h1 { font-size: 36px; padding-bottom: 25px; }
+            .subtitle { font-size: 16px; margin-bottom: 30px; }
+            .category { margin-bottom: 45px; }
+            .category h2 { font-size: 24px; padding: 18px 20px; margin-bottom: 25px; }
+            .grid { grid-template-columns: 1fr; gap: 25px; }
+            .card { padding: 30px; }
+            .card h3 { font-size: 22px; }
+            .card p { font-size: 14px; }
+            .footer { padding: 35px 25px; }
+        }
+        
+        @media (max-width: 480px) {
+            body { padding: 10px 5px; }
+            .container { padding: 30px 20px; }
+            h1 { font-size: 30px; }
+            .subtitle { font-size: 15px; }
+            .category h2 { font-size: 22px; padding: 15px; }
             .card { padding: 25px; }
             .card h3 { font-size: 20px; }
             .card p { font-size: 14px; }
-            .footer { padding: 30px 20px; }
+            .card .badge, .card .questions { font-size: 12px; padding: 7px 14px; }
+            .footer { padding: 30px 20px; font-size: 14px; }
         }
-        @media (max-width: 480px) {
-            body { padding: 10px 5px; }
-            .container { padding: 25px 20px; }
+        
+        @media (max-width: 360px) {
             h1 { font-size: 26px; }
-            .subtitle { font-size: 15px; }
-            .category h2 { font-size: 20px; padding: 12px; }
-            .card { padding: 20px; }
             .card h3 { font-size: 18px; }
             .card p { font-size: 13px; }
-            .card .badge { font-size: 12px; padding: 6px 12px; }
-            .footer { padding: 25px 15px; font-size: 14px; }
-        }
-        @media (max-width: 360px) {
-            h1 { font-size: 22px; }
-            .card h3 { font-size: 17px; }
-            .card p { font-size: 12px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📚 Interview Preparation Library</h1>
-        <p class="subtitle">Comprehensive Interview Preparation Guides for 4-13 Years Experience | Beginner to Expert Level</p>
+        <div class="header-section">
+            <h1>📚 Interview Preparation Library</h1>
+            <p class="subtitle">Comprehensive Interview Preparation Guides for 4-13 Years Experience | Beginner to Expert Level</p>
+            <div class="subtitle-badge">✨ 1000+ Questions Across All Technologies</div>
+        </div>
 
         <div class="category">
             <h2>🌐 Cloud & DevOps</h2>
             <div class="grid">
                 <a href="interview-azure.html" class="card">
+                    <div class="card-icon">☁️</div>
                     <h3>Microsoft Azure</h3>
                     <p>Complete Azure interview guide covering compute, storage, networking, security, and advanced architecture patterns.</p>
-                    <span class="badge">50 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 50 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-aws.html" class="card">
+                    <div class="card-icon">🚀</div>
                     <h3>AWS (Amazon Web Services)</h3>
                     <p>Comprehensive AWS interview preparation covering all major services, architecture patterns, and cost management.</p>
-                    <span class="badge">50 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 50 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-cicd.html" class="card">
+                    <div class="card-icon">⚙️</div>
                     <h3>CI/CD Pipeline</h3>
                     <p>Complete CI/CD guide covering Jenkins, GitLab, GitHub Actions, GitOps, and multi-cloud strategies.</p>
-                    <span class="badge">50 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 50 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
             </div>
         </div>
@@ -215,40 +373,58 @@
             <h2>💻 .NET & Backend Development</h2>
             <div class="grid">
                 <a href="interview-aspnet-core.html" class="card">
+                    <div class="card-icon">🔧</div>
                     <h3>ASP.NET Core</h3>
                     <p>Complete ASP.NET Core guide covering middleware, dependency injection, hosting, security, and performance.</p>
-                    <span class="badge">50 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 50 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-mvc-core.html" class="card">
+                    <div class="card-icon">🎨</div>
                     <h3>ASP.NET Core MVC</h3>
                     <p>Comprehensive MVC guide covering controllers, views, routing, filters, and advanced patterns.</p>
-                    <span class="badge">50 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 50 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-dotnet-api.html" class="card">
+                    <div class="card-icon">🌐</div>
                     <h3>.NET Core API</h3>
                     <p>Complete Web API guide covering REST, GraphQL, gRPC, authentication, and API security.</p>
-                    <span class="badge">50 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 50 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-linq.html" class="card">
+                    <div class="card-icon">🔍</div>
                     <h3>LINQ</h3>
                     <p>Comprehensive LINQ guide covering queries, operators, performance, and advanced patterns.</p>
-                    <span class="badge">90 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 90 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-entity-framework.html" class="card">
+                    <div class="card-icon">🗄️</div>
                     <h3>Entity Framework</h3>
                     <p>Complete EF Core guide covering DbContext, migrations, relationships, and performance optimization.</p>
-                    <span class="badge">80 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 80 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-database-integration.html" class="card">
+                    <div class="card-icon">🔗</div>
                     <h3>Database & Integration</h3>
                     <p>Comprehensive guide covering SQL, NoSQL, integration patterns, and database optimization.</p>
-                    <span class="badge">60 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 60 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
             </div>
         </div>
@@ -257,22 +433,31 @@
             <h2>🎨 Frontend Development</h2>
             <div class="grid">
                 <a href="interview-angular.html" class="card">
+                    <div class="card-icon">🅰️</div>
                     <h3>Angular</h3>
                     <p>Complete Angular guide covering components, services, routing, RxJS, and advanced patterns.</p>
-                    <span class="badge">60 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 60 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-react.html" class="card">
+                    <div class="card-icon">⚛️</div>
                     <h3>React</h3>
                     <p>Comprehensive React guide covering hooks, state management, performance, and advanced patterns.</p>
-                    <span class="badge">60 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 60 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-lit.html" class="card">
+                    <div class="card-icon">💡</div>
                     <h3>Lit</h3>
                     <p>Complete Lit guide covering web components, reactive properties, and Lit 3+ features.</p>
-                    <span class="badge">50 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 50 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
             </div>
         </div>
@@ -281,40 +466,58 @@
             <h2>🚀 Market Trending Technologies</h2>
             <div class="grid">
                 <a href="interview-kubernetes.html" class="card">
+                    <div class="card-icon">☸️</div>
                     <h3>Kubernetes</h3>
                     <p>Complete Kubernetes guide covering pods, deployments, services, security, and orchestration.</p>
-                    <span class="badge">50 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 50 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-docker.html" class="card">
+                    <div class="card-icon">🐳</div>
                     <h3>Docker</h3>
                     <p>Comprehensive Docker guide covering containers, images, Dockerfile, Compose, and best practices.</p>
-                    <span class="badge">50 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 50 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-genai.html" class="card">
+                    <div class="card-icon">🤖</div>
                     <h3>Generative AI</h3>
                     <p>Complete GenAI guide covering LLMs, Transformers, RAG, prompt engineering, and AI safety.</p>
-                    <span class="badge">50 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 50 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-machine-learning.html" class="card">
+                    <div class="card-icon">🧠</div>
                     <h3>Machine Learning</h3>
                     <p>Comprehensive ML guide covering algorithms, neural networks, MLOps, and model deployment.</p>
-                    <span class="badge">50 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 50 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-cybersecurity.html" class="card">
+                    <div class="card-icon">🔒</div>
                     <h3>Cybersecurity</h3>
                     <p>Complete security guide covering network security, cryptography, compliance, and threat intelligence.</p>
-                    <span class="badge">50 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 50 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
                 <a href="interview-microservices.html" class="card">
+                    <div class="card-icon">🏗️</div>
                     <h3>Microservices Architecture</h3>
                     <p>Comprehensive microservices guide covering patterns, communication, observability, and deployment.</p>
-                    <span class="badge">50 Questions</span>
-                    <div class="questions">Beginner to Expert (4-13 years)</div>
+                    <div class="card-meta">
+                        <span class="badge">📝 50 Questions</span>
+                        <span class="questions">🎯 Beginner to Expert</span>
+                    </div>
                 </a>
             </div>
         </div>
@@ -323,7 +526,8 @@
             <p><strong>Total Questions:</strong> 1000+ Questions Across All Technologies</p>
             <p><strong>Experience Level:</strong> Beginner to Expert (4-13 Years)</p>
             <p><strong>Format:</strong> HTML with Print-Ready Styling for PDF Conversion</p>
-            <p style="margin-top: 20px;">© 2024 Complete Tech Library - Interview Preparation Series</p>
+            <div class="footer-divider"></div>
+            <p>© 2024 Complete Tech Library - Interview Preparation Series</p>
         </div>
     </div>
 </body>
