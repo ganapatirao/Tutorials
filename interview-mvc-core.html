@@ -247,7 +247,7 @@
                 <li>Selects and returns a View or data</li>
             </ul>
             
-            <div class="code-block">public class ProductsController : Controller
+            <div class="code-block" data-language="code"><pre><code>public class ProductsController : Controller
 {
     private readonly IProductService _service;
     
@@ -280,7 +280,7 @@
         _service.Create(model);
         return RedirectToAction(nameof(Index));
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -356,22 +356,22 @@
                 <li><strong>@inject</strong> - Injects services</li>
             </ul>
             
-            <div class="code-block">@model IEnumerable&lt;Product&gt;
+            <div class="code-block" data-language="code"><pre><code>@model IEnumerable&lt;Product&gt;
 @{
     ViewData["Title"] = "Products";
 }
 
-<h1>@ViewData["Title"]</h1>
+&lt;h1&gt;@ViewData["Title"]&lt;/h1&gt;
 
 @if (Model.Any())
 {
     @foreach (var product in Model)
     {
-        <div class="product">
-            <h3>@product.Name</h3>
-            <p>Price: @product.Price.ToString("C")</p>
-            <a asp-action="Details" asp-route-id="@product.Id">View Details</a>
-        </div>
+        &lt;div class="product"&gt;
+            &lt;h3&gt;@product.Name&lt;/h3&gt;
+            &lt;p&gt;Price: @product.Price.ToString("C")&lt;/p&gt;
+            &lt;a asp-action="Details" asp-route-id="@product.Id"&gt;View Details&lt;/a&gt;
+        </code></pre></div>
     }
 }
 else
@@ -423,14 +423,14 @@ else
                 </tr>
             </table>
             
-            <div class="code-block">// ViewData
+            <div class="code-block" data-language="code"><pre><code>// ViewData
 ViewData["Message"] = "Hello";
 
 // ViewBag
 ViewBag.Message = "Hello";
 
 // TempData
-TempData["Message"] = "Hello"; // Persists until read</div>
+TempData["Message"] = "Hello"; // Persists until read</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -451,7 +451,7 @@ TempData["Message"] = "Hello"; // Persists until read</div>
             
             <p>to strongly-typed objects.</p>
             
-            <div class="code-block">// Model binding example
+            <div class="code-block" data-language="code"><pre><code>// Model binding example
 public class ProductViewModel
 {
     public int Id { get; set; }
@@ -470,7 +470,7 @@ public IActionResult Create(ProductViewModel model)
     }
     // Process the model
     return RedirectToAction(nameof(Index));
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -486,7 +486,7 @@ public IActionResult Create(ProductViewModel model)
                 <li><strong>Header:</strong> HTTP headers</li>
             </ol>
             
-            <div class="code-block">// Explicit binding sources
+            <div class="code-block" data-language="code"><pre><code>// Explicit binding sources
 public IActionResult Edit(
     [FromRoute] int id,
     [FromQuery] string returnUrl,
@@ -494,7 +494,7 @@ public IActionResult Edit(
     [FromBody] ProductViewModel model)
 {
     // ...
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -506,12 +506,12 @@ public IActionResult Edit(
         </div>
         <div class="answer">
             <h3>1. Convention-based Routing:</h3>
-            <div class="code-block">app.MapControllerRoute(
+            <div class="code-block" data-language="code"><pre><code>app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");</div>
+    pattern: "{controller=Home}/{action=Index}/{id?}");</code></pre></div>
             
             <h3>2. Attribute Routing:</h3>
-            <div class="code-block">[Route("products")]
+            <div class="code-block" data-language="code"><pre><code>[Route("products")]
 public class ProductsController : Controller
 {
     [Route("")]
@@ -523,7 +523,7 @@ public class ProductsController : Controller
     [Route("create")]
     [HttpPost]
     public IActionResult Create(ProductViewModel model) { }
-}</div>
+}</code></pre></div>
             
             <h3>3. Mixed Routing:</h3>
             <p>Both convention-based and attribute routing can be used together.</p>
@@ -538,13 +538,13 @@ public class ProductsController : Controller
                 <li><strong>[HttpGet], [HttpPost], etc.:</strong> Combines route definition with HTTP method constraint. More specific and preferred for API actions.</li>
             </ul>
             
-            <div class="code-block">// [Route] - Any HTTP method
+            <div class="code-block" data-language="code"><pre><code>// [Route] - Any HTTP method
 [Route("products/{id}")]
 public IActionResult Get(int id) { }
 
 // [HttpGet] - Only GET requests
 [HttpGet("products/{id}")]
-public IActionResult Get(int id) { }</div>
+public IActionResult Get(int id) { }</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -566,7 +566,7 @@ public IActionResult Get(int id) { }</div>
                 <li>Composition - can combine data from multiple sources</li>
             </ul>
             
-            <div class="code-block">// Domain Model
+            <div class="code-block" data-language="code"><pre><code>// Domain Model
 public class Product
 {
     public int Id { get; set; }
@@ -584,7 +584,7 @@ public class ProductViewModel
     public string FormattedPrice { get; set; }
     public string CategoryName { get; set; }
     public bool IsInStock { get; set; }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -602,11 +602,11 @@ public class ProductViewModel
                 <strong>Important:</strong> Always use View Models to prevent over-posting. Never bind directly to domain entities in POST actions.
             </div>
             
-            <div class="code-block">// Vulnerable - binds to all properties
+            <div class="code-block" data-language="code"><pre><code>// Vulnerable - binds to all properties
 public IActionResult Create(Product product) { }
 
 // Secure - uses view model
-public IActionResult Create(ProductViewModel model) { }</div>
+public IActionResult Create(ProductViewModel model) { }</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -624,11 +624,11 @@ public IActionResult Create(ProductViewModel model) { }</div>
                 <li>Reducing code duplication</li>
             </ul>
             
-            <div class="code-block">// Rendering a partial view
+            <div class="code-block" data-language="code"><pre><code>// Rendering a partial view
 @Html.Partial("_ProductCard", product)
 
 // Or using tag helper
-&lt;partial name="_ProductCard" model="product" /&gt;</div>
+&lt;partial name="_ProductCard" model="product" /&gt;</code></pre></div>
         </div>
 
         <div class="question">
@@ -663,7 +663,7 @@ public IActionResult Create(ProductViewModel model) { }</div>
                 </tr>
             </table>
             
-            <div class="code-block">// View Component
+            <div class="code-block" data-language="code"><pre><code>// View Component
 public class ProductListViewComponent : ViewComponent
 {
     private readonly IProductService _service;
@@ -681,7 +681,7 @@ public class ProductListViewComponent : ViewComponent
 }
 
 // Usage
-@await Component.InvokeAsync("ProductList", new { count = 5 })</div>
+@await Component.InvokeAsync("ProductList", new { count = 5 })</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -702,13 +702,13 @@ public class ProductListViewComponent : ViewComponent
                 <li>More natural syntax</li>
             </ul>
             
-            <div class="code-block">// HTML Helper (old way)
-@Html.TextBoxFor(m => m.Name)
-@Html.DropDownListFor(m => m.CategoryId, Model.Categories)
+            <div class="code-block" data-language="code"><pre><code>// HTML Helper (old way)
+@Html.TextBoxFor(m =&gt; m.Name)
+@Html.DropDownListFor(m =&gt; m.CategoryId, Model.Categories)
 
 // Tag Helper (new way)
 &lt;input asp-for="Name" /&gt;
-&lt;select asp-for="CategoryId" asp-items="Model.Categories"&gt;&lt;/select&gt;</div>
+&lt;select asp-for="CategoryId" asp-items="Model.Categories"&gt;&lt;/select&gt;</code></pre></div>
         </div>
 
         <div class="question">
@@ -737,7 +737,7 @@ public class ProductListViewComponent : ViewComponent
         <div class="answer">
             <p>A <strong>Layout page</strong> defines the common structure for multiple views, such as header, footer, and navigation. It uses @RenderBody() to specify where the view content will be inserted.</p>
             
-            <div class="code-block">// _Layout.cshtml
+            <div class="code-block" data-language="code"><pre><code>// _Layout.cshtml
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -749,7 +749,7 @@ public class ProductListViewComponent : ViewComponent
     &lt;main&gt;@RenderBody()&lt;/main&gt;
     &lt;footer&gt;@RenderSection("Footer", required: false)&lt;/footer&gt;
 &lt;/body&gt;
-&lt;/html&gt;</div>
+&lt;/html&gt;</code></pre></div>
         </div>
 
         <div class="question">
@@ -758,7 +758,7 @@ public class ProductListViewComponent : ViewComponent
         <div class="answer">
             <p><strong>Sections</strong> allow views to inject content into specific areas of the layout page.</p>
             
-            <div class="code-block">// In view
+            <div class="code-block" data-language="code"><pre><code>// In view
 @{
     Layout = "_Layout";
 }
@@ -771,7 +771,7 @@ public class ProductListViewComponent : ViewComponent
     &lt;p&gt;Custom footer&lt;/p&gt;
 }
 
-&lt;h1&gt;Main content&lt;/h1&gt;</div>
+&lt;h1&gt;Main content&lt;/h1&gt;</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -792,7 +792,7 @@ public class ProductListViewComponent : ViewComponent
                 <li>Independent routing for each area</li>
             </ul>
             
-            <div class="code-block">// Area controller
+            <div class="code-block" data-language="code"><pre><code>// Area controller
 [Area("Admin")]
 [Route("admin/[controller]/[action]")]
 public class DashboardController : Controller
@@ -806,7 +806,7 @@ public class DashboardController : Controller
 // Area routing
 app.MapControllerRoute(
     name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");</div>
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -825,7 +825,7 @@ app.MapControllerRoute(
                 <li><strong>Result filters:</strong> Run before and after result execution</li>
             </ul>
             
-            <div class="code-block">// Action filter example
+            <div class="code-block" data-language="code"><pre><code>// Action filter example
 public class LogActionFilter : ActionFilterAttribute
 {
     public override void OnActionExecuting(ActionExecutingContext context)
@@ -844,7 +844,7 @@ public class LogActionFilter : ActionFilterAttribute
 public class ProductsController : Controller
 {
     // ...
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -857,7 +857,7 @@ public class ProductsController : Controller
         <div class="answer">
             <p>ASP.NET Core MVC uses <strong>Data Annotations</strong> for validation. The framework automatically validates models based on these attributes.</p>
             
-            <div class="code-block">public class ProductViewModel
+            <div class="code-block" data-language="code"><pre><code>public class ProductViewModel
 {
     public int Id { get; set; }
     
@@ -885,7 +885,7 @@ public IActionResult Create(ProductViewModel model)
     }
     // Process valid model
     return RedirectToAction(nameof(Index));
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -894,7 +894,7 @@ public IActionResult Create(ProductViewModel model)
         <div class="answer">
             <p>You can create custom validation attributes by inheriting from ValidationAttribute.</p>
             
-            <div class="code-block">public class CustomDateAttribute : ValidationAttribute
+            <div class="code-block" data-language="code"><pre><code>public class CustomDateAttribute : ValidationAttribute
 {
     protected override ValidationResult IsValid(object value, ValidationContext context)
     {
@@ -911,7 +911,7 @@ public IActionResult Create(ProductViewModel model)
 
 // Usage
 [CustomDate]
-public DateTime ExpiryDate { get; set; }</div>
+public DateTime ExpiryDate { get; set; }</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -934,10 +934,10 @@ public DateTime ExpiryDate { get; set; }</div>
         <div class="answer">
             <p>_ViewStart.cshtml is executed before every view in the same directory (or subdirectories). It's commonly used to specify the default layout for all views.</p>
             
-            <div class="code-block">// _ViewStart.cshtml
+            <div class="code-block" data-language="code"><pre><code>// _ViewStart.cshtml
 @{
     Layout = "_Layout";
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -946,18 +946,18 @@ public DateTime ExpiryDate { get; set; }</div>
         <div class="answer">
             <p>_ViewImports.cshtml is used to import namespaces and add tag helpers that are available to all views in the same directory (or subdirectories).</p>
             
-            <div class="code-block">// _ViewImports.cshtml
+            <div class="code-block" data-language="code"><pre><code>// _ViewImports.cshtml
 @using MyApp.Models
 @using MyApp.ViewModels
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@addTagHelper *, AuthorTagHelpers</div>
+@addTagHelper *, AuthorTagHelpers</code></pre></div>
         </div>
 
         <div class="question">
             Q26: How do you implement AJAX in MVC?
         </div>
         <div class="answer">
-            <div class="code-block">// Controller action returning JSON
+            <div class="code-block" data-language="code"><pre><code>// Controller action returning JSON
 public IActionResult GetProducts()
 {
     var products = _service.GetAll();
@@ -975,10 +975,10 @@ $.ajax({
 
 // Or using fetch
 fetch('/Products/GetProducts')
-    .then(response => response.json())
-    .then(data => {
+    .then(response =&gt; response.json())
+    .then(data =&gt; {
         // Process data
-    });</div>
+    });</code></pre></div>
         </div>
 
         <div class="question">
@@ -995,7 +995,7 @@ fetch('/Products/GetProducts')
             Q28: How do you handle file uploads in MVC?
         </div>
         <div class="answer">
-            <div class="code-block">// View
+            <div class="code-block" data-language="code"><pre><code>// View
 &lt;form asp-action="Upload" asp-controller="Home" method="post" 
       enctype="multipart/form-data"&gt;
     &lt;input type="file" name="file" /&gt;
@@ -1006,7 +1006,7 @@ fetch('/Products/GetProducts')
 [HttpPost]
 public IActionResult Upload(IFormFile file)
 {
-    if (file != null && file.Length > 0)
+    if (file != null &amp;&amp; file.Length &gt; 0)
     {
         var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", file.FileName);
         using (var stream = new FileStream(path, FileMode.Create))
@@ -1015,7 +1015,7 @@ public IActionResult Upload(IFormFile file)
         }
     }
     return RedirectToAction(nameof(Index));
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1029,7 +1029,7 @@ public IActionResult Upload(IFormFile file)
                 <li>Ensures the request originated from your application</li>
             </ul>
             
-            <div class="code-block">// View
+            <div class="code-block" data-language="code"><pre><code>// View
 @Html.AntiForgeryToken()
 // Or
 &lt;form asp-action="Create" method="post"&gt;
@@ -1042,14 +1042,14 @@ public IActionResult Upload(IFormFile file)
 public IActionResult Create(ProductViewModel model)
 {
     // ...
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q30: How do you implement caching in MVC?
         </div>
         <div class="answer">
-            <div class="code-block">// Response caching
+            <div class="code-block" data-language="code"><pre><code>// Response caching
 [ResponseCache(Duration = 60)]
 public IActionResult Index()
 {
@@ -1064,14 +1064,14 @@ public IActionResult Products(int page = 1)
 }
 
 // Cache profile in Program.cs
-builder.Services.AddControllers(options =>
+builder.Services.AddControllers(options =&gt;
 {
     options.CacheProfiles.Add("Default30",
         new CacheProfile
         {
             Duration = 30
         });
-});</div>
+});</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1084,7 +1084,7 @@ builder.Services.AddControllers(options =>
         <div class="answer">
             <p><strong>Repository Pattern</strong> mediates between the domain and data mapping layers, acting like an in-memory domain object collection.</p>
             
-            <div class="code-block"> Repository interface
+            <div class="code-block" data-language="code"><pre><code> Repository interface
 public interface IRepository&lt;T&gt; where T : class
 {
     Task&lt;IEnumerable&lt;T&gt;&gt; GetAllAsync();
@@ -1134,7 +1134,7 @@ public class Repository&lt;T&gt; : IRepository&lt;T&gt; where T : class
         _dbSet.Remove(entity);
         await _context.SaveChangesAsync();
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1143,7 +1143,7 @@ public class Repository&lt;T&gt; : IRepository&lt;T&gt; where T : class
         <div class="answer">
             <p><strong>Unit of Work Pattern</strong> maintains a list of objects affected by a business transaction and coordinates the writing out of changes.</p>
             
-            <div class="code-block"> Unit of Work interface
+            <div class="code-block" data-language="code"><pre><code> Unit of Work interface
 public interface IUnitOfWork : IDisposable
 {
     IRepository&lt;Product&gt; Products { get; }
@@ -1174,7 +1174,7 @@ public class UnitOfWork : IUnitOfWork
     {
         _context.Dispose();
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1183,7 +1183,7 @@ public class UnitOfWork : IUnitOfWork
         <div class="answer">
             <p><strong>Service Layer Pattern</strong> defines an application's boundary and its set of available operations from the perspective of interfacing client layers.</p>
             
-            <div class="code-block"> Service interface
+            <div class="code-block" data-language="code"><pre><code> Service interface
 public interface IProductService
 {
     Task&lt;ProductViewModel&gt; GetProductAsync(int id);
@@ -1218,7 +1218,7 @@ public class ProductService : IProductService
         await _unitOfWork.SaveAsync();
         return _mapper.Map&lt;ProductViewModel&gt;(product);
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1227,7 +1227,7 @@ public class ProductService : IProductService
         <div class="answer">
             <p><strong>CQRS (Command Query Responsibility Segregation)</strong> separates read and write operations into different models.</p>
             
-            <div class="code-block"> Query
+            <div class="code-block" data-language="code"><pre><code> Query
 public class GetProductQuery
 {
     public int Id { get; set; }
@@ -1272,7 +1272,7 @@ public class CreateProductCommandHandler
         await _context.SaveChangesAsync();
         return product.Id;
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1283,7 +1283,7 @@ public class CreateProductCommandHandler
             Q35: How do you implement role-based authorization in MVC?
         </div>
         <div class="answer">
-            <div class="code-block"> Controller level
+            <div class="code-block" data-language="code"><pre><code> Controller level
 [Authorize(Roles = "Admin")]
 public class AdminController : Controller
 {
@@ -1307,22 +1307,22 @@ public class ProductController : Controller
 }
 
 // Policy-based authorization
-builder.Services.AddAuthorization(options =>
+builder.Services.AddAuthorization(options =&gt;
 {
-    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
-    options.AddPolicy("ManagerOrAdmin", policy => 
+    options.AddPolicy("AdminOnly", policy =&gt; policy.RequireRole("Admin"));
+    options.AddPolicy("ManagerOrAdmin", policy =&gt; 
         policy.RequireRole("Manager", "Admin"));
-});</div>
+});</code></pre></div>
         </div>
 
         <div class="question">
             Q36: How do you implement policy-based authorization in MVC?
         </div>
         <div class="answer">
-            <div class="code-block"> Define policy
-builder.Services.AddAuthorization(options =>
+            <div class="code-block" data-language="code"><pre><code> Define policy
+builder.Services.AddAuthorization(options =&gt;
 {
-    options.AddPolicy("AtLeast21", policy =>
+    options.AddPolicy("AtLeast21", policy =&gt;
         policy.Requirements.Add(new MinimumAgeRequirement(21)));
 });
 
@@ -1343,8 +1343,8 @@ public class MinimumAgeHandler : AuthorizationHandler&lt;MinimumAgeRequirement&g
         AuthorizationHandlerContext context,
         MinimumAgeRequirement requirement)
     {
-        var ageClaim = context.User.FindFirst(c => c.Type == "Age");
-        if (ageClaim != null && int.Parse(ageClaim.Value) >= requirement.MinimumAge)
+        var ageClaim = context.User.FindFirst(c =&gt; c.Type == "Age");
+        if (ageClaim != null &amp;&amp; int.Parse(ageClaim.Value) &gt;= requirement.MinimumAge)
         {
             context.Succeed(requirement);
         }
@@ -1357,14 +1357,14 @@ public class MinimumAgeHandler : AuthorizationHandler&lt;MinimumAgeRequirement&g
 public IActionResult AdultContent()
 {
     return View();
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q37: How do you implement resource-based authorization in MVC?
         </div>
         <div class="answer">
-            <div class="code-block"> Requirement
+            <div class="code-block" data-language="code"><pre><code> Requirement
 public class SameAuthorRequirement : IAuthorizationRequirement
 {
 }
@@ -1403,7 +1403,7 @@ public class DocumentController : Controller
         
         return View(document);
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1600,3 +1600,5 @@ public class DocumentController : Controller
     </div>
 </body>
 </html>
+
+

@@ -60,15 +60,45 @@
             border-left: 4px solid #28a745;
         }
         .code-block {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 8px;
+            background: #2d2d2d;
+            color: #e0e0e0;
+            padding: 25px;
+            border-radius: 12px;
             overflow-x: auto;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 13px;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
             margin: 15px 0;
-            line-height: 1.5;
+            line-height: 1.7;
+            border-left: 4px solid #512bd4;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .code-block::before {
+            content: '';
+            display: block;
+            margin-bottom: 10px;
+        }
+        .code-block .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        .code-block .keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+        .code-block .string {
+            color: #ce9178;
+        }
+        .code-block .function {
+            color: #dcdcaa;
+        }
+        .code-block .number {
+            color: #b5cea8;
+        }
+        .code-block .variable {
+            color: #9cdcfe;
+        }
+        .code-block .type {
+            color: #4ec9b0;
         }
         .important {
             background: #fff3cd;
@@ -226,7 +256,7 @@
                 <li><strong>Publish:</strong> Store artifacts for deployment</li>
             </ol>
             
-            <div class="code-block">// Example CI pipeline (GitHub Actions)
+            <div class="code-block" data-language="code"><pre><code>// Example CI pipeline (GitHub Actions)
 name: CI Pipeline
 
 on:
@@ -255,7 +285,7 @@ jobs:
       run: dotnet test --no-build --configuration Release
     
     - name: Publish
-      run: dotnet publish --configuration Release --no-build -o ./publish</div>
+      run: dotnet publish --configuration Release --no-build -o ./publish</code></pre></div>
         </div>
 
         <div class="question">
@@ -380,7 +410,7 @@ jobs:
                 <li><strong>Declarative:</strong> Define desired state, tool figures out how to achieve it. Example: Terraform, CloudFormation, ARM Templates.</li>
             </ul>
             
-            <div class="code-block">// Declarative (Terraform)
+            <div class="code-block" data-language="code"><pre><code>// Declarative (Terraform)
 resource "aws_instance" "web" {
   ami           = "ami-0c55b159cbfafe1f0"
   instance_type = "t2.micro"
@@ -395,7 +425,7 @@ resource "aws_instance" "web" {
     image: ami-0c55b159cbfafe1f0
     instance_type: t2.micro
     tags:
-      Name: WebServer</div>
+      Name: WebServer</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -421,7 +451,7 @@ resource "aws_instance" "web" {
             Q10: How do you set up a CI/CD pipeline in AWS?
         </div>
         <div class="answer">
-            <div class="code-block">// CloudFormation template for CodePipeline
+            <div class="code-block" data-language="code"><pre><code>// CloudFormation template for CodePipeline
 AWSTemplateFormatVersion: '2010-09-09'
 Resources:
   Pipeline:
@@ -469,7 +499,7 @@ Resources:
                 ApplicationName: my-app
                 DeploymentGroupName: my-deployment-group
               InputArtifacts:
-                - Name: BuildArtifact</div>
+                - Name: BuildArtifact</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -494,7 +524,7 @@ Resources:
             Q12: How do you set up a CI/CD pipeline in Azure?
         </div>
         <div class="answer">
-            <div class="code-block">// Azure Pipeline YAML
+            <div class="code-block" data-language="code"><pre><code>// Azure Pipeline YAML
 trigger:
 - main
 
@@ -529,7 +559,7 @@ steps:
     azureSubscription: 'MyAzureServiceConnection'
     appType: 'webApp'
     appName: 'my-web-app'
-    package: '$(System.DefaultWorkingDirectory)/**/*.zip'</div>
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -554,7 +584,7 @@ steps:
             Q14: How do you set up a CI/CD pipeline in Google Cloud?
         </div>
         <div class="answer">
-            <div class="code-block">// cloudbuild.yaml
+            <div class="code-block" data-language="code"><pre><code>// cloudbuild.yaml
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
@@ -579,7 +609,7 @@ steps:
 
 # Store images in Artifact Registry
 images:
-  - 'gcr.io/$PROJECT_ID/my-app:$SHORT_SHA'</div>
+  - 'gcr.io/$PROJECT_ID/my-app:$SHORT_SHA'</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -590,7 +620,7 @@ images:
             Q15: How do you deploy containers in CI/CD?
         </div>
         <div class="answer">
-            <div class="code-block">// Dockerfile
+            <div class="code-block" data-language="code"><pre><code>// Dockerfile
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 
@@ -611,14 +641,14 @@ ENTRYPOINT ["dotnet", "MyApp.dll"]
 
 // Build and push in CI/CD
 docker build -t myregistry.azurecr.io/myapp:${tag} .
-docker push myregistry.azurecr.io/myapp:${tag}</div>
+docker push myregistry.azurecr.io/myapp:${tag}</code></pre></div>
         </div>
 
         <div class="question">
             Q16: How do you deploy to Kubernetes in CI/CD?
         </div>
         <div class="answer">
-            <div class="code-block">// Kubernetes deployment.yaml
+            <div class="code-block" data-language="code"><pre><code>// Kubernetes deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -647,7 +677,7 @@ spec:
   run: |
     kubectl apply -f k8s/deployment.yaml
     kubectl set image deployment/myapp myapp=myregistry.azurecr.io/myapp:${IMAGE_TAG}
-    kubectl rollout status deployment/myapp</div>
+    kubectl rollout status deployment/myapp</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -795,12 +825,12 @@ spec:
                 <li>Consistency across environments</li>
             </ul>
             
-            <div class="code-block">// Examples
+            <div class="code-block" data-language="code"><pre><code>// Examples
 // GitHub Actions: .github/workflows/ci.yml
 // GitLab CI: .gitlab-ci.yml
 // Azure Pipelines: azure-pipelines.yml
 // Jenkins: Jenkinsfile
-// CircleCI: .circleci/config.yml</div>
+// CircleCI: .circleci/config.yml</code></pre></div>
         </div>
 
         <div class="question">
@@ -826,12 +856,12 @@ spec:
                 <li>Targeted user segments</li>
             </ul>
             
-            <div class="code-block">// Feature flag example
+            <div class="code-block" data-language="code"><pre><code>// Feature flag example
 if (featureFlags.isEnabled('new-feature')) {
   // New feature code
 } else {
   // Old feature code
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1418,6 +1448,1030 @@ if (featureFlags.isEnabled('new-feature')) {
             </ul>
         </div>
 
+        <div class="page-break"></div>
+
+        <h2>15. Advanced Topics (4-13 Years Experience)</h2>
+
+        <div class="question">
+            Q51: How do you implement GitOps with ArgoCD?
+        </div>
+        <div class="answer">
+            <p><strong>GitOps</strong> uses Git as the single source of truth for declarative infrastructure and applications.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># ArgoCD Application manifest
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/user/myapp.git
+    targetRevision: HEAD
+    path: kubernetes/manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+
+# ArgoCD ApplicationSet for multi-cluster
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: myapp-multi-cluster
+spec:
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          environment: production
+  template:
+    metadata:
+      name: '{{name}}-myapp'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/user/myapp.git
+        targetRevision: HEAD
+        path: kubernetes/manifests
+      destination:
+        server: '{{server}}'
+        namespace: production
+
+# App-of-Apps pattern
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apps
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/user/infrastructure.git
+    targetRevision: HEAD
+    path: apps
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q52: How do you implement progressive delivery with Flagger?
+        </div>
+        <div class="answer">
+            <p><strong>Progressive delivery</strong> enables canary and A/B deployments with automated rollbacks.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Flagger canary deployment
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: myapp
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: myapp
+  service:
+    port: 80
+    targetPort: http
+  analysis:
+    interval: 1m
+    threshold: 5
+    maxWeight: 50
+    stepWeight: 5
+    metrics:
+    - name: request-success-rate
+      thresholdRange:
+        min: 99
+      interval: 1m
+    - name: request-duration
+      thresholdRange:
+        max: 500
+      interval: 1m
+  webhooks:
+  - name: load-test
+    url: http://flagger-loadtester/
+    metadata:
+      cmd: "hey -z 2m -q 10 -c 2 http://myapp-canary/"
+
+# Flagger A/B testing
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: myapp-ab
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: myapp
+  service:
+    port: 80
+  analysis:
+    iterations: 10
+    match:
+    - headers:
+        x-user-group:
+          exact: beta-testers
+    metrics:
+    - name: request-success-rate
+      thresholdRange:
+        min: 99</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q53: How do you implement CI/CD security with supply chain protection?
+        </div>
+        <div class="answer">
+            <p><strong>Supply chain security</strong> ensures the integrity of artifacts throughout the CI/CD pipeline.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># GitHub Actions with Sigstore signing
+name: Build and Sign
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build image
+      run: docker build -t myapp:${{ github.sha }} .
+    
+    - name: Sign image with Cosign
+      uses: sigstore/cosign-installer@v2
+      with:
+        cosign-release: 'v1.13.0'
+    
+    - name: Sign image
+      run: |
+        cosign sign --key env://COSIGN_PRIVATE_KEY \
+          myapp:${{ github.sha }}
+      env:
+        COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+
+# SBOM generation with Syft
+- name: Generate SBOM
+  run: |
+    syft myapp:${{ github.sha }} -o spdx-json &gt; sbom.json
+
+# Verify image before deployment
+- name: Verify image signature
+  run: |
+    cosign verify --key cosign.pub \
+      myapp:${{ github.sha }}
+
+# Kyverno for policy enforcement
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: verify-image-signatures
+spec:
+  validationFailureAction: enforce
+  background: false
+  rules:
+  - name: check-signature
+    match:
+      resources:
+        kinds:
+        - Pod
+    verifyImages:
+    - image: "*"
+      key: |-
+        -----BEGIN PUBLIC KEY-----
+        MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE...
+        -----END PUBLIC KEY-----</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q54: How do you implement feature flags in CI/CD?
+        </div>
+        <div class="answer">
+            <p><strong>Feature flags</strong> enable controlled rollout of features without deployment.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># LaunchDarkly integration
+using Launchdarkly.Client;
+
+public class FeatureFlagService
+{
+    private readonly ILdClient _ldClient;
+    
+    public FeatureFlagService(ILdClient ldClient)
+    {
+        _ldClient = ldClient;
+    }
+    
+    public async Task&lt;bool&gt; IsFeatureEnabledAsync(string featureKey, string userId)
+    {
+        var user = User.WithKey(userId);
+        return await _ldClient.BoolVariationAsync(featureKey, user, false);
+    }
+}
+
+# Feature flag in code
+if (await _featureFlagService.IsFeatureEnabledAsync("new-ui", userId))
+{
+    return View("NewUI");
+}
+else
+{
+    return View("LegacyUI");
+}
+
+# ConfigMap for feature flags (simple approach)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: feature-flags
+data:
+  new-ui.enabled: "true"
+  new-api.enabled: "false"
+
+# Unleash feature flags
+# unleash.yaml
+apiVersion: unleash.github.com/v1
+kind: Unleash
+metadata:
+  name: myapp
+spec:
+  url: https://unleash.example.com
+  appName: myapp
+  instanceId: myapp-prod</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q55: How do you implement DORA metrics in CI/CD?
+        </div>
+        <div class="answer">
+            <p><strong>DORA metrics</strong> measure software delivery performance and organizational efficiency.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># DORA Metrics
+# 1. Deployment Frequency
+# Track deployments over time
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: record-deployment
+spec:
+  steps:
+  - name: record-metric
+    image: curlimages/curl
+    script: |
+      curl -X POST https://metrics-api.example.com/deployments \
+        -H "Content-Type: application/json" \
+        -d '{"service": "myapp", "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"}'
+
+# 2. Lead Time for Changes
+# Measure time from commit to deployment
+- name: calculate-lead-time
+  run: |
+    COMMIT_TIME=$(git log -1 --format=%ct ${{ github.sha }})
+    DEPLOY_TIME=$(date +%s)
+    LEAD_TIME=$((DEPLOY_TIME - COMMIT_TIME))
+    echo "Lead time: $LEAD_TIME seconds"
+
+# 3. Change Failure Rate
+# Track failed deployments
+- name: record-failure
+  if: failure()
+  run: |
+    curl -X POST https://metrics-api.example.com/failures \
+      -d '{"service": "myapp", "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"}'
+
+# 4. Mean Time to Recovery (MTTR)
+# Track time to restore service
+- name: record-recovery
+  run: |
+    curl -X POST https://metrics-api.example.com/recovery \
+      -d '{"service": "myapp", "duration": 3600}'
+
+# Grafana dashboard for DORA metrics
+{
+  "dashboard": {
+    "title": "DORA Metrics",
+    "panels": [
+      {
+        "title": "Deployment Frequency",
+        "targets": [{
+          "expr": "rate(deployments_total[1d])"
+        }]
+      },
+      {
+        "title": "Lead Time",
+        "targets": [{
+          "expr": "avg(lead_time_seconds)"
+        }]
+      }
+    ]
+  }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q56: How do you implement CI/CD for microservices?
+        </div>
+        <div class="answer">
+            <p><strong>Microservices CI/CD</strong> requires independent deployment and versioning strategies.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Monorepo with Nx
+# nx.json
+{
+  "version": 2,
+  "projects": {
+    "myapp-api": "apps/api",
+    "myapp-ui": "apps/ui",
+    "shared-lib": "libs/shared"
+  }
+}
+
+# Affected-based CI/CD
+name: Build Affected Services
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      api: ${{ steps.changes.outputs.api }}
+      ui: ${{ steps.changes.outputs.ui }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: nrwl/nx-set-shas@v3
+    - id: changes
+      uses: nrwl/nx-affected@v3
+      with:
+        projects: "myapp-api, myapp-ui"
+
+  build-api:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.api == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - run: nx build myapp-api
+
+# Service versioning strategy
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-api
+  labels:
+    app: myapp-api
+    version: v1.2.0</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q57: How do you implement CI/CD observability?
+        </div>
+        <div class="answer">
+            <p><strong>Observability</strong> provides insights into CI/CD pipeline performance and health.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># OpenTelemetry for pipeline metrics
+from opentelemetry import trace
+from opentelemetry.sdk.trace import TracerProvider
+
+tracer = TracerProvider()
+
+@tracer.tracer("pipeline").start_as_current_span("build-stage")
+def build_stage():
+    # Build logic
+    pass
+
+# GitHub Actions with tracing
+- name: Trace pipeline
+  uses: honeycombio/trace-github-action@v1
+  with:
+    apikey: ${{ secrets.HONEYCOMB_API_KEY }}
+    dataset: ci-pipelines
+
+# Custom metrics in Jenkins
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    def duration = System.currentTimeMillis() - buildStartTime
+                    echo "Build duration: ${duration}ms"
+                    // Send to metrics system
+                }
+            }
+        }
+    }
+}
+
+# Grafana dashboard for CI/CD
+{
+  "dashboard": {
+    "title": "CI/CD Pipeline Metrics",
+    "panels": [
+      {
+        "title": "Pipeline Duration",
+        "targets": [{
+          "expr": "pipeline_duration_seconds"
+        }]
+      },
+      {
+        "title": "Success Rate",
+        "targets": [{
+          "expr": "rate(pipeline_successes[5m]) / rate(pipeline_runs[5m])"
+        }]
+      }
+    ]
+  }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q58: How do you implement CI/CD for serverless applications?
+        </div>
+        <div class="answer">
+            <p><strong>Serverless CI/CD</strong> requires specialized tooling for function deployment.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># AWS SAM for Lambda deployment
+# template.yaml
+Resources:
+  MyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./src
+      Handler: app.handler
+      Runtime: nodejs18.x
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: GET
+
+# GitHub Actions for SAM
+name: Deploy Lambda
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: aws-actions/setup-sam@v2
+    - name: Build
+      run: sam build
+    - name: Deploy
+      run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
+
+# Serverless Framework
+# serverless.yml
+service: myapp
+provider:
+  name: aws
+  runtime: nodejs18.x
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
+
+# Deploy with CI/CD
+- name: Deploy with Serverless
+  run: serverless deploy --stage production</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q59: How do you implement CI/CD disaster recovery?
+        </div>
+        <div class="answer">
+            <p><strong>Disaster recovery</strong> ensures CI/CD system resilience and recoverability.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># GitLab backup
+sudo gitlab-backup create
+
+# Restore GitLab
+sudo gitlab-backup restore BACKUP=11493135454_2018_04_25_10.6.4_gitlab_backup.tar
+
+# Jenkins configuration backup
+# Backup JENKINS_HOME directory
+tar -czf jenkins-backup.tar.gz /var/lib/jenkins
+
+# GitHub Actions runner backup
+# Backup runner configuration
+kubectl get configmap github-runner-config -o yaml &gt; runner-config.yaml
+
+# Multi-region CI/CD
+name: Multi-Region Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy-us-east:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to us-east
+      run: |
+        kubectl config use-context us-east
+        kubectl apply -f manifests/
+
+  deploy-eu-west:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to eu-west
+      run: |
+        kubectl config use-context eu-west
+        kubectl apply -f manifests/
+
+  # Failover test
+  failover-test:
+    needs: [deploy-us-east, deploy-eu-west]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Test failover
+      run: |
+        # Simulate region failure
+        # Verify traffic routes to healthy region</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q60: How do you implement CI/CD for mobile applications?
+        </div>
+        <div class="answer">
+            <p><strong>Mobile CI/CD</strong> requires app store integration and device testing.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Fastlane for iOS deployment
+# Fastfile
+lane :beta do
+  build_app(
+    scheme: "MyApp",
+    export_method: "app-store"
+  )
+  upload_to_app_store(
+    api_key_path: "./api_key.json",
+    skip_metadata: true,
+    skip_screenshots: true,
+    submit_for_review: false
+  )
+end
+
+# GitHub Actions for iOS
+name: iOS Build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: |
+        cd ios
+        pod install
+    - name: Build and test
+      run: |
+        xcodebuild test -workspace MyApp.xcworkspace \
+          -scheme MyApp -destination 'platform=iOS Simulator,name=iPhone 14'
+
+# Android with Gradle
+name: Android Build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build APK
+      run: |
+        ./gradlew assembleRelease
+    - name: Upload to Play Store
+      uses: r0adkll/upload-google-play@v1
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+        packageName: com.example.myapp
+        releaseFiles: app/build/outputs/apk/release/app-release.apk
+        track: internal</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q61: How do you implement CI/CD for infrastructure as code?
+        </div>
+        <div class="answer">
+            <p><strong>IaC CI/CD</strong> validates and deploys infrastructure changes safely.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Terraform with CI/CD
+name: Terraform Apply
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - terraform/**
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: hashicorp/setup-terraform@v2
+    - name: Terraform Format Check
+      run: terraform fmt -check
+    - name: Terraform Init
+      run: terraform init
+    - name: Terraform Validate
+      run: terraform validate
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan
+    - name: Terraform Apply
+      run: terraform apply tfplan
+
+# Checkov for IaC security
+- name: Run Checkov
+  uses: bridgecrewio/checkov-action@master
+  with:
+    directory: terraform/
+    framework: terraform
+
+# OPA for policy validation
+- name: OPA Validate
+  run: |
+    terraform show -json &gt; tfplan.json
+    opa eval -i tfplan.json -d policies/ data.terraform.analysis</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q62: How do you implement CI/CD for data pipelines?
+        </div>
+        <div class="answer">
+            <p><strong>Data pipeline CI/CD</strong> validates data quality and pipeline integrity.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># dbt for data transformation
+name: dbt CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  dbt:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up dbt
+      uses: dbt-labs/setup-dbt@v1
+    - name: dbt deps
+      run: dbt deps
+    - name: dbt compile
+      run: dbt compile
+    - name: dbt test
+      run: dbt test
+    - name: dbt run
+      run: dbt run --target prod
+
+# Airflow DAG validation
+name: Airflow CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Validate DAGs
+      run: |
+        python -c "
+from airflow.models import DagBag
+dagbag = DagBag(dag_folder='dags')
+for dag_id, dag in dagbag.dags.items():
+    print(f'Validating {dag_id}')
+        "
+
+# Great Expectations for data quality
+name: Data Quality
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run Great Expectations
+      run: |
+        great_expectations checkpoint run my_checkpoint</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q63: How do you implement CI/CD for machine learning?
+        </div>
+        <div class="answer">
+            <p><strong>MLOps CI/CD</strong> automates model training, validation, and deployment.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># MLflow for model tracking
+name: ML Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Train model
+      run: |
+        python train.py --experiment-name my-experiment
+    - name: Log model
+      run: |
+        mlflow models log-artifacts models/</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q64: How do you implement CI/CD for compliance and auditing?
+        </div>
+        <div class="answer">
+            <p><strong>Compliance CI/CD</strong> ensures regulatory and organizational requirements are met.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Policy as Code with OPA
+name: Compliance Check
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: OPA Check
+      run: |
+        opa eval -i deployment.yaml -d policies/ data.compliance
+
+# Audit logging
+- name: Log deployment
+  run: |
+    curl -X POST https://audit-log.example.com \
+      -d '{"action": "deploy", "user": "${{ github.actor }}", "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"}"
+
+# Compliance report generation
+- name: Generate report
+  run: |
+    python generate-compliance-report.py &gt; compliance-report.html</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q65: How do you implement CI/CD for hybrid cloud?
+        </div>
+        <div class="answer">
+            <p><strong>Hybrid cloud CI/CD</strong> deploys across on-premise and cloud environments.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Multi-cloud deployment
+name: Hybrid Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy-onprem:
+    runs-on: self-hosted
+    steps:
+    - name: Deploy to on-prem
+      run: |
+        kubectl apply -f manifests/ --context=onprem
+
+  deploy-aws:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to AWS
+      run: |
+        kubectl apply -f manifests/ --context=aws
+
+  deploy-azure:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to Azure
+      run: |
+        kubectl apply -f manifests/ --context=azure</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q66: How do you implement CI/CD for database changes?
+        </div>
+        <div class="answer">
+            <p><strong>Database CI/CD</strong> manages schema changes and data migrations safely.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Flyway for database migrations
+name: Database Migration
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - db/migrations/**
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run Flyway
+      run: |
+        flyway -url=jdbc:postgresql://db.example.com/mydb \
+          -user=admin -password=${{ secrets.DB_PASSWORD }} \
+          -locations=filesystem:db/migrations migrate
+
+# Liquibase
+name: Liquibase Migration
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run Liquibase
+      run: |
+        liquibase --url=jdbc:postgresql://db.example.com/mydb \
+          --username=admin --password=${{ secrets.DB_PASSWORD }} \
+          --changeLogFile=db/changelog.xml update</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q67: How do you implement CI/CD for Kubernetes operators?
+        </div>
+        <div class="answer">
+            <p><strong>Operator CI/CD</strong> builds and deploys Kubernetes operators.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Operator SDK with CI/CD
+name: Build Operator
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+    - name: Run tests
+      run: make test
+    - name: Build image
+      run: make docker-build IMG=myoperator:${{ github.sha }}
+    - name: Push image
+      run: |
+        docker push myoperator:${{ github.sha }}
+    - name: Deploy operator
+      run: |
+        make deploy IMG=myoperator:${{ github.sha }}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q68: How do you implement CI/CD for desktop applications?
+        </div>
+        <div class="answer">
+            <p><strong>Desktop app CI/CD</strong> builds and distributes desktop applications.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Electron with CI/CD
+name: Build Electron App
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    - name: Install dependencies
+      run: npm install
+    - name: Build
+      run: npm run build
+    - name: Package
+      run: npm run package
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: electron-app
+        path: dist/*.exe</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q69: How do you implement CI/CD for game development?
+        </div>
+        <div class="answer">
+            <p><strong>Game CI/CD</strong> handles large asset pipelines and platform-specific builds.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Unity with CI/CD
+name: Unity Build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Unity
+      uses: game-ci/unity-builder@v2
+      env:
+        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      with:
+        targetPlatform: StandaloneWindows64</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q70: How do you implement CI/CD cost optimization?
+        </div>
+        <div class="answer">
+            <p><strong>Cost optimization</strong> reduces CI/CD infrastructure and runtime costs.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Self-hosted runners for cost savings
+name: Build with Self-Hosted
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: make build
+
+# Spot instances for CI/CD
+# AWS Spot Fleet
+resource "aws_spot_fleet_request" "ci_fleet" {
+  spot_price_max_expression = "0.10"
+  target_capacity = 10
+  iam_fleet_role = aws_iam_role.ci_fleet.arn
+}
+
+# Caching strategies
+- name: Cache dependencies
+  uses: actions/cache@v3
+  with:
+    path: ~/.npm
+    key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+# Parallel execution for faster builds
+strategy:
+  matrix:
+    node-version: [14, 16, 18]
+    os: [ubuntu-latest, windows-latest, macos-latest]</code></pre></div>
+        </div>
+
         <div class="tip">
             <strong>Interview Tip:</strong> When discussing CI/CD, emphasize automation, security, testing, and reliability. Be prepared to discuss real-world scenarios, tool choices, and best practices for different cloud platforms. For senior positions, demonstrate knowledge of GitOps, progressive delivery, multi-cloud strategies, and observability.
         </div>
@@ -1439,3 +2493,5 @@ if (featureFlags.isEnabled('new-feature')) {
     </div>
 </body>
 </html>
+
+

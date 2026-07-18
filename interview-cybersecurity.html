@@ -325,14 +325,14 @@
         <div class="answer">
             <p><strong>SQL Injection (SQLi)</strong> is a vulnerability where malicious SQL code is inserted into a query, allowing attackers to view, modify, or delete data.</p>
             
-            <div class="code-block">`r`n# Vulnerable code
+            <div class="code-block" data-language="code"><pre><code># Vulnerable code
 query = "SELECT * FROM users WHERE username = '" + username + "'"
 
 # Malicious input
 username = "admin' OR '1'='1"
 
 # Resulting query
-SELECT * FROM users WHERE username = 'admin' OR '1'='1'</div>
+SELECT * FROM users WHERE username = 'admin' OR '1'='1'</code></pre></div>
             
             <h3>Prevention:</h3>
             <ul>
@@ -1283,3 +1283,5 @@ SELECT * FROM users WHERE username = 'admin' OR '1'='1'</div>
     </div>
 </body>
 </html>
+
+

@@ -253,7 +253,7 @@
                 </tr>
             </table>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 // Inner Join
 SELECT p.Name, c.CategoryName
 FROM Products p
@@ -262,7 +262,7 @@ INNER JOIN Categories c ON p.CategoryId = c.Id;
 // Left Join
 SELECT p.Name, c.CategoryName
 FROM Products p
-LEFT JOIN Categories c ON p.CategoryId = c.Id;</div>
+LEFT JOIN Categories c ON p.CategoryId = c.Id;</code></pre></div>
         </div>
 
         <div class="question">
@@ -274,18 +274,18 @@ LEFT JOIN Categories c ON p.CategoryId = c.Id;</div>
                 <li><strong>HAVING:</strong> Filters groups after aggregation. Can use aggregate functions.</li>
             </ul>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 // WHERE - filters before grouping
 SELECT CategoryId, COUNT(*) as Count
 FROM Products
-WHERE Price > 100
+WHERE Price &gt; 100
 GROUP BY CategoryId;
 
 // HAVING - filters after grouping
 SELECT CategoryId, COUNT(*) as Count
 FROM Products
 GROUP BY CategoryId
-HAVING COUNT(*) > 10;</div>
+HAVING COUNT(*) &gt; 10;</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -356,7 +356,7 @@ HAVING COUNT(*) > 10;</div>
             Q7: How do you connect to MongoDB from .NET?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 // Install MongoDB.Driver NuGet package
 // MongoDB.Driver
 
@@ -374,15 +374,15 @@ var product = new Product { Name = "Laptop", Price = 999.99 };
 await collection.InsertOneAsync(product);
 
 // Find
-var products = await collection.Find(p => p.Price > 100).ToListAsync();
+var products = await collection.Find(p =&gt; p.Price &gt; 100).ToListAsync();
 
 // Update
-var filter = Builders&lt;Product&gt;.Filter.Eq(p => p.Id, id);
-var update = Builders&lt;Product&gt;.Update.Set(p => p.Price, 899.99);
+var filter = Builders&lt;Product&gt;.Filter.Eq(p =&gt; p.Id, id);
+var update = Builders&lt;Product&gt;.Update.Set(p =&gt; p.Price, 899.99);
 await collection.UpdateOneAsync(filter, update);
 
 // Delete
-await collection.DeleteOneAsync(filter);</div>
+await collection.DeleteOneAsync(filter);</code></pre></div>
         </div>
 
         <div class="question">
@@ -394,7 +394,7 @@ await collection.DeleteOneAsync(filter);</div>
                 <li><strong>Referencing:</strong> Store references to other documents. Good for one-to-many or many-to-many relationships.</li>
             </ul>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 // Embedding - one-to-few
 {
   "_id": ObjectId("..."),
@@ -410,7 +410,7 @@ await collection.DeleteOneAsync(filter);</div>
   "_id": ObjectId("..."),
   "name": "Author",
   "bookIds": [ObjectId("..."), ObjectId("...")]
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -439,7 +439,7 @@ await collection.DeleteOneAsync(filter);</div>
             Q10: How do you produce and consume messages in Kafka using .NET?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 // Install Confluent.Kafka NuGet package
 using Confluent.Kafka;
 
@@ -470,7 +470,7 @@ while (true)
     var consumeResult = consumer.Consume();
     Console.WriteLine($"Message: {consumeResult.Message.Value}");
     consumer.Commit(consumeResult);
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -513,7 +513,7 @@ while (true)
             Q13: How do you use Redis with .NET?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 // Install StackExchange.Redis NuGet package
 using StackExchange.Redis;
 
@@ -543,7 +543,7 @@ db.SortedSetAdd("leaderboard", "user1", 100);
 var rank = db.SortedSetRank("leaderboard", "user1");
 
 // Expiration
-db.KeyExpire("key", TimeSpan.FromMinutes(5));</div>
+db.KeyExpire("key", TimeSpan.FromMinutes(5));</code></pre></div>
         </div>
 
         <div class="question">
@@ -589,7 +589,7 @@ db.KeyExpire("key", TimeSpan.FromMinutes(5));</div>
         <div class="answer">
             <p><strong>SPL</strong> is Splunk's search language for querying and manipulating data.</p>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 // Basic search
 index=web sourcetype=access_combined status=200
 
@@ -600,7 +600,7 @@ index=web | stats count by status
 index=web | timechart count by status
 
 // Join data
-index=web | join type=inner userId [search index=users]</div>
+index=web | join type=inner userId [search index=users]</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -707,9 +707,9 @@ index=web | join type=inner userId [search index=users]</div>
             Q21: How do you integrate Redis with ASP.NET Core?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 // Add Redis distributed cache
-builder.Services.AddStackExchangeRedisCache(options =>
+builder.Services.AddStackExchangeRedisCache(options =&gt;
 {
     options.Configuration = "localhost:6379";
     options.InstanceName = "MyApp_";
@@ -747,7 +747,7 @@ public class ProductService
         
         return product;
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -809,7 +809,7 @@ public class ProductService
                 <li>Large tables where full table scans are slow</li>
             </ul>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 // Create index
 CREATE INDEX idx_product_name ON Products(Name);
 
@@ -817,7 +817,7 @@ CREATE INDEX idx_product_name ON Products(Name);
 CREATE INDEX idx_product_category_price ON Products(CategoryId, Price);
 
 // Unique index
-CREATE UNIQUE INDEX idx_product_code ON Products(ProductCode);</div>
+CREATE UNIQUE INDEX idx_product_code ON Products(ProductCode);</code></pre></div>
             
             <div class="important">
                 <strong>Important:</strong> Indexes improve read performance but slow down write operations. Don't over-index.
@@ -949,10 +949,10 @@ CREATE UNIQUE INDEX idx_product_code ON Products(ProductCode);</div>
             Q29: How do you implement connection pooling?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 // Entity Framework Core connection pooling
-builder.Services.AddDbContext&lt;AppDbContext&gt;(options =>
-    options.UseSqlServer(connectionString, sqlOptions =>
+builder.Services.AddDbContext&lt;AppDbContext&gt;(options =&gt;
+    options.UseSqlServer(connectionString, sqlOptions =&gt;
     {
         sqlOptions.EnableRetryOnFailure(maxRetryCount: 5);
         sqlOptions.CommandTimeout(30);
@@ -966,7 +966,7 @@ var settings = new MongoClientSettings
     MaxConnectionPoolSize = 100,
     MinConnectionPoolSize = 10
 };
-var client = new MongoClient(settings);</div>
+var client = new MongoClient(settings);</code></pre></div>
         </div>
 
         <div class="question">
@@ -978,12 +978,12 @@ var client = new MongoClient(settings);</div>
                 <li><strong>Asynchronous:</strong> Returns immediately, operation completes in background. Better scalability and resource utilization.</li>
             </ul>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 // Synchronous (avoid in web apps)
 var products = context.Products.ToList();
 
 // Asynchronous (preferred)
-var products = await context.Products.ToListAsync();</div>
+var products = await context.Products.ToListAsync();</code></pre></div>
             
             <div class="tip">
                 <strong>Tip:</strong> Always use async/await for database operations in web applications to improve scalability.
@@ -1009,18 +1009,18 @@ var products = await context.Products.ToListAsync();</div>
                 <li><strong>Use stored procedures:</strong> For complex, frequently executed logic</li>
             </ul>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 -- Bad: Function on indexed column
 SELECT * FROM Products WHERE YEAR(CreatedAt) = 2024;
 
 -- Good: Range query on indexed column
-SELECT * FROM Products WHERE CreatedAt >= '2024-01-01' AND CreatedAt < '2025-01-01';
+SELECT * FROM Products WHERE CreatedAt &gt;= '2024-01-01' AND CreatedAt &lt; '2025-01-01';
 
 -- Bad: SELECT *
 SELECT * FROM Users WHERE Id = 1;
 
 -- Good: Select specific columns
-SELECT Id, Name, Email FROM Users WHERE Id = 1;</div>
+SELECT Id, Name, Email FROM Users WHERE Id = 1;</code></pre></div>
         </div>
 
         <div class="question">
@@ -1039,7 +1039,7 @@ SELECT Id, Name, Email FROM Users WHERE Id = 1;</div>
                 <li><strong>Non-Clustered Index:</strong> Separate index structure with pointers to data.</li>
             </ul>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 -- Create composite index
 CREATE INDEX idx_product_category_price ON Products(CategoryId, Price);
 
@@ -1048,7 +1048,7 @@ CREATE INDEX idx_active_products ON Products(Name) WHERE IsActive = true;
 
 -- Create covering index (INCLUDE clause in SQL Server)
 CREATE INDEX idx_product_covering ON Products(CategoryId) 
-INCLUDE (Name, Price, Stock);</div>
+INCLUDE (Name, Price, Stock);</code></pre></div>
         </div>
 
         <div class="question">
@@ -1056,7 +1056,7 @@ INCLUDE (Name, Price, Stock);</div>
         </div>
         <div class="answer">
 
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 -- SQL Server
 SET STATISTICS IO ON;
 SET STATISTICS TIME ON;
@@ -1084,7 +1084,7 @@ db.products.find({ categoryId: 5 }).explain("executionStats");
 // - executionTimeMillis
 // - totalDocsExamined
 // - totalKeysExamined
-// - stage (IXSCAN vs COLLSCAN)</div>
+// - stage (IXSCAN vs COLLSCAN)</code></pre></div>
         </div>
 
         <div class="question">
@@ -1100,7 +1100,7 @@ db.products.find({ categoryId: 5 }).explain("executionStats");
                 <li><strong>Composite Partitioning:</strong> Combination of above methods</li>
             </ul>
 
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 -- Range partitioning by date (PostgreSQL)
 CREATE TABLE orders (
     id SERIAL,
@@ -1120,14 +1120,14 @@ CREATE TABLE orders_2025 PARTITION OF orders
 -- - Improved query performance (partition pruning)
 -- - Easier maintenance (drop old partitions)
 -- - Parallel query execution
--- - Better index efficiency</div>
+-- - Better index efficiency</code></pre></div>
         </div>
 
         <div class="question">
             Q35: How do you implement database connection pooling?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 // HikariCP (Java)
 HikariConfig config = new HikariConfig();
 config.setJdbcUrl("jdbc:postgresql://localhost:5432/mydb");
@@ -1142,8 +1142,8 @@ config.setMaxLifetime(1800000);
 HikariDataSource dataSource = new HikariDataSource(config);
 
 // .NET Core (Entity Framework)
-builder.Services.AddDbContext&lt;AppDbContext&gt;(options =>
-    options.UseSqlServer(connectionString, sqlOptions =>
+builder.Services.AddDbContext&lt;AppDbContext&gt;(options =&gt;
+    options.UseSqlServer(connectionString, sqlOptions =&gt;
     {
         sqlOptions.EnableRetryOnFailure(maxRetryCount: 5);
         sqlOptions.CommandTimeout(30);
@@ -1160,7 +1160,7 @@ const pool = new Pool({
     max: 20, // Maximum pool size
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000
-});</div>
+});</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1191,7 +1191,7 @@ const pool = new Pool({
         <div class="answer">
             <p><strong>SQL Injection</strong> is a code injection technique where malicious SQL is inserted into query strings.</p>
 
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 -- Vulnerable code (DON'T DO THIS)
 string query = "SELECT * FROM Users WHERE Name = '" + userName + "'";
 // If userName = "' OR '1'='1", returns all users
@@ -1204,7 +1204,7 @@ SqlCommand command = new SqlCommand(query, connection);
 command.Parameters.AddWithValue("@Name", userName);
 
 // 2. ORM (Entity Framework)
-var user = await context.Users.FirstOrDefaultAsync(u => u.Name == userName);
+var user = await context.Users.FirstOrDefaultAsync(u =&gt; u.Name == userName);
 
 // 3. Stored procedures
 CREATE PROCEDURE GetUserByName
@@ -1218,14 +1218,14 @@ END
 if (!Regex.IsMatch(userName, @"^[a-zA-Z0-9 ]*$"))
 {
     throw new ArgumentException("Invalid input");
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q38: How do you implement data masking and anonymization?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 -- Dynamic Data Masking (SQL Server)
 CREATE TABLE Customers (
     Id INT PRIMARY KEY,
@@ -1255,7 +1255,7 @@ public static string MaskEmail(string email)
     if (string.IsNullOrEmpty(email)) return email;
     var parts = email.Split('@');
     return parts[0].Substring(0, 2) + "****@" + parts[1];
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1273,7 +1273,7 @@ public static string MaskEmail(string email)
                 <li><strong>Audit Logging:</strong> Log all data access and modifications</li>
             </ul>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 Right to be forgotten implementation
 CREATE PROCEDURE DeleteUserData
     @UserId INT
@@ -1297,14 +1297,14 @@ BEGIN
     WHERE Id = @UserId;
     
     COMMIT TRANSACTION;
-END</div>
+END</code></pre></div>
         </div>
 
         <div class="question">
             Q40: How do you implement database auditing?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 SQL Server Audit
 CREATE SERVER AUDIT MyServerAudit
 TO FILE (FILEPATH = 'C:\Audit\');
@@ -1345,7 +1345,7 @@ BEGIN
         RETURN NEW;
     END IF;
 END;
-$$ LANGUAGE plpgsql;</div>
+$$ LANGUAGE plpgsql;</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1403,7 +1403,7 @@ $$ LANGUAGE plpgsql;</div>
                 <li><strong>Semi-Synchronous Replication:</strong> At least one slave confirms before commit. Balance of consistency and performance.</li>
             </ul>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 PostgreSQL streaming replication
 -- Primary server (postgresql.conf)
 wal_level = replica
@@ -1419,7 +1419,7 @@ host replication replicator 192.168.1.0/24 md5
 -- Standby server (recovery.conf)
 standby_mode = 'on'
 primary_conninfo = 'host=primary_host port=5432 user=replicator password=password'
-restore_command = 'cp /var/lib/postgresql/archive/%f %p'</div>
+restore_command = 'cp /var/lib/postgresql/archive/%f %p'</code></pre></div>
         </div>
 
         <div class="question">
@@ -1435,7 +1435,7 @@ restore_command = 'cp /var/lib/postgresql/archive/%f %p'</div>
                 <li><strong>Geographic Sharding:</strong> Data located based on user location</li>
             </ul>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 Application-level sharding example
 public class ShardingDbContextFactory
 {
@@ -1472,7 +1472,7 @@ public class ConsistentHash
 
     public void AddNode(string node)
     {
-        for (int i = 0; i < _virtualNodes; i++)
+        for (int i = 0; i &lt; _virtualNodes; i++)
         {
             int hash = GetHashCode($"{node}:{i}");
             _ring[hash] = node;
@@ -1482,10 +1482,10 @@ public class ConsistentHash
     public string GetNode(string key)
     {
         int hash = GetHashCode(key);
-        var node = _ring.FirstOrDefault(x => x.Key >= hash);
+        var node = _ring.FirstOrDefault(x =&gt; x.Key &gt;= hash);
         return node.Value ?? _ring.First().Value;
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1501,7 +1501,7 @@ public class ConsistentHash
                 <li><strong>Geo-Redundancy:</strong> Replicate across different geographic regions</li>
             </ul>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 SQL Server Always On Availability Groups
 -- Create availability group
 CREATE AVAILABILITY GROUP MyAG
@@ -1523,7 +1523,7 @@ REPLICA ON
 
 -- Point-in-time restore
 RESTORE DATABASE MyDb FROM DISK = 'backup.bak'
-WITH NORECOVERY, STOPAT = '2024-01-15 14:30:00';</div>
+WITH NORECOVERY, STOPAT = '2024-01-15 14:30:00';</code></pre></div>
         </div>
 
         <div class="question">
@@ -1537,7 +1537,7 @@ WITH NORECOVERY, STOPAT = '2024-01-15 14:30:00';</div>
                 <li><strong>Incremental Backup:</strong> Changes since last backup (any type).</li>
             </ul>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 SQL Server backup strategy
 -- Full backup (weekly, Sunday)
 BACKUP DATABASE MyDb TO DISK = 'C:\Backups\MyDb_Full.bak'
@@ -1568,7 +1568,7 @@ sqlcmd -S localhost -Q "BACKUP DATABASE MyDb TO DISK = '$backupFile' WITH COMPRE
 # Retention policy (keep last 30 days)
 Get-ChildItem $backupPath -Filter "MyDb_*.bak" | 
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-30) } | 
-    Remove-Item</div>
+    Remove-Item</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1581,7 +1581,7 @@ Get-ChildItem $backupPath -Filter "MyDb_*.bak" |
         <div class="answer">
             <p><strong>Event Sourcing</strong> stores all state changes as a sequence of events. The current state is derived by replaying events.</p>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 Event model
 public interface IEvent
 {
@@ -1594,7 +1594,7 @@ public class OrderCreatedEvent : IEvent
 {
     public Guid EventId { get; } = Guid.NewGuid();
     public DateTime OccurredOn { get; } = DateTime.UtcNow;
-    public string EventType => "OrderCreated";
+    public string EventType =&gt; "OrderCreated";
     public Guid OrderId { get; set; }
     public Guid CustomerId { get; set; }
     public decimal Amount { get; set; }
@@ -1649,14 +1649,14 @@ public class OrderAggregate
                 break;
         }
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q47: How do you implement CQRS with event sourcing?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 Command side (write)
 public class CreateOrderCommand
 {
@@ -1716,7 +1716,7 @@ public class OrderEventProjector
                         OrderId = e.OrderId,
                         CustomerId = e.CustomerId,
                         Status = OrderStatus.Created,
-                        TotalAmount = e.Items.Sum(i => i.Price * i.Quantity),
+                        TotalAmount = e.Items.Sum(i =&gt; i.Price * i.Quantity),
                         CreatedAt = e.OccurredOn
                     };
                     _readContext.Orders.Add(readModel);
@@ -1727,14 +1727,14 @@ public class OrderEventProjector
             _consumer.Commit(result);
         }
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q48: How do you implement distributed transactions with Kafka?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 Using Kafka Transactions (exactly-once semantics)
 public class OrderProcessor
 {
@@ -1805,16 +1805,16 @@ public class OrderSaga
             }
         }
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q49: How do you implement Redis as a distributed cache?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 Redis Cluster configuration
-services.AddStackExchangeRedisCache(options =>
+services.AddStackExchangeRedisCache(options =&gt;
 {
     options.Configuration = "localhost:6379,localhost:6380,localhost:6381";
     options.InstanceName = "MyApp_";
@@ -1867,7 +1867,7 @@ public class CacheInvalidationService
 
     public void SubscribeToInvalidation()
     {
-        _subscriber.Subscribe("cache-invalidation", async (channel, message) =>
+        _subscriber.Subscribe("cache-invalidation", async (channel, message) =&gt;
         {
             var cacheKey = message;
             await _cache.RemoveAsync(cacheKey);
@@ -1879,14 +1879,14 @@ public class CacheInvalidationService
         await _cache.RemoveAsync(cacheKey);
         await _subscriber.PublishAsync("cache-invalidation", cacheKey);
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q50: How do you implement MongoDB change streams?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 MongoDB Change Stream for real-time updates
 public class ChangeStreamProcessor
 {
@@ -1895,7 +1895,7 @@ public class ChangeStreamProcessor
     public async Task ProcessChangesAsync()
     {
         var pipeline = new EmptyPipelineDefinition&lt;ChangeStreamDocument&lt;Order&gt;&gt;()
-            .Match(change => change.OperationType == ChangeOperationType.Insert ||
+            .Match(change =&gt; change.OperationType == ChangeOperationType.Insert ||
                            change.OperationType == ChangeOperationType.Update ||
                            change.OperationType == ChangeOperationType.Delete);
 
@@ -1906,7 +1906,7 @@ public class ChangeStreamProcessor
 
         using var cursor = await _ordersCollection.WatchAsync(pipeline, options);
         
-        await cursor.ForEachAsync(async change =>
+        await cursor.ForEachAsync(async change =&gt;
         {
             switch (change.OperationType)
             {
@@ -1934,7 +1934,7 @@ public class ChangeStreamProcessor
         // Send notification
         await _notificationService.SendAsync($"New order {order.Id}");
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -2032,7 +2032,7 @@ public class ChangeStreamProcessor
                 <li><strong>Read Your Writes:</strong> Client always sees its own writes</li>
             </ul>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 Eventual consistency example with DynamoDB
 // Write to primary region
 await dynamoClient.PutItemAsync(new PutItemRequest
@@ -2054,14 +2054,14 @@ var response = await dynamoClient.GetItemAsync(new GetItemRequest
         { "OrderId", new AttributeValue { S = orderId } }
     },
     ConsistentRead = false // Set to true for strong consistency
-});</div>
+});</code></pre></div>
         </div>
 
         <div class="question">
             Q54: How do you implement database connection string security?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 Store in Azure Key Vault
 public class SecretConfigurationProvider
 {
@@ -2095,14 +2095,14 @@ public static void ProtectConfiguration()
     section.SectionInformation.ProtectSection("DataProtectionConfigurationProvider");
     section.SectionInformation.ForceSave = true;
     config.Save();
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q55: How do you monitor database performance?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 Using Application Insights with SQL
 builder.Services.AddApplicationInsightsTelemetry();
 builder.Services.AddApplicationInsightsKubernetesEnricher();
@@ -2148,7 +2148,7 @@ SELECT
     max_exec_time
 FROM pg_stat_statements
 ORDER BY mean_exec_time DESC
-LIMIT 10;</div>
+LIMIT 10;</code></pre></div>
         </div>
 
         <div class="question">
@@ -2165,7 +2165,7 @@ LIMIT 10;</div>
                 <li><strong>Canary Release:</strong> Roll out to subset of servers first</li>
             </ul>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 EF Core migration strategy
 public class MigrationService
 {
@@ -2196,7 +2196,7 @@ public class MigrationService
         var sql = $"BACKUP DATABASE MyDb TO DISK = 'backup_{DateTime.Now:yyyyMMdd}.bak'";
         await context.Database.ExecuteSqlRawAsync(sql);
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -2205,7 +2205,7 @@ public class MigrationService
         <div class="answer">
             <p><strong>Schema Drift</strong> occurs when the actual database schema differs from the expected schema due to manual changes or failed migrations.</p>
             
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 Detect schema drift
 public class SchemaDriftDetector
 {
@@ -2247,8 +2247,8 @@ public class SchemaDriftDetector
                 var columnName = property.GetColumnName();
                 var expectedType = GetColumnType(property);
                 
-                var actual = actualColumns.FirstOrDefault(c => 
-                    c.Table == tableName && c.Column == columnName);
+                var actual = actualColumns.FirstOrDefault(c =&gt; 
+                    c.Table == tableName &amp;&amp; c.Column == columnName);
                 
                 if (actual == default)
                 {
@@ -2263,14 +2263,14 @@ public class SchemaDriftDetector
 
         return drift;
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q58: How do you implement database read replicas?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 Read replica routing
 public class ReadReplicaDbContextFactory
 {
@@ -2320,26 +2320,26 @@ public class ProductRepository
         context.Products.Update(product);
         await context.SaveChangesAsync();
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q59: How do you implement database connection resilience?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 Polly retry policy for database connections
 public class DatabaseResiliencePolicy
 {
     public static IAsyncPolicy&lt;HttpResponseMessage&gt; CreateRetryPolicy()
     {
         return Policy
-            .Handle&lt;SqlException&gt;(ex => IsTransientError(ex))
+            .Handle&lt;SqlException&gt;(ex =&gt; IsTransientError(ex))
             .Or&lt;TimeoutException&gt;()
             .WaitAndRetryAsync(
                 retryCount: 3,
-                sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
-                onRetry: (exception, timeSpan, retryCount, context) =>
+                sleepDurationProvider: retryAttempt =&gt; TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+                onRetry: (exception, timeSpan, retryCount, context) =&gt;
                 {
                     Console.WriteLine($"Retry {retryCount} after {timeSpan.TotalSeconds}s due to: {exception.Message}");
                 });
@@ -2361,25 +2361,25 @@ public static IAsyncPolicy CreateCircuitBreakerPolicy()
         .CircuitBreakerAsync(
             exceptionsAllowedBeforeBreaking: 5,
             durationOfBreak: TimeSpan.FromSeconds(30),
-            onBreak: (ex, breakDelay) =>
+            onBreak: (ex, breakDelay) =&gt;
             {
                 Console.WriteLine($"Circuit broken due to: {ex.Message}");
             },
-            onReset: () =>
+            onReset: () =&gt;
             {
                 Console.WriteLine("Circuit reset");
             });
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q60: How do you implement database query timeouts?
         </div>
         <div class="answer">
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 Entity Framework Core command timeout
-builder.Services.AddDbContext&lt;AppDbContext&gt;(options =>
-    options.UseSqlServer(connectionString, sqlOptions =>
+builder.Services.AddDbContext&lt;AppDbContext&gt;(options =&gt;
+    options.UseSqlServer(connectionString, sqlOptions =&gt;
     {
         sqlOptions.CommandTimeout(30); // 30 seconds
         sqlOptions.EnableRetryOnFailure(maxRetryCount: 3);
@@ -2406,7 +2406,7 @@ var products = await collection
     .ToListAsync();
 
 // Redis operation timeout
-var redis = ConnectionMultiplexer.Connect("localhost:6379,connectTimeout=5000,syncTimeout=5000");</div>
+var redis = ConnectionMultiplexer.Connect("localhost:6379,connectTimeout=5000,syncTimeout=5000");</code></pre></div>
         </div>
 
         <div class="tip">
@@ -2430,3 +2430,5 @@ var redis = ConnectionMultiplexer.Connect("localhost:6379,connectTimeout=5000,sy
     </div>
 </body>
 </html>
+
+

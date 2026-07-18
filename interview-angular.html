@@ -60,15 +60,45 @@
             border-left: 4px solid #28a745;
         }
         .code-block {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 8px;
+            background: #2d2d2d;
+            color: #e0e0e0;
+            padding: 25px;
+            border-radius: 12px;
             overflow-x: auto;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 13px;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
             margin: 15px 0;
-            line-height: 1.5;
+            line-height: 1.7;
+            border-left: 4px solid #dd0031;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .code-block::before {
+            content: '';
+            display: block;
+            margin-bottom: 10px;
+        }
+        .code-block .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        .code-block .keyword {
+            color: #569cd6;
+            font-weight: bold;
+        }
+        .code-block .string {
+            color: #ce9178;
+        }
+        .code-block .function {
+            color: #dcdcaa;
+        }
+        .code-block .number {
+            color: #b5cea8;
+        }
+        .code-block .variable {
+            color: #9cdcfe;
+        }
+        .code-block .type {
+            color: #4ec9b0;
         }
         .important {
             background: #fff3cd;
@@ -250,7 +280,7 @@
                 <li><strong>Metadata:</strong> Decorator that configures the component</li>
             </ul>
             
-            <div class="code-block">@Component({
+            <div class="code-block" data-language="code"><pre><code>@Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
@@ -268,7 +298,7 @@ export class ProductComponent implements OnInit {
   onSelect(): void {
     this.productSelected.emit(this.product);
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -329,7 +359,7 @@ export class ProductComponent implements OnInit {
                 </tr>
             </table>
             
-            <div class="code-block">// Interpolation
+            <div class="code-block" data-language="code"><pre><code>// Interpolation
 &lt;p&gt;{{ product.name }}&lt;/p&gt;
 
 // Property binding
@@ -342,7 +372,7 @@ export class ProductComponent implements OnInit {
 &lt;input (input)="onInput($event)"&gt;
 
 // Two-way binding
-&lt;input [(ngModel)]="product.name"&gt;</div>
+&lt;input [(ngModel)]="product.name"&gt;</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -359,7 +389,7 @@ export class ProductComponent implements OnInit {
                 <li><strong>Structural directives:</strong> Change DOM layout (add/remove elements)</li>
             </ul>
             
-            <div class="code-block">// Built-in attribute directives
+            <div class="code-block" data-language="code"><pre><code>// Built-in attribute directives
 &lt;div [ngClass]="{active: isActive}"&gt;&lt;/div&gt;
 &lt;div [ngStyle]="{color: textColor}"&gt;&lt;/div&gt;
 &lt;input [ngModel]="name"&gt;
@@ -370,14 +400,14 @@ export class ProductComponent implements OnInit {
 &lt;div [ngSwitch]="status"&gt;
   &lt;div *ngSwitchCase="'active'"&gt;Active&lt;/div&gt;
   &lt;div *ngSwitchDefault&gt;Inactive&lt;/div&gt;
-&lt;/div&gt;</div>
+&lt;/div&gt;</code></pre></div>
         </div>
 
         <div class="question">
             Q7: How do you create a custom directive?
         </div>
         <div class="answer">
-            <div class="code-block">// Attribute directive
+            <div class="code-block" data-language="code"><pre><code>// Attribute directive
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
@@ -400,7 +430,7 @@ export class HighlightDirective {
 }
 
 // Usage
-&lt;p appHighlight&gt;Highlight me&lt;/p&gt;</div>
+&lt;p appHighlight&gt;Highlight me&lt;/p&gt;</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -424,7 +454,7 @@ export class HighlightDirective {
                 <li>AsyncPipe - unwrap observables</li>
             </ul>
             
-            <div class="code-block">// Built-in pipes
+            <div class="code-block" data-language="code"><pre><code>// Built-in pipes
 {{ birthday | date:'shortDate' }}
 {{ name | uppercase }}
 {{ price | currency:'USD' }}
@@ -441,12 +471,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TruncatePipe implements PipeTransform {
   transform(value: string, limit: number): string {
-    return value.length > limit ? value.substring(0, limit) + '...' : value;
+    return value.length &gt; limit ? value.substring(0, limit) + '...' : value;
   }
 }
 
 // Usage
-{{ description | truncate:50 }}</div>
+{{ description | truncate:50 }}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -466,7 +496,7 @@ export class TruncatePipe implements PipeTransform {
                 <li><strong>Component:</strong> New instance per component</li>
             </ul>
             
-            <div class="code-block">// Service
+            <div class="code-block" data-language="code"><pre><code>// Service
 @Injectable({
   providedIn: 'root'
 })
@@ -482,7 +512,7 @@ export class ProductService {
 @Component({...})
 export class ProductComponent {
   constructor(private productService: ProductService) {}
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -511,13 +541,13 @@ export class ProductComponent {
         <div class="answer">
             <p><strong>NgModule</strong> is a class decorated with @NgModule that groups related components, directives, pipes, and services.</p>
             
-            <div class="code-block">@NgModule({
+            <div class="code-block" data-language="code"><pre><code>@NgModule({
   declarations: [AppComponent, ProductComponent],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule],
   providers: [ProductService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }</div>
+export class AppModule { }</code></pre></div>
             
             <h3>NgModule Properties:</h3>
             <ul>
@@ -549,7 +579,7 @@ export class AppModule { }</div>
         <div class="answer">
             <p>Angular's Router enables navigation from one view to another as users perform application tasks.</p>
             
-            <div class="code-block">// Route configuration
+            <div class="code-block" data-language="code"><pre><code>// Route configuration
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
@@ -575,7 +605,7 @@ constructor(private router: Router) {}
 
 navigateToProduct(id: number) {
   this.router.navigate(['/products', id]);
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -592,7 +622,7 @@ navigateToProduct(id: number) {
                 <li><strong>CanMatch:</strong> Can a route match?</li>
             </ul>
             
-            <div class="code-block">@Injectable({ providedIn: 'root' })
+            <div class="code-block" data-language="code"><pre><code>@Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
   
@@ -606,7 +636,7 @@ export class AuthGuard implements CanActivate {
 }
 
 // Usage
-{ path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }</div>
+{ path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -650,7 +680,7 @@ export class AuthGuard implements CanActivate {
                 </tr>
             </table>
             
-            <div class="code-block">// Template-driven
+            <div class="code-block" data-language="code"><pre><code>// Template-driven
 &lt;input [(ngModel)]="name" required #name="ngModel"&gt;
 &lt;div *ngIf="name.invalid"&gt;Name is required&lt;/div&gt;
 
@@ -661,7 +691,7 @@ this.form = new FormGroup({
 });
 
 &lt;input formControlName="name"&gt;
-&lt;div *ngIf="form.get('name').invalid"&gt;Name is required&lt;/div&gt;</div>
+&lt;div *ngIf="form.get('name').invalid"&gt;Name is required&lt;/div&gt;</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -672,7 +702,7 @@ this.form = new FormGroup({
             Q16: How do you make HTTP requests in Angular?
         </div>
         <div class="answer">
-            <div class="code-block">// HttpClientModule
+            <div class="code-block" data-language="code"><pre><code>// HttpClientModule
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
@@ -698,7 +728,7 @@ export class ApiService {
   deleteItem(id: number): Observable&lt;void&gt; {
     return this.http.delete&lt;void&gt;(`/api/items/${id}`);
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -707,7 +737,7 @@ export class ApiService {
         <div class="answer">
             <p><strong>HTTP interceptors</strong> intercept HTTP requests and responses to add common logic like authentication, logging, or error handling.</p>
             
-            <div class="code-block">@Injectable()
+            <div class="code-block" data-language="code"><pre><code>@Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
   
@@ -723,7 +753,7 @@ export class AuthInterceptor implements HttpInterceptor {
 // Register interceptor
 providers: [
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-]</div>
+]</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -748,20 +778,21 @@ providers: [
                 <li><strong>tap:</strong> Side effects</li>
             </ul>
             
-            <div class="code-block">`nimport { Observable, of } from 'rxjs';
+            <div class="code-block" data-language="code"><pre><code>import { Observable, of } from 'rxjs';
 import { map, filter, catchError } from 'rxjs/operators';
 
-this.http.get&lt;Item[]&gt;('/api/items')
+this.http
+  .get&lt;Item[]&gt;('/api/items')
   .pipe(
-    map(items => items.filter(item => item.active)),
-    catchError(error => {
+    map(items =&gt; items.filter(item =&gt; item.active)),
+    catchError(error =&gt; {
       console.error(error);
       return of([]);
     })
   )
-  .subscribe(items => {
+  .subscribe(items =&gt; {
     this.items = items;
-  });</div>
+  });</code></pre></div>
         </div>
 
         <div class="question">
@@ -818,13 +849,13 @@ this.http.get&lt;Item[]&gt;('/api/items')
                 <li><strong>OnPush:</strong> Only checks when input references change or events occur in component</li>
             </ul>
             
-            <div class="code-block">@Component({
+            <div class="code-block" data-language="code"><pre><code>@Component({
   selector: 'app-product',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductComponent {
   @Input() product: Product;
-}</div>
+}</code></pre></div>
             
             <div class="tip">
                 <strong>Tip:</strong> Use OnPush for better performance in large applications. Combine with immutable data patterns.
@@ -844,7 +875,7 @@ export class ProductComponent {
                 <li><strong>@Output:</strong> Sends data from child component to parent component via events</li>
             </ul>
             
-            <div class="code-block">// Parent
+            <div class="code-block" data-language="code"><pre><code>// Parent
 &lt;app-child [data]="parentData" (dataChanged)="onDataChanged($event)"&gt;&lt;/app-child&gt;
 
 // Child
@@ -853,7 +884,7 @@ export class ProductComponent {
 
 onChange() {
   this.dataChanged.emit(this.data);
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -862,7 +893,7 @@ onChange() {
         <div class="answer">
             <p><strong>Content Projection</strong> allows you to project content from a parent component into a child component using ng-content.</p>
             
-            <div class="code-block">// Child component
+            <div class="code-block" data-language="code"><pre><code>// Child component
 &lt;div class="card"&gt;
   &lt;ng-content select="header"&gt;&lt;/ng-content&gt;
   &lt;ng-content&gt;&lt;/ng-content&gt;
@@ -874,7 +905,7 @@ onChange() {
   &lt;header&gt;Card Title&lt;/header&gt;
   &lt;p&gt;Card content&lt;/p&gt;
   &lt;footer&gt;Card footer&lt;/footer&gt;
-&lt;/app-card&gt;</div>
+&lt;/app-card&gt;</code></pre></div>
         </div>
 
         <div class="question">
@@ -886,7 +917,7 @@ onChange() {
                 <li><strong>ContentChild:</strong> Access projected content (ng-content) from parent</li>
             </ul>
             
-            <div class="code-block">@ViewChild(ChildComponent) childComponent: ChildComponent;
+            <div class="code-block" data-language="code"><pre><code>@ViewChild(ChildComponent) childComponent: ChildComponent;
 @ViewChild('myInput') inputElement: ElementRef;
 
 @ContentChild(ProjectedComponent) projectedComponent: ProjectedComponent;
@@ -894,7 +925,7 @@ onChange() {
 ngAfterViewInit() {
   this.childComponent.doSomething();
   this.inputElement.nativeElement.focus();
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -906,7 +937,7 @@ ngAfterViewInit() {
                 <li><strong>Impure pipe:</strong> Re-evaluates on every change detection cycle. Use with caution for performance.</li>
             </ul>
             
-            <div class="code-block">// Pure (default)
+            <div class="code-block" data-language="code"><pre><code>// Pure (default)
 @Pipe({
   name: 'truncate',
   pure: true
@@ -916,7 +947,7 @@ ngAfterViewInit() {
 @Pipe({
   name: 'async',
   pure: false
-})</div>
+})</code></pre></div>
         </div>
 
         <div class="question">
@@ -928,15 +959,15 @@ ngAfterViewInit() {
                 <li><strong>BehaviorSubject:</strong> Subject that has an initial value and emits the current value to new subscribers.</li>
             </ul>
             
-            <div class="code-block">// Subject
+            <div class="code-block" data-language="code"><pre><code>// Subject
 const subject = new Subject&lt;string&gt;();
 subject.next('hello');
-subject.subscribe(value => console.log(value)); // Won't receive 'hello'
+subject.subscribe(value =&gt; console.log(value)); // Won't receive 'hello'
 
 // BehaviorSubject
 const behaviorSubject = new BehaviorSubject&lt;string&gt;('initial');
 behaviorSubject.next('hello');
-behaviorSubject.subscribe(value => console.log(value)); // Receives 'hello'</div>
+behaviorSubject.subscribe(value =&gt; console.log(value)); // Receives 'hello'</code></pre></div>
         </div>
 
         <div class="question">
@@ -948,19 +979,19 @@ behaviorSubject.subscribe(value => console.log(value)); // Receives 'hello'</div
                 <li><strong>mergeMap:</strong> Keeps all observables active. Good for parallel operations.</li>
             </ul>
             
-            <div class="code-block">// switchMap - cancels previous
+            <div class="code-block" data-language="code"><pre><code>// switchMap - cancels previous
 searchTerms.pipe(
-  switchMap(term => this.http.search(term))
-).subscribe(results => {
+  switchMap(term =&gt; this.http.search(term))
+).subscribe(results =&gt; {
   this.results = results;
 });
 
 // mergeMap - keeps all active
 ids.pipe(
-  mergeMap(id => this.http.getItem(id))
-).subscribe(item => {
+  mergeMap(id =&gt; this.http.getItem(id))
+).subscribe(item =&gt; {
   this.items.push(item);
-});</div>
+});</code></pre></div>
         </div>
 
         <div class="question">
@@ -969,18 +1000,24 @@ ids.pipe(
         <div class="answer">
             <p><strong>Lazy loading</strong> loads feature modules on demand, improving initial load time.</p>
             
-            <div class="code-block">// Route configuration
+            <div class="code-block" data-language="code"><pre><code>// Route configuration
 const routes: Routes = [
-  { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) }
+  {
+    path: 'products',
+    loadChildren: () =&gt;
+      import('./products/products.module').then(m =&gt; m.ProductsModule)
+  }
 ];
 
 // Products module
 @NgModule({
-  imports: [RouterModule.forChild([
-    { path: '', component: ProductsComponent }
-  ])]
+  imports: [
+    RouterModule.forChild([
+      { path: '', component: ProductsComponent }
+    ])
+  ]
 })
-export class ProductsModule { }</div>
+export class ProductsModule {}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1006,7 +1043,7 @@ export class ProductsModule { }</div>
                 <li><strong>ng-template:</strong> Template that doesn't render by default. Used with ngIf, ngFor, or ngTemplateOutlet.</li>
             </ul>
             
-            <div class="code-block">// ng-container
+            <div class="code-block" data-language="code"><pre><code>// ng-container
 &lt;ng-container *ngIf="condition"&gt;
   &lt;p&gt;Content&lt;/p&gt;
 &lt;/ng-container&gt;
@@ -1016,14 +1053,16 @@ export class ProductsModule { }</div>
   &lt;p&gt;Template content&lt;/p&gt;
 &lt;/ng-template&gt;
 
-&lt;ng-container *ngTemplateOutlet="myTemplate"&gt;&lt;/ng-container&gt;</div>
+&lt;ng-container
+  *ngTemplateOutlet="myTemplate"
+&gt;&lt;/ng-container&gt;</code></pre></div>
         </div>
 
         <div class="question">
             Q30: How do you implement internationalization (i18n) in Angular?
         </div>
         <div class="answer">
-            <div class="code-block">// Use i18n attribute in templates
+            <div class="code-block" data-language="code"><pre><code>// Use i18n attribute in templates
 &lt;h1 i18n&gt;Welcome&lt;/h1&gt;
 &lt;p i18n&gt;Hello {{ name }}&lt;/p&gt;
 
@@ -1037,7 +1076,7 @@ ng build --i18n-locale fr --i18n-file src/locale/messages.fr.xlf
 import { LOCALE_ID, NgModule } from '@angular/core';
 @NgModule({
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }]
-})</div>
+})</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1062,17 +1101,17 @@ import { LOCALE_ID, NgModule } from '@angular/core';
             Q32: How do you implement NgRx for state management?
         </div>
         <div class="answer">
-            <div class="code-block"> Define actions
+            <div class="code-block" data-language="code"><pre><code> Define actions
 import { createAction, props } from '@ngrx/store';
 
 export const loadProducts = createAction('[Product] Load Products');
 export const loadProductsSuccess = createAction(
   '[Product] Load Products Success',
-  props<{ products: Product[] }>()
+  props&lt;{ products: Product[] }&gt;()
 );
 export const loadProductsFailure = createAction(
   '[Product] Load Products Failure',
-  props<{ error: string }>()
+  props&lt;{ error: string }&gt;()
 );
 
 // Define reducer
@@ -1092,13 +1131,13 @@ export const initialState: ProductState = {
 
 export const productReducer = createReducer(
   initialState,
-  on(loadProducts, (state) => ({ ...state, loading: true })),
-  on(loadProductsSuccess, (state, { products }) => ({
+  on(loadProducts, (state) =&gt; ({ ...state, loading: true })),
+  on(loadProductsSuccess, (state, { products }) =&gt; ({
     ...state,
     products,
     loading: false
   })),
-  on(loadProductsFailure, (state, { error }) => ({
+  on(loadProductsFailure, (state, { error }) =&gt; ({
     ...state,
     error,
     loading: false
@@ -1113,13 +1152,13 @@ import { loadProducts, loadProductsSuccess, loadProductsFailure } from './produc
 
 @Injectable()
 export class ProductEffects {
-  loadProducts$ = createEffect(() =>
+  loadProducts$ = createEffect(() =&gt;
     this.actions$.pipe(
       ofType(loadProducts),
-      exhaustMap(() =>
+      exhaustMap(() =&gt;
         this.productService.getProducts().pipe(
-          map(products => loadProductsSuccess({ products })),
-          catchError(error => of(loadProductsFailure({ error: error.message })))
+          map(products =&gt; loadProductsSuccess({ products })),
+          catchError(error =&gt; of(loadProductsFailure({ error: error.message })))
         )
       )
     )
@@ -1135,13 +1174,13 @@ export const selectProductState = createFeatureSelector&lt;ProductState&gt;('pro
 
 export const selectAllProducts = createSelector(
   selectProductState,
-  (state) => state.products
+  (state) =&gt; state.products
 );
 
 export const selectProductsLoading = createSelector(
   selectProductState,
-  (state) => state.loading
-);</div>
+  (state) =&gt; state.loading
+);</code></pre></div>
         </div>
 
         <div class="question">
@@ -1150,7 +1189,7 @@ export const selectProductsLoading = createSelector(
         <div class="answer">
             <p><strong>Angular Signals</strong> provide a reactive way to manage state with fine-grained reactivity. They are simpler than RxJS and work well for component state.</p>
 
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 import { signal, computed, effect, Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
@@ -1165,14 +1204,14 @@ export class ProductService {
   readonly loading$ = this.loading.asReadonly();
   readonly error$ = this.error.asReadonly();
 
-  readonly productCount = computed(() => this.products().length);
-  readonly expensiveProducts = computed(() =>
-    this.products().filter(p => p.price > 100)
+  readonly productCount = computed(() =&gt; this.products().length);
+  readonly expensiveProducts = computed(() =&gt;
+    this.products().filter(p =&gt; p.price &gt; 100)
   );
 
   // Effect
   constructor() {
-    effect(() => {
+    effect(() =&gt; {
       if (this.error()) {
         console.error('Product error:', this.error());
       }
@@ -1192,12 +1231,12 @@ export class ProductService {
   }
 
   addProduct(product: Product) {
-    this.products.update(products => [...products, product]);
+    this.products.update(products =&gt; [...products, product]);
   }
 
   updateProduct(id: number, updates: Partial&lt;Product&gt;) {
-    this.products.update(products =>
-      products.map(p => p.id === id ? { ...p, ...updates } : p)
+    this.products.update(products =&gt;
+      products.map(p =&gt; p.id === id ? { ...p, ...updates } : p)
     );
   }
 }
@@ -1220,7 +1259,7 @@ export class ProductsComponent {
   constructor(private productService: ProductService) {
     this.productService.loadProducts();
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1229,7 +1268,7 @@ export class ProductsComponent {
         <div class="answer">
             <p><strong>Service-based state management</strong> with RxJS uses BehaviorSubjects to hold state and expose it as Observables. This is a common pattern for managing shared state across components.</p>
 
-            <div class="code-block">
+            <div class="code-block" data-language="code"><pre><code>
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap, catchError } from 'rxjs';
 
@@ -1246,7 +1285,7 @@ export class CartService {
   }
 
   private loadCart() {
-    this.http.get&lt;CartItem[]&gt;('/api/cart').subscribe(items => {
+    this.http.get&lt;CartItem[]&gt;('/api/cart').subscribe(items =&gt; {
       this.cartItems.next(items);
       this.calculateTotal();
     });
@@ -1254,11 +1293,11 @@ export class CartService {
 
   addToCart(item: CartItem): Observable&lt;CartItem[]&gt; {
     return this.http.post&lt;CartItem[]&gt;('/api/cart', item).pipe(
-      tap(items => {
+      tap(items =&gt; {
         this.cartItems.next(items);
         this.calculateTotal();
       }),
-      catchError(error => {
+      catchError(error =&gt; {
         console.error('Error adding to cart:', error);
         throw error;
       })
@@ -1267,7 +1306,7 @@ export class CartService {
 
   removeFromCart(itemId: number): Observable&lt;CartItem[]&gt; {
     return this.http.delete&lt;CartItem[]&gt;(`/api/cart/${itemId}`).pipe(
-      tap(items => {
+      tap(items =&gt; {
         this.cartItems.next(items);
         this.calculateTotal();
       })
@@ -1276,7 +1315,7 @@ export class CartService {
 
   private calculateTotal() {
     const currentItems = this.cartItems.value;
-    const total = currentItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const total = currentItems.reduce((sum, item) =&gt; sum + item.price * item.quantity, 0);
     this.total.next(total);
   }
 
@@ -1284,7 +1323,7 @@ export class CartService {
     this.cartItems.next([]);
     this.total.next(0);
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1295,19 +1334,19 @@ export class CartService {
             Q35: How do you write unit tests for Angular components?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { ComponentFixture, TestBed } from '@angular/core/testing';
+            <div class="code-block" data-language="code"><pre><code>import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { ProductComponent } from './product.component';
 import { ProductService } from '../services/product.service';
 import { of } from 'rxjs';
 
-describe('ProductComponent', () => {
+describe('ProductComponent', () =&gt; {
   let component: ProductComponent;
   let fixture: ComponentFixture&lt;ProductComponent&gt;;
   let productServiceSpy: jasmine.SpyObj&lt;ProductService&gt;;
 
-  beforeEach(async () => {
+  beforeEach(async () =&gt; {
     const spy = jasmine.createSpyObj('ProductService', ['getProducts']);
 
     await TestBed.configureTestingModule({
@@ -1322,11 +1361,11 @@ describe('ProductComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should create', () => {
+  it('should create', () =&gt; {
     expect(component).toBeTruthy();
   });
 
-  it('should display products', () => {
+  it('should display products', () =&gt; {
     const mockProducts = [
       { id: 1, name: 'Product 1', price: 100 },
       { id: 2, name: 'Product 2', price: 200 }
@@ -1339,35 +1378,35 @@ describe('ProductComponent', () => {
     expect(productElements.length).toBe(2);
   });
 
-  it('should call getProducts on init', () => {
+  it('should call getProducts on init', () =&gt; {
     fixture.detectChanges();
     expect(productServiceSpy.getProducts).toHaveBeenCalled();
   });
 
-  it('should show loading state', () => {
-    productServiceSpy.getProducts.and.returnValue(new Observable(() => {}));
+  it('should show loading state', () =&gt; {
+    productServiceSpy.getProducts.and.returnValue(new Observable(() =&gt; {}));
     fixture.detectChanges();
 
     const loadingElement = fixture.debugElement.query(By.css('.loading'));
     expect(loadingElement).toBeTruthy();
   });
-});</div>
+});</code></pre></div>
         </div>
 
         <div class="question">
             Q36: How do you test Angular services?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { TestBed } from '@angular/core/testing';
+            <div class="code-block" data-language="code"><pre><code>import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ProductService } from './product.service';
 import { Product } from '../models/product';
 
-describe('ProductService', () => {
+describe('ProductService', () =&gt; {
   let service: ProductService;
   let httpMock: HttpTestingController;
 
-  beforeEach(() => {
+  beforeEach(() =&gt; {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [ProductService]
@@ -1377,20 +1416,20 @@ describe('ProductService', () => {
     httpMock = TestBed.inject(HttpTestingController);
   });
 
-  afterEach(() => {
+  afterEach(() =&gt; {
     httpMock.verify();
   });
 
-  it('should be created', () => {
+  it('should be created', () =&gt; {
     expect(service).toBeTruthy();
   });
 
-  it('should retrieve products', () => {
+  it('should retrieve products', () =&gt; {
     const mockProducts: Product[] = [
       { id: 1, name: 'Product 1', price: 100 }
     ];
 
-    service.getProducts().subscribe(products => {
+    service.getProducts().subscribe(products =&gt; {
       expect(products.length).toBe(1);
       expect(products[0].name).toBe('Product 1');
     });
@@ -1400,36 +1439,36 @@ describe('ProductService', () => {
     req.flush(mockProducts);
   });
 
-  it('should handle errors', () => {
+  it('should handle errors', () =&gt; {
     const errorMessage = 'Server error';
 
     service.getProducts().subscribe({
-      next: () => fail('should have failed'),
-      error: (error) => expect(error.message).toBe(errorMessage)
+      next: () =&gt; fail('should have failed'),
+      error: (error) =&gt; expect(error.message).toBe(errorMessage)
     });
 
     const req = httpMock.expectOne('/api/products');
     req.flush(errorMessage, { status: 500, statusText: 'Server Error' });
   });
-});</div>
+});</code></pre></div>
         </div>
 
         <div class="question">
             Q37: How do you write integration tests with TestBed?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { ComponentFixture, TestBed } from '@angular/core/testing';
+            <div class="code-block" data-language="code"><pre><code>import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductFormComponent } from './product-form.component';
 import { ProductService } from '../services/product.service';
 
-describe('ProductFormComponent Integration', () => {
+describe('ProductFormComponent Integration', () =&gt; {
   let component: ProductFormComponent;
   let fixture: ComponentFixture&lt;ProductFormComponent&gt;;
 
-  beforeEach(async () => {
+  beforeEach(async () =&gt; {
     await TestBed.configureTestingModule({
       declarations: [ProductFormComponent],
       imports: [
@@ -1445,7 +1484,7 @@ describe('ProductFormComponent Integration', () => {
     fixture.detectChanges();
   });
 
-  it('should submit form and navigate', () => {
+  it('should submit form and navigate', () =&gt; {
     const navigateSpy = spyOn(TestBed.inject(Router), 'navigate');
 
     component.productForm.setValue({
@@ -1459,20 +1498,20 @@ describe('ProductFormComponent Integration', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/products']);
   });
 
-  it('should validate required fields', () => {
+  it('should validate required fields', () =&gt; {
     const nameControl = component.productForm.get('name');
     nameControl.setValue('');
     expect(nameControl.invalid).toBeTruthy();
     expect(nameControl.hasError('required')).toBeTruthy();
   });
-});</div>
+});</code></pre></div>
         </div>
 
         <div class="question">
             Q38: How do you use Jest with Angular?
         </div>
         <div class="answer">
-            <div class="code-block"> Install Jest
+            <div class="code-block" data-language="code"><pre><code> Install Jest
 npm install --save-dev jest @types/jest jest-preset-angular
 
 // jest.config.js
@@ -1495,19 +1534,19 @@ import 'jest-preset-angular/setup-jest';
 import { TestBed } from '@angular/core/testing';
 import { MyComponent } from './my.component';
 
-describe('MyComponent', () => {
-  beforeEach(() => {
+describe('MyComponent', () =&gt; {
+  beforeEach(() =&gt; {
     TestBed.configureTestingModule({
       declarations: [MyComponent]
     });
   });
 
-  it('should create', () => {
+  it('should create', () =&gt; {
     const fixture = TestBed.createComponent(MyComponent);
     const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
-});</div>
+});</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1536,7 +1575,7 @@ describe('MyComponent', () => {
             Q40: How do you implement OnPush change detection?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+            <div class="code-block" data-language="code"><pre><code>import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-product-item',
@@ -1577,18 +1616,18 @@ export class ProductsComponent {
 
   updateProduct(index: number, updates: Partial&lt;Product&gt;) {
     // Create new product object
-    this.products = this.products.map((p, i) =>
+    this.products = this.products.map((p, i) =&gt;
       i === index ? { ...p, ...updates } : p
     );
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q41: How do you implement trackBy with ngFor?
         </div>
         <div class="answer">
-            <div class="code-block">`r`n@Component({
+            <div class="code-block" data-language="code"><pre><code>@Component({
   selector: 'app-products',
   template: `
     &lt;div *ngFor="let product of products; trackBy: trackByProductId"&gt;
@@ -1608,14 +1647,14 @@ export class ProductsComponent {
   // - Avoids re-creating DOM elements for unchanged items
   // - Improves performance for large lists
   // - Preserves component state (like scroll position)
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q42: How do you implement virtual scrolling?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { ScrollingModule } from '@angular/cdk/scrolling';
+            <div class="code-block" data-language="code"><pre><code>import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [ScrollingModule]
@@ -1633,28 +1672,28 @@ export class AppModule {}
   `
 })
 export class VirtualListComponent {
-  items = Array.from({ length: 10000 }, (_, i) => ({
+  items = Array.from({ length: 10000 }, (_, i) =&gt; ({
     id: i,
     name: `Item ${i}`
   }));
 
   // Only renders visible items
   // Efficient for lists with thousands of items
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q43: How do you implement lazy loading and preloading strategies?
         </div>
         <div class="answer">
-            <div class="code-block"> Custom preloading strategy
+            <div class="code-block" data-language="code"><pre><code> Custom preloading strategy
 import { PreloadingStrategy, Route } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 export class CustomPreloadingStrategy implements PreloadingStrategy {
-  preload(route: Route, load: () => Observable&lt;any&gt;): Observable&lt;any&gt; {
+  preload(route: Route, load: () =&gt; Observable&lt;any&gt;): Observable&lt;any&gt; {
     // Preload routes with data.preload = true
-    if (route.data && route.data['preload']) {
+    if (route.data &amp;&amp; route.data['preload']) {
       return load();
     }
     return of(null);
@@ -1670,14 +1709,14 @@ const routes: Routes = [
   },
   {
     path: 'products',
-    loadChildren: () => import('./products/products.module')
-      .then(m => m.ProductsModule),
+    loadChildren: () =&gt; import('./products/products.module')
+      .then(m =&gt; m.ProductsModule),
     data: { preload: true }
   },
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module')
-      .then(m => m.AdminModule)
+    loadChildren: () =&gt; import('./admin/admin.module')
+      .then(m =&gt; m.AdminModule)
     // No preload - load on demand
   }
 ];
@@ -1690,7 +1729,7 @@ const routes: Routes = [
     })
   ]
 })
-export class AppRoutingModule {}</div>
+export class AppRoutingModule {}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1701,7 +1740,7 @@ export class AppRoutingModule {}</div>
             Q44: How do you implement smart vs dumb components?
         </div>
         <div class="answer">
-            <div class="code-block"> Dumb (Presentational) Component
+            <div class="code-block" data-language="code"><pre><code> Dumb (Presentational) Component
 @Component({
   selector: 'app-product-card',
   template: `
@@ -1740,14 +1779,14 @@ export class ProductsContainerComponent {
     this.cartService.addToCart(product);
   }
   // Handles business logic, service calls, state management
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q45: How do you implement a custom directive?
         </div>
         <div class="answer">
-            <div class="code-block"> Attribute directive
+            <div class="code-block" data-language="code"><pre><code> Attribute directive
 import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 
 @Directive({
@@ -1780,10 +1819,10 @@ export class UnlessDirective {
   private hasView = false;
 
   @Input() set appUnless(condition: boolean) {
-    if (!condition && !this.hasView) {
+    if (!condition &amp;&amp; !this.hasView) {
       this.viewContainer.createEmbeddedView(this.templateRef);
       this.hasView = true;
-    } else if (condition && this.hasView) {
+    } else if (condition &amp;&amp; this.hasView) {
       this.viewContainer.clear();
       this.hasView = false;
     }
@@ -1796,14 +1835,14 @@ export class UnlessDirective {
 }
 
 // Usage
-&lt;div *appUnless="condition"&gt;Show unless condition is true&lt;/div&gt;</div>
+&lt;div *appUnless="condition"&gt;Show unless condition is true&lt;/div&gt;</code></pre></div>
         </div>
 
         <div class="question">
             Q46: How do you implement a custom pipe?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { Pipe, PipeTransform } from '@angular/core';
+            <div class="code-block" data-language="code"><pre><code>import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'truncate',
@@ -1812,7 +1851,7 @@ export class UnlessDirective {
 export class TruncatePipe implements PipeTransform {
   transform(value: string, limit: number = 20, trail: string = '...'): string {
     if (!value) return '';
-    return value.length > limit ? value.substring(0, limit) + trail : value;
+    return value.length &gt; limit ? value.substring(0, limit) + trail : value;
   }
 }
 
@@ -1827,8 +1866,8 @@ export class AsyncErrorPipe implements PipeTransform {
     let error: any;
 
     obs.subscribe({
-      next: value => latestValue = value,
-      error: err => error = err
+      next: value =&gt; latestValue = value,
+      error: err =&gt; error = err
     });
 
     if (error) throw error;
@@ -1837,14 +1876,14 @@ export class AsyncErrorPipe implements PipeTransform {
 }
 
 // Usage
-&lt;p&gt;{{ longText | truncate: 30 }}&lt;/p&gt;</div>
+&lt;p&gt;{{ longText | truncate: 30 }}&lt;/p&gt;</code></pre></div>
         </div>
 
         <div class="question">
             Q47: How do you implement HTTP interceptors?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { Injectable } from '@angular/core';
+            <div class="code-block" data-language="code"><pre><code>import { Injectable } from '@angular/core';
 import {
   HttpEvent, HttpInterceptor, HttpHandler, HttpRequest,
   HttpErrorResponse
@@ -1872,7 +1911,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest&lt;any&gt;, next: HttpHandler): Observable&lt;HttpEvent&lt;any&gt;&gt; {
     return next.handle(req).pipe(
       retry(3),
-      catchError((error: HttpErrorResponse) => {
+      catchError((error: HttpErrorResponse) =&gt; {
         if (error.status === 401) {
           // Handle unauthorized
           this.router.navigate(['/login']);
@@ -1880,7 +1919,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           // Handle server error
           this.showError('Server error occurred');
         }
-        return throwError(() => error);
+        return throwError(() =&gt; error);
       })
     );
   }
@@ -1893,14 +1932,14 @@ export class ErrorInterceptor implements HttpInterceptor {
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ]
 })
-export class AppModule {}</div>
+export class AppModule {}</code></pre></div>
         </div>
 
         <div class="question">
             Q48: How do you implement content projection?
         </div>
         <div class="answer">
-            <div class="code-block"> Single-slot content projection
+            <div class="code-block" data-language="code"><pre><code> Single-slot content projection
 @Component({
   selector: 'app-card',
   template: `
@@ -1940,7 +1979,7 @@ export class CardComponent {}
   &lt;div header&gt;Card Title&lt;/div&gt;
   &lt;div body&gt;Card Content&lt;/div&gt;
   &lt;div footer&gt;Card Footer&lt;/div&gt;
-&lt;/app-card&gt;</div>
+&lt;/app-card&gt;</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1953,7 +1992,7 @@ export class CardComponent {}
         <div class="answer">
             <p><strong>Standalone components</strong> don't require NgModule declarations. They manage their own dependencies.</p>
             
-            <div class="code-block">`r`nimport { Component } from '@angular/core';
+            <div class="code-block" data-language="code"><pre><code>import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -1978,14 +2017,14 @@ export class ProductComponent {
 // - Simplified component structure
 // - Better tree-shaking
 // - Easier to understand dependencies
-// - Future of Angular architecture</div>
+// - Future of Angular architecture</code></pre></div>
         </div>
 
         <div class="question">
             Q50: How do you bootstrap a standalone Angular application?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { bootstrapApplication } from '@angular/platform-browser';
+            <div class="code-block" data-language="code"><pre><code>import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
@@ -2011,14 +2050,14 @@ import { RouterOutlet } from '@angular/router';
     &lt;router-outlet&gt;&lt;/router-outlet&gt;
   `
 })
-export class AppComponent {}</div>
+export class AppComponent {}</code></pre></div>
         </div>
 
         <div class="question">
             Q51: How do you create standalone directives and pipes?
         </div>
         <div class="answer">
-            <div class="code-block"> Standalone directive
+            <div class="code-block" data-language="code"><pre><code> Standalone directive
 import { Directive, Input } from '@angular/core';
 
 @Directive({
@@ -2042,7 +2081,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TruncatePipe implements PipeTransform {
   transform(value: string, limit: number): string {
-    return value.length > limit ? value.substring(0, limit) + '...' : value;
+    return value.length &gt; limit ? value.substring(0, limit) + '...' : value;
   }
 }
 
@@ -2057,33 +2096,33 @@ export class TruncatePipe implements PipeTransform {
     &lt;/div&gt;
   `
 })
-export class ProductComponent {}</div>
+export class ProductComponent {}</code></pre></div>
         </div>
 
         <div class="question">
             Q52: How do you configure routing with standalone components?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { Routes } from '@angular/router';
+            <div class="code-block" data-language="code"><pre><code>import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
+    loadComponent: () =&gt; import('./home/home.component').then(m =&gt; m.HomeComponent)
   },
   {
     path: 'products',
-    loadComponent: () => import('./products/products.component').then(m => m.ProductsComponent)
+    loadComponent: () =&gt; import('./products/products.component').then(m =&gt; m.ProductsComponent)
   },
   {
     path: 'products/:id',
-    loadComponent: () => import('./product-detail/product-detail.component').then(m => m.ProductDetailComponent)
+    loadComponent: () =&gt; import('./product-detail/product-detail.component').then(m =&gt; m.ProductDetailComponent)
   }
 ];
 
 // Lazy loading with standalone components
 // No need for loadChildren with modules
-// Use loadComponent for component-level lazy loading</div>
+// Use loadComponent for component-level lazy loading</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -2139,24 +2178,24 @@ export const routes: Routes = [
                 <li><strong>AsyncSubject:</strong> Emits last value only when complete.</li>
             </ul>
             
-            <div class="code-block"> Subject
+            <div class="code-block" data-language="code"><pre><code> Subject
 const subject = new Subject&lt;number&gt;();
 subject.next(1);
-subject.subscribe(x => console.log(x)); // Nothing
+subject.subscribe(x =&gt; console.log(x)); // Nothing
 subject.next(2); // Logs: 2
 
 // BehaviorSubject
 const behavior = new BehaviorSubject&lt;number&gt;(0);
 behavior.next(1);
-behavior.subscribe(x => console.log(x)); // Logs: 1
-behavior.next(2); // Logs: 2</div>
+behavior.subscribe(x =&gt; console.log(x)); // Logs: 1
+behavior.next(2); // Logs: 2</code></pre></div>
         </div>
 
         <div class="question">
             Q55: How do you handle memory leaks in Angular?
         </div>
         <div class="answer">
-            <div class="code-block"> Using takeUntil
+            <div class="code-block" data-language="code"><pre><code> Using takeUntil
 @Component({...})
 export class MyComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject&lt;void&gt;();
@@ -2186,7 +2225,7 @@ export class MyComponent {
 }
 
 // Using take(1) for single emissions
-this.http.get('/api/data').pipe(take(1)).subscribe();</div>
+this.http.get('/api/data').pipe(take(1)).subscribe();</code></pre></div>
         </div>
 
         <div class="question">
@@ -2198,7 +2237,7 @@ this.http.get('/api/data').pipe(take(1)).subscribe();</div>
                 <li><strong>@ContentChild:</strong> Accesses child components or elements projected into the component using ng-content.</li>
             </ul>
             
-            <div class="code-block"> ViewChild
+            <div class="code-block" data-language="code"><pre><code> ViewChild
 @Component({
   template: `
     &lt;app-child #child&gt;&lt;/app-child&gt;
@@ -2222,14 +2261,14 @@ export class CardComponent {
 // Usage
 &lt;app-card&gt;
   &lt;div #header&gt;Header&lt;/div&gt;
-&lt;/app-card&gt;</div>
+&lt;/app-card&gt;</code></pre></div>
         </div>
 
         <div class="question">
             Q57: How do you implement SSR with Angular Universal?
         </div>
         <div class="answer">
-            <div class="code-block"> Install Angular Universal
+            <div class="code-block" data-language="code"><pre><code> Install Angular Universal
 ng add @nguniversal/express-engine
 
 // Server configuration
@@ -2240,7 +2279,7 @@ app.engine('html', ngExpressEngine({
   bootstrap: AppServerModule
 }));
 
-app.get('*', (req, res) => {
+app.get('*', (req, res) =&gt; {
   res.render('index', { req });
 });
 
@@ -2248,14 +2287,14 @@ app.get('*', (req, res) => {
 // - SEO friendly (search engines can crawl)
 // - Faster initial page load
 // - Better social media sharing
-// - Improved performance on slow devices</div>
+// - Improved performance on slow devices</code></pre></div>
         </div>
 
         <div class="question">
             Q58: How do you implement PWA with Angular?
         </div>
         <div class="answer">
-            <div class="code-block"> Add PWA support
+            <div class="code-block" data-language="code"><pre><code> Add PWA support
 ng add @angular/pwa
 
 // This creates:
@@ -2297,14 +2336,14 @@ ng add @angular/pwa
 // - Offline functionality
 // - Faster subsequent loads
 // - Push notifications
-// - App-like experience</div>
+// - App-like experience</code></pre></div>
         </div>
 
         <div class="question">
             Q59: How do you implement Angular Elements?
         </div>
         <div class="answer">
-            <div class="code-block"> Install Angular Elements
+            <div class="code-block" data-language="code"><pre><code> Install Angular Elements
 ng add @angular/elements
 
 // Create custom element
@@ -2329,7 +2368,7 @@ export class AppModule {
 // Benefits:
 // - Use Angular components in other frameworks
 // - Share components across applications
-// - Micro-frontend architecture</div>
+// - Micro-frontend architecture</code></pre></div>
         </div>
 
         <div class="question">
@@ -2350,6 +2389,906 @@ export class AppModule {
                 <li><strong>Use RxJS operators efficiently:</strong> Avoid memory leaks with unsubscribe</li>
                 <li><strong>Implement accessibility:</strong> ARIA labels, keyboard navigation</li>
             </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>15. Advanced Topics (4-13 Years Experience)</h2>
+
+        <div class="question">
+            Q61: How do you implement advanced RxJS patterns for complex data flows?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced RxJS patterns</strong> include combining multiple streams, error handling strategies, and complex transformations.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Combining multiple streams with combineLatest
+import { combineLatest, forkJoin, withLatestFrom } from 'rxjs';
+import { switchMap, catchError, retry, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+
+// combineLatest - emits when any source emits
+combineLatest([
+  this.userService.getUser$(),
+  this.orderService.getOrders$()
+]).pipe(
+  switchMap(([user, orders]) =&gt; {
+    return this.analyticsService.getUserAnalytics(user.id, orders);
+  })
+).subscribe(analytics =&gt; {
+  this.analytics = analytics;
+});
+
+// forkJoin - waits for all to complete
+forkJoin([
+  this.productService.getProducts$(),
+  this.categoryService.getCategories$()
+]).pipe(
+  map(([products, categories]) =&gt; ({
+    products,
+    categories
+  }))
+).subscribe(data =&gt; {
+  this.data = data;
+});
+
+// withLatestFrom - combine with latest value from another observable
+searchTerms$.pipe(
+  withLatestFrom(currentUser$),
+  switchMap(([term, user]) =&gt; {
+    return this.searchService.search(term, user.preferences);
+  })
+).subscribe(results =&gt; {
+  this.results = results;
+});
+
+// Advanced error handling with retry
+apiCall$.pipe(
+  retry({
+    count: 3,
+    delay: (error, retryCount) =&gt; {
+      if (error.status === 404) return throwError(() =&gt; error);
+      return timer(Math.pow(2, retryCount) * 1000);
+    }
+  }),
+  catchError(error =&gt; {
+    if (error.status === 401) {
+      return this.authService.refreshToken().pipe(
+        switchMap(() =&gt; apiCall$)
+      );
+    }
+    return of(null);
+  })
+).subscribe();</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q62: How do you optimize Angular bundle size and performance?
+        </div>
+        <div class="answer">
+            <p><strong>Bundle optimization</strong> involves analyzing and reducing the size of your JavaScript bundles.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// 1. Analyze bundle size
+ng build --stats-json
+// Then use webpack-bundle-analyzer
+
+// 2. Configure angular.json for optimization
+"build": {
+  "configurations": {
+    "production": {
+      "optimization": true,
+      "buildOptimizer": true,
+      "aot": true,
+      "extractLicenses": true,
+      "sourceMap": false,
+      "namedChunks": false
+    }
+  }
+}
+
+// 3. Lazy load routes
+const routes: Routes = [
+  {
+    path: 'admin',
+    loadChildren: () =&gt; import('./admin/admin.module').then(m =&gt; m.AdminModule)
+  }
+];
+
+// 4. Preload strategies
+export class CustomPreloadingStrategy implements PreloadingStrategy {
+  preload(route: Route, load: () =&gt; Observable&lt;any&gt;): Observable&lt;any&gt; {
+    if (route.data &amp;&amp; route.data['preload']) {
+      return load();
+    }
+    return of(null);
+  }
+}
+
+// 5. Tree-shakeable providers
+@Injectable({ providedIn: 'root' })
+export class MyService { }
+
+// 6. OnPush change detection
+@Component({
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+
+// 7. Virtual scrolling for large lists
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
+&lt;cdk-virtual-scroll-viewport itemSize="50"&gt;
+  &lt;div *cdkVirtualFor="let item of items"&gt;
+    {{ item.name }}
+  &lt;/div&gt;
+&lt;/cdk-virtual-scroll-viewport&gt;
+
+// 8. TrackBy for ngFor
+&lt;div *ngFor="let item of items; trackBy: trackById"&gt;
+  {{ item.name }}
+&lt;/div&gt;
+
+trackById(index: number, item: any): number {
+  return item.id;
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q63: How do you implement micro-frontend architecture with Angular?
+        </div>
+        <div class="answer">
+            <p><strong>Micro-frontend architecture</strong> allows multiple teams to work on different parts of an application independently.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// 1. Using Angular Elements
+import { createCustomElement } from '@angular/elements';
+
+@NgModule({
+  declarations: [ProductWidgetComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class ProductWidgetModule {
+  constructor(private injector: Injector) {
+    const customElement = createCustomElement(ProductWidgetComponent, {
+      injector: this.injector
+    });
+    customElements.define('product-widget', customElement);
+  }
+}
+
+// 2. Using Module Federation (Webpack)
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      name: "product_app",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./ProductModule": "./src/app/product/product.module.ts",
+      },
+      shared: {
+        "@angular/core": { singleton: true, strictVersion: true },
+        "@angular/common": { singleton: true, strictVersion: true },
+        "@angular/router": { singleton: true, strictVersion: true },
+      },
+    }),
+  ],
+};
+
+// 3. Loading remote module
+const routes: Routes = [
+  {
+    path: 'products',
+    loadChildren: () =&gt;
+      import('product_app/ProductModule').then(m =&gt; m.ProductModule)
+  }
+];
+
+// 4. Single-SPA integration
+import { registerApplication, start } from 'single-spa';
+
+registerApplication({
+  name: '@my-org/product',
+  app: () =&gt; System.import('@my-org/product'),
+  activeWhen: '/products'
+});
+
+start();</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q64: How do you implement advanced security measures in Angular?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced security</strong> includes CSRF protection, XSS prevention, and secure authentication.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// 1. CSRF Token Interceptor
+@Injectable()
+export class CsrfInterceptor implements HttpInterceptor {
+  constructor(private cookieService: CookieService) {}
+
+  intercept(req: HttpRequest&lt;any&gt;, next: HttpHandler): Observable&lt;HttpEvent&lt;any&gt;&gt; {
+    const csrfToken = this.cookieService.get('XSRF-TOKEN');
+    
+    if (csrfToken) {
+      req = req.clone({
+        setHeaders: {
+          'X-XSRF-TOKEN': csrfToken
+        }
+      });
+    }
+    
+    return next.handle(req);
+  }
+}
+
+// 2. XSS Prevention - Sanitization
+import { DomSanitizer } from '@angular/platform-browser';
+
+constructor(private sanitizer: DomSanitizer) {}
+
+sanitizeHtml(html: string) {
+  return this.sanitizer.bypassSecurityTrustHtml(html);
+}
+
+// 3. Content Security Policy
+&lt;meta http-equiv="Content-Security-Policy" 
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';"&gt;
+
+// 4. Secure HTTP Headers Interceptor
+@Injectable()
+export class SecurityHeadersInterceptor implements HttpInterceptor {
+  intercept(req: HttpRequest&lt;any&gt;, next: HttpHandler): Observable&lt;HttpEvent&lt;any&gt;&gt; {
+    const secureReq = req.clone({
+      setHeaders: {
+        'X-Content-Type-Options': 'nosniff',
+        'X-Frame-Options': 'DENY',
+        'X-XSS-Protection': '1; mode=block',
+        'Strict-Transport-Security': 'max-age=31536000; includeSubDomains'
+      }
+    });
+    
+    return next.handle(secureReq);
+  }
+}
+
+// 5. JWT Token Management
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  constructor(private authService: AuthService) {}
+
+  intercept(req: HttpRequest&lt;any&gt;, next: HttpHandler): Observable&lt;HttpEvent&lt;any&gt;&gt; {
+    const token = this.authService.getToken();
+    
+    if (token) {
+      req = req.clone({
+        setHeaders: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+    }
+    
+    return next.handle(req).pipe(
+      catchError(error =&gt; {
+        if (error.status === 401) {
+          this.authService.logout();
+        }
+        return throwError(() =&gt; error);
+      })
+    );
+  }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q65: How do you implement advanced testing strategies in Angular?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced testing</strong> includes integration tests, end-to-end tests, and test utilities.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// 1. Integration Testing with TestBed
+describe('ProductComponent Integration', () =&gt; {
+  let component: ProductComponent;
+  let fixture: ComponentFixture&lt;ProductComponent&gt;;
+  let productService: ProductService;
+
+  beforeEach(async () =&gt; {
+    await TestBed.configureTestingModule({
+      declarations: [ProductComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [ProductService]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ProductComponent);
+    component = fixture.componentInstance;
+    productService = TestBed.inject(ProductService);
+  });
+
+  it('should load products on init', fakeAsync(() =&gt; {
+    spyOn(productService, 'getProducts').and.returnValue(of([
+      { id: 1, name: 'Product 1' }
+    ]));
+
+    component.ngOnInit();
+    tick();
+
+    expect(component.products.length).toBe(1);
+  }));
+});
+
+// 2. Component Testing with Inputs and Outputs
+it('should emit product selected event', () =&gt; {
+  const product = { id: 1, name: 'Product 1' };
+  spyOn(component.productSelected, 'emit');
+
+  component.selectProduct(product);
+
+  expect(component.productSelected.emit).toHaveBeenCalledWith(product);
+});
+
+// 3. Directive Testing
+describe('HighlightDirective', () =&gt; {
+  it('should highlight element', () =&gt; {
+    const fixture = TestBed.createComponent(HostComponent);
+    const directive = fixture.debugElement.query(By.directive(HighlightDirective));
+    
+    directive.nativeElement.dispatchEvent(new Event('mouseenter'));
+    fixture.detectChanges();
+
+    expect(directive.nativeElement.style.backgroundColor).toBe('yellow');
+  });
+});
+
+// 4. E2E Testing with Cypress
+describe('Product Page E2E', () =&gt; {
+  it('should display products', () =&gt; {
+    cy.visit('/products');
+    cy.get('.product-item').should('have.length.greaterThan', 0);
+  });
+
+  it('should add product to cart', () =&gt; {
+    cy.visit('/products');
+    cy.get('.add-to-cart').first().click();
+    cy.get('.cart-count').should('contain', '1');
+  });
+});
+
+// 5. Testing HTTP Interceptors
+describe('AuthInterceptor', () =&gt; {
+  let interceptor: AuthInterceptor;
+  let authService: AuthService;
+  let httpRequest: HttpRequest&lt;any&gt;;
+  let httpHandler: HttpHandler;
+
+  beforeEach(() =&gt; {
+    TestBed.configureTestingModule({
+      providers: [AuthInterceptor, AuthService]
+    });
+
+    interceptor = TestBed.inject(AuthInterceptor);
+    authService = TestBed.inject(AuthService);
+    httpRequest = new HttpRequest('GET', '/api/data');
+    httpHandler = { handle: jasmine.createSpy('handle').and.returnValue(of(null)) };
+  });
+
+  it('should add auth header', () =&gt; {
+    spyOn(authService, 'getToken').and.returnValue('test-token');
+    
+    interceptor.intercept(httpRequest, httpHandler).subscribe();
+    
+    expect(httpHandler.handle).toHaveBeenCalledWith(
+      jasmine.objectContaining({
+        headers: jasmine.objectContaining({
+          'Authorization': 'Bearer test-token'
+        })
+      })
+    );
+  });
+});</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q66: How do you implement advanced component patterns and architecture?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced component patterns</strong> include container/presentational pattern, smart/dumb components, and composition patterns.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// 1. Container/Presentational Pattern
+// Presentational Component (Dumb)
+@Component({
+  selector: 'app-product-list',
+  template: `
+    &lt;div *ngFor="let product of products"&gt;
+      &lt;app-product-item [product]="product" (select)="onSelect($event)"&gt;&lt;/app-product-item&gt;
+    &lt;/div&gt;
+  `
+})
+export class ProductListComponent {
+  @Input() products: Product[];
+  @Output() select = new EventEmitter&lt;Product&gt;();
+  
+  onSelect(product: Product) {
+    this.select.emit(product);
+  }
+}
+
+// Container Component (Smart)
+@Component({
+  selector: 'app-product-container',
+  template: `
+    &lt;app-product-list 
+      [products]="products$ | async" 
+      (select)="selectProduct($event)"&gt;
+    &lt;/app-product-list&gt;
+  `
+})
+export class ProductContainerComponent {
+  products$ = this.productService.getProducts$();
+  
+  constructor(private productService: ProductService) {}
+  
+  selectProduct(product: Product) {
+    this.productService.selectProduct(product);
+  }
+}
+
+// 2. Composition Pattern with Content Projection
+@Component({
+  selector: 'app-card',
+  template: `
+    &lt;div class="card"&gt;
+      &lt;div class="card-header"&gt;
+        &lt;ng-content select="[card-header]"&gt;&lt;/ng-content&gt;
+      &lt;/div&gt;
+      &lt;div class="card-body"&gt;
+        &lt;ng-content select="[card-body]"&gt;&lt;/ng-content&gt;
+      &lt;/div&gt;
+      &lt;div class="card-footer"&gt;
+        &lt;ng-content select="[card-footer]"&gt;&lt;/ng-content&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  `
+})
+export class CardComponent {}
+
+// Usage
+&lt;app-card&gt;
+  &lt;div card-header&gt;Product Details&lt;/div&gt;
+  &lt;div card-body&gt;{{ product.description }}&lt;/div&gt;
+  &lt;div card-footer&gt;
+    &lt;button (click)="buy()"&gt;Buy Now&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/app-card&gt;
+
+// 3. Higher-Order Component Pattern
+@Component({
+  selector: 'app-with-loading',
+  template: `
+    &lt;ng-container *ngIf="!loading"&gt;
+      &lt;ng-content&gt;&lt;/ng-content&gt;
+    &lt;/ng-container&gt;
+    &lt;div *ngIf="loading" class="loading"&gt;Loading...&lt;/div&gt;
+  `
+})
+export class WithLoadingComponent {
+  @Input() loading = false;
+}
+
+// Usage
+&lt;app-with-loading [loading]="isLoading$ | async"&gt;
+  &lt;app-product-list [products]="products$ | async"&gt;&lt;/app-product-list&gt;
+&lt;/app-with-loading&gt;
+
+// 4. Mixin Pattern using TypeScript
+export class DestroyMixin implements OnDestroy {
+  protected destroy$ = new Subject&lt;void&gt;();
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+}
+
+@Component({
+  selector: 'app-product',
+  template: '...'
+})
+export class ProductComponent extends DestroyMixin {
+  constructor() {
+    super();
+    
+    this.data$.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe();
+  }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q67: How do you implement advanced routing patterns?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced routing</strong> includes lazy loading, route guards, custom resolvers, and route parameters.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// 1. Custom Route Resolver
+@Injectable({ providedIn: 'root' })
+export class ProductResolver implements Resolve&lt;Product&gt; {
+  constructor(private productService: ProductService) {}
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable&lt;Product&gt; {
+    return this.productService.getProduct(route.paramMap.get('id')).pipe(
+      catchError(error =&gt; {
+        this.router.navigate(['/error']);
+        return of(null);
+      })
+    );
+  }
+}
+
+// Route configuration
+const routes: Routes = [
+  {
+    path: 'products/:id',
+    component: ProductDetailComponent,
+    resolve: {
+      product: ProductResolver
+    }
+  }
+];
+
+// 2. Multiple Route Guards
+@Injectable({ providedIn: 'root' })
+export class AdminGuard implements CanActivate {
+  constructor(private authService: AuthService, private router: Router) {}
+
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+    if (this.authService.isAdmin()) {
+      return true;
+    }
+    this.router.navigate(['/unauthorized']);
+    return false;
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class CanDeactivateGuard implements CanDeactivate&lt;ProductComponent&gt; {
+  canDeactivate(component: ProductComponent): boolean {
+    if (component.hasUnsavedChanges()) {
+      return confirm('You have unsaved changes. Are you sure you want to leave?');
+    }
+    return true;
+  }
+}
+
+// 3. Dynamic Route Configuration
+const routes: Routes = [
+  {
+    path: 'admin',
+    canLoad: [AdminGuard],
+    loadChildren: () =&gt; import('./admin/admin.module').then(m =&gt; m.AdminModule)
+  }
+];
+
+// 4. Custom Preloading Strategy
+export class CustomPreloadingStrategy implements PreloadingStrategy {
+  preload(route: Route, load: () =&gt; Observable&lt;any&gt;): Observable&lt;any&gt; {
+    if (route.data &amp;&amp; route.data['preload']) {
+      return load();
+    }
+    return of(null);
+  }
+}
+
+// 5. Query Parameters and Fragment
+this.router.navigate(['/products'], {
+  queryParams: { category: 'electronics', price: '100-500' },
+  fragment: 'reviews'
+});
+
+// 6. Route Reuse Strategy
+export class CustomRouteReuseStrategy extends BaseRouteReuseStrategy {
+  shouldDetach(route: ActivatedRouteSnapshot): boolean {
+    return route.data['shouldReuse'] || false;
+  }
+
+  store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
+    this.storedRoutes[route.routeConfig.path] = handle;
+  }
+
+  shouldAttach(route: ActivatedRouteSnapshot): boolean {
+    return !!route.routeConfig &amp;&amp; !!this.storedRoutes[route.routeConfig.path];
+  }
+
+  retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
+    return this.storedRoutes[route.routeConfig.path];
+  }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q68: How do you implement server-side rendering (SSR) with Angular Universal?
+        </div>
+        <div class="answer">
+            <p><strong>Angular Universal</strong> enables server-side rendering for improved SEO and initial load performance.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// 1. Add Angular Universal
+ng add @nguniversal/express-engine
+
+// 2. Server Configuration
+import { ngExpressEngine } from '@nguniversal/express-engine';
+import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
+
+app.engine('html', ngExpressEngine({
+  bootstrap: AppServerModule,
+  providers: [
+    provideModuleMap(LAZY_MODULE_MAP)
+  ]
+});
+
+app.set('view engine', 'html');
+app.set('views', join(DIST_FOLDER, 'browser'));
+
+// 3. Transfer State between Server and Client
+import { TransferState, makeStateKey } from '@angular/platform-browser';
+
+const STATE_KEY = makeStateKey('products');
+
+// Server-side
+constructor(private transferState: TransferState) {}
+
+ngOnInit() {
+  if (!this.transferState.hasKey(STATE_KEY)) {
+    this.http.get('/api/products').subscribe(products =&gt; {
+      this.transferState.set(STATE_KEY, products);
+      this.products = products;
+    });
+  } else {
+    this.products = this.transferState.get(STATE_KEY, null);
+  }
+}
+
+// 4. SEO Meta Tags
+import { Meta, Title } from '@angular/platform-browser';
+
+constructor(private meta: Meta, private title: Title) {}
+
+updateMetaTags(product: Product) {
+  this.title.setTitle(product.name);
+  this.meta.updateTag({
+    name: 'description',
+    content: product.description
+  });
+  this.meta.updateTag({
+    property: 'og:title',
+    content: product.name
+  });
+  this.meta.updateTag({
+    property: 'og:image',
+    content: product.imageUrl
+  });
+}
+
+// 5. Handle Browser-Specific Code
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+
+constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+ngOnInit() {
+  if (isPlatformBrowser(this.platformId)) {
+    // Browser-only code
+    localStorage.setItem('key', 'value');
+  }
+  
+  if (isPlatformServer(this.platformId)) {
+    // Server-only code
+    console.log('Rendering on server');
+  }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q69: How do you implement Progressive Web App (PWA) features in Angular?
+        </div>
+        <div class="answer">
+            <p><strong>PWA features</strong> include offline support, push notifications, and app-like experience.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// 1. Add PWA support
+ng add @angular/pwa
+
+// 2. Service Worker Configuration
+{
+  "name": "angular-pwa",
+  "version": "1.0.0",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/manifest.webmanifest",
+          "/*.css",
+          "/*.js"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/*.(svg|png|jpg|jpeg|gif|webp|ico)"
+        ]
+      }
+    }
+  ]
+}
+
+// 3. Push Notifications
+this.swPush.messages.subscribe(message =&gt; {
+  console.log('Push notification received:', message);
+});
+
+this.swPush.requestSubscription({
+  serverPublicKey: this.vapidPublicKey
+}).then(subscription =&gt; {
+  this.userService.savePushSubscription(subscription);
+});
+
+// 4. Offline Detection
+this.sw.available.subscribe(event =&gt; {
+  console.log('New version available:', event);
+  this.promptUpdate();
+});
+
+this.sw.activated.subscribe(event =&gt; {
+  console.log('New version activated:', event);
+});
+
+promptUpdate() {
+  this.swActivationService.activateUpdate();
+}
+
+// 5. Background Sync
+navigator.serviceWorker.ready.then(registration =&gt; {
+  registration.sync.register('sync-data');
+});
+
+// 6. App Shell
+const routes: Routes = [
+  {
+    path: 'shell',
+    component: AppShellComponent,
+    outlet: 'shell'
+  },
+  {
+    path: 'products',
+    component: ProductsComponent
+  }
+];
+
+// 7. Install Prompt
+window.addEventListener('beforeinstallprompt', (event) =&gt; {
+  event.preventDefault();
+  this.installPrompt = event;
+  this.showInstallButton = true;
+});
+
+installApp() {
+  this.installPrompt.prompt();
+  this.installPrompt.userChoice.then(result =&gt; {
+    if (result.outcome === 'accepted') {
+      console.log('App installed');
+    }
+    this.showInstallButton = false;
+  });
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q70: How do you implement advanced form validation and patterns?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced form patterns</strong> include custom validators, dynamic forms, and cross-field validation.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// 1. Custom Async Validator
+export function uniqueEmailValidator(userService: UserService): AsyncValidatorFn {
+  return (control: AbstractControl): Observable&lt;ValidationErrors | null&gt; =&gt; {
+    return userService.checkEmailExists(control.value).pipe(
+      map(exists =&gt; exists ? { uniqueEmail: true } : null),
+      catchError(() =&gt; of(null))
+    );
+  };
+}
+
+// Usage
+this.email = new FormControl('', null, [uniqueEmailValidator(this.userService)]);
+
+// 2. Cross-Field Validator
+export function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+  const password = control.get('password');
+  const confirmPassword = control.get('confirmPassword');
+  
+  if (password.value !== confirmPassword.value) {
+    return { passwordMatch: true };
+  }
+  
+  return null;
+}
+
+// Usage
+this.form = new FormGroup({
+  password: new FormControl('', Validators.required),
+  confirmPassword: new FormControl('', Validators.required)
+}, { validators: passwordMatchValidator });
+
+// 3. Dynamic Form Builder
+@Injectable()
+export class DynamicFormService {
+  buildForm(controls: FormControlConfig[]): FormGroup {
+    const group: any = {};
+    
+    controls.forEach(config =&gt; {
+      group[config.name] = this.createControl(config);
+    });
+    
+    return new FormGroup(group);
+  }
+  
+  private createControl(config: FormControlConfig): AbstractControl {
+    let validators = [];
+    let asyncValidators = [];
+    
+    if (config.required) validators.push(Validators.required);
+    if (config.minLength) validators.push(Validators.minLength(config.minLength));
+    if (config.maxLength) validators.push(Validators.maxLength(config.maxLength));
+    if (config.pattern) validators.push(Validators.pattern(config.pattern));
+    if (config.email) validators.push(Validators.email);
+    
+    if (config.uniqueEmail) {
+      asyncValidators.push(uniqueEmailValidator(this.userService));
+    }
+    
+    return new FormControl(config.value || '', validators, asyncValidators);
+  }
+}
+
+// 4. Form State Management with Signals
+@Injectable()
+export class FormStore {
+  private formState = signal&lt;FormGroupState&gt;({
+    values: {},
+    errors: {},
+    touched: {},
+    dirty: {}
+  });
+  
+  readonly state = this.formState.asReadonly();
+  
+  updateValue(field: string, value: any) {
+    this.formState.update(state =&gt; ({
+      ...state,
+      values: { ...state.values, [field]: value }
+    }));
+  }
+  
+  updateError(field: string, error: ValidationErrors | null) {
+    this.formState.update(state =&gt; ({
+      ...state,
+      errors: { ...state.errors, [field]: error }
+    }));
+  }
+}
+
+// 5. Form Debounce with RxJS
+this.searchControl.valueChanges.pipe(
+  debounceTime(300),
+  distinctUntilChanged(),
+  switchMap(value =&gt; this.searchService.search(value))
+).subscribe(results =&gt; {
+  this.results = results;
+});</code></pre></div>
         </div>
 
         <div class="tip">
@@ -2373,3 +3312,5 @@ export class AppModule {
     </div>
 </body>
 </html>
+
+

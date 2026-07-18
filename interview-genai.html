@@ -352,14 +352,14 @@
         <div class="answer">
             <p><strong>Self-Attention</strong> is a mechanism that allows the model to weigh the importance of different words in a sequence when processing a particular word.</p>
             
-            <div class="code-block">`r`n# Self-attention formula
+            <div class="code-block" data-language="code"><pre><code># Self-attention formula
 Attention(Q, K, V) = softmax(QK^T / sqrt(d_k))V
 
 # Where:
 # Q = Query matrix
 # K = Key matrix
 # V = Value matrix
-# d_k = Dimension of keys</div>
+# d_k = Dimension of keys</code></pre></div>
         </div>
 
         <div class="question">
@@ -470,13 +470,13 @@ Attention(Q, K, V) = softmax(QK^T / sqrt(d_k))V
         <div class="answer">
             <p><strong>Chain-of-Thought (CoT)</strong> prompting encourages the model to break down complex problems into intermediate steps, improving reasoning performance.</p>
             
-            <div class="code-block">`r`n# Example of Chain-of-Thought prompting
+            <div class="code-block" data-language="code"><pre><code># Example of Chain-of-Thought prompting
 Prompt: "Solve this step by step: If a store sells 5 apples for $3, 
 how much do 12 apples cost?"
 
 Response: "Step 1: Find the cost per apple. $3 / 5 = $0.60 per apple.
 Step 2: Calculate cost for 12 apples. 12 * $0.60 = $7.20.
-Answer: 12 apples cost $7.20."</div>
+Answer: 12 apples cost $7.20."</code></pre></div>
         </div>
 
         <div class="question">
@@ -1074,3 +1074,5 @@ Answer: 12 apples cost $7.20."</div>
     </div>
 </body>
 </html>
+
+

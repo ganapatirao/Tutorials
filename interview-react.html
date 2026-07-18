@@ -243,7 +243,7 @@
                 </tr>
             </table>
             
-            <div class="code-block">// Functional component
+            <div class="code-block" data-language="code"><pre><code>// Functional component
 function Welcome({ name }) {
   return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
 }
@@ -253,7 +253,7 @@ class Welcome extends React.Component {
   render() {
     return &lt;h1&gt;Hello, {this.props.name}!&lt;/h1&gt;;
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -262,7 +262,7 @@ class Welcome extends React.Component {
         <div class="answer">
             <p><strong>Props</strong> (properties) are read-only data passed from parent to child components. They enable component composition and data flow.</p>
             
-            <div class="code-block">// Parent component
+            <div class="code-block" data-language="code"><pre><code>// Parent component
 function App() {
   return &lt;ProductCard name="Laptop" price={999.99} inStock={true} /&gt;;
 }
@@ -276,7 +276,7 @@ function ProductCard({ name, price, inStock }) {
       {inStock ? &lt;p&gt;In Stock&lt;/p&gt; : &lt;p&gt;Out of Stock&lt;/p&gt;}
     &lt;/div&gt;
   );
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -289,17 +289,17 @@ function ProductCard({ name, price, inStock }) {
         <div class="answer">
             <p><strong>State</strong> is an object that holds component-specific data that can change over time. When state changes, React re-renders the component.</p>
             
-            <div class="code-block">// Using useState hook
+            <div class="code-block" data-language="code"><pre><code>// Using useState hook
 function Counter() {
   const [count, setCount] = useState(0);
   
   return (
     &lt;div&gt;
       &lt;p&gt;Count: {count}&lt;/p&gt;
-      &lt;button onClick={() => setCount(count + 1)}&gt;Increment&lt;/button&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Increment&lt;/button&gt;
     &lt;/div&gt;
   );
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -370,26 +370,26 @@ function Counter() {
         <div class="answer">
             <p><strong>useEffect</strong> handles side effects in functional components. It runs after every render by default, but can be configured with dependencies.</p>
             
-            <div class="code-block">// Run on every render
-useEffect(() => {
+            <div class="code-block" data-language="code"><pre><code>// Run on every render
+useEffect(() =&gt; {
   console.log('Component rendered');
 });
 
 // Run only on mount
-useEffect(() => {
+useEffect(() =&gt; {
   console.log('Component mounted');
 }, []);
 
 // Run when count changes
-useEffect(() => {
+useEffect(() =&gt; {
   console.log('Count changed:', count);
 }, [count]);
 
 // Cleanup on unmount
-useEffect(() => {
-  const timer = setInterval(() => console.log('Tick'), 1000);
-  return () => clearInterval(timer);
-}, []);</div>
+useEffect(() =&gt; {
+  const timer = setInterval(() =&gt; console.log('Tick'), 1000);
+  return () =&gt; clearInterval(timer);
+}, []);</code></pre></div>
         </div>
 
         <div class="question">
@@ -416,7 +416,7 @@ useEffect(() => {
         <div class="answer">
             <p>The <strong>Context API</strong> provides a way to pass data through the component tree without having to pass props manually at every level. It's designed for sharing data that can be considered "global" for a tree of components.</p>
             
-            <div class="code-block">// Create context
+            <div class="code-block" data-language="code"><pre><code>// Create context
 const ThemeContext = createContext('light');
 
 // Provider
@@ -432,7 +432,7 @@ function App() {
 function ThemedButton() {
   const theme = useContext(ThemeContext);
   return &lt;button className={theme}&gt;Click me&lt;/button&gt;;
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -460,8 +460,8 @@ function ThemedButton() {
                 <li><strong>Changes are made with pure functions:</strong> Reducers specify how state changes</li>
             </ul>
             
-            <div class="code-block">// Action
-const increment = () => ({ type: 'INCREMENT' });
+            <div class="code-block" data-language="code"><pre><code>// Action
+const increment = () =&gt; ({ type: 'INCREMENT' });
 
 // Reducer
 function counter(state = 0, action) {
@@ -477,7 +477,7 @@ function counter(state = 0, action) {
 const store = createStore(counter);
 
 // Dispatch
-store.dispatch(increment());</div>
+store.dispatch(increment());</code></pre></div>
         </div>
 
         <div class="question">
@@ -493,20 +493,20 @@ store.dispatch(increment());</div>
                 <li>Better TypeScript support</li>
             </ul>
             
-            <div class="code-block">// Redux Toolkit
+            <div class="code-block" data-language="code"><pre><code>// Redux Toolkit
 import { createSlice } from '@reduxjs/toolkit';
 
 const counterSlice = createSlice({
   name: 'counter',
   initialState: 0,
   reducers: {
-    increment: (state) => state + 1,
-    decrement: (state) => state - 1
+    increment: (state) =&gt; state + 1,
+    decrement: (state) =&gt; state - 1
   }
 });
 
 export const { increment, decrement } = counterSlice.actions;
-export default counterSlice.reducer;</div>
+export default counterSlice.reducer;</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -519,7 +519,7 @@ export default counterSlice.reducer;</div>
         <div class="answer">
             <p><strong>React Router</strong> enables client-side routing in React applications. It uses the HTML5 History API to keep the UI in sync with the URL.</p>
             
-            <div class="code-block">// Basic routing
+            <div class="code-block" data-language="code"><pre><code>// Basic routing
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -535,7 +535,7 @@ function App() {
       &lt;/Routes&gt;
     &lt;/BrowserRouter&gt;
   );
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -584,14 +584,14 @@ function App() {
                 </tr>
             </table>
             
-            <div class="code-block">// Controlled component
+            <div class="code-block" data-language="code"><pre><code>// Controlled component
 function ControlledForm() {
   const [value, setValue] = useState('');
   
   return (
     &lt;input
       value={value}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={(e) =&gt; setValue(e.target.value)}
     /&gt;
   );
 }
@@ -600,14 +600,14 @@ function ControlledForm() {
 function UncontrolledForm() {
   const inputRef = useRef();
   
-  const handleSubmit = () => {
+  const handleSubmit = () =&gt; {
     console.log(inputRef.current.value);
   };
   
   return (
     &lt;input ref={inputRef} /&gt;
   );
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -628,28 +628,28 @@ function UncontrolledForm() {
                 <li><strong>Key prop:</strong> Provide stable keys for lists</li>
             </ul>
             
-            <div class="code-block">// React.memo
+            <div class="code-block" data-language="code"><pre><code>// React.memo
 const ExpensiveComponent = React.memo(function ExpensiveComponent({ data }) {
   return &lt;div&gt;{data}&lt;/div&gt;;
 });
 
 // useMemo
-const expensiveValue = useMemo(() => {
+const expensiveValue = useMemo(() =&gt; {
   return computeExpensiveValue(a, b);
 }, [a, b]);
 
 // useCallback
-const handleClick = useCallback(() => {
+const handleClick = useCallback(() =&gt; {
   doSomething(dependency);
 }, [dependency]);
 
 // Code splitting
-const LazyComponent = React.lazy(() => import('./LazyComponent'));
+const LazyComponent = React.lazy(() =&gt; import('./LazyComponent'));
 
 // Keys
-{items.map(item => (
+{items.map(item =&gt; (
   &lt;Item key={item.id} item={item} /&gt;
-))}</div>
+))}</code></pre></div>
         </div>
 
         <div class="question">
@@ -678,11 +678,11 @@ const LazyComponent = React.lazy(() => import('./LazyComponent'));
         <div class="answer">
             <p>React components are typically tested with Jest and React Testing Library.</p>
             
-            <div class="code-block">// Component test
+            <div class="code-block" data-language="code"><pre><code>// Component test
 import { render, screen, fireEvent } from '@testing-library/react';
 import Counter from './Counter';
 
-test('increments counter when button is clicked', () => {
+test('increments counter when button is clicked', () =&gt; {
   render(&lt;Counter /&gt;);
   
   const button = screen.getByText('Increment');
@@ -691,7 +691,7 @@ test('increments counter when button is clicked', () => {
   fireEvent.click(button);
   
   expect(screen.getByText('Count: 1')).toBeInTheDocument();
-});</div>
+});</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -707,11 +707,11 @@ test('increments counter when button is clicked', () => {
                 <li><strong>JSX:</strong> Syntax extension that looks like HTML. Transpiled to createElement by Babel. More readable and maintainable.</li>
             </ul>
             
-            <div class="code-block">// createElement
+            <div class="code-block" data-language="code"><pre><code>// createElement
 React.createElement('h1', null, 'Hello World');
 
 // JSX
-&lt;h1&gt;Hello World&lt;/h1&gt;</div>
+&lt;h1&gt;Hello World&lt;/h1&gt;</code></pre></div>
         </div>
 
         <div class="question">
@@ -723,12 +723,12 @@ React.createElement('h1', null, 'Hello World');
                 <li><strong>Refs:</strong> Does not trigger re-render. Use for DOM access, focus management, or storing values that don't affect rendering.</li>
             </ul>
             
-            <div class="code-block">// State - triggers re-render
+            <div class="code-block" data-language="code"><pre><code>// State - triggers re-render
 const [count, setCount] = useState(0);
 
 // Ref - doesn't trigger re-render
 const inputRef = useRef(null);
-inputRef.current.focus();</div>
+inputRef.current.focus();</code></pre></div>
         </div>
 
         <div class="question">
@@ -740,15 +740,15 @@ inputRef.current.focus();</div>
                 <li><strong>useMemo:</strong> Memoizes a value. Returns the cached value unless dependencies change.</li>
             </ul>
             
-            <div class="code-block">// useCallback - memoizes function
-const memoizedCallback = useCallback(() => {
+            <div class="code-block" data-language="code"><pre><code>// useCallback - memoizes function
+const memoizedCallback = useCallback(() =&gt; {
   doSomething(a, b);
 }, [a, b]);
 
 // useMemo - memoizes value
-const memoizedValue = useMemo(() => {
+const memoizedValue = useMemo(() =&gt; {
   return computeExpensiveValue(a, b);
-}, [a, b]);</div>
+}, [a, b]);</code></pre></div>
         </div>
 
         <div class="question">
@@ -770,10 +770,10 @@ const memoizedValue = useMemo(() => {
                 <li><strong>useEffect:</strong> Hook. Can run on mount, update, or unmount depending on dependencies. More flexible.</li>
             </ul>
             
-            <div class="code-block">// componentDidMount equivalent
-useEffect(() => {
+            <div class="code-block" data-language="code"><pre><code>// componentDidMount equivalent
+useEffect(() =&gt; {
   // Runs on mount
-}, []);</div>
+}, []);</code></pre></div>
         </div>
 
         <div class="question">
@@ -799,11 +799,11 @@ useEffect(() => {
                 <li><strong>Native events:</strong> Browser's native event objects. Browser-specific APIs.</li>
             </ul>
             
-            <div class="code-block">// Access native event
+            <div class="code-block" data-language="code"><pre><code>// Access native event
 function handleClick(event) {
   const nativeEvent = event.nativeEvent;
   console.log(nativeEvent);
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -815,11 +815,11 @@ function handleClick(event) {
                 <li><strong>useReducer:</strong> Complex state management with reducer pattern. Good for related state pieces or complex state logic.</li>
             </ul>
             
-            <div class="code-block">// useState - simple
+            <div class="code-block" data-language="code"><pre><code>// useState - simple
 const [count, setCount] = useState(0);
 
 // useReducer - complex
-const [state, dispatch] = useReducer(reducer, initialState);</div>
+const [state, dispatch] = useReducer(reducer, initialState);</code></pre></div>
         </div>
 
         <div class="question">
@@ -831,14 +831,14 @@ const [state, dispatch] = useReducer(reducer, initialState);</div>
                 <li><strong>forwardRef:</strong> Forward a ref from parent to child component. Used when parent needs to access child's DOM element.</li>
             </ul>
             
-            <div class="code-block">// forwardRef
-const FancyButton = forwardRef((props, ref) => (
+            <div class="code-block" data-language="code"><pre><code>// forwardRef
+const FancyButton = forwardRef((props, ref) =&gt; (
   &lt;button ref={ref}&gt;{props.children}&lt;/button&gt;
 ));
 
 // Usage
 const buttonRef = useRef();
-&lt;FancyButton ref={buttonRef}&gt;Click me&lt;/FancyButton&gt;;</div>
+&lt;FancyButton ref={buttonRef}&gt;Click me&lt;/FancyButton&gt;;</code></pre></div>
         </div>
 
         <div class="question">
@@ -850,7 +850,7 @@ const buttonRef = useRef();
                 <li><strong>Suspense:</strong> Displays a fallback while waiting for lazy-loaded components or data fetching.</li>
             </ul>
             
-            <div class="code-block">const LazyComponent = React.lazy(() => import('./LazyComponent'));
+            <div class="code-block" data-language="code"><pre><code>const LazyComponent = React.lazy(() =&gt; import('./LazyComponent'));
 
 function App() {
   return (
@@ -858,7 +858,7 @@ function App() {
       &lt;LazyComponent /&gt;
     &lt;/Suspense&gt;
   );
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -918,20 +918,20 @@ function App() {
             Q32: How do you implement Redux Toolkit?
         </div>
         <div class="answer">
-            <div class="code-block"> store.js
+            <div class="code-block" data-language="code"><pre><code> store.js
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const counterSlice = createSlice({
   name: 'counter',
   initialState: { value: 0 },
   reducers: {
-    increment: (state) => {
+    increment: (state) =&gt; {
       state.value += 1;
     },
-    decrement: (state) => {
+    decrement: (state) =&gt; {
       state.value -= 1;
     },
-    incrementByAmount: (state, action) => {
+    incrementByAmount: (state, action) =&gt; {
       state.value += action.payload;
     }
   }
@@ -949,24 +949,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement } from './store';
 
 function Counter() {
-  const count = useSelector((state) => state.counter.value);
+  const count = useSelector((state) =&gt; state.counter.value);
   const dispatch = useDispatch();
 
   return (
     &lt;div&gt;
-      &lt;button onClick={() => dispatch(decrement())}&gt;-&lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch(decrement())}&gt;-&lt;/button&gt;
       &lt;span&gt;{count}&lt;/span&gt;
-      &lt;button onClick={() => dispatch(increment())}&gt;+&lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch(increment())}&gt;+&lt;/button&gt;
     &lt;/div&gt;
   );
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q33: How do you use React Query for server state?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { useQuery, useMutation, useQueryClient, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+            <div class="code-block" data-language="code"><pre><code>import { useQuery, useMutation, useQueryClient, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
@@ -981,7 +981,7 @@ function App() {
 function Posts() {
   const { data, isLoading, error } = useQuery({
     queryKey: ['posts'],
-    queryFn: () => fetch('https://api.example.com/posts').then(res => res.json())
+    queryFn: () =&gt; fetch('https://api.example.com/posts').then(res =&gt; res.json())
   });
 
   if (isLoading) return &lt;div&gt;Loading...&lt;/div&gt;;
@@ -989,7 +989,7 @@ function Posts() {
 
   return (
     &lt;ul&gt;
-      {data.map(post => (
+      {data.map(post =&gt; (
         &lt;li key={post.id}&gt;{post.title}&lt;/li&gt;
       ))}
     &lt;/ul&gt;
@@ -999,35 +999,35 @@ function Posts() {
 function CreatePost() {
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (newPost) => fetch('https://api.example.com/posts', {
+    mutationFn: (newPost) =&gt; fetch('https://api.example.com/posts', {
       method: 'POST',
       body: JSON.stringify(newPost)
-    }).then(res => res.json()),
-    onSuccess: () => {
+    }).then(res =&gt; res.json()),
+    onSuccess: () =&gt; {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
     }
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) =&gt; {
     e.preventDefault();
     mutation.mutate({ title: 'New Post' });
   };
 
   return &lt;form onSubmit={handleSubmit}&gt;&lt;button type="submit"&gt;Create&lt;/button&gt;&lt;/form&gt;;
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q34: How do you implement Zustand for state management?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport create from 'zustand';
+            <div class="code-block" data-language="code"><pre><code>import create from 'zustand';
 
-const useStore = create((set) => ({
+const useStore = create((set) =&gt; ({
   count: 0,
-  increment: () => set((state) => ({ count: state.count + 1 })),
-  decrement: () => set((state) => ({ count: state.count - 1 })),
-  reset: () => set({ count: 0 })
+  increment: () =&gt; set((state) =&gt; ({ count: state.count + 1 })),
+  decrement: () =&gt; set((state) =&gt; ({ count: state.count - 1 })),
+  reset: () =&gt; set({ count: 0 })
 }));
 
 function Counter() {
@@ -1043,16 +1043,16 @@ function Counter() {
 }
 
 // Async actions
-const usePostsStore = create((set) => ({
+const usePostsStore = create((set) =&gt; ({
   posts: [],
   loading: false,
-  fetchPosts: async () => {
+  fetchPosts: async () =&gt; {
     set({ loading: true });
     const response = await fetch('https://api.example.com/posts');
     const posts = await response.json();
     set({ posts, loading: false });
   }
-}));</div>
+}));</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1063,8 +1063,8 @@ const usePostsStore = create((set) => ({
             Q35: What are compound components?
         </div>
         <div class="answer">
-            <div class="code-block"> Compound components pattern
-const Tabs = ({ children }) => {
+            <div class="code-block" data-language="code"><pre><code> Compound components pattern
+const Tabs = ({ children }) =&gt; {
   const [activeTab, setActiveTab] = useState(0);
   
   return (
@@ -1074,28 +1074,28 @@ const Tabs = ({ children }) => {
   );
 };
 
-const TabList = ({ children }) => {
+const TabList = ({ children }) =&gt; {
   return &lt;div className="tab-list"&gt;{children}&lt;/div&gt;;
 };
 
-const Tab = ({ children, index }) => {
+const Tab = ({ children, index }) =&gt; {
   const { activeTab, setActiveTab } = useContext(TabsContext);
   
   return (
     &lt;button
       className={activeTab === index ? 'active' : ''}
-      onClick={() => setActiveTab(index)}
+      onClick={() =&gt; setActiveTab(index)}
     &gt;
       {children}
     &lt;/button&gt;
   );
 };
 
-const TabPanels = ({ children }) => {
+const TabPanels = ({ children }) =&gt; {
   return &lt;div className="tab-panels"&gt;{children}&lt;/div&gt;;
 };
 
-const TabPanel = ({ children, index }) => {
+const TabPanel = ({ children, index }) =&gt; {
   const { activeTab } = useContext(TabsContext);
   
   return activeTab === index ? &lt;div&gt;{children}&lt;/div&gt; : null;
@@ -1111,18 +1111,18 @@ const TabPanel = ({ children, index }) => {
     &lt;TabPanel index={0}&gt;Content 1&lt;/TabPanel&gt;
     &lt;TabPanel index={1}&gt;Content 2&lt;/TabPanel&gt;
   &lt;/TabPanels&gt;
-&lt;/Tabs&gt;</div>
+&lt;/Tabs&gt;</code></pre></div>
         </div>
 
         <div class="question">
             Q36: What are render props?
         </div>
         <div class="answer">
-            <div class="code-block"> Render props pattern
-const MouseTracker = ({ render }) => {
+            <div class="code-block" data-language="code"><pre><code> Render props pattern
+const MouseTracker = ({ render }) =&gt; {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e) =&gt; {
     setPosition({ x: e.clientX, y: e.clientY });
   };
 
@@ -1135,29 +1135,29 @@ const MouseTracker = ({ render }) => {
 
 // Usage
 &lt;MouseTracker
-  render={({ x, y }) => (
+  render={({ x, y }) =&gt; (
     &lt;p&gt;Mouse position: {x}, {y}&lt;/p&gt;
   )}
 /&gt;
 
 // Using children as render prop
 &lt;MouseTracker&gt;
-  {({ x, y }) => &lt;p&gt;Mouse: {x}, {y}&lt;/p&gt;}
-&lt;/MouseTracker&gt;</div>
+  {({ x, y }) =&gt; &lt;p&gt;Mouse: {x}, {y}&lt;/p&gt;}
+&lt;/MouseTracker&gt;</code></pre></div>
         </div>
 
         <div class="question">
             Q37: What are higher-order components (HOCs)?
         </div>
         <div class="answer">
-            <div class="code-block"> HOC pattern
-const withLoading = (WrappedComponent) => {
-  return (props) => {
+            <div class="code-block" data-language="code"><pre><code> HOC pattern
+const withLoading = (WrappedComponent) =&gt; {
+  return (props) =&gt; {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState(null);
 
-    useEffect(() => {
-      fetchData().then(result => {
+    useEffect(() =&gt; {
+      fetchData().then(result =&gt; {
         setData(result);
         setLoading(false);
       });
@@ -1169,15 +1169,15 @@ const withLoading = (WrappedComponent) => {
 };
 
 // Usage
-const UserProfile = ({ data }) => {
+const UserProfile = ({ data }) =&gt; {
   return &lt;div&gt;{data.name}&lt;/div&gt;;
 };
 
 const UserProfileWithLoading = withLoading(UserProfile);
 
 // HOC with authentication
-const withAuth = (WrappedComponent) => {
-  return (props) => {
+const withAuth = (WrappedComponent) =&gt; {
+  return (props) =&gt; {
     const isAuthenticated = useAuth();
     
     if (!isAuthenticated) {
@@ -1186,16 +1186,16 @@ const withAuth = (WrappedComponent) => {
     
     return &lt;WrappedComponent {...props} /&gt;;
   };
-};</div>
+};</code></pre></div>
         </div>
 
         <div class="question">
             Q38: What are custom hooks?
         </div>
         <div class="answer">
-            <div class="code-block"> Custom hook for localStorage
+            <div class="code-block" data-language="code"><pre><code> Custom hook for localStorage
 function useLocalStorage(key, initialValue) {
-  const [storedValue, setStoredValue] = useState(() => {
+  const [storedValue, setStoredValue] = useState(() =&gt; {
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
@@ -1204,7 +1204,7 @@ function useLocalStorage(key, initialValue) {
     }
   });
 
-  const setValue = (value) => {
+  const setValue = (value) =&gt; {
     try {
       const valueToStore = value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
@@ -1224,12 +1224,12 @@ const [name, setName] = useLocalStorage('name', 'John');
 function useDebounce(value, delay) {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
-  useEffect(() => {
-    const handler = setTimeout(() => {
+  useEffect(() =&gt; {
+    const handler = setTimeout(() =&gt; {
       setDebouncedValue(value);
     }, delay);
 
-    return () => {
+    return () =&gt; {
       clearTimeout(handler);
     };
   }, [value, delay]);
@@ -1239,21 +1239,21 @@ function useDebounce(value, delay) {
 
 // Usage
 const [searchTerm, setSearchTerm] = useState('');
-const debouncedSearchTerm = useDebounce(searchTerm, 500);</div>
+const debouncedSearchTerm = useDebounce(searchTerm, 500);</code></pre></div>
         </div>
 
         <div class="question">
             Q39: What is the difference between controlled and uncontrolled components?
         </div>
         <div class="answer">
-            <div class="code-block"> Controlled component
+            <div class="code-block" data-language="code"><pre><code> Controlled component
 function ControlledForm() {
   const [value, setValue] = useState('');
 
   return (
     &lt;input
       value={value}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={(e) =&gt; setValue(e.target.value)}
     /&gt;
   );
 }
@@ -1262,7 +1262,7 @@ function ControlledForm() {
 function UncontrolledForm() {
   const inputRef = useRef();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) =&gt; {
     e.preventDefault();
     console.log(inputRef.current.value);
   };
@@ -1277,7 +1277,7 @@ function UncontrolledForm() {
 
 // When to use each:
 // Controlled: Form validation, dynamic inputs, real-time formatting
-// Uncontrolled: Simple forms, integrating with non-React code, performance</div>
+// Uncontrolled: Simple forms, integrating with non-React code, performance</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1288,7 +1288,7 @@ function UncontrolledForm() {
             Q40: How do you implement SSR with Next.js?
         </div>
         <div class="answer">
-            <div class="code-block"> pages/index.js (SSR)
+            <div class="code-block" data-language="code"><pre><code> pages/index.js (SSR)
 export async function getServerSideProps(context) {
   const res = await fetch('https://api.example.com/data');
   const data = await res.json();
@@ -1321,24 +1321,24 @@ export async function getStaticPaths() {
   const posts = await res.json();
 
   return {
-    paths: posts.map(post => ({ params: { id: post.id } })),
+    paths: posts.map(post =&gt; ({ params: { id: post.id } })),
     fallback: 'blocking'
   };
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q41: How do you implement SSR with React 18?
         </div>
         <div class="answer">
-            <div class="code-block"> server.js
+            <div class="code-block" data-language="code"><pre><code> server.js
 import express from 'express';
 import { renderToPipeableStream } from 'react-dom/server';
 import App from './App';
 
 const app = express();
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) =&gt; {
   const { pipe } = renderToPipeableStream(
     &lt;App /&gt;,
     {
@@ -1362,7 +1362,7 @@ app.listen(3000);
 import { hydrateRoot } from 'react-dom/client';
 import App from './App';
 
-hydrateRoot(document.getElementById('root'), &lt;App /&gt;);</div>
+hydrateRoot(document.getElementById('root'), &lt;App /&gt;);</code></pre></div>
         </div>
 
         <div class="question">
@@ -1421,18 +1421,18 @@ hydrateRoot(document.getElementById('root'), &lt;App /&gt;);</div>
             Q44: How do you use concurrent features in React 18?
         </div>
         <div class="answer">
-            <div class="code-block"> useTransition for non-urgent updates
+            <div class="code-block" data-language="code"><pre><code> useTransition for non-urgent updates
 function SearchResults() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [isPending, startTransition] = useTransition();
 
-  const handleChange = (e) => {
+  const handleChange = (e) =&gt; {
     // Urgent update
     setQuery(e.target.value);
     
     // Non-urgent update
-    startTransition(() => {
+    startTransition(() =&gt; {
       setResults(search(e.target.value));
     });
   };
@@ -1451,19 +1451,19 @@ function ProductList({ products }) {
   
   return (
     &lt;div&gt;
-      {deferredProducts.map(product => (
+      {deferredProducts.map(product =&gt; (
         &lt;ProductCard key={product.id} product={product} /&gt;
       ))}
     &lt;/div&gt;
   );
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q45: How do you use the new root API?
         </div>
         <div class="answer">
-            <div class="code-block"> Old way (React 17)
+            <div class="code-block" data-language="code"><pre><code> Old way (React 17)
 import ReactDOM from 'react-dom';
 import App from './App';
 
@@ -1484,19 +1484,19 @@ root.render(
   &lt;StrictMode&gt;
     &lt;App /&gt;
   &lt;/StrictMode&gt;
-);</div>
+);</code></pre></div>
         </div>
 
         <div class="question">
             Q46: What is automatic batching in React 18?
         </div>
         <div class="answer">
-            <div class="code-block"> React 18 automatically batches state updates
+            <div class="code-block" data-language="code"><pre><code> React 18 automatically batches state updates
 // even in async operations, promises, timeouts
 
 function handleClick() {
-  setCount(c => c + 1);
-  setFlag(f => !f);
+  setCount(c =&gt; c + 1);
+  setFlag(f =&gt; !f);
   // Both updates are batched - only one re-render
 }
 
@@ -1510,9 +1510,9 @@ async function fetchData() {
 }
 
 // In event handlers
-setTimeout(() => {
-  setCount(c => c + 1);
-  setFlag(f => !f);
+setTimeout(() =&gt; {
+  setCount(c =&gt; c + 1);
+  setFlag(f =&gt; !f);
   // Batched in React 18, not in React 17
 }, 1000);
 
@@ -1520,13 +1520,13 @@ setTimeout(() => {
 import { flushSync } from 'react-dom';
 
 function handleClick() {
-  flushSync(() => {
-    setCount(c => c + 1);
+  flushSync(() =&gt; {
+    setCount(c =&gt; c + 1);
   });
   // Re-renders immediately
-  setFlag(f => !f);
+  setFlag(f =&gt; !f);
   // Re-renders again
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1542,23 +1542,23 @@ function handleClick() {
                 <li><strong>useLayoutEffect:</strong> Runs before paint. Blocking. Use for DOM measurements.</li>
             </ul>
             
-            <div class="code-block"> useEffect (non-blocking)
-useEffect(() => {
+            <div class="code-block" data-language="code"><pre><code> useEffect (non-blocking)
+useEffect(() =&gt; {
   document.title = `Count: ${count}`;
 }, [count]);
 
 // useLayoutEffect (blocking, for DOM measurements)
-useLayoutEffect(() => {
+useLayoutEffect(() =&gt; {
   const rect = ref.current.getBoundingClientRect();
   setPosition(rect.top);
-}, []);</div>
+}, []);</code></pre></div>
         </div>
 
         <div class="question">
             Q48: How do you handle errors in React?
         </div>
         <div class="answer">
-            <div class="code-block"> Error boundary
+            <div class="code-block" data-language="code"><pre><code> Error boundary
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -1587,8 +1587,8 @@ class ErrorBoundary extends React.Component {
 &lt;/ErrorBoundary&gt;
 
 // Error handling in async operations
-useEffect(() => {
-  const fetchData = async () => {
+useEffect(() =&gt; {
+  const fetchData = async () =&gt; {
     try {
       const data = await fetch('/api/data');
       setData(data);
@@ -1597,7 +1597,7 @@ useEffect(() => {
     }
   };
   fetchData();
-}, []);</div>
+}, []);</code></pre></div>
         </div>
 
         <div class="question">
@@ -1627,27 +1627,27 @@ useEffect(() => {
                 <li><strong>useCallback:</strong> Memoizes a function. Returns the memoized function.</li>
             </ul>
             
-            <div class="code-block"> useMemo
-const expensiveValue = useMemo(() => {
+            <div class="code-block" data-language="code"><pre><code> useMemo
+const expensiveValue = useMemo(() =&gt; {
   return computeExpensiveValue(a, b);
 }, [a, b]);
 
 // useCallback
-const handleClick = useCallback(() => {
+const handleClick = useCallback(() =&gt; {
   doSomething(a, b);
 }, [a, b]);
 
 // useCallback is essentially useMemo with a function
-const handleClick = useMemo(() => () => {
+const handleClick = useMemo(() =&gt; () =&gt; {
   doSomething(a, b);
-}, [a, b]);</div>
+}, [a, b]);</code></pre></div>
         </div>
 
         <div class="question">
             Q51: How do you implement infinite scroll?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { useEffect, useState, useRef } from 'react';
+            <div class="code-block" data-language="code"><pre><code>import { useEffect, useState, useRef } from 'react';
 
 function InfiniteScroll() {
   const [items, setItems] = useState([]);
@@ -1655,18 +1655,18 @@ function InfiniteScroll() {
   const [page, setPage] = useState(1);
   const observerRef = useRef();
 
-  const loadMore = async () => {
+  const loadMore = async () =&gt; {
     setLoading(true);
     const newItems = await fetchItems(page);
-    setItems(prev => [...prev, ...newItems]);
-    setPage(prev => prev + 1);
+    setItems(prev =&gt; [...prev, ...newItems]);
+    setPage(prev =&gt; prev + 1);
     setLoading(false);
   };
 
-  useEffect(() => {
+  useEffect(() =&gt; {
     const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !loading) {
+      (entries) =&gt; {
+        if (entries[0].isIntersecting &amp;&amp; !loading) {
           loadMore();
         }
       },
@@ -1677,30 +1677,30 @@ function InfiniteScroll() {
       observer.observe(observerRef.current);
     }
 
-    return () => observer.disconnect();
+    return () =&gt; observer.disconnect();
   }, [loading, page]);
 
   return (
     &lt;div&gt;
-      {items.map(item => &lt;Item key={item.id} item={item} /&gt;)}
-      {loading && &lt;div&gt;Loading...&lt;/div&gt;}
+      {items.map(item =&gt; &lt;Item key={item.id} item={item} /&gt;)}
+      {loading &amp;&amp; &lt;div&gt;Loading...&lt;/div&gt;}
       &lt;div ref={observerRef} /&gt;
     &lt;/div&gt;
   );
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q52: How do you implement a custom hook for API calls?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nfunction useApi(url) {
+            <div class="code-block" data-language="code"><pre><code>function useApi(url) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  useEffect(() =&gt; {
+    const fetchData = async () =&gt; {
       try {
         setLoading(true);
         const response = await fetch(url);
@@ -1729,10 +1729,10 @@ function Users() {
 
   return (
     &lt;ul&gt;
-      {users.map(user => &lt;li key={user.id}&gt;{user.name}&lt;/li&gt;)}
+      {users.map(user =&gt; &lt;li key={user.id}&gt;{user.name}&lt;/li&gt;)}
     &lt;/ul&gt;
   );
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1759,13 +1759,13 @@ function Users() {
             Q54: How do you implement authentication in React?
         </div>
         <div class="answer">
-            <div class="code-block"> Auth context
+            <div class="code-block" data-language="code"><pre><code> Auth context
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const login = async (credentials) => {
+  const login = async (credentials) =&gt; {
     const response = await fetch('/api/login', {
       method: 'POST',
       body: JSON.stringify(credentials)
@@ -1775,7 +1775,7 @@ function AuthProvider({ children }) {
     localStorage.setItem('token', user.token);
   };
 
-  const logout = () => {
+  const logout = () =&gt; {
     setUser(null);
     localStorage.removeItem('token');
   };
@@ -1811,23 +1811,23 @@ function ProtectedRoute({ children }) {
       }
     /&gt;
   &lt;/Routes&gt;
-&lt;/AuthProvider&gt;</div>
+&lt;/AuthProvider&gt;</code></pre></div>
         </div>
 
         <div class="question">
             Q55: How do you implement file upload in React?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nfunction FileUpload() {
+            <div class="code-block" data-language="code"><pre><code>function FileUpload() {
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = (e) =&gt; {
     setFile(e.target.files[0]);
   };
 
-  const handleUpload = async () => {
+  const handleUpload = async () =&gt; {
     if (!file) return;
 
     setUploading(true);
@@ -1837,13 +1837,13 @@ function ProtectedRoute({ children }) {
     try {
       const xhr = new XMLHttpRequest();
       
-      xhr.upload.onprogress = (e) => {
+      xhr.upload.onprogress = (e) =&gt; {
         if (e.lengthComputable) {
           setProgress((e.loaded / e.total) * 100);
         }
       };
 
-      xhr.onload = () => {
+      xhr.onload = () =&gt; {
         setUploading(false);
         setProgress(0);
       };
@@ -1862,41 +1862,41 @@ function ProtectedRoute({ children }) {
       &lt;button onClick={handleUpload} disabled={uploading}&gt;
         {uploading ? 'Uploading...' : 'Upload'}
       &lt;/button&gt;
-      {uploading && &lt;progress value={progress} max={100} /&gt;}
+      {uploading &amp;&amp; &lt;progress value={progress} max={100} /&gt;}
     &lt;/div&gt;
   );
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q56: How do you implement real-time updates in React?
         </div>
         <div class="answer">
-            <div class="code-block"> Using WebSocket
+            <div class="code-block" data-language="code"><pre><code> Using WebSocket
 function RealTimeChat() {
   const [messages, setMessages] = useState([]);
   const wsRef = useRef(null);
 
-  useEffect(() => {
+  useEffect(() =&gt; {
     wsRef.current = new WebSocket('ws://localhost:8080');
 
-    wsRef.current.onmessage = (event) => {
+    wsRef.current.onmessage = (event) =&gt; {
       const message = JSON.parse(event.data);
-      setMessages(prev => [...prev, message]);
+      setMessages(prev =&gt; [...prev, message]);
     };
 
-    return () => {
+    return () =&gt; {
       wsRef.current.close();
     };
   }, []);
 
-  const sendMessage = (message) => {
+  const sendMessage = (message) =&gt; {
     wsRef.current.send(JSON.stringify(message));
   };
 
   return (
     &lt;div&gt;
-      {messages.map(msg => (
+      {messages.map(msg =&gt; (
         &lt;div key={msg.id}&gt;{msg.text}&lt;/div&gt;
       ))}
     &lt;/div&gt;
@@ -1907,25 +1907,25 @@ function RealTimeChat() {
 function SseComponent() {
   const [events, setEvents] = useState([]);
 
-  useEffect(() => {
+  useEffect(() =&gt; {
     const eventSource = new EventSource('/api/events');
 
-    eventSource.onmessage = (event) => {
-      setEvents(prev => [...prev, JSON.parse(event.data)]);
+    eventSource.onmessage = (event) =&gt; {
+      setEvents(prev =&gt; [...prev, JSON.parse(event.data)]);
     };
 
-    return () => eventSource.close();
+    return () =&gt; eventSource.close();
   }, []);
 
   return &lt;div&gt;{events.length} events&lt;/div&gt;;
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q57: How do you implement internationalization (i18n) in React?
         </div>
         <div class="answer">
-            <div class="code-block"> Using react-i18next
+            <div class="code-block" data-language="code"><pre><code> Using react-i18next
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
@@ -1953,7 +1953,7 @@ i18n
 function MyComponent() {
   const { t, i18n } = useTranslation();
 
-  const changeLanguage = (lng) => {
+  const changeLanguage = (lng) =&gt; {
     i18n.changeLanguage(lng);
   };
 
@@ -1961,29 +1961,29 @@ function MyComponent() {
     &lt;div&gt;
       &lt;h1&gt;{t('welcome')}&lt;/h1&gt;
       &lt;p&gt;{t('greeting', { name: 'John' })}&lt;/p&gt;
-      &lt;button onClick={() => changeLanguage('fr')}&gt;Français&lt;/button&gt;
-      &lt;button onClick={() => changeLanguage('en')}&gt;English&lt;/button&gt;
+      &lt;button onClick={() =&gt; changeLanguage('fr')}&gt;Français&lt;/button&gt;
+      &lt;button onClick={() =&gt; changeLanguage('en')}&gt;English&lt;/button&gt;
     &lt;/div&gt;
   );
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q58: How do you implement dark mode in React?
         </div>
         <div class="answer">
-            <div class="code-block"> Theme context
+            <div class="code-block" data-language="code"><pre><code> Theme context
 const ThemeContext = createContext();
 
 function ThemeProvider({ children }) {
   const [theme, setTheme] = useState('light');
 
-  useEffect(() => {
+  useEffect(() =&gt; {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  const toggleTheme = () =&gt; {
+    setTheme(prev =&gt; prev === 'light' ? 'dark' : 'light');
   };
 
   return (
@@ -2020,20 +2020,20 @@ function App() {
       &lt;/button&gt;
     &lt;/div&gt;
   );
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q59: How do you implement drag and drop in React?
         </div>
         <div class="answer">
-            <div class="code-block"> Using react-beautiful-dnd
+            <div class="code-block" data-language="code"><pre><code> Using react-beautiful-dnd
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 function KanbanBoard() {
   const [columns, setColumns] = useState(initialData);
 
-  const onDragEnd = (result) => {
+  const onDragEnd = (result) =&gt; {
     const { source, destination } = result;
 
     if (!destination) return;
@@ -2077,7 +2077,7 @@ function KanbanBoard() {
 
   return (
     &lt;DragDropContext onDragEnd={onDragEnd}&gt;
-      {Object.entries(columns).map(([colId, col]) => (
+      {Object.entries(columns).map(([colId, col]) =&gt; (
         &lt;Droppable key={colId} droppableId={colId}&gt;
           {(provided) =&gt; (
             &lt;div ref={provided.innerRef} {...provided.droppableProps}&gt;
@@ -2101,7 +2101,7 @@ function KanbanBoard() {
       ))}
     &lt;/DragDropContext&gt;
   );
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -2141,3 +2141,5 @@ function KanbanBoard() {
     </div>
 </body>
 </html>
+
+

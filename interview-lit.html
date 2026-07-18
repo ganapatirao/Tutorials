@@ -205,7 +205,7 @@
             Q3: How do you create a Lit component?
         </div>
         <div class="answer">
-            <div class="code-block">import { LitElement, html, css } from 'lit';
+            <div class="code-block" data-language="code"><pre><code>import { LitElement, html, css } from 'lit';
 
 class MyElement extends LitElement {
   static styles = css`
@@ -239,7 +239,7 @@ class MyElement extends LitElement {
   }
 }
 
-customElements.define('my-element', MyElement);</div>
+customElements.define('my-element', MyElement);</code></pre></div>
         </div>
 
         <div class="question">
@@ -277,14 +277,14 @@ customElements.define('my-element', MyElement);</div>
                 </tr>
             </table>
             
-            <div class="code-block">static properties = {
+            <div class="code-block" data-language="code"><pre><code>static properties = {
   name: { type: String },
   count: { type: Number },
   active: { type: Boolean },
   items: { type: Array },
   config: { type: Object },
   onChange: { type: Function }
-};</div>
+};</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -303,7 +303,7 @@ customElements.define('my-element', MyElement);</div>
                 <li>Updates only changed parts of the DOM</li>
             </ul>
             
-            <div class="code-block">static properties = {
+            <div class="code-block" data-language="code"><pre><code>static properties = {
   items: { type: Array },
   selected: { type: Number }
 };
@@ -311,14 +311,14 @@ customElements.define('my-element', MyElement);</div>
 render() {
   return html`
     &lt;ul&gt;
-      ${this.items.map((item, index) => html`
+      ${this.items.map((item, index) =&gt; html`
         &lt;li class="${index === this.selected ? 'selected' : ''}"&gt;
           ${item.name}
         &lt;/li&gt;
       `)}
     &lt;/ul&gt;
   `;
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -330,7 +330,7 @@ render() {
                 <li><strong>Internal state:</strong> Private, not reactive by default. Use for component-internal state that doesn't need to trigger re-render.</li>
             </ul>
             
-            <div class="code-block">// Property - reactive, public
+            <div class="code-block" data-language="code"><pre><code>// Property - reactive, public
 static properties = {
   count: { type: Number }
 };
@@ -338,7 +338,7 @@ static properties = {
 // Internal state - not reactive
 private _internalState = {
   data: null
-};</div>
+};</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -358,14 +358,14 @@ private _internalState = {
                 <li>Directives</li>
             </ul>
             
-            <div class="code-block">render() {
+            <div class="code-block" data-language="code"><pre><code>render() {
   return html`
     &lt;div&gt;
       &lt;h1&gt;${this.title}&lt;/h1&gt;
       
-      ${this.items.length > 0 ? html`
+      ${this.items.length &gt; 0 ? html`
         &lt;ul&gt;
-          ${this.items.map(item => html`
+          ${this.items.map(item =&gt; html`
             &lt;li&gt;${item.name}&lt;/li&gt;
           `)}
         &lt;/ul&gt;
@@ -376,7 +376,7 @@ private _internalState = {
       &lt;button @click=${this.handleClick}&gt;Click&lt;/button&gt;
     &lt;/div&gt;
   `;
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -393,21 +393,21 @@ private _internalState = {
                 <li><strong>unsafeHTML:</strong> Render raw HTML (use with caution)</li>
             </ul>
             
-            <div class="code-block">import { repeat } from 'lit/directives/repeat.js';
+            <div class="code-block" data-language="code"><pre><code>import { repeat } from 'lit/directives/repeat.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
 render() {
   return html`
     &lt;div class="${classMap({ active: this.isActive })}"&gt;
-      ${repeat(this.items, (item) => item.id, (item, index) => html`
+      ${repeat(this.items, (item) =&gt; item.id, (item, index) =&gt; html`
         &lt;div style="${styleMap({ color: item.color })}"&gt;
           ${item.name}
         &lt;/div&gt;
       `)}
     &lt;/div&gt;
   `;
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -420,7 +420,7 @@ render() {
         <div class="answer">
             <p>Lit components use <strong>Shadow DOM</strong> by default, which encapsulates styles. Styles are defined in the static styles property.</p>
             
-            <div class="code-block">import { css } from 'lit';
+            <div class="code-block" data-language="code"><pre><code>import { css } from 'lit';
 
 class MyElement extends LitElement {
   static styles = css`
@@ -447,7 +447,7 @@ class MyElement extends LitElement {
       background: #4230a3;
     }
   `;
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -459,7 +459,7 @@ class MyElement extends LitElement {
                 <li><strong>Global styles:</strong> Can be applied to light DOM or shared across components. Use constructable stylesheets or global CSS.</li>
             </ul>
             
-            <div class="code-block">// Scoped (Shadow DOM)
+            <div class="code-block" data-language="code"><pre><code>// Scoped (Shadow DOM)
 static styles = css`
   :host { display: block; }
 `;
@@ -474,7 +474,7 @@ render() {
     &lt;style&gt;${globalStyle}&lt;/style&gt;
     &lt;div class="global-class"&gt;Global styled&lt;/div&gt;
   `;
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -495,11 +495,11 @@ render() {
                 <li><strong>firstUpdated():</strong> Called after first update. One-time setup.</li>
             </ul>
             
-            <div class="code-block">class MyElement extends LitElement {
+            <div class="code-block" data-language="code"><pre><code>class MyElement extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     // Set up event listeners, timers
-    this._interval = setInterval(() => this._tick(), 1000);
+    this._interval = setInterval(() =&gt; this._tick(), 1000);
   }
   
   disconnectedCallback() {
@@ -521,7 +521,7 @@ render() {
       this._scrollToBottom();
     }
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -534,18 +534,18 @@ render() {
         <div class="answer">
             <p>Lit components can be tested with standard web component testing tools like Web Test Runner or @web/tester.</p>
             
-            <div class="code-block">import { fixture, expect } from '@open-wc/testing';
+            <div class="code-block" data-language="code"><pre><code>import { fixture, expect } from '@open-wc/testing';
 import { MyElement } from './my-element.js';
 
-describe('MyElement', () => {
-  it('renders a greeting', async () => {
+describe('MyElement', () =&gt; {
+  it('renders a greeting', async () =&gt; {
     const el = await fixture('&lt;my-element name="World"&gt;&lt;/my-element&gt;');
     
     const h1 = el.shadowRoot.querySelector('h1');
     expect(h1.textContent).to.equal('Hello, World!');
   });
   
-  it('increments count on button click', async () => {
+  it('increments count on button click', async () =&gt; {
     const el = await fixture('&lt;my-element&gt;&lt;/my-element&gt;');
     const button = el.shadowRoot.querySelector('button');
     
@@ -554,7 +554,7 @@ describe('MyElement', () => {
     
     expect(el.count).to.equal(1);
   });
-});</div>
+});</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -677,7 +677,7 @@ describe('MyElement', () => {
             Q17: How do you handle events in Lit?
         </div>
         <div class="answer">
-            <div class="code-block">// Event handling in template
+            <div class="code-block" data-language="code"><pre><code>// Event handling in template
 render() {
   return html`
     &lt;button @click=${this.handleClick}&gt;Click&lt;/button&gt;
@@ -696,7 +696,7 @@ handleInput(event) {
 
 handleHover(event) {
   console.log('Hovered at:', event.clientX, event.clientY);
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -708,22 +708,22 @@ handleHover(event) {
                 <li><strong>@event:capture:</strong> Capture phase. Event flows down from ancestors to target.</li>
             </ul>
             
-            <div class="code-block">&lt;div @click=${this.handleParentClick}&gt;
+            <div class="code-block" data-language="code"><pre><code>&lt;div @click=${this.handleParentClick}&gt;
   &lt;button @click=${this.handleChildClick}&gt;Click&lt;/button&gt;
 &lt;/div&gt;
 
 &lt;div @click:capture=${this.handleParentClick}&gt;
   &lt;button @click=${this.handleChildClick}&gt;Click&lt;/button&gt;
-&lt;/div&gt;</div>
+&lt;/div&gt;</code></pre></div>
         </div>
 
         <div class="question">
             Q19: How do you create a custom directive?
         </div>
         <div class="answer">
-            <div class="code-block">import { directive } from 'lit/directive.js';
+            <div class="code-block" data-language="code"><pre><code>import { directive } from 'lit/directive.js';
 
-const myDirective = directive((value) => (part) => {
+const myDirective = directive((value) =&gt; (part) =&gt; {
   part.setValue(value.toUpperCase());
 });
 
@@ -732,7 +732,7 @@ render() {
   return html`
     &lt;span&gt;${myDirective(this.text)}&lt;/span&gt;
   `;
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -744,20 +744,20 @@ render() {
                 <li><strong>Attributes:</strong> HTML attributes. Always strings. Used in HTML markup.</li>
             </ul>
             
-            <div class="code-block">// In HTML
+            <div class="code-block" data-language="code"><pre><code>// In HTML
 &lt;my-element name="John" count="5"&gt;&lt;/my-element&gt;
 
 // In JavaScript
 const el = document.querySelector('my-element');
 el.name = 'John';  // Property
-el.setAttribute('name', 'John');  // Attribute</div>
+el.setAttribute('name', 'John');  // Attribute</code></pre></div>
         </div>
 
         <div class="question">
             Q21: How do you handle async operations in Lit?
         </div>
         <div class="answer">
-            <div class="code-block">class MyElement extends LitElement {
+            <div class="code-block" data-language="code"><pre><code>class MyElement extends LitElement {
   static properties = {
     data: { type: Array }
   };
@@ -768,7 +768,7 @@ el.setAttribute('name', 'John');  // Attribute</div>
   }
   
   async _loadData() {
-    this.data = await fetch('/api/data').then(r => r.json());
+    this.data = await fetch('/api/data').then(r =&gt; r.json());
   }
   
   render() {
@@ -778,11 +778,11 @@ el.setAttribute('name', 'John');  // Attribute</div>
     
     return html`
       &lt;ul&gt;
-        ${this.data.map(item => html`&lt;li&gt;${item.name}&lt;/li&gt;`)}
+        ${this.data.map(item =&gt; html`&lt;li&gt;${item.name}&lt;/li&gt;`)}
       &lt;/ul&gt;
     `;
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -803,7 +803,7 @@ el.setAttribute('name', 'John');  // Attribute</div>
             Q23: How do you handle slot content in Lit?
         </div>
         <div class="answer">
-            <div class="code-block">class MyElement extends LitElement {
+            <div class="code-block" data-language="code"><pre><code>class MyElement extends LitElement {
   render() {
     return html`
       &lt;div&gt;
@@ -820,7 +820,7 @@ el.setAttribute('name', 'John');  // Attribute</div>
   &lt;div slot="header"&gt;Header&lt;/div&gt;
   &lt;div&gt;Main content&lt;/div&gt;
   &lt;div slot="footer"&gt;Footer&lt;/div&gt;
-&lt;/my-element&gt;</div>
+&lt;/my-element&gt;</code></pre></div>
         </div>
 
         <div class="question">
@@ -860,7 +860,7 @@ el.setAttribute('name', 'John');  // Attribute</div>
             Q25: How do you use Lit with TypeScript?
         </div>
         <div class="answer">
-            <div class="code-block">import { LitElement, html, css } from 'lit';
+            <div class="code-block" data-language="code"><pre><code>import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 @customElement('my-element')
@@ -879,7 +879,7 @@ export class MyElement extends LitElement {
       &lt;p&gt;Count: ${this.count}&lt;/p&gt;
     `;
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -891,11 +891,11 @@ export class MyElement extends LitElement {
                 <li><strong>@state:</strong> Private reactive property. Cannot be set from outside. Triggers re-render.</li>
             </ul>
             
-            <div class="code-block">@property({ type: String })
+            <div class="code-block" data-language="code"><pre><code>@property({ type: String })
 name = 'World';
 
 @state()
-private _count = 0;</div>
+private _count = 0;</code></pre></div>
         </div>
 
         <div class="question">
@@ -910,15 +910,15 @@ private _count = 0;</div>
                 <li><strong>Use virtual scrolling:</strong> For long lists</li>
             </ul>
             
-            <div class="code-block">import { repeat } from 'lit/directives/repeat.js';
+            <div class="code-block" data-language="code"><pre><code>import { repeat } from 'lit/directives/repeat.js';
 
 render() {
   return html`
-    ${repeat(this.items, (item) => item.id, (item) => html`
+    ${repeat(this.items, (item) =&gt; item.id, (item) =&gt; html`
       &lt;div&gt;${item.name}&lt;/div&gt;
     `)}
   `;
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -963,7 +963,7 @@ render() {
             Q29: How do you handle form inputs in Lit?
         </div>
         <div class="answer">
-            <div class="code-block">class FormElement extends LitElement {
+            <div class="code-block" data-language="code"><pre><code>class FormElement extends LitElement {
   static properties = {
     value: { type: String }
   };
@@ -982,7 +982,7 @@ render() {
   _handleInput(event) {
     this.value = event.target.value;
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -994,11 +994,11 @@ render() {
                 <li><strong>Lit's approach:</strong> Programmatic shadow DOM creation. More flexible, works in all browsers.</li>
             </ul>
             
-            <div class="code-block">// Declarative Shadow DOM
+            <div class="code-block" data-language="code"><pre><code>// Declarative Shadow DOM
 &lt;template shadowrootmode="open"&gt;
   &lt;style&gt;:host { color: red; }&lt;/style&gt;
   &lt;slot&gt;&lt;/slot&gt;
-&lt;/template&gt;</div>
+&lt;/template&gt;</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1009,7 +1009,7 @@ render() {
             Q31: How do you implement a compound component pattern in Lit?
         </div>
         <div class="answer">
-            <div class="code-block"> Parent component
+            <div class="code-block" data-language="code"><pre><code> Parent component
 class Tabs extends LitElement {
   static properties = {
     active: { type: Number }
@@ -1030,8 +1030,8 @@ class Tabs extends LitElement {
 
   _handleSlotChange(e) {
     const tabs = e.target.assignedElements({ flatten: true });
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => {
+    tabs.forEach((tab, index) =&gt; {
+      tab.addEventListener('click', () =&gt; {
         this.active = index;
         this._updatePanels();
       });
@@ -1041,7 +1041,7 @@ class Tabs extends LitElement {
   _updatePanels() {
     const panels = this.shadowRoot.querySelectorAll('slot[name="panel"]')
       .assignedElements({ flatten: true });
-    panels.forEach((panel, index) => {
+    panels.forEach((panel, index) =&gt; {
       panel.style.display = index === this.active ? 'block' : 'none';
     });
   }
@@ -1053,17 +1053,17 @@ class Tabs extends LitElement {
   &lt;div class="tab"&gt;Tab 2&lt;/div&gt;
   &lt;div slot="panel"&gt;Panel 1&lt;/div&gt;
   &lt;div slot="panel"&gt;Panel 2&lt;/div&gt;
-&lt;/my-tabs&gt;</div>
+&lt;/my-tabs&gt;</code></pre></div>
         </div>
 
         <div class="question">
             Q32: How do you implement a custom directive in Lit?
         </div>
         <div class="answer">
-            <div class="code-block"> Custom directive for lazy loading
-const lazyLoad = directive((importFn) => (part) => {
+            <div class="code-block" data-language="code"><pre><code> Custom directive for lazy loading
+const lazyLoad = directive((importFn) =&gt; (part) =&gt; {
   part.setValue('');
-  importFn().then((module) => {
+  importFn().then((module) =&gt; {
     part.setValue(module.default);
     part.commit();
   });
@@ -1072,16 +1072,16 @@ const lazyLoad = directive((importFn) => (part) => {
 class LazyComponent extends LitElement {
   render() {
     return html`
-      ${lazyLoad(() => import('./heavy-component.js'))}
+      ${lazyLoad(() =&gt; import('./heavy-component.js'))}
     `;
   }
 }
 
 // Custom directive for event delegation
-const delegate = directive((eventName, handler) => (part) => {
+const delegate = directive((eventName, handler) =&gt; (part) =&gt; {
   const element = part.committer?.element;
   if (element) {
-    element.addEventListener(eventName, (e) => {
+    element.addEventListener(eventName, (e) =&gt; {
       if (e.target.matches(part.selector)) {
         handler(e);
       }
@@ -1093,7 +1093,7 @@ class ListComponent extends LitElement {
   render() {
     return html`
       &lt;ul ${delegate('click', this._handleItemClick)}&gt;
-        ${this.items.map(item => html`&lt;li data-id="${item.id}"&gt;${item.name}&lt;/li&gt;`)}
+        ${this.items.map(item =&gt; html`&lt;li data-id="${item.id}"&gt;${item.name}&lt;/li&gt;`)}
       &lt;/ul&gt;
     `;
   }
@@ -1102,15 +1102,15 @@ class ListComponent extends LitElement {
     const id = e.target.dataset.id;
     console.log('Clicked:', id);
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q33: How do you implement a mixin in Lit?
         </div>
         <div class="answer">
-            <div class="code-block"> Mixin for click tracking
-const ClickTracker = (superclass) => class extends superclass {
+            <div class="code-block" data-language="code"><pre><code> Mixin for click tracking
+const ClickTracker = (superclass) =&gt; class extends superclass {
   _trackClick(event) {
     console.log('Click tracked:', event.target);
     super._handleClick?.(event);
@@ -1118,7 +1118,7 @@ const ClickTracker = (superclass) => class extends superclass {
 };
 
 // Mixin for localization
-const Localizable = (superclass) => class extends superclass {
+const Localizable = (superclass) =&gt; class extends superclass {
   static properties = {
     locale: { type: String }
   };
@@ -1143,19 +1143,19 @@ class MyElement extends Localizable(ClickTracker(LitElement)) {
       &lt;button @click="${this._trackClick}"&gt;${this.t('hello')}&lt;/button&gt;
     `;
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q34: How do you implement a controller in Lit?
         </div>
         <div class="answer">
-            <div class="code-block"> Controller for managing child elements
+            <div class="code-block" data-language="code"><pre><code> Controller for managing child elements
 class ResizeController {
   constructor(host, callback) {
     this.host = host;
     this.callback = callback;
-    this.observer = new ResizeObserver((entries) => {
+    this.observer = new ResizeObserver((entries) =&gt; {
       this.callback(entries[0].contentRect);
     });
     this.host.addController(this);
@@ -1173,7 +1173,7 @@ class ResizeController {
 class ResizableElement extends LitElement {
   constructor() {
     super();
-    new ResizeController(this, (rect) => {
+    new ResizeController(this, (rect) =&gt; {
       console.log('Size:', rect.width, rect.height);
     });
   }
@@ -1181,7 +1181,7 @@ class ResizableElement extends LitElement {
   render() {
     return html`&lt;div&gt;Resize me&lt;/div&gt;`;
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1206,7 +1206,7 @@ class ResizableElement extends LitElement {
             Q36: How do you use decorators in Lit 3?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { LitElement, html, css } from 'lit';
+            <div class="code-block" data-language="code"><pre><code>import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
 @customElement('my-element')
@@ -1232,14 +1232,14 @@ class MyElement extends LitElement {
   private _increment() {
     this._count++;
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q37: How do you implement scoped elements in Lit 3?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { ScopedElementsMixin } from '@lit-labs/scoped-registry-mixin';
+            <div class="code-block" data-language="code"><pre><code>import { ScopedElementsMixin } from '@lit-labs/scoped-registry-mixin';
 
 class MyElement extends ScopedElementsMixin(LitElement) {
   static get scopedElements() {
@@ -1261,7 +1261,7 @@ class MyElement extends ScopedElementsMixin(LitElement) {
 // - Elements are scoped to component
 // - No global custom element registration
 // - Better encapsulation
-// - Avoids naming conflicts</div>
+// - Avoids naming conflicts</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1282,11 +1282,11 @@ class MyElement extends ScopedElementsMixin(LitElement) {
                 <li><strong>Avoid unnecessary re-renders:</strong> Use hasChanged option</li>
             </ul>
             
-            <div class="code-block"> Custom hasChanged for performance
+            <div class="code-block" data-language="code"><pre><code> Custom hasChanged for performance
 class OptimizedElement extends LitElement {
   static properties = {
     data: {
-      hasChanged: (newVal, oldVal) => {
+      hasChanged: (newVal, oldVal) =&gt; {
         // Only update if data actually changed
         return JSON.stringify(newVal) !== JSON.stringify(oldVal);
       }
@@ -1296,14 +1296,14 @@ class OptimizedElement extends LitElement {
   render() {
     return html`&lt;div&gt;${this.data}&lt;/div&gt;`;
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q39: How do you implement virtual scrolling in Lit?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { VirtualScroller } from '@lit-labs/virtual-scroller';
+            <div class="code-block" data-language="code"><pre><code>import { VirtualScroller } from '@lit-labs/virtual-scroller';
 
 class VirtualList extends LitElement {
   static properties = {
@@ -1325,14 +1325,14 @@ class VirtualList extends LitElement {
 }
 
 customElements.define('virtual-list', VirtualList);
-customElements.define('virtual-scroller', VirtualScroller);</div>
+customElements.define('virtual-scroller', VirtualScroller);</code></pre></div>
         </div>
 
         <div class="question">
             Q40: How do you implement lazy loading in Lit?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nclass LazyLoadElement extends LitElement {
+            <div class="code-block" data-language="code"><pre><code>class LazyLoadElement extends LitElement {
   static properties = {
     component: { type: String }
   };
@@ -1341,7 +1341,7 @@ customElements.define('virtual-scroller', VirtualScroller);</div>
   private _loadedComponent = null;
 
   async _loadComponent() {
-    if (!this._loadedComponent && this.component) {
+    if (!this._loadedComponent &amp;&amp; this.component) {
       const module = await import(`./${this.component}.js`);
       this._loadedComponent = module.default;
     }
@@ -1360,7 +1360,7 @@ customElements.define('virtual-scroller', VirtualScroller);</div>
       this._loadComponent();
     }
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1409,7 +1409,7 @@ customElements.define('virtual-scroller', VirtualScroller);</div>
             Q42: How do you handle accessibility in Lit?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nclass AccessibleButton extends LitElement {
+            <div class="code-block" data-language="code"><pre><code>class AccessibleButton extends LitElement {
   static properties = {
     label: { type: String },
     disabled: { type: Boolean }
@@ -1436,14 +1436,14 @@ customElements.define('virtual-scroller', VirtualScroller);</div>
       }));
     }
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q43: How do you implement server-side rendering with Lit?
         </div>
         <div class="answer">
-            <div class="code-block"> Using declarative shadow DOM
+            <div class="code-block" data-language="code"><pre><code> Using declarative shadow DOM
 import { render } from '@lit-labs/ssr';
 
 const ssrResult = await render(html`
@@ -1459,7 +1459,7 @@ import { render } from '@lit-labs/ssr/lib/lib/render-with-global-dom-shim.cjs.js
 
 const app = express();
 
-app.get('/', async (req, res) => {
+app.get('/', async (req, res) =&gt; {
   const result = await render(html`&lt;my-app&gt;&lt;/my-app&gt;`);
   res.send(`
     &lt;!DOCTYPE html&gt;
@@ -1468,19 +1468,19 @@ app.get('/', async (req, res) => {
       &lt;body&gt;${result.html}&lt;/body&gt;
     &lt;/html&gt;
   `);
-});</div>
+});</code></pre></div>
         </div>
 
         <div class="question">
             Q44: How do you implement internationalization in Lit?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nimport { localize } from '@lit/localize';
+            <div class="code-block" data-language="code"><pre><code>import { localize } from '@lit/localize';
 
 localize.initialize({
   sourceLocale: 'en',
   targetLocales: ['en', 'fr', 'es'],
-  loadLocale: (locale) => import(`./locales/${locale}.js`)
+  loadLocale: (locale) =&gt; import(`./locales/${locale}.js`)
 });
 
 class LocalizedElement extends LitElement {
@@ -1497,14 +1497,14 @@ export const sourceLocale = 'en';
 export const templates = {
   'Welcome': 'Welcome',
   'Hello': 'Hello {name}'
-};</div>
+};</code></pre></div>
         </div>
 
         <div class="question">
             Q45: How do you implement theming in Lit?
         </div>
         <div class="answer">
-            <div class="code-block"> Using CSS custom properties for theming
+            <div class="code-block" data-language="code"><pre><code> Using CSS custom properties for theming
 class ThemedElement extends LitElement {
   static styles = css`
     :host {
@@ -1533,14 +1533,14 @@ class ThemedElement extends LitElement {
 }
 
 // Override theme in parent
-document.documentElement.style.setProperty('--primary-color', '#ff0000');</div>
+document.documentElement.style.setProperty('--primary-color', '#ff0000');</code></pre></div>
         </div>
 
         <div class="question">
             Q46: How do you implement form validation in Lit?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nclass ValidatedInput extends LitElement {
+            <div class="code-block" data-language="code"><pre><code>class ValidatedInput extends LitElement {
   static properties = {
     value: { type: String },
     required: { type: Boolean },
@@ -1569,14 +1569,14 @@ document.documentElement.style.setProperty('--primary-color', '#ff0000');</div>
   _handleInvalid(e) {
     this.error = e.target.validationMessage;
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q47: How do you implement animation in Lit?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nclass AnimatedElement extends LitElement {
+            <div class="code-block" data-language="code"><pre><code>class AnimatedElement extends LitElement {
   static styles = css`
     @keyframes fadeIn {
       from { opacity: 0; }
@@ -1603,14 +1603,14 @@ document.documentElement.style.setProperty('--primary-color', '#ff0000');</div>
   _toggle() {
     this._visible = !this._visible;
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q48: How do you implement drag and drop in Lit?
         </div>
         <div class="answer">
-            <div class="code-block">`r`nclass DraggableElement extends LitElement {
+            <div class="code-block" data-language="code"><pre><code>class DraggableElement extends LitElement {
   render() {
     return html`
       &lt;div
@@ -1654,7 +1654,7 @@ class DropZone extends LitElement {
     const data = e.dataTransfer.getData('text/plain');
     console.log('Dropped:', data);
   }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1679,14 +1679,14 @@ class DropZone extends LitElement {
             Q50: How do you integrate Lit with other frameworks?
         </div>
         <div class="answer">
-            <div class="code-block"> With React
+            <div class="code-block" data-language="code"><pre><code> With React
 import React, { useEffect, useRef } from 'react';
 
 function ReactWrapper() {
   const ref = useRef();
 
-  useEffect(() => {
-    import('./my-element.js').then(() => {
+  useEffect(() =&gt; {
+    import('./my-element.js').then(() =&gt; {
       // Custom element is now registered
     });
   }, []);
@@ -1715,7 +1715,7 @@ export default {
     return { value: 'Hello' };
   }
 }
-&lt;/script&gt;</div>
+&lt;/script&gt;</code></pre></div>
         </div>
 
         <div class="tip">
@@ -1739,3 +1739,5 @@ export default {
     </div>
 </body>
 </html>
+
+

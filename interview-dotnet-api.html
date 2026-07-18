@@ -316,7 +316,7 @@
                 <li><strong>ControllerBase:</strong> Base class for API controllers without view support. Used for Web API applications.</li>
             </ul>
             
-            <div class="code-block">// API Controller (uses ControllerBase)
+            <div class="code-block" data-language="code"><pre><code>// API Controller (uses ControllerBase)
 [ApiController]
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
@@ -328,7 +328,7 @@ public class ProductsController : ControllerBase
 public class HomeController : Controller
 {
     // ...
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -357,14 +357,14 @@ public class HomeController : Controller
         </div>
         <div class="answer">
             <h3>1. Convention-based Routing:</h3>
-            <div class="code-block">`napp.MapControllers();
+            <div class="code-block" data-language="code"><pre><code>app.MapControllers();
 
 // With route attribute on controller
 [Route("api/[controller]")]
-public class ProductsController : ControllerBase</div>
+public class ProductsController : ControllerBase</code></pre></div>
             
             <h3>2. Attribute Routing:</h3>
-            <div class="code-block">[ApiController]
+            <div class="code-block" data-language="code"><pre><code>[ApiController]
 [Route("api/products")]
 public class ProductsController : ControllerBase
 {
@@ -376,7 +376,7 @@ public class ProductsController : ControllerBase
     
     [HttpPost]
     public IActionResult Create(ProductDto dto) { }
-}</div>
+}</code></pre></div>
             
             <h3>3. Mixed Routing:</h3>
             <p>Both can be used together in the same application.</p>
@@ -386,7 +386,7 @@ public class ProductsController : ControllerBase
             Q8: How do you handle route constraints?
         </div>
         <div class="answer">
-            <div class="code-block">// Route constraints
+            <div class="code-block" data-language="code"><pre><code>// Route constraints
 [HttpGet("{id:int}")]
 public IActionResult GetById(int id) { }
 
@@ -401,7 +401,7 @@ public IActionResult GetById(Guid id) { }
 
 // Custom constraint
 [HttpGet("{id:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}")]
-public IActionResult GetBySsn(string id) { }</div>
+public IActionResult GetBySsn(string id) { }</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -422,7 +422,7 @@ public IActionResult GetBySsn(string id) { }</div>
                 <li><strong>[FromServices]:</strong> From dependency injection</li>
             </ul>
             
-            <div class="code-block">[HttpPost]
+            <div class="code-block" data-language="code"><pre><code>[HttpPost]
 public IActionResult Create([FromBody] ProductDto dto)
 {
     if (!ModelState.IsValid)
@@ -431,14 +431,14 @@ public IActionResult Create([FromBody] ProductDto dto)
     }
     // Process
     return CreatedAtAction(nameof(GetById), new { id = dto.Id }, dto);
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q10: How do you implement validation in Web API?
         </div>
         <div class="answer">
-            <div class="code-block">// DTO with validation attributes
+            <div class="code-block" data-language="code"><pre><code>// DTO with validation attributes
 public class ProductDto
 {
     public int Id { get; set; }
@@ -463,7 +463,7 @@ public IActionResult Create(ProductDto dto)
     var product = _mapper.Map&lt;Product&gt;(dto);
     _service.Create(product);
     return CreatedAtAction(nameof(GetById), new { id = product.Id }, dto);
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -481,19 +481,19 @@ public IActionResult Create(ProductDto dto)
                 <li>Server configuration</li>
             </ul>
             
-            <div class="code-block">// Add content negotiation services
-builder.Services.AddControllers(options =>
+            <div class="code-block" data-language="code"><pre><code>// Add content negotiation services
+builder.Services.AddControllers(options =&gt;
 {
     options.ReturnHttpNotAcceptable = true;
     options.RespectBrowserAcceptHeader = true;
-}).AddXmlDataContractSerializerFormatters();</div>
+}).AddXmlDataContractSerializerFormatters();</code></pre></div>
         </div>
 
         <div class="question">
             Q12: How do you return different content types?
         </div>
         <div class="answer">
-            <div class="code-block">// Automatic content negotiation
+            <div class="code-block" data-language="code"><pre><code>// Automatic content negotiation
 [HttpGet("{id}")]
 public IActionResult GetById(int id)
 {
@@ -510,7 +510,7 @@ public IActionResult GetById(int id)
     {
         ContentTypes = new[] { "application/json" }
     };
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -522,7 +522,7 @@ public IActionResult GetById(int id)
         </div>
         <div class="answer">
             <h3>1. URL Versioning:</h3>
-            <div class="code-block">`nbuilder.Services.AddApiVersioning(options =>
+            <div class="code-block" data-language="code"><pre><code>builder.Services.AddApiVersioning(options =&gt;
 {
     options.DefaultApiVersion = new ApiVersion(1, 0);
     options.AssumeDefaultVersionWhenUnspecified = true;
@@ -531,21 +531,21 @@ public IActionResult GetById(int id)
 
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
-public class ProductsController : ControllerBase</div>
+public class ProductsController : ControllerBase</code></pre></div>
             
             <h3>2. Query String Versioning:</h3>
-            <div class="code-block">`nbuilder.Services.AddApiVersioning(options =>
+            <div class="code-block" data-language="code"><pre><code>builder.Services.AddApiVersioning(options =&gt;
 {
     options.DefaultApiVersion = new ApiVersion(1, 0);
     options.ApiVersionReader = new QueryStringApiVersionReader("api-version");
-});</div>
+});</code></pre></div>
             
             <h3>3. Header Versioning:</h3>
-            <div class="code-block">`nbuilder.Services.AddApiVersioning(options =>
+            <div class="code-block" data-language="code"><pre><code>builder.Services.AddApiVersioning(options =&gt;
 {
     options.DefaultApiVersion = new ApiVersion(1, 0);
     options.ApiVersionReader = new HeaderApiVersionReader("X-API-Version");
-});</div>
+});</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -556,9 +556,9 @@ public class ProductsController : ControllerBase</div>
             Q14: How do you implement JWT authentication in Web API?
         </div>
         <div class="answer">
-            <div class="code-block">// Add JWT authentication
+            <div class="code-block" data-language="code"><pre><code>// Add JWT authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
+    .AddJwtBearer(options =&gt;
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -591,7 +591,7 @@ public IActionResult Delete(int id) { }
 
 // Policy-based authorization
 [Authorize(Policy = "RequireManager")]
-public IActionResult Approve(int id) { }</div>
+public IActionResult Approve(int id) { }</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -604,11 +604,11 @@ public IActionResult Approve(int id) { }</div>
         <div class="answer">
             <p><strong>CORS (Cross-Origin Resource Sharing)</strong> allows browsers to make requests to a different domain than the one that served the page.</p>
             
-            <div class="code-block">// Add CORS services
-builder.Services.AddCors(options =>
+            <div class="code-block" data-language="code"><pre><code>// Add CORS services
+builder.Services.AddCors(options =&gt;
 {
     options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("https://example.com")
+        builder =&gt; builder.WithOrigins("https://example.com")
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials());
@@ -628,7 +628,7 @@ public class ProductsController : ControllerBase
 
 // Disable CORS on specific action
 [DisableCors]
-public IActionResult GetSensitiveData() { }</div>
+public IActionResult GetSensitiveData() { }</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -639,9 +639,9 @@ public IActionResult GetSensitiveData() { }</div>
             Q16: How do you integrate Swagger/OpenAPI?
         </div>
         <div class="answer">
-            <div class="code-block">// Add Swagger services
+            <div class="code-block" data-language="code"><pre><code>// Add Swagger services
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddSwaggerGen(c =&gt;
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
@@ -660,18 +660,18 @@ builder.Services.AddSwaggerGen(c =>
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
+    app.UseSwaggerUI(c =&gt;
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
     });
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q17: How do you add XML comments for Swagger?
         </div>
         <div class="answer">
-            <div class="code-block">// Enable XML documentation in .csproj
+            <div class="code-block" data-language="code"><pre><code>// Enable XML documentation in .csproj
 &lt;PropertyGroup&gt;
   &lt;GenerateDocumentationFile&gt;true&lt;/GenerateDocumentationFile&gt;
   &lt;NoWarn&gt;$(NoWarn);1591&lt;/NoWarn&gt;
@@ -697,7 +697,7 @@ public IActionResult GetAll()
 public IActionResult GetById(int id)
 {
     // ...
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -709,65 +709,65 @@ public IActionResult GetById(int id)
         </div>
         <div class="answer">
             <h3>1. Using Exception Filter:</h3>
-            <div class="code-block">`npublic class GlobalExceptionFilter : IExceptionFilter
+            <div class="code-block" data-language="code"><pre><code>public class GlobalExceptionFilter : IExceptionFilter
 {
-    private readonly ILogger&lt;GlobalExceptionFilter&gt; _logger;
-    
-    public GlobalExceptionFilter(ILogger&lt;GlobalExceptionFilter&gt; logger)
+  private readonly ILogger&lt;GlobalExceptionFilter&gt; _logger;
+
+  public GlobalExceptionFilter(ILogger&lt;GlobalExceptionFilter&gt; logger)
+  {
+    _logger = logger;
+  }
+
+  public void OnException(ExceptionContext context)
+  {
+    _logger.LogError(context.Exception, "Unhandled exception");
+
+    context.Result = new ObjectResult(new
     {
-        _logger = logger;
-    }
-    
-    public void OnException(ExceptionContext context)
+      Error = "An error occurred",
+      Message = context.Exception.Message
+    })
     {
-        _logger.LogError(context.Exception, "Unhandled exception");
-        
-        context.Result = new ObjectResult(new
-        {
-            Error = "An error occurred",
-            Message = context.Exception.Message
-        })
-        {
-            StatusCode = 500
-        };
-        
-        context.ExceptionHandled = true;
-    }
+      StatusCode = 500
+    };
+
+    context.ExceptionHandled = true;
+  }
 }
 
 // Register filter
-builder.Services.AddControllers(options =>
+builder.Services.AddControllers(options =&gt;
 {
-    options.Filters.Add&lt;GlobalExceptionFilter&gt;();
-});</div>
+  options.Filters.Add&lt;GlobalExceptionFilter&gt;();
+});</code></pre></div>
             
             <h3>2. Using Problem Details:</h3>
-            <div class="code-block">`nbuilder.Services.AddProblemDetails();
+            <div class="code-block" data-language="code"><pre><code>builder.Services.AddProblemDetails();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler();
+  app.UseExceptionHandler();
 }
 else
 {
-    app.UseExceptionHandler(exceptionHandlerApp =>
+  app.UseExceptionHandler(exceptionHandlerApp =&gt;
+  {
+    exceptionHandlerApp.Run(async context =&gt;
     {
-        exceptionHandlerApp.Run(async context =>
-        {
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            context.Response.ContentType = "application/problem+json";
-            
-            var problemDetails = new ProblemDetails
-            {
-                Status = context.Response.StatusCode,
-                Title = "An error occurred",
-                Detail = "An unexpected error occurred"
-            };
-            
-            await context.Response.WriteAsJsonAsync(problemDetails);
-        });
+      context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+      context.Response.ContentType = "application/problem+json";
+
+      var problemDetails = new ProblemDetails
+      {
+        Status = context.Response.StatusCode,
+        Title = "An error occurred",
+        Detail = "An unexpected error occurred"
+      };
+
+      await context.Response.WriteAsJsonAsync(problemDetails);
     });
-}</div>
+  });
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -778,7 +778,7 @@ else
             Q19: How do you test Web API controllers?
         </div>
         <div class="answer">
-            <div class="code-block">// Unit test example
+            <div class="code-block" data-language="code"><pre><code>// Unit test example
 public class ProductsControllerTests
 {
     private readonly Mock&lt;IProductService&gt; _mockService;
@@ -795,7 +795,7 @@ public class ProductsControllerTests
     {
         // Arrange
         var product = new Product { Id = 1, Name = "Test" };
-        _mockService.Setup(s => s.GetByIdAsync(1))
+        _mockService.Setup(s =&gt; s.GetByIdAsync(1))
             .ReturnsAsync(product);
         
         // Act
@@ -828,7 +828,7 @@ public class ProductsControllerIntegrationTests : IClassFixture&lt;WebApplicatio
         Assert.Equal("application/json; charset=utf-8", 
             response.Content.Headers.ContentType.ToString());
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -850,8 +850,8 @@ public class ProductsControllerIntegrationTests : IClassFixture&lt;WebApplicatio
                 <li><strong>Minimize allocations:</strong> Reduce memory allocations in hot paths</li>
             </ul>
             
-            <div class="code-block">// Response compression
-builder.Services.AddResponseCompression(options =>
+            <div class="code-block" data-language="code"><pre><code>// Response compression
+builder.Services.AddResponseCompression(options =&gt;
 {
     options.EnableForHttps = true;
     options.Providers.Add&lt;GzipCompressionProvider&gt;();
@@ -865,7 +865,7 @@ public IActionResult GetProducts(int page = 1, int pageSize = 10)
 {
     var products = _service.GetPaged(page, pageSize);
     return Ok(products);
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -896,7 +896,7 @@ public IActionResult GetProducts(int page = 1, int pageSize = 10)
             Q23: How do you handle file uploads in Web API?
         </div>
         <div class="answer">
-            <div class="code-block">// Single file upload
+            <div class="code-block" data-language="code"><pre><code>// Single file upload
 [HttpPost("upload")]
 public async Task&lt;IActionResult&gt; Upload(IFormFile file)
 {
@@ -918,7 +918,7 @@ public async Task&lt;IActionResult&gt; UploadMultiple(List&lt;IFormFile&gt; file
 {
     // Process multiple files
     return Ok();
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -927,21 +927,21 @@ public async Task&lt;IActionResult&gt; UploadMultiple(List&lt;IFormFile&gt; file
         <div class="answer">
             <p><strong>CreatedAtAction</strong> returns a 201 Created status code with a Location header pointing to the newly created resource. It follows REST best practices for POST operations.</p>
             
-            <div class="code-block">[HttpPost]
+            <div class="code-block" data-language="code"><pre><code>[HttpPost]
 public IActionResult Create(ProductDto dto)
 {
     var product = _service.Create(dto);
     return CreatedAtAction(nameof(GetById), 
         new { id = product.Id }, 
         product);
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q25: How do you implement PATCH in Web API?
         </div>
         <div class="answer">
-            <div class="code-block">// Using JsonPatch
+            <div class="code-block" data-language="code"><pre><code>// Using JsonPatch
 [HttpPatch("{id}")]
 public IActionResult Patch(int id, [FromBody] JsonPatchDocument&lt;ProductDto&gt; patchDoc)
 {
@@ -958,7 +958,7 @@ public IActionResult Patch(int id, [FromBody] JsonPatchDocument&lt;ProductDto&gt
     _service.Update(product);
     
     return NoContent();
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -975,7 +975,7 @@ public IActionResult Patch(int id, [FromBody] JsonPatchDocument&lt;ProductDto&gt
             Q27: How do you implement rate limiting?
         </div>
         <div class="answer">
-            <div class="code-block">// Using middleware
+            <div class="code-block" data-language="code"><pre><code>// Using middleware
 public class RateLimitMiddleware
 {
     private readonly RequestDelegate _next;
@@ -992,13 +992,13 @@ public class RateLimitMiddleware
         var key = context.Connection.RemoteIpAddress.ToString();
         var limit = 100; // 100 requests per minute
         
-        var current = _cache.GetOrCreate(key, entry =>
+        var current = _cache.GetOrCreate(key, entry =&gt;
         {
             entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1);
             return 0;
         });
         
-        if (current >= limit)
+        if (current &gt;= limit)
         {
             context.Response.StatusCode = 429; // Too Many Requests
             return;
@@ -1007,7 +1007,7 @@ public class RateLimitMiddleware
         _cache.Set(key, current + 1);
         await _next(context);
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1016,7 +1016,7 @@ public class RateLimitMiddleware
         <div class="answer">
             <p><strong>HATEOAS (Hypermedia as the Engine of Application State)</strong> is a REST constraint where the API returns hypermedia links that allow clients to discover available actions dynamically.</p>
             
-            <div class="code-block">public class ProductDto
+            <div class="code-block" data-language="code"><pre><code>public class ProductDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -1051,14 +1051,14 @@ public class LinkDto
       "method": "DELETE"
     }
   ]
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q29: How do you implement API health checks?
         </div>
         <div class="answer">
-            <div class="code-block">// Add health check services
+            <div class="code-block" data-language="code"><pre><code>// Add health check services
 builder.Services.AddHealthChecks()
     .AddCheck&lt;DatabaseHealthCheck&gt;("database")
     .AddCheck&lt;ExternalApiHealthCheck&gt;("external-api");
@@ -1085,7 +1085,7 @@ public class DatabaseHealthCheck : IHealthCheck
             return HealthCheckResult.Unhealthy("Database is not accessible", ex);
         }
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1101,7 +1101,7 @@ public class DatabaseHealthCheck : IHealthCheck
                 <li>Performance monitoring</li>
             </ul>
             
-            <div class="code-block">public class LogActionFilter : IActionFilter
+            <div class="code-block" data-language="code"><pre><code>public class LogActionFilter : IActionFilter
 {
     public void OnActionExecuting(ActionExecutingContext context)
     {
@@ -1114,7 +1114,7 @@ public class DatabaseHealthCheck : IHealthCheck
         // After action executes
         Console.WriteLine($"Executed: {context.ActionDescriptor.DisplayName}");
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1193,7 +1193,7 @@ public class DatabaseHealthCheck : IHealthCheck
         <div class="answer">
             <p><strong>CQRS (Command Query Responsibility Segregation)</strong> separates read and write operations into different models.</p>
             
-            <div class="code-block"> Query
+            <div class="code-block" data-language="code"><pre><code> Query
 public class GetProductQuery
 {
     public int Id { get; set; }
@@ -1238,7 +1238,7 @@ public class CreateProductCommandHandler
         await _context.SaveChangesAsync();
         return product.Id;
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -1247,7 +1247,7 @@ public class CreateProductCommandHandler
         <div class="answer">
             <p><strong>Repository Pattern</strong> mediates between the domain and data mapping layers, acting like an in-memory domain object collection.</p>
             
-            <div class="code-block"> Repository interface
+            <div class="code-block" data-language="code"><pre><code> Repository interface
 public interface IRepository&lt;T&gt; where T : class
 {
     Task&lt;IEnumerable&lt;T&gt;&gt; GetAllAsync();
@@ -1297,7 +1297,7 @@ public class Repository&lt;T&gt; : IRepository&lt;T&gt; where T : class
         _dbSet.Remove(entity);
         await _context.SaveChangesAsync();
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1308,9 +1308,9 @@ public class Repository&lt;T&gt; : IRepository&lt;T&gt; where T : class
             Q35: How do you implement JWT authentication in APIs?
         </div>
         <div class="answer">
-            <div class="code-block"> Configure JWT in Program.cs
+            <div class="code-block" data-language="code"><pre><code> Configure JWT in Program.cs
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
+    .AddJwtBearer(options =&gt;
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -1351,14 +1351,14 @@ public class AuthService
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q36: How do you implement API key authentication?
         </div>
         <div class="answer">
-            <div class="code-block"> Custom API key authentication
+            <div class="code-block" data-language="code"><pre><code> Custom API key authentication
 public class ApiKeyAuthenticationHandler : AuthenticationHandler&lt;ApiKeyAuthenticationOptions&gt;
 {
     private readonly IConfiguration _configuration;
@@ -1399,20 +1399,20 @@ public class ApiKeyAuthenticationHandler : AuthenticationHandler&lt;ApiKeyAuthen
 
         return AuthenticateResult.Success(ticket);
     }
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="question">
             Q37: How do you implement rate limiting in APIs?
         </div>
         <div class="answer">
-            <div class="code-block"> Using AspNetCoreRateLimit
-builder.Services.AddRateLimiter(options =>
+            <div class="code-block" data-language="code"><pre><code> Using AspNetCoreRateLimit
+builder.Services.AddRateLimiter(options =&gt;
 {
-    options.AddPolicy("FixedWindow", context =>
+    options.AddPolicy("FixedWindow", context =&gt;
         RateLimitPartition.GetSlidingWindowLimiter(
             partitionKey: context.User.Identity?.Name ?? context.Request.Headers.Host.ToString(),
-            factory: _ => new SlidingWindowRateLimiterOptions
+            factory: _ =&gt; new SlidingWindowRateLimiterOptions
             {
                 PermitLimit = 100,
                 Window = TimeSpan.FromMinutes(1),
@@ -1426,7 +1426,7 @@ builder.Services.AddRateLimiter(options =>
 public IActionResult GetProducts()
 {
     return Ok(_repository.GetAll());
-}</div>
+}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1608,3 +1608,5 @@ public IActionResult GetProducts()
     </div>
 </body>
 </html>
+
+
