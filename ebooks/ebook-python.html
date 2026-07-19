@@ -230,20 +230,16 @@
         }
         
         h2 {
-            color: #1a1a2e;
-            font-size: 32px;
+            color: white;
+            font-size: 28px;
             font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            padding: 18px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            animation: slideIn 0.5s ease both;
         }
         
         @keyframes slideIn {
@@ -251,65 +247,59 @@
             to { opacity: 1; transform: translateX(0); }
         }
         
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
-        }
-        
         h3 {
             color: #1a1a2e;
-            font-size: 26px;
+            font-size: 20px;
             font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            animation: fadeIn 0.4s ease both;
         }
         
         .chapter {
             background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
-            border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
             position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
+            transition: all 0.3s ease;
+            animation: slideUp 0.5s ease both;
         }
         
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
         
         .code-block {
             background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
             color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 10px;
             overflow-x: auto;
             overflow-y: auto;
             font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            margin: 20px 0;
+            line-height: 1.6;
+            border-left: 4px solid #dd0031;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             word-wrap: break-word;
             white-space: pre-wrap;
             max-width: 100%;
-            animation: codeAppear 0.5s ease both;
+            animation: codeAppear 0.4s ease both;
         }
         
         @keyframes codeAppear {
@@ -322,6 +312,23 @@
             white-space: pre-wrap;
             word-wrap: break-word;
             overflow-x: auto;
+        }
+        
+        .code-block code {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .code-block::before {
+            content: 'CODE';
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 9px;
+            color: #888;
+            letter-spacing: 2px;
+            font-weight: 600;
+            z-index: 10;
         }
         
         
@@ -416,29 +423,38 @@
         }
         
         .important {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            padding: 18px 20px;
+            border-radius: 10px;
+            margin: 18px 0;
+            border-left: 4px solid #17a2b8;
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.15);
         }
         
         .important strong {
-            color: #856404;
+            color: #0c5460;
         }
         
         .tip {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            padding: 18px 20px;
+            border-radius: 10px;
+            margin: 18px 0;
+            border-left: 4px solid #ffc107;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.15);
         }
         
         .tip strong {
-            color: #0c5460;
+            color: #856404;
+        }
+        
+        .example {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 18px 20px;
+            border-radius: 10px;
+            margin: 18px 0;
+            border-left: 4px solid #4caf50;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.15);
         }
         
         table {
@@ -493,183 +509,57 @@
         
                 
         @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
-            }
+            body { padding: 12px 8px; }
+            .container { padding: 25px 20px; border-radius: 15px; }
+            h1 { font-size: 28px; padding-bottom: 20px; }
+            .subtitle { font-size: 15px; margin-bottom: 25px; }
+            h2 { font-size: 22px; padding: 15px 20px; margin-bottom: 20px; }
+            h3 { font-size: 18px; padding: 10px 15px; }
+            .chapter { padding: 20px; margin: 15px 0; }
+            .code-block { padding: 18px; font-size: 12px; overflow-x: auto; margin: 15px 0; }
+            .toc { padding: 20px; }
+            .toc h3 { font-size: 20px; }
+            .toc li { font-size: 14px; }
+            table { margin: 15px 0; overflow-x: auto; }
+            th, td { padding: 10px; font-size: 12px; }
+            .important, .tip, .example { padding: 15px; font-size: 13px; }
+            ul, ol { padding-left: 20px; }
+            li { font-size: 13px; }
         }
         
         @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
-            }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
+            body { padding: 10px 5px; }
+            .container { padding: 20px 15px; }
+            h1 { font-size: 24px; }
+            .subtitle { font-size: 14px; }
+            h2 { font-size: 20px; padding: 12px 15px; }
+            h3 { font-size: 16px; padding: 10px 12px; }
+            .chapter { padding: 15px; margin: 12px 0; }
+            .code-block { padding: 15px; font-size: 11px; overflow-x: auto; margin: 12px 0; }
+            .toc { padding: 15px; }
+            .toc h3 { font-size: 18px; }
+            .toc li { font-size: 12px; }
+            table { margin: 12px 0; overflow-x: auto; }
+            th, td { padding: 8px; font-size: 11px; }
+            .important, .tip, .example { padding: 12px; font-size: 12px; }
+            ul, ol { padding-left: 18px; }
+            li { font-size: 12px; }
         }
-</style>
+        
+        @media (max-width: 360px) {
+            body { padding: 8px 4px; }
+            .container { padding: 15px 12px; }
+            h1 { font-size: 22px; }
+            h2 { font-size: 18px; padding: 10px 12px; }
+            h3 { font-size: 15px; padding: 8px 10px; }
+            .chapter { padding: 12px; margin: 10px 0; }
+            .code-block { padding: 12px; font-size: 10px; overflow-x: auto; margin: 10px 0; }
+            .toc { padding: 12px; }
+            .toc h3 { font-size: 16px; }
+            th, td { padding: 6px; font-size: 10px; }
+            .important, .tip, .example { padding: 10px; font-size: 11px; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -680,103 +570,787 @@
             Back to Home
         </a>
         <h1>Python Programming E-Book</h1>
-                <p class="subtitle">Comprehensive guide covering Python fundamentals, OOP, data structures, file handling, exceptions, advanced features, web development, data science with detailed explanations and code examples</p>
-        
-        <h2>Table of Contents</h2>
+        <p style="font-size: 18px; color: #666; margin-bottom: 30px;"><strong>Complete Guide to Python Programming from Fundamentals to Advanced Concepts</strong></p>
+
         <div class="toc">
             <h3>Table of Contents</h3>
             <ol>
-                <li>Fundamentals</li>
-                <li>Core Concepts</li>
-                <li>Implementation</li>
+                <li>Introduction to Python</li>
+                <li>Python Fundamentals</li>
+                <li>Data Types and Variables</li>
+                <li>Control Flow</li>
+                <li>Functions and Modules</li>
+                <li>Object-Oriented Programming</li>
+                <li>File Handling and I/O</li>
+                <li>Exception Handling</li>
+                <li>Data Structures</li>
+                <li>Advanced Python Features</li>
+                <li>Web Development with Python</li>
+                <li>Data Science with Python</li>
                 <li>Best Practices</li>
-                <li>Advanced Topics</li>
             </ol>
         </div>
-        
-        <h2>1. Fundamentals</h2>
 
-        <div class="question">
-            Q1: What are the fundamental concepts in this subject?
-        </div>
-        <div class="answer">
-            <p>The fundamental concepts form the foundation for understanding this subject. These include core terminology, basic principles, and essential knowledge required for advanced topics.</p>
-            <h3>Key Concepts:</h3>
+        <h2>Chapter 1: Introduction to Python</h2>
+
+        <div class="chapter">
+            <h3>1.1 What is Python?</h3>
+            <p>Python is a high-level, interpreted programming language known for its simplicity and readability. Created by Guido van Rossum in 1991, Python emphasizes code readability with its notable use of significant whitespace.</p>
+            
+            <div class="important">
+                <strong>Key Insight:</strong> Python is versatile - used in web development, data science, AI, automation, and more.
+            </div>
+            
+            <h3>1.2 Why Python?</h3>
+            <p>Python's popularity stems from its simplicity, extensive libraries, and strong community support.</p>
             <ul>
-                <li>Concept 1: Description of first fundamental concept</li>
-                <li>Concept 2: Description of second fundamental concept</li>
-                <li>Concept 3: Description of third fundamental concept</li>
+                <li><strong>Easy to Learn</strong>: Simple syntax similar to English</li>
+                <li><strong>Versatile</strong>: Web, data science, AI, automation</li>
+                <li><strong>Large Ecosystem</strong>: PyPI with 300,000+ packages</li>
+                <li><strong>Cross-Platform</strong>: Runs on Windows, Linux, macOS</li>
+                <li><strong>Strong Community</strong>: Active support and resources</li>
+            </ul>
+            
+            <h3>1.3 Python Applications</h3>
+            <ul>
+                <li><strong>Web Development</strong>: Django, Flask, FastAPI</li>
+                <li><strong>Data Science</strong>: Pandas, NumPy, Matplotlib</li>
+                <li><strong>Machine Learning</strong>: TensorFlow, PyTorch, scikit-learn</li>
+                <li><strong>Automation</strong>: Scripts, web scraping, testing</li>
+                <li><strong>Desktop Apps</strong>: Tkinter, PyQt, Kivy</li>
             </ul>
         </div>
 
-        <h2>2. Core Concepts</h2>
+        <h2>Chapter 2: Python Fundamentals</h2>
 
-        <div class="question">
-            Q2: What are the core principles and patterns?
-        </div>
-        <div class="answer">
-            <p>Understanding the core principles is essential for mastering this subject. This section explores the most important concepts and their applications in real-world scenarios.</p>
-            <h3>Key Principles:</h3>
-            <ul>
-                <li>Principle 1: Description of the first key principle</li>
-                <li>Principle 2: Description of the second key principle</li>
-                <li>Principle 3: Description of the third key principle</li>
-            </ul>
+        <div class="chapter">
+            <h3>2.1 Hello World</h3>
+            <p>The traditional first program demonstrating Python's simplicity.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>print("Hello, World!")</code></pre></div>
+            
+            <h3>2.2 Variables and Data Types</h3>
+            <p>Python is dynamically typed - variables don't need explicit type declaration.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Variables
+name = "John"
+age = 25
+height = 5.9
+is_student = True
+
+# Type checking
+print(type(name))  # <class 'str'>
+print(type(age))   # <class 'int'></code></pre></div>
+            
+            <h3>2.3 Comments</h3>
+            <p>Non-executable text for code documentation.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Single-line comment
+"""
+Multi-line comment
+docstring
+"""</code></pre></div>
+            
+            <h3>2.4 Operators</h3>
+            <p>Arithmetic, comparison, logical, and assignment operators.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Arithmetic
+a = 10 + 5
+b = 10 * 2
+c = 10 % 3
+
+# Comparison
+x = 10 > 5
+y = 10 == 10
+
+# Logical
+result = True and False
+result = True or False
+result = not True</code></pre></div>
         </div>
 
-        <h2>3. Implementation</h2>
+        <h2>Chapter 3: Data Types and Variables</h2>
 
-        <div class="question">
-            Q3: How do you implement these concepts in practice?
+        <div class="chapter">
+            <h3>3.1 Numbers</h3>
+            <p>Integer, float, and complex number types.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Integer
+x = 10
+
+# Float
+y = 3.14
+
+# Complex
+z = 3 + 4j
+
+# Type conversion
+x = int(3.14)  # 3
+y = float(10)   # 10.0</code></pre></div>
+            
+            <h3>3.2 Strings</h3>
+            <p>Immutable sequences of characters.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># String creation
+name = "John"
+message = 'Hello'
+
+# String methods
+text = "Hello World"
+print(text.upper())     # HELLO WORLD
+print(text.lower())     # hello world
+print(text.split())     # ['Hello', 'World']
+print(len(text))        # 11
+
+# String formatting
+name = "John"
+age = 25
+print(f"My name is {name} and I'm {age}")</code></pre></div>
+            
+            <h3>3.3 Lists</h3>
+            <p>Mutable, ordered collections of items.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># List creation
+fruits = ["apple", "banana", "cherry"]
+
+# List operations
+fruits.append("orange")
+fruits.remove("banana")
+fruits[0] = "grape"
+
+# List slicing
+print(fruits[0:2])  # ['grape', 'cherry']
+
+# List comprehension
+squares = [x**2 for x in range(10)]</code></pre></div>
+            
+            <h3>3.4 Tuples</h3>
+            <p>Immutable, ordered collections.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Tuple creation
+coordinates = (10, 20)
+
+# Tuple unpacking
+x, y = coordinates
+
+# Named tuples
+from collections import namedtuple
+Point = namedtuple('Point', ['x', 'y'])
+p = Point(10, 20)</code></pre></div>
+            
+            <h3>3.5 Dictionaries</h3>
+            <p>Key-value pairs for storing data.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Dictionary creation
+person = {
+    "name": "John",
+    "age": 25,
+    "city": "New York"
+}
+
+# Dictionary operations
+person["email"] = "john@example.com"
+del person["city"]
+print(person.get("name"))  # John
+
+# Dictionary comprehension
+squares = {x: x**2 for x in range(10)}</code></pre></div>
+            
+            <h3>3.6 Sets</h3>
+            <p>Unordered collections of unique elements.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Set creation
+numbers = {1, 2, 3, 4, 5}
+
+# Set operations
+numbers.add(6)
+numbers.remove(3)
+
+# Set operations
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+print(set1 | set2)  # Union: {1, 2, 3, 4, 5}
+print(set1 & set2)  # Intersection: {3}</code></pre></div>
         </div>
-        <div class="answer">
-            <p>This chapter provides practical implementation examples with code snippets and real-world scenarios to help you apply the concepts learned.</p>
-            <div class="code-block"><pre><code># Python implementation example
-class DataProcessor:
-    def __init__(self, data):
-        self.data = data
+
+        <h2>Chapter 4: Control Flow</h2>
+
+        <div class="chapter">
+            <h3>4.1 Conditional Statements</h3>
+            <p>Execute different code blocks based on conditions.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># if-elif-else
+age = 25
+if age < 18:
+    print("Minor")
+elif age >= 18 and age < 65:
+    print("Adult")
+else:
+    print("Senior")
+
+# Ternary operator
+status = "Adult" if age >= 18 else "Minor"</code></pre></div>
+            
+            <h3>4.2 Loops</h3>
+            <p>Execute code multiple times.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># for loop
+for i in range(10):
+    print(i)
+
+# while loop
+count = 0
+while count < 10:
+    print(count)
+    count += 1
+
+# Loop with else
+for i in range(5):
+    print(i)
+else:
+    print("Loop completed")</code></pre></div>
+            
+            <h3>4.3 Break, Continue, Pass</h3>
+            <p>Control loop execution.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># break
+for i in range(10):
+    if i == 5:
+        break
+    print(i)
+
+# continue
+for i in range(10):
+    if i % 2 == 0:
+        continue
+    print(i)
+
+# pass (placeholder)
+if True:
+    pass</code></pre></div>
+        </div>
+
+        <h2>Chapter 5: Functions and Modules</h2>
+
+        <div class="chapter">
+            <h3>5.1 Functions</h3>
+            <p>Reusable blocks of code.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Function definition
+def greet(name):
+    return f"Hello, {name}!"
+
+# Function call
+message = greet("John")
+print(message)
+
+# Default parameters
+def greet(name="World"):
+    return f"Hello, {name}!"
+
+# Multiple return values
+def calculate(a, b):
+    return a + b, a - b
+
+sum_result, diff_result = calculate(10, 5)</code></pre></div>
+            
+            <h3>5.2 Lambda Functions</h3>
+            <p>Anonymous functions for short operations.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Lambda function
+square = lambda x: x ** 2
+print(square(5))  # 25
+
+# Lambda with map
+numbers = [1, 2, 3, 4, 5]
+squared = list(map(lambda x: x ** 2, numbers))
+
+# Lambda with filter
+even = list(filter(lambda x: x % 2 == 0, numbers))</code></pre></div>
+            
+            <h3>5.3 Modules and Packages</h3>
+            <p>Organize code into reusable modules.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Import module
+import math
+print(math.sqrt(16))  # 4.0
+
+# Import specific function
+from math import sqrt
+print(sqrt(16))  # 4.0
+
+# Import with alias
+import numpy as np
+import pandas as pd</code></pre></div>
+            
+            <h3>5.4 Decorators</h3>
+            <p>Modify function behavior without changing code.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Simple decorator
+def uppercase_decorator(func):
+    def wrapper():
+        result = func()
+        return result.upper()
+    return wrapper
+
+@uppercase_decorator
+def greet():
+    return "hello"
+
+print(greet())  # HELLO</code></pre></div>
+        </div>
+
+        <h2>Chapter 6: Object-Oriented Programming</h2>
+
+        <div class="chapter">
+            <h3>6.1 Classes and Objects</h3>
+            <p>Blueprints for creating objects with properties and methods.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
     
-    def process(self):
-        return [item * 2 for item in self.data]
+    def greet(self):
+        return f"Hello, I'm {self.name}"
     
-    def filter(self, condition):
-        return [item for item in self.data if condition(item)]
+    def __str__(self):
+        return f"Person(name={self.name}, age={self.age})"
 
-# Usage
-processor = DataProcessor([1, 2, 3, 4, 5])
-result = processor.process()
-filtered = processor.filter(lambda x: x > 5)
-print(f"Processed: {result}")
-print(f"Filtered: {filtered}")</code></pre></div>
+# Create object
+person = Person("John", 25)
+print(person.greet())  # Hello, I'm John</code></pre></div>
+            
+            <h3>6.2 Inheritance</h3>
+            <p>Create new classes based on existing ones.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>class Animal:
+    def __init__(self, name):
+        self.name = name
+    
+    def speak(self):
+        pass
 
-        <h2>4. Best Practices</h2>
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} says Woof!"
 
-        <div class="question">
-            Q4: What are the industry best practices and standards?
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name} says Meow!"</code></pre></div>
+            
+            <h3>6.3 Encapsulation</h3>
+            <p>Hide internal state and require interaction through methods.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>class BankAccount:
+    def __init__(self, balance):
+        self.__balance = balance  # Private attribute
+    
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+    
+    def get_balance(self):
+        return self.__balance</code></pre></div>
+            
+            <h3>6.4 Polymorphism</h3>
+            <p>Same interface, different implementations.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>class Shape:
+    def area(self):
+        pass
+
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+    
+    def area(self):
+        return self.width * self.height
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+    
+    def area(self):
+        return 3.14 * self.radius ** 2</code></pre></div>
         </div>
-        <div class="answer">
-            <p>Learn industry best practices and standards for professional development and production environments. These guidelines ensure code quality, maintainability, and scalability.</p>
-            <h3>Best Practices:</h3>
+
+        <h2>Chapter 7: File Handling and I/O</h2>
+
+        <div class="chapter">
+            <h3>7.1 Reading Files</h3>
+            <p>Read content from files.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Read entire file
+with open('file.txt', 'r') as file:
+    content = file.read()
+    print(content)
+
+# Read line by line
+with open('file.txt', 'r') as file:
+    for line in file:
+        print(line.strip())
+
+# Read all lines
+with open('file.txt', 'r') as file:
+    lines = file.readlines()</code></pre></div>
+            
+            <h3>7.2 Writing Files</h3>
+            <p>Write content to files.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Write to file
+with open('file.txt', 'w') as file:
+    file.write("Hello, World!")
+
+# Append to file
+with open('file.txt', 'a') as file:
+    file.write("\nNew line")
+
+# Write multiple lines
+lines = ["Line 1", "Line 2", "Line 3"]
+with open('file.txt', 'w') as file:
+    file.writelines('\n'.join(lines))</code></pre></div>
+            
+            <h3>7.3 Working with Directories</h3>
+            <p>Manage directories and file paths.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>import os
+import pathlib
+
+# Check if directory exists
+if os.path.exists('directory'):
+    print("Directory exists")
+
+# Create directory
+os.makedirs('new_directory', exist_ok=True)
+
+# List files
+files = os.listdir('directory')
+
+# Using pathlib
+path = pathlib.Path('file.txt')
+print(path.name)  # file.txt
+print(path.suffix)  # .txt</code></pre></div>
+        </div>
+
+        <h2>Chapter 8: Exception Handling</h2>
+
+        <div class="chapter">
+            <h3>8.1 Try-Except Blocks</h3>
+            <p>Handle runtime errors gracefully.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+except Exception as e:
+    print(f"An error occurred: {e}")
+else:
+    print("No errors occurred")
+finally:
+    print("This always executes")</code></pre></div>
+            
+            <h3>8.2 Raising Exceptions</h3>
+            <p>Throw exceptions for error conditions.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>def divide(a, b):
+    if b == 0:
+        raise ValueError("Cannot divide by zero")
+    return a / b
+
+try:
+    result = divide(10, 0)
+except ValueError as e:
+    print(f"Error: {e}")</code></pre></div>
+            
+            <h3>8.3 Custom Exceptions</h3>
+            <p>Create domain-specific exceptions.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>class InsufficientFundsError(Exception):
+    def __init__(self, balance, amount):
+        self.balance = balance
+        self.amount = amount
+        super().__init__(f"Insufficient funds: {balance} < {amount}")
+
+def withdraw(balance, amount):
+    if amount > balance:
+        raise InsufficientFundsError(balance, amount)
+    return balance - amount</code></pre></div>
+        </div>
+
+        <h2>Chapter 9: Data Structures</h2>
+
+        <div class="chapter">
+            <h3>9.1 Lists Advanced</h3>
+            <p>Advanced list operations and methods.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Sorting
+numbers = [3, 1, 4, 1, 5, 9]
+numbers.sort()  # [1, 1, 3, 4, 5, 9]
+numbers.sort(reverse=True)  # [9, 5, 4, 3, 1, 1]
+
+# List methods
+numbers.append(10)
+numbers.extend([11, 12])
+numbers.insert(0, 0)
+numbers.pop()
+numbers.remove(1)
+numbers.count(1)
+numbers.index(3)</code></pre></div>
+            
+            <h3>9.2 Dictionary Advanced</h3>
+            <p>Advanced dictionary operations.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Dictionary methods
+person = {"name": "John", "age": 25}
+person.keys()    # dict_keys(['name', 'age'])
+person.values()  # dict_values(['John', 25])
+person.items()   # dict_items([('name', 'John'), ('age', 25)])
+
+# Default dictionary
+from collections import defaultdict
+counts = defaultdict(int)
+counts['apple'] += 1</code></pre></div>
+            
+            <h3>9.3 Stack and Queue</h3>
+            <p>LIFO and FIFO data structures.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Stack (using list)
+stack = []
+stack.append(1)
+stack.append(2)
+stack.pop()  # 2
+
+# Queue (using collections)
+from collections import deque
+queue = deque()
+queue.append(1)
+queue.append(2)
+queue.popleft()  # 1</code></pre></div>
+        </div>
+
+        <h2>Chapter 10: Advanced Python Features</h2>
+
+        <div class="chapter">
+            <h3>10.1 List Comprehensions</h3>
+            <p>Concise way to create lists.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Basic comprehension
+squares = [x**2 for x in range(10)]
+
+# With condition
+evens = [x for x in range(10) if x % 2 == 0]
+
+# Nested comprehension
+matrix = [[i*j for j in range(3)] for i in range(3)]</code></pre></div>
+            
+            <h3>10.2 Generators</h3>
+            <p>Lazy evaluation for memory efficiency.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Generator function
+def fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
+
+# Generator expression
+squares = (x**2 for x in range(10))
+for square in squares:
+    print(square)</code></pre></div>
+            
+            <h3>10.3 Context Managers</h3>
+            <p>Resource management with with statement.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>from contextlib import contextmanager
+
+@contextmanager
+def file_manager(filename, mode):
+    file = open(filename, mode)
+    try:
+        yield file
+    finally:
+        file.close()
+
+with file_manager('file.txt', 'r') as f:
+    content = f.read()</code></pre></div>
+            
+            <h3>10.4 Iterators</h3>
+            <p>Custom iteration over data.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>class Countdown:
+    def __init__(self, start):
+        self.start = start
+    
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        if self.start <= 0:
+            raise StopIteration
+        self.start -= 1
+        return self.start + 1
+
+for i in Countdown(5):
+    print(i)  # 5, 4, 3, 2, 1</code></pre></div>
+        </div>
+
+        <h2>Chapter 11: Web Development with Python</h2>
+
+        <div class="chapter">
+            <h3>11.1 Flask Basics</h3>
+            <p>Lightweight web framework.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Hello, World!"
+
+@app.route('/api/data')
+def get_data():
+    return jsonify({"name": "John", "age": 25})
+
+if __name__ == '__main__':
+    app.run(debug=True)</code></pre></div>
+            
+            <h3>11.2 Django Basics</h3>
+            <p>Full-featured web framework.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># views.py
+from django.http import JsonResponse
+
+def api_view(request):
+    data = {"message": "Hello from Django"}
+    return JsonResponse(data)
+
+# urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('api/', views.api_view),
+]</code></pre></div>
+            
+            <h3>11.3 REST APIs</h3>
+            <p>Building RESTful services.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Item(BaseModel):
+    name: str
+    price: float
+
+@app.post("/items/")
+async def create_item(item: Item):
+    return {"item": item}</code></pre></div>
+        </div>
+
+        <h2>Chapter 12: Data Science with Python</h2>
+
+        <div class="chapter">
+            <h3>12.1 NumPy Basics</h3>
+            <p>Numerical computing library.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>import numpy as np
+
+# Create arrays
+arr = np.array([1, 2, 3, 4, 5])
+matrix = np.array([[1, 2], [3, 4]])
+
+# Array operations
+print(arr * 2)  # [2, 4, 6, 8, 10]
+print(arr.mean())  # 3.0
+print(arr.sum())  # 15</code></pre></div>
+            
+            <h3>12.2 Pandas Basics</h3>
+            <p>Data manipulation library.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>import pandas as pd
+
+# Create DataFrame
+df = pd.DataFrame({
+    'Name': ['John', 'Jane', 'Bob'],
+    'Age': [25, 30, 35]
+})
+
+# DataFrame operations
+print(df.head())
+print(df.describe())
+print(df['Age'].mean())</code></pre></div>
+            
+            <h3>12.3 Matplotlib Basics</h3>
+            <p>Data visualization library.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>import matplotlib.pyplot as plt
+
+# Line plot
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 6, 8, 10]
+plt.plot(x, y)
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Line Plot')
+plt.show()</code></pre></div>
+        </div>
+
+        <h2>Chapter 13: Best Practices</h2>
+
+        <div class="chapter">
+            <h3>13.1 Code Style</h3>
+            <p>Follow PEP 8 guidelines for Python code.</p>
             <ul>
-                <li>Use clear and descriptive naming conventions</li>
-                <li>Follow established coding standards</li>
-                <li>Write comprehensive documentation</li>
-                <li>Implement proper error handling</li>
-                <li>Optimize for performance and readability</li>
+                <li><strong>Indentation</strong>: Use 4 spaces per indentation level</li>
+                <li><strong>Naming</strong>: snake_case for variables, PascalCase for classes</li>
+                <li><strong>Line length</strong>: Maximum 79 characters</li>
+                <li><strong>Imports</strong>: Group imports at top of file</li>
+                <li><strong>Whitespace</strong>: Use spaces around operators</li>
             </ul>
+            
+            <h3>13.2 Documentation</h3>
+            <p>Document your code with docstrings.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>def calculate_area(length, width):
+    """
+    Calculate the area of a rectangle.
+    
+    Args:
+        length (float): The length of the rectangle
+        width (float): The width of the rectangle
+    
+    Returns:
+        float: The area of the rectangle
+    """
+    return length * width</code></pre></div>
+            
+            <h3>13.3 Error Handling</h3>
+            <p>Handle exceptions gracefully.</p>
+            <ul>
+                <li>Use specific exceptions instead of broad Exception</li>
+                <li>Log errors for debugging</li>
+                <li>Provide meaningful error messages</li>
+                <li>Use finally for cleanup</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use type hints for better code documentation and IDE support.
+            </div>
+            
+            <div class="important">
+                <strong>Important:</strong> Always use virtual environments to manage project dependencies.
+            </div>
+            
+            <div class="example">
+                <strong>Final Advice:</strong> Write clean, readable code. Python emphasizes readability - make your code self-documenting.
+            </div>
         </div>
-        
-        <h2>5. Advanced Topics</h2>
 
-        <div class="question">
-            Q5: What are the advanced techniques and optimizations?
-        </div>
-        <div class="answer">
-            <p>Explore advanced techniques, optimizations, and cutting-edge approaches in this field. These topics are essential for senior-level understanding and expert-level implementation.</p>
-            <div class="code-block"><pre><code># Advanced technique example
-# Add technology-specific advanced code here
-</code></pre></div>
-        </div>
     </div>
 </body>
 </html>

@@ -228,20 +228,16 @@
         }
         
         h2 {
-            color: #1a1a2e;
-            font-size: 32px;
+            color: white;
+            font-size: 28px;
             font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            padding: 18px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            animation: slideIn 0.5s ease both;
         }
         
         @keyframes slideIn {
@@ -249,65 +245,59 @@
             to { opacity: 1; transform: translateX(0); }
         }
         
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
-        }
-        
         h3 {
             color: #1a1a2e;
-            font-size: 26px;
+            font-size: 20px;
             font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            animation: fadeIn 0.4s ease both;
         }
         
         .chapter {
             background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
-            border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
             position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
+            transition: all 0.3s ease;
+            animation: slideUp 0.5s ease both;
         }
         
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
         
         .code-block {
             background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
             color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 10px;
             overflow-x: auto;
             overflow-y: auto;
             font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            margin: 20px 0;
+            line-height: 1.6;
+            border-left: 4px solid #dd0031;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             word-wrap: break-word;
             white-space: pre-wrap;
             max-width: 100%;
-            animation: codeAppear 0.5s ease both;
+            animation: codeAppear 0.4s ease both;
         }
         
         @keyframes codeAppear {
@@ -320,6 +310,23 @@
             white-space: pre-wrap;
             word-wrap: break-word;
             overflow-x: auto;
+        }
+        
+        .code-block code {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .code-block::before {
+            content: 'CODE';
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 9px;
+            color: #888;
+            letter-spacing: 2px;
+            font-weight: 600;
+            z-index: 10;
         }
         
         
@@ -414,29 +421,38 @@
         }
         
         .important {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            padding: 18px 20px;
+            border-radius: 10px;
+            margin: 18px 0;
+            border-left: 4px solid #17a2b8;
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.15);
         }
         
         .important strong {
-            color: #856404;
+            color: #0c5460;
         }
         
         .tip {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            padding: 18px 20px;
+            border-radius: 10px;
+            margin: 18px 0;
+            border-left: 4px solid #ffc107;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.15);
         }
         
         .tip strong {
-            color: #0c5460;
+            color: #856404;
+        }
+        
+        .example {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 18px 20px;
+            border-radius: 10px;
+            margin: 18px 0;
+            border-left: 4px solid #4caf50;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.15);
         }
         
         table {
@@ -495,532 +511,664 @@
         }
         
         @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
-            }
+            body { padding: 12px 8px; }
+            .container { padding: 25px 20px; border-radius: 15px; }
+            h1 { font-size: 28px; padding-bottom: 20px; }
+            .subtitle { font-size: 15px; margin-bottom: 25px; }
+            h2 { font-size: 22px; padding: 15px 20px; margin-bottom: 20px; }
+            h3 { font-size: 18px; padding: 10px 15px; }
+            .chapter { padding: 20px; margin: 15px 0; }
+            .code-block { padding: 18px; font-size: 12px; overflow-x: auto; margin: 15px 0; }
+            .toc { padding: 20px; }
+            .toc h3 { font-size: 20px; }
+            .toc li { font-size: 14px; }
+            table { margin: 15px 0; overflow-x: auto; }
+            th, td { padding: 10px; font-size: 12px; }
+            .important, .tip, .example { padding: 15px; font-size: 13px; }
+            ul, ol { padding-left: 20px; }
+            li { font-size: 13px; }
         }
         
         @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
-            }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
-        }</style>
+            body { padding: 10px 5px; }
+            .container { padding: 20px 15px; }
+            h1 { font-size: 24px; }
+            .subtitle { font-size: 14px; }
+            h2 { font-size: 20px; padding: 12px 15px; }
+            h3 { font-size: 16px; padding: 10px 12px; }
+            .chapter { padding: 15px; margin: 12px 0; }
+            .code-block { padding: 15px; font-size: 11px; overflow-x: auto; margin: 12px 0; }
+            .toc { padding: 15px; }
+            .toc h3 { font-size: 18px; }
+            .toc li { font-size: 12px; }
+            table { margin: 12px 0; overflow-x: auto; }
+            th, td { padding: 8px; font-size: 11px; }
+            .important, .tip, .example { padding: 12px; font-size: 12px; }
+            ul, ol { padding-left: 18px; }
+            li { font-size: 12px; }
+        }
+        
+        @media (max-width: 360px) {
+            body { padding: 8px 4px; }
+            .container { padding: 15px 12px; }
+            h1 { font-size: 22px; }
+            h2 { font-size: 18px; padding: 10px 12px; }
+            h3 { font-size: 15px; padding: 8px 10px; }
+            .chapter { padding: 12px; margin: 10px 0; }
+            .code-block { padding: 12px; font-size: 10px; overflow-x: auto; margin: 10px 0; }
+            .toc { padding: 12px; }
+            .toc h3 { font-size: 16px; }
+            th, td { padding: 6px; font-size: 10px; }
+            .important, .tip, .example { padding: 10px; font-size: 11px; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-button"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>Back to Home</a>
+        <a href="../index.html" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Home
+        </a>
         <h1>React Programming E-Book</h1>
-        <p class="subtitle">Complete Guide to React Development from Fundamentals to Advanced Concepts</p>
+        <p style="font-size: 18px; color: #666; margin-bottom: 30px;"><strong>Complete Guide to React Development from Fundamentals to Advanced Concepts</strong></p>
 
         <div class="toc">
             <h3>Table of Contents</h3>
             <ol>
                 <li>Introduction to React</li>
                 <li>React Fundamentals</li>
-                <li>Components</li>
-                <li>JSX</li>
-                <li>Props and State</li>
-                <li>Hooks</li>
-                <li>Event Handling</li>
+                <li>Components and Props</li>
+                <li>State and Lifecycle</li>
+                <li>Handling Events</li>
+                <li>Conditional Rendering</li>
+                <li>Lists and Keys</li>
                 <li>Forms</li>
-                <li>Routing</li>
-                <li>State Management</li>
+                <li>Hooks</li>
                 <li>Context API</li>
-                <li>Performance Optimization</li>
-                <li>Testing</li>
+                <li>React Router</li>
+                <li>State Management</li>
                 <li>Best Practices</li>
             </ol>
         </div>
 
         <h2>Chapter 1: Introduction to React</h2>
+
         <div class="chapter">
             <h3>1.1 What is React?</h3>
-            <p>React is a JavaScript library for building user interfaces, maintained by Meta (Facebook) and a community of developers. It allows developers to create large web applications that can update and render efficiently in response to data changes.</p>
-            <h3>1.2 Key Features</h3>
+            <p>React is a JavaScript library for building user interfaces, developed by Facebook. It allows developers to create reusable UI components and efficiently update the DOM using a virtual DOM.</p>
+            
+            <div class="important">
+                <strong>Key Insight:</strong> React uses a virtual DOM to minimize direct DOM manipulation, improving performance.
+            </div>
+            
+            <h3>1.2 Why React?</h3>
+            <p>React's popularity comes from its component-based architecture and efficient rendering.</p>
             <ul>
                 <li><strong>Component-Based</strong>: Build encapsulated components that manage their own state</li>
                 <li><strong>Declarative</strong>: Design simple views for each state</li>
-                <li><strong>Virtual DOM</strong>: Efficient updates using a virtual DOM</li>
-                <li><strong>One-Way Data Flow</strong>: Data flows down from parent to child</li>
-                <li><strong>Ecosystem</strong>: Rich ecosystem of tools and libraries</li>
+                <li><strong>Learn Once, Write Anywhere</strong>: Use React on web, mobile, and desktop</li>
+                <li><strong>Large Ecosystem</strong>: Extensive library and tool support</li>
+                <li><strong>Strong Community</strong>: Active development and support</li>
+            </ul>
+            
+            <h3>1.3 React Applications</h3>
+            <ul>
+                <li><strong>Single Page Applications</strong>: Facebook, Instagram, Netflix</li>
+                <li><strong>Mobile Apps</strong>: React Native for iOS and Android</li>
+                <li><strong>Desktop Apps</strong>: Electron with React</li>
+                <li><strong>Static Sites</strong>: Gatsby, Next.js for SEO</li>
             </ul>
         </div>
 
         <h2>Chapter 2: React Fundamentals</h2>
+
         <div class="chapter">
             <h3>2.1 Setting Up React</h3>
-            <div class="code-block" data-language="code"><pre><code># Create new React app
+            <p>Quick setup using Create React App or Vite.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Using Create React App
 npx create-react-app my-app
+cd my-app
+npm start
 
 # Using Vite (recommended)
 npm create vite@latest my-app -- --template react
 cd my-app
 npm install
 npm run dev</code></pre></div>
-            <h3>2.2 Project Structure</h3>
-            <ul>
-                <li><strong>src/</strong>: Source code</li>
-                <li><strong>public/</strong>: Static assets</li>
-                <li><strong>package.json</strong>: Dependencies and scripts</li>
-                <li><strong>index.html</strong>: Entry HTML file</li>
-            </ul>
-        </div>
-
-        <h2>Chapter 3: Components</h2>
-        <div class="chapter">
-            <h3>3.1 Functional Components</h3>
-            <div class="code-block" data-language="code"><pre><code>import React from 'react';
-
-function Welcome(props) {
-  return <h1>Hello, {props.name}!</h1>;
-}
-
-// Arrow function syntax
-const Welcome = ({ name }) => {
-  return <h1>Hello, {name}!</h1>;
-};</code></pre></div>
-            <h3>3.2 Component Lifecycle</h3>
-            <ul>
-                <li><strong>Mounting</strong>: Component is created and inserted into DOM</li>
-                <li><strong>Updating</strong>: Component receives new props or state changes</li>
-                <li><strong>Unmounting</strong>: Component is removed from DOM</li>
-            </ul>
-        </div>
-
-        <h2>Chapter 4: JSX</h2>
-        <div class="chapter">
-            <h3>4.1 JSX Basics</h3>
-            <div class="code-block" data-language="code"><pre><code>const element = <h1>Hello, world!</h1>;
+            
+            <h3>2.2 JSX</h3>
+            <p>JavaScript XML syntax for writing React components.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// JSX example
+const element = <h1>Hello, World!</h1>;
 
 // Embedding expressions
-const name = 'John';
+const name = "John";
 const element = <h1>Hello, {name}</h1>;
 
-// Attributes
-const element = <img src={user.avatarUrl} alt={user.name} />;</code></pre></div>
-            <h3>4.2 JSX Rules</h3>
-            <ul>
-                <li>Always return a single parent element</li>
-                <li>Use className instead of class</li>
-                <li>CamelCase for attributes (onClick, not onclick)</li>
-                <li>Self-closing tags must have a slash</li>
-            </ul>
+// JSX with attributes
+const element = <img src={user.avatar} alt={user.name} />;</code></pre></div>
+            
+            <h3>2.3 Rendering Elements</h3>
+            <p>Render React elements to the DOM.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>const root = ReactDOM.createRoot(document.getElementById('root'));
+const element = <h1>Hello, World!</h1>;
+root.render(element);</code></pre></div>
         </div>
 
-        <h2>Chapter 5: Props and State</h2>
-        <div class="chapter">
-            <h3>5.1 Props</h3>
-            <div class="code-block" data-language="code"><pre><code>// Passing props
-<UserCard name="John" age={30} isActive={true} />
+        <h2>Chapter 3: Components and Props</h2>
 
-// Accessing props
-function UserCard({ name, age, isActive }) {
-  return (
-    <div>
-      <h2>{name}</h2>
-      <p>Age: {age}</p>
-      <p>Status: {isActive ? 'Active' : 'Inactive'}</p>
-    </div>
-  );
+        <div class="chapter">
+            <h3>3.1 Function Components</h3>
+            <p>Modern React uses function components with hooks.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>function Welcome(props) {
+    return <h1>Hello, {props.name}</h1>;
+}
+
+// Arrow function
+const Welcome = ({ name }) => {
+    return <h1>Hello, {name}</h1>;
+};</code></pre></div>
+            
+            <h3>3.2 Class Components</h3>
+            <p>Traditional class-based components (legacy).</p>
+            
+            <div class="code-block" data-language="code"><pre><code>class Welcome extends React.Component {
+    render() {
+        return <h1>Hello, {this.props.name}</h1>;
+    }
 }</code></pre></div>
-            <h3>5.2 State with useState</h3>
+            
+            <h3>3.3 Props</h3>
+            <p>Pass data to components via props.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Passing props
+<Welcome name="John" age={25} />
+
+// Receiving props
+function Welcome({ name, age }) {
+    return (
+        <div>
+            <h1>Hello, {name}</h1>
+            <p>Age: {age}</p>
+        </div>
+    );
+}
+
+// Default props
+Welcome.defaultProps = {
+    name: "Guest",
+    age: 0
+};</code></pre></div>
+        </div>
+
+        <h2>Chapter 4: State and Lifecycle</h2>
+
+        <div class="chapter">
+            <h3>4.1 useState Hook</h3>
+            <p>Manage state in function components.</p>
+            
             <div class="code-block" data-language="code"><pre><code>import { useState } from 'react';
 
 function Counter() {
-  const [count, setCount] = useState(0);
-  
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>
-        Increment
-      </button>
-    </div>
-  );
+    const [count, setCount] = useState(0);
+    
+    return (
+        <div>
+            <p>Count: {count}</p>
+            <button onClick={() => setCount(count + 1)}>
+                Increment
+            </button>
+        </div>
+    );
+}</code></pre></div>
+            
+            <h3>4.2 useEffect Hook</h3>
+            <p>Handle side effects in function components.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>import { useState, useEffect } from 'react';
+
+function UserProfile({ userId }) {
+    const [user, setUser] = useState(null);
+    
+    useEffect(() => {
+        fetchUser(userId).then(data => setUser(data));
+    }, [userId]);
+    
+    return user ? <div>{user.name}</div> : <div>Loading...</div>;
+}</code></pre></div>
+            
+            <h3>4.3 Class Component State</h3>
+            <p>State management in class components.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>class Counter extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { count: 0 };
+    }
+    
+    increment = () => {
+        this.setState({ count: this.state.count + 1 });
+    }
+    
+    render() {
+        return (
+            <div>
+                <p>Count: {this.state.count}</p>
+                <button onClick={this.increment}>Increment</button>
+            </div>
+        );
+    }
 }</code></pre></div>
         </div>
 
-        <h2>Chapter 6: Hooks</h2>
+        <h2>Chapter 5: Handling Events</h2>
+
         <div class="chapter">
-            <h3>6.1 Common Hooks</h3>
-            <div class="code-block" data-language="code"><pre><code>// useState
-const [count, setCount] = useState(0);
-
-// useEffect
-useEffect(() => {
-  document.title = `Count: ${count}`;
-  return () => {
-    // Cleanup
-  };
-}, [count]);
-
-// useContext
-const value = useContext(MyContext);
-
-// useReducer
-const [state, dispatch] = useReducer(reducer, initialState);
-
-// useMemo
-const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
-
-// useCallback
-const memoizedCallback = useCallback(() => {
-  doSomething(a, b);
-}, [a, b]);
-
-// useRef
-const inputRef = useRef(null);
-
-// custom hook
-function useWindowSize() {
-  const [size, setSize] = useState({ width: 0, height: 0 });
-  // Implementation
-  return size;
-}</code></pre></div>
-        </div>
-
-        <h2>Chapter 7: Event Handling</h2>
-        <div class="chapter">
-            <h3>7.1 Handling Events</h3>
+            <h3>5.1 Event Handling</h3>
+            <p>Handle user interactions with events.</p>
+            
             <div class="code-block" data-language="code"><pre><code>function Button() {
-  const handleClick = (event) => {
-    event.preventDefault();
-    console.log('Button clicked');
-  };
-  
-  return (
-    <button onClick={handleClick}>
-      Click me
-    </button>
-  );
+    const handleClick = (e) => {
+        e.preventDefault();
+        console.log('Button clicked');
+    };
+    
+    return <button onClick={handleClick}>Click me</button>;
 }</code></pre></div>
-            <h3>7.2 Event Object</h3>
+            
+            <h3>5.2 Event Objects</h3>
+            <p>Access event properties and methods.</p>
+            
             <div class="code-block" data-language="code"><pre><code>function Form() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    console.log(Object.fromEntries(formData));
-  };
-  
-  return <form onSubmit={handleSubmit}>...</form>;
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+    };
+    
+    return (
+        <form onSubmit={handleSubmit}>
+            <input type="text" />
+            <button type="submit">Submit</button>
+        </form>
+    );
 }</code></pre></div>
+        </div>
+
+        <h2>Chapter 6: Conditional Rendering</h2>
+
+        <div class="chapter">
+            <h3>6.1 If-Else Rendering</h3>
+            <p>Conditionally render components.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>function Greeting({ isLoggedIn }) {
+    if (isLoggedIn) {
+        return <h1>Welcome back!</h1>;
+    }
+    return <h1>Please sign in</h1>;
+}</code></pre></div>
+            
+            <h3>6.2 Ternary Operator</h3>
+            <p>Inline conditional rendering.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>function Greeting({ isLoggedIn }) {
+    return (
+        <div>
+            {isLoggedIn ? <h1>Welcome back!</h1> : <h1>Please sign in</h1>}
+        </div>
+    );
+}</code></pre></div>
+            
+            <h3>6.3 Logical AND</h3>
+            <p>Render only if condition is true.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>function WarningBanner({ warn }) {
+    if (!warn) return null;
+    
+    return (
+        <div className="warning">
+            Warning!
+        </div>
+    );
+}
+
+// Shorter version
+function WarningBanner({ warn }) {
+    return (
+        warn && <div className="warning">Warning!</div>
+    );
+}</code></pre></div>
+        </div>
+
+        <h2>Chapter 7: Lists and Keys</h2>
+
+        <div class="chapter">
+            <h3>7.1 Rendering Lists</h3>
+            <p>Render arrays of data.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>function NumberList({ numbers }) {
+    const listItems = numbers.map((number) =>
+        <li key={number.toString()}>
+            {number}
+        </li>
+    );
+    
+    return <ul>{listItems}</ul>;
+}</code></pre></div>
+            
+            <h3>7.2 Keys</h3>
+            <p>Help React identify which items have changed.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Using index as key (not recommended for dynamic lists)
+{items.map((item, index) => (
+    <li key={index}>{item.name}</li>
+))}
+
+// Using unique ID (recommended)
+{items.map((item) => (
+    <li key={item.id}>{item.name}</li>
+))}</code></pre></div>
         </div>
 
         <h2>Chapter 8: Forms</h2>
+
         <div class="chapter">
             <h3>8.1 Controlled Components</h3>
-            <div class="code-block" data-language="code"><pre><code>function Form() {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: ''
-  });
-  
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-  };
-  
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-      />
-      <input
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <button type="submit">Submit</button>
-    </form>
-  );
+            <p>Form elements controlled by React state.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>function NameForm() {
+    const [value, setValue] = useState('');
+    
+    const handleChange = (e) => {
+        setValue(e.target.value);
+    };
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        alert('Submitted: ' + value);
+    };
+    
+    return (
+        <form onSubmit={handleSubmit}>
+            <label>
+                Name:
+                <input type="text" value={value} onChange={handleChange} />
+            </label>
+            <button type="submit">Submit</button>
+        </form>
+    );
+}</code></pre></div>
+            
+            <h3>8.2 Multiple Inputs</h3>
+            <p>Handle multiple form fields.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>function ReservationForm() {
+    const [formData, setFormData] = useState({
+        isGoing: true,
+        numberOfGuests: 2
+    });
+    
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+    
+    return (
+        <form>
+            <label>
+                Is going:
+                <input
+                    name="isGoing"
+                    type="checkbox"
+                    checked={formData.isGoing}
+                    onChange={handleChange}
+                />
+            </label>
+            <label>
+                Number of guests:
+                <input
+                    name="numberOfGuests"
+                    type="number"
+                    value={formData.numberOfGuests}
+                    onChange={handleChange}
+                />
+            </label>
+        </form>
+    );
 }</code></pre></div>
         </div>
 
-        <h2>Chapter 9: Routing</h2>
+        <h2>Chapter 9: Hooks</h2>
+
         <div class="chapter">
-            <h3>9.1 React Router</h3>
+            <h3>9.1 Custom Hooks</h3>
+            <p>Create reusable stateful logic.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>function useWindowSize() {
+    const [size, setSize] = useState([window.innerWidth, window.innerHeight]);
+    
+    useEffect(() => {
+        const handleResize = () => {
+            setSize([window.innerWidth, window.innerHeight]);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    
+    return size;
+}</code></pre></div>
+            
+            <h3>9.2 useContext</h3>
+            <p>Access context without nesting.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>const ThemeContext = createContext('light');
+
+function App() {
+    return (
+        <ThemeContext.Provider value="dark">
+            <Toolbar />
+        </ThemeContext.Provider>
+    );
+}
+
+function Toolbar() {
+    const theme = useContext(ThemeContext);
+    return <div>Current theme: {theme}</div>;
+}</code></pre></div>
+            
+            <h3>9.3 useReducer</h3>
+            <p>Manage complex state logic.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>const initialState = { count: 0 };
+
+function reducer(state, action) {
+    switch (action.type) {
+        case 'increment':
+            return { count: state.count + 1 };
+        case 'decrement':
+            return { count: state.count - 1 };
+        default:
+            throw new Error();
+    }
+}
+
+function Counter() {
+    const [state, dispatch] = useReducer(reducer, initialState);
+    return (
+        <div>
+            Count: {state.count}
+            <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+            <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+        </div>
+    );
+}</code></pre></div>
+        </div>
+
+        <h2>Chapter 10: Context API</h2>
+
+        <div class="chapter">
+            <h3>10.1 Creating Context</h3>
+            <p>Share data across component tree.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>const UserContext = createContext();
+
+function App() {
+    const user = { name: 'John', age: 25 };
+    
+    return (
+        <UserContext.Provider value={user}>
+            <Profile />
+        </UserContext.Provider>
+    );
+}</code></pre></div>
+            
+            <h3>10.2 Consuming Context</h3>
+            <p>Access context in components.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>function Profile() {
+    const user = useContext(UserContext);
+    return <div>Name: {user.name}, Age: {user.age}</div>;
+}</code></pre></div>
+        </div>
+
+        <h2>Chapter 11: React Router</h2>
+
+        <div class="chapter">
+            <h3>11.1 Basic Routing</h3>
+            <p>Client-side routing with React Router.</p>
+            
             <div class="code-block" data-language="code"><pre><code>import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/user/:id" element={<User />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <nav>
+                <Link to="/">Home</Link>
+                <Link to="/about">About</Link>
+            </nav>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+            </Routes>
+        </BrowserRouter>
+    );
+}</code></pre></div>
+            
+            <h3>11.2 Dynamic Routes</h3>
+            <p>Route parameters and nested routes.</p>
+            
+            <div class="code-block" data-language="code"><pre><code><Routes>
+    <Route path="/users/:id" element={<UserDetail />} />
+</Routes>
+
+function UserDetail() {
+    const { id } = useParams();
+    return <div>User ID: {id}</div>;
 }</code></pre></div>
         </div>
 
-        <h2>Chapter 10: State Management</h2>
-        <div class="chapter">
-            <h3>10.1 Context API</h3>
-            <div class="code-block" data-language="code"><pre><code>// Create context
-const UserContext = createContext();
+        <h2>Chapter 12: State Management</h2>
 
-// Provider
-function App() {
-  const [user, setUser] = useState(null);
-  
-  return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <ChildComponent />
-    </UserContext.Provider>
-  );
+        <div class="chapter">
+            <h3>12.1 Redux Basics</h3>
+            <p>Global state management with Redux.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>import { createStore } from 'redux';
+
+// Action
+const increment = () => ({ type: 'INCREMENT' });
+
+// Reducer
+function counter(state = 0, action) {
+    switch (action.type) {
+        case 'INCREMENT':
+            return state + 1;
+        default:
+            return state;
+    }
 }
 
-// Consumer
-function ChildComponent() {
-  const { user, setUser } = useContext(UserContext);
-  return <div>{user?.name}</div>;
-}</code></pre></div>
-            <h3>10.2 Redux Toolkit</h3>
-            <div class="code-block" data-language="code"><pre><code>// Slice
-import { createSlice } from '@reduxjs/toolkit';
+// Store
+const store = createStore(counter);
+store.dispatch(increment());</code></pre></div>
+            
+            <h3>12.2 Redux Toolkit</h3>
+            <p>Modern Redux with simplified API.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>import { createSlice, configureStore } from '@reduxjs/toolkit';
 
 const counterSlice = createSlice({
-  name: 'counter',
-  initialState: { value: 0 },
-  reducers: {
-    increment: (state) => { state.value += 1; },
-    decrement: (state) => { state.value -= 1; }
-  }
+    name: 'counter',
+    initialState: { value: 0 },
+    reducers: {
+        increment: (state) => {
+            state.value += 1;
+        }
+    }
 });
 
-export const { increment, decrement } = counterSlice.actions;
-export default counterSlice.reducer;</code></pre></div>
+const store = configureStore({
+    reducer: {
+        counter: counterSlice.reducer
+    }
+});</code></pre></div>
         </div>
 
-        <h2>Chapter 11: Performance Optimization</h2>
+        <h2>Chapter 13: Best Practices</h2>
+
         <div class="chapter">
-            <h3>11.1 Memoization</h3>
-            <div class="code-block" data-language="code"><pre><code>// React.memo
+            <h3>13.1 Component Design</h3>
+            <p>Design reusable and maintainable components.</p>
+            <ul>
+                <li><strong>Single Responsibility</strong>: Each component does one thing well</li>
+                <li><strong>Composition</strong>: Build complex UIs from simple components</li>
+                <li><strong>Props vs State</strong>: Use props for data, state for UI state</li>
+                <li><strong>Pure Components</strong>: Avoid side effects in render</li>
+            </ul>
+            
+            <h3>13.2 Performance Optimization</h3>
+            <p>Optimize React application performance.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// React.memo for memoization
 const ExpensiveComponent = React.memo(function ExpensiveComponent({ data }) {
-  return <div>{data}</div>;
+    return <div>{data}</div>;
 });
 
-// useMemo
-const expensiveValue = useMemo(() => {
-  return computeExpensiveValue(a, b);
-}, [a, b]);
+// useMemo for expensive calculations
+const expensiveValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
 
-// useCallback
+// useCallback for function memoization
 const handleClick = useCallback(() => {
-  doSomething(a, b);
+    doSomething(a, b);
 }, [a, b]);</code></pre></div>
-            <h3>11.2 Code Splitting</h3>
-            <div class="code-block" data-language="code"><pre><code>import { lazy, Suspense } from 'react';
-
-const LazyComponent = lazy(() => import('./LazyComponent'));
-
-function App() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <LazyComponent />
-    </Suspense>
-  );
-}</code></pre></div>
-        </div>
-
-        <h2>Chapter 12: Best Practices</h2>
-        <div class="chapter">
-            <h3>12.1 Component Design</h3>
+            
+            <h3>13.3 Code Organization</h3>
+            <p>Organize React projects effectively.</p>
             <ul>
+                <li>Group components by feature or route</li>
+                <li>Separate concerns (components, hooks, utils)</li>
+                <li>Use absolute imports with path aliases</li>
                 <li>Keep components small and focused</li>
-                <li>Use functional components with hooks</li>
-                <li>Avoid prop drilling with context</li>
-                <li>Use composition over inheritance</li>
-                <li>Implement proper error boundaries</li>
             </ul>
-            <h3>12.2 Performance</h3>
-            <ul>
-                <li>Use React.memo for expensive components</li>
-                <li>Implement code splitting</li>
-                <li>Use virtual scrolling for large lists</li>
-                <li>Avoid unnecessary re-renders</li>
-                <li>Optimize images and assets</li>
-            </ul>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use TypeScript for better type safety and developer experience.
+            </div>
+            
             <div class="important">
-                <strong>Important:</strong> Always use the dependency array in useEffect to prevent infinite loops and unnecessary re-renders.
+                <strong>Important:</strong> Always handle loading and error states in your components.
+            </div>
+            
+            <div class="example">
+                <strong>Final Advice:</strong> Think in components. Break down complex UIs into small, reusable pieces.
             </div>
         </div>
 
