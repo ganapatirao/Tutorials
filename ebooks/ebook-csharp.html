@@ -230,20 +230,16 @@
         }
         
         h2 {
-            color: #1a1a2e;
-            font-size: 32px;
+            color: white;
+            font-size: 28px;
             font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            padding: 18px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            animation: slideIn 0.5s ease both;
         }
         
         @keyframes slideIn {
@@ -251,65 +247,59 @@
             to { opacity: 1; transform: translateX(0); }
         }
         
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
-        }
-        
         h3 {
             color: #1a1a2e;
-            font-size: 26px;
+            font-size: 20px;
             font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            animation: fadeIn 0.4s ease both;
         }
         
         .chapter {
             background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
-            border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
             position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
+            transition: all 0.3s ease;
+            animation: slideUp 0.5s ease both;
         }
         
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
         
         .code-block {
             background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
             color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 10px;
             overflow-x: auto;
             overflow-y: auto;
             font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            margin: 20px 0;
+            line-height: 1.6;
+            border-left: 4px solid #dd0031;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             word-wrap: break-word;
             white-space: pre-wrap;
             max-width: 100%;
-            animation: codeAppear 0.5s ease both;
+            animation: codeAppear 0.4s ease both;
         }
         
         @keyframes codeAppear {
@@ -332,11 +322,11 @@
         .code-block::before {
             content: 'CODE';
             position: absolute;
-            top: 18px;
-            right: 25px;
-            font-size: 11px;
+            top: 10px;
+            right: 12px;
+            font-size: 9px;
             color: #888;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             font-weight: 600;
             z-index: 10;
         }
@@ -431,34 +421,34 @@
         
         .tip {
             background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 6px solid #ffc107;
-            margin: 25px 0;
+            padding: 18px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ffc107;
+            margin: 18px 0;
             font-weight: 500;
-            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.2);
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.15);
             word-wrap: break-word;
         }
         
         .important {
             background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 6px solid #17a2b8;
-            margin: 25px 0;
+            padding: 18px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #17a2b8;
+            margin: 18px 0;
             font-weight: 500;
-            box-shadow: 0 6px 20px rgba(23, 162, 184, 0.2);
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.15);
             word-wrap: break-word;
         }
         
         .example {
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 6px solid #4caf50;
-            margin: 25px 0;
+            padding: 18px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4caf50;
+            margin: 18px 0;
             font-weight: 500;
-            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.2);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.15);
             word-wrap: break-word;
         }
         
@@ -478,55 +468,58 @@
         }
         
         @media (max-width: 768px) {
-            body { padding: 15px 10px; }
-            .container { padding: 35px 25px; border-radius: 20px; }
-            h1 { font-size: 36px; padding-bottom: 25px; }
-            .subtitle { font-size: 16px; margin-bottom: 30px; }
-            h2 { font-size: 24px; padding: 18px 20px; margin-bottom: 25px; }
-            h3 { font-size: 20px; padding-left: 15px; }
-            .chapter { padding: 25px; }
-            .code-block { padding: 25px; font-size: 13px; overflow-x: auto; }
-            .toc { padding: 25px; }
-            .toc h3 { font-size: 22px; }
-            .toc li { font-size: 14px; }
-            table { margin: 20px 0; overflow-x: auto; }
-            th, td { padding: 12px; font-size: 13px; }
-            td { max-width: 200px; }
-            .tip, .important, .example { padding: 20px; }
-            ul, ol { padding-left: 25px; }
-            li { font-size: 14px; }
-        }
-        
-        @media (max-width: 480px) {
-            body { padding: 10px 5px; }
-            .container { padding: 30px 20px; }
-            h1 { font-size: 30px; }
-            .subtitle { font-size: 15px; }
-            h2 { font-size: 22px; padding: 15px; }
-            h3 { font-size: 18px; }
-            .chapter { padding: 20px; }
-            .code-block { padding: 20px; font-size: 12px; overflow-x: auto; }
+            body { padding: 12px 8px; }
+            .container { padding: 25px 20px; border-radius: 15px; }
+            h1 { font-size: 28px; padding-bottom: 20px; }
+            .subtitle { font-size: 15px; margin-bottom: 25px; }
+            h2 { font-size: 22px; padding: 15px 20px; margin-bottom: 20px; }
+            h3 { font-size: 18px; padding: 10px 15px; }
+            .chapter { padding: 20px; margin: 15px 0; }
+            .code-block { padding: 18px; font-size: 12px; overflow-x: auto; margin: 15px 0; }
             .toc { padding: 20px; }
             .toc h3 { font-size: 20px; }
-            .toc li { font-size: 13px; }
+            .toc li { font-size: 14px; }
             table { margin: 15px 0; overflow-x: auto; }
             th, td { padding: 10px; font-size: 12px; }
-            td { max-width: 150px; }
-            .tip, .important, .example { padding: 18px; font-size: 13px; }
+            td { max-width: 180px; }
+            .tip, .important, .example { padding: 15px; font-size: 13px; }
             ul, ol { padding-left: 20px; }
             li { font-size: 13px; }
         }
         
-        @media (max-width: 360px) {
-            h1 { font-size: 26px; }
-            h2 { font-size: 20px; }
-            h3 { font-size: 17px; }
-            .chapter { padding: 18px; }
-            .code-block { padding: 18px; font-size: 11px; overflow-x: auto; }
-            .toc { padding: 18px; }
+        @media (max-width: 480px) {
+            body { padding: 10px 5px; }
+            .container { padding: 20px 15px; }
+            h1 { font-size: 24px; }
+            .subtitle { font-size: 14px; }
+            h2 { font-size: 20px; padding: 12px 15px; }
+            h3 { font-size: 16px; padding: 10px 12px; }
+            .chapter { padding: 15px; margin: 12px 0; }
+            .code-block { padding: 15px; font-size: 11px; overflow-x: auto; margin: 12px 0; }
+            .toc { padding: 15px; }
             .toc h3 { font-size: 18px; }
+            .toc li { font-size: 12px; }
+            table { margin: 12px 0; overflow-x: auto; }
             th, td { padding: 8px; font-size: 11px; }
-            td { max-width: 120px; }
+            td { max-width: 140px; }
+            .tip, .important, .example { padding: 12px; font-size: 12px; }
+            ul, ol { padding-left: 18px; }
+            li { font-size: 12px; }
+        }
+        
+        @media (max-width: 360px) {
+            body { padding: 8px 4px; }
+            .container { padding: 15px 12px; }
+            h1 { font-size: 22px; }
+            h2 { font-size: 18px; padding: 10px 12px; }
+            h3 { font-size: 15px; padding: 8px 10px; }
+            .chapter { padding: 12px; margin: 10px 0; }
+            .code-block { padding: 12px; font-size: 10px; overflow-x: auto; margin: 10px 0; }
+            .toc { padding: 12px; }
+            .toc h3 { font-size: 16px; }
+            th, td { padding: 6px; font-size: 10px; }
+            td { max-width: 110px; }
+            .tip, .important, .example { padding: 10px; font-size: 11px; }
         }
     </style>
 </head>
@@ -557,6 +550,8 @@
                 <li>Async/Await</li>
                 <li>Memory Management</li>
                 <li>Best Practices</li>
+                <li>File I/O and Serialization</li>
+                <li>Advanced Topics</li>
             </ol>
         </div>
 
@@ -564,36 +559,50 @@
 
         <div class="chapter">
             <h3>1.1 What is C#?</h3>
-            <p>C# (pronounced "C-sharp") is a modern, object-oriented programming language developed by Microsoft as part of the .NET initiative. It was designed for building a wide range of applications that run on the .NET platform.</p>
+            <p>C# ("C-sharp") is a modern, object-oriented language by Microsoft for .NET development. It combines C++ power with VB simplicity, featuring strong typing, automatic memory management, and cross-platform support via .NET Core.</p>
+            
+            <div class="important">
+                <strong>Key Insight:</strong> C# is simple, modern, and general-purpose - the primary language for .NET development used by millions worldwide.
+            </div>
             
             <h3>1.2 History of C#</h3>
-            <p>C# was developed by Microsoft and led by Anders Hejlsberg. It was first released in 2000 as part of Microsoft's .NET Framework. Since then, it has evolved through multiple versions, with C# 12 being the latest major release.</p>
+            <p>Created by Anders Hejlsberg (Turbo Pascal, Delphi), C# launched in 2000 with .NET Framework. Now at C# 12, it evolved from Windows-only to cross-platform with .NET Core/.NET 5+.</p>
+            
+            <div class="tip">
+                <strong>Evolution:</strong> C# 1.0 (2002) → C# 12.0 (2023)
+            </div>
             
             <h3>1.3 Key Features</h3>
             <ul>
-                <li><strong>Object-Oriented</strong>: Supports encapsulation, inheritance, and polymorphism</li>
-                <li><strong>Type-Safe</strong>: Strongly typed language with compile-time type checking</li>
-                <li><strong>Component-Oriented</strong>: Supports properties, methods, events, and attributes</li>
+                <li><strong>Object-Oriented</strong>: Encapsulation, inheritance, polymorphism</li>
+                <li><strong>Type-Safe</strong>: Compile-time type checking</li>
+                <li><strong>Component-Oriented</strong>: Properties, methods, events, attributes</li>
                 <li><strong>Garbage Collection</strong>: Automatic memory management</li>
-                <li><strong>Modern Language Features</strong>: LINQ, async/await, pattern matching, records</li>
-                <li><strong>Cross-Platform</strong>: Runs on Windows, Linux, and macOS via .NET Core/.NET 5+</li>
+                <li><strong>Modern Features</strong>: LINQ, async/await, pattern matching, records</li>
+                <li><strong>Cross-Platform</strong>: Windows, Linux, macOS via .NET 5+</li>
+                <li><strong>Rich Library</strong>: Extensive Base Class Library (BCL)</li>
             </ul>
             
             <h3>1.4 C# Applications</h3>
             <ul>
-                <li>Desktop applications (Windows Forms, WPF, MAUI)</li>
-                <li>Web applications (ASP.NET, Blazor)</li>
-                <li>Mobile applications (Xamarin, MAUI)</li>
-                <li>Game development (Unity)</li>
-                <li>Cloud services (Azure Functions)</li>
-                <li>Microservices</li>
+                <li><strong>Desktop</strong>: Windows Forms, WPF, MAUI</li>
+                <li><strong>Web</strong>: ASP.NET Core, Blazor</li>
+                <li><strong>Mobile</strong>: Xamarin, MAUI</li>
+                <li><strong>Games</strong>: Unity engine</li>
+                <li><strong>Cloud</strong>: Azure Functions, microservices</li>
+                <li><strong>ML/IoT</strong>: ML.NET, .NET IoT</li>
             </ul>
+            
+            <div class="example">
+                <strong>Examples:</strong> Visual Studio, Microsoft Teams, Stack Overflow
+            </div>
         </div>
 
         <h2>Chapter 2: C# Fundamentals</h2>
 
         <div class="chapter">
             <h3>2.1 Hello World Program</h3>
+            <p>The traditional first program demonstrating C# structure: namespaces, classes, methods, and console output.</p>
             
             <div class="code-block" data-language="code"><pre><code>using System;
 
@@ -608,24 +617,21 @@ class Program
             <div class="example">
                 <strong>Explanation:</strong>
                 <ul>
-                    <li><code>using System;</code> - Imports the System namespace</li>
-                    <li><code>class Program</code> - Defines a class named Program</li>
-                    <li><code>static void Main</code> - Entry point of the program</li>
-                    <li><code>Console.WriteLine</code> - Outputs text to the console</li>
+                    <li><code>using System;</code> - Imports System namespace</li>
+                    <li><code>class Program</code> - Defines a class</li>
+                    <li><code>static void Main</code> - Entry point</li>
+                    <li><code>Console.WriteLine</code> - Outputs text</li>
                 </ul>
             </div>
             
             <h3>2.2 Comments in C#</h3>
+            <p>Non-executable text for code documentation. C# supports single-line, multi-line, and XML documentation comments.</p>
             
             <div class="code-block" data-language="code"><pre><code>// Single-line comment
 
-/*
-   Multi-line comment
-   Spans multiple lines
-*/
+/* Multi-line comment */
 
 /// XML documentation comment
-/// Used for generating documentation
 public class MyClass
 {
     /// <summary>
@@ -634,7 +640,12 @@ public class MyClass
     public string Name { get; set; }
 }</code></pre></div>
             
+            <div class="tip">
+                <strong>Best Practice:</strong> Use XML comments for public APIs to enable IntelliSense and documentation generation.
+            </div>
+            
             <h3>2.3 Namespaces</h3>
+            <p>Organizes code into logical groups, preventing naming conflicts. Essential for managing code complexity in large projects.</p>
             
             <div class="code-block" data-language="code"><pre><code>using System;
 using System.Collections.Generic;
@@ -649,73 +660,110 @@ namespace MyApplication
         }
     }
 }</code></pre></div>
+            
+            <div class="important">
+                <strong>Key Concept:</strong> Namespaces prevent naming conflicts and improve code organization.
+            </div>
+            
+            <h3>2.4 Operators</h3>
+            <p>C# provides various operators for arithmetic, comparison, logical, and bitwise operations.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Arithmetic
+int sum = 10 + 5;
+int product = 10 * 5;
+int remainder = 10 % 3;
+
+// Comparison
+bool isEqual = 10 == 5;
+bool isGreater = 10 > 5;
+
+// Logical
+bool and = true && false;
+bool or = true || false;
+bool not = !true;
+
+// Assignment
+int x = 10;
+x += 5;  // x = x + 5
+x *= 2;  // x = x * 2</code></pre></div>
+            
+            <h3>2.5 Input/Output</h3>
+            <p>Console input and output for interacting with users.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Output
+Console.WriteLine("Hello");
+Console.Write("No newline");
+
+// Input
+string name = Console.ReadLine();
+int age = int.Parse(Console.ReadLine());
+
+// Formatted output
+Console.WriteLine($"Name: {name}, Age: {age}");</code></pre></div>
         </div>
 
         <h2>Chapter 3: Data Types and Variables</h2>
 
         <div class="chapter">
             <h3>3.1 Value Types</h3>
-            <p>Value types store the actual data directly on the stack:</p>
+            <p>Store actual data directly on the stack. Efficient for small data structures. Include integers, floats, booleans, and characters.</p>
             
             <div class="code-block" data-language="code"><pre><code>// Integral types
-byte b = 255;           // 8-bit unsigned (0 to 255)
-sbyte sb = -128;        // 8-bit signed (-128 to 127)
-short s = 32767;        // 16-bit signed
-ushort us = 65535;      // 16-bit unsigned
+byte b = 255;           // 8-bit unsigned
 int i = 2147483647;     // 32-bit signed
-uint ui = 4294967295U;  // 32-bit unsigned
 long l = 9223372036854775807L;   // 64-bit signed
-ulong ul = 18446744073709551615UL; // 64-bit unsigned
 
-// Floating-point types
-float f = 3.14f;        // 32-bit (7 digits precision)
-double d = 3.14159265359; // 64-bit (15-16 digits precision)
+// Floating-point
+float f = 3.14f;        // 32-bit
+double d = 3.14159265359; // 64-bit
 
-// Other types
+// Other
 bool flag = true;       // Boolean
-char c = 'A';           // 16-bit Unicode character
-decimal money = 100.50m; // 128-bit (28-29 digits precision)</code></pre></div>
+char c = 'A';           // 16-bit Unicode
+decimal money = 100.50m; // 128-bit precise</code></pre></div>
+            
+            <div class="tip">
+                <strong>Performance:</strong> Use value types for small, immutable data structures.
+            </div>
             
             <h3>3.2 Reference Types</h3>
-            <p>Reference types store a reference to the data on the heap:</p>
+            <p>Store references to data on the heap. Used for complex objects. Include classes, strings, arrays, and interfaces.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// String
-string name = "John Doe";
-
-// Class
+            <div class="code-block" data-language="code"><pre><code>string name = "John Doe";
 Person person = new Person();
-
-// Array
 int[] numbers = new int[5];
-
-// Interface
 IEnumerable<int> collection = new List<int>();</code></pre></div>
             
-            <h3>3.3 Variable Declaration and Initialization</h3>
+            <div class="important">
+                <strong>Key Difference:</strong> Value types store data directly; reference types store references to data.
+            </div>
+            
+            <h3>3.3 Variable Declaration</h3>
+            <p>C# supports explicit typing and type inference with <code>var</code>. Choose based on clarity and context.</p>
             
             <div class="code-block" data-language="code"><pre><code>// Explicit typing
 int age = 25;
 string name = "John";
 
 // Type inference (var)
-var count = 10;         // Compiler infers int
-var message = "Hello";  // Compiler infers string
-
-// Multiple declaration
-int x = 10, y = 20, z = 30;
+var count = 10;
+var message = "Hello";
 
 // Default values
 int a = default;         // 0
-string s = default;     // null
-bool b = default;       // false</code></pre></div>
+string s = default;     // null</code></pre></div>
+            
+            <div class="tip">
+                <strong>Guideline:</strong> Use <code>var</code> when type is obvious; explicit types when clarity is needed.
+            </div>
             
             <h3>3.4 Constants</h3>
+            <p>Immutable values using <code>const</code> (compile-time) or <code>readonly</code> (runtime). Prevent accidental modification.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// const - compile-time constant
+            <div class="code-block" data-language="code"><pre><code>// const - compile-time
 const double Pi = 3.14159;
-const int MaxUsers = 100;
 
-// readonly - runtime constant (can be set in constructor)
+// readonly - runtime
 class Configuration
 {
     public readonly string ApiKey;
@@ -725,326 +773,311 @@ class Configuration
         ApiKey = key;
     }
 }</code></pre></div>
+            
+            <div class="example">
+                <strong>When to use:</strong> <code>const</code> for compile-time values, <code>readonly</code> for runtime values.
+            </div>
+            
+            <h3>3.5 Nullable Types</h3>
+            <p>Allow value types to be null. Essential for database interactions and optional values.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Nullable value type
+int? nullableInt = null;
+bool? nullableBool = null;
+
+// Null-coalescing operator
+int value = nullableInt ?? 0;
+
+// Null-conditional operator
+string name = person?.Name ?? "Unknown";</code></pre></div>
+            
+            <h3>3.6 String Manipulation</h3>
+            <p>String operations and formatting in C#.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// String interpolation
+string name = "John";
+string message = $"Hello, {name}";
+
+// String methods
+string text = "Hello World";
+bool contains = text.Contains("World");
+string upper = text.ToUpper();
+string trimmed = text.Trim();
+string[] parts = text.Split(' ');
+
+// String builder for concatenation
+var sb = new StringBuilder();
+sb.Append("Hello");
+sb.Append(" World");</code></pre></div>
+            
+            <h3>3.7 Enums</h3>
+            <p>Named constants for better code readability and type safety.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>enum DayOfWeek
+{
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday
+}
+
+DayOfWeek today = DayOfWeek.Monday;
+
+// Enum with values
+enum Priority : int
+{
+    Low = 1,
+    Medium = 2,
+    High = 3
+}</code></pre></div>
+            
+            <h3>3.8 Structs</h3>
+            <p>Value types for small data structures. More efficient than classes for small objects.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public struct Point
+{
+    public int X { get; set; }
+    public int Y { get; set; }
+    
+    public Point(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+}
+
+Point p1 = new Point(10, 20);
+Point p2 = p1; // Value copy, not reference</code></pre></div>
+            
+            <div class="important">
+                <strong>Performance:</strong> Use structs for small, immutable data types. Use classes for larger objects.
+            </div>
         </div>
 
         <h2>Chapter 4: Control Flow</h2>
 
         <div class="chapter">
             <h3>4.1 Conditional Statements</h3>
+            <p>Execute different code blocks based on conditions. Includes if-else, switch statements, and switch expressions.</p>
             
             <div class="code-block" data-language="code"><pre><code>// if-else
-int score = 85;
-
 if (score >= 90)
-{
     Console.WriteLine("Grade: A");
-}
 else if (score >= 80)
-{
     Console.WriteLine("Grade: B");
-}
-else if (score >= 70)
-{
-    Console.WriteLine("Grade: C");
-}
-else
-{
-    Console.WriteLine("Grade: F");
-}
-
-// switch statement
-string day = "Monday";
-
-switch (day)
-{
-    case "Monday":
-        Console.WriteLine("Start of the week");
-        break;
-    case "Friday":
-        Console.WriteLine("End of the week");
-        break;
-    default:
-        Console.WriteLine("Mid week");
-        break;
-}
 
 // switch expression (C# 8+)
 string grade = score switch
 {
     >= 90 => "A",
     >= 80 => "B",
-    >= 70 => "C",
     _ => "F"
 };</code></pre></div>
             
+            <div class="tip">
+                <strong>Modern C#:</strong> Switch expressions provide concise, functional-style conditional logic.
+            </div>
+            
             <h3>4.2 Loops</h3>
+            <p>Execute code multiple times. Choose based on iteration needs: for, while, do-while, or foreach.</p>
             
             <div class="code-block" data-language="code"><pre><code>// for loop
 for (int i = 0; i < 10; i++)
-{
     Console.WriteLine(i);
-}
-
-// while loop
-int count = 0;
-while (count < 10)
-{
-    Console.WriteLine(count);
-    count++;
-}
-
-// do-while loop
-int num = 0;
-do
-{
-    Console.WriteLine(num);
-    num++;
-} while (num < 10);
 
 // foreach loop
-int[] numbers = { 1, 2, 3, 4, 5 };
 foreach (int number in numbers)
-{
     Console.WriteLine(number);
-}</code></pre></div>
+
+// while loop
+while (count < 10)
+    count++;</code></pre></div>
+            
+            <div class="important">
+                <strong>Performance:</strong> For loops are faster; foreach is more readable for collections.
+            </div>
             
             <h3>4.3 Jump Statements</h3>
+            <p>Transfer control within code: <code>break</code> exits loops, <code>continue</code> skips iterations, <code>return</code> exits methods.</p>
             
             <div class="code-block" data-language="code"><pre><code>// break - exit loop
 for (int i = 0; i < 10; i++)
 {
-    if (i == 5)
-        break;
+    if (i == 5) break;
     Console.WriteLine(i);
 }
 
-// continue - skip to next iteration
+// continue - skip iteration
 for (int i = 0; i < 10; i++)
 {
-    if (i % 2 == 0)
-        continue;
+    if (i % 2 == 0) continue;
     Console.WriteLine(i);
-}
-
-// return - exit method
-int Calculate(int x, int y)
-{
-    return x + y;
 }</code></pre></div>
+            
+            <div class="tip">
+                <strong>Best Practice:</strong> Avoid <code>goto</code> statements in modern C# code.
+            </div>
+            
+            <h3>4.4 Pattern Matching</h3>
+            <p>Concise syntax for checking conditions and extracting data. Available in if, switch, and other expressions.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Type pattern
+if (obj is string s)
+    Console.WriteLine(s.ToUpper());
+
+// Relational pattern
+int number = 5;
+string description = number switch
+{
+    < 0 => "Negative",
+    0 => "Zero",
+    > 0 => "Positive"
+};
+
+// Property pattern
+if (person is { Name: "John", Age: 30 })
+    Console.WriteLine("John is 30");</code></pre></div>
         </div>
 
         <h2>Chapter 5: Object-Oriented Programming</h2>
 
         <div class="chapter">
             <h3>5.1 Classes and Objects</h3>
+            <p>Classes define structure and behavior. Objects are instances created with <code>new</code>. Classes encapsulate data (fields) and behavior (methods).</p>
             
             <div class="code-block" data-language="code"><pre><code>public class Person
 {
-    // Fields
     private string _name;
-    private int _age;
     
-    // Constructor
-    public Person(string name, int age)
+    public Person(string name)
     {
         _name = name;
-        _age = age;
     }
     
-    // Properties
-    public string Name
-    {
-        get { return _name; }
-        set { _name = value; }
-    }
-    
-    public int Age
-    {
-        get { return _age; }
-        set { _age = value; }
-    }
-    
-    // Method
-    public void Introduce()
-    {
-        Console.WriteLine($"Hi, I'm {_name} and I'm {_age} years old.");
-    }
-}
-
-// Creating objects
-Person person = new Person("John", 30);
-person.Introduce();</code></pre></div>
-            
-            <h3>5.2 Inheritance</h3>
-            
-            <div class="code-block" data-language="code"><pre><code>// Base class
-public class Animal
-{
     public string Name { get; set; }
     
-    public Animal(string name)
+    public void Introduce()
     {
-        Name = name;
-    }
-    
-    public virtual void MakeSound()
-    {
-        Console.WriteLine("Animal makes a sound");
+        Console.WriteLine($"Hi, I'm {_name}");
     }
 }
 
-// Derived class
+Person person = new Person("John");
+person.Introduce();</code></pre></div>
+            
+            <div class="important">
+                <strong>OOP Principle:</strong> Encapsulation hides implementation details and exposes only necessary functionality.
+            </div>
+            
+            <h3>5.2 Inheritance</h3>
+            <p>Derived classes reuse and extend base class functionality. Promotes code reuse and establishes hierarchies.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public class Animal
+{
+    public virtual void MakeSound() => 
+        Console.WriteLine("Animal sound");
+}
+
 public class Dog : Animal
 {
-    public string Breed { get; set; }
-    
-    public Dog(string name, string breed) : base(name)
-    {
-        Breed = breed;
-    }
-    
-    public override void MakeSound()
-    {
+    public override void MakeSound() => 
         Console.WriteLine("Woof!");
-    }
-    
-    public void Fetch()
-    {
-        Console.WriteLine($"{Name} is fetching the ball!");
-    }
 }</code></pre></div>
             
-            <h3>5.3 Polymorphism</h3>
+            <div class="tip">
+                <strong>Design Tip:</strong> Use inheritance for "is-a" relationships. Use composition for code reuse.
+            </div>
             
-            <div class="code-block" data-language="code"><pre><code>// Method overloading (compile-time polymorphism)
-public class Calculator
-{
-    public int Add(int a, int b)
-    {
-        return a + b;
-    }
-    
-    public double Add(double a, double b)
-    {
-        return a + b;
-    }
-    
-    public int Add(int a, int b, int c)
-    {
-        return a + b + c;
-    }
-}
+            <h3>5.3 Polymorphism</h3>
+            <p>Objects of different types treated as common base type. Includes method overloading (compile-time) and overriding (runtime).</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Method overloading
+public int Add(int a, int b) => a + b;
+public double Add(double a, double b) => a + b;
 
-// Method overriding (runtime polymorphism)
-Animal animal = new Dog("Buddy", "Golden Retriever");
-animal.MakeSound(); // Outputs: Woof!</code></pre></div>
+// Method overriding
+Animal animal = new Dog();
+animal.MakeSound(); // Woof!</code></pre></div>
             
             <h3>5.4 Abstraction</h3>
+            <p>Hide complex details, show essential features. Achieved through abstract classes (can have implementation) and interfaces (contracts only).</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Abstract class
-public abstract class Shape
+            <div class="code-block" data-language="code"><pre><code>public abstract class Shape
 {
     public abstract double GetArea();
-    public abstract double GetPerimeter();
-    
-    public void DisplayInfo()
-    {
-        Console.WriteLine($"Area: {GetArea()}");
-        Console.WriteLine($"Perimeter: {GetPerimeter()}");
-    }
 }
 
-// Concrete class
-public class Circle : Shape
-{
-    public double Radius { get; set; }
-    
-    public Circle(double radius)
-    {
-        Radius = radius;
-    }
-    
-    public override double GetArea()
-    {
-        return Math.PI * Radius * Radius;
-    }
-    
-    public override double GetPerimeter()
-    {
-        return 2 * Math.PI * Radius;
-    }
-}
-
-// Interface
 public interface IResizable
 {
     void Resize(double factor);
+}</code></pre></div>
+            
+            <div class="important">
+                <strong>Key Difference:</strong> Abstract classes can have implementation; interfaces define contracts only.
+            </div>
+            
+            <h3>5.5 Access Modifiers</h3>
+            <p>Control visibility and accessibility of class members.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public class MyClass
+{
+    public int PublicField;      // Accessible anywhere
+    private int _privateField;   // Only within class
+    protected int ProtectedField; // Within class and derived
+    internal int InternalField;  // Within same assembly
+    
+    public void PublicMethod() { }
+    private void PrivateMethod() { }
+}</code></pre></div>
+            
+            <h3>5.6 Static Members</h3>
+            <p>Belong to the class rather than instances. Shared across all objects.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public class Counter
+{
+    public static int Count = 0;
+    
+    public Counter()
+    {
+        Count++; // Increments shared counter
+    }
+    
+    public static void Reset() => Count = 0;
 }
 
-public class Rectangle : Shape, IResizable
-{
-    public double Width { get; set; }
-    public double Height { get; set; }
-    
-    public Rectangle(double width, double height)
-    {
-        Width = width;
-        Height = height;
-    }
-    
-    public override double GetArea() => Width * Height;
-    public override double GetPerimeter() => 2 * (Width + Height);
-    
-    public void Resize(double factor)
-    {
-        Width *= factor;
-        Height *= factor;
-    }
-}</code></pre></div>
+Counter.Count = 5;
+Counter.Reset();</code></pre></div>
         </div>
 
         <h2>Chapter 6: Advanced C# Features</h2>
 
         <div class="chapter">
             <h3>6.1 Properties</h3>
+            <p>Flexible data accessors maintaining encapsulation. Support validation, computed values, and auto-implemented syntax.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Auto-implemented properties
-public class Person
+            <div class="code-block" data-language="code"><pre><code>// Auto-implemented
+public string Name { get; set; }
+
+// With validation
+private decimal _balance;
+public decimal Balance
 {
-    public string Name { get; set; }
-    public int Age { get; set; }
+    get => _balance;
+    private set => _balance = value;
 }
 
-// Properties with backing fields
-public class BankAccount
-{
-    private decimal _balance;
-    
-    public decimal Balance
-    {
-        get { return _balance; }
-        private set { _balance = value; }
-    }
-    
-    public void Deposit(decimal amount)
-    {
-        if (amount > 0)
-            _balance += amount;
-    }
-}
-
-// Computed properties
-public class Circle
-{
-    public double Radius { get; set; }
-    
-    public double Area
-    {
-        get { return Math.PI * Radius * Radius; }
-    }
-}</code></pre></div>
+// Computed
+public double Area => Math.PI * Radius * Radius;</code></pre></div>
+            
+            <div class="tip">
+                <strong>Modern C#:</strong> C# 9+ supports init-only properties for immutable data structures.
+            </div>
             
             <h3>6.2 Indexers</h3>
+            <p>Index classes like arrays using square bracket notation. Enable custom collection-like behavior.</p>
             
             <div class="code-block" data-language="code"><pre><code>public class StringCollection
 {
@@ -1052,132 +1085,195 @@ public class Circle
     
     public string this[int index]
     {
-        get { return _items[index]; }
-        set { _items[index] = value; }
-    }
-    
-    public string this[string key]
-    {
-        get { return _items.FirstOrDefault(item => item == key); }
+        get => _items[index];
+        set => _items[index] = value;
     }
 }
 
-// Usage
 var collection = new StringCollection();
-collection[0] = "Hello";
-collection[1] = "World";
-Console.WriteLine(collection[0]); // Hello</code></pre></div>
+collection[0] = "Hello";</code></pre></div>
             
             <h3>6.3 Extension Methods</h3>
+            <p>Add methods to existing types without modification. Powerful for extending third-party libraries.</p>
             
             <div class="code-block" data-language="code"><pre><code>public static class StringExtensions
 {
-    public static bool IsNullOrEmpty(this string value)
-    {
-        return string.IsNullOrEmpty(value);
-    }
-    
     public static string ToTitleCase(this string value)
     {
-        return CultureInfo.CurrentCulture.TextInfo
-            .ToTitleCase(value.ToLower());
-    }
-    
-    public static string Reverse(this string value)
-    {
-        char[] charArray = value.ToCharArray();
-        Array.Reverse(charArray);
-        return new string(charArray);
+        return CultureInfo.CurrentCulture
+            .TextInfo.ToTitleCase(value.ToLower());
     }
 }
 
+string name = "john".ToTitleCase(); // John</code></pre></div>
+            
+            <div class="important">
+                <strong>Best Practice:</strong> Use extension methods sparingly to avoid code confusion.
+            </div>
+            
+            <h3>6.4 Records</h3>
+            <p>Immutable reference types with built-in value-based equality. Perfect for data transfer objects.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Record type (C# 9+)
+public record Person(string Name, int Age);
+
 // Usage
-string name = "john doe";
-bool isEmpty = name.IsNullOrEmpty();
-string title = name.ToTitleCase(); // John Doe
-string reversed = name.Reverse(); // eod nhoj</code></pre></div>
+var person1 = new Person("John", 30);
+var person2 = new Person("John", 30);
+
+// Value-based equality
+Console.WriteLine(person1 == person2); // True
+
+// With-expression for immutable updates
+var person3 = person1 with { Age = 31 };</code></pre></div>
+            
+            <h3>6.5 Tuples</h3>
+            <p>Lightweight data structures for multiple return values without creating custom types.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Tuple syntax
+(int, string) GetInfo() => (42, "Hello");
+
+// Named elements
+(int Id, string Name) GetPerson() => (1, "John");
+
+// Deconstruction
+var (id, name) = GetPerson();
+
+// Tuple literals
+var result = (Count: 5, Total: 100);
+Console.WriteLine($"{result.Count}, {result.Total}");</code></pre></div>
+            
+            <h3>6.6 Lambda Expressions</h3>
+            <p>Anonymous functions for concise inline code. Essential for LINQ and delegates.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Lambda expression
+Func<int, int> square = x => x * x;
+
+// Lambda with multiple parameters
+Func<int, int, int> add = (a, b) => a + b;
+
+// Lambda with statement body
+Func<int, int, int> complex = (a, b) =>
+{
+    int result = a + b;
+    return result * 2;
+};
+
+// Used in LINQ
+var evenNumbers = numbers.Where(n => n % 2 == 0);</code></pre></div>
+            
+            <h3>6.7 Attributes</h3>
+            <p>Declarative tags for adding metadata to code. Used for serialization, validation, and more.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>[Serializable]
+public class Person
+{
+    [JsonProperty("name")]
+    public string Name { get; set; }
+    
+    [Range(0, 120)]
+    public int Age { get; set; }
+    
+    [Obsolete("Use NewMethod instead")]
+    public void OldMethod() { }
+}</code></pre></div>
+            
+            <h3>6.8 Nullable Reference Types</h3>
+            <p>C# 8+ feature to prevent null reference exceptions. Makes nullability explicit.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Nullable reference type
+string? nullableName = null;
+
+// Non-nullable reference type
+string name = "John"; // Cannot be null
+
+// Null-forgiving operator
+string value = nullableName!;</code></pre></div>
+            
+            <div class="important">
+                <strong>Safety:</strong> Enable nullable reference types to catch null errors at compile time.
+            </div>
         </div>
 
         <h2>Chapter 7: Generics and Collections</h2>
 
         <div class="chapter">
             <h3>7.1 Generics</h3>
+            <p>Type-safe, reusable code with type placeholders. Avoid boxing/unboxing, improve performance for collections.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Generic class
-public class Repository<T>
+            <div class="code-block" data-language="code"><pre><code>public class Repository<T>
 {
     private List<T> _items = new List<T>();
     
-    public void Add(T item)
-    {
-        _items.Add(item);
-    }
-    
-    public T GetById(int id)
-    {
-        return _items[id];
-    }
-    
-    public IEnumerable<T> GetAll()
-    {
-        return _items;
-    }
+    public void Add(T item) => _items.Add(item);
+    public T GetById(int id) => _items[id];
 }
 
-// Generic method
-public T Max<T>(T a, T b) where T : IComparable<T>
-{
-    return a.CompareTo(b) > 0 ? a : b;
-}
-
-// Generic interface
-public interface IRepository<T>
-{
-    void Add(T item);
-    T GetById(int id);
-    IEnumerable<T> GetAll();
-}
-
-// Usage
 var intRepo = new Repository<int>();
-intRepo.Add(10);
-
-var stringRepo = new Repository<string>();
-stringRepo.Add("Hello");</code></pre></div>
+var stringRepo = new Repository<string>();</code></pre></div>
             
-            <h3>7.2 Collections</h3>
+            <div class="tip">
+                <strong>Performance:</strong> Generics avoid boxing/unboxing for value types.
+            </div>
             
-            <div class="code-block" data-language="code"><pre><code>// List<T>
-List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
-numbers.Add(6);
-numbers.Remove(3);
+            <h3>7.2 Generic Constraints</h3>
+            <p>Restrict generic types to specific types or interfaces for better type safety.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Constraint to reference type
+public class MyClass<T> where T : class
 
-// Dictionary<TKey, TValue>
+// Constraint to value type
+public class MyStruct<T> where T : struct
+
+// Constraint to specific interface
+public class MyList<T> where T : IEnumerable<T>
+
+// Constraint with parameterless constructor
+public class Factory<T> where T : new()
+
+// Multiple constraints
+public class Processor<T> where T : class, new(), IDisposable</code></pre></div>
+            
+            <h3>7.3 Collections</h3>
+            <p>Type-safe, optimized collections. Choose based on access patterns: List, Dictionary, HashSet, Queue, Stack.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>List<int> numbers = new List<int> { 1, 2, 3 };
 Dictionary<string, int> ages = new Dictionary<string, int>();
-ages["John"] = 30;
-ages["Jane"] = 25;
-
-// HashSet<T>
-HashSet<int> uniqueNumbers = new HashSet<int> { 1, 2, 3, 2, 1 };
-// Contains only: 1, 2, 3
-
-// Queue<T>
+HashSet<int> unique = new HashSet<int> { 1, 2, 2 };
 Queue<string> queue = new Queue<string>();
-queue.Enqueue("First");
-queue.Enqueue("Second");
-string first = queue.Dequeue(); // "First"
+Stack<int> stack = new Stack<int>();</code></pre></div>
+            
+            <div class="important">
+                <strong>Selection:</strong> List for general use, Dictionary for lookups, HashSet for uniqueness.
+            </div>
+            
+            <h3>7.4 IEnumerable and Yield</h3>
+            <p>Lazy evaluation with custom iterators using yield return. Efficient for large sequences.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public IEnumerable<int> GetNumbers(int max)
+{
+    for (int i = 0; i < max; i++)
+    {
+        yield return i;
+    }
+}
 
-// Stack<T>
-Stack<int> stack = new Stack<int>();
-stack.Push(1);
-stack.Push(2);
-int top = stack.Pop(); // 2</code></pre></div>
+// Lazy evaluation - only processes when iterated
+foreach (int num in GetNumbers(1000000))
+{
+    Console.WriteLine(num);
+}</code></pre></div>
+            
+            <div class="tip">
+                <strong>Performance:</strong> Yield return enables lazy evaluation, saving memory for large sequences.
+            </div>
         </div>
 
         <h2>Chapter 8: Exception Handling</h2>
 
         <div class="chapter">
             <h3>8.1 Try-Catch-Finally</h3>
+            <p>Handle runtime errors gracefully. Try block for risky code, catch for specific exceptions, finally for cleanup (always executes).</p>
             
             <div class="code-block" data-language="code"><pre><code>try
 {
@@ -1186,53 +1282,45 @@ int top = stack.Pop(); // 2</code></pre></div>
 catch (DivideByZeroException ex)
 {
     Console.WriteLine("Division by zero");
-    Console.WriteLine($"Error: {ex.Message}");
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"General error: {ex.Message}");
 }
 finally
 {
-    Console.WriteLine("Cleanup code always executes");
+    Console.WriteLine("Cleanup always runs");
 }</code></pre></div>
+            
+            <div class="important">
+                <strong>Best Practice:</strong> Catch specific exceptions before general Exception. Only catch what you can handle.
+            </div>
             
             <h3>8.2 Throwing Exceptions</h3>
+            <p>Throw exceptions for error conditions. Use appropriate exception types with meaningful messages.</p>
             
-            <div class="code-block" data-language="code"><pre><code>public class BankAccount
+            <div class="code-block" data-language="code"><pre><code>public void Withdraw(decimal amount)
 {
-    private decimal _balance;
+    if (amount <= 0)
+        throw new ArgumentException("Amount must be positive");
     
-    public void Withdraw(decimal amount)
-    {
-        if (amount <= 0)
-        {
-            throw new ArgumentException("Amount must be positive");
-        }
-        
-        if (amount > _balance)
-        {
-            throw new InvalidOperationException("Insufficient funds");
-        }
-        
-        _balance -= amount;
-    }
+    if (amount > _balance)
+        throw new InvalidOperationException("Insufficient funds");
 }</code></pre></div>
             
+            <div class="tip">
+                <strong>Guideline:</strong> Use ArgumentException for invalid parameters, InvalidOperationException for invalid state.
+            </div>
+            
             <h3>8.3 Custom Exceptions</h3>
+            <p>Create domain-specific exceptions for precise error handling. Inherit from Exception with additional context.</p>
             
             <div class="code-block" data-language="code"><pre><code>public class InsufficientFundsException : Exception
 {
     public decimal Balance { get; }
     public decimal RequestedAmount { get; }
     
-    public InsufficientFundsException(
-        decimal balance, 
-        decimal requestedAmount)
-        : base($"Insufficient funds. Balance: {balance}, Requested: {requestedAmount}")
+    public InsufficientFundsException(decimal balance, decimal requested)
+        : base($"Insufficient funds. Balance: {balance}")
     {
         Balance = balance;
-        RequestedAmount = requestedAmount;
+        RequestedAmount = requested;
     }
 }</code></pre></div>
         </div>
@@ -1241,79 +1329,77 @@ finally
 
         <div class="chapter">
             <h3>9.1 Delegates</h3>
+            <p>Type-safe function pointers for passing methods as parameters. Foundation for events and LINQ.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Delegate declaration
-public delegate int Operation(int a, int b);
+            <div class="code-block" data-language="code"><pre><code>public delegate int Operation(int a, int b);
 
-// Using delegate
 Operation add = (a, b) => a + b;
 Operation multiply = (a, b) => a * b;
 
-int result1 = add(5, 3);      // 8
-int result2 = multiply(5, 3); // 15
+int result = add(5, 3); // 8
 
-// Multicast delegate
-Operation combined = add + multiply;
-combined(5, 3); // Executes both delegates</code></pre></div>
+// Built-in delegates
+Action<string> log = msg => Console.WriteLine(msg);
+Func<int, int, int> calc = (a, b) => a * b;
+Predicate<int> isEven = n => n % 2 == 0;</code></pre></div>
+            
+            <div class="tip">
+                <strong>Modern C#:</strong> Use built-in Action, Func, and Predicate instead of custom delegates.
+            </div>
             
             <h3>9.2 Events</h3>
+            <p>Publish-subscribe pattern for notifications. Objects notify subscribers when something occurs.</p>
             
             <div class="code-block" data-language="code"><pre><code>public class Button
 {
     public event EventHandler Click;
     
-    public void OnClick()
-    {
-        Click?.Invoke(this, EventArgs.Empty);
-    }
+    public void OnClick() => Click?.Invoke(this, EventArgs.Empty);
 }
 
-public class ButtonHandler
-{
-    public void HandleClick(object sender, EventArgs e)
-    {
-        Console.WriteLine("Button clicked!");
-    }
-}
-
-// Usage
 var button = new Button();
-var handler = new ButtonHandler();
-
-button.Click += handler.HandleClick;
-button.OnClick(); // Button clicked!</code></pre></div>
+button.Click += (s, e) => Console.WriteLine("Clicked!");
+button.OnClick(); // Clicked!</code></pre></div>
+            
+            <div class="important">
+                <strong>Memory Leak:</strong> Always unsubscribe from events to prevent memory leaks.
+            </div>
         </div>
 
         <h2>Chapter 10: LINQ</h2>
 
         <div class="chapter">
             <h3>10.1 LINQ Query Syntax</h3>
+            <p>SQL-like syntax for querying data. More readable for complex queries. Translated to method syntax by compiler.</p>
             
             <div class="code-block" data-language="code"><pre><code>int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-// Query syntax
 var evenNumbers = from num in numbers
                   where num % 2 == 0
                   select num;
 
-var squaredNumbers = from num in numbers
-                     select num * num;</code></pre></div>
+var query = from num in numbers
+            where num > 5
+            orderby num descending
+            select new { Number = num, Square = num * num };</code></pre></div>
+            
+            <div class="tip">
+                <strong>Readability:</strong> Query syntax for complex queries; method syntax for simple operations.
+            </div>
             
             <h3>10.2 LINQ Method Syntax</h3>
+            <p>Extension methods with lambdas. Functional style, preferred for chaining operations.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Method syntax
-var evenNumbers = numbers.Where(n => n % 2 == 0);
-var squaredNumbers = numbers.Select(n => n * n);
-var sortedNumbers = numbers.OrderBy(n => n);
-var groupedNumbers = numbers.GroupBy(n => n % 2);
-
-// Chaining operations
-var result = numbers
-    .Where(n => n > 5)
-    .OrderBy(n => n)
-    .Select(n => n * 2);</code></pre></div>
+            <div class="code-block" data-language="code"><pre><code>var evenNumbers = numbers.Where(n => n % 2 == 0);
+var sorted = numbers.OrderBy(n => n);
+var result = numbers.Where(n => n > 5).OrderBy(n => n).ToList();</code></pre></div>
+            
+            <div class="important">
+                <strong>Deferred Execution:</strong> LINQ queries execute when iterated. Use ToList() for immediate execution.
+            </div>
             
             <h3>10.3 Common LINQ Operations</h3>
+            <p>Filtering, projection, sorting, aggregation, grouping, and partitioning operations.</p>
             
             <div class="code-block" data-language="code"><pre><code>// Filtering
 var filtered = numbers.Where(n => n > 5);
@@ -1323,99 +1409,73 @@ var projected = numbers.Select(n => n * 2);
 
 // Sorting
 var sorted = numbers.OrderBy(n => n);
-var sortedDesc = numbers.OrderByDescending(n => n);
 
 // Aggregation
 var sum = numbers.Sum();
-var average = numbers.Average();
 var count = numbers.Count();
-var max = numbers.Max();
-var min = numbers.Min();
 
 // Grouping
-var grouped = numbers.GroupBy(n => n % 2);
-foreach (var group in grouped)
-{
-    Console.WriteLine($"Group {group.Key}: {string.Join(", ", group)}");
-}</code></pre></div>
+var grouped = numbers.GroupBy(n => n % 2);</code></pre></div>
         </div>
 
         <h2>Chapter 11: Async/Await</h2>
 
         <div class="chapter">
             <h3>11.1 Async Methods</h3>
+            <p>Perform long-running operations without blocking. Async/await make asynchronous code look synchronous. Return Task or Task<T>.</p>
             
             <div class="code-block" data-language="code"><pre><code>// Synchronous (blocking)
-public string GetData()
-{
-    Thread.Sleep(1000); // Blocks thread
-    return "Data";
-}
+public string GetData() => "Data";
 
 // Asynchronous (non-blocking)
 public async Task<string> GetDataAsync()
 {
-    await Task.Delay(1000); // Doesn't block thread
+    await Task.Delay(1000);
     return "Data";
 }</code></pre></div>
             
-            <h3>11.2 Calling Async Methods</h3>
+            <div class="important">
+                <strong>Key Concept:</strong> Async methods don't create new threads automatically; they use the thread pool efficiently.
+            </div>
             
-            <div class="code-block" data-language="code"><pre><code>public async Task ProcessDataAsync()
-{
-    // Sequential execution
-    string data1 = await GetDataAsync();
-    string data2 = await GetDataAsync();
-    
-    // Parallel execution
-    var task1 = GetDataAsync();
-    var task2 = GetDataAsync();
-    
-    await Task.WhenAll(task1, task2);
-    
-    Console.WriteLine($"Data1: {task1.Result}");
-    Console.WriteLine($"Data2: {task2.Result}");
-}</code></pre></div>
+            <h3>11.2 Calling Async Methods</h3>
+            <p>Sequential (await each) or parallel (start multiple, await together) execution.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Sequential
+string data1 = await GetDataAsync();
+string data2 = await GetDataAsync();
+
+// Parallel
+var task1 = GetDataAsync();
+var task2 = GetDataAsync();
+await Task.WhenAll(task1, task2);</code></pre></div>
+            
+            <div class="tip">
+                <strong>Performance:</strong> Use Task.WhenAll for parallel execution of independent operations.
+            </div>
             
             <h3>11.3 Cancellation</h3>
+            <p>Cancel long-running operations with CancellationToken. Essential for good UX.</p>
             
-            <div class="code-block" data-language="code"><pre><code>public async Task ProcessWithCancellationAsync(
-    CancellationToken cancellationToken)
+            <div class="code-block" data-language="code"><pre><code>public async Task ProcessAsync(CancellationToken ct)
 {
-    try
-    {
-        await Task.Delay(5000, cancellationToken);
-        Console.WriteLine("Operation completed");
-    }
-    catch (OperationCanceledException)
-    {
-        Console.WriteLine("Operation was cancelled");
-    }
+    await Task.Delay(5000, ct);
 }
 
-// Usage
 var cts = new CancellationTokenSource();
-var task = ProcessWithCancellationAsync(cts.Token);
-
-// Cancel after 2 seconds
-await Task.Delay(2000);
-cts.Cancel();</code></pre></div>
+var task = ProcessAsync(cts.Token);
+cts.Cancel(); // Cancel operation</code></pre></div>
         </div>
 
         <h2>Chapter 12: Memory Management</h2>
 
         <div class="chapter">
             <h3>12.1 Garbage Collection</h3>
+            <p>Automatic memory management reclaims unused objects. Prevents memory leaks. Avoid manual GC.Collect() calls.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// GC methods
-GC.Collect(); // Force garbage collection (usually not needed)
-GC.WaitForPendingFinalizers(); // Wait for finalizers
-GC.GetTotalMemory(false); // Get memory usage
-
-// IDisposable pattern
+            <div class="code-block" data-language="code"><pre><code>// IDisposable pattern for unmanaged resources
 public class ResourceHolder : IDisposable
 {
-    private IntPtr _unmanagedResource;
     private bool _disposed = false;
     
     public void Dispose()
@@ -1428,52 +1488,37 @@ public class ResourceHolder : IDisposable
     {
         if (!_disposed)
         {
-            if (disposing)
-            {
-                // Dispose managed resources
-            }
-            // Free unmanaged resources
-            CloseHandle(_unmanagedResource);
+            // Free resources
             _disposed = true;
         }
     }
-    
-    ~ResourceHolder()
-    {
-        Dispose(false);
-    }
 }</code></pre></div>
             
-            <h3>12.2 Using Statement</h3>
+            <div class="important">
+                <strong>Performance:</strong> Avoid calling GC.Collect() manually - the GC is optimized.
+            </div>
             
-            <div class="code-block" data-language="code"><pre><code>// Traditional way
-FileStream file = null;
-try
-{
-    file = new FileStream("test.txt", FileMode.Open);
-    // Process file
-}
-finally
-{
-    file?.Dispose();
-}
-
-// Using statement (recommended)
-using (var file = new FileStream("test.txt", FileMode.Open))
+            <h3>12.2 Using Statement</h3>
+            <p>Ensures IDisposable objects are properly disposed. Automatically calls Dispose() even on exceptions.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>using (var file = new FileStream("test.txt", FileMode.Open))
 {
     // Process file
 } // Automatically calls Dispose()
 
-// Multiple using statements (C# 8+)
-using var file1 = new FileStream("file1.txt", FileMode.Open);
-using var file2 = new FileStream("file2.txt", FileMode.Open);
-// Both disposed at end of scope</code></pre></div>
+// C# 8+ declaration
+using var reader = new StreamReader("data.txt");</code></pre></div>
+            
+            <div class="tip">
+                <strong>Best Practice:</strong> Always use using for IDisposable objects to prevent resource leaks.
+            </div>
         </div>
 
         <h2>Chapter 13: Best Practices</h2>
 
         <div class="chapter">
             <h3>13.1 Naming Conventions</h3>
+            <p>Consistent naming improves readability. Follow Microsoft's official guidelines for C# projects.</p>
             
             <div class="code-block" data-language="code"><pre><code>// Classes: PascalCase
 public class UserService { }
@@ -1484,43 +1529,211 @@ public void GetUserById(int id) { }
 // Properties: PascalCase
 public string UserName { get; set; }
 
-// Fields: camelCase with underscore prefix
+// Fields: _camelCase
 private string _userName;
-
-// Local variables: camelCase
-string userName = "John";
 
 // Constants: PascalCase
 public const int MaxUsers = 100;
 
-// Interfaces: PascalCase with 'I' prefix
-public interface IUserService { }</code></pre></div>
+// Interfaces: IPascalCase
+public interface IUserService { }
+
+// Async methods: Async suffix
+public async Task LoadDataAsync() { }</code></pre></div>
+            
+            <div class="tip">
+                <strong>Guideline:</strong> Consistency is more important than personal preference.
+            </div>
             
             <h3>13.2 SOLID Principles</h3>
+            <p>Design principles for maintainable, scalable software.</p>
             <ul>
-                <li><strong>S</strong>ingle Responsibility: Each class should have one reason to change</li>
+                <li><strong>S</strong>ingle Responsibility: One reason to change</li>
                 <li><strong>O</strong>pen/Closed: Open for extension, closed for modification</li>
-                <li><strong>L</strong>iskov Substitution: Subtypes must be substitutable for base types</li>
-                <li><strong>I</strong>nterface Segregation: Clients shouldn't depend on unused interfaces</li>
+                <li><strong>L</strong>iskov Substitution: Subtypes substitutable for base types</li>
+                <li><strong>I</strong>nterface Segregation: Small, focused interfaces</li>
                 <li><strong>D</strong>ependency Inversion: Depend on abstractions, not concretions</li>
             </ul>
             
             <h3>13.3 Code Organization</h3>
+            <p>Well-organized code is easier to maintain and debug.</p>
             <ul>
-                <li>Keep methods short and focused</li>
-                <li>Use meaningful names for variables and methods</li>
-                <li>Avoid magic numbers - use constants</li>
-                <li>Write unit tests for critical functionality</li>
-                <li>Use XML documentation for public APIs</li>
-                <li>Follow consistent coding style</li>
+                <li><strong>Keep methods short</strong> - One purpose, fit on one screen</li>
+                <li><strong>Use meaningful names</strong> - Self-documenting code</li>
+                <li><strong>Avoid magic numbers</strong> - Use named constants</li>
+                <li><strong>Write unit tests</strong> - Prevent regressions</li>
+                <li><strong>Use XML documentation</strong> - For public APIs</li>
+                <li><strong>Follow consistent style</strong> - Throughout project</li>
             </ul>
             
             <div class="tip">
-                <strong>Tip:</strong> Always use async/await for I/O operations to keep your application responsive. Never use async void except for event handlers.
+                <strong>Tip:</strong> Use async/await for I/O operations. Never use async void except for event handlers.
             </div>
             
             <div class="important">
-                <strong>Important:</strong> Always dispose of objects that implement IDisposable using the using statement to prevent resource leaks.
+                <strong>Important:</strong> Always dispose IDisposable objects with using statement.
+            </div>
+            
+            <div class="example">
+                <strong>Final Advice:</strong> Code is read more than written. Invest in clean, readable code.
+            </div>
+        </div>
+
+        <h2>Chapter 14: File I/O and Serialization</h2>
+
+        <div class="chapter">
+            <h3>14.1 File Operations</h3>
+            <p>Read and write files using System.IO namespace for file system operations.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Read all text
+string content = File.ReadAllText("data.txt");
+
+// Write text
+File.WriteAllText("output.txt", "Hello World");
+
+// Read lines
+string[] lines = File.ReadAllLines("data.txt");
+
+// Check if file exists
+if (File.Exists("data.txt"))
+{
+    // Process file
+}
+
+// Using StreamReader for large files
+using (var reader = new StreamReader("largefile.txt"))
+{
+    string line;
+    while ((line = reader.ReadLine()) != null)
+    {
+        Console.WriteLine(line);
+    }
+}</code></pre></div>
+            
+            <h3>14.2 JSON Serialization</h3>
+            <p>Serialize and deserialize objects to JSON format using System.Text.Json.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>using System.Text.Json;
+
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+
+// Serialize to JSON
+Person person = new Person { Name = "John", Age = 30 };
+string json = JsonSerializer.Serialize(person);
+
+// Deserialize from JSON
+Person deserialized = JsonSerializer.Deserialize<Person>(json);</code></pre></div>
+            
+            <h3>14.3 Regular Expressions</h3>
+            <p>Pattern matching for string validation and extraction using Regex.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>using System.Text.RegularExpressions;
+
+// Email validation
+string email = "user@example.com";
+string pattern = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$";
+bool isValid = Regex.IsMatch(email, pattern);
+
+// Extract matches
+string text = "Price: $100, Discount: 20%";
+MatchCollection matches = Regex.Matches(text, @"\d+");
+foreach (Match match in matches)
+{
+    Console.WriteLine(match.Value);
+}</code></pre></div>
+            
+            <div class="tip">
+                <strong>Performance:</strong> Compile regex patterns used frequently with Regex.CompileToAssembly for better performance.
+            </div>
+        </div>
+
+        <h2>Chapter 15: Advanced Topics</h2>
+
+        <div class="chapter">
+            <h3>15.1 Reflection</h3>
+            <p>Inspect and manipulate types at runtime. Useful for frameworks and dynamic code.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>using System.Reflection;
+
+// Get type information
+Type type = typeof(Person);
+
+// Get properties
+PropertyInfo[] properties = type.GetProperties();
+foreach (var prop in properties)
+{
+    Console.WriteLine($"{prop.Name}: {prop.PropertyType}");
+}
+
+// Invoke method dynamically
+MethodInfo method = type.GetMethod("Introduce");
+object instance = Activator.CreateInstance(type);
+method.Invoke(instance, null);</code></pre></div>
+            
+            <div class="important">
+                <strong>Performance:</strong> Reflection is slower than direct calls. Use sparingly in performance-critical code.
+            </div>
+            
+            <h3>15.2 Parallel Programming</h3>
+            <p>Execute tasks concurrently using Task Parallel Library (TPL) for CPU-bound operations.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>using System.Threading.Tasks;
+
+// Parallel for loop
+Parallel.For(0, 100, i =>
+{
+    ProcessItem(i);
+});
+
+// Parallel foreach
+Parallel.ForEach(items, item =>
+{
+    ProcessItem(item);
+});
+
+// Parallel LINQ (PLINQ)
+var results = numbers.AsParallel()
+    .Where(n => n % 2 == 0)
+    .Select(n => n * 2)
+    .ToArray();</code></pre></div>
+            
+            <h3>15.3 Dependency Injection</h3>
+            <p>Inversion of Control pattern for loose coupling and testability.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Service interface
+public interface ILogger
+{
+    void Log(string message);
+}
+
+// Service implementation
+public class ConsoleLogger : ILogger
+{
+    public void Log(string message) => Console.WriteLine(message);
+}
+
+// Constructor injection
+public class UserService
+{
+    private readonly ILogger _logger;
+    
+    public UserService(ILogger logger)
+    {
+        _logger = logger;
+    }
+    
+    public void CreateUser(string name)
+    {
+        _logger.Log($"Creating user: {name}");
+    }
+}</code></pre></div>
+            
+            <div class="tip">
+                <strong>Best Practice:</strong> Use dependency injection frameworks like Microsoft.Extensions.DependencyInjection for complex applications.
             </div>
         </div>
 
