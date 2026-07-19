@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume Templates - Download in Word & PDF</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #1a1a2e;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            min-height: 100vh;
+            padding: 30px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 60% 60%, rgba(102, 126, 234, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(240, 147, 251, 0.2) 0%, transparent 40%);
+            animation: particleFloat 15s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border-radius: 32px;
+            box-shadow: 
+                0 30px 100px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: containerFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, 
+                #667eea 0%, 
+                #764ba2 20%, 
+                #f093fb 40%, 
+                #764ba2 60%, 
+                #667eea 80%, 
+                #764ba2 100%);
+            background-size: 300% 100%;
+            animation: shimmer 4s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -300% 0; }
+            100% { background-position: 300% 0; }
+        }
+        
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(240, 147, 251, 0.1) 100%);
+            border-radius: 24px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            overflow: hidden;
+        }
+        
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(102, 126, 234, 0.1), transparent, rgba(240, 147, 251, 0.1), transparent);
+            animation: rotateGradient 10s linear infinite;
+        }
+        
+        @keyframes rotateGradient {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            color: #1a1a2e;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subtitle {
+            color: #4a4a68;
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.4s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+        }
+        
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .template-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid #f0f0f0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .template-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 20px 60px rgba(102, 126, 234, 0.3),
+                0 0 0 2px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        
+        .template-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .template-card h3 {
+            color: #1a1a2e;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .template-card p {
+            color: #4a4a68;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .template-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .download-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .download-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .download-btn.word {
+            background: linear-gradient(135deg, #2b579a 0%, #1e3f7a 100%);
+            color: white;
+        }
+        
+        .download-btn.pdf {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-title {
+            color: #1a1a2e;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            position: relative;
+        }
+        
+        .section-title::before {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #f093fb;
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 25px 20px; }
+            h1 { font-size: 32px; }
+            .templates-grid { grid-template-columns: 1fr; }
+            .download-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Home
+        </a>
+        
+        <div class="header-section">
+            <h1>📄 Professional Resume Templates</h1>
+            <p class="subtitle">Download professionally designed resume templates for freshers and experienced professionals in Word & PDF formats</p>
+        </div>
+        
+        <h2 class="section-title">🎓 Fresher Resume Templates</h2>
+        <div class="templates-grid">
+            <div class="template-card">
+                <div class="template-icon">🌟</div>
+                <span class="template-badge">Fresher</span>
+                <h3>Modern Clean Template</h3>
+                <p>Perfect for fresh graduates with clean layout and modern design. Focuses on education, skills, and internships.</p>
+                <div class="download-buttons">
+                    <button class="download-btn word" onclick="downloadTemplate('fresher-modern', 'word')">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7l-3.5 3.5 1.5 1.5L13 11v7h-2v-7l-2 2-1.5-1.5L11 9z"/></svg>
+                        Word
+                    </button>
+                    <button class="download-btn pdf" onclick="downloadTemplate('fresher-modern', 'pdf')">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v2.5zm3.5 3.5H12V7h3v1.5h-1.5v1H15v1.5h-1.5v1zm5-3.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5V9c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v2.5z"/></svg>
+                        PDF
+                    </button>
+                </div>
+            </div>
+            
+            <div class="template-card">
+                <div class="template-icon">🎯</div>
+                <span class="template-badge">Fresher</span>
+                <h3>Professional Entry-Level</h3>
+                <p>Professional design for entry-level positions. Emphasizes academic achievements and potential.</p>
+                <div class="download-buttons">
+                    <button class="download-btn word" onclick="downloadTemplate('fresher-professional', 'word')">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7l-3.5 3.5 1.5 1.5L13 11v7h-2v-7l-2 2-1.5-1.5L11 9z"/></svg>
+                        Word
+                    </button>
+                    <button class="download-btn pdf" onclick="downloadTemplate('fresher-professional', 'pdf')">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v2.5zm3.5 3.5H12V7h3v1.5h-1.5v1H15v1.5h-1.5v1zm5-3.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5V9c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v2.5z"/></svg>
+                        PDF
+                    </button>
+                </div>
+            </div>
+            
+            <div class="template-card">
+                <div class="template-icon">💼</div>
+                <span class="template-badge">Fresher</span>
+                <h3>Creative Design</h3>
+                <p>Creative and colorful template perfect for design, marketing, and creative roles.</p>
+                <div class="download-buttons">
+                    <button class="download-btn word" onclick="downloadTemplate('fresher-creative', 'word')">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7l-3.5 3.5 1.5 1.5L13 11v7h-2v-7l-2 2-1.5-1.5L11 9z"/></svg>
+                        Word
+                    </button>
+                    <button class="download-btn pdf" onclick="downloadTemplate('fresher-creative', 'pdf')">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v2.5zm3.5 3.5H12V7h3v1.5h-1.5v1H15v1.5h-1.5v1zm5-3.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5V9c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v2.5z"/></svg>
+                        PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">🚀 Experienced Professional Templates</h2>
+        <div class="templates-grid">
+            <div class="template-card">
+                <div class="template-icon">⭐</div>
+                <span class="template-badge">Experienced</span>
+                <h3>Executive Professional</h3>
+                <p>Executive-level template for senior professionals. Emphasizes leadership, achievements, and strategic impact.</p>
+                <div class="download-buttons">
+                    <button class="download-btn word" onclick="downloadTemplate('experienced-executive', 'word')">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7l-3.5 3.5 1.5 1.5L13 11v7h-2v-7l-2 2-1.5-1.5L11 9z"/></svg>
+                        Word
+                    </button>
+                    <button class="download-btn pdf" onclick="downloadTemplate('experienced-executive', 'pdf')">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v2.5zm3.5 3.5H12V7h3v1.5h-1.5v1H15v1.5h-1.5v1zm5-3.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5V9c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v2.5z"/></svg>
+                        PDF
+                    </button>
+                </div>
+            </div>
+            
+            <div class="template-card">
+                <div class="template-icon">🎖️</div>
+                <span class="template-badge">Experienced</span>
+                <h3>Technical Professional</h3>
+                <p>Technical-focused template for IT, engineering, and technical roles. Highlights technical skills and projects.</p>
+                <div class="download-buttons">
+                    <button class="download-btn word" onclick="downloadTemplate('experienced-technical', 'word')">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7l-3.5 3.5 1.5 1.5L13 11v7h-2v-7l-2 2-1.5-1.5L11 9z"/></svg>
+                        Word
+                    </button>
+                    <button class="download-btn pdf" onclick="downloadTemplate('experienced-technical', 'pdf')">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v2.5zm3.5 3.5H12V7h3v1.5h-1.5v1H15v1.5h-1.5v1zm5-3.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5V9c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v2.5z"/></svg>
+                        PDF
+                    </button>
+                </div>
+            </div>
+            
+            <div class="template-card">
+                <div class="template-icon">🏆</div>
+                <span class="template-badge">Experienced</span>
+                <h3>Achievement-Focused</h3>
+                <p>Achievement-driven template for professionals with significant accomplishments and metrics.</p>
+                <div class="download-buttons">
+                    <button class="download-btn word" onclick="downloadTemplate('experienced-achievement', 'word')">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7l-3.5 3.5 1.5 1.5L13 11v7h-2v-7l-2 2-1.5-1.5L11 9z"/></svg>
+                        Word
+                    </button>
+                    <button class="download-btn pdf" onclick="downloadTemplate('experienced-achievement', 'pdf')">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v2.5zm3.5 3.5H12V7h3v1.5h-1.5v1H15v1.5h-1.5v1zm5-3.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5V9c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v2.5z"/></svg>
+                        PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function downloadTemplate(templateName, format) {
+            // Create template content based on template name
+            let content = generateTemplateContent(templateName);
+            
+            if (format === 'word') {
+                // For Word format, create HTML file that can be opened in Word
+                const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Resume Template</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 40px; }
+        .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 20px; }
+        .name { font-size: 28px; font-weight: bold; color: #333; }
+        .contact { font-size: 14px; color: #666; margin-top: 10px; }
+        .section { margin-top: 25px; }
+        .section-title { font-size: 18px; font-weight: bold; color: #667eea; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+        .content { margin-top: 15px; }
+        .item { margin-bottom: 15px; }
+        .item-title { font-weight: bold; }
+        .item-subtitle { font-style: italic; color: #666; }
+        .item-date { float: right; font-size: 14px; color: #999; }
+    </style>
+</head>
+<body>
+${content}
+</body>
+</html>`;
+                
+                const blob = new Blob([htmlContent], { type: 'application/msword' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${templateName}-resume.doc`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } else if (format === 'pdf') {
+                // For PDF format, use browser's print functionality
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Resume Template</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 40px; }
+        .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 20px; }
+        .name { font-size: 28px; font-weight: bold; color: #333; }
+        .contact { font-size: 14px; color: #666; margin-top: 10px; }
+        .section { margin-top: 25px; }
+        .section-title { font-size: 18px; font-weight: bold; color: #667eea; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+        .content { margin-top: 15px; }
+        .item { margin-bottom: 15px; }
+        .item-title { font-weight: bold; }
+        .item-subtitle { font-style: italic; color: #666; }
+        .item-date { float: right; font-size: 14px; color: #999; }
+        @media print { body { padding: 0; } }
+    </style>
+</head>
+<body>
+${content}
+</body>
+</html>`);
+                printWindow.document.close();
+                setTimeout(() => {
+                    printWindow.print();
+                }, 250);
+            }
+        }
+        
+        function generateTemplateContent(templateName) {
+            const templates = {
+                'fresher-modern': `
+<div class="header">
+    <div class="name">John Doe</div>
+    <div class="contact">john.doe@email.com | (555) 123-4567 | LinkedIn: linkedin.com/in/johndoe</div>
+</div>
+<div class="section">
+    <div class="section-title">OBJECTIVE</div>
+    <div class="content">Recent graduate with a degree in Computer Science seeking an entry-level position in software development. Passionate about learning new technologies and contributing to innovative projects.</div>
+</div>
+<div class="section">
+    <div class="section-title">EDUCATION</div>
+    <div class="content">
+        <div class="item">
+            <div class="item-title">Bachelor of Science in Computer Science</div>
+            <div class="item-subtitle">University of Technology</div>
+            <div class="item-date">2020 - 2024</div>
+            <div>GPA: 3.8/4.0 | Dean's List</div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-title">SKILLS</div>
+    <div class="content">
+        <div><strong>Programming:</strong> Python, Java, JavaScript, HTML, CSS</div>
+        <div><strong>Tools:</strong> Git, VS Code, Docker, AWS</div>
+        <div><strong>Soft Skills:</strong> Communication, Teamwork, Problem-solving</div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-title">PROJECTS</div>
+    <div class="content">
+        <div class="item">
+            <div class="item-title">Web Application Development</div>
+            <div class="item-subtitle">Personal Project</div>
+            <div>Developed a full-stack web application using React and Node.js</div>
+        </div>
+    </div>
+</div>`,
+                'fresher-professional': `
+<div class="header">
+    <div class="name">Jane Smith</div>
+    <div class="contact">jane.smith@email.com | (555) 987-6543 | GitHub: github.com/janesmith</div>
+</div>
+<div class="section">
+    <div class="section-title">PROFESSIONAL SUMMARY</div>
+    <div class="content">Motivated and detail-oriented graduate with strong analytical skills and a passion for technology. Seeking to leverage academic background and internship experience in a challenging entry-level role.</div>
+</div>
+<div class="section">
+    <div class="section-title">EDUCATION</div>
+    <div class="content">
+        <div class="item">
+            <div class="item-title">Master of Science in Data Science</div>
+            <div class="item-subtitle">State University</div>
+            <div class="item-date">2022 - 2024</div>
+        </div>
+        <div class="item">
+            <div class="item-title">Bachelor of Science in Mathematics</div>
+            <div class="item-subtitle">State University</div>
+            <div class="item-date">2018 - 2022</div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-title">INTERNSHIP EXPERIENCE</div>
+    <div class="content">
+        <div class="item">
+            <div class="item-title">Data Analyst Intern</div>
+            <div class="item-subtitle">Tech Company Inc.</div>
+            <div class="item-date">Summer 2023</div>
+            <div>Analyzed customer data and created reports for business intelligence</div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-title">TECHNICAL SKILLS</div>
+    <div class="content">
+        <div><strong>Languages:</strong> Python, R, SQL, JavaScript</div>
+        <div><strong>Libraries:</strong> Pandas, NumPy, Scikit-learn, TensorFlow</div>
+        <div><strong>Tools:</strong> Jupyter, Tableau, Excel, Git</div>
+    </div>
+</div>`,
+                'fresher-creative': `
+<div class="header">
+    <div class="name">Alex Johnson</div>
+    <div class="contact">alex.johnson@email.com | (555) 456-7890 | Portfolio: alexjohnson.design</div>
+</div>
+<div class="section">
+    <div class="section-title">CREATIVE PROFILE</div>
+    <div class="content">Creative and innovative designer with a passion for user experience and visual storytelling. Looking to bring fresh perspectives and design thinking to a dynamic team.</div>
+</div>
+<div class="section">
+    <div class="section-title">EDUCATION</div>
+    <div class="content">
+        <div class="item">
+            <div class="item-title">Bachelor of Fine Arts in Graphic Design</div>
+            <div class="item-subtitle">Design Institute</div>
+            <div class="item-date">2020 - 2024</div>
+            <div>Senior Project Award | Design Competition Winner</div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-title">CREATIVE SKILLS</div>
+    <div class="content">
+        <div><strong>Design:</strong> Adobe Creative Suite, Figma, Sketch, InVision</div>
+        <div><strong>Branding:</strong> Logo Design, Brand Identity, Visual Systems</div>
+        <div><strong>Motion:</strong> After Effects, Premiere Pro, Animation</div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-title">PORTFOLIO PROJECTS</div>
+    <div class="content">
+        <div class="item">
+            <div class="item-title">Brand Redesign Project</div>
+            <div>Complete rebranding of a local startup including logo, website, and marketing materials</div>
+        </div>
+        <div class="item">
+            <div class="item-title">Mobile App Design</div>
+            <div>UI/UX design for a fitness tracking application with 50k+ downloads</div>
+        </div>
+    </div>
+</div>`,
+                'experienced-executive': `
+<div class="header">
+    <div class="name">Robert Williams</div>
+    <div class="contact">robert.williams@email.com | (555) 111-2222 | LinkedIn: linkedin.com/in/robertwilliams</div>
+</div>
+<div class="section">
+    <div class="section-title">EXECUTIVE SUMMARY</div>
+    <div class="content">Results-driven executive with 15+ years of experience in strategic leadership and business development. Proven track record of driving revenue growth and leading high-performing teams across multiple industries.</div>
+</div>
+<div class="section">
+    <div class="section-title">PROFESSIONAL EXPERIENCE</div>
+    <div class="content">
+        <div class="item">
+            <div class="item-title">Chief Operating Officer</div>
+            <div class="item-subtitle">Global Corporation</div>
+            <div class="item-date">2020 - Present</div>
+            <div>Oversee operations across 5 international offices, managing 500+ employees and $200M annual budget. Increased operational efficiency by 35% and reduced costs by $15M annually.</div>
+        </div>
+        <div class="item">
+            <div class="item-title">Vice President of Operations</div>
+            <div class="item-subtitle">Tech Solutions Inc.</div>
+            <div class="item-date">2015 - 2020</div>
+            <div>Led operational transformation resulting in 40% revenue growth over 5 years. Managed cross-functional teams of 200+ professionals.</div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-title">LEADERSHIP & ACHIEVEMENTS</div>
+    <div class="content">
+        <div>• Led company through successful IPO, raising $500M in capital</div>
+        <div>• Implemented digital transformation strategy, saving $20M annually</div>
+        <div>• Mentored 15 executives who advanced to senior leadership roles</div>
+        <div>• Recognized as "Top 50 COOs" by Business Magazine 2023</div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-title">EDUCATION</div>
+    <div class="content">
+        <div class="item">
+            <div class="item-title">Master of Business Administration</div>
+            <div class="item-subtitle">Harvard Business School</div>
+            <div class="item-date">2013 - 2015</div>
+        </div>
+    </div>
+</div>`,
+                'experienced-technical': `
+<div class="header">
+    <div class="name">Michael Chen</div>
+    <div class="contact">michael.chen@email.com | (555) 333-4444 | GitHub: github.com/michaelchen</div>
+</div>
+<div class="section">
+    <div class="section-title">TECHNICAL SUMMARY</div>
+    <div class="content">Senior Software Engineer with 10+ years of experience in full-stack development, cloud architecture, and team leadership. Expert in building scalable systems and mentoring development teams.</div>
+</div>
+<div class="section">
+    <div class="section-title">TECHNICAL EXPERIENCE</div>
+    <div class="content">
+        <div class="item">
+            <div class="item-title">Senior Software Engineer</div>
+            <div class="item-subtitle">Amazon Web Services</div>
+            <div class="item-date">2019 - Present</div>
+            <div>Architected and implemented microservices handling 10M+ daily requests. Led team of 8 engineers, improving deployment frequency by 300%.</div>
+        </div>
+        <div class="item">
+            <div class="item-title">Software Engineer</div>
+            <div class="item-subtitle">Google</div>
+            <div class="item-date">2014 - 2019</div>
+            <div>Developed core features for Google Maps platform serving 1B+ users. Contributed to open-source projects with 10k+ GitHub stars.</div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-title">TECHNICAL SKILLS</div>
+    <div class="content">
+        <div><strong>Languages:</strong> Python, Java, Go, JavaScript, TypeScript, C++</div>
+        <div><strong>Cloud & DevOps:</strong> AWS, Kubernetes, Docker, Terraform, CI/CD</div>
+        <div><strong>Databases:</strong> PostgreSQL, MongoDB, Redis, DynamoDB</div>
+        <div><strong>Architecture:</strong> Microservices, Event-driven, Serverless</div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-title">KEY ACHIEVEMENTS</div>
+    <div class="content">
+        <div>• Reduced system latency by 60% through optimization</div>
+        <div>• Led migration of legacy systems to cloud architecture</div>
+        <div>• Published 3 technical papers at major conferences</div>
+        <div>• AWS Certified Solutions Architect Professional</div>
+    </div>
+</div>`,
+                'experienced-achievement': `
+<div class="header">
+    <div class="name">Sarah Martinez</div>
+    <div class="contact">sarah.martinez@email.com | (555) 555-6666 | LinkedIn: linkedin.com/in/sarahmartinez</div>
+</div>
+<div class="section">
+    <div class="section-title">ACHIEVEMENT-DRIVEN PROFILE</div>
+    <div class="content">Accomplished Sales Director with 12+ years of experience driving revenue growth and building high-performing teams. Consistently exceeded targets and recognized for exceptional leadership and strategic thinking.</div>
+</div>
+<div class="section">
+    <div class="section-title">CAREER ACHIEVEMENTS</div>
+    <div class="content">
+        <div class="item">
+            <div class="item-title">Revenue Growth Leader</div>
+            <div>Grew regional revenue from $5M to $25M (400% growth) over 4 years</div>
+        </div>
+        <div class="item">
+            <div class="item-title">Team Builder</div>
+            <div>Built and managed team of 25 sales professionals, achieving 95% retention rate</div>
+        </div>
+        <div class="item">
+            <div class="item-title">Award Winner</div>
+            <div>Sales Excellence Award 2021, 2022, 2023; President's Club 2020</div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-title">PROFESSIONAL EXPERIENCE</div>
+    <div class="content">
+        <div class="item">
+            <div class="item-title">Director of Sales</div>
+            <div class="item-subtitle">Fortune 500 Company</div>
+            <div class="item-date">2020 - Present</div>
+            <div>Direct sales operations for Northeast region, managing $50M annual revenue. Exceeded targets by 25% for 3 consecutive years.</div>
+        </div>
+        <div class="item">
+            <div class="item-title">Regional Sales Manager</div>
+            <div class="item-subtitle">Tech Solutions Inc.</div>
+            <div class="item-date">2016 - 2020</div>
+            <div>Managed sales across 10 states, growing territory revenue by 200% and expanding team from 5 to 15 representatives.</div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-title">KEY METRICS</div>
+    <div class="content">
+        <div>• Total Revenue Generated: $150M+ over career</div>
+        <div>• Team Size Managed: Up to 50 professionals</div>
+        <div>• Client Retention Rate: 98% (industry avg: 85%)</div>
+        <div>• Deals Closed: 500+ enterprise contracts</div>
+    </div>
+</div>`
+            };
+            
+            return templates[templateName] || templates['fresher-modern'];
+        }
+    </script>
+</body>
+</html>

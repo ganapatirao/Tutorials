@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOPS Programming E-Book</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #1a1a2e;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            min-height: 100vh;
+            padding: 25px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
+            animation: particleFloat 15s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border-radius: 32px;
+            box-shadow: 
+                0 30px 100px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: containerFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, 
+                #667eea 0%, 
+                #764ba2 20%, 
+                #f093fb 40%, 
+                #764ba2 60%, 
+                #667eea 80%, 
+                #764ba2 100%);
+            background-size: 300% 100%;
+            animation: shimmer 4s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -300% 0; }
+            100% { background-position: 300% 0; }
+        }
+        
+        .container::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: orbFloat 8s ease-in-out infinite;
+        }
+        
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 20px) scale(1.1); }
+            66% { transform: translate(20px, -10px) scale(0.9); }
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 
+                0 8px 25px rgba(102, 126, 234, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            animation: slideDown 0.8s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .back-button:hover::before {
+            left: 100%;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+        }
+        
+        .back-button svg {
+            width: 22px;
+            height: 22px;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover svg {
+            transform: translateX(-5px);
+        }
+        
+        h1 {
+            color: #1a1a2e;
+            font-size: 52px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
+            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
+        }
+        
+        @keyframes titleGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
+            background-size: 200% 100%;
+            border-radius: 3px;
+            animation: lineGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes lineGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #4a4a68;
+            margin-bottom: 40px;
+            font-weight: 500;
+            animation: fadeIn 1s ease 0.4s both;
+        }
+        
+        h2 {
+            color: #1a1a2e;
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            padding: 28px 35px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 8px solid #667eea;
+            border-radius: 0 20px 20px 0;
+            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            animation: slideIn 0.6s ease both;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        h2::before {
+            content: '';
+            width: 5px;
+            height: 45px;
+            background: linear-gradient(180deg, #764ba2, #f093fb);
+            border-radius: 3px;
+        }
+        
+        h3 {
+            color: #1a1a2e;
+            font-size: 26px;
+            font-weight: 600;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            padding-left: 25px;
+            border-left: 6px solid #764ba2;
+            animation: fadeIn 0.5s ease both;
+        }
+        
+        .chapter {
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+            padding: 40px;
+            margin: 35px 0;
+            border-radius: 20px;
+            border-left: 8px solid #28a745;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: slideUp 0.6s ease both;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .chapter:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+        }
+        
+        .code-block {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            color: #e0e0e0;
+            padding: 45px;
+            border-radius: 20px;
+            overflow-x: auto;
+            overflow-y: auto;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 15px;
+            margin: 35px 0;
+            line-height: 1.8;
+            border-left: 8px solid #dd0031;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            max-width: 100%;
+            animation: codeAppear 0.5s ease both;
+        }
+        
+        @keyframes codeAppear {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+        }
+        
+        
+        .toc {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 35px 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 8px solid #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            animation: slideUp 0.6s ease both;
+        }
+        
+        .toc h3 {
+            color: #1a1a2e;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-left: 0;
+            border-left: none;
+        }
+        
+        .toc ol {
+            padding-left: 25px;
+            color: #4a4a68;
+            line-height: 2;
+        }
+        
+        .toc ol li {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .question {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+            font-size: 18px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            animation: slideIn 0.5s ease both;
+        }
+        
+        .answer {
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+            padding: 30px 35px;
+            border-radius: 15px;
+            margin: 15px 0 25px 0;
+            border-left: 6px solid #764ba2;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            animation: slideUp 0.5s ease both;
+        }
+        
+        .answer p {
+            margin-bottom: 15px;
+            color: #1a1a2e;
+            line-height: 1.8;
+        }
+        
+        .answer h3 {
+            color: #667eea;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            padding-left: 0;
+            border-left: none;
+        }
+        
+        .answer ul, .answer ol {
+            padding-left: 25px;
+            margin-bottom: 15px;
+            color: #4a4a68;
+            line-height: 1.8;
+        }
+        
+        .answer ul li, .answer ol li {
+            margin-bottom: 8px;
+        }
+        
+        .answer strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .page-break {
+            page-break-after: always;
+            margin: 60px 0;
+            border-top: 2px dashed #e0e0e0;
+            padding-top: 40px;
+        }
+        
+        .important {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 6px solid #ffc107;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+        }
+        
+        .important strong {
+            color: #856404;
+        }
+        
+        .tip {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 6px solid #17a2b8;
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
+        }
+        
+        .tip strong {
+            color: #0c5460;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            color: #4a4a68;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover td {
+            background: #f8f9fa;
+        }
+        
+        p {
+            color: #1a1a2e;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 15px;
+            color: #4a4a68;
+            line-height: 1.8;
+        }
+        
+        ul li, ol li {
+            margin-bottom: 8px;
+        }
+        
+        strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 10px;
+            }
+            
+            .container {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+            
+            h1 {
+                font-size: 36px;
+                letter-spacing: -1px;
+                padding-bottom: 25px;
+            }
+            
+            h1::after {
+                width: 100px;
+                height: 4px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+            
+            h2 {
+                font-size: 24px;
+                padding: 20px 25px;
+                margin-top: 35px;
+                margin-bottom: 20px;
+            }
+            
+            h3 {
+                font-size: 20px;
+                padding-left: 20px;
+                margin-top: 25px;
+                margin-bottom: 15px;
+            }
+            
+            .back-button {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            .toc {
+                padding: 25px 20px;
+                margin: 30px 0;
+            }
+            
+            .toc h3 {
+                font-size: 20px;
+            }
+            
+            .toc ol {
+                padding-left: 20px;
+            }
+            
+            .question {
+                padding: 15px 20px;
+                font-size: 16px;
+                margin: 20px 0 12px 0;
+            }
+            
+            .answer {
+                padding: 20px 25px;
+                margin: 12px 0 20px 0;
+            }
+            
+            .answer h3 {
+                font-size: 18px;
+            }
+            
+            .answer ul, .answer ol {
+                padding-left: 20px;
+            }
+            
+            .code-block {
+                padding: 25px 20px;
+                font-size: 13px;
+                margin: 25px 0;
+                overflow-x: auto;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .chapter {
+                padding: 25px 20px;
+                margin: 25px 0;
+            }
+            
+            .important, .tip {
+                padding: 15px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+                padding-bottom: 20px;
+            }
+            
+            h1::after {
+                width: 80px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+            
+            h2 {
+                font-size: 20px;
+                padding: 15px 20px;
+            }
+            
+            h3 {
+                font-size: 18px;
+                padding-left: 15px;
+            }
+            
+            .back-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+            
+            .back-button svg {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+                border-radius: 15px;
+            }
+            
+            .question {
+                padding: 12px 15px;
+                font-size: 15px;
+            }
+            
+            .answer {
+                padding: 15px 18px;
+            }
+            
+            .code-block {
+                padding: 20px 15px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+                font-size: 11px;
+            }
+            
+            .toc {
+                padding: 20px 15px;
+            }
+            
+            .toc h3 {
+                font-size: 18px;
+            }
+            
+            .toc ol {
+                padding-left: 18px;
+            }
+        }</style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Home
+        </a>
+        <h1>OOPS Programming E-Book</h1>
+        <p class="subtitle">Complete Guide to Object-Oriented Programming Concepts and Best Practices</p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>Introduction to OOP</li>
+                <li>Classes and Objects</li>
+                <li>Encapsulation</li>
+                <li>Inheritance</li>
+                <li>Polymorphism</li>
+                <li>Abstraction</li>
+                <li>SOLID Principles</li>
+                <li>Design Patterns</li>
+                <li>OOP vs Procedural Programming</li>
+                <li>Best Practices</li>
+            </ol>
+        </div>
+
+        <h2>Chapter 1: Introduction to OOP</h2>
+
+        <div class="chapter">
+            <h3>1.1 What is Object-Oriented Programming?</h3>
+            <p>Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code. The data is in the form of fields (often known as attributes or properties), and the code is in the form of procedures (often known as methods).</p>
+            
+            <h3>1.2 History of OOP</h3>
+            <p>OOP concepts originated with Simula 67, a programming language designed for discrete event simulation. The concepts were further developed in Smalltalk, which introduced the term "object-oriented programming". Today, OOP is used in many popular languages including Java, C++, C#, Python, and more.</p>
+            
+            <h3>1.3 Why Use OOP?</h3>
+            <ul>
+                <li><strong>Modularity</strong>: Break down complex problems into smaller, manageable pieces</li>
+                <li><strong>Reusability</strong>: Write code once and reuse it in different parts of the application</li>
+                <li><strong>Maintainability</strong>: Easier to understand, debug, and maintain</li>
+                <li><strong>Flexibility</strong>: Easy to modify and extend existing code</li>
+                <li><strong>Security</strong>: Data hiding protects internal state from external interference</li>
+            </ul>
+            
+            <h3>1.4 Key OOP Concepts</h3>
+            <ul>
+                <li><strong>Class</strong>: Blueprint or template for creating objects</li>
+                <li><strong>Object</strong>: Instance of a class with state and behavior</li>
+                <li><strong>Encapsulation</strong>: Bundling data and methods together</li>
+                <li><strong>Inheritance</strong>: Creating new classes from existing classes</li>
+                <li><strong>Polymorphism</strong>: Objects taking many forms</li>
+                <li><strong>Abstraction</strong>: Hiding implementation details</li>
+            </ul>
+        </div>
+
+        <h2>Chapter 2: Classes and Objects</h2>
+
+        <div class="chapter">
+            <h3>2.1 What is a Class?</h3>
+            <p>A class is a blueprint or template that defines the properties and behaviors of objects. It specifies what data an object will hold and what operations can be performed on that data.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Class definition in C#
+public class Car
+{
+    // Properties (state)
+    public string Brand { get; set; }
+    public string Model { get; set; }
+    public int Year { get; set; }
+    
+    // Constructor
+    public Car(string brand, string model, int year)
+    {
+        Brand = brand;
+        Model = model;
+        Year = year;
+    }
+    
+    // Methods (behavior)
+    public void Start()
+    {
+        Console.WriteLine("Car is starting");
+    }
+    
+    public void Accelerate()
+    {
+        Console.WriteLine("Car is accelerating");
+    }
+    
+    public void Brake()
+    {
+        Console.WriteLine("Car is braking");
+    }
+}</code></pre></div>
+            
+            <h3>2.2 What is an Object?</h3>
+            <p>An object is an instance of a class. It has state (values of properties) and behavior (methods). Multiple objects can be created from a single class.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Creating objects
+Car car1 = new Car("Toyota", "Camry", 2022);
+Car car2 = new Car("Honda", "Civic", 2023);
+
+// Accessing object properties
+Console.WriteLine(car1.Brand); // Toyota
+Console.WriteLine(car2.Model); // Civic
+
+// Calling object methods
+car1.Start();
+car2.Accelerate();</code></pre></div>
+            
+            <div class="example">
+                <strong>Real-world Example:</strong> Think of a class as a blueprint for a house, and objects as the actual houses built from that blueprint. The blueprint defines the structure, but each house can have different paint colors, furniture, etc.
+            </div>
+        </div>
+
+        <h2>Chapter 3: Encapsulation</h2>
+
+        <div class="chapter">
+            <h3>3.1 What is Encapsulation?</h3>
+            <p>Encapsulation is the bundling of data and methods that operate on that data within a single unit (class). It also involves restricting access to the internal state of an object, only allowing access through public methods.</p>
+            
+            <h3>3.2 Access Modifiers</h3>
+            <p>Access modifiers control the visibility and accessibility of class members:</p>
+            
+            <table>
+                <tr>
+                    <th>Modifier</th>
+                    <th>Same Class</th>
+                    <th>Same Package</th>
+                    <th>Subclass</th>
+                    <th>World</th>
+                </tr>
+                <tr>
+                    <td>public</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>protected</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✗</td>
+                </tr>
+                <tr>
+                    <td>default</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✗</td>
+                    <td>✗</td>
+                </tr>
+                <tr>
+                    <td>private</td>
+                    <td>✓</td>
+                    <td>✗</td>
+                    <td>✗</td>
+                    <td>✗</td>
+                </tr>
+            </table>
+            
+            <h3>3.3 Encapsulation Example</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>public class BankAccount
+{
+    // Private fields (encapsulated data)
+    private decimal _balance;
+    private string _accountNumber;
+    
+    // Constructor
+    public BankAccount(string accountNumber, decimal initialBalance)
+    {
+        _accountNumber = accountNumber;
+        _balance = initialBalance;
+    }
+    
+    // Public methods to access/modify private data
+    public decimal GetBalance()
+    {
+        return _balance;
+    }
+    
+    public void Deposit(decimal amount)
+    {
+        if (amount > 0)
+        {
+            _balance += amount;
+            Console.WriteLine($"Deposited: {amount:C}");
+        }
+        else
+        {
+            Console.WriteLine("Invalid deposit amount");
+        }
+    }
+    
+    public bool Withdraw(decimal amount)
+    {
+        if (amount > 0 && _balance >= amount)
+        {
+            _balance -= amount;
+            Console.WriteLine($"Withdrawn: {amount:C}");
+            return true;
+        }
+        Console.WriteLine("Insufficient funds or invalid amount");
+        return false;
+    }
+}</code></pre></div>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use properties (getters/setters) instead of public fields to implement encapsulation. This allows you to add validation logic later without breaking existing code.
+            </div>
+        </div>
+
+        <h2>Chapter 4: Inheritance</h2>
+
+        <div class="chapter">
+            <h3>4.1 What is Inheritance?</h3>
+            <p>Inheritance is a mechanism where a new class derives properties and behaviors from an existing class. It promotes code reusability and establishes a parent-child relationship between classes.</p>
+            
+            <h3>4.2 Types of Inheritance</h3>
+            <ul>
+                <li><strong>Single Inheritance</strong>: A class inherits from one parent class</li>
+                <li><strong>Multiple Inheritance</strong>: A class inherits from multiple parent classes (not supported in C#, supported in C++)</li>
+                <li><strong>Multilevel Inheritance</strong>: A class inherits from a derived class (chain inheritance)</li>
+                <li><strong>Hierarchical Inheritance</strong>: Multiple classes inherit from a single parent class</li>
+                <li><strong>Hybrid Inheritance</strong>: Combination of multiple inheritance types</li>
+            </ul>
+            
+            <h3>4.3 Inheritance Example</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Base class (Parent)
+public class Animal
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    
+    public Animal(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+    
+    public void Eat()
+    {
+        Console.WriteLine($"{Name} is eating");
+    }
+    
+    public void Sleep()
+    {
+        Console.WriteLine($"{Name} is sleeping");
+    }
+    
+    public virtual void MakeSound()
+    {
+        Console.WriteLine("Animal makes a sound");
+    }
+}
+
+// Derived class (Child)
+public class Dog : Animal
+{
+    public string Breed { get; set; }
+    
+    public Dog(string name, int age, string breed) : base(name, age)
+    {
+        Breed = breed;
+    }
+    
+    public void Fetch()
+    {
+        Console.WriteLine($"{Name} is fetching the ball");
+    }
+    
+    public override void MakeSound()
+    {
+        Console.WriteLine("Woof!");
+    }
+}
+
+// Another derived class
+public class Cat : Animal
+{
+    public Cat(string name, int age) : base(name, age) { }
+    
+    public void Scratch()
+    {
+        Console.WriteLine($"{Name} is scratching");
+    }
+    
+    public override void MakeSound()
+    {
+        Console.WriteLine("Meow!");
+    }
+}</code></pre></div>
+            
+            <h3>4.4 Method Overriding</h3>
+            <p>Method overriding allows a derived class to provide a specific implementation of a method that is already defined in its base class.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>Animal myDog = new Dog("Buddy", 5, "Golden Retriever");
+myDog.MakeSound(); // Outputs: Woof! (Dog's implementation)
+
+Animal myCat = new Cat("Whiskers", 3);
+myCat.MakeSound(); // Outputs: Meow! (Cat's implementation)</code></pre></div>
+        </div>
+
+        <h2>Chapter 5: Polymorphism</h2>
+
+        <div class="chapter">
+            <h3>5.1 What is Polymorphism?</h3>
+            <p>Polymorphism means "many forms". It allows objects of different types to be treated as objects of a common type. The same method can behave differently based on the object it's called on.</p>
+            
+            <h3>5.2 Types of Polymorphism</h3>
+            
+            <p><strong>Compile-time Polymorphism (Static Binding)</strong>: Method overloading and operator overloading.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public class Calculator
+{
+    // Method overloading
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+    
+    public double Add(double a, double b)
+    {
+        return a + b;
+    }
+    
+    public int Add(int a, int b, int c)
+    {
+        return a + b + c;
+    }
+    
+    public string Add(string a, string b)
+    {
+        return a + b;
+    }
+}</code></pre></div>
+            
+            <p><strong>Runtime Polymorphism (Dynamic Binding)</strong>: Method overriding and virtual methods.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public class Shape
+{
+    public virtual void Draw()
+    {
+        Console.WriteLine("Drawing shape");
+    }
+}
+
+public class Circle : Shape
+{
+    public override void Draw()
+    {
+        Console.WriteLine("Drawing circle");
+    }
+}
+
+public class Rectangle : Shape
+{
+    public override void Draw()
+    {
+        Console.WriteLine("Drawing rectangle");
+    }
+}
+
+// Polymorphism in action
+List<Shape> shapes = new List<Shape>
+{
+    new Circle(),
+    new Rectangle(),
+    new Circle()
+};
+
+foreach (Shape shape in shapes)
+{
+    shape.Draw(); // Calls appropriate method based on object type
+}</code></pre></div>
+            
+            <div class="important">
+                <strong>Important:</strong> Polymorphism enables you to write flexible and maintainable code. You can add new types without modifying existing code that uses the base type.
+            </div>
+        </div>
+
+        <h2>Chapter 6: Abstraction</h2>
+
+        <div class="chapter">
+            <h3>6.1 What is Abstraction?</h3>
+            <p>Abstraction is the concept of hiding complex implementation details and showing only the essential features of an object. It focuses on what an object does rather than how it does it.</p>
+            
+            <h3>6.2 Abstract Classes</h3>
+            <p>An abstract class cannot be instantiated and can contain both abstract methods (without implementation) and concrete methods (with implementation).</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public abstract class Vehicle
+{
+    public string Brand { get; set; }
+    public string Model { get; set; }
+    
+    public Vehicle(string brand, string model)
+    {
+        Brand = brand;
+        Model = model;
+    }
+    
+    // Abstract method - must be implemented by derived classes
+    public abstract void Start();
+    public abstract void Stop();
+    
+    // Concrete method - can be used as-is or overridden
+    public void Honk()
+    {
+        Console.WriteLine("Beep beep!");
+    }
+}
+
+public class Car : Vehicle
+{
+    public Car(string brand, string model) : base(brand, model) { }
+    
+    public override void Start()
+    {
+        Console.WriteLine("Car engine starting");
+    }
+    
+    public override void Stop()
+    {
+        Console.WriteLine("Car engine stopping");
+    }
+}</code></pre></div>
+            
+            <h3>6.3 Interfaces</h3>
+            <p>An interface defines a contract that classes must implement. It contains only method signatures (before C# 8) and no implementation.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public interface IShape
+{
+    double GetArea();
+    double GetPerimeter();
+}
+
+public interface IResizable
+{
+    void Resize(double factor);
+}
+
+public class Circle : IShape, IResizable
+{
+    public double Radius { get; set; }
+    
+    public Circle(double radius)
+    {
+        Radius = radius;
+    }
+    
+    public double GetArea()
+    {
+        return Math.PI * Radius * Radius;
+    }
+    
+    public double GetPerimeter()
+    {
+        return 2 * Math.PI * Radius;
+    }
+    
+    public void Resize(double factor)
+    {
+        Radius *= factor;
+    }
+}</code></pre></div>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use abstract classes when you want to share code among related classes. Use interfaces when you want to define a contract for unrelated classes or when you need multiple inheritance.
+            </div>
+        </div>
+
+        <h2>Chapter 7: SOLID Principles</h2>
+
+        <div class="chapter">
+            <h3>7.1 Single Responsibility Principle (SRP)</h3>
+            <p>A class should have only one reason to change. It should have a single responsibility.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Bad - Multiple responsibilities
+public class User
+{
+    public string Name { get; set; }
+    public string Email { get; set; }
+    
+    public void SaveToDatabase() { }
+    public void SendEmail() { }
+    public void Validate() { }
+}
+
+// Good - Single responsibility
+public class User
+{
+    public string Name { get; set; }
+    public string Email { get; set; }
+}
+
+public class UserRepository
+{
+    public void Save(User user) { }
+}
+
+public class EmailService
+{
+    public void SendEmail(User user) { }
+}
+
+public class UserValidator
+{
+    public bool Validate(User user) { }
+}</code></pre></div>
+            
+            <h3>7.2 Open/Closed Principle (OCP)</h3>
+            <p>Software entities should be open for extension but closed for modification.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Bad - Needs modification for new shapes
+public class AreaCalculator
+{
+    public double CalculateArea(object shape)
+    {
+        if (shape is Circle)
+            return Math.PI * Math.Pow(((Circle)shape).Radius, 2);
+        else if (shape is Rectangle)
+            return ((Rectangle)shape).Width * ((Rectangle)shape).Height;
+        // Need to add more conditions for new shapes
+    }
+}
+
+// Good - Open for extension
+public interface IShape
+{
+    double CalculateArea();
+}
+
+public class Circle : IShape
+{
+    public double Radius { get; set; }
+    public double CalculateArea()
+    {
+        return Math.PI * Math.Pow(Radius, 2);
+    }
+}
+
+public class Rectangle : IShape
+{
+    public double Width { get; set; }
+    public double Height { get; set; }
+    public double CalculateArea()
+    {
+        return Width * Height;
+    }
+}</code></pre></div>
+            
+            <h3>7.3 Liskov Substitution Principle (LSP)</h3>
+            <p>Subtypes must be substitutable for their base types without affecting the correctness of the program.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Bad - Violates LSP
+public class Bird
+{
+    public virtual void Fly()
+    {
+        Console.WriteLine("Flying");
+    }
+}
+
+public class Penguin : Bird
+{
+    public override void Fly()
+    {
+        throw new Exception("Penguins can't fly");
+    }
+}
+
+// Good - Follows LSP
+public class Bird { }
+
+public class FlyingBird : Bird
+{
+    public virtual void Fly()
+    {
+        Console.WriteLine("Flying");
+    }
+}
+
+public class Sparrow : FlyingBird
+{
+    public override void Fly()
+    {
+        Console.WriteLine("Sparrow flying");
+    }
+}
+
+public class Penguin : Bird
+{
+    public void Swim()
+    {
+        Console.WriteLine("Swimming");
+    }
+}</code></pre></div>
+            
+            <h3>7.4 Interface Segregation Principle (ISP)</h3>
+            <p>Clients should not be forced to depend on interfaces they don't use.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Bad - Fat interface
+public interface IWorker
+{
+    void Work();
+    void Eat();
+    void Sleep();
+}
+
+public class Robot : IWorker
+{
+    public void Work() { }
+    public void Eat() { throw new Exception(); }
+    public void Sleep() { throw new Exception(); }
+}
+
+// Good - Segregated interfaces
+public interface IWorker
+{
+    void Work();
+}
+
+public interface IEater
+{
+    void Eat();
+}
+
+public interface ISleeper
+{
+    void Sleep();
+}</code></pre></div>
+            
+            <h3>7.5 Dependency Inversion Principle (DIP)</h3>
+            <p>Depend on abstractions, not on concretions. High-level modules should not depend on low-level modules.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Bad - Depends on concrete implementation
+public class Switch
+{
+    private LightBulb bulb;
+    
+    public Switch()
+    {
+        bulb = new LightBulb();
+    }
+    
+    public void Toggle()
+    {
+        bulb.TurnOn();
+    }
+}
+
+// Good - Depends on abstraction
+public interface ISwitchable
+{
+    void TurnOn();
+    void TurnOff();
+}
+
+public class LightBulb : ISwitchable
+{
+    public void TurnOn() { Console.WriteLine("Light on"); }
+    public void TurnOff() { Console.WriteLine("Light off"); }
+}
+
+public class Switch
+{
+    private ISwitchable device;
+    
+    public Switch(ISwitchable device)
+    {
+        this.device = device;
+    }
+    
+    public void Toggle()
+    {
+        device.TurnOn();
+    }
+}</code></pre></div>
+        </div>
+
+        <h2>Chapter 8: Design Patterns</h2>
+
+        <div class="chapter">
+            <h3>8.1 Creational Patterns</h3>
+            
+            <p><strong>Singleton Pattern</strong>: Ensures a class has only one instance.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public sealed class Singleton
+{
+    private static Singleton instance = null;
+    private static readonly object padlock = new object();
+    
+    private Singleton() { }
+    
+    public static Singleton Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new Singleton();
+                    }
+                }
+            }
+            return instance;
+        }
+    }
+}</code></pre></div>
+            
+            <p><strong>Factory Method Pattern</strong>: Creates objects without specifying the exact class.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public interface IShape
+{
+    void Draw();
+}
+
+public class Circle : IShape
+{
+    public void Draw() => Console.WriteLine("Drawing Circle");
+}
+
+public class Rectangle : IShape
+{
+    public void Draw() => Console.WriteLine("Drawing Rectangle");
+}
+
+public class ShapeFactory
+{
+    public IShape GetShape(string shapeType)
+    {
+        return shapeType.ToLower() switch
+        {
+            "circle" => new Circle(),
+            "rectangle" => new Rectangle(),
+            _ => throw new ArgumentException("Invalid shape type")
+        };
+    }
+}</code></pre></div>
+            
+            <h3>8.2 Structural Patterns</h3>
+            
+            <p><strong>Adapter Pattern</strong>: Allows incompatible interfaces to work together.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public interface ITarget
+{
+    string GetRequest();
+}
+
+public class Adaptee
+{
+    public string GetSpecificRequest()
+    {
+        return "Specific request";
+    }
+}
+
+public class Adapter : ITarget
+{
+    private readonly Adaptee _adaptee;
+    
+    public Adapter(Adaptee adaptee)
+    {
+        _adaptee = adaptee;
+    }
+    
+    public string GetRequest()
+    {
+        return _adaptee.GetSpecificRequest();
+    }
+}</code></pre></div>
+            
+            <h3>8.3 Behavioral Patterns</h3>
+            
+            <p><strong>Observer Pattern</strong>: Defines a subscription mechanism to notify multiple objects about events.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public interface IObserver
+{
+    void Update(string message);
+}
+
+public interface ISubject
+{
+    void Attach(IObserver observer);
+    void Detach(IObserver observer);
+    void Notify(string message);
+}
+
+public class NewsPublisher : ISubject
+{
+    private List<IObserver> observers = new List<IObserver>();
+    
+    public void Attach(IObserver observer) => observers.Add(observer);
+    public void Detach(IObserver observer) => observers.Remove(observer);
+    
+    public void Notify(string message)
+    {
+        foreach (var observer in observers)
+        {
+            observer.Update(message);
+        }
+    }
+}</code></pre></div>
+        </div>
+
+        <h2>Chapter 9: OOP vs Procedural Programming</h2>
+
+        <div class="chapter">
+            <h3>9.1 Key Differences</h3>
+            
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>OOP</th>
+                    <th>Procedural Programming</th>
+                </tr>
+                <tr>
+                    <td>Focus</td>
+                    <td>Objects and their interactions</td>
+                    <td>Functions and procedures</td>
+                </tr>
+                <tr>
+                    <td>Data</td>
+                    <td>Data and methods bundled together</td>
+                    <td>Data separate from functions</td>
+                </tr>
+                <tr>
+                    <td>Access</td>
+                    <td>Controlled via access modifiers</td>
+                    <td>Global access to data</td>
+                </tr>
+                <tr>
+                    <td>Reuse</td>
+                    <td>Inheritance and composition</td>
+                    <td>Function libraries</td>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>Handles complex systems better</td>
+                    <td>Simpler for small programs</td>
+                </tr>
+                <tr>
+                    <td>Example</td>
+                    <td>C#, Java, Python</td>
+                    <td>C, Pascal, Fortran</td>
+                </tr>
+            </table>
+            
+            <h3>9.2 When to Use Each</h3>
+            
+            <div class="tip">
+                <strong>Use OOP when:</strong>
+                <ul>
+                    <li>Building large, complex applications</li>
+                    <li>Need for code reusability and maintainability</li>
+                    <li>Modeling real-world entities</li>
+                    <li>Multiple developers working on the project</li>
+                </ul>
+            </div>
+            
+            <div class="tip">
+                <strong>Use Procedural Programming when:</strong>
+                <ul>
+                    <li>Building small, simple programs</li>
+                    <li>Performance is critical</li>
+                    <li>Learning programming basics</li>
+                    <li>System-level programming</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Chapter 10: Best Practices</h2>
+
+        <div class="chapter">
+            <h3>10.1 General OOP Best Practices</h3>
+            <ul>
+                <li>Follow SOLID principles</li>
+                <li>Use composition over inheritance</li>
+                <li>Keep classes small and focused</li>
+                <li>Use meaningful names for classes and methods</li>
+                <li>Favor interfaces over abstract classes when possible</li>
+                <li>Implement proper encapsulation</li>
+                <li>Write unit tests for your classes</li>
+                <li>Document your code with XML comments</li>
+            </ul>
+            
+            <h3>10.2 Common Mistakes to Avoid</h3>
+            <ul>
+                <li>Creating god classes (classes that do too much)</li>
+                <li>Overusing inheritance</li>
+                <li>Breaking encapsulation with public fields</li>
+                <li>Tight coupling between classes</li>
+                <li>Ignoring error handling</li>
+                <li>Not following naming conventions</li>
+            </ul>
+            
+            <div class="important">
+                <strong>Important:</strong> Remember that OOP is a tool, not a solution. Use it when it makes sense for your problem, and don't force OOP patterns where simpler solutions would work better.
+            </div>
+            
+            <div class="tip">
+                <strong>Tip:</strong> The best way to learn OOP is through practice. Start with small projects and gradually apply OOP principles. Review your code regularly and refactor it to follow best practices.
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

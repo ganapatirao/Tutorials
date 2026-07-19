@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# Programming E-Book</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #1a1a2e;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            min-height: 100vh;
+            padding: 25px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Animated background particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
+            animation: particleFloat 15s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border-radius: 32px;
+            box-shadow: 
+                0 30px 100px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: containerFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, 
+                #667eea 0%, 
+                #764ba2 20%, 
+                #f093fb 40%, 
+                #764ba2 60%, 
+                #667eea 80%, 
+                #764ba2 100%);
+            background-size: 300% 100%;
+            animation: shimmer 4s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -300% 0; }
+            100% { background-position: 300% 0; }
+        }
+        
+        /* Floating orbs decoration */
+        .container::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: orbFloat 8s ease-in-out infinite;
+        }
+        
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 20px) scale(1.1); }
+            66% { transform: translate(20px, -10px) scale(0.9); }
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 
+                0 8px 25px rgba(102, 126, 234, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            animation: slideDown 0.8s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .back-button:hover::before {
+            left: 100%;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+        }
+        
+        .back-button svg {
+            width: 22px;
+            height: 22px;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover svg {
+            transform: translateX(-5px);
+        }
+        
+        h1 {
+            color: #1a1a2e;
+            font-size: 52px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
+            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
+        }
+        
+        @keyframes titleGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
+            background-size: 200% 100%;
+            border-radius: 3px;
+            animation: lineGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes lineGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #4a4a68;
+            margin-bottom: 40px;
+            font-weight: 500;
+            animation: fadeIn 1s ease 0.4s both;
+        }
+        
+        h2 {
+            color: #1a1a2e;
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            padding: 28px 35px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 8px solid #667eea;
+            border-radius: 0 20px 20px 0;
+            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            animation: slideIn 0.6s ease both;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        h2::before {
+            content: '';
+            width: 5px;
+            height: 45px;
+            background: linear-gradient(180deg, #764ba2, #f093fb);
+            border-radius: 3px;
+        }
+        
+        h3 {
+            color: #1a1a2e;
+            font-size: 26px;
+            font-weight: 600;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            padding-left: 25px;
+            border-left: 6px solid #764ba2;
+            animation: fadeIn 0.5s ease both;
+        }
+        
+        .chapter {
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+            padding: 40px;
+            margin: 35px 0;
+            border-radius: 20px;
+            border-left: 8px solid #28a745;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: slideUp 0.6s ease both;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .chapter:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+        }
+        
+        .code-block {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            color: #e0e0e0;
+            padding: 45px;
+            border-radius: 20px;
+            overflow-x: auto;
+            overflow-y: auto;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 15px;
+            margin: 35px 0;
+            line-height: 1.8;
+            border-left: 8px solid #dd0031;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            max-width: 100%;
+            animation: codeAppear 0.5s ease both;
+        }
+        
+        @keyframes codeAppear {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+        }
+        
+        .code-block code {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .code-block::before {
+            content: 'CODE';
+            position: absolute;
+            top: 18px;
+            right: 25px;
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 3px;
+            font-weight: 600;
+            z-index: 10;
+        }
+        
+        .toc {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 35px;
+            border-radius: 18px;
+            margin: 35px 0;
+            border-left: 6px solid #667eea;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .toc h3 {
+            color: #1a1a2e;
+            font-size: 26px;
+            margin-bottom: 25px;
+            border-left: none;
+            padding-left: 0;
+        }
+        
+        .toc ol {
+            margin-left: 30px;
+        }
+        
+        .toc li {
+            margin: 14px 0;
+            color: #4a4a68;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .toc a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
+            overflow: hidden;
+            overflow-x: auto;
+            display: block;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            padding: 18px;
+            text-align: left;
+            font-size: 15px;
+            white-space: nowrap;
+        }
+        
+        td {
+            padding: 18px;
+            border-bottom: 1px solid #e9ecef;
+            color: #4a4a68;
+            word-wrap: break-word;
+            max-width: 300px;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover {
+            background: #e9ecef;
+        }
+        
+        ul, ol {
+            margin: 25px 0;
+            padding-left: 35px;
+        }
+        
+        li {
+            margin: 12px 0;
+            color: #4a4a68;
+            line-height: 1.7;
+        }
+        
+        .tip {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 6px solid #ffc107;
+            margin: 25px 0;
+            font-weight: 500;
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.2);
+            word-wrap: break-word;
+        }
+        
+        .important {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 6px solid #17a2b8;
+            margin: 25px 0;
+            font-weight: 500;
+            box-shadow: 0 6px 20px rgba(23, 162, 184, 0.2);
+            word-wrap: break-word;
+        }
+        
+        .example {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 6px solid #4caf50;
+            margin: 25px 0;
+            font-weight: 500;
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.2);
+            word-wrap: break-word;
+        }
+        
+        .page-break {
+            page-break-before: always;
+            margin-top: 60px;
+        }
+        
+        @media print {
+            body { background: white; animation: none; }
+            .container { padding: 30px; box-shadow: none; backdrop-filter: none; }
+            .tip, .important { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+        
+        @media (max-width: 1024px) {
+            .container { padding: 40px; }
+        }
+        
+        @media (max-width: 768px) {
+            body { padding: 15px 10px; }
+            .container { padding: 35px 25px; border-radius: 20px; }
+            h1 { font-size: 36px; padding-bottom: 25px; }
+            .subtitle { font-size: 16px; margin-bottom: 30px; }
+            h2 { font-size: 24px; padding: 18px 20px; margin-bottom: 25px; }
+            h3 { font-size: 20px; padding-left: 15px; }
+            .chapter { padding: 25px; }
+            .code-block { padding: 25px; font-size: 13px; overflow-x: auto; }
+            .toc { padding: 25px; }
+            .toc h3 { font-size: 22px; }
+            .toc li { font-size: 14px; }
+            table { margin: 20px 0; overflow-x: auto; }
+            th, td { padding: 12px; font-size: 13px; }
+            td { max-width: 200px; }
+            .tip, .important, .example { padding: 20px; }
+            ul, ol { padding-left: 25px; }
+            li { font-size: 14px; }
+        }
+        
+        @media (max-width: 480px) {
+            body { padding: 10px 5px; }
+            .container { padding: 30px 20px; }
+            h1 { font-size: 30px; }
+            .subtitle { font-size: 15px; }
+            h2 { font-size: 22px; padding: 15px; }
+            h3 { font-size: 18px; }
+            .chapter { padding: 20px; }
+            .code-block { padding: 20px; font-size: 12px; overflow-x: auto; }
+            .toc { padding: 20px; }
+            .toc h3 { font-size: 20px; }
+            .toc li { font-size: 13px; }
+            table { margin: 15px 0; overflow-x: auto; }
+            th, td { padding: 10px; font-size: 12px; }
+            td { max-width: 150px; }
+            .tip, .important, .example { padding: 18px; font-size: 13px; }
+            ul, ol { padding-left: 20px; }
+            li { font-size: 13px; }
+        }
+        
+        @media (max-width: 360px) {
+            h1 { font-size: 26px; }
+            h2 { font-size: 20px; }
+            h3 { font-size: 17px; }
+            .chapter { padding: 18px; }
+            .code-block { padding: 18px; font-size: 11px; overflow-x: auto; }
+            .toc { padding: 18px; }
+            .toc h3 { font-size: 18px; }
+            th, td { padding: 8px; font-size: 11px; }
+            td { max-width: 120px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Home
+        </a>
+        <h1>C# Programming E-Book</h1>
+        <p style="font-size: 18px; color: #666; margin-bottom: 30px;"><strong>Complete Guide to C# Programming from Fundamentals to Advanced Concepts</strong></p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>Introduction to C#</li>
+                <li>C# Fundamentals</li>
+                <li>Data Types and Variables</li>
+                <li>Control Flow</li>
+                <li>Object-Oriented Programming</li>
+                <li>Advanced C# Features</li>
+                <li>Generics and Collections</li>
+                <li>Exception Handling</li>
+                <li>Delegates and Events</li>
+                <li>LINQ</li>
+                <li>Async/Await</li>
+                <li>Memory Management</li>
+                <li>Best Practices</li>
+            </ol>
+        </div>
+
+        <h2>Chapter 1: Introduction to C#</h2>
+
+        <div class="chapter">
+            <h3>1.1 What is C#?</h3>
+            <p>C# (pronounced "C-sharp") is a modern, object-oriented programming language developed by Microsoft as part of the .NET initiative. It was designed for building a wide range of applications that run on the .NET platform.</p>
+            
+            <h3>1.2 History of C#</h3>
+            <p>C# was developed by Microsoft and led by Anders Hejlsberg. It was first released in 2000 as part of Microsoft's .NET Framework. Since then, it has evolved through multiple versions, with C# 12 being the latest major release.</p>
+            
+            <h3>1.3 Key Features</h3>
+            <ul>
+                <li><strong>Object-Oriented</strong>: Supports encapsulation, inheritance, and polymorphism</li>
+                <li><strong>Type-Safe</strong>: Strongly typed language with compile-time type checking</li>
+                <li><strong>Component-Oriented</strong>: Supports properties, methods, events, and attributes</li>
+                <li><strong>Garbage Collection</strong>: Automatic memory management</li>
+                <li><strong>Modern Language Features</strong>: LINQ, async/await, pattern matching, records</li>
+                <li><strong>Cross-Platform</strong>: Runs on Windows, Linux, and macOS via .NET Core/.NET 5+</li>
+            </ul>
+            
+            <h3>1.4 C# Applications</h3>
+            <ul>
+                <li>Desktop applications (Windows Forms, WPF, MAUI)</li>
+                <li>Web applications (ASP.NET, Blazor)</li>
+                <li>Mobile applications (Xamarin, MAUI)</li>
+                <li>Game development (Unity)</li>
+                <li>Cloud services (Azure Functions)</li>
+                <li>Microservices</li>
+            </ul>
+        </div>
+
+        <h2>Chapter 2: C# Fundamentals</h2>
+
+        <div class="chapter">
+            <h3>2.1 Hello World Program</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Hello, World!");
+    }
+}</code></pre></div>
+            
+            <div class="example">
+                <strong>Explanation:</strong>
+                <ul>
+                    <li><code>using System;</code> - Imports the System namespace</li>
+                    <li><code>class Program</code> - Defines a class named Program</li>
+                    <li><code>static void Main</code> - Entry point of the program</li>
+                    <li><code>Console.WriteLine</code> - Outputs text to the console</li>
+                </ul>
+            </div>
+            
+            <h3>2.2 Comments in C#</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Single-line comment
+
+/*
+   Multi-line comment
+   Spans multiple lines
+*/
+
+/// XML documentation comment
+/// Used for generating documentation
+public class MyClass
+{
+    /// <summary>
+    /// Gets or sets the name
+    /// </summary>
+    public string Name { get; set; }
+}</code></pre></div>
+            
+            <h3>2.3 Namespaces</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>using System;
+using System.Collections.Generic;
+
+namespace MyApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Namespace example");
+        }
+    }
+}</code></pre></div>
+        </div>
+
+        <h2>Chapter 3: Data Types and Variables</h2>
+
+        <div class="chapter">
+            <h3>3.1 Value Types</h3>
+            <p>Value types store the actual data directly on the stack:</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Integral types
+byte b = 255;           // 8-bit unsigned (0 to 255)
+sbyte sb = -128;        // 8-bit signed (-128 to 127)
+short s = 32767;        // 16-bit signed
+ushort us = 65535;      // 16-bit unsigned
+int i = 2147483647;     // 32-bit signed
+uint ui = 4294967295U;  // 32-bit unsigned
+long l = 9223372036854775807L;   // 64-bit signed
+ulong ul = 18446744073709551615UL; // 64-bit unsigned
+
+// Floating-point types
+float f = 3.14f;        // 32-bit (7 digits precision)
+double d = 3.14159265359; // 64-bit (15-16 digits precision)
+
+// Other types
+bool flag = true;       // Boolean
+char c = 'A';           // 16-bit Unicode character
+decimal money = 100.50m; // 128-bit (28-29 digits precision)</code></pre></div>
+            
+            <h3>3.2 Reference Types</h3>
+            <p>Reference types store a reference to the data on the heap:</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// String
+string name = "John Doe";
+
+// Class
+Person person = new Person();
+
+// Array
+int[] numbers = new int[5];
+
+// Interface
+IEnumerable<int> collection = new List<int>();</code></pre></div>
+            
+            <h3>3.3 Variable Declaration and Initialization</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Explicit typing
+int age = 25;
+string name = "John";
+
+// Type inference (var)
+var count = 10;         // Compiler infers int
+var message = "Hello";  // Compiler infers string
+
+// Multiple declaration
+int x = 10, y = 20, z = 30;
+
+// Default values
+int a = default;         // 0
+string s = default;     // null
+bool b = default;       // false</code></pre></div>
+            
+            <h3>3.4 Constants</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// const - compile-time constant
+const double Pi = 3.14159;
+const int MaxUsers = 100;
+
+// readonly - runtime constant (can be set in constructor)
+class Configuration
+{
+    public readonly string ApiKey;
+    
+    public Configuration(string key)
+    {
+        ApiKey = key;
+    }
+}</code></pre></div>
+        </div>
+
+        <h2>Chapter 4: Control Flow</h2>
+
+        <div class="chapter">
+            <h3>4.1 Conditional Statements</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// if-else
+int score = 85;
+
+if (score >= 90)
+{
+    Console.WriteLine("Grade: A");
+}
+else if (score >= 80)
+{
+    Console.WriteLine("Grade: B");
+}
+else if (score >= 70)
+{
+    Console.WriteLine("Grade: C");
+}
+else
+{
+    Console.WriteLine("Grade: F");
+}
+
+// switch statement
+string day = "Monday";
+
+switch (day)
+{
+    case "Monday":
+        Console.WriteLine("Start of the week");
+        break;
+    case "Friday":
+        Console.WriteLine("End of the week");
+        break;
+    default:
+        Console.WriteLine("Mid week");
+        break;
+}
+
+// switch expression (C# 8+)
+string grade = score switch
+{
+    >= 90 => "A",
+    >= 80 => "B",
+    >= 70 => "C",
+    _ => "F"
+};</code></pre></div>
+            
+            <h3>4.2 Loops</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// for loop
+for (int i = 0; i < 10; i++)
+{
+    Console.WriteLine(i);
+}
+
+// while loop
+int count = 0;
+while (count < 10)
+{
+    Console.WriteLine(count);
+    count++;
+}
+
+// do-while loop
+int num = 0;
+do
+{
+    Console.WriteLine(num);
+    num++;
+} while (num < 10);
+
+// foreach loop
+int[] numbers = { 1, 2, 3, 4, 5 };
+foreach (int number in numbers)
+{
+    Console.WriteLine(number);
+}</code></pre></div>
+            
+            <h3>4.3 Jump Statements</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// break - exit loop
+for (int i = 0; i < 10; i++)
+{
+    if (i == 5)
+        break;
+    Console.WriteLine(i);
+}
+
+// continue - skip to next iteration
+for (int i = 0; i < 10; i++)
+{
+    if (i % 2 == 0)
+        continue;
+    Console.WriteLine(i);
+}
+
+// return - exit method
+int Calculate(int x, int y)
+{
+    return x + y;
+}</code></pre></div>
+        </div>
+
+        <h2>Chapter 5: Object-Oriented Programming</h2>
+
+        <div class="chapter">
+            <h3>5.1 Classes and Objects</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>public class Person
+{
+    // Fields
+    private string _name;
+    private int _age;
+    
+    // Constructor
+    public Person(string name, int age)
+    {
+        _name = name;
+        _age = age;
+    }
+    
+    // Properties
+    public string Name
+    {
+        get { return _name; }
+        set { _name = value; }
+    }
+    
+    public int Age
+    {
+        get { return _age; }
+        set { _age = value; }
+    }
+    
+    // Method
+    public void Introduce()
+    {
+        Console.WriteLine($"Hi, I'm {_name} and I'm {_age} years old.");
+    }
+}
+
+// Creating objects
+Person person = new Person("John", 30);
+person.Introduce();</code></pre></div>
+            
+            <h3>5.2 Inheritance</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Base class
+public class Animal
+{
+    public string Name { get; set; }
+    
+    public Animal(string name)
+    {
+        Name = name;
+    }
+    
+    public virtual void MakeSound()
+    {
+        Console.WriteLine("Animal makes a sound");
+    }
+}
+
+// Derived class
+public class Dog : Animal
+{
+    public string Breed { get; set; }
+    
+    public Dog(string name, string breed) : base(name)
+    {
+        Breed = breed;
+    }
+    
+    public override void MakeSound()
+    {
+        Console.WriteLine("Woof!");
+    }
+    
+    public void Fetch()
+    {
+        Console.WriteLine($"{Name} is fetching the ball!");
+    }
+}</code></pre></div>
+            
+            <h3>5.3 Polymorphism</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Method overloading (compile-time polymorphism)
+public class Calculator
+{
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+    
+    public double Add(double a, double b)
+    {
+        return a + b;
+    }
+    
+    public int Add(int a, int b, int c)
+    {
+        return a + b + c;
+    }
+}
+
+// Method overriding (runtime polymorphism)
+Animal animal = new Dog("Buddy", "Golden Retriever");
+animal.MakeSound(); // Outputs: Woof!</code></pre></div>
+            
+            <h3>5.4 Abstraction</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Abstract class
+public abstract class Shape
+{
+    public abstract double GetArea();
+    public abstract double GetPerimeter();
+    
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"Area: {GetArea()}");
+        Console.WriteLine($"Perimeter: {GetPerimeter()}");
+    }
+}
+
+// Concrete class
+public class Circle : Shape
+{
+    public double Radius { get; set; }
+    
+    public Circle(double radius)
+    {
+        Radius = radius;
+    }
+    
+    public override double GetArea()
+    {
+        return Math.PI * Radius * Radius;
+    }
+    
+    public override double GetPerimeter()
+    {
+        return 2 * Math.PI * Radius;
+    }
+}
+
+// Interface
+public interface IResizable
+{
+    void Resize(double factor);
+}
+
+public class Rectangle : Shape, IResizable
+{
+    public double Width { get; set; }
+    public double Height { get; set; }
+    
+    public Rectangle(double width, double height)
+    {
+        Width = width;
+        Height = height;
+    }
+    
+    public override double GetArea() => Width * Height;
+    public override double GetPerimeter() => 2 * (Width + Height);
+    
+    public void Resize(double factor)
+    {
+        Width *= factor;
+        Height *= factor;
+    }
+}</code></pre></div>
+        </div>
+
+        <h2>Chapter 6: Advanced C# Features</h2>
+
+        <div class="chapter">
+            <h3>6.1 Properties</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Auto-implemented properties
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+
+// Properties with backing fields
+public class BankAccount
+{
+    private decimal _balance;
+    
+    public decimal Balance
+    {
+        get { return _balance; }
+        private set { _balance = value; }
+    }
+    
+    public void Deposit(decimal amount)
+    {
+        if (amount > 0)
+            _balance += amount;
+    }
+}
+
+// Computed properties
+public class Circle
+{
+    public double Radius { get; set; }
+    
+    public double Area
+    {
+        get { return Math.PI * Radius * Radius; }
+    }
+}</code></pre></div>
+            
+            <h3>6.2 Indexers</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>public class StringCollection
+{
+    private string[] _items = new string[10];
+    
+    public string this[int index]
+    {
+        get { return _items[index]; }
+        set { _items[index] = value; }
+    }
+    
+    public string this[string key]
+    {
+        get { return _items.FirstOrDefault(item => item == key); }
+    }
+}
+
+// Usage
+var collection = new StringCollection();
+collection[0] = "Hello";
+collection[1] = "World";
+Console.WriteLine(collection[0]); // Hello</code></pre></div>
+            
+            <h3>6.3 Extension Methods</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>public static class StringExtensions
+{
+    public static bool IsNullOrEmpty(this string value)
+    {
+        return string.IsNullOrEmpty(value);
+    }
+    
+    public static string ToTitleCase(this string value)
+    {
+        return CultureInfo.CurrentCulture.TextInfo
+            .ToTitleCase(value.ToLower());
+    }
+    
+    public static string Reverse(this string value)
+    {
+        char[] charArray = value.ToCharArray();
+        Array.Reverse(charArray);
+        return new string(charArray);
+    }
+}
+
+// Usage
+string name = "john doe";
+bool isEmpty = name.IsNullOrEmpty();
+string title = name.ToTitleCase(); // John Doe
+string reversed = name.Reverse(); // eod nhoj</code></pre></div>
+        </div>
+
+        <h2>Chapter 7: Generics and Collections</h2>
+
+        <div class="chapter">
+            <h3>7.1 Generics</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Generic class
+public class Repository<T>
+{
+    private List<T> _items = new List<T>();
+    
+    public void Add(T item)
+    {
+        _items.Add(item);
+    }
+    
+    public T GetById(int id)
+    {
+        return _items[id];
+    }
+    
+    public IEnumerable<T> GetAll()
+    {
+        return _items;
+    }
+}
+
+// Generic method
+public T Max<T>(T a, T b) where T : IComparable<T>
+{
+    return a.CompareTo(b) > 0 ? a : b;
+}
+
+// Generic interface
+public interface IRepository<T>
+{
+    void Add(T item);
+    T GetById(int id);
+    IEnumerable<T> GetAll();
+}
+
+// Usage
+var intRepo = new Repository<int>();
+intRepo.Add(10);
+
+var stringRepo = new Repository<string>();
+stringRepo.Add("Hello");</code></pre></div>
+            
+            <h3>7.2 Collections</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// List<T>
+List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
+numbers.Add(6);
+numbers.Remove(3);
+
+// Dictionary<TKey, TValue>
+Dictionary<string, int> ages = new Dictionary<string, int>();
+ages["John"] = 30;
+ages["Jane"] = 25;
+
+// HashSet<T>
+HashSet<int> uniqueNumbers = new HashSet<int> { 1, 2, 3, 2, 1 };
+// Contains only: 1, 2, 3
+
+// Queue<T>
+Queue<string> queue = new Queue<string>();
+queue.Enqueue("First");
+queue.Enqueue("Second");
+string first = queue.Dequeue(); // "First"
+
+// Stack<T>
+Stack<int> stack = new Stack<int>();
+stack.Push(1);
+stack.Push(2);
+int top = stack.Pop(); // 2</code></pre></div>
+        </div>
+
+        <h2>Chapter 8: Exception Handling</h2>
+
+        <div class="chapter">
+            <h3>8.1 Try-Catch-Finally</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>try
+{
+    int result = 10 / 0;
+}
+catch (DivideByZeroException ex)
+{
+    Console.WriteLine("Division by zero");
+    Console.WriteLine($"Error: {ex.Message}");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"General error: {ex.Message}");
+}
+finally
+{
+    Console.WriteLine("Cleanup code always executes");
+}</code></pre></div>
+            
+            <h3>8.2 Throwing Exceptions</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>public class BankAccount
+{
+    private decimal _balance;
+    
+    public void Withdraw(decimal amount)
+    {
+        if (amount <= 0)
+        {
+            throw new ArgumentException("Amount must be positive");
+        }
+        
+        if (amount > _balance)
+        {
+            throw new InvalidOperationException("Insufficient funds");
+        }
+        
+        _balance -= amount;
+    }
+}</code></pre></div>
+            
+            <h3>8.3 Custom Exceptions</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>public class InsufficientFundsException : Exception
+{
+    public decimal Balance { get; }
+    public decimal RequestedAmount { get; }
+    
+    public InsufficientFundsException(
+        decimal balance, 
+        decimal requestedAmount)
+        : base($"Insufficient funds. Balance: {balance}, Requested: {requestedAmount}")
+    {
+        Balance = balance;
+        RequestedAmount = requestedAmount;
+    }
+}</code></pre></div>
+        </div>
+
+        <h2>Chapter 9: Delegates and Events</h2>
+
+        <div class="chapter">
+            <h3>9.1 Delegates</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Delegate declaration
+public delegate int Operation(int a, int b);
+
+// Using delegate
+Operation add = (a, b) => a + b;
+Operation multiply = (a, b) => a * b;
+
+int result1 = add(5, 3);      // 8
+int result2 = multiply(5, 3); // 15
+
+// Multicast delegate
+Operation combined = add + multiply;
+combined(5, 3); // Executes both delegates</code></pre></div>
+            
+            <h3>9.2 Events</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>public class Button
+{
+    public event EventHandler Click;
+    
+    public void OnClick()
+    {
+        Click?.Invoke(this, EventArgs.Empty);
+    }
+}
+
+public class ButtonHandler
+{
+    public void HandleClick(object sender, EventArgs e)
+    {
+        Console.WriteLine("Button clicked!");
+    }
+}
+
+// Usage
+var button = new Button();
+var handler = new ButtonHandler();
+
+button.Click += handler.HandleClick;
+button.OnClick(); // Button clicked!</code></pre></div>
+        </div>
+
+        <h2>Chapter 10: LINQ</h2>
+
+        <div class="chapter">
+            <h3>10.1 LINQ Query Syntax</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+// Query syntax
+var evenNumbers = from num in numbers
+                  where num % 2 == 0
+                  select num;
+
+var squaredNumbers = from num in numbers
+                     select num * num;</code></pre></div>
+            
+            <h3>10.2 LINQ Method Syntax</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Method syntax
+var evenNumbers = numbers.Where(n => n % 2 == 0);
+var squaredNumbers = numbers.Select(n => n * n);
+var sortedNumbers = numbers.OrderBy(n => n);
+var groupedNumbers = numbers.GroupBy(n => n % 2);
+
+// Chaining operations
+var result = numbers
+    .Where(n => n > 5)
+    .OrderBy(n => n)
+    .Select(n => n * 2);</code></pre></div>
+            
+            <h3>10.3 Common LINQ Operations</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Filtering
+var filtered = numbers.Where(n => n > 5);
+
+// Projection
+var projected = numbers.Select(n => n * 2);
+
+// Sorting
+var sorted = numbers.OrderBy(n => n);
+var sortedDesc = numbers.OrderByDescending(n => n);
+
+// Aggregation
+var sum = numbers.Sum();
+var average = numbers.Average();
+var count = numbers.Count();
+var max = numbers.Max();
+var min = numbers.Min();
+
+// Grouping
+var grouped = numbers.GroupBy(n => n % 2);
+foreach (var group in grouped)
+{
+    Console.WriteLine($"Group {group.Key}: {string.Join(", ", group)}");
+}</code></pre></div>
+        </div>
+
+        <h2>Chapter 11: Async/Await</h2>
+
+        <div class="chapter">
+            <h3>11.1 Async Methods</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Synchronous (blocking)
+public string GetData()
+{
+    Thread.Sleep(1000); // Blocks thread
+    return "Data";
+}
+
+// Asynchronous (non-blocking)
+public async Task<string> GetDataAsync()
+{
+    await Task.Delay(1000); // Doesn't block thread
+    return "Data";
+}</code></pre></div>
+            
+            <h3>11.2 Calling Async Methods</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>public async Task ProcessDataAsync()
+{
+    // Sequential execution
+    string data1 = await GetDataAsync();
+    string data2 = await GetDataAsync();
+    
+    // Parallel execution
+    var task1 = GetDataAsync();
+    var task2 = GetDataAsync();
+    
+    await Task.WhenAll(task1, task2);
+    
+    Console.WriteLine($"Data1: {task1.Result}");
+    Console.WriteLine($"Data2: {task2.Result}");
+}</code></pre></div>
+            
+            <h3>11.3 Cancellation</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>public async Task ProcessWithCancellationAsync(
+    CancellationToken cancellationToken)
+{
+    try
+    {
+        await Task.Delay(5000, cancellationToken);
+        Console.WriteLine("Operation completed");
+    }
+    catch (OperationCanceledException)
+    {
+        Console.WriteLine("Operation was cancelled");
+    }
+}
+
+// Usage
+var cts = new CancellationTokenSource();
+var task = ProcessWithCancellationAsync(cts.Token);
+
+// Cancel after 2 seconds
+await Task.Delay(2000);
+cts.Cancel();</code></pre></div>
+        </div>
+
+        <h2>Chapter 12: Memory Management</h2>
+
+        <div class="chapter">
+            <h3>12.1 Garbage Collection</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// GC methods
+GC.Collect(); // Force garbage collection (usually not needed)
+GC.WaitForPendingFinalizers(); // Wait for finalizers
+GC.GetTotalMemory(false); // Get memory usage
+
+// IDisposable pattern
+public class ResourceHolder : IDisposable
+{
+    private IntPtr _unmanagedResource;
+    private bool _disposed = false;
+    
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+    
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                // Dispose managed resources
+            }
+            // Free unmanaged resources
+            CloseHandle(_unmanagedResource);
+            _disposed = true;
+        }
+    }
+    
+    ~ResourceHolder()
+    {
+        Dispose(false);
+    }
+}</code></pre></div>
+            
+            <h3>12.2 Using Statement</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Traditional way
+FileStream file = null;
+try
+{
+    file = new FileStream("test.txt", FileMode.Open);
+    // Process file
+}
+finally
+{
+    file?.Dispose();
+}
+
+// Using statement (recommended)
+using (var file = new FileStream("test.txt", FileMode.Open))
+{
+    // Process file
+} // Automatically calls Dispose()
+
+// Multiple using statements (C# 8+)
+using var file1 = new FileStream("file1.txt", FileMode.Open);
+using var file2 = new FileStream("file2.txt", FileMode.Open);
+// Both disposed at end of scope</code></pre></div>
+        </div>
+
+        <h2>Chapter 13: Best Practices</h2>
+
+        <div class="chapter">
+            <h3>13.1 Naming Conventions</h3>
+            
+            <div class="code-block" data-language="code"><pre><code>// Classes: PascalCase
+public class UserService { }
+
+// Methods: PascalCase
+public void GetUserById(int id) { }
+
+// Properties: PascalCase
+public string UserName { get; set; }
+
+// Fields: camelCase with underscore prefix
+private string _userName;
+
+// Local variables: camelCase
+string userName = "John";
+
+// Constants: PascalCase
+public const int MaxUsers = 100;
+
+// Interfaces: PascalCase with 'I' prefix
+public interface IUserService { }</code></pre></div>
+            
+            <h3>13.2 SOLID Principles</h3>
+            <ul>
+                <li><strong>S</strong>ingle Responsibility: Each class should have one reason to change</li>
+                <li><strong>O</strong>pen/Closed: Open for extension, closed for modification</li>
+                <li><strong>L</strong>iskov Substitution: Subtypes must be substitutable for base types</li>
+                <li><strong>I</strong>nterface Segregation: Clients shouldn't depend on unused interfaces</li>
+                <li><strong>D</strong>ependency Inversion: Depend on abstractions, not concretions</li>
+            </ul>
+            
+            <h3>13.3 Code Organization</h3>
+            <ul>
+                <li>Keep methods short and focused</li>
+                <li>Use meaningful names for variables and methods</li>
+                <li>Avoid magic numbers - use constants</li>
+                <li>Write unit tests for critical functionality</li>
+                <li>Use XML documentation for public APIs</li>
+                <li>Follow consistent coding style</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Always use async/await for I/O operations to keep your application responsive. Never use async void except for event handlers.
+            </div>
+            
+            <div class="important">
+                <strong>Important:</strong> Always dispose of objects that implement IDisposable using the using statement to prevent resource leaks.
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

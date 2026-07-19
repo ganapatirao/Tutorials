@@ -1,0 +1,2725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Interview Preparation Guide</title>
+                <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #1a1a2e;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            min-height: 100vh;
+            padding: 25px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
+            animation: particleFloat 15s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border-radius: 32px;
+            box-shadow: 
+                0 30px 100px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: containerFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, 
+                #667eea 0%, 
+                #764ba2 20%, 
+                #f093fb 40%, 
+                #764ba2 60%, 
+                #667eea 80%, 
+                #764ba2 100%);
+            background-size: 300% 100%;
+            animation: shimmer 4s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -300% 0; }
+            100% { background-position: 300% 0; }
+        }
+        
+        .container::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: orbFloat 8s ease-in-out infinite;
+        }
+        
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 20px) scale(1.1); }
+            66% { transform: translate(20px, -10px) scale(0.9); }
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 
+                0 8px 25px rgba(102, 126, 234, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            animation: slideDown 0.8s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .back-button:hover::before {
+            left: 100%;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+        }
+        
+        .back-button svg {
+            width: 22px;
+            height: 22px;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover svg {
+            transform: translateX(-5px);
+        }
+        
+        h1 {
+            color: #1a1a2e;
+            font-size: 52px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
+            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
+        }
+        
+        @keyframes titleGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
+            background-size: 200% 100%;
+            border-radius: 3px;
+            animation: lineGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes lineGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #4a4a68;
+            margin-bottom: 40px;
+            font-weight: 500;
+            animation: fadeIn 1s ease 0.4s both;
+        }
+        
+        h2 {
+            color: #1a1a2e;
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            padding: 28px 35px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 8px solid #667eea;
+            border-radius: 0 20px 20px 0;
+            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            animation: slideIn 0.6s ease both;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        h2::before {
+            content: '';
+            width: 5px;
+            height: 45px;
+            background: linear-gradient(180deg, #764ba2, #f093fb);
+            border-radius: 3px;
+        }
+        
+        h3 {
+            color: #1a1a2e;
+            font-size: 26px;
+            font-weight: 600;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            padding-left: 25px;
+            border-left: 6px solid #764ba2;
+            animation: fadeIn 0.5s ease both;
+        }
+        
+        .chapter {
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+            padding: 40px;
+            margin: 35px 0;
+            border-radius: 20px;
+            border-left: 8px solid #28a745;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: slideUp 0.6s ease both;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .chapter:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+        }
+        
+        .code-block {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            color: #e0e0e0;
+            padding: 45px;
+            border-radius: 20px;
+            overflow-x: auto;
+            overflow-y: auto;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 15px;
+            margin: 35px 0;
+            line-height: 1.8;
+            border-left: 8px solid #dd0031;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            max-width: 100%;
+            animation: codeAppear 0.5s ease both;
+        }
+        
+        @keyframes codeAppear {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+        }
+        
+        
+        .toc {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 35px 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 8px solid #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            animation: slideUp 0.6s ease both;
+        }
+        
+        .toc h3 {
+            color: #1a1a2e;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-left: 0;
+            border-left: none;
+        }
+        
+        .toc ol {
+            padding-left: 25px;
+            color: #4a4a68;
+            line-height: 2;
+        }
+        
+        .toc ol li {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .question {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+            font-size: 18px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            animation: slideIn 0.5s ease both;
+        }
+        
+        .answer {
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+            padding: 30px 35px;
+            border-radius: 15px;
+            margin: 15px 0 25px 0;
+            border-left: 6px solid #764ba2;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            animation: slideUp 0.5s ease both;
+        }
+        
+        .answer p {
+            margin-bottom: 15px;
+            color: #1a1a2e;
+            line-height: 1.8;
+        }
+        
+        .answer h3 {
+            color: #667eea;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            padding-left: 0;
+            border-left: none;
+        }
+        
+        .answer ul, .answer ol {
+            padding-left: 25px;
+            margin-bottom: 15px;
+            color: #4a4a68;
+            line-height: 1.8;
+        }
+        
+        .answer ul li, .answer ol li {
+            margin-bottom: 8px;
+        }
+        
+        .answer strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .page-break {
+            page-break-after: always;
+            margin: 60px 0;
+            border-top: 2px dashed #e0e0e0;
+            padding-top: 40px;
+        }
+        
+        .important {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 6px solid #ffc107;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+        }
+        
+        .important strong {
+            color: #856404;
+        }
+        
+        .tip {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 6px solid #17a2b8;
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
+        }
+        
+        .tip strong {
+            color: #0c5460;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            color: #4a4a68;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover td {
+            background: #f8f9fa;
+        }
+        
+        p {
+            color: #1a1a2e;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 15px;
+            color: #4a4a68;
+            line-height: 1.8;
+        }
+        
+        ul li, ol li {
+            margin-bottom: 8px;
+        }
+        
+                
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 10px;
+            }
+            
+            .container {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+            
+            h1 {
+                font-size: 36px;
+                letter-spacing: -1px;
+                padding-bottom: 25px;
+            }
+            
+            h1::after {
+                width: 100px;
+                height: 4px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+            
+            h2 {
+                font-size: 24px;
+                padding: 20px 25px;
+                margin-top: 35px;
+                margin-bottom: 20px;
+            }
+            
+            h3 {
+                font-size: 20px;
+                padding-left: 20px;
+                margin-top: 25px;
+                margin-bottom: 15px;
+            }
+            
+            .back-button {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            .toc {
+                padding: 25px 20px;
+                margin: 30px 0;
+            }
+            
+            .toc h3 {
+                font-size: 20px;
+            }
+            
+            .toc ol {
+                padding-left: 20px;
+            }
+            
+            .question {
+                padding: 15px 20px;
+                font-size: 16px;
+                margin: 20px 0 12px 0;
+            }
+            
+            .answer {
+                padding: 20px 25px;
+                margin: 12px 0 20px 0;
+            }
+            
+            .answer h3 {
+                font-size: 18px;
+            }
+            
+            .answer ul, .answer ol {
+                padding-left: 20px;
+            }
+            
+            .code-block {
+                padding: 25px 20px;
+                font-size: 13px;
+                margin: 25px 0;
+                overflow-x: auto;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .chapter {
+                padding: 25px 20px;
+                margin: 25px 0;
+            }
+            
+            .important, .tip {
+                padding: 15px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+                padding-bottom: 20px;
+            }
+            
+            h1::after {
+                width: 80px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+            
+            h2 {
+                font-size: 20px;
+                padding: 15px 20px;
+            }
+            
+            h3 {
+                font-size: 18px;
+                padding-left: 15px;
+            }
+            
+            .back-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+            
+            .back-button svg {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+                border-radius: 15px;
+            }
+            
+            .question {
+                padding: 12px 15px;
+                font-size: 15px;
+            }
+            
+            .answer {
+                padding: 15px 18px;
+            }
+            
+            .code-block {
+                padding: 20px 15px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+                font-size: 11px;
+            }
+            
+            .toc {
+                padding: 20px 15px;
+            }
+            
+            .toc h3 {
+                font-size: 18px;
+            }
+            
+            .toc ol {
+                padding-left: 18px;
+            }
+        }</style></head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Home
+        </a>
+        <h1>Docker Interview Preparation Guide</h1>
+        <p class="subtitle">Comprehensive Interview Preparation with In-Depth Concepts, Code Examples, and Best Practices</p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>Docker Fundamentals</li>
+                <li>Docker Architecture</li>
+                <li>Docker Images and Containers</li>
+                <li>Dockerfile and Building Images</li>
+                <li>Docker Compose</li>
+                <li>Docker Networking</li>
+                <li>Docker Storage and Volumes</li>
+                <li>Docker Registry</li>
+                <li>Docker Security</li>
+                <li>Docker Orchestration</li>
+                <li>Docker Performance Optimization</li>
+                <li>Docker Multi-Stage Builds</li>
+                <li>Docker Best Practices</li>
+                <li>Common Interview Questions</li>
+            </ol>
+        </div>
+
+        <h2>1. Docker Fundamentals</h2>
+
+        <div class="question">
+            Q1: What is Docker and why is it used?
+        </div>
+        <div class="answer">
+            <p><strong>Docker</strong> is an open-source platform for developing, shipping, and running applications in containers. It enables application isolation, portability, and consistency across environments.</p>
+            
+            <h3>Key Benefits:</h3>
+            <ul>
+                <li><strong>Consistency:</strong> Same environment across development, testing, and production</li>
+                <li><strong>Isolation:</strong> Applications run in isolated containers</li>
+                <li><strong>Portability:</strong> Containers run anywhere (Linux, Windows, Cloud)</li>
+                <li><strong>Efficiency:</strong> Lightweight compared to VMs</li>
+                <li><strong>Speed:</strong> Fast startup and deployment</li>
+                <li><strong>Scalability:</strong> Easy to scale horizontally</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q2: What is a container?
+        </div>
+        <div class="answer">
+            <p><strong>Container</strong> is a lightweight, standalone package that includes everything needed to run an application: code, runtime, system tools, libraries, and settings.</p>
+            
+            <h3>Key Characteristics:</h3>
+            <ul>
+                <li>Shares host OS kernel</li>
+                <li>Isolated from other containers</li>
+                <li>Portable across environments</li>
+                <li>Lightweight and fast</li>
+                <li>Immutable infrastructure</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q3: What is the difference between container and virtual machine?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Container</th>
+                    <th>Virtual Machine</th>
+                </tr>
+                <tr>
+                    <td>OS</td>
+                    <td>Shares host OS</td>
+                    <td>Has own OS</td>
+                </tr>
+                <tr>
+                    <td>Size</td>
+                    <td>Lightweight (MBs)</td>
+                    <td>Heavy (GBs)</td>
+                </tr>
+                <tr>
+                    <td>Startup</td>
+                    <td>Fast (seconds)</td>
+                    <td>Slow (minutes)</td>
+                </tr>
+                <tr>
+                    <td>Isolation</td>
+                    <td>Process-level</td>
+                    <td>Hardware-level</td>
+                </tr>
+                <tr>
+                    <td>Portability</td>
+                    <td>High</td>
+                    <td>Lower</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>2. Docker Architecture</h2>
+
+        <div class="question">
+            Q4: What are the key components of Docker architecture?
+        </div>
+        <div class="answer">
+            <h3>Docker Components:</h3>
+            <ul>
+                <li><strong>Docker Daemon (dockerd):</strong> Background service that manages Docker objects (images, containers, networks, volumes)</li>
+                <li><strong>Docker Client (docker):</strong> CLI tool that communicates with Docker Daemon</li>
+                <li><strong>Docker Registry:</strong> Stores and distributes Docker images (Docker Hub, private registries)</li>
+                <li><strong>Docker Objects:</strong> Images, containers, networks, volumes, services</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q5: What is the difference between Docker Daemon and Docker Client?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Docker Daemon:</strong> Background service that manages Docker objects. Listens for Docker API requests. Performs container operations.</li>
+                <li><strong>Docker Client:</strong> CLI tool that sends commands to Docker Daemon. Provides user interface. Communicates via REST API.</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>3. Docker Images and Containers</h2>
+
+        <div class="question">
+            Q6: What is a Docker image?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Image</strong> is a read-only template for creating containers. It contains the application code, libraries, dependencies, and runtime.</p>
+            
+            <h3>Key Characteristics:</h3>
+            <ul>
+                <li>Read-only</li>
+                <li>Layered file system</li>
+                <li>Immutable</li>
+                <li>Can be versioned</li>
+                <li>Stored in registries</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q7: What is the difference between Docker image and container?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Docker Image:</strong> Read-only template. Blueprint for containers. Can be shared and stored.</li>
+                <li><strong>Docker Container:</strong> Running instance of an image. Writable layer. Isolated runtime environment.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q8: What are Docker image layers?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Image Layers</strong> are read-only filesystems stacked on top of each other to form the final image.</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li><strong>Efficiency:</strong> Layers are cached and reused</li>
+                <li><strong>Speed:</strong> Only changed layers need to be rebuilt</li>
+                <li><strong>Size:</strong> Shared layers reduce storage</li>
+                <li><strong>Versioning:</strong> Each layer has a unique ID</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>4. Dockerfile and Building Images</h2>
+
+        <div class="question">
+            Q9: What is a Dockerfile?
+        </div>
+        <div class="answer">
+            <p><strong>Dockerfile</strong> is a text document that contains all the commands to assemble a Docker image. It's like a recipe for building images.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Example Dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q10: What are the common Dockerfile instructions?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Instruction</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>FROM</td>
+                    <td>Base image to build from</td>
+                </tr>
+                <tr>
+                    <td>RUN</td>
+                    <td>Execute commands during build</td>
+                </tr>
+                <tr>
+                    <td>CMD</td>
+                    <td>Default command to run on container start</td>
+                </tr>
+                <tr>
+                    <td>ENTRYPOINT</td>
+                    <td>Executable that runs on container start</td>
+                </tr>
+                <tr>
+                    <td>COPY</td>
+                    <td>Copy files from host to image</td>
+                </tr>
+                <tr>
+                    <td>ADD</td>
+                    <td>Copy files and URLs, auto-extract</td>
+                </tr>
+                <tr>
+                    <td>ENV</td>
+                    <td>Set environment variables</td>
+                </tr>
+                <tr>
+                    <td>EXPOSE</td>
+                    <td>Document exposed ports</td>
+                </tr>
+                <tr>
+                    <td>VOLUME</td>
+                    <td>Create mount point for volumes</td>
+                </tr>
+                <tr>
+                    <td>WORKDIR</td>
+                    <td>Set working directory</td>
+                </tr>
+                <tr>
+                    <td>USER</td>
+                    <td>Set user for RUN, CMD, ENTRYPOINT</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q11: What is the difference between CMD and ENTRYPOINT?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>CMD:</strong> Default command that can be overridden. Provides default arguments. Can be replaced at runtime.</li>
+                <li><strong>ENTRYPOINT:</strong> Main executable that cannot be overridden. Provides entry point. Can only be overridden with --entrypoint flag.</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>5. Docker Compose</h2>
+
+        <div class="question">
+            Q12: What is Docker Compose?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Compose</strong> is a tool for defining and running multi-container Docker applications. It uses YAML files to configure application services.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># docker-compose.yml
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_PASSWORD: example</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q13: What are the common Docker Compose commands?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker-compose up:</strong> Create and start containers</li>
+                <li><strong>docker-compose down:</strong> Stop and remove containers</li>
+                <li><strong>docker-compose build:</strong> Build or rebuild services</li>
+                <li><strong>docker-compose ps:</strong> List containers</li>
+                <li><strong>docker-compose logs:</strong> View output from containers</li>
+                <li><strong>docker-compose exec:</strong> Execute command in running container</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>6. Docker Networking</h2>
+
+        <div class="question">
+            Q14: What are Docker network types?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Bridge:</strong> Default network for containers. Isolated on host. Containers can communicate via IP.</li>
+                <li><strong>Host:</strong> No network isolation. Container uses host network. Good for high performance.</li>
+                <li><strong>None:</strong> No network access. Completely isolated. Good for security.</li>
+                <li><strong>Overlay:</strong> Multi-host networking. Connects containers across multiple hosts. Used in Swarm.</li>
+                <li><strong>Macvlan:</strong> Assign MAC address to container. Direct access to physical network.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q15: What is the difference between bridge and overlay networks?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Bridge</th>
+                    <th>Overlay</th>
+                </tr>
+                <tr>
+                    <td>Scope</td>
+                    <td>Single host</td>
+                    <td>Multi-host</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Local development</td>
+                    <td>Swarm, multi-host</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Better</td>
+                    <td>Slightly lower</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>7. Docker Storage and Volumes</h2>
+
+        <div class="question">
+            Q16: What are Docker storage drivers?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Storage Drivers</strong> manage how containers store and access data on the host filesystem.</p>
+            
+            <h3>Common Drivers:</h3>
+            <ul>
+                <li><strong>overlay2:</strong> Default for Linux. Best performance.</li>
+                <li><strong>btrfs:</strong> Btrfs filesystem support.</li>
+                <li><strong>zfs:</strong> ZFS filesystem support.</li>
+                <li><strong>vfs:</strong> For testing, no copy-on-write.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q17: What is a Docker volume?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Volume</strong> is a persistent data storage mechanism that exists independently of containers. It allows data to survive container deletion.</p>
+            
+            <h3>Volume Types:</h3>
+            <ul>
+                <li><strong>Named volumes:</strong> Managed by Docker. Created with docker volume create.</li>
+                <li><strong>Bind mounts:</strong> Map host directory to container. Managed by user.</li>
+                <li><strong>tmpfs mounts:</strong> Stored in host memory. Non-persistent.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q18: What is the difference between volume and bind mount?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Volume</th>
+                    <th>Bind Mount</th>
+                </tr>
+                <tr>
+                    <td>Management</td>
+                    <td>Docker managed</td>
+                    <td>User managed</td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td>Var/lib/docker/volumes</td>
+                    <td>User-specified path</td>
+                </tr>
+                <tr>
+                    <td>Portability</td>
+                    <td>High</td>
+                    <td>Low</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Production</td>
+                    <td>Development</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>8. Docker Registry</h2>
+
+        <div class="question">
+            Q19: What is a Docker registry?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Registry</strong> is a storage and distribution system for Docker images. It stores and serves Docker images.</p>
+            
+            <h3>Types:</h3>
+            <ul>
+                <li><strong>Docker Hub:</strong> Public registry by Docker. Free and private repositories.</li>
+                <li><strong>Private Registry:</strong> Self-hosted registry. For security and compliance.</li>
+                <li><strong>Third-party registries:</strong> AWS ECR, Azure Container Registry, Google GCR.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q20: What are the common Docker registry commands?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker login:</strong> Authenticate with registry</li>
+                <li><strong>docker pull:</strong> Pull image from registry</li>
+                <li><strong>docker push:</strong> Push image to registry</li>
+                <li><strong>docker search:</strong> Search for images in Docker Hub</li>
+                <li><strong>docker tag:</strong> Tag image for registry</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>9. Docker Security</h2>
+
+        <div class="question">
+            Q21: What are Docker security best practices?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Use official images:</strong> Prefer official images from Docker Hub</li>
+                <li><strong>Scan images:</strong> Use tools like Trivy, Clair to scan for vulnerabilities</li>
+                <li><strong>Use non-root user:</strong> Run containers as non-root user</li>
+                <li><strong>Minimize image size:</strong> Use alpine images, multi-stage builds</li>
+                <li><strong>Use secrets management:</strong> Don't hardcode secrets in images</li>
+                <li><strong>Enable Content Trust:</strong> Verify image signatures</li>
+                <li><strong>Use Docker Bench:</strong> Run Docker security benchmark</li>
+                <li><strong>Limit capabilities:</strong> Drop unnecessary Linux capabilities</li>
+                <li><strong>Use read-only filesystem:</strong> Make container filesystem read-only</li>
+                <li><strong>Network isolation:</strong> Use proper network segmentation</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q22: What is Docker Content Trust?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Content Trust (DCT)</strong> enables digital signing of Docker images. It ensures the integrity and authenticity of images pulled from or pushed to registries.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li>Image signing</li>
+                <li>Signature verification</li>
+                <li>Prevents image tampering</li>
+                <li>Ensures image authenticity</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>10. Docker Orchestration</h2>
+
+        <div class="question">
+            Q23: What is Docker Swarm?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Swarm</strong> is Docker's native clustering and orchestration tool. It turns a pool of Docker hosts into a single virtual host.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li>Native Docker integration</li>
+                <li>Declarative service model</li>
+                <li>Load balancing</li>
+                <li>Rolling updates</li>
+                <li>Service discovery</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q24: What is the difference between Docker Swarm and Kubernetes?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Docker Swarm</th>
+                    <th>Kubernetes</th>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>Simple</td>
+                    <td>Complex</td>
+                </tr>
+                <tr>
+                    <td>Scalability</td>
+                    <td>Limited</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>Ecosystem</td>
+                    <td>Smaller</td>
+                    <td>Larger</td>
+                </tr>
+                <tr>
+                    <td>Learning Curve</td>
+                    <td>Gentle</td>
+                    <td>Steep</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Simple deployments</td>
+                    <td>Enterprise, complex</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>11. Docker Performance Optimization</h2>
+
+        <div class="question">
+            Q25: How do you optimize Docker image size?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Use alpine images:</strong> Smaller base images</li>
+                <li><strong>Multi-stage builds:</strong> Separate build and runtime environments</li>
+                <li><strong>Minimize layers:</strong> Combine RUN commands</li>
+                <li><strong>Use .dockerignore:</strong> Exclude unnecessary files</li>
+                <li><strong>Clean up package cache:</strong> Remove cache after installation</li>
+                <li><strong>Use specific versions:</strong> Avoid latest tag</li>
+                <li><strong>Remove unnecessary files:</strong> Delete temp files, documentation</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q26: What is .dockerignore?
+        </div>
+        <div class="answer">
+            <p><strong>.dockerignore</strong> is a file that specifies patterns to exclude when building a Docker image. Similar to .gitignore.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># .dockerignore example
+node_modules
+npm-debug.log
+.git
+.env
+.DS_Store
+*.md</code></pre></div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>12. Docker Multi-Stage Builds</h2>
+
+        <div class="question">
+            Q27: What are multi-stage builds?
+        </div>
+        <div class="answer">
+            <p><strong>Multi-stage builds</strong> allow you to use multiple FROM statements in a Dockerfile. Each FROM starts a new build stage, and you can copy artifacts from one stage to another.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Multi-stage build example
+# Build stage
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Runtime stage
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY package*.json ./
+RUN npm install --production
+EXPOSE 3000
+CMD ["npm", "start"]</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q28: What are the benefits of multi-stage builds?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Smaller final image:</strong> Only runtime dependencies included</li>
+                <li><strong>Better security:</strong> Build tools not in final image</li>
+                <li><strong>Faster deployment:</strong> Smaller images download faster</li>
+                <li><strong>Clean separation:</strong> Build and runtime environments separate</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>13. Docker Best Practices</h2>
+
+        <div class="question">
+            Q29: What are Docker best practices for production?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Use specific image tags:</strong> Avoid latest tag</li>
+                <li><strong>Scan images for vulnerabilities:</strong> Use security scanning tools</li>
+                <li><strong>Use non-root user:</strong> Run containers as non-root</li>
+                <li><strong>Limit container resources:</strong> Set CPU and memory limits</li>
+                <li><strong>Use health checks:</strong> Implement container health checks</li>
+                <li><strong>Log to stdout/stderr:</strong> Centralized logging</li>
+                <li><strong>Use volumes for persistent data:</strong> Don't store data in containers</li>
+                <li><strong>Use .dockerignore:</strong> Exclude unnecessary files</li>
+                <li><strong>Minimize image layers:</strong> Combine RUN commands</li>
+                <li><strong>Use multi-stage builds:</strong> Optimize image size</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q30: What are Docker best practices for development?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Use Docker Compose:</strong> Manage multi-container applications</li>
+                <li><strong>Use bind mounts:</strong> Live code reloading</li>
+                <li><strong>Use volume mounts:</strong> Persist database data</li>
+                <li><strong>Use environment variables:</strong> Configure applications</li>
+                <li><strong>Use Dockerfile for dev:</strong> Include dev tools</li>
+                <li><strong>Use .env files:</strong> Manage environment variables</li>
+                <li><strong>Use docker-compose.override.yml:</strong> Local overrides</li>
+                <li><strong>Use hot reloading:</strong> Enable live reload in development</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>14. Common Interview Questions</h2>
+
+        <div class="question">
+            Q31: What is the difference between docker run and docker start?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker run:</strong> Creates a new container and starts it. Combines create and start. Used for first time.</li>
+                <li><strong>docker start:</strong> Starts an existing stopped container. Used for restarting containers.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q32: What is the difference between docker stop and docker kill?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker stop:</strong> Gracefully stops container. Sends SIGTERM, then SIGTERM after timeout. Allows cleanup.</li>
+                <li><strong>docker kill:</strong> Immediately stops container. Sends SIGKILL. No cleanup.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q33: What is the difference between docker pause and docker stop?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker pause:</strong> Suspends all processes in container. Keeps container running but frozen. Can be resumed.</li>
+                <li><strong>docker stop:</strong> Stops container completely. Processes terminated. Cannot be resumed, only restarted.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q34: What is the difference between docker exec and docker attach?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker exec:</strong> Run command in running container. Starts new process. Good for debugging.</li>
+                <li><strong>docker attach:</strong> Attach to container's main process. View container output. Good for monitoring.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q35: What is the difference between docker ps and docker inspect?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker ps:</strong> List running containers. Shows basic information. Good for overview.</li>
+                <li><strong>docker inspect:</strong> Detailed information about container. Shows configuration, state. Good for debugging.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q36: What is the difference between docker logs and docker events?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker logs:</strong> View container logs. Shows stdout/stderr. Good for application debugging.</li>
+                <li><strong>docker events:</strong> View Docker daemon events. Shows container lifecycle events. Good for monitoring.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q37: What is the difference between docker commit and docker build?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker commit:</strong> Create image from container. Captures container state. Not reproducible.</li>
+                <li><strong>docker build:</strong> Build image from Dockerfile. Reproducible builds. Best practice.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q38: What is the difference between docker export and docker save?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker export:</strong> Export container filesystem to tar. Creates flat image. Loses history and metadata.</li>
+                <li><strong>docker save:</strong> Save image to tar. Preserves layers and metadata. Can be loaded back.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q39: What is the difference between docker import and docker load?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker import:</strong> Import tar as image. Creates new image from export. No layers.</li>
+                <li><strong>docker load:</strong> Load image from tar. Restores saved image with layers.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q40: What is the difference between docker rmi and docker rm?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>docker rmi:</strong> Remove Docker image. Deletes image from local storage. Must stop containers first.</li>
+                <li><strong>docker rm:</strong> Remove Docker container. Deletes container. Must stop container first.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q41: What is the difference between COPY and ADD in Dockerfile?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>COPY:</strong> Copy files from host to image. Simple and transparent. Recommended for most cases.</li>
+                <li><strong>ADD:</strong> Copy files and URLs. Auto-extracts archives. Can download from URLs. More complex.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q42: What is the difference between ENTRYPOINT and CMD in Dockerfile?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>ENTRYPOINT:</strong> Executable that runs on container start. Cannot be overridden easily. Defines container's main process.</li>
+                <li><strong>CMD:</strong> Default arguments for ENTRYPOINT. Can be overridden. Provides default command.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q43: What is the difference between ENV and ARG in Dockerfile?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>ENV:</strong> Environment variable available at runtime. Persists in container. Can be overridden at runtime.</li>
+                <li><strong>ARG:</strong> Build-time variable. Only available during build. Not available at runtime.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q44: What is the difference between ONBUILD and STOPSIGNAL in Dockerfile?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>ONBUILD:</strong> Trigger instruction when image used as base. Good for base images. Deferred execution.</li>
+                <li><strong>STOPSIGNAL:</strong> Signal to send to container on stop. Default is SIGTERM. Can be overridden.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q45: What is the difference between HEALTHCHECK and SHELL in Dockerfile?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>HEALTHCHECK:</strong> Define health check command. Monitors container health. Can trigger restarts.</li>
+                <li><strong>SHELL:</strong> Override default shell. Changes shell used for RUN, CMD, ENTRYPOINT.</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q46: What are the common Docker troubleshooting scenarios?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Container won't start:</strong> Check image, logs, resource limits</li>
+                <li><strong>Container exits immediately:</strong> Check entrypoint, command, logs</li>
+                <li><strong>Network issues:</strong> Check network configuration, DNS, firewall</li>
+                <li><strong>Volume mounting issues:</strong> Check permissions, paths, SELinux</li>
+                <li><strong>Image pull failures:</strong> Check registry, authentication, network</li>
+                <li><strong>Resource exhaustion:</strong> Check CPU, memory, disk space</li>
+                <li><strong>Permission denied:</strong> Check user permissions, SELinux</li>
+                <li><strong>Port conflicts:</strong> Check port bindings, host ports</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q47: What is Docker Bench Security?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Bench Security</strong> is a script that checks for common security best practices in Docker deployments. It's based on the CIS Docker Benchmark.</p>
+            
+            <h3>Checks:</h3>
+            <ul>
+                <li>Host configuration</li>
+                <li>Docker daemon configuration</li>
+                <li>Docker daemon configuration files</li>
+                <li>Container images and build files</li>
+                <li>Container runtime</li>
+                <li>Docker security operations</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q48: What is Docker Scout?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Scout</strong> is a tool for analyzing and securing Docker images. It provides vulnerability scanning, image analysis, and best practice recommendations.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li>Vulnerability scanning</li>
+                <li>Image analysis</li>
+                <li>Base image recommendations</li>
+                <li>License compliance</li>
+                <li>CI/CD integration</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q49: What is Docker BuildKit?
+        </div>
+        <div class="answer">
+            <p><strong>Docker BuildKit</strong> is the next-generation builder for Docker. It provides improved performance, better caching, and more features.</p>
+            
+            <h3>Features:</h3>
+            <ul>
+                <li>Parallel build execution</li>
+                <li>Better caching</li>
+                <li>Secret management</li>
+                <li>SSH agent forwarding</li>
+                <li>Custom build outputs</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q50: What are the common Docker monitoring tools?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>cAdvisor:</strong> Container metrics collection</li>
+                <li><strong>Prometheus:</strong> Metrics storage and querying</li>
+                <li><strong>Grafana:</strong> Visualization and dashboards</li>
+                <li><strong>ELK Stack:</strong> Log aggregation and analysis</li>
+                <li><strong>Docker Stats:</strong> Built-in container stats</li>
+                <li><strong>Portainer:</strong> Docker management UI</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>15. Advanced Topics (All Experience Levels)</h2>
+
+        <div class="question">
+            Q51: How do you implement multi-stage builds for optimized images?
+        </div>
+        <div class="answer">
+            <p><strong>Multi-stage builds</strong> reduce image size by separating build and runtime dependencies.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Multi-stage build for .NET application
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /src
+
+# Copy project files
+COPY ["MyApp.csproj", "./"]
+RUN dotnet restore "MyApp.csproj"
+
+# Copy source code
+COPY . .
+RUN dotnet publish "MyApp.csproj" -c Release -o /app/publish
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+WORKDIR /app
+
+# Copy published output from build stage
+COPY --from=build /app/publish .
+
+# Non-root user for security
+RUN addgroup --system --gid 1001 appgroup &amp;&amp; \
+    adduser --system --uid 1001 --gid 1001 appuser
+USER appuser
+
+EXPOSE 80
+ENTRYPOINT ["dotnet", "MyApp.dll"]
+
+# Advanced multi-stage with caching
+FROM node:18-alpine AS deps
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --only=production &amp;&amp; \
+    npm cache clean --force
+
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
+
+FROM node:18-alpine AS runner
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY --from=deps /app/node_modules ./node_modules
+EXPOSE 3000
+CMD ["node", "dist/index.js"]</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q52: How do you implement Docker BuildKit with advanced features?
+        </div>
+        <div class="answer">
+            <p><strong>BuildKit</strong> provides advanced build capabilities including secrets, SSH, and caching.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Enable BuildKit
+DOCKER_BUILDKIT=1 docker build .
+
+# Secret management in BuildKit
+# syntax=docker/dockerfile:1.2
+FROM alpine
+RUN --mount=type=secret,id=aws \
+    AWS_ACCESS_KEY_ID=$(cat /run/secrets/aws) \
+    AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/aws_secret) \
+    aws s3 cp s3://bucket/file /file
+
+# Build with secret
+docker build --secret id=aws,env=AWS_ACCESS_KEY_ID \
+             --secret id=aws_secret,env=AWS_SECRET_ACCESS_KEY \
+             -t myapp .
+
+# SSH agent forwarding
+# syntax=docker/dockerfile:1.2
+FROM alpine
+RUN apk add --no-cache git openssh
+RUN --mount=type=ssh \
+    git clone git@github.com:user/repo.git
+
+# Build with SSH
+docker build --ssh default -t myapp .
+
+# Advanced caching with BuildKit
+FROM node:18 AS deps
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci
+
+FROM node:18 AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN --mount=type=cache,target=/root/.npm \
+    npm run build
+
+# Custom build outputs
+FROM alpine AS exporter
+COPY --from=builder /app/dist ./dist
+RUN tar -czf /output.tar.gz /dist</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q53: How do you implement Docker security scanning and hardening?
+        </div>
+        <div class="answer">
+            <p><strong>Security scanning</strong> identifies vulnerabilities in images before deployment.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Trivy vulnerability scanner
+trivy image myapp:latest
+
+# Scan with severity filter
+trivy image --severity HIGH,CRITICAL myapp:latest
+
+# Docker Scout
+docker scout quickview myapp:latest
+docker scout cves myapp:latest
+
+# Hardened Dockerfile
+FROM alpine:3.18
+
+# Install only necessary packages
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev &amp;&amp; \
+    apk add --no-cache curl &amp;&amp; \
+    # Build and cleanup
+    apk del .build-deps
+
+# Non-root user
+RUN addgroup -S appgroup &amp;&amp; adduser -S appuser -G appgroup
+USER appuser
+
+# Read-only filesystem
+COPY --chown=appuser:appgroup . /app
+WORKDIR /app
+
+# Minimal capabilities
+# In docker-compose.yml:
+# cap_drop:
+#   - ALL
+# cap_add:
+#   - NET_BIND_SERVICE
+
+# Security options in docker-compose
+security_opt:
+  - no-new-privileges:true
+  - apparmor:docker-default
+  - seccomp:seccomp-profile.json
+
+# Rootless Docker
+# Run Docker without root privileges
+dockerd-rootless-setuptool.sh install</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q54: How do you implement Docker networking for complex architectures?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced networking</strong> enables complex communication patterns between containers.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Custom bridge network
+docker network create --driver bridge --subnet 172.20.0.0/16 mynetwork
+
+# IPv6 networking
+docker network create --ipv6 --subnet 2001:db8::/64 ipv6net
+
+# MACVLAN network for direct physical network access
+docker network create -d macvlan \
+  --subnet=192.168.1.0/24 \
+  --gateway=192.168.1.1 \
+  -o parent=eth0 macvlan_net
+
+# Overlay network for multi-host
+docker network create -d overlay --attachable myoverlay
+
+# Network policies with Docker
+# docker-compose.yml
+version: '3.8'
+services:
+  app:
+    networks:
+      - frontend
+      - backend
+  db:
+    networks:
+      - backend
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+    internal: true
+
+# DNS configuration
+docker run --dns 8.8.8.8 --dns 8.8.4.4 myapp
+
+# Host networking for performance
+docker run --network host myapp
+
+# Container networking with custom DNS
+docker run --network mynetwork \
+  --dns-search mydomain.local \
+  --add-host database.internal:172.20.0.5 \
+  myapp</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q55: How do you implement Docker storage drivers and volume plugins?
+        </div>
+        <div class="answer">
+            <p><strong>Storage drivers</strong> determine how containers store and access data.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Check storage driver
+docker info | grep "Storage Driver"
+
+# Common storage drivers: overlay2, aufs, btrfs, zfs
+
+# Volume plugins (e.g., NFS, AWS EFS, Azure Files)
+# Using Convoy NFS plugin
+convoy volume create --driver=nfs --opt=nfs-server=192.168.1.100:/data myvol
+
+# Docker volume with local driver and options
+docker volume create --driver local \
+  --opt type=tmpfs \
+  --opt device=tmpfs \
+  --opt o=size=100m,uid=1000 \
+  myvolume
+
+# Bind mount with SELinux context
+docker run -v /host/path:/container/path:z myapp
+
+# Volume with NFS
+docker run -v nfs-server:/data:/container/path myapp
+
+# CSI (Container Storage Interface) volumes
+# For Kubernetes integration
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.1.100
+    path: /data
+
+# Docker Compose with volumes
+version: '3.8'
+services:
+  app:
+    volumes:
+      - data:/app/data
+      - type: bind
+        source: ./config
+        target: /app/config
+        read_only: true
+      - type: tmpfs
+        target: /tmp
+volumes:
+  data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /host/path/data</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q56: How do you implement Docker logging drivers and centralized logging?
+        </div>
+        <div class="answer">
+            <p><strong>Centralized logging</strong> aggregates logs from all containers for analysis.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Configure logging driver
+docker run --log-driver=json-file --log-opt max-size=10m myapp
+
+# Syslog logging
+docker run --log-driver=syslog \
+  --log-opt syslog-address=tcp://192.168.1.100:514 \
+  myapp
+
+# ELK Stack with Docker
+# docker-compose.yml
+version: '3.8'
+services:
+  app:
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+  elasticsearch:
+    image: elasticsearch:8.0
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+  logstash:
+    image: logstash:8.0
+    depends_on:
+      - elasticsearch
+  kibana:
+    image: kibana:8.0
+    depends_on:
+      - elasticsearch
+
+# Fluentd logging driver
+docker run --log-driver=fluentd \
+  --log-opt fluentd-address=localhost:24224 \
+  --log-opt tag=myapp \
+  myapp
+
+# Loki and Grafana
+version: '3.8'
+services:
+  app:
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+  loki:
+    image: grafana/loki
+  grafana:
+    image: grafana/grafana
+
+# Custom log format
+docker run --log-driver=json-file \
+  --log-opt labels=environment,service \
+  --label environment=production \
+  --label service=api \
+  myapp</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q57: How do you implement Docker resource management and limits?
+        </div>
+        <div class="answer">
+            <p><strong>Resource limits</strong> prevent containers from consuming excessive system resources.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># CPU limits
+docker run --cpus="1.5" myapp
+docker run --cpu-period=100000 --cpu-quota=150000 myapp
+docker run --cpuset-cpus="0,1" myapp
+
+# Memory limits
+docker run --memory="512m" myapp
+docker run --memory="512m" --memory-swap="1g" myapp
+docker run --memory-reservation="256m" myapp
+
+# Docker Compose resource limits
+version: '3.8'
+services:
+  app:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+# OOM killer prevention
+docker run --memory="512m" --memory-swap="512m" myapp
+
+# I/O limits
+docker run --device-read-bps /dev/sda:1mb myapp
+docker run --device-write-bps /dev/sda:1mb myapp
+
+# PIDs limit
+docker run --pids-limit 100 myapp
+
+# Ulimits
+docker run --ulimit nofile=65535:65535 myapp
+
+# Cgroup v2 for better resource isolation
+# Enable in /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"]
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q58: How do you implement Docker private registry and image distribution?
+        </div>
+        <div class="answer">
+            <p><strong>Private registries</strong> provide secure image storage and distribution.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Run Docker Registry
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
+
+# Registry with authentication
+docker run -d \
+  -p 5000:5000 \
+  --restart=always \
+  --name registry \
+  -v /auth:/auth \
+  -e REGISTRY_AUTH=htpasswd \
+  -e REGISTRY_AUTH_HTPASSWD_REALM="Registry Realm" \
+  -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
+  registry:2
+
+# Create htpasswd file
+htpasswd -Bn user password &gt; auth/htpasswd
+
+# Registry with TLS
+docker run -d \
+  -p 5000:5000 \
+  --restart=always \
+  --name registry \
+  -v /certs:/certs \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
+  -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
+  registry:2
+
+# Push to private registry
+docker tag myapp localhost:5000/myapp
+docker push localhost:5000/myapp
+
+# Configure insecure registry
+# /etc/docker/daemon.json
+{
+  "insecure-registries": ["myregistry.example.com:5000"]
+}
+
+# Harbor registry (enterprise-grade)
+version: '3.8'
+services:
+  harbor-db:
+    image: goharbor/harbor-db
+  harbor-core:
+    image: goharbor/harbor-core
+  harbor-jobservice:
+    image: goharbor/harbor-jobservice
+  harbor-portal:
+    image: goharbor/harbor-portal
+  harbor-registry:
+    image: goharbor/registry-photon
+
+# AWS ECR
+aws ecr get-login-password --region us-west-2 | \
+  docker login --username AWS --password-stdin 123456789.dkr.ecr.us-west-2.amazonaws.com
+docker push 123456789.dkr.ecr.us-west-2.amazonaws.com/myapp:latest</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q59: How do you implement Docker Compose for production deployments?
+        </div>
+        <div class="answer">
+            <p><strong>Production Compose</strong> includes health checks, restart policies, and proper configuration.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Production-ready docker-compose.yml
+version: '3.8'
+
+services:
+  app:
+    image: myapp:latest
+    deploy:
+      mode: replicated
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=db;Database=MyDb
+    env_file:
+      - .env.production
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: MyDb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d MyDb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - app
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+    internal: true
+
+volumes:
+  postgres_data:
+  redis_data:</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q60: How do you implement Docker monitoring and observability?
+        </div>
+        <div class="answer">
+            <p><strong>Observability stack</strong> provides metrics, logs, and traces for Docker containers.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Prometheus + Grafana + cAdvisor stack
+version: '3.8'
+services:
+  prometheus:
+    image: prom/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - "8080:8080"
+
+  node-exporter:
+    image: prom/node-exporter
+    ports:
+      - "9100:9100"
+
+volumes:
+  prometheus_data:
+  grafana_data:
+
+# Prometheus configuration
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+# Docker metrics endpoint
+docker run --name myapp \
+  --label prometheus.io/scrape="true" \
+  --label prometheus.io/port="8080" \
+  myapp</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q61: How do you implement Docker in production with orchestration?
+        </div>
+        <div class="answer">
+            <p><strong>Production orchestration</strong> uses Docker Swarm or Kubernetes for container management.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Docker Swarm mode
+docker swarm init
+
+# Deploy stack
+docker stack deploy -c docker-compose.yml mystack
+
+# Service scaling
+docker service scale mystack_app=5
+
+# Rolling update
+docker service update --image myapp:v2 mystack_app
+
+# Service rollback
+docker service rollback mystack_app
+
+# Service constraints
+version: '3.8'
+services:
+  app:
+    image: myapp
+    deploy:
+      mode: replicated
+      replicas: 3
+      placement:
+        constraints:
+          - node.labels.region == us-east
+          - node.role == worker
+        preferences:
+          - spread: node.labels.zone
+
+# Health checks in Swarm
+healthcheck:
+  test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+  interval: 30s
+  timeout: 10s
+  retries: 3
+
+# Secrets management
+echo "mysecret" | docker secret create my_secret -
+# docker-compose.yml
+secrets:
+  my_secret:
+    external: true
+services:
+  app:
+    secrets:
+      - my_secret
+
+# Configs management
+echo "myconfig" | docker config create my_config -
+# docker-compose.yml
+configs:
+  my_config:
+    external: true
+services:
+  app:
+    configs:
+      - my_config</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q62: How do you implement Docker rootless mode for security?
+        </div>
+        <div class="answer">
+            <p><strong>Rootless Docker</strong> runs containers without root privileges for improved security.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Install rootless Docker
+curl -fsSL https://get.docker.com/rootless | sh
+
+# Start rootless Docker
+systemctl --user start docker
+systemctl --user enable docker
+
+# Set environment variables
+export PATH=/home/user/bin:$PATH
+export DOCKER_HOST=unix:///run/user/1001/docker.sock
+
+# Run containers without root
+docker run -d --name myapp myapp
+
+# Limitations of rootless mode
+# - Cannot bind ports &lt; 1024
+# - Cannot access certain system features
+# - Some networking features limited
+
+# Workaround for port 80
+# Use reverse proxy or configure sysctl:
+# sysctl -w net.ipv4.ip_unprivileged_port_start=80
+
+# Rootless with Docker Compose
+# Set DOCKER_HOST environment variable
+export DOCKER_HOST=unix:///run/user/1001/docker.sock
+docker-compose up -d
+
+# Rootless in production with systemd
+# /etc/systemd/system/rootless-docker.service
+[Unit]
+Description=Docker Application Container Engine (Rootless)
+After=network-online.target docker.socket
+Wants=network-online.target
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/dockerd-rootless.sh
+ExecReload=/bin/kill -s HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q63: How do you implement Docker image signing and verification?
+        </div>
+        <div class="answer">
+            <p><strong>Image signing</strong> ensures image integrity and authenticity.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Docker Content Trust (DCT)
+export DOCKER_CONTENT_TRUST=1
+docker push myapp:latest
+
+# Sign image
+docker trust sign myapp:latest
+
+# Verify image
+docker trust inspect myapp:latest
+
+# Pull signed image
+docker pull myapp:latest
+
+# Notary for advanced signing
+# Generate keys
+notary key generate myapp
+
+# Initialize repository
+notary init myapp
+
+# Add delegation role
+notary delegation add targets/releases myapp
+
+# Sign and publish
+notary publish myapp
+
+# Verify with Notary
+notary verify myapp:latest
+
+# Cosign (Sigstore) signing
+cosign generate-key-pair
+cosign sign myapp:latest
+cosign verify myapp:latest
+
+# SBOM (Software Bill of Materials)
+syft myapp:latest -o spdx-json &gt; sbom.json
+cosign attach sbom sbom.json myapp:latest
+cosign verify-blob sbom.json</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q64: How do you implement Docker container runtime alternatives?
+        </div>
+        <div class="answer">
+            <p><strong>Alternative runtimes</strong> like containerd and Podman provide different capabilities.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># containerd directly
+ctr images pull docker.io/library/nginx:latest
+ctr run docker.io/library/nginx:latest nginx
+
+# Podman (rootless)
+podman run -d -p 8080:80 nginx
+
+# Podman with Docker Compose
+# Install podman-compose
+podman-compose up -d
+
+# Podman pods
+podman pod create --name mypod -p 8080:80
+podman run -d --pod mypod nginx
+podman pod start mypod
+
+# Podman generate Kubernetes YAML
+podman generate kube mypod &gt; mypod.yaml
+
+# runc low-level runtime
+runc run mycontainer
+
+# CRI-O for Kubernetes
+# Configure /etc/crio/crio.conf
+[crio.runtime]
+runtime = "runc"
+
+# Kata Containers for enhanced isolation
+# Install Kata Containers
+# Configure Docker daemon
+{
+  "runtimes": {
+    "kata-runtime": {
+      "path": "/usr/bin/kata-runtime"
+    }
+  }
+}
+
+# Use Kata runtime
+docker run --runtime=kata-runtime myapp</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q65: How do you implement Docker backup and disaster recovery?
+        </div>
+        <div class="answer">
+            <p><strong>Backup strategies</strong> ensure data and configuration recovery.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Backup volumes
+docker run --rm \
+  -v myvolume:/data \
+  -v $(pwd):/backup \
+  alpine tar czf /backup/myvolume-backup.tar.gz /data
+
+# Restore volumes
+docker run --rm \
+  -v myvolume:/data \
+  -v $(pwd):/backup \
+  alpine tar xzf /backup/myvolume-backup.tar.gz -C /
+
+# Backup Docker daemon configuration
+tar -czf docker-backup.tar.gz /var/lib/docker /etc/docker
+
+# Export images
+docker save -o images.tar myapp:latest another:latest
+
+# Import images
+docker load -i images.tar
+
+# Backup Docker Compose
+docker-compose config &gt; docker-compose-backup.yml
+
+# Automated backup script
+#!/bin/bash
+BACKUP_DIR="/backups/$(date +%Y%m%d)"
+mkdir -p $BACKUP_DIR
+
+# Backup volumes
+docker volume ls -q | while read vol; do
+  docker run --rm -v $vol:/data -v $BACKUP_DIR:/backup \
+    alpine tar czf /backup/$vol.tar.gz /data
+done
+
+# Backup images
+docker images --format '{{.Repository}}:{{.Tag}}' | grep -v '&lt;none&gt;' | \
+  while read img; do
+    docker save $img -o $BACKUP_DIR/$(echo $img | tr '/:' '-').tar
+  done
+
+# Restore from backup
+docker load -i /backups/20231201/myapp-latest.tar
+docker run --rm -v myvolume:/data -v /backups/20231201:/backup \
+  alpine tar xzf /backup/myvolume.tar.gz -C /</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q66: How do you implement Docker CI/CD integration?
+        </div>
+        <div class="answer">
+            <p><strong>CI/CD integration</strong> automates building, testing, and deploying Docker images.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># GitHub Actions workflow
+name: Docker CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: Build and push
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: true
+        tags: myapp:latest,myapp:${{ github.sha }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+    
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: myapp:latest
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+    
+    - name: Deploy
+      run: |
+        docker-compose -f docker-compose.prod.yml up -d
+
+# GitLab CI
+build-image:
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:latest</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q67: How do you implement Docker performance optimization?
+        </div>
+        <div class="answer">
+            <p><strong>Performance optimization</strong> reduces image size and improves container startup time.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Layer caching optimization
+# Order Dockerfile instructions by frequency of change
+FROM node:18-alpine
+WORKDIR /app
+
+# Copy dependency files first (rarely change)
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Copy source code (frequently change)
+COPY . .
+RUN npm run build
+
+# Use .dockerignore
+node_modules
+npm-debug.log
+.git
+.env
+*.md
+
+# Multi-stage for minimal images
+# See Q51 for examples
+
+# Use distroless images
+FROM gcr.io/distroless/nodejs
+COPY --from=builder /app/dist ./dist
+CMD ["dist/index.js"]
+
+# Remove unnecessary packages
+RUN apk add --no-cache --virtual .build-deps gcc &amp;&amp; \
+    apk add --no-cache curl &amp;&amp; \
+    # build
+    apk del .build-deps
+
+# Optimize ENTRYPOINT/CMD
+Use exec form for proper signal handling
+ENTRYPOINT ["dotnet", "MyApp.dll"]
+
+# Use .dockerignore patterns
+**/*.md
+**/*.txt
+.git
+.gitignore
+.vscode
+.idea
+node_modules
+npm-debug.log
+
+# Parallel builds with BuildKit
+DOCKER_BUILDKIT=1 docker build --build-arg BUILDKIT_INLINE_CACHE=1 -t myapp .
+
+# Squash layers (not recommended for caching)
+docker build --squash -t myapp .</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q68: How do you implement Docker troubleshooting strategies?
+        </div>
+        <div class="answer">
+            <p><strong>Advanced troubleshooting</strong> techniques for complex Docker issues.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Inspect container filesystem
+docker export mycontainer &gt; mycontainer.tar
+tar -xf mycontainer.tar
+
+# Debug with nsenter
+PID=$(docker inspect -f '{{.State.Pid}}' mycontainer)
+nsenter -t $PID -m -u -i -n sh
+
+# Network debugging
+docker run --net container:mycontainer nicolaka/netshoot
+
+# Resource usage
+docker stats mycontainer
+
+# Inspect changes
+docker diff mycontainer
+
+# View container logs in real-time
+docker logs -f --tail 100 mycontainer
+
+# Check container processes
+docker top mycontainer
+
+# Execute commands in container
+docker exec -it mycontainer /bin/bash
+
+# Check container configuration
+docker inspect mycontainer
+
+# Docker daemon logs
+journalctl -u docker.service
+
+# Clean up unused resources
+docker system prune -a --volumes
+
+# Check disk usage
+docker system df
+
+# Network connectivity test
+docker run --rm --net host alpine ping google.com
+
+# DNS debugging
+docker run --rm alpine nslookup google.com</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q69: How do you implement Docker for Windows containers?
+        </div>
+        <div class="answer">
+            <p><strong>Windows containers</strong> run Windows-specific applications in Docker.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Windows Dockerfile
+FROM mcr.microsoft.com/dotnet/aspnet:7.0-windowsservercore-ltsc2022
+WORKDIR /app
+COPY . .
+ENTRYPOINT ["dotnet", "MyApp.dll"]
+
+# Switch between Linux and Windows containers
+# Docker Desktop settings
+
+# Windows-specific networking
+docker network create -d nat mynetwork
+
+# Windows volume mounting
+docker run -v C:\data:C:\data myapp
+
+# Windows container isolation modes
+# process isolation (default)
+docker run --isolation=process myapp
+# hyper-v isolation
+docker run --isolation=hyperv myapp
+
+# Windows containers with IIS
+FROM mcr.microsoft.com/windows/servercore/iis
+RUN powershell -Command Install-WindowsFeature Web-Server
+COPY ./website /inetpub/wwwroot
+
+# Windows containers with .NET Framework
+FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8
+WORKDIR /inetpub/wwwroot
+COPY . .</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q70: How do you implement Docker for ARM architectures?
+        </div>
+        <div class="answer">
+            <p><strong>Multi-architecture builds</strong> support different CPU architectures.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Build for multiple architectures
+docker buildx build --platform linux/amd64,linux/arm64 -t myapp:latest .
+
+# Create builder
+docker buildx create --name mybuilder --use
+docker buildx inspect --bootstrap
+
+# Push multi-arch image
+docker buildx build --platform linux/amd64,linux/arm64 \
+  -t myregistry/myapp:latest --push .
+
+# Cross-compilation
+# Dockerfile
+FROM --platform=$BUILDPLATFORM golang:1.21-alpine AS build
+WORKDIR /src
+COPY . .
+RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o app
+
+FROM alpine
+COPY --from=build /src/app /app
+CMD ["/app"]
+
+# Build specific architecture
+docker buildx build --platform linux/arm64 -t myapp:arm64 .
+
+# Test on different architectures
+docker run --platform linux/arm64 myapp
+
+# Docker Compose with platform
+version: '3.8'
+services:
+  app:
+    image: myapp:latest
+    platform: linux/arm64</code></pre></div>
+        </div>
+
+        <div class="tip">
+            <strong>Interview Tip:</strong> When discussing Docker, emphasize understanding of core concepts (images, containers, volumes), practical experience with Docker commands, and knowledge of security best practices. Be prepared to discuss real-world scenarios like multi-stage builds, Docker Compose, and troubleshooting.
+        </div>
+
+        <div class="important">
+            <strong>Key Takeaways for Interview:</strong>
+            <ul>
+                <li>Understand Docker architecture and components</li>
+                <li>Know the difference between images and containers</li>
+                <li>Understand Dockerfile instructions and best practices</li>
+                <li>Know Docker Compose for multi-container apps</li>
+                <li>Understand Docker networking and storage</li>
+                <li>Know Docker security best practices</li>
+                <li>Understand multi-stage builds and optimization</li>
+                <li>Know Docker registry and image management</li>
+                <li>Understand Docker troubleshooting strategies</li>
+                <li>Know Docker monitoring and logging</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 50px; padding: 20px; background: #2496ed; color: white; border-radius: 8px; text-align: center;">
+            <h3>End of Docker Interview Preparation Guide</h3>
+            <p>Comprehensive coverage with detailed questions and answers</p>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+

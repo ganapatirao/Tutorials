@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# Interview Preparation Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #1a1a2e;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            min-height: 100vh;
+            padding: 25px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
+            animation: particleFloat 15s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border-radius: 32px;
+            box-shadow: 
+                0 30px 100px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: containerFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, 
+                #667eea 0%, 
+                #764ba2 20%, 
+                #f093fb 40%, 
+                #764ba2 60%, 
+                #667eea 80%, 
+                #764ba2 100%);
+            background-size: 300% 100%;
+            animation: shimmer 4s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -300% 0; }
+            100% { background-position: 300% 0; }
+        }
+        
+        .container::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: orbFloat 8s ease-in-out infinite;
+        }
+        
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20px, 20px) scale(1.1); }
+            66% { transform: translate(20px, -10px) scale(0.9); }
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 
+                0 8px 25px rgba(102, 126, 234, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            animation: slideDown 0.8s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .back-button:hover::before {
+            left: 100%;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+        }
+        
+        .back-button svg {
+            width: 22px;
+            height: 22px;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover svg {
+            transform: translateX(-5px);
+        }
+        
+        h1 {
+            color: #1a1a2e;
+            font-size: 52px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
+            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
+        }
+        
+        @keyframes titleGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
+            background-size: 200% 100%;
+            border-radius: 3px;
+            animation: lineGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes lineGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #4a4a68;
+            margin-bottom: 40px;
+            font-weight: 500;
+            animation: fadeIn 1s ease 0.4s both;
+        }
+        
+        h2 {
+            color: #1a1a2e;
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            padding: 28px 35px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 8px solid #667eea;
+            border-radius: 0 20px 20px 0;
+            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            animation: slideIn 0.6s ease both;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        h2::before {
+            content: '';
+            width: 5px;
+            height: 45px;
+            background: linear-gradient(180deg, #764ba2, #f093fb);
+            border-radius: 3px;
+        }
+        
+        h3 {
+            color: #1a1a2e;
+            font-size: 26px;
+            font-weight: 600;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            padding-left: 25px;
+            border-left: 6px solid #764ba2;
+            animation: fadeIn 0.5s ease both;
+        }
+        
+        .chapter {
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+            padding: 40px;
+            margin: 35px 0;
+            border-radius: 20px;
+            border-left: 8px solid #28a745;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: slideUp 0.6s ease both;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .chapter:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+        }
+        
+        .code-block {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            color: #e0e0e0;
+            padding: 45px;
+            border-radius: 20px;
+            overflow-x: auto;
+            overflow-y: auto;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 15px;
+            margin: 35px 0;
+            line-height: 1.8;
+            border-left: 8px solid #dd0031;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            max-width: 100%;
+            animation: codeAppear 0.5s ease both;
+        }
+        
+        @keyframes codeAppear {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+        }
+        
+        
+        .toc {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 35px 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 8px solid #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            animation: slideUp 0.6s ease both;
+        }
+        
+        .toc h3 {
+            color: #1a1a2e;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-left: 0;
+            border-left: none;
+        }
+        
+        .toc ol {
+            padding-left: 25px;
+            color: #4a4a68;
+            line-height: 2;
+        }
+        
+        .toc ol li {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .question {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin: 25px 0 15px 0;
+            font-weight: 600;
+            font-size: 18px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            animation: slideIn 0.5s ease both;
+        }
+        
+        .answer {
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+            padding: 30px 35px;
+            border-radius: 15px;
+            margin: 15px 0 25px 0;
+            border-left: 6px solid #764ba2;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            animation: slideUp 0.5s ease both;
+        }
+        
+        .answer p {
+            margin-bottom: 15px;
+            color: #1a1a2e;
+            line-height: 1.8;
+        }
+        
+        .answer h3 {
+            color: #667eea;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            padding-left: 0;
+            border-left: none;
+        }
+        
+        .answer ul, .answer ol {
+            padding-left: 25px;
+            margin-bottom: 15px;
+            color: #4a4a68;
+            line-height: 1.8;
+        }
+        
+        .answer ul li, .answer ol li {
+            margin-bottom: 8px;
+        }
+        
+        .answer strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .page-break {
+            page-break-after: always;
+            margin: 60px 0;
+            border-top: 2px dashed #e0e0e0;
+            padding-top: 40px;
+        }
+        
+        .important {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 6px solid #ffc107;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+        }
+        
+        .important strong {
+            color: #856404;
+        }
+        
+        .tip {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 6px solid #17a2b8;
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
+        }
+        
+        .tip strong {
+            color: #0c5460;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            color: #4a4a68;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover td {
+            background: #f8f9fa;
+        }
+        
+        p {
+            color: #1a1a2e;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 15px;
+            color: #4a4a68;
+            line-height: 1.8;
+        }
+        
+        ul li, ol li {
+            margin-bottom: 8px;
+        }
+        
+                
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 10px;
+            }
+            
+            .container {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+            
+            h1 {
+                font-size: 36px;
+                letter-spacing: -1px;
+                padding-bottom: 25px;
+            }
+            
+            h1::after {
+                width: 100px;
+                height: 4px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+            
+            h2 {
+                font-size: 24px;
+                padding: 20px 25px;
+                margin-top: 35px;
+                margin-bottom: 20px;
+            }
+            
+            h3 {
+                font-size: 20px;
+                padding-left: 20px;
+                margin-top: 25px;
+                margin-bottom: 15px;
+            }
+            
+            .back-button {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            .toc {
+                padding: 25px 20px;
+                margin: 30px 0;
+            }
+            
+            .toc h3 {
+                font-size: 20px;
+            }
+            
+            .toc ol {
+                padding-left: 20px;
+            }
+            
+            .question {
+                padding: 15px 20px;
+                font-size: 16px;
+                margin: 20px 0 12px 0;
+            }
+            
+            .answer {
+                padding: 20px 25px;
+                margin: 12px 0 20px 0;
+            }
+            
+            .answer h3 {
+                font-size: 18px;
+            }
+            
+            .answer ul, .answer ol {
+                padding-left: 20px;
+            }
+            
+            .code-block {
+                padding: 25px 20px;
+                font-size: 13px;
+                margin: 25px 0;
+                overflow-x: auto;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .chapter {
+                padding: 25px 20px;
+                margin: 25px 0;
+            }
+            
+            .important, .tip {
+                padding: 15px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+                padding-bottom: 20px;
+            }
+            
+            h1::after {
+                width: 80px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+            
+            h2 {
+                font-size: 20px;
+                padding: 15px 20px;
+            }
+            
+            h3 {
+                font-size: 18px;
+                padding-left: 15px;
+            }
+            
+            .back-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+            
+            .back-button svg {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+                border-radius: 15px;
+            }
+            
+            .question {
+                padding: 12px 15px;
+                font-size: 15px;
+            }
+            
+            .answer {
+                padding: 15px 18px;
+            }
+            
+            .code-block {
+                padding: 20px 15px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+                font-size: 11px;
+            }
+            
+            .toc {
+                padding: 20px 15px;
+            }
+            
+            .toc h3 {
+                font-size: 18px;
+            }
+            
+            .toc ol {
+                padding-left: 18px;
+            }
+        }</style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Home
+        </a>
+        <h1>C# Interview Preparation Guide</h1>
+        <p class="subtitle">Comprehensive Interview Preparation with In-Depth Concepts, Code Examples, and Best Practices</p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>C# Fundamentals</li>
+                <li>Data Types and Variables</li>
+                <li>Object-Oriented Programming in C#</li>
+                <li>Advanced C# Features</li>
+                <li>Generics and Collections</li>
+                <li>Exception Handling</li>
+                <li>Delegates and Events</li>
+                <li>LINQ</li>
+                <li>Async/Await</li>
+                <li>Memory Management</li>
+            </ol>
+        </div>
+
+        <h2>1. C# Fundamentals</h2>
+
+        <div class="question">
+            Q1: What is C# and what are its key features?
+        </div>
+        <div class="answer">
+            <p>C# (pronounced "C-sharp") is a modern, object-oriented programming language developed by Microsoft as part of the .NET initiative. Key features include:</p>
+            <ul>
+                <li><strong>Object-Oriented</strong>: Supports encapsulation, inheritance, and polymorphism</li>
+                <li><strong>Type-Safe</strong>: Strongly typed language with compile-time type checking</li>
+                <li><strong>Component-Oriented</strong>: Supports properties, methods, events, and attributes</li>
+                <li><strong>Garbage Collection</strong>: Automatic memory management</li>
+                <li><strong>Modern Language Features</strong>: LINQ, async/await, pattern matching, records</li>
+                <li><strong>Cross-Platform</strong>: Runs on Windows, Linux, and macOS via .NET Core/.NET 5+</li>
+                <li><strong>Interoperability</strong>: Can work with other .NET languages and COM components</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q2: What is the difference between value types and reference types in C#?
+        </div>
+        <div class="answer">
+            <p><strong>Value Types</strong> store the actual data directly on the stack:</p>
+            <ul>
+                <li>Primitive types (int, float, bool, char, etc.)</li>
+                <li>Struct types</li>
+                <li>Enum types</li>
+                <li>Directly contain their data</li>
+                <li>Copied by value</li>
+                <li>Cannot be null (unless nullable)</li>
+            </ul>
+            <p><strong>Reference Types</strong> store a reference to the data on the heap:</p>
+            <ul>
+                <li>Class types</li>
+                <li>Interface types</li>
+                <li>Array types</li>
+                <li>Delegate types</li>
+                <li>String types</li>
+                <li>Contain a reference to the actual data</li>
+                <li>Copied by reference</li>
+                <li>Can be null</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>// Value type example
+int x = 10;
+int y = x; // Creates a copy
+y = 20;
+Console.WriteLine(x); // Output: 10 (unchanged)
+
+// Reference type example
+class MyClass { public int Value; }
+MyClass obj1 = new MyClass { Value = 10 };
+MyClass obj2 = obj1; // Copies reference
+obj2.Value = 20;
+Console.WriteLine(obj1.Value); // Output: 20 (changed)</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q3: What is the difference between struct and class in C#?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Class (Reference Type)</th>
+                    <th>Struct (Value Type)</th>
+                </tr>
+                <tr>
+                    <td>Memory</td>
+                    <td>Allocated on heap</td>
+                    <td>Allocated on stack (or inline)</td>
+                </tr>
+                <tr>
+                    <td>Inheritance</td>
+                    <td>Supports inheritance</td>
+                    <td>No inheritance (can implement interfaces)</td>
+                </tr>
+                <tr>
+                    <td>Default Constructor</td>
+                    <td>Always has parameterless constructor</td>
+                    <td>Cannot have parameterless constructor</td>
+                </tr>
+                <tr>
+                    <td>Nullability</td>
+                    <td>Can be null</td>
+                    <td>Cannot be null (unless nullable)</td>
+                </tr>
+                <tr>
+                    <td>Assignment</td>
+                    <td>Reference copy</td>
+                    <td>Value copy</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Slower due to heap allocation</td>
+                    <td>Faster for small types</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Complex objects with behavior</td>
+                    <td>Small, simple data structures</td>
+                </tr>
+            </table>
+            
+            <div class="code-block" data-language="code"><pre><code>// Class example
+class Person {
+    public string Name { get; set; }
+}
+
+// Struct example
+struct Point {
+    public int X { get; set; }
+    public int Y { get; set; }
+}
+
+// Usage
+Person p1 = new Person { Name = "John" };
+Person p2 = p1; // Reference copy
+
+Point pt1 = new Point { X = 10, Y = 20 };
+Point pt2 = pt1; // Value copy</code></pre></div>
+        </div>
+
+        <h2>2. Data Types and Variables</h2>
+
+        <div class="question">
+            Q4: What are nullable value types in C#?
+        </div>
+        <div class="answer">
+            <p>Nullable value types allow value types to represent null values. They are useful when you need to represent the absence of a value.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Nullable syntax using ?
+int? nullableInt = null;
+bool? nullableBool = null;
+DateTime? nullableDate = null;
+
+// Using Nullable<T> syntax
+Nullable<int> nullableInt2 = null;
+
+// Checking for null
+if (nullableInt.HasValue) {
+    Console.WriteLine(nullableInt.Value);
+}
+
+// Null-coalescing operator
+int value = nullableInt ?? 0;
+
+// Null-conditional operator
+int? result = nullableInt?.GetValueOrDefault();</code></pre></div>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Nullable types are commonly used with database operations where a value might be missing, or when working with optional parameters.
+            </div>
+        </div>
+
+        <div class="question">
+            Q5: What is the difference between const, readonly, and static readonly?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>const</th>
+                    <th>readonly</th>
+                    <th>static readonly</th>
+                </tr>
+                <tr>
+                    <td>When Assigned</td>
+                    <td>At compile time (declaration)</td>
+                    <td>At declaration or in constructor</td>
+                    <td>At declaration or static constructor</td>
+                </tr>
+                <tr>
+                    <td>Scope</td>
+                    <td>Local or class level</td>
+                    <td>Instance level</td>
+                    <td>Class level (shared)</td>
+                </tr>
+                <tr>
+                    <td>Changeable</td>
+                    <td>Never</td>
+                    <td>Only in constructor</td>
+                    <td>Only in static constructor</td>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>Value types, strings</td>
+                    <td>Any type</td>
+                    <td>Any type</td>
+                </tr>
+            </table>
+            
+            <div class="code-block" data-language="code"><pre><code>class Constants {
+    // const - compile-time constant
+    public const int MaxUsers = 100;
+    
+    // readonly - instance constant
+    public readonly DateTime CreatedDate;
+    
+    // static readonly - class constant
+    public static readonly string AppName = "MyApp";
+    
+    public Constants() {
+        CreatedDate = DateTime.Now; // Can set in constructor
+    }
+    
+    static Constants() {
+        // AppName could be set here if not at declaration
+    }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q6: What is the difference between var and explicit type declaration?
+        </div>
+        <div class="answer">
+            <p><strong>var</strong> is type inference where the compiler determines the type from the initializer:</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Using var - type inferred
+var name = "John"; // Compiler infers string
+var age = 25; // Compiler infers int
+var list = new List<string>(); // Compiler infers List<string>
+
+// Explicit type declaration
+string name2 = "John";
+int age2 = 25;
+List<string> list2 = new List<string>();
+
+// var cannot be used without initialization
+// var x; // Error: Implicitly-typed variables must be initialized
+
+// var cannot be used for class-level fields
+class MyClass {
+    // var field = 10; // Error: var cannot be used at class level
+    private int field = 10; // Correct
+}</code></pre></div>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use var when the type is obvious from the right side. Use explicit types when the type is not obvious or when you want to make the type explicit for clarity.
+            </div>
+        </div>
+
+        <h2>3. Object-Oriented Programming in C#</h2>
+
+        <div class="question">
+            Q7: What are the four pillars of OOP in C#?
+        </div>
+        <div class="answer">
+            <p><strong>1. Encapsulation</strong>: Bundling data and methods that operate on the data within a single unit (class), and restricting access to the internal state.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public class BankAccount {
+    private decimal balance; // Private field (encapsulated)
+    
+    public void Deposit(decimal amount) {
+        if (amount > 0)
+            balance += amount;
+    }
+    
+    public decimal GetBalance() {
+        return balance;
+    }
+}</code></pre></div>
+            
+            <p><strong>2. Inheritance</strong>: Creating new classes based on existing classes, inheriting their properties and methods.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public class Animal {
+    public void Eat() {
+        Console.WriteLine("Animal is eating");
+    }
+}
+
+public class Dog : Animal {
+    public void Bark() {
+        Console.WriteLine("Dog is barking");
+    }
+}
+
+// Dog inherits Eat() method from Animal</code></pre></div>
+            
+            <p><strong>3. Polymorphism</strong>: Objects can take many forms. Method overloading (compile-time) and method overriding (runtime).</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Method Overloading (compile-time polymorphism)
+public class Calculator {
+    public int Add(int a, int b) => a + b;
+    public double Add(double a, double b) => a + b;
+}
+
+// Method Overriding (runtime polymorphism)
+public class Shape {
+    public virtual void Draw() {
+        Console.WriteLine("Drawing shape");
+    }
+}
+
+public class Circle : Shape {
+    public override void Draw() {
+        Console.WriteLine("Drawing circle");
+    }
+}</code></pre></div>
+            
+            <p><strong>4. Abstraction</strong>: Hiding implementation details and showing only functionality to the user.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Abstract class
+public abstract class Vehicle {
+    public abstract void Start(); // Abstract method
+    public void Stop() {
+        Console.WriteLine("Vehicle stopped");
+    }
+}
+
+// Interface
+public interface IShape {
+    void Draw();
+    double GetArea();
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q8: What is the difference between abstract class and interface?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Abstract Class</th>
+                    <th>Interface</th>
+                </tr>
+                <tr>
+                    <td>Implementation</td>
+                    <td>Can have implementation</td>
+                    <td>No implementation (before C# 8)</td>
+                </tr>
+                <tr>
+                    <td>Multiple Inheritance</td>
+                    <td>Single inheritance</td>
+                    <td>Multiple inheritance</td>
+                </tr>
+                <tr>
+                    <td>Access Modifiers</td>
+                    <td>Can have access modifiers</td>
+                    <td>Public by default</td>
+                </tr>
+                <tr>
+                    <td>Fields</td>
+                    <td>Can have fields</td>
+                    <td>No fields (before C# 8)</td>
+                </tr>
+                <tr>
+                    <td>Constructors</td>
+                    <td>Can have constructors</td>
+                    <td>No constructors</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Share code among related classes</td>
+                    <td>Define contract for unrelated classes</td>
+                </tr>
+            </table>
+            
+            <div class="code-block" data-language="code"><pre><code>// Abstract Class
+public abstract class Animal {
+    protected string name;
+    
+    public Animal(string name) {
+        this.name = name;
+    }
+    
+    public abstract void MakeSound();
+    public void Sleep() {
+        Console.WriteLine($"{name} is sleeping");
+    }
+}
+
+// Interface
+public interface IPlayable {
+    void Play();
+}
+
+// Class can inherit one abstract class and implement multiple interfaces
+public class Dog : Animal, IPlayable {
+    public Dog(string name) : base(name) { }
+    
+    public override void MakeSound() {
+        Console.WriteLine("Woof!");
+    }
+    
+    public void Play() {
+        Console.WriteLine("Dog is playing");
+    }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q9: What is the difference between virtual, override, and new keywords?
+        </div>
+        <div class="answer">
+            <p><strong>virtual</strong>: Indicates a method can be overridden in derived classes.</p>
+            <p><strong>override</strong>: Provides a new implementation for a virtual method in a derived class.</p>
+            <p><strong>new</strong>: Hides a base class method (method hiding, not overriding).</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public class Base {
+    public virtual void Method1() {
+        Console.WriteLine("Base Method1");
+    }
+    
+    public virtual void Method2() {
+        Console.WriteLine("Base Method2");
+    }
+}
+
+public class Derived : Base {
+    public override void Method1() {
+        Console.WriteLine("Derived Method1 (override)");
+    }
+    
+    public new void Method2() {
+        Console.WriteLine("Derived Method2 (new)");
+    }
+}
+
+// Usage
+Base obj = new Derived();
+obj.Method1(); // Output: Derived Method1 (polymorphism)
+obj.Method2(); // Output: Base Method2 (new doesn't affect polymorphism)
+
+Derived obj2 = new Derived();
+obj2.Method1(); // Output: Derived Method1
+obj2.Method2(); // Output: Derived Method2</code></pre></div>
+            
+            <div class="important">
+                <strong>Important:</strong> Use override when you want polymorphism. Use new when you want to hide the base method intentionally (usually with a warning).
+            </div>
+        </div>
+
+        <h2>4. Advanced C# Features</h2>
+
+        <div class="question">
+            Q10: What are generics in C#?
+        </div>
+        <div class="answer">
+            <p>Generics allow you to define type-safe data structures without committing to specific data types. They provide type safety, performance, and code reusability.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Generic class
+public class Repository<T> {
+    private List<T> items = new List<T>();
+    
+    public void Add(T item) {
+        items.Add(item);
+    }
+    
+    public T GetById(int id) {
+        return items[id];
+    }
+}
+
+// Generic method
+public T Max<T>(T a, T b) where T : IComparable<T> {
+    return a.CompareTo(b) > 0 ? a : b;
+}
+
+// Generic interface
+public interface IRepository<T> {
+    void Add(T item);
+    T GetById(int id);
+}
+
+// Usage
+var intRepo = new Repository<int>();
+intRepo.Add(10);
+
+var stringRepo = new Repository<string>();
+stringRepo.Add("Hello");</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q11: What is the difference between IEnumerable and IQueryable?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>IEnumerable</th>
+                    <th>IQueryable</th>
+                </tr>
+                <tr>
+                    <td>Namespace</td>
+                    <td>System.Collections</td>
+                    <td>System.Linq</td>
+                </tr>
+                <tr>
+                    <td>Execution</td>
+                    <td>In-memory</td>
+                    <td>Database/remote</td>
+                </tr>
+                <tr>
+                    <td>Deferred Execution</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>Filtering</td>
+                    <td>Client-side</td>
+                    <td>Server-side</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>In-memory collections</td>
+                    <td>Database queries</td>
+                </tr>
+            </table>
+            
+            <div class="code-block" data-language="code"><pre><code>// IEnumerable - loads all data first, then filters
+var users = dbContext.Users
+    .ToList() // Executes query, loads all data
+    .Where(u => u.Age > 18); // Filters in-memory
+
+// IQueryable - filters at database level
+var users = dbContext.Users
+    .Where(u => u.Age > 18); // Filters in SQL query
+    .ToList(); // Executes query with filter</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q12: What are extension methods in C#?
+        </div>
+        <div class="answer">
+            <p>Extension methods allow you to add new methods to existing types without modifying the original type or creating a derived type.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Extension method for string
+public static class StringExtensions {
+    public static bool IsNullOrEmpty(this string value) {
+        return string.IsNullOrEmpty(value);
+    }
+    
+    public static string ToTitleCase(this string value) {
+        return CultureInfo.CurrentCulture.TextInfo
+            .ToTitleCase(value.ToLower());
+    }
+}
+
+// Usage
+string name = "john doe";
+bool isEmpty = name.IsNullOrEmpty(); // Extension method
+string title = name.ToTitleCase(); // "John Doe"
+
+// Extension method for IEnumerable
+public static class EnumerableExtensions {
+    public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source) {
+        var random = new Random();
+        return source.OrderBy(x => random.Next());
+    }
+}
+
+// Usage
+var numbers = new[] { 1, 2, 3, 4, 5 };
+var shuffled = numbers.Shuffle();</code></pre></div>
+        </div>
+
+        <h2>5. Exception Handling</h2>
+
+        <div class="question">
+            Q13: What are the different ways to handle exceptions in C#?
+        </div>
+        <div class="answer">
+            <div class="code-block" data-language="code"><pre><code>// 1. try-catch-finally
+try {
+    int result = 10 / 0;
+}
+catch (DivideByZeroException ex) {
+    Console.WriteLine("Division by zero");
+}
+catch (Exception ex) {
+    Console.WriteLine($"General error: {ex.Message}");
+}
+finally {
+    Console.WriteLine("Cleanup code");
+}
+
+// 2. throw - re-throw exception
+try {
+    ProcessData();
+}
+catch (Exception ex) {
+    LogError(ex);
+    throw; // Re-throw with original stack trace
+}
+
+// 3. throw new - throw new exception
+try {
+    ProcessData();
+}
+catch (Exception ex) {
+    throw new CustomException("Processing failed", ex);
+}
+
+// 4. using - for IDisposable objects
+using (var file = new FileStream("test.txt", FileMode.Open)) {
+    // Process file
+} // Automatically disposes
+
+// 5. try-catch with when (exception filtering)
+try {
+    ProcessData();
+}
+catch (Exception ex) when (ex is InvalidOperationException) {
+    Console.WriteLine("Invalid operation");
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q14: What is the difference between throw and throw ex?
+        </div>
+        <div class="answer">
+            <p><strong>throw</strong>: Preserves the original stack trace.</p>
+            <p><strong>throw ex</strong>: Resets the stack trace to the current location.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>try {
+    MethodThatThrows();
+}
+catch (Exception ex) {
+    throw; // Preserves original stack trace
+}
+
+try {
+    MethodThatThrows();
+}
+catch (Exception ex) {
+    throw ex; // Resets stack trace - loses original location
+}</code></pre></div>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Always use <code>throw</code> instead of <code>throw ex</code> to preserve the original stack trace for debugging.
+            </div>
+        </div>
+
+        <h2>6. Async/Await</h2>
+
+        <div class="question">
+            Q15: What is async/await and how does it work?
+        </div>
+        <div class="answer">
+            <p>async/await is a pattern for writing asynchronous code that looks and behaves like synchronous code. It prevents blocking the UI thread and improves application responsiveness.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Synchronous (blocking)
+public string GetData() {
+    Thread.Sleep(1000); // Blocks thread
+    return "Data";
+}
+
+// Asynchronous (non-blocking)
+public async Task<string> GetDataAsync() {
+    await Task.Delay(1000); // Doesn't block thread
+    return "Data";
+}
+
+// Usage
+public async Task ProcessDataAsync() {
+    string data = await GetDataAsync(); // Waits without blocking
+    Console.WriteLine(data);
+}
+
+// Multiple async operations
+public async Task ProcessMultipleAsync() {
+    var task1 = GetDataAsync();
+    var task2 = GetDataAsync();
+    
+    await Task.WhenAll(task1, task2); // Wait for both
+}</code></pre></div>
+            
+            <div class="important">
+                <strong>Important:</strong> Never use async void (except for event handlers). Always return Task or Task<T> for async methods.
+            </div>
+        </div>
+
+        <div class="question">
+            Q16: What is the difference between Task and ValueTask?
+        </div>
+        <div class="answer">
+            <p><strong>Task</strong>: Reference type, always allocates memory on the heap.</p>
+            <p><strong>ValueTask</strong>: Value type, can avoid heap allocation for synchronous results or already-completed tasks.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Task - always allocates
+public async Task<int> GetValueAsync() {
+    await Task.Delay(100);
+    return 42;
+}
+
+// ValueTask - may avoid allocation
+public async ValueTask<int> GetValueOptimizedAsync() {
+    // If result is cached, no allocation needed
+    if (_cached) {
+        return _cachedValue; // Returns without allocation
+    }
+    
+    await Task.Delay(100);
+    _cachedValue = 42;
+    _cached = true;
+    return _cachedValue;
+}</code></pre></div>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use ValueTask for high-performance scenarios where methods are called frequently and often return synchronously.
+            </div>
+        </div>
+
+        <h2>7. LINQ</h2>
+
+        <div class="question">
+            Q17: What are the different types of LINQ?
+        </div>
+        <div class="answer">
+            <p><strong>1. LINQ to Objects</strong>: Query in-memory collections.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>var numbers = new[] { 1, 2, 3, 4, 5 };
+var evenNumbers = numbers.Where(n => n % 2 == 0);</code></pre></div>
+            
+            <p><strong>2. LINQ to XML</strong>: Query XML documents.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>XDocument doc = XDocument.Load("data.xml");
+var elements = doc.Descendants("Item")
+    .Where(e => (int)e.Element("Value") > 10);</code></pre></div>
+            
+            <p><strong>3. LINQ to SQL</strong>: Query SQL databases (Entity Framework).</p>
+            
+            <div class="code-block" data-language="code"><pre><code>var users = dbContext.Users
+    .Where(u => u.Age > 18)
+    .OrderBy(u => u.Name)
+    .ToList();</code></pre></div>
+            
+            <p><strong>4. LINQ to Entities</strong>: Query Entity Framework models.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>var orders = context.Orders
+    .Include(o => o.Customer)
+    .Where(o => o.Total > 1000);</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q18: What is the difference between deferred and immediate execution in LINQ?
+        </div>
+        <div class="answer">
+            <p><strong>Deferred Execution</strong>: Query is executed when enumerated (ToList, foreach, etc.).</p>
+            
+            <div class="code-block" data-language="code"><pre><code>var query = numbers.Where(n => n > 5); // Not executed yet
+numbers.Add(10); // Adding after query definition
+var result = query.ToList(); // Executes now, includes 10</code></pre></div>
+            
+            <p><strong>Immediate Execution</strong>: Query is executed immediately.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>var result = numbers.Count(n => n > 5); // Executes immediately
+numbers.Add(10); // Adding after execution
+// result doesn't include 10</code></pre></div>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Methods like ToList(), ToArray(), Count(), First(), Single() cause immediate execution. Where(), Select(), OrderBy() are deferred.
+            </div>
+        </div>
+
+        <h2>8. Memory Management</h2>
+
+        <div class="question">
+            Q19: How does garbage collection work in C#?
+        </div>
+        <div class="answer">
+            <p>Garbage Collection (GC) automatically manages memory allocation and deallocation. It works in generations:</p>
+            
+            <ul>
+                <li><strong>Generation 0</strong>: Short-lived objects (newly allocated)</li>
+                <li><strong>Generation 1</strong>: Objects that survived Gen 0 collection</li>
+                <li><strong>Generation 2</strong>: Long-lived objects (survived Gen 1 collection)</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>// GC methods
+GC.Collect(); // Force garbage collection (usually not needed)
+GC.WaitForPendingFinalizers(); // Wait for finalizers
+GC.GetTotalMemory(false); // Get memory usage
+
+// IDisposable pattern for manual cleanup
+public class ResourceHolder : IDisposable {
+    private IntPtr unmanagedResource;
+    private bool disposed = false;
+    
+    public void Dispose() {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+    
+    protected virtual void Dispose(bool disposing) {
+        if (!disposed) {
+            if (disposing) {
+                // Dispose managed resources
+            }
+            // Free unmanaged resources
+            CloseHandle(unmanagedResource);
+            disposed = true;
+        }
+    }
+    
+    ~ResourceHolder() {
+        Dispose(false);
+    }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q20: What is the using statement and why is it important?
+        </div>
+        <div class="answer">
+            <p>The using statement ensures that IDisposable objects are properly disposed, even if an exception occurs.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Traditional way
+FileStream file = null;
+try {
+    file = new FileStream("test.txt", FileMode.Open);
+    // Process file
+}
+finally {
+    file?.Dispose();
+}
+
+// Using statement (recommended)
+using (var file = new FileStream("test.txt", FileMode.Open)) {
+    // Process file
+} // Automatically calls Dispose()
+
+// Multiple using statements (C# 8+)
+using var file1 = new FileStream("file1.txt", FileMode.Open);
+using var file2 = new FileStream("file2.txt", FileMode.Open);
+// Both disposed at end of scope</code></pre></div>
+            
+            <div class="important">
+                <strong>Important:</strong> Always use using statements for objects that implement IDisposable to prevent resource leaks.
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
