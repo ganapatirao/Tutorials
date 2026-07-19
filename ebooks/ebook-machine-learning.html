@@ -228,105 +228,98 @@
         }
         
         h2 {
-            color: white;
-            font-size: 28px;
+            color: #1a1a2e;
+            font-size: 32px;
             font-weight: 700;
-            margin-top: 40px;
-            margin-bottom: 25px;
-            padding: 18px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            padding: 28px 35px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 8px solid #667eea;
+            border-radius: 0 20px 20px 0;
+            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            animation: slideIn 0.6s ease both;
         }
-        
+
         @keyframes slideIn {
             from { opacity: 0; transform: translateX(-20px); }
             to { opacity: 1; transform: translateX(0); }
         }
-        
+
+        h2::before {
+            content: '';
+            width: 5px;
+            height: 45px;
+            background: linear-gradient(180deg, #764ba2, #f093fb);
+            border-radius: 3px;
+        }
+
         h3 {
             color: #1a1a2e;
-            font-size: 20px;
+            font-size: 26px;
             font-weight: 600;
-            margin-top: 25px;
-            margin-bottom: 15px;
-            padding: 12px 20px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 4px solid #667eea;
-            border-radius: 8px;
-            animation: fadeIn 0.4s ease both;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            padding-left: 25px;
+            border-left: 6px solid #764ba2;
+            animation: fadeIn 0.5s ease both;
         }
         
         .chapter {
             background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 25px;
-            margin: 20px 0;
-            border-radius: 12px;
-            border: 1px solid #e9ecef;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            padding: 40px;
+            margin: 35px 0;
+            border-radius: 20px;
+            border-left: 8px solid #28a745;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
             position: relative;
-            transition: all 0.3s ease;
-            animation: slideUp 0.5s ease both;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: slideUp 0.6s ease both;
         }
-        
+
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .chapter:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
         }
-        
+
         .code-block {
             background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
             color: #e0e0e0;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 45px;
+            border-radius: 20px;
             overflow-x: auto;
             overflow-y: auto;
             font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 14px;
-            margin: 20px 0;
-            line-height: 1.6;
-            border-left: 4px solid #dd0031;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            font-size: 15px;
+            margin: 35px 0;
+            line-height: 1.8;
+            border-left: 8px solid #dd0031;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             position: relative;
             word-wrap: break-word;
             white-space: pre-wrap;
             max-width: 100%;
-            animation: codeAppear 0.4s ease both;
+            animation: codeAppear 0.5s ease both;
         }
-        
+
         @keyframes codeAppear {
             from { opacity: 0; transform: scale(0.98); }
             to { opacity: 1; transform: scale(1); }
         }
-        
+
         .code-block pre {
             margin: 0;
             white-space: pre-wrap;
             word-wrap: break-word;
             overflow-x: auto;
-        }
-        
-        .code-block code {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-        
-        .code-block::before {
-            content: 'CODE';
-            position: absolute;
-            top: 10px;
-            right: 12px;
-            font-size: 9px;
-            color: #888;
-            letter-spacing: 2px;
-            font-weight: 600;
-            z-index: 10;
         }
         
         .toc {
@@ -360,38 +353,38 @@
         }
         
         .important {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
-            padding: 18px 20px;
-            border-radius: 10px;
-            margin: 18px 0;
-            border-left: 4px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.15);
-        }
-        
-        .important strong {
-            color: #0c5460;
-        }
-        
-        .tip {
             background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-            padding: 18px 20px;
-            border-radius: 10px;
-            margin: 18px 0;
-            border-left: 4px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.15);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 6px solid #ffc107;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
         }
-        
-        .tip strong {
+
+        .important strong {
             color: #856404;
         }
-        
+
+        .tip {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 6px solid #17a2b8;
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
+        }
+
+        .tip strong {
+            color: #0c5460;
+        }
+
         .example {
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            padding: 18px 20px;
-            border-radius: 10px;
-            margin: 18px 0;
-            border-left: 4px solid #4caf50;
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.15);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 6px solid #4caf50;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
         }
         
         table {
@@ -450,55 +443,157 @@
         }
         
         @media (max-width: 768px) {
-            body { padding: 12px 8px; }
-            .container { padding: 25px 20px; border-radius: 15px; }
-            h1 { font-size: 28px; padding-bottom: 20px; }
-            .subtitle { font-size: 15px; margin-bottom: 25px; }
-            h2 { font-size: 22px; padding: 15px 20px; margin-bottom: 20px; }
-            h3 { font-size: 18px; padding: 10px 15px; }
-            .chapter { padding: 20px; margin: 15px 0; }
-            .code-block { padding: 18px; font-size: 12px; overflow-x: auto; margin: 15px 0; }
-            .toc { padding: 20px; }
-            .toc h3 { font-size: 20px; }
-            .toc li { font-size: 14px; }
-            table { margin: 15px 0; overflow-x: auto; }
-            th, td { padding: 10px; font-size: 12px; }
-            .important, .tip, .example { padding: 15px; font-size: 13px; }
-            ul, ol { padding-left: 20px; }
-            li { font-size: 13px; }
+            body {
+                padding: 15px 10px;
+            }
+
+            .container {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+
+            h1 {
+                font-size: 36px;
+                letter-spacing: -1px;
+                padding-bottom: 25px;
+            }
+
+            h1::after {
+                width: 100px;
+                height: 4px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+
+            h2 {
+                font-size: 24px;
+                padding: 20px 25px;
+                margin-top: 35px;
+                margin-bottom: 20px;
+            }
+
+            h3 {
+                font-size: 20px;
+                padding-left: 20px;
+                margin-top: 25px;
+                margin-bottom: 15px;
+            }
+
+            .back-button {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .toc {
+                padding: 25px 20px;
+                margin: 30px 0;
+            }
+
+            .toc h3 {
+                font-size: 20px;
+            }
+
+            .toc ol {
+                padding-left: 20px;
+            }
+
+            .code-block {
+                padding: 25px 20px;
+                font-size: 13px;
+                margin: 25px 0;
+                overflow-x: auto;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+
+            .chapter {
+                padding: 25px 20px;
+                margin: 25px 0;
+            }
+
+            .important, .tip, .example {
+                padding: 15px 20px;
+            }
         }
-        
+
         @media (max-width: 480px) {
-            body { padding: 10px 5px; }
-            .container { padding: 20px 15px; }
-            h1 { font-size: 24px; }
-            .subtitle { font-size: 14px; }
-            h2 { font-size: 20px; padding: 12px 15px; }
-            h3 { font-size: 16px; padding: 10px 12px; }
-            .chapter { padding: 15px; margin: 12px 0; }
-            .code-block { padding: 15px; font-size: 11px; overflow-x: auto; margin: 12px 0; }
-            .toc { padding: 15px; }
-            .toc h3 { font-size: 18px; }
-            .toc li { font-size: 12px; }
-            table { margin: 12px 0; overflow-x: auto; }
-            th, td { padding: 8px; font-size: 11px; }
-            .important, .tip, .example { padding: 12px; font-size: 12px; }
-            ul, ol { padding-left: 18px; }
-            li { font-size: 12px; }
-        }
-        
-        @media (max-width: 360px) {
-            body { padding: 8px 4px; }
-            .container { padding: 15px 12px; }
-            h1 { font-size: 22px; }
-            h2 { font-size: 18px; padding: 10px 12px; }
-            h3 { font-size: 15px; padding: 8px 10px; }
-            .chapter { padding: 12px; margin: 10px 0; }
-            .code-block { padding: 12px; font-size: 10px; overflow-x: auto; margin: 10px 0; }
-            .toc { padding: 12px; }
-            .toc h3 { font-size: 16px; }
-            th, td { padding: 6px; font-size: 10px; }
-            .important, .tip, .example { padding: 10px; font-size: 11px; }
+            h1 {
+                font-size: 28px;
+                padding-bottom: 20px;
+            }
+
+            h1::after {
+                width: 80px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            h2 {
+                font-size: 20px;
+                padding: 15px 20px;
+            }
+
+            h3 {
+                font-size: 18px;
+                padding-left: 15px;
+            }
+
+            .back-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .back-button svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .container {
+                padding: 20px 15px;
+                border-radius: 15px;
+            }
+
+            .code-block {
+                padding: 20px 15px;
+                font-size: 12px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 8px 6px;
+                font-size: 11px;
+            }
+
+            .toc {
+                padding: 20px 15px;
+            }
+
+            .toc h3 {
+                font-size: 18px;
+            }
+
+            .toc ol {
+                padding-left: 18px;
+            }
+
+            .important, .tip, .example {
+                padding: 15px 18px;
+            }
         }
 </style>
 </head>

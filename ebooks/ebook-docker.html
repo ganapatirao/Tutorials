@@ -692,8 +692,6 @@
                 <li>Docker Volumes</li>
                 <li>Docker Registry</li>
                 <li>Docker Security</li>
-                <li>Docker Optimization</li>
-                <li>Docker in CI/CD</li>
                 <li>Docker Best Practices</li>
             </ol>
         </div>
@@ -793,9 +791,9 @@ docker build -t myapp https://github.com/user/repo.git</code></pre></div>
             </ul>
         </div>
 
-        <h2>Chapter 5: Dockerfile</h2>
+        <h2>Chapter 6: Dockerfile</h2>
         <div class="chapter">
-            <h3>5.1 Dockerfile Instructions</h3>
+            <h3>6.1 Dockerfile Instructions</h3>
             <div class="code-block" data-language="code"><pre><code># Base image
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 
@@ -824,7 +822,7 @@ EXPOSE 80
 
 # Entry point
 ENTRYPOINT ["dotnet", "MyApp.dll"]</code></pre></div>
-            <h3>5.2 Best Practices</h3>
+            <h3>6.2 Best Practices</h3>
             <ul>
                 <li>Use official base images</li>
                 <li>Minimize number of layers</li>
@@ -834,9 +832,9 @@ ENTRYPOINT ["dotnet", "MyApp.dll"]</code></pre></div>
             </ul>
         </div>
 
-        <h2>Chapter 6: Docker Compose</h2>
+        <h2>Chapter 7: Docker Compose</h2>
         <div class="chapter">
-            <h3>6.1 Compose File</h3>
+            <h3>7.1 Compose File</h3>
             <div class="code-block" data-language="code"><pre><code>version: '3.8'
 
 services:
@@ -859,7 +857,7 @@ services:
 
 volumes:
   dbdata:</code></pre></div>
-            <h3>6.2 Compose Commands</h3>
+            <h3>7.2 Compose Commands</h3>
             <div class="code-block" data-language="code"><pre><code># Start services
 docker-compose up -d
 
@@ -873,16 +871,16 @@ docker-compose logs -f
 docker-compose up -d --scale web=3</code></pre></div>
         </div>
 
-        <h2>Chapter 7: Docker Networks</h2>
+        <h2>Chapter 8: Docker Networks</h2>
         <div class="chapter">
-            <h3>7.1 Network Drivers</h3>
+            <h3>8.1 Network Drivers</h3>
             <ul>
                 <li><strong>Bridge</strong>: Default for standalone containers</li>
                 <li><strong>Host</strong>: No network isolation</li>
                 <li><strong>Overlay</strong>: For multi-host networking</li>
                 <li><strong>Macvlan</strong>: Assign MAC addresses to containers</li>
             </ul>
-            <h3>7.2 Network Commands</h3>
+            <h3>8.2 Network Commands</h3>
             <div class="code-block" data-language="code"><pre><code># Create network
 docker network create mynetwork
 
@@ -896,15 +894,15 @@ docker network ls
 docker network inspect mynetwork</code></pre></div>
         </div>
 
-        <h2>Chapter 8: Docker Volumes</h2>
+        <h2>Chapter 9: Docker Volumes</h2>
         <div class="chapter">
-            <h3>8.1 Volume Types</h3>
+            <h3>9.1 Volume Types</h3>
             <ul>
                 <li><strong>Named volumes</strong>: Managed by Docker</li>
                 <li><strong>Bind mounts</strong>: Mount host directory into container</li>
                 <li><strong>tmpfs mounts</strong>: Stored in host memory</li>
             </ul>
-            <h3>8.2 Volume Commands</h3>
+            <h3>9.2 Volume Commands</h3>
             <div class="code-block" data-language="code"><pre><code># Create volume
 docker volume create myvolume
 
@@ -918,9 +916,9 @@ docker volume ls
 docker volume rm myvolume</code></pre></div>
         </div>
 
-        <h2>Chapter 9: Docker Security</h2>
+        <h2>Chapter 10: Docker Security</h2>
         <div class="chapter">
-            <h3>9.1 Security Best Practices</h3>
+            <h3>10.1 Security Best Practices</h3>
             <ul>
                 <li>Use non-root user in containers</li>
                 <li>Scan images for vulnerabilities</li>
@@ -928,7 +926,7 @@ docker volume rm myvolume</code></pre></div>
                 <li>Limit container capabilities</li>
                 <li>Use secrets management</li>
             </ul>
-            <h3>9.2 Security Scanning</h3>
+            <h3>10.2 Security Scanning</h3>
             <div class="code-block" data-language="code"><pre><code># Scan image with Trivy
 trivy image myapp:1.0
 
@@ -936,9 +934,9 @@ trivy image myapp:1.0
 docker scout quickview myapp:1.0</code></pre></div>
         </div>
 
-        <h2>Chapter 10: Docker Best Practices</h2>
+        <h2>Chapter 11: Docker Best Practices</h2>
         <div class="chapter">
-            <h3>10.1 General Best Practices</h3>
+            <h3>11.1 General Best Practices</h3>
             <ul>
                 <li>Keep images small</li>
                 <li>Use specific tags, not latest</li>
