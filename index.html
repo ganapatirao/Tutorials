@@ -237,6 +237,15 @@
             color: #1a1a2e;
             font-size: 19px;
             font-weight: 700;
+            margin: 0 0 8px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-subtitle {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
             margin: 0;
             position: relative;
             z-index: 1;
@@ -500,10 +509,11 @@
         
         <!-- E-Books Tab Content -->
         <div id="ebooks-tab" class="tab-content active">
-            <!-- Programming E-Books -->
+            <!-- Programming Languages -->
             <div class="section">
                 <div class="section-header">
-                    <h2>📖 Programming E-Books</h2>
+                    <h2>� Programming Languages</h2>
+                    <p class="section-subtitle">Master fundamental programming skills and language-specific expertise</p>
                 </div>
                 <div class="grid">
                     <a href="ebooks/ebook-python.html" class="card">
@@ -524,13 +534,115 @@
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
+                    <a href="ebooks/ebook-c.html" class="card">
+                        <div class="card-icon">🔷</div>
+                        <h3>C Programming</h3>
+                        <p>Fundamental C programming concepts, memory management, pointers, and system programming.</p>
+                        <div class="card-meta">
+                            <span class="badge">📖 12 Chapters</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
                 </div>
             </div>
 
-            <!-- Cloud & DevOps E-Books -->
+            <!-- Frontend Development -->
             <div class="section">
                 <div class="section-header">
-                    <h2>☁️ Cloud & DevOps E-Books</h2>
+                    <h2>🎨 Frontend Development</h2>
+                    <p class="section-subtitle">Build modern, responsive user interfaces with popular frameworks</p>
+                </div>
+                <div class="grid">
+                    <a href="ebooks/ebook-angular.html" class="card">
+                        <div class="card-icon">🅰️</div>
+                        <h3>Angular Development</h3>
+                        <p>Complete Angular framework guide covering components, services, directives, and best practices.</p>
+                        <div class="card-meta">
+                            <span class="badge">📖 15 Chapters</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                    <a href="ebooks/ebook-react.html" class="card">
+                        <div class="card-icon">⚛️</div>
+                        <h3>React Development</h3>
+                        <p>React.js, hooks, state management, and modern frontend development patterns.</p>
+                        <div class="card-meta">
+                            <span class="badge">📖 14 Chapters</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                    <a href="ebooks/ebook-lit.html" class="card">
+                        <div class="card-icon">⚡</div>
+                        <h3>Lit Web Components</h3>
+                        <p>Modern web components with Lit, TypeScript, and reactive programming patterns.</p>
+                        <div class="card-meta">
+                            <span class="badge">📖 9 Chapters</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Backend Development -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>🔧 Backend Development</h2>
+                    <p class="section-subtitle">Server-side development, APIs, and data access technologies</p>
+                </div>
+                <div class="grid">
+                    <a href="ebooks/ebook-aspnet-core.html" class="card">
+                        <div class="card-icon">🌐</div>
+                        <h3>ASP.NET Core</h3>
+                        <p>ASP.NET Core framework development with MVC, Web API, and modern .NET features.</p>
+                        <div class="card-meta">
+                            <span class="badge">📖 14 Chapters</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                    <a href="ebooks/ebook-mvc-core.html" class="card">
+                        <div class="card-icon">🎨</div>
+                        <h3>ASP.NET MVC Core</h3>
+                        <p>Model-View-Controller pattern with ASP.NET Core, Razor views, and web applications.</p>
+                        <div class="card-meta">
+                            <span class="badge">📖 10 Chapters</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                    <a href="ebooks/ebook-dotnet-api.html" class="card">
+                        <div class="card-icon">🔌</div>
+                        <h3>.NET API Development</h3>
+                        <p>RESTful API design, ASP.NET Web API, authentication, and API security.</p>
+                        <div class="card-meta">
+                            <span class="badge">📖 11 Chapters</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                    <a href="ebooks/ebook-entity-framework.html" class="card">
+                        <div class="card-icon">�</div>
+                        <h3>Entity Framework</h3>
+                        <p>ORM with Entity Framework Core, LINQ, database migrations, and data access patterns.</p>
+                        <div class="card-meta">
+                            <span class="badge">📖 10 Chapters</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                    <a href="ebooks/ebook-linq.html" class="card">
+                        <div class="card-icon">🔍</div>
+                        <h3>LINQ & C# Query</h3>
+                        <p>Language Integrated Query, LINQ to Objects, LINQ to SQL, and advanced query patterns.</p>
+                        <div class="card-meta">
+                            <span class="badge">📖 8 Chapters</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Cloud & DevOps -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>☁️ Cloud & DevOps</h2>
+                    <p class="section-subtitle">Cloud platforms, containerization, and infrastructure automation</p>
                 </div>
                 <div class="grid">
                     <a href="ebooks/ebook-azure.html" class="card">
@@ -560,13 +672,41 @@
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
+                    <a href="ebooks/ebook-cicd.html" class="card">
+                        <div class="card-icon">�</div>
+                        <h3>CI/CD Pipeline</h3>
+                        <p>Continuous Integration and Deployment with modern tools and best practices.</p>
+                        <div class="card-meta">
+                            <span class="badge">📖 10 Chapters</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                    <a href="ebooks/ebook-docker.html" class="card">
+                        <div class="card-icon">�</div>
+                        <h3>Docker & Containers</h3>
+                        <p>Container orchestration, Docker Compose, Kubernetes basics, and microservices.</p>
+                        <div class="card-meta">
+                            <span class="badge">📖 10 Chapters</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                    <a href="ebooks/ebook-kubernetes.html" class="card">
+                        <div class="card-icon">☸️</div>
+                        <h3>Kubernetes</h3>
+                        <p>Container orchestration, deployments, services, and production-grade K8s configurations.</p>
+                        <div class="card-meta">
+                            <span class="badge">📖 12 Chapters</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
                 </div>
             </div>
 
-            <!-- AI & ML E-Books -->
+            <!-- AI & Machine Learning -->
             <div class="section">
                 <div class="section-header">
-                    <h2>🤖 AI & Machine Learning E-Books</h2>
+                    <h2>🤖 AI & Machine Learning</h2>
+                    <p class="section-subtitle">Artificial intelligence, machine learning, and generative AI technologies</p>
                 </div>
                 <div class="grid">
                     <a href="ebooks/ebook-ai.html" class="card">
@@ -579,7 +719,7 @@
                         </div>
                     </a>
                     <a href="ebooks/ebook-machine-learning.html" class="card">
-                        <div class="card-icon">🔮</div>
+                        <div class="card-icon">�</div>
                         <h3>Machine Learning</h3>
                         <p>ML algorithms, neural networks, model training, evaluation, and deployment strategies.</p>
                         <div class="card-meta">
@@ -599,14 +739,15 @@
                 </div>
             </div>
 
-            <!-- Software Engineering E-Books -->
+            <!-- Software Engineering -->
             <div class="section">
                 <div class="section-header">
-                    <h2>🏗️ Software Engineering E-Books</h2>
+                    <h2>🏗️ Software Engineering</h2>
+                    <p class="section-subtitle">Design patterns, testing methodologies, and software architecture principles</p>
                 </div>
                 <div class="grid">
                     <a href="ebooks/ebook-solid.html" class="card">
-                        <div class="card-icon">🔷</div>
+                        <div class="card-icon">�</div>
                         <h3>SOLID Principles</h3>
                         <p>Master SOLID principles for writing maintainable, scalable, and robust software.</p>
                         <div class="card-meta">
@@ -632,109 +773,10 @@
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
-                    <a href="ebooks/ebook-angular.html" class="card">
-                        <div class="card-icon">🅰️</div>
-                        <h3>Angular Development</h3>
-                        <p>Complete Angular framework guide covering components, services, directives, and best practices.</p>
-                        <div class="card-meta">
-                            <span class="badge">📖 15 Chapters</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="ebooks/ebook-aspnet-core.html" class="card">
-                        <div class="card-icon">🌐</div>
-                        <h3>ASP.NET Core</h3>
-                        <p>ASP.NET Core framework development with MVC, Web API, and modern .NET features.</p>
-                        <div class="card-meta">
-                            <span class="badge">📖 14 Chapters</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="ebooks/ebook-c.html" class="card">
-                        <div class="card-icon">🔷</div>
-                        <h3>C Programming</h3>
-                        <p>Fundamental C programming concepts, memory management, pointers, and system programming.</p>
-                        <div class="card-meta">
-                            <span class="badge">📖 12 Chapters</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="ebooks/ebook-cicd.html" class="card">
-                        <div class="card-icon">🔄</div>
-                        <h3>CI/CD Pipeline</h3>
-                        <p>Continuous Integration and Deployment with modern tools and best practices.</p>
-                        <div class="card-meta">
-                            <span class="badge">📖 10 Chapters</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="ebooks/ebook-cybersecurity.html" class="card">
-                        <div class="card-icon">🔒</div>
-                        <h3>Cybersecurity</h3>
-                        <p>Security fundamentals, ethical hacking, network security, and threat mitigation.</p>
-                        <div class="card-meta">
-                            <span class="badge">📖 12 Chapters</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="ebooks/ebook-database-integration.html" class="card">
-                        <div class="card-icon">🗄️</div>
-                        <h3>Database Integration</h3>
-                        <p>Database design, SQL optimization, ORM frameworks, and data integration patterns.</p>
-                        <div class="card-meta">
-                            <span class="badge">📖 11 Chapters</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="ebooks/ebook-docker.html" class="card">
-                        <div class="card-icon">🐳</div>
-                        <h3>Docker & Containers</h3>
-                        <p>Container orchestration, Docker Compose, Kubernetes basics, and microservices.</p>
-                        <div class="card-meta">
-                            <span class="badge">📖 10 Chapters</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="ebooks/ebook-dotnet-api.html" class="card">
-                        <div class="card-icon">🔌</div>
-                        <h3>.NET API Development</h3>
-                        <p>RESTful API design, ASP.NET Web API, authentication, and API security.</p>
-                        <div class="card-meta">
-                            <span class="badge">📖 11 Chapters</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="ebooks/ebook-entity-framework.html" class="card">
-                        <div class="card-icon">📊</div>
-                        <h3>Entity Framework</h3>
-                        <p>ORM with Entity Framework Core, LINQ, database migrations, and data access patterns.</p>
-                        <div class="card-meta">
-                            <span class="badge">📖 10 Chapters</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="ebooks/ebook-kubernetes.html" class="card">
-                        <div class="card-icon">☸️</div>
-                        <h3>Kubernetes</h3>
-                        <p>Container orchestration, deployments, services, and production-grade K8s configurations.</p>
-                        <div class="card-meta">
-                            <span class="badge">📖 12 Chapters</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="ebooks/ebook-linq.html" class="card">
-                        <div class="card-icon">🔍</div>
-                        <h3>LINQ & C# Query</h3>
-                        <p>Language Integrated Query, LINQ to Objects, LINQ to SQL, and advanced query patterns.</p>
-                        <div class="card-meta">
-                            <span class="badge">📖 8 Chapters</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="ebooks/ebook-lit.html" class="card">
-                        <div class="card-icon">⚡</div>
-                        <h3>Lit Web Components</h3>
-                        <p>Modern web components with Lit, TypeScript, and reactive programming patterns.</p>
+                    <a href="ebooks/ebook-oops.html" class="card">
+                        <div class="card-icon">🧩</div>
+                        <h3>OOP Principles</h3>
+                        <p>Object-oriented programming concepts, SOLID principles, and design fundamentals.</p>
                         <div class="card-meta">
                             <span class="badge">📖 9 Chapters</span>
                             <span class="questions">🎯 Comprehensive Guide</span>
@@ -749,30 +791,31 @@
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
-                    <a href="ebooks/ebook-mvc-core.html" class="card">
-                        <div class="card-icon">🎨</div>
-                        <h3>ASP.NET MVC Core</h3>
-                        <p>Model-View-Controller pattern with ASP.NET Core, Razor views, and web applications.</p>
+                </div>
+            </div>
+
+            <!-- Data & Security -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>🔒 Data & Security</h2>
+                    <p class="section-subtitle">Database management, data integration, and cybersecurity practices</p>
+                </div>
+                <div class="grid">
+                    <a href="ebooks/ebook-database-integration.html" class="card">
+                        <div class="card-icon">🗄️</div>
+                        <h3>Database Integration</h3>
+                        <p>Database design, SQL optimization, ORM frameworks, and data integration patterns.</p>
                         <div class="card-meta">
-                            <span class="badge">📖 10 Chapters</span>
+                            <span class="badge">📖 11 Chapters</span>
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
-                    <a href="ebooks/ebook-oops.html" class="card">
-                        <div class="card-icon">🧩</div>
-                        <h3>OOP Principles</h3>
-                        <p>Object-oriented programming concepts, SOLID principles, and design fundamentals.</p>
+                    <a href="ebooks/ebook-cybersecurity.html" class="card">
+                        <div class="card-icon">🔒</div>
+                        <h3>Cybersecurity</h3>
+                        <p>Security fundamentals, ethical hacking, network security, and threat mitigation.</p>
                         <div class="card-meta">
-                            <span class="badge">📖 9 Chapters</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="ebooks/ebook-react.html" class="card">
-                        <div class="card-icon">⚛️</div>
-                        <h3>React Development</h3>
-                        <p>React.js, hooks, state management, and modern frontend development patterns.</p>
-                        <div class="card-meta">
-                            <span class="badge">📖 14 Chapters</span>
+                            <span class="badge">📖 12 Chapters</span>
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
@@ -782,10 +825,11 @@
 
         <!-- Tutorials Tab Content -->
         <div id="tutorials-tab" class="tab-content">
-            <!-- Programming Tutorials -->
+            <!-- Programming Languages -->
             <div class="section">
                 <div class="section-header">
-                    <h2>💻 Programming Tutorials</h2>
+                    <h2>💻 Programming Languages</h2>
+                    <p class="section-subtitle">Master fundamental programming skills and language-specific expertise</p>
                 </div>
                 <div class="grid">
                     <a href="tutorials/interview-python.html" class="card">
@@ -806,28 +850,29 @@
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
-                    <a href="tutorials/interview-angular.html" class="card">
-                        <div class="card-icon">🅰️</div>
-                        <h3>Angular Interview</h3>
-                        <p>Angular framework interview questions covering components, services, and best practices.</p>
+                    <a href="tutorials/interview-c.html" class="card">
+                        <div class="card-icon">🔷</div>
+                        <h3>C Programming Interview</h3>
+                        <p>C programming interview questions covering memory management, pointers, and algorithms.</p>
                         <div class="card-meta">
                             <span class="badge">📝 40 Questions</span>
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
-                    <a href="tutorials/interview-aspnet-core.html" class="card">
-                        <div class="card-icon">🌐</div>
-                        <h3>ASP.NET Core Interview</h3>
-                        <p>ASP.NET Core interview questions covering MVC, Web API, and modern .NET features.</p>
-                        <div class="card-meta">
-                            <span class="badge">📝 45 Questions</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="tutorials/interview-c.html" class="card">
-                        <div class="card-icon">🔷</div>
-                        <h3>C Programming Interview</h3>
-                        <p>C programming interview questions covering memory management, pointers, and algorithms.</p>
+                </div>
+            </div>
+
+            <!-- Frontend Development -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>🎨 Frontend Development</h2>
+                    <p class="section-subtitle">Build modern, responsive user interfaces with popular frameworks</p>
+                </div>
+                <div class="grid">
+                    <a href="tutorials/interview-angular.html" class="card">
+                        <div class="card-icon">🅰️</div>
+                        <h3>Angular Interview</h3>
+                        <p>Angular framework interview questions covering components, services, and best practices.</p>
                         <div class="card-meta">
                             <span class="badge">📝 40 Questions</span>
                             <span class="questions">🎯 Comprehensive Guide</span>
@@ -842,22 +887,78 @@
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
-                    <a href="tutorials/interview-oops.html" class="card">
-                        <div class="card-icon">🧩</div>
-                        <h3>OOP Interview</h3>
-                        <p>Object-oriented programming interview questions covering OOP concepts and principles.</p>
+                    <a href="tutorials/interview-lit.html" class="card">
+                        <div class="card-icon">⚡</div>
+                        <h3>Lit Interview</h3>
+                        <p>Lit web components interview questions covering modern frontend development.</p>
                         <div class="card-meta">
-                            <span class="badge">📝 35 Questions</span>
+                            <span class="badge">📝 20 Questions</span>
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
                 </div>
             </div>
 
-            <!-- Cloud & DevOps Tutorials -->
+            <!-- Backend Development -->
             <div class="section">
                 <div class="section-header">
-                    <h2>☁️ Cloud & DevOps Tutorials</h2>
+                    <h2>🔧 Backend Development</h2>
+                    <p class="section-subtitle">Server-side development, APIs, and data access technologies</p>
+                </div>
+                <div class="grid">
+                    <a href="tutorials/interview-aspnet-core.html" class="card">
+                        <div class="card-icon">🌐</div>
+                        <h3>ASP.NET Core Interview</h3>
+                        <p>ASP.NET Core interview questions covering MVC, Web API, and modern .NET features.</p>
+                        <div class="card-meta">
+                            <span class="badge">📝 45 Questions</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                    <a href="tutorials/interview-mvc-core.html" class="card">
+                        <div class="card-icon">🎨</div>
+                        <h3>MVC Core Interview</h3>
+                        <p>ASP.NET MVC Core interview questions covering MVC pattern and Razor views.</p>
+                        <div class="card-meta">
+                            <span class="badge">📝 30 Questions</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                    <a href="tutorials/interview-dotnet-api.html" class="card">
+                        <div class="card-icon">🔌</div>
+                        <h3>.NET API Interview</h3>
+                        <p>.NET API interview questions covering RESTful design and Web API best practices.</p>
+                        <div class="card-meta">
+                            <span class="badge">📝 30 Questions</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                    <a href="tutorials/interview-entity-framework.html" class="card">
+                        <div class="card-icon">�</div>
+                        <h3>Entity Framework Interview</h3>
+                        <p>Entity Framework interview questions covering ORM and data access patterns.</p>
+                        <div class="card-meta">
+                            <span class="badge">📝 30 Questions</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                    <a href="tutorials/interview-linq.html" class="card">
+                        <div class="card-icon">🔍</div>
+                        <h3>LINQ Interview</h3>
+                        <p>LINQ interview questions covering query syntax and data manipulation patterns.</p>
+                        <div class="card-meta">
+                            <span class="badge">📝 25 Questions</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Cloud & DevOps -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>☁️ Cloud & DevOps</h2>
+                    <p class="section-subtitle">Cloud platforms, containerization, and infrastructure automation</p>
                 </div>
                 <div class="grid">
                     <a href="tutorials/interview-azure.html" class="card">
@@ -888,7 +989,7 @@
                         </div>
                     </a>
                     <a href="tutorials/interview-docker.html" class="card">
-                        <div class="card-icon">🐳</div>
+                        <div class="card-icon">�</div>
                         <h3>Docker Interview</h3>
                         <p>Docker and container interview questions covering orchestration and deployment.</p>
                         <div class="card-meta">
@@ -905,22 +1006,14 @@
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
-                    <a href="tutorials/interview-cybersecurity.html" class="card">
-                        <div class="card-icon">🔒</div>
-                        <h3>Cybersecurity Interview</h3>
-                        <p>Cybersecurity interview questions covering network security and threat mitigation.</p>
-                        <div class="card-meta">
-                            <span class="badge">📝 35 Questions</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
                 </div>
             </div>
 
-            <!-- AI & ML Tutorials -->
+            <!-- AI & Machine Learning -->
             <div class="section">
                 <div class="section-header">
-                    <h2>🤖 AI & ML Tutorials</h2>
+                    <h2>🤖 AI & Machine Learning</h2>
+                    <p class="section-subtitle">Artificial intelligence, machine learning, and generative AI technologies</p>
                 </div>
                 <div class="grid">
                     <a href="tutorials/interview-ai.html" class="card">
@@ -953,10 +1046,11 @@
                 </div>
             </div>
 
-            <!-- Software Engineering Tutorials -->
+            <!-- Software Engineering -->
             <div class="section">
                 <div class="section-header">
-                    <h2>🏗️ Software Engineering Tutorials</h2>
+                    <h2>🏗️ Software Engineering</h2>
+                    <p class="section-subtitle">Design patterns, testing methodologies, and software architecture principles</p>
                 </div>
                 <div class="grid">
                     <a href="tutorials/interview-solid.html" class="card">
@@ -986,8 +1080,17 @@
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
+                    <a href="tutorials/interview-oops.html" class="card">
+                        <div class="card-icon">🧩</div>
+                        <h3>OOP Interview</h3>
+                        <p>Object-oriented programming interview questions covering OOP concepts and principles.</p>
+                        <div class="card-meta">
+                            <span class="badge">📝 35 Questions</span>
+                            <span class="questions">🎯 Comprehensive Guide</span>
+                        </div>
+                    </a>
                     <a href="tutorials/interview-microservices.html" class="card">
-                        <div class="card-icon">🏗️</div>
+                        <div class="card-icon">�️</div>
                         <h3>Microservices Interview</h3>
                         <p>Microservices interview questions covering architecture patterns and distributed systems.</p>
                         <div class="card-meta">
@@ -995,8 +1098,18 @@
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
+                </div>
+            </div>
+
+            <!-- Data & Security -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>🔒 Data & Security</h2>
+                    <p class="section-subtitle">Database management, data integration, and cybersecurity practices</p>
+                </div>
+                <div class="grid">
                     <a href="tutorials/interview-database-integration.html" class="card">
-                        <div class="card-icon">🗄️</div>
+                        <div class="card-icon">�️</div>
                         <h3>Database Integration Interview</h3>
                         <p>Database interview questions covering SQL optimization, ORM, and data access patterns.</p>
                         <div class="card-meta">
@@ -1004,48 +1117,12 @@
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
-                    <a href="tutorials/interview-dotnet-api.html" class="card">
-                        <div class="card-icon">🔌</div>
-                        <h3>.NET API Interview</h3>
-                        <p>.NET API interview questions covering RESTful design and Web API best practices.</p>
+                    <a href="tutorials/interview-cybersecurity.html" class="card">
+                        <div class="card-icon">🔒</div>
+                        <h3>Cybersecurity Interview</h3>
+                        <p>Cybersecurity interview questions covering network security and threat mitigation.</p>
                         <div class="card-meta">
-                            <span class="badge">📝 30 Questions</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="tutorials/interview-entity-framework.html" class="card">
-                        <div class="card-icon">📊</div>
-                        <h3>Entity Framework Interview</h3>
-                        <p>Entity Framework interview questions covering ORM and data access patterns.</p>
-                        <div class="card-meta">
-                            <span class="badge">📝 30 Questions</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="tutorials/interview-mvc-core.html" class="card">
-                        <div class="card-icon">🎨</div>
-                        <h3>MVC Core Interview</h3>
-                        <p>ASP.NET MVC Core interview questions covering MVC pattern and Razor views.</p>
-                        <div class="card-meta">
-                            <span class="badge">📝 30 Questions</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="tutorials/interview-linq.html" class="card">
-                        <div class="card-icon">🔍</div>
-                        <h3>LINQ Interview</h3>
-                        <p>LINQ interview questions covering query syntax and data manipulation patterns.</p>
-                        <div class="card-meta">
-                            <span class="badge">📝 25 Questions</span>
-                            <span class="questions">🎯 Comprehensive Guide</span>
-                        </div>
-                    </a>
-                    <a href="tutorials/interview-lit.html" class="card">
-                        <div class="card-icon">⚡</div>
-                        <h3>Lit Interview</h3>
-                        <p>Lit web components interview questions covering modern frontend development.</p>
-                        <div class="card-meta">
-                            <span class="badge">📝 20 Questions</span>
+                            <span class="badge">📝 35 Questions</span>
                             <span class="questions">🎯 Comprehensive Guide</span>
                         </div>
                     </a>
