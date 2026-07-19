@@ -1,19 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOLID Principles E-Book</title>
     <style>
-
-
-        @import url('https://fonts.googleapis.com/css2family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -24,29 +18,6 @@
             animation: gradientShift 20s ease infinite;
             min-height: 100vh;
             padding: 25px 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
-            animation: particleFloat 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
         }
         
         @keyframes gradientShift {
@@ -62,60 +33,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(30px);
             border-radius: 32px;
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            animation: containerFloat 6s ease-in-out infinite;
-        }
-        
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #764ba2 60%, 
-                #667eea 80%, 
-                #764ba2 100%);
-            background-size: 300% 100%;
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-        
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3);
         }
         
         .back-button {
@@ -129,49 +47,7 @@
             border-radius: 30px;
             font-weight: 700;
             font-size: 16px;
-            box-shadow: 
-                0 8px 25px rgba(102, 126, 234, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-button:hover::before {
-            left: 100%;
-        }
-        
-        .back-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
-        }
-        
-        .back-button svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.3s ease;
-        }
-        
-        .back-button:hover svg {
-            transform: translateX(-5px);
         }
         
         h1 {
@@ -180,496 +56,169 @@
             font-weight: 800;
             text-align: center;
             margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 35px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
-            border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
         
         .subtitle {
             text-align: center;
             font-size: 18px;
-            color: #4a4a68;
+            color: #666;
             margin-bottom: 40px;
-            font-weight: 500;
-            animation: fadeIn 1s ease 0.4s both;
         }
         
         h2 {
             color: #1a1a2e;
             font-size: 32px;
             font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
+            padding: 25px 30px;
+            margin: 40px 0 25px 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 5px solid #667eea;
+            border-radius: 0 15px 15px 0;
         }
         
         h3 {
-            color: #1a1a2e;
-            font-size: 26px;
+            color: #333;
+            font-size: 24px;
             font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
+            padding: 20px 25px;
+            margin: 25px 0 15px 0;
+            border-left: 3px solid #764ba2;
         }
+        
+        p { margin: 15px 0; color: #444; font-size: 16px; line-height: 1.8; }
         
         .chapter {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
+            padding: 30px;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(102, 126, 234, 0.2);
         }
         
         .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
             overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.5s ease both;
-        }
-        
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.6;
         }
         
         .code-block pre {
             margin: 0;
             white-space: pre-wrap;
             word-wrap: break-word;
-            overflow-x: auto;
         }
         
+        .code-block code {
+            color: #d4d4d4;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+            color: #444;
+            font-size: 16px;
+        }
+        
+        li { margin: 10px 0; }
+        
+        strong { color: #667eea; font-weight: 600; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        th {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            font-weight: 600;
+            color: #1a1a2e;
+        }
         
         .toc {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 35px 40px;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 30px;
             border-radius: 20px;
-            margin: 40px 0;
-            border-left: 8px solid #667eea;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
+            margin: 30px 0;
+            border: 1px solid rgba(102, 126, 234, 0.3);
         }
         
         .toc h3 {
             color: #1a1a2e;
             font-size: 24px;
-            font-weight: 700;
             margin-bottom: 20px;
-            padding-left: 0;
             border-left: none;
+            padding-left: 0;
         }
         
         .toc ol {
             padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
         }
         
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .question {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
-        }
-        
-        .answer {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 30px 35px;
-            border-radius: 15px;
-            margin: 15px 0 25px 0;
-            border-left: 6px solid #764ba2;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            animation: slideUp 0.5s ease both;
-        }
-        
-        .answer p {
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            line-height: 1.8;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
-        }
-        
-        .answer strong {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .page-break {
-            page-break-after: always;
-            margin: 60px 0;
-            border-top: 2px dashed #e0e0e0;
-            padding-top: 40px;
+        .toc li {
+            margin: 12px 0;
+            color: #444;
         }
         
         .important {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+            border-left: 4px solid #ffc107;
             padding: 20px 25px;
-            border-radius: 12px;
             margin: 20px 0;
-            border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
-        }
-        
-        .important strong {
-            color: #856404;
+            border-radius: 0 15px 15px 0;
         }
         
         .tip {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(139, 195, 74, 0.1) 100%);
+            border-left: 4px solid #4caf50;
             padding: 20px 25px;
-            border-radius: 12px;
             margin: 20px 0;
-            border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
+            border-radius: 0 15px 15px 0;
         }
         
-        .tip strong {
-            color: #0c5460;
+        .example {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(63, 81, 181, 0.1) 100%);
+            border-left: 4px solid #2196f3;
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
         }
         
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 15px;
-        }
-        
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e9ecef;
-            color: #4a4a68;
-        }
-        
-        tr:last-child td {
-            border-bottom: none;
-        }
-        
-        tr:hover td {
-            background: #f8f9fa;
-        }
-        
-        p {
-            color: #1a1a2e;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        
-        ul, ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        ul li, ol li {
-            margin-bottom: 8px;
-        }
-        
-                
         @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
-            }
+            h1 { font-size: 36px; }
+            h2 { font-size: 26px; padding: 20px 25px; }
+            h3 { font-size: 20px; padding: 15px 20px; }
+            .container { padding: 30px 20px; }
+            .chapter { padding: 20px; }
         }
         
         @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
-            }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
+            h1 { font-size: 28px; padding-bottom: 20px; }
+            h2 { font-size: 20px; padding: 15px 20px; }
+            h3 { font-size: 18px; padding-left: 15px; }
+            .back-button { padding: 10px 16px; font-size: 13px; }
+            .container { padding: 20px 15px; border-radius: 15px; }
+            .code-block { padding: 20px 15px; font-size: 12px; }
+            .toc { padding: 20px 15px; }
         }
-</style>
+    </style>
 </head>
 <body>
     <div class="container">
@@ -680,152 +229,377 @@
             Back to Home
         </a>
         <h1>SOLID Principles E-Book</h1>
-                <p class="subtitle">Comprehensive guide covering Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion principles with detailed explanations and code examples</p>
-        
-        <h2>Table of Contents</h2>
+        <p class="subtitle">Comprehensive guide covering Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion principles with detailed explanations and code examples</p>
+
         <div class="toc">
             <h3>Table of Contents</h3>
             <ol>
-                <li>Fundamentals</li>
-                <li>Core Concepts</li>
-                <li>Implementation</li>
+                <li>Introduction to SOLID</li>
+                <li>Single Responsibility Principle (SRP)</li>
+                <li>Open/Closed Principle (OCP)</li>
+                <li>Liskov Substitution Principle (LSP)</li>
+                <li>Interface Segregation Principle (ISP)</li>
+                <li>Dependency Inversion Principle (DIP)</li>
+                <li>Applying SOLID Together</li>
                 <li>Best Practices</li>
-                <li>Advanced Topics</li>
             </ol>
         </div>
 
-        <h2>1. Fundamentals</h2>
-
-        <div class="question">
-            Q1: What are the fundamental concepts in this subject</div>
-        <div class="answer">
-            <p>The fundamental concepts form the foundation for understanding this subject. These include core terminology, basic principles, and essential knowledge required for advanced topics.</p>
-            <h3>Key Concepts:</h3>
+        <h2>Chapter 1: Introduction to SOLID</h2>
+        <div class="chapter">
+            <h3>1.1 What are SOLID Principles?</h3>
+            <p>SOLID is an acronym for five design principles intended to make software designs more understandable, flexible, and maintainable. These principles help developers create robust, scalable, and easy-to-maintain software systems.</p>
+            
+            <div class="important">
+                <strong>Key Insight:</strong> SOLID principles are guidelines, not strict rules. Apply them judiciously based on your specific context and requirements.
+            </div>
+            
+            <h3>1.2 The Five Principles</h3>
             <ul>
-                <li>Concept 1: Description of first fundamental concept</li>
-                <li>Concept 2: Description of second fundamental concept</li>
-                <li>Concept 3: Description of third fundamental concept</li>
+                <li><strong>S</strong> - Single Responsibility Principle</li>
+                <li><strong>O</strong> - Open/Closed Principle</li>
+                <li><strong>L</strong> - Liskov Substitution Principle</li>
+                <li><strong>I</strong> - Interface Segregation Principle</li>
+                <li><strong>D</strong> - Dependency Inversion Principle</li>
+            </ul>
+            
+            <h3>1.3 Benefits of SOLID</h3>
+            <ul>
+                <li>Improved code maintainability</li>
+                <li>Enhanced testability</li>
+                <li>Better code reusability</li>
+                <li>Easier to understand and modify</li>
+                <li>Reduced coupling between components</li>
             </ul>
         </div>
 
-        <h2>2. Core Concepts</h2>
+        <h2>Chapter 2: Single Responsibility Principle (SRP)</h2>
+        <div class="chapter">
+            <h3>2.1 What is SRP?</h3>
+            <p>A class should have only one reason to change, meaning it should have only one job or responsibility.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Violation of SRP
+class User {
+    public string Name { get; set; }
+    public string Email { get; set; }
+    
+    public void Save() { /* Save to database */ }
+    public void SendEmail() { /* Send email */ }
+    public void Validate() { /* Validate user */ }
+}
 
-        <div class="question">
-            Q2: What are the core principles and patterns</div>
-        <div class="answer">
-            <p>Understanding the core principles is essential for mastering this subject. This section explores the most important concepts and their applications in real-world scenarios.</p>
-            <h3>Key Principles:</h3>
+// Following SRP
+class User {
+    public string Name { get; set; }
+    public string Email { get; set; }
+}
+
+class UserRepository {
+    public void Save(User user) { /* Save to database */ }
+}
+
+class EmailService {
+    public void SendEmail(User user, string message) { /* Send email */ }
+}
+
+class UserValidator {
+    public bool Validate(User user) { /* Validate user */ }
+}</code></pre></div>
+            
+            <h3>2.2 Benefits of SRP</h3>
             <ul>
-                <li>Principle 1: Description of the first key principle</li>
-                <li>Principle 2: Description of the second key principle</li>
-                <li>Principle 3: Description of the third key principle</li>
+                <li>Easier to understand and maintain</li>
+                <li>Reduced risk of breaking other functionality</li>
+                <li>Better testability</li>
+                <li>Clearer separation of concerns</li>
             </ul>
         </div>
 
-        <h2>3. Implementation</h2>
+        <h2>Chapter 3: Open/Closed Principle (OCP)</h2>
+        <div class="chapter">
+            <h3>3.1 What is OCP?</h3>
+            <p>Software entities should be open for extension but closed for modification. You should be able to extend behavior without modifying existing code.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Violation of OCP
+class AreaCalculator {
+    public double CalculateArea(object shape) {
+        if (shape is Rectangle) {
+            var rect = (Rectangle)shape;
+            return rect.Width * rect.Height;
+        }
+        else if (shape is Circle) {
+            var circle = (Circle)shape;
+            return 3.14 * circle.Radius * circle.Radius;
+        }
+        return 0;
+    }
+}
 
-        <div class="question">
-            Q3: How do you implement these concepts in practice</div>
-        <div class="answer">
-            <p>This chapter provides practical implementation examples with code snippets and real-world scenarios to help you apply the concepts learned.</p>
-            <div class="code-block"><pre><code># SOLID Principles implementation
-# Single Responsibility Principle
-class User:
-    def __init__(self, name, email):
-        self.name = name
-        self.email = email
+// Following OCP
+interface IShape {
+    double CalculateArea();
+}
 
-class UserRepository:
-    def save(self, user):
-        print(f"Saving user: {user.name}")
+class Rectangle : IShape {
+    public double Width { get; set; }
+    public double Height { get; set; }
+    public double CalculateArea() => Width * Height;
+}
 
-class EmailService:
-    def send_email(self, user, message):
-        print(f"Sending email to {user.email}: {message}")
+class Circle : IShape {
+    public double Radius { get; set; }
+    public double CalculateArea() => 3.14 * Radius * Radius;
+}
 
-# Open/Closed Principle
-from abc import ABC, abstractmethod
-
-class Shape(ABC):
-    @abstractmethod
-    def area(self):
-        pass
-
-class Rectangle(Shape):
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-    
-    def area(self):
-        return self.width * self.height
-
-class Circle(Shape):
-    def __init__(self, radius):
-        self.radius = radius
-    
-    def area(self):
-        return 3.14 * self.radius ** 2</code></pre></div>
-
-        <h2>4. Best Practices</h2>
-
-        <div class="question">
-            Q4: What are the industry best practices and standards</div>
-        <div class="answer">
-            <p>Learn industry best practices and standards for professional development and production environments. These guidelines ensure code quality, maintainability, and scalability.</p>
-            <h3>Best Practices:</h3>
+class AreaCalculator {
+    public double CalculateArea(IShape shape) => shape.CalculateArea();
+}</code></pre></div>
+            
+            <h3>2.2 Benefits of OCP</h3>
             <ul>
-                <li>Use clear and descriptive naming conventions</li>
-                <li>Follow established coding standards</li>
-                <li>Write comprehensive documentation</li>
-                <li>Implement proper error handling</li>
-                <li>Optimize for performance and readability</li>
+                <li>Reduces risk of introducing bugs</li>
+                <li>Makes code more extensible</li>
+                <li>Follows the "don't repeat yourself" principle</li>
+                <li>Easier to add new features</li>
             </ul>
         </div>
-        
-        <h2>5. Advanced Topics</h2>
 
-        <div class="question">
-            Q5: What are the advanced techniques and optimizations</div>
-        <div class="answer">
-            <p>Explore advanced techniques, optimizations, and cutting-edge approaches in this field. These topics are essential for senior-level understanding and expert-level implementation.</p>
-            <div class="code-block"><pre><code># SOLID Principles implementation
-# Single Responsibility Principle
-class User:
-    def __init__(self, name, email):
-        self.name = name
-        self.email = email
+        <h2>Chapter 4: Liskov Substitution Principle (LSP)</h2>
+        <div class="chapter">
+            <h3>4.1 What is LSP?</h3>
+            <p>Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Violation of LSP
+class Bird {
+    public virtual void Fly() { Console.WriteLine("Flying"); }
+}
 
-class UserRepository:
-    def save(self, user):
-        print(f"Saving user: {user.name}")
+class Penguin : Bird {
+    public override void Fly() { 
+        throw new NotImplementedException("Penguins can't fly"); 
+    }
+}
 
-class EmailService:
-    def send_email(self, user, message):
-        print(f"Sending email to {user.email}: {message}")
+// Following LSP
+class Bird { }
 
-# Open/Closed Principle
-from abc import ABC, abstractmethod
+class FlyingBird : Bird {
+    public virtual void Fly() { Console.WriteLine("Flying"); }
+}
 
-class Shape(ABC):
-    @abstractmethod
-    def area(self):
-        pass
+class Sparrow : FlyingBird {
+    public override void Fly() { Console.WriteLine("Sparrow flying"); }
+}
 
-class Rectangle(Shape):
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-    
-    def area(self):
-        return self.width * self.height
-
-class Circle(Shape):
-    def __init__(self, radius):
-        self.radius = radius
-    
-    def area(self):
-        return 3.14 * self.radius ** 2</code></pre></div>
+class Penguin : Bird {
+    public void Swim() { Console.WriteLine("Swimming"); }
+}</code></pre></div>
+            
+            <h3>4.2 Key Guidelines</h3>
+            <ul>
+                <li>Subclasses must not remove base class behavior</li>
+                <li>Subclasses must not violate base class invariants</li>
+                <li>Subclasses must not strengthen preconditions</li>
+                <li>Subclasses must not weaken postconditions</li>
+            </ul>
         </div>
+
+        <h2>Chapter 5: Interface Segregation Principle (ISP)</h2>
+        <div class="chapter">
+            <h3>5.1 What is ISP?</h3>
+            <p>Clients should not be forced to depend on interfaces they don't use. Prefer smaller, more specific interfaces over large, general-purpose ones.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Violation of ISP
+interface IWorker {
+    void Work();
+    void Eat();
+    void Sleep();
+}
+
+class Robot : IWorker {
+    public void Work() { /* Work */ }
+    public void Eat() { throw new NotImplementedException(); }
+    public void Sleep() { throw new NotImplementedException(); }
+}
+
+// Following ISP
+interface IWorkable {
+    void Work();
+}
+
+interface IEatable {
+    void Eat();
+}
+
+interface ISleepable {
+    void Sleep();
+}
+
+class Human : IWorkable, IEatable, ISleepable {
+    public void Work() { /* Work */ }
+    public void Eat() { /* Eat */ }
+    public void Sleep() { /* Sleep */ }
+}
+
+class Robot : IWorkable {
+    public void Work() { /* Work */ }
+}</code></pre></div>
+            
+            <h3>5.2 Benefits of ISP</h3>
+            <ul>
+                <li>Reduces coupling between components</li>
+                <li>Makes interfaces more focused</li>
+                <li>Improves code maintainability</li>
+                <li>Prevents forcing implementations of unused methods</li>
+            </ul>
+        </div>
+
+        <h2>Chapter 6: Dependency Inversion Principle (DIP)</h2>
+        <div class="chapter">
+            <h3>6.1 What is DIP?</h3>
+            <p>Depend on abstractions, not concretions. High-level modules should not depend on low-level modules; both should depend on abstractions.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Violation of DIP
+class LightBulb {
+    public void TurnOn() { Console.WriteLine("Light on"); }
+    public void TurnOff() { Console.WriteLine("Light off"); }
+}
+
+class Switch {
+    private LightBulb _bulb;
+    
+    public Switch() {
+        _bulb = new LightBulb();
+    }
+    
+    public void Toggle() {
+        // Toggle bulb
+    }
+}
+
+// Following DIP
+interface ISwitchable {
+    void TurnOn();
+    void TurnOff();
+}
+
+class LightBulb : ISwitchable {
+    public void TurnOn() { Console.WriteLine("Light on"); }
+    public void TurnOff() { Console.WriteLine("Light off"); }
+}
+
+class Fan : ISwitchable {
+    public void TurnOn() { Console.WriteLine("Fan on"); }
+    public void TurnOff() { Console.WriteLine("Fan off"); }
+}
+
+class Switch {
+    private ISwitchable _device;
+    
+    public Switch(ISwitchable device) {
+        _device = device;
+    }
+    
+    public void Toggle() {
+        // Toggle device
+    }
+}</code></pre></div>
+            
+            <h3>6.2 Benefits of DIP</h3>
+            <ul>
+                <li>Reduces coupling between components</li>
+                <li>Makes code more testable</li>
+                <li>Enables easier substitution of implementations</li>
+                <li>Follows the Hollywood Principle ("Don't call us, we'll call you")</li>
+            </ul>
+        </div>
+
+        <h2>Chapter 7: Applying SOLID Together</h2>
+        <div class="chapter">
+            <h3>7.1 Real-World Example</h3>
+            <p>Let's see how all SOLID principles work together in a practical example.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// A complete example applying all SOLID principles
+interface ILogger {
+    void Log(string message);
+}
+
+interface IEmailSender {
+    void SendEmail(string to, string subject, string body);
+}
+
+interface IOrderProcessor {
+    void ProcessOrder(Order order);
+}
+
+class Order {
+    public int Id { get; set; }
+    public string CustomerEmail { get; set; }
+    public decimal Amount { get; set; }
+}
+
+class FileLogger : ILogger {
+    public void Log(string message) {
+        File.WriteAllText("log.txt", message);
+    }
+}
+
+class SmtpEmailSender : IEmailSender {
+    public void SendEmail(string to, string subject, string body) {
+        // Send email via SMTP
+    }
+}
+
+class OrderProcessor : IOrderProcessor {
+    private readonly ILogger _logger;
+    private readonly IEmailSender _emailSender;
+    
+    public OrderProcessor(ILogger logger, IEmailSender emailSender) {
+        _logger = logger;
+        _emailSender = emailSender;
+    }
+    
+    public void ProcessOrder(Order order) {
+        _logger.Log($"Processing order {order.Id}");
+        // Process order logic
+        _emailSender.SendEmail(order.CustomerEmail, "Order Confirmed", "Your order is confirmed");
+    }
+}</code></pre></div>
+        </div>
+
+        <h2>Chapter 8: Best Practices</h2>
+        <div class="chapter">
+            <h3>8.1 When to Apply SOLID</h3>
+            <ul>
+                <li>Apply SOLID principles during design and refactoring</li>
+                <li>Don't over-engineer simple solutions</li>
+                <li>Consider the context and team size</li>
+                <li>Balance principles with practical constraints</li>
+                <li>Refactor towards SOLID as code evolves</li>
+            </ul>
+            
+            <h3>8.2 Common Pitfalls</h3>
+            <ul>
+                <li>Over-abstraction leading to complexity</li>
+                <li>Applying principles blindly without context</li>
+                <li>Creating too many small interfaces</li>
+                <li>Ignoring performance implications</li>
+                <li>Focusing on principles over business value</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Tip:</strong> SOLID principles are tools to guide design decisions, not strict rules to follow blindly. Use them to improve code quality when appropriate.
+            </div>
+            
+            <div class="important">
+                <strong>Important:</strong> The goal of SOLID is to create maintainable, flexible software. If applying a principle makes the code harder to understand or maintain, reconsider your approach.
+            </div>
+            
+            <div class="example">
+                <strong>Final Advice:</strong> Master SOLID principles through practice. Start with simple examples and gradually apply them to more complex scenarios. The best code is often the simplest code that solves the problem effectively.
+            </div>
+        </div>
+
     </div>
 </body>
 </html>

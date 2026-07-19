@@ -1,19 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Software Testing E-Book</title>
     <style>
-
-
-        @import url('https://fonts.googleapis.com/css2family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -24,29 +18,6 @@
             animation: gradientShift 20s ease infinite;
             min-height: 100vh;
             padding: 25px 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
-            animation: particleFloat 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
         }
         
         @keyframes gradientShift {
@@ -62,60 +33,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(30px);
             border-radius: 32px;
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            animation: containerFloat 6s ease-in-out infinite;
-        }
-        
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #764ba2 60%, 
-                #667eea 80%, 
-                #764ba2 100%);
-            background-size: 300% 100%;
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-        
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3);
         }
         
         .back-button {
@@ -129,49 +47,7 @@
             border-radius: 30px;
             font-weight: 700;
             font-size: 16px;
-            box-shadow: 
-                0 8px 25px rgba(102, 126, 234, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-button:hover::before {
-            left: 100%;
-        }
-        
-        .back-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
-        }
-        
-        .back-button svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.3s ease;
-        }
-        
-        .back-button:hover svg {
-            transform: translateX(-5px);
         }
         
         h1 {
@@ -180,496 +56,169 @@
             font-weight: 800;
             text-align: center;
             margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 35px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
-            border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
         
         .subtitle {
             text-align: center;
             font-size: 18px;
-            color: #4a4a68;
+            color: #666;
             margin-bottom: 40px;
-            font-weight: 500;
-            animation: fadeIn 1s ease 0.4s both;
         }
         
         h2 {
             color: #1a1a2e;
             font-size: 32px;
             font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
+            padding: 25px 30px;
+            margin: 40px 0 25px 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 5px solid #667eea;
+            border-radius: 0 15px 15px 0;
         }
         
         h3 {
-            color: #1a1a2e;
-            font-size: 26px;
+            color: #333;
+            font-size: 24px;
             font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
+            padding: 20px 25px;
+            margin: 25px 0 15px 0;
+            border-left: 3px solid #764ba2;
         }
+        
+        p { margin: 15px 0; color: #444; font-size: 16px; line-height: 1.8; }
         
         .chapter {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
+            padding: 30px;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(102, 126, 234, 0.2);
         }
         
         .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
             overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.5s ease both;
-        }
-        
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.6;
         }
         
         .code-block pre {
             margin: 0;
             white-space: pre-wrap;
             word-wrap: break-word;
-            overflow-x: auto;
         }
         
+        .code-block code {
+            color: #d4d4d4;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+            color: #444;
+            font-size: 16px;
+        }
+        
+        li { margin: 10px 0; }
+        
+        strong { color: #667eea; font-weight: 600; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        th {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            font-weight: 600;
+            color: #1a1a2e;
+        }
         
         .toc {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 35px 40px;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 30px;
             border-radius: 20px;
-            margin: 40px 0;
-            border-left: 8px solid #667eea;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
+            margin: 30px 0;
+            border: 1px solid rgba(102, 126, 234, 0.3);
         }
         
         .toc h3 {
             color: #1a1a2e;
             font-size: 24px;
-            font-weight: 700;
             margin-bottom: 20px;
-            padding-left: 0;
             border-left: none;
+            padding-left: 0;
         }
         
         .toc ol {
             padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
         }
         
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .question {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
-        }
-        
-        .answer {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 30px 35px;
-            border-radius: 15px;
-            margin: 15px 0 25px 0;
-            border-left: 6px solid #764ba2;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            animation: slideUp 0.5s ease both;
-        }
-        
-        .answer p {
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            line-height: 1.8;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
-        }
-        
-        .answer strong {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .page-break {
-            page-break-after: always;
-            margin: 60px 0;
-            border-top: 2px dashed #e0e0e0;
-            padding-top: 40px;
+        .toc li {
+            margin: 12px 0;
+            color: #444;
         }
         
         .important {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+            border-left: 4px solid #ffc107;
             padding: 20px 25px;
-            border-radius: 12px;
             margin: 20px 0;
-            border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
-        }
-        
-        .important strong {
-            color: #856404;
+            border-radius: 0 15px 15px 0;
         }
         
         .tip {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(139, 195, 74, 0.1) 100%);
+            border-left: 4px solid #4caf50;
             padding: 20px 25px;
-            border-radius: 12px;
             margin: 20px 0;
-            border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
+            border-radius: 0 15px 15px 0;
         }
         
-        .tip strong {
-            color: #0c5460;
+        .example {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(63, 81, 181, 0.1) 100%);
+            border-left: 4px solid #2196f3;
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
         }
         
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 15px;
-        }
-        
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e9ecef;
-            color: #4a4a68;
-        }
-        
-        tr:last-child td {
-            border-bottom: none;
-        }
-        
-        tr:hover td {
-            background: #f8f9fa;
-        }
-        
-        p {
-            color: #1a1a2e;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        
-        ul, ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        ul li, ol li {
-            margin-bottom: 8px;
-        }
-        
-                
         @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
-            }
+            h1 { font-size: 36px; }
+            h2 { font-size: 26px; padding: 20px 25px; }
+            h3 { font-size: 20px; padding: 15px 20px; }
+            .container { padding: 30px 20px; }
+            .chapter { padding: 20px; }
         }
         
         @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
-            }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
+            h1 { font-size: 28px; padding-bottom: 20px; }
+            h2 { font-size: 20px; padding: 15px 20px; }
+            h3 { font-size: 18px; padding-left: 15px; }
+            .back-button { padding: 10px 16px; font-size: 13px; }
+            .container { padding: 20px 15px; border-radius: 15px; }
+            .code-block { padding: 20px 15px; font-size: 12px; }
+            .toc { padding: 20px 15px; }
         }
-</style>
+    </style>
 </head>
 <body>
     <div class="container">
@@ -680,56 +229,70 @@
             Back to Home
         </a>
         <h1>Software Testing E-Book</h1>
-                <p class="subtitle">Comprehensive guide covering Unit testing, integration testing, E2E testing, test automation, TDD, BDD, CI/CD testing with detailed explanations and code examples</p>
-        
-        <h2>Table of Contents</h2>
+        <p class="subtitle">Comprehensive guide covering Unit testing, integration testing, E2E testing, test automation, TDD, BDD, CI/CD testing with detailed explanations and code examples</p>
+
         <div class="toc">
             <h3>Table of Contents</h3>
             <ol>
-                <li>Fundamentals</li>
-                <li>Core Concepts</li>
-                <li>Implementation</li>
+                <li>Introduction to Software Testing</li>
+                <li>Unit Testing</li>
+                <li>Integration Testing</li>
+                <li>End-to-End Testing</li>
+                <li>Test-Driven Development (TDD)</li>
+                <li>Behavior-Driven Development (BDD)</li>
+                <li>Test Automation</li>
+                <li>CI/CD Testing</li>
                 <li>Best Practices</li>
-                <li>Advanced Topics</li>
             </ol>
         </div>
 
-        <h2>1. Fundamentals</h2>
-
-        <div class="question">
-            Q1: What are the fundamental concepts in this subject</div>
-        <div class="answer">
-            <p>The fundamental concepts form the foundation for understanding this subject. These include core terminology, basic principles, and essential knowledge required for advanced topics.</p>
-            <h3>Key Concepts:</h3>
+        <h2>Chapter 1: Introduction to Software Testing</h2>
+        <div class="chapter">
+            <h3>1.1 What is Software Testing?</h3>
+            <p>Software testing is the process of evaluating a software application to detect differences between given input and expected output. It ensures that the software meets requirements and is free of defects.</p>
+            
+            <div class="important">
+                <strong>Key Insight:</strong> Testing is not just about finding bugs; it's about ensuring quality, reliability, and user satisfaction.
+            </div>
+            
+            <h3>1.2 Testing Levels</h3>
             <ul>
-                <li>Concept 1: Description of first fundamental concept</li>
-                <li>Concept 2: Description of second fundamental concept</li>
-                <li>Concept 3: Description of third fundamental concept</li>
+                <li><strong>Unit Testing</strong>: Testing individual components</li>
+                <li><strong>Integration Testing</strong>: Testing component interactions</li>
+                <li><strong>System Testing</strong>: Testing complete system</li>
+                <li><strong>Acceptance Testing</strong>: Testing against requirements</li>
+            </ul>
+            
+            <h3>1.3 Testing Types</h3>
+            <ul>
+                <li><strong>Functional Testing</strong>: Verifies functionality</li>
+                <li><strong>Non-Functional Testing</strong>: Performance, security, usability</li>
+                <li><strong>Manual Testing</strong>: Human-driven testing</li>
+                <li><strong>Automated Testing</strong>: Tool-driven testing</li>
             </ul>
         </div>
 
-        <h2>2. Core Concepts</h2>
+        <h2>Chapter 2: Unit Testing</h2>
+        <div class="chapter">
+            <h3>2.1 What is Unit Testing?</h3>
+            <p>Unit testing involves testing individual components or functions in isolation to ensure they work correctly.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Unit testing example with Jest
+describe('Calculator', () => {
+    test('adds two numbers', () => {
+        expect(add(2, 3)).toBe(5);
+    });
+    
+    test('subtracts two numbers', () => {
+        expect(subtract(5, 3)).toBe(2);
+    });
+    
+    test('multiplies two numbers', () => {
+        expect(multiply(3, 4)).toBe(12);
+    });
+});
 
-        <div class="question">
-            Q2: What are the core principles and patterns</div>
-        <div class="answer">
-            <p>Understanding the core principles is essential for mastering this subject. This section explores the most important concepts and their applications in real-world scenarios.</p>
-            <h3>Key Principles:</h3>
-            <ul>
-                <li>Principle 1: Description of the first key principle</li>
-                <li>Principle 2: Description of the second key principle</li>
-                <li>Principle 3: Description of the third key principle</li>
-            </ul>
-        </div>
-
-        <h2>3. Implementation</h2>
-
-        <div class="question">
-            Q3: How do you implement these concepts in practice</div>
-        <div class="answer">
-            <p>This chapter provides practical implementation examples with code snippets and real-world scenarios to help you apply the concepts learned.</p>
-            <div class="code-block"><pre><code># Software Testing implementation
-# Unit Testing with pytest
+// Unit testing example with pytest
 import pytest
 
 def test_addition():
@@ -738,78 +301,267 @@ def test_addition():
 def test_string_upper():
     assert "hello".upper() == "HELLO"
 
-# Integration Testing
-class TestAPIIntegration:
-    def test_user_creation(self):
-        response = client.post('/users', json={'name': 'John'})
-        assert response.status_code == 201
-        assert response.json()['name'] == 'John'
-
-# E2E Testing with Selenium
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-
-def test_login():
-    driver = webdriver.Chrome()
-    driver.get('https://example.com/login')
-    driver.find_element(By.ID, 'username').send_keys('testuser')
-    driver.find_element(By.ID, 'password').send_keys('password')
-    driver.find_element(By.ID, 'submit').click()
-    assert 'Welcome' in driver.page_source
-    driver.quit()</code></pre></div>
-
-        <h2>4. Best Practices</h2>
-
-        <div class="question">
-            Q4: What are the industry best practices and standards</div>
-        <div class="answer">
-            <p>Learn industry best practices and standards for professional development and production environments. These guidelines ensure code quality, maintainability, and scalability.</p>
-            <h3>Best Practices:</h3>
+def test_list_length():
+    assert len([1, 2, 3]) == 3</code></pre></div>
+            
+            <h3>2.2 Unit Testing Best Practices</h3>
             <ul>
-                <li>Use clear and descriptive naming conventions</li>
-                <li>Follow established coding standards</li>
-                <li>Write comprehensive documentation</li>
-                <li>Implement proper error handling</li>
-                <li>Optimize for performance and readability</li>
+                <li>Write testable code</li>
+                <li>Keep tests independent</li>
+                <li>Use descriptive test names</li>
+                <li>Test edge cases and boundaries</li>
+                <li>Maintain test code quality</li>
             </ul>
         </div>
-        
-        <h2>5. Advanced Topics</h2>
 
-        <div class="question">
-            Q5: What are the advanced techniques and optimizations</div>
-        <div class="answer">
-            <p>Explore advanced techniques, optimizations, and cutting-edge approaches in this field. These topics are essential for senior-level understanding and expert-level implementation.</p>
-            <div class="code-block"><pre><code># Software Testing implementation
-# Unit Testing with pytest
-import pytest
-
-def test_addition():
-    assert 1 + 1 == 2
-
-def test_string_upper():
-    assert "hello".upper() == "HELLO"
-
-# Integration Testing
+        <h2>Chapter 3: Integration Testing</h2>
+        <div class="chapter">
+            <h3>3.1 What is Integration Testing?</h3>
+            <p>Integration testing verifies that different components or services work together correctly.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Integration testing example
 class TestAPIIntegration:
     def test_user_creation(self):
         response = client.post('/users', json={'name': 'John'})
         assert response.status_code == 201
         assert response.json()['name'] == 'John'
+    
+    def test_user_retrieval(self):
+        user = create_test_user()
+        response = client.get(f'/users/{user.id}')
+        assert response.status_code == 200
+        assert response.json()['name'] == user.name</code></pre></div>
+            
+            <h3>3.2 Integration Testing Approaches</h3>
+            <ul>
+                <li><strong>Big Bang</strong>: Test all components together</li>
+                <li><strong>Top-Down</strong>: Test from top to bottom</li>
+                <li><strong>Bottom-Up</strong>: Test from bottom to top</li>
+                <li><strong>Sandwich</strong>: Combination of top-down and bottom-up</li>
+            </ul>
+        </div>
 
-# E2E Testing with Selenium
+        <h2>Chapter 4: End-to-End Testing</h2>
+        <div class="chapter">
+            <h3>4.1 What is E2E Testing?</h3>
+            <p>End-to-end testing tests the complete application flow from start to finish, simulating real user scenarios.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// E2E testing with Selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 def test_login():
     driver = webdriver.Chrome()
     driver.get('https://example.com/login')
+    
     driver.find_element(By.ID, 'username').send_keys('testuser')
     driver.find_element(By.ID, 'password').send_keys('password')
     driver.find_element(By.ID, 'submit').click()
+    
     assert 'Welcome' in driver.page_source
-    driver.quit()</code></pre></div>
+    driver.quit()
+
+// E2E testing with Cypress
+describe('Login Flow', () => {
+    it('should login successfully', () => {
+        cy.visit('/login')
+        cy.get('#username').type('testuser')
+        cy.get('#password').type('password')
+        cy.get('#submit').click()
+        cy.contains('Welcome').should('be.visible')
+    })
+})</code></pre></div>
+            
+            <h3>4.2 E2E Testing Tools</h3>
+            <ul>
+                <li><strong>Selenium</strong>: Browser automation</li>
+                <li><strong>Cypress</strong>: Modern E2E framework</li>
+                <li><strong>Playwright</strong>: Cross-browser testing</li>
+                <li><strong>Puppeteer</strong>: Chrome DevTools Protocol</li>
+            </ul>
         </div>
+
+        <h2>Chapter 5: Test-Driven Development (TDD)</h2>
+        <div class="chapter">
+            <h3>5.1 What is TDD?</h3>
+            <p>TDD is a development process where you write tests before writing the actual code. It follows a red-green-refactor cycle.</p>
+            
+            <h3>5.2 TDD Cycle</h3>
+            <ul>
+                <li><strong>Red</strong>: Write a failing test</li>
+                <li><strong>Green</strong>: Write minimal code to pass the test</li>
+                <li><strong>Refactor</strong>: Improve the code while keeping tests passing</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>// TDD example
+// Step 1: Write failing test (Red)
+test('calculate_discount', () => {
+    expect(calculateDiscount(100, 10)).toBe(90);
+});
+
+// Step 2: Write minimal code (Green)
+function calculateDiscount(price, discount) {
+    return price - discount;
+}
+
+// Step 3: Refactor
+function calculateDiscount(price, discountPercentage) {
+    return price * (1 - discountPercentage / 100);
+}</code></pre></div>
+            
+            <div class="tip">
+                <strong>Tip:</strong> TDD leads to better design, fewer bugs, and comprehensive test coverage.
+            </div>
+        </div>
+
+        <h2>Chapter 6: Behavior-Driven Development (BDD)</h2>
+        <div class="chapter">
+            <h3>6.1 What is BDD?</h3>
+            <p>BDD is an agile testing practice that encourages collaboration between developers, QA, and non-technical stakeholders.</p>
+            
+            <h3>6.2 Gherkin Syntax</h3>
+            <div class="code-block" data-language="code"><pre><code>Feature: User Login
+  As a user
+  I want to login to the system
+  So that I can access my account
+
+  Scenario: Successful login
+    Given I am on the login page
+    When I enter valid credentials
+    And I click the login button
+    Then I should be redirected to the dashboard
+    And I should see a welcome message</code></pre></div>
+            
+            <h3>6.3 BDD Tools</h3>
+            <ul>
+                <li><strong>Cucumber</strong>: BDD framework for multiple languages</li>
+                <li><strong>SpecFlow</strong>: BDD for .NET</li>
+                <li><strong>Behave</strong>: BDD for Python</li>
+                <li><strong>Jest</strong>: JavaScript testing with BDD support</li>
+            </ul>
+        </div>
+
+        <h2>Chapter 7: Test Automation</h2>
+        <div class="chapter">
+            <h3>7.1 Benefits of Test Automation</h3>
+            <ul>
+                <li>Faster feedback cycles</li>
+                <li>Consistent test execution</li>
+                <li>Reduced manual effort</li>
+                <li>Increased test coverage</li>
+                <li>Regression testing efficiency</li>
+            </ul>
+            
+            <h3>7.2 Automation Frameworks</h3>
+            <ul>
+                <li><strong>JUnit</strong>: Java testing framework</li>
+                <li><strong>PyTest</strong>: Python testing framework</li>
+                <li><strong>Jest</strong>: JavaScript testing framework</li>
+                <li><strong>xUnit</strong>: .NET testing framework</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>// Automated test suite example
+describe('User Management', () => {
+    beforeEach(() => {
+        // Setup before each test
+        setupTestDatabase();
+    });
+    
+    afterEach(() => {
+        // Cleanup after each test
+        cleanupTestDatabase();
+    });
+    
+    test('create user', async () => {
+        const user = await createUser({ name: 'John' });
+        expect(user.name).toBe('John');
+    });
+    
+    test('update user', async () => {
+        const user = await createUser({ name: 'John' });
+        const updated = await updateUser(user.id, { name: 'Jane' });
+        expect(updated.name).toBe('Jane');
+    });
+    
+    test('delete user', async () => {
+        const user = await createUser({ name: 'John' });
+        await deleteUser(user.id);
+        const deleted = await getUser(user.id);
+        expect(deleted).toBeNull();
+    });
+});</code></pre></div>
+        </div>
+
+        <h2>Chapter 8: CI/CD Testing</h2>
+        <div class="chapter">
+            <h3>8.1 Testing in CI/CD Pipeline</h3>
+            <p>Integrate automated testing into continuous integration and continuous deployment pipelines.</p>
+            
+            <h3>8.2 CI/CD Testing Strategy</h3>
+            <ul>
+                <li><strong>Unit Tests</strong>: Run on every commit</li>
+                <li><strong>Integration Tests</strong>: Run on pull requests</li>
+                <li><strong>E2E Tests</strong>: Run before deployment</li>
+                <li><strong>Performance Tests</strong>: Run on staging</li>
+                <li><strong>Security Tests</strong>: Run periodically</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code># GitHub Actions example
+name: Test Pipeline
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - name: Run unit tests
+        run: npm run test:unit
+      - name: Run integration tests
+        run: npm run test:integration
+      - name: Run E2E tests
+        run: npm run test:e2e</code></pre></div>
+        </div>
+
+        <h2>Chapter 9: Best Practices</h2>
+        <div class="chapter">
+            <h3>9.1 Testing Guidelines</h3>
+            <ul>
+                <li>Write tests early and often</li>
+                <li>Maintain test independence</li>
+                <li>Use meaningful test names</li>
+                <li>Test behavior, not implementation</li>
+                <li>Keep tests fast and reliable</li>
+            </ul>
+            
+            <h3>9.2 Common Pitfalls</h3>
+            <ul>
+                <li>Testing too late in development</li>
+                <li>Writing brittle tests</li>
+                <li>Testing implementation details</li>
+                <li>Ignoring flaky tests</li>
+                <li>Not maintaining test data</li>
+            </ul>
+            
+            <div class="important">
+                <strong>Important:</strong> Good tests are an investment in code quality. They pay dividends in reduced bugs, faster development, and increased confidence.
+            </div>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Aim for high test coverage, but remember that coverage is a metric, not a goal. Focus on testing critical paths and edge cases.
+            </div>
+            
+            <div class="example">
+                <strong>Final Advice:</strong> Testing is not a phase; it's a mindset. Build quality into your development process from the start.
+            </div>
+        </div>
+
     </div>
 </body>
 </html>

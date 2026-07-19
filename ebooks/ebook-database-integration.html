@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,11 +7,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -22,29 +18,6 @@
             animation: gradientShift 20s ease infinite;
             min-height: 100vh;
             padding: 25px 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
-            animation: particleFloat 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
         }
         
         @keyframes gradientShift {
@@ -60,60 +33,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(30px);
             border-radius: 32px;
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            animation: containerFloat 6s ease-in-out infinite;
-        }
-        
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #764ba2 60%, 
-                #667eea 80%, 
-                #764ba2 100%);
-            background-size: 300% 100%;
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-        
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3);
         }
         
         .back-button {
@@ -127,49 +47,7 @@
             border-radius: 30px;
             font-weight: 700;
             font-size: 16px;
-            box-shadow: 
-                0 8px 25px rgba(102, 126, 234, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-button:hover::before {
-            left: 100%;
-        }
-        
-        .back-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
-        }
-        
-        .back-button svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.3s ease;
-        }
-        
-        .back-button:hover svg {
-            transform: translateX(-5px);
         }
         
         h1 {
@@ -178,503 +56,178 @@
             font-weight: 800;
             text-align: center;
             margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 35px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
-            border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
         
         .subtitle {
             text-align: center;
             font-size: 18px;
-            color: #4a4a68;
+            color: #666;
             margin-bottom: 40px;
-            font-weight: 500;
-            animation: fadeIn 1s ease 0.4s both;
         }
         
         h2 {
             color: #1a1a2e;
             font-size: 32px;
             font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
+            padding: 25px 30px;
+            margin: 40px 0 25px 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 5px solid #667eea;
+            border-radius: 0 15px 15px 0;
         }
         
         h3 {
-            color: #1a1a2e;
-            font-size: 26px;
+            color: #333;
+            font-size: 24px;
             font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
+            padding: 20px 25px;
+            margin: 25px 0 15px 0;
+            border-left: 3px solid #764ba2;
         }
+        
+        p { margin: 15px 0; color: #444; font-size: 16px; line-height: 1.8; }
         
         .chapter {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
+            padding: 30px;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(102, 126, 234, 0.2);
         }
         
         .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
             overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.5s ease both;
-        }
-        
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.6;
         }
         
         .code-block pre {
             margin: 0;
             white-space: pre-wrap;
             word-wrap: break-word;
-            overflow-x: auto;
         }
         
+        .code-block code {
+            color: #d4d4d4;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+            color: #444;
+            font-size: 16px;
+        }
+        
+        li { margin: 10px 0; }
+        
+        strong { color: #667eea; font-weight: 600; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        th {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            font-weight: 600;
+            color: #1a1a2e;
+        }
         
         .toc {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 35px 40px;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 30px;
             border-radius: 20px;
-            margin: 40px 0;
-            border-left: 8px solid #667eea;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
+            margin: 30px 0;
+            border: 1px solid rgba(102, 126, 234, 0.3);
         }
         
         .toc h3 {
             color: #1a1a2e;
             font-size: 24px;
-            font-weight: 700;
             margin-bottom: 20px;
-            padding-left: 0;
             border-left: none;
+            padding-left: 0;
         }
         
         .toc ol {
             padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
         }
         
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .question {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
-        }
-        
-        .answer {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 30px 35px;
-            border-radius: 15px;
-            margin: 15px 0 25px 0;
-            border-left: 6px solid #764ba2;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            animation: slideUp 0.5s ease both;
-        }
-        
-        .answer p {
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            line-height: 1.8;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
-        }
-        
-        .answer strong {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .page-break {
-            page-break-after: always;
-            margin: 60px 0;
-            border-top: 2px dashed #e0e0e0;
-            padding-top: 40px;
+        .toc li {
+            margin: 12px 0;
+            color: #444;
         }
         
         .important {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+            border-left: 4px solid #ffc107;
             padding: 20px 25px;
-            border-radius: 12px;
             margin: 20px 0;
-            border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
-        }
-        
-        .important strong {
-            color: #856404;
+            border-radius: 0 15px 15px 0;
         }
         
         .tip {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(139, 195, 74, 0.1) 100%);
+            border-left: 4px solid #4caf50;
             padding: 20px 25px;
-            border-radius: 12px;
             margin: 20px 0;
-            border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
+            border-radius: 0 15px 15px 0;
         }
         
-        .tip strong {
-            color: #0c5460;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 15px;
-        }
-        
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e9ecef;
-            color: #4a4a68;
-        }
-        
-        tr:last-child td {
-            border-bottom: none;
-        }
-        
-        tr:hover td {
-            background: #f8f9fa;
-        }
-        
-        p {
-            color: #1a1a2e;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        
-        ul, ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        ul li, ol li {
-            margin-bottom: 8px;
-        }
-        
-        strong {
-            color: #667eea;
-            font-weight: 600;
+        .example {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(63, 81, 181, 0.1) 100%);
+            border-left: 4px solid #2196f3;
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
         }
         
         @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
-            }
+            h1 { font-size: 36px; }
+            h2 { font-size: 26px; padding: 20px 25px; }
+            h3 { font-size: 20px; padding: 15px 20px; }
+            .container { padding: 30px 20px; }
+            .chapter { padding: 20px; }
         }
         
         @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
-            }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
-        }</style>
+            h1 { font-size: 28px; padding-bottom: 20px; }
+            h2 { font-size: 20px; padding: 15px 20px; }
+            h3 { font-size: 18px; padding-left: 15px; }
+            .back-button { padding: 10px 16px; font-size: 13px; }
+            .container { padding: 20px 15px; border-radius: 15px; }
+            .code-block { padding: 20px 15px; font-size: 12px; }
+            .toc { padding: 20px 15px; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-button"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>Back to Home</a>
+        <a href="../index.html" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Home
+        </a>
         <h1>Database Integration E-Book</h1>
         <p class="subtitle">Complete Guide to Database Integration from Fundamentals to Advanced Concepts</p>
 
@@ -697,46 +250,336 @@
         <h2>Chapter 1: Introduction to Database Integration</h2>
         <div class="chapter">
             <h3>1.1 What is Database Integration?</h3>
-            <p>Database integration is the process of connecting applications to databases to store, retrieve, and manipulate data efficiently and securely.</p>
+            <p>Database integration is the process of connecting applications to databases to store, retrieve, and manipulate data efficiently and securely. It's a critical aspect of modern software development that enables applications to persist data and maintain state across sessions.</p>
+            
             <h3>1.2 Integration Approaches</h3>
             <ul>
-                <li>Raw SQL queries</li>
-                <li>ORM (Object-Relational Mapping)</li>
-                <li>Micro-ORMs</li>
-                <li>NoSQL integration</li>
+                <li><strong>Raw SQL queries</strong>: Direct database queries using SQL commands</li>
+                <li><strong>ORM (Object-Relational Mapping)</strong>: Map database tables to programming objects</li>
+                <li><strong>Micro-ORMs</strong>: Lightweight data access libraries</li>
+                <li><strong>NoSQL integration</strong>: Working with document and key-value stores</li>
             </ul>
+            
+            <div class="important">
+                <strong>Key Insight:</strong> Choose the right integration approach based on your application requirements, team expertise, and performance needs.
+            </div>
         </div>
 
         <h2>Chapter 2: Database Fundamentals</h2>
         <div class="chapter">
             <h3>2.1 Database Types</h3>
             <ul>
-                <li><strong>Relational Databases</strong>: SQL Server, PostgreSQL, MySQL, Oracle</li>
-                <li><strong>NoSQL Databases</strong>: MongoDB, Redis, Cassandra</li>
-                <li><strong>In-Memory Databases</strong>: Redis, Memcached</li>
+                <li><strong>Relational Databases</strong>: SQL Server, PostgreSQL, MySQL, Oracle - Structured data with relationships</li>
+                <li><strong>NoSQL Databases</strong>: MongoDB, Redis, Cassandra - Flexible schema for unstructured data</li>
+                <li><strong>In-Memory Databases</strong>: Redis, Memcached - Ultra-fast data access</li>
+            </ul>
+            
+            <h3>2.2 Database Selection Criteria</h3>
+            <ul>
+                <li>Data structure and complexity</li>
+                <li>Scalability requirements</li>
+                <li>Consistency vs availability trade-offs</li>
+                <li>Query patterns and access patterns</li>
+                <li>Team expertise and support</li>
             </ul>
         </div>
 
         <h2>Chapter 3: Connection Management</h2>
         <div class="chapter">
             <h3>3.1 Connection Pooling</h3>
+            <p>Connection pooling reuses existing database connections instead of creating new ones for each request, significantly improving performance.</p>
+            
             <ul>
                 <li>Reuse existing connections</li>
-                <li>Improve performance</li>
-                <li>Manage connection limits</li>
+                <li>Improve performance by reducing connection overhead</li>
+                <li>Manage connection limits effectively</li>
+                <li>Handle connection lifecycle automatically</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>// Connection pooling example in C#
+var builder = new SqlConnectionStringBuilder();
+builder.DataSource = "server.example.com";
+builder.InitialCatalog = "MyDatabase";
+builder.IntegratedSecurity = true;
+builder.Pooling = true;
+builder.MinPoolSize = 5;
+builder.MaxPoolSize = 100;
+
+using (var connection = new SqlConnection(builder.ConnectionString))
+{
+    connection.Open();
+    // Execute queries
+}</code></pre></div>
+        </div>
+
+        <h2>Chapter 4: SQL Basics</h2>
+        <div class="chapter">
+            <h3>4.1 Basic SQL Operations</h3>
+            <div class="code-block" data-language="code"><pre><code>-- SELECT - Retrieve data
+SELECT * FROM Products WHERE Price > 100;
+
+-- INSERT - Add new data
+INSERT INTO Products (Name, Price, CategoryId) 
+VALUES ('New Product', 99.99, 1);
+
+-- UPDATE - Modify existing data
+UPDATE Products SET Price = 109.99 WHERE Id = 1;
+
+-- DELETE - Remove data
+DELETE FROM Products WHERE Id = 1;</code></pre></div>
+            
+            <h3>4.2 Advanced SQL Operations</h3>
+            <div class="code-block" data-language="code"><pre><code>-- JOIN operations
+SELECT p.Name, c.CategoryName 
+FROM Products p
+INNER JOIN Categories c ON p.CategoryId = c.Id;
+
+-- Aggregate functions
+SELECT CategoryId, COUNT(*) as ProductCount, AVG(Price) as AvgPrice
+FROM Products
+GROUP BY CategoryId;
+
+-- Subqueries
+SELECT * FROM Products 
+WHERE CategoryId IN (SELECT Id FROM Categories WHERE Name = 'Electronics');</code></pre></div>
+            
+            <h3>4.3 SQL Best Practices</h3>
+            <ul>
+                <li>Use parameterized queries to prevent SQL injection</li>
+                <li>Select only needed columns instead of using SELECT *</li>
+                <li>Use appropriate indexes for frequently queried columns</li>
+                <li>Avoid N+1 query problems</li>
+                <li>Use transactions for related operations</li>
             </ul>
         </div>
 
-        <h2>Chapter 4: Best Practices</h2>
+        <h2>Chapter 5: ORM Concepts</h2>
         <div class="chapter">
-            <h3>4.1 General Best Practices</h3>
+            <h3>5.1 What is ORM?</h3>
+            <p>Object-Relational Mapping (ORM) is a technique that converts data between incompatible systems using object-oriented programming languages and relational databases. It eliminates the need for most of the data-access code that developers usually need to write.</p>
+            
+            <h3>5.2 ORM Benefits</h3>
             <ul>
-                <li>Use parameterized queries</li>
-                <li>Implement proper error handling</li>
-                <li>Use transactions for multiple operations</li>
-                <li>Implement connection pooling</li>
-                <li>Encrypt sensitive data</li>
+                <li>Eliminates boilerplate SQL code</li>
+                <li>Type safety and compile-time checking</li>
+                <li>Easier maintenance and refactoring</li>
+                <li>Database independence</li>
+                <li>Automatic connection management</li>
+                <li>Change tracking and automatic updates</li>
             </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>// Entity Framework Core example
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public int CategoryId { get; set; }
+    public Category Category { get; set; }
+}
+
+// Querying with LINQ
+var expensiveProducts = context.Products
+    .Where(p => p.Price > 100)
+    .Include(p => p.Category)
+    .ToList();</code></pre></div>
+        </div>
+
+        <h2>Chapter 6: Transaction Management</h2>
+        <div class="chapter">
+            <h3>6.1 ACID Properties</h3>
+            <ul>
+                <li><strong>Atomicity</strong>: All operations succeed or all fail</li>
+                <li><strong>Consistency</strong>: Database remains in valid state</li>
+                <li><strong>Isolation</strong>: Transactions don't interfere with each other</li>
+                <li><strong>Durability</strong>: Committed changes persist even after system failure</li>
+            </ul>
+            
+            <h3>6.2 Transaction Implementation</h3>
+            <div class="code-block" data-language="code"><pre><code>// Transaction example in C#
+using (var transaction = context.Database.BeginTransaction())
+{
+    try
+    {
+        // Create order
+        var order = new Order { CustomerId = customerId, Total = 0 };
+        context.Orders.Add(order);
+        
+        // Add order items
+        foreach (var item in orderItems)
+        {
+            var orderItem = new OrderItem 
+            { 
+                OrderId = order.Id, 
+                ProductId = item.ProductId,
+                Quantity = item.Quantity 
+            };
+            context.OrderItems.Add(orderItem);
+        }
+        
+        context.SaveChanges();
+        transaction.Commit();
+    }
+    catch
+    {
+        transaction.Rollback();
+        throw;
+    }
+}</code></pre></div>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Always use transactions for operations that involve multiple related database changes to ensure data consistency.
+            </div>
+        </div>
+
+        <h2>Chapter 7: Data Access Patterns</h2>
+        <div class="chapter">
+            <h3>7.1 Repository Pattern</h3>
+            <p>The Repository pattern encapsulates data access logic and provides a collection-like interface for accessing domain objects. It abstracts the data layer from the business logic.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>public interface IRepository<T> where T : class
+{
+    T GetById(int id);
+    IEnumerable<T> GetAll();
+    void Add(T entity);
+    void Update(T entity);
+    void Delete(T entity);
+}
+
+public class ProductRepository : IRepository<Product>
+{
+    private readonly AppDbContext _context;
+    
+    public ProductRepository(AppDbContext context)
+    {
+        _context = context;
+    }
+    
+    public Product GetById(int id)
+    {
+        return _context.Products.Find(id);
+    }
+    
+    public IEnumerable<Product> GetAll()
+    {
+        return _context.Products.ToList();
+    }
+    
+    public void Add(Product product)
+    {
+        _context.Products.Add(product);
+    }
+}</code></pre></div>
+            
+            <h3>7.2 Unit of Work Pattern</h3>
+            <p>The Unit of Work pattern tracks changes to objects during a business transaction and coordinates the writing out of changes as a single operation.</p>
+            
+            <h3>7.3 Data Access Object (DAO)</h3>
+            <p>DAO abstracts and encapsulates all access to a data source, providing a clean separation between business logic and data access logic.</p>
+        </div>
+
+        <h2>Chapter 8: Performance Optimization</h2>
+        <div class="chapter">
+            <h3>8.1 Indexing</h3>
+            <ul>
+                <li>Create indexes on frequently queried columns</li>
+                <li>Use composite indexes for multi-column queries</li>
+                <li>Avoid over-indexing on write-heavy tables</li>
+                <li>Monitor index usage and remove unused indexes</li>
+            </ul>
+            
+            <h3>8.2 Query Optimization</h3>
+            <ul>
+                <li>Use SELECT only for needed columns</li>
+                <li>Implement pagination for large result sets</li>
+                <li>Use stored procedures for complex operations</li>
+                <li>Cache frequently accessed data</li>
+                <li>Optimize JOIN operations</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>-- Create index example
+CREATE INDEX idx_products_price ON Products(Price);
+
+-- Composite index
+CREATE INDEX idx_products_category_price ON Products(CategoryId, Price);
+
+-- Pagination example
+SELECT * FROM Products 
+ORDER BY Id 
+OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY;</code></pre></div>
+            
+            <div class="important">
+                <strong>Important:</strong> Always analyze query execution plans to identify performance bottlenecks before adding indexes.
+            </div>
+        </div>
+
+        <h2>Chapter 9: Database Security</h2>
+        <div class="chapter">
+            <h3>9.1 Security Best Practices</h3>
+            <ul>
+                <li>Use parameterized queries to prevent SQL injection</li>
+                <li>Implement least privilege access control</li>
+                <li>Encrypt sensitive data at rest and in transit</li>
+                <li>Regular security audits and updates</li>
+                <li>Secure connection strings and credentials</li>
+                <li>Implement row-level security when needed</li>
+            </ul>
+            
+            <h3>9.2 Authentication and Authorization</h3>
+            <ul>
+                <li>Database user authentication</li>
+                <li>Role-based access control (RBAC)</li>
+                <li>Row-level security (RLS)</li>
+                <li>Audit logging for sensitive operations</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>-- Parameterized query example (prevents SQL injection)
+string query = "SELECT * FROM Users WHERE Username = @Username AND Password = @Password";
+using (var command = new SqlCommand(query, connection))
+{
+    command.Parameters.AddWithValue("@Username", username);
+    command.Parameters.AddWithValue("@Password", hashedPassword);
+    // Execute query
+}</code></pre></div>
+            
+            <div class="important">
+                <strong>Important:</strong> Never hardcode credentials in your application code. Always use secure configuration management and environment variables.
+            </div>
+        </div>
+
+        <h2>Chapter 10: Best Practices</h2>
+        <div class="chapter">
+            <h3>10.1 Development Guidelines</h3>
+            <ul>
+                <li>Use environment-specific configurations</li>
+                <li>Implement proper error handling and logging</li>
+                <li>Use connection pooling for performance</li>
+                <li>Implement retry logic for transient failures</li>
+                <li>Use async operations for I/O-bound tasks</li>
+                <li>Monitor database performance metrics</li>
+            </ul>
+            
+            <h3>10.2 Testing Database Code</h3>
+            <ul>
+                <li>Use in-memory databases for unit tests</li>
+                <li>Implement integration tests with test databases</li>
+                <li>Mock database dependencies where appropriate</li>
+                <li>Test transaction rollback scenarios</li>
+                <li>Test edge cases and error conditions</li>
+            </ul>
+            
+            <h3>10.3 Monitoring and Maintenance</h3>
+            <ul>
+                <li>Monitor query performance and slow queries</li>
+                <li>Regular database backups and testing</li>
+                <li>Index maintenance and optimization</li>
+                <li>Statistics update and query plan analysis</li>
+                <li>Capacity planning and scaling</li>
+            </ul>
+            
+            <div class="example">
+                <strong>Final Advice:</strong> Database integration is critical for application performance and reliability. Invest time in proper design, security, and optimization from the start.
+            </div>
         </div>
 
     </div>

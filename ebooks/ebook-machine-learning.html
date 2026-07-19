@@ -1,19 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Machine Learning E-Book</title>
     <style>
-
-
-        @import url('https://fonts.googleapis.com/css2family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -24,29 +18,6 @@
             animation: gradientShift 20s ease infinite;
             min-height: 100vh;
             padding: 25px 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
-            animation: particleFloat 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
         }
         
         @keyframes gradientShift {
@@ -62,60 +33,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(30px);
             border-radius: 32px;
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            animation: containerFloat 6s ease-in-out infinite;
-        }
-        
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #764ba2 60%, 
-                #667eea 80%, 
-                #764ba2 100%);
-            background-size: 300% 100%;
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-        
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3);
         }
         
         .back-button {
@@ -129,49 +47,7 @@
             border-radius: 30px;
             font-weight: 700;
             font-size: 16px;
-            box-shadow: 
-                0 8px 25px rgba(102, 126, 234, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-button:hover::before {
-            left: 100%;
-        }
-        
-        .back-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
-        }
-        
-        .back-button svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.3s ease;
-        }
-        
-        .back-button:hover svg {
-            transform: translateX(-5px);
         }
         
         h1 {
@@ -180,496 +56,169 @@
             font-weight: 800;
             text-align: center;
             margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 35px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
-            border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
         
         .subtitle {
             text-align: center;
             font-size: 18px;
-            color: #4a4a68;
+            color: #666;
             margin-bottom: 40px;
-            font-weight: 500;
-            animation: fadeIn 1s ease 0.4s both;
         }
         
         h2 {
             color: #1a1a2e;
             font-size: 32px;
             font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
+            padding: 25px 30px;
+            margin: 40px 0 25px 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 5px solid #667eea;
+            border-radius: 0 15px 15px 0;
         }
         
         h3 {
-            color: #1a1a2e;
-            font-size: 26px;
+            color: #333;
+            font-size: 24px;
             font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
+            padding: 20px 25px;
+            margin: 25px 0 15px 0;
+            border-left: 3px solid #764ba2;
         }
+        
+        p { margin: 15px 0; color: #444; font-size: 16px; line-height: 1.8; }
         
         .chapter {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
+            padding: 30px;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(102, 126, 234, 0.2);
         }
         
         .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
             overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.5s ease both;
-        }
-        
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.6;
         }
         
         .code-block pre {
             margin: 0;
             white-space: pre-wrap;
             word-wrap: break-word;
-            overflow-x: auto;
         }
         
+        .code-block code {
+            color: #d4d4d4;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+            color: #444;
+            font-size: 16px;
+        }
+        
+        li { margin: 10px 0; }
+        
+        strong { color: #667eea; font-weight: 600; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        th {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            font-weight: 600;
+            color: #1a1a2e;
+        }
         
         .toc {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 35px 40px;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 30px;
             border-radius: 20px;
-            margin: 40px 0;
-            border-left: 8px solid #667eea;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
+            margin: 30px 0;
+            border: 1px solid rgba(102, 126, 234, 0.3);
         }
         
         .toc h3 {
             color: #1a1a2e;
             font-size: 24px;
-            font-weight: 700;
             margin-bottom: 20px;
-            padding-left: 0;
             border-left: none;
+            padding-left: 0;
         }
         
         .toc ol {
             padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
         }
         
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .question {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
-        }
-        
-        .answer {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 30px 35px;
-            border-radius: 15px;
-            margin: 15px 0 25px 0;
-            border-left: 6px solid #764ba2;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            animation: slideUp 0.5s ease both;
-        }
-        
-        .answer p {
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            line-height: 1.8;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
-        }
-        
-        .answer strong {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .page-break {
-            page-break-after: always;
-            margin: 60px 0;
-            border-top: 2px dashed #e0e0e0;
-            padding-top: 40px;
+        .toc li {
+            margin: 12px 0;
+            color: #444;
         }
         
         .important {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+            border-left: 4px solid #ffc107;
             padding: 20px 25px;
-            border-radius: 12px;
             margin: 20px 0;
-            border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
-        }
-        
-        .important strong {
-            color: #856404;
+            border-radius: 0 15px 15px 0;
         }
         
         .tip {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(139, 195, 74, 0.1) 100%);
+            border-left: 4px solid #4caf50;
             padding: 20px 25px;
-            border-radius: 12px;
             margin: 20px 0;
-            border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
+            border-radius: 0 15px 15px 0;
         }
         
-        .tip strong {
-            color: #0c5460;
+        .example {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(63, 81, 181, 0.1) 100%);
+            border-left: 4px solid #2196f3;
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
         }
         
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 15px;
-        }
-        
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e9ecef;
-            color: #4a4a68;
-        }
-        
-        tr:last-child td {
-            border-bottom: none;
-        }
-        
-        tr:hover td {
-            background: #f8f9fa;
-        }
-        
-        p {
-            color: #1a1a2e;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        
-        ul, ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        ul li, ol li {
-            margin-bottom: 8px;
-        }
-        
-                
         @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
-            }
+            h1 { font-size: 36px; }
+            h2 { font-size: 26px; padding: 20px 25px; }
+            h3 { font-size: 20px; padding: 15px 20px; }
+            .container { padding: 30px 20px; }
+            .chapter { padding: 20px; }
         }
         
         @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
-            }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
+            h1 { font-size: 28px; padding-bottom: 20px; }
+            h2 { font-size: 20px; padding: 15px 20px; }
+            h3 { font-size: 18px; padding-left: 15px; }
+            .back-button { padding: 10px 16px; font-size: 13px; }
+            .container { padding: 20px 15px; border-radius: 15px; }
+            .code-block { padding: 20px 15px; font-size: 12px; }
+            .toc { padding: 20px 15px; }
         }
-</style>
+    </style>
 </head>
 <body>
     <div class="container">
@@ -680,116 +229,282 @@
             Back to Home
         </a>
         <h1>Machine Learning E-Book</h1>
-                <p class="subtitle">Comprehensive guide covering ML fundamentals, supervised learning, unsupervised learning, deep learning, model evaluation, MLOps with detailed explanations and code examples</p>
-        
-        <h2>Table of Contents</h2>
+        <p class="subtitle">Comprehensive guide covering ML fundamentals, supervised learning, unsupervised learning, deep learning, model evaluation, MLOps with detailed explanations and code examples</p>
+
         <div class="toc">
             <h3>Table of Contents</h3>
             <ol>
-                <li>Fundamentals</li>
-                <li>Core Concepts</li>
-                <li>Implementation</li>
+                <li>Introduction to Machine Learning</li>
+                <li>Supervised Learning</li>
+                <li>Unsupervised Learning</li>
+                <li>Deep Learning</li>
+                <li>Model Evaluation</li>
+                <li>Feature Engineering</li>
+                <li>MLOps and Deployment</li>
                 <li>Best Practices</li>
-                <li>Advanced Topics</li>
             </ol>
         </div>
 
-        <h2>1. Fundamentals</h2>
-
-        <div class="question">
-            Q1: What are the fundamental concepts in this subject</div>
-        <div class="answer">
-            <p>The fundamental concepts form the foundation for understanding this subject. These include core terminology, basic principles, and essential knowledge required for advanced topics.</p>
-            <h3>Key Concepts:</h3>
+        <h2>Chapter 1: Introduction to Machine Learning</h2>
+        <div class="chapter">
+            <h3>1.1 What is Machine Learning?</h3>
+            <p>Machine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. It focuses on developing algorithms that can access data and use it to learn for themselves.</p>
+            
+            <div class="important">
+                <strong>Key Insight:</strong> ML algorithms build models based on sample data, known as "training data", in order to make predictions or decisions without being explicitly programmed.
+            </div>
+            
+            <h3>1.2 Types of Machine Learning</h3>
             <ul>
-                <li>Concept 1: Description of first fundamental concept</li>
-                <li>Concept 2: Description of second fundamental concept</li>
-                <li>Concept 3: Description of third fundamental concept</li>
+                <li><strong>Supervised Learning</strong>: Learning with labeled data</li>
+                <li><strong>Unsupervised Learning</strong>: Learning with unlabeled data</li>
+                <li><strong>Reinforcement Learning</strong>: Learning through rewards and penalties</li>
+                <li><strong>Semi-Supervised Learning</strong>: Combination of labeled and unlabeled data</li>
+            </ul>
+            
+            <h3>1.3 ML Workflow</h3>
+            <ul>
+                <li>Data collection and preparation</li>
+                <li>Feature selection and engineering</li>
+                <li>Model selection and training</li>
+                <li>Model evaluation and validation</li>
+                <li>Deployment and monitoring</li>
             </ul>
         </div>
 
-        <h2>2. Core Concepts</h2>
-
-        <div class="question">
-            Q2: What are the core principles and patterns</div>
-        <div class="answer">
-            <p>Understanding the core principles is essential for mastering this subject. This section explores the most important concepts and their applications in real-world scenarios.</p>
-            <h3>Key Principles:</h3>
-            <ul>
-                <li>Principle 1: Description of the first key principle</li>
-                <li>Principle 2: Description of the second key principle</li>
-                <li>Principle 3: Description of the third key principle</li>
-            </ul>
-        </div>
-
-        <h2>3. Implementation</h2>
-
-        <div class="question">
-            Q3: How do you implement these concepts in practice</div>
-        <div class="answer">
-            <p>This chapter provides practical implementation examples with code snippets and real-world scenarios to help you apply the concepts learned.</p>
-            <div class="code-block"><pre><code># Machine Learning implementation example
-import numpy as np
+        <h2>Chapter 2: Supervised Learning</h2>
+        <div class="chapter">
+            <h3>2.1 Classification</h3>
+            <p>Classification algorithms predict discrete class labels from input data.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Classification example with scikit-learn
 from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Train model
+model = RandomForestClassifier(n_estimators=100)
+model.fit(X_train, y_train)
+
+# Predict and evaluate
+predictions = model.predict(X_test)
+accuracy = accuracy_score(y_test, predictions)
+print(f"Accuracy: {accuracy}")</code></pre></div>
+            
+            <h3>2.2 Regression</h3>
+            <p>Regression algorithms predict continuous numerical values.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Regression example
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
-class MLModel:
-    def __init__(self):
-        self.model = LinearRegression()
-    
-    def train(self, X, y):
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-        self.model.fit(X_train, y_train)
-        predictions = self.model.predict(X_test)
-        mse = mean_squared_error(y_test, predictions)
-        return mse
-    
-    def predict(self, X):
-        return self.model.predict(X)</code></pre></div>
+# Train model
+model = LinearRegression()
+model.fit(X_train, y_train)
 
-        <h2>4. Best Practices</h2>
-
-        <div class="question">
-            Q4: What are the industry best practices and standards</div>
-        <div class="answer">
-            <p>Learn industry best practices and standards for professional development and production environments. These guidelines ensure code quality, maintainability, and scalability.</p>
-            <h3>Best Practices:</h3>
+# Predict and evaluate
+predictions = model.predict(X_test)
+mse = mean_squared_error(y_test, predictions)
+print(f"MSE: {mse}")</code></pre></div>
+            
+            <h3>2.3 Common Algorithms</h3>
             <ul>
-                <li>Use clear and descriptive naming conventions</li>
-                <li>Follow established coding standards</li>
-                <li>Write comprehensive documentation</li>
-                <li>Implement proper error handling</li>
-                <li>Optimize for performance and readability</li>
+                <li><strong>Linear Regression</strong>: Predict continuous values</li>
+                <li><strong>Logistic Regression</strong>: Binary classification</li>
+                <li><strong>Decision Trees</strong>: Tree-based classification</li>
+                <li><strong>Random Forest</strong>: Ensemble of decision trees</li>
+                <li><strong>Support Vector Machines</strong>: Classification and regression</li>
+                <li><strong>Neural Networks</strong>: Complex pattern recognition</li>
             </ul>
         </div>
-        
-        <h2>5. Advanced Topics</h2>
 
-        <div class="question">
-            Q5: What are the advanced techniques and optimizations</div>
-        <div class="answer">
-            <p>Explore advanced techniques, optimizations, and cutting-edge approaches in this field. These topics are essential for senior-level understanding and expert-level implementation.</p>
-            <div class="code-block"><pre><code># Machine Learning implementation example
-import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
+        <h2>Chapter 3: Unsupervised Learning</h2>
+        <div class="chapter">
+            <h3>3.1 Clustering</h3>
+            <p>Clustering groups similar data points together without labels.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># K-Means clustering example
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
 
-class MLModel:
-    def __init__(self):
-        self.model = LinearRegression()
-    
-    def train(self, X, y):
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-        self.model.fit(X_train, y_train)
-        predictions = self.model.predict(X_test)
-        mse = mean_squared_error(y_test, predictions)
-        return mse
-    
-    def predict(self, X):
-        return self.model.predict(X)</code></pre></div>
+# Scale data
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Cluster data
+kmeans = KMeans(n_clusters=3, random_state=42)
+clusters = kmeans.fit_predict(X_scaled)
+print(f"Cluster assignments: {clusters}")</code></pre></div>
+            
+            <h3>3.2 Dimensionality Reduction</h3>
+            <p>Reduces the number of random variables under consideration.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># PCA example
+from sklearn.decomposition import PCA
+
+# Reduce dimensions
+pca = PCA(n_components=2)
+X_reduced = pca.fit_transform(X_scaled)
+print(f"Explained variance: {pca.explained_variance_ratio_}")</code></pre></div>
+            
+            <h3>3.3 Common Algorithms</h3>
+            <ul>
+                <li><strong>K-Means</strong>: Centroid-based clustering</li>
+                <li><strong>Hierarchical Clustering</strong>: Tree-based clustering</li>
+                <li><strong>DBSCAN</strong>: Density-based clustering</li>
+                <li><strong>PCA</strong>: Principal Component Analysis</li>
+                <li><strong>t-SNE</strong>: Visualization of high-dimensional data</li>
+            </ul>
         </div>
+
+        <h2>Chapter 4: Deep Learning</h2>
+        <div class="chapter">
+            <h3>4.1 Neural Networks</h3>
+            <p>Neural networks are computing systems inspired by biological neural networks.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Neural network with TensorFlow/Keras
+import tensorflow as tf
+from tensorflow import keras
+
+model = keras.Sequential([
+    keras.layers.Dense(128, activation='relu', input_shape=(784,)),
+    keras.layers.Dropout(0.2),
+    keras.layers.Dense(64, activation='relu'),
+    keras.layers.Dense(10, activation='softmax')
+])
+
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+model.fit(X_train, y_train, epochs=10, validation_split=0.2)</code></pre></div>
+            
+            <h3>4.2 Deep Learning Architectures</h3>
+            <ul>
+                <li><strong>CNN</strong>: Convolutional Neural Networks for images</li>
+                <li><strong>RNN</strong>: Recurrent Neural Networks for sequences</li>
+                <li><strong>LSTM</strong>: Long Short-Term Memory for long sequences</li>
+                <li><strong>Transformer</strong>: Attention-based architecture</li>
+            </ul>
+        </div>
+
+        <h2>Chapter 5: Model Evaluation</h2>
+        <div class="chapter">
+            <h3>5.1 Evaluation Metrics</h3>
+            <ul>
+                <li><strong>Accuracy</strong>: Overall correctness</li>
+                <li><strong>Precision</strong>: True positive rate</li>
+                <li><strong>Recall</strong>: Sensitivity</li>
+                <li><strong>F1 Score</strong>: Harmonic mean of precision and recall</li>
+                <li><strong>ROC-AUC</strong>: Area under ROC curve</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code># Evaluation metrics example
+from sklearn.metrics import classification_report, confusion_matrix
+
+print(classification_report(y_test, predictions))
+print(confusion_matrix(y_test, predictions))</code></pre></div>
+            
+            <h3>5.2 Cross-Validation</h3>
+            <p>Cross-validation assesses how well a model generalizes to an independent dataset.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Cross-validation example
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(model, X, y, cv=5)
+print(f"Cross-validation scores: {scores}")
+print(f"Mean accuracy: {scores.mean()}")</code></pre></div>
+        </div>
+
+        <h2>Chapter 6: Feature Engineering</h2>
+        <div class="chapter">
+            <h3>6.1 Feature Selection</h3>
+            <p>Selecting the most relevant features for model training.</p>
+            
+            <ul>
+                <li><strong>Filter Methods</strong>: Statistical measures</li>
+                <li><strong>Wrapper Methods</strong>: Model-based selection</li>
+                <li><strong>Embedded Methods</strong>: Regularization-based</li>
+            </ul>
+            
+            <h3>6.2 Feature Transformation</h3>
+            <ul>
+                <li>Normalization and scaling</li>
+                <li>Encoding categorical variables</li>
+                <li>Handling missing values</li>
+                <li>Creating polynomial features</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code># Feature engineering example
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+
+# Preprocess features
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', StandardScaler(), numerical_features),
+        ('cat', OneHotEncoder(), categorical_features)
+    ])
+
+X_processed = preprocessor.fit_transform(X)</code></pre></div>
+        </div>
+
+        <h2>Chapter 7: MLOps and Deployment</h2>
+        <div class="chapter">
+            <h3>7.1 Model Deployment</h3>
+            <ul>
+                <li>API deployment (REST, GraphQL)</li>
+                <li>Containerization (Docker)</li>
+                <li>Cloud deployment (AWS, Azure, GCP)</li>
+                <li>Edge deployment</li>
+            </ul>
+            
+            <h3>7.2 MLOps Practices</h3>
+            <ul>
+                <li>Model versioning</li>
+                <li>Continuous training and deployment</li>
+                <li>Monitoring and logging</li>
+                <li>A/B testing</li>
+                <li>Model governance</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Implement robust monitoring to detect model drift and performance degradation in production.
+            </div>
+        </div>
+
+        <h2>Chapter 8: Best Practices</h2>
+        <div class="chapter">
+            <h3>8.1 Development Guidelines</h3>
+            <ul>
+                <li>Start with simple models before complex ones</li>
+                <li>Always split data into train/validation/test sets</li>
+                <li>Use cross-validation for reliable evaluation</li>
+                <li>Monitor for overfitting and underfitting</li>
+                <li>Document data sources and preprocessing steps</li>
+            </ul>
+            
+            <h3>8.2 Common Pitfalls</h3>
+            <ul>
+                <li>Data leakage between train and test sets</li>
+                <li>Ignoring class imbalance</li>
+                <li>Overfitting to training data</li>
+                <li>Not validating assumptions</li>
+                <li>Ignoring model interpretability</li>
+            </ul>
+            
+            <div class="important">
+                <strong>Important:</strong> Always validate your model on unseen data before deployment to ensure it generalizes well.
+            </div>
+            
+            <div class="example">
+                <strong>Final Advice:</strong> Machine learning is an iterative process. Start simple, measure everything, and continuously improve based on data and feedback.
+            </div>
+        </div>
+
     </div>
 </body>
 </html>
