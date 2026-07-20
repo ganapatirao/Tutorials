@@ -2525,19 +2525,299 @@ function KanbanBoard() {
         </div>
 
         <div class="question">
-            Q60: What are the common React performance issues and solutions?
+            Q61: What is JSX and why can't browsers read it directly?
+        </div>
+        <div class="answer">
+            <p><strong>JSX</strong> (JavaScript XML) is a syntax extension for JavaScript that allows you to write HTML-like code within JavaScript files. It makes it easier to write and understand React components.</p>
+            
+            <h3>Why browsers can't read JSX directly:</h3>
+            <ul>
+                <li>Browsers only understand standard JavaScript, not JSX syntax</li>
+                <li>JSX needs to be transpiled (converted) to regular JavaScript using tools like Babel</li>
+                <li>The transpilation process converts JSX to React.createElement() calls</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>// JSX (what you write)
+const element = &lt;h1&gt;Hello, World!&lt;/h1&gt;;
+
+// Transpiled to JavaScript (what browsers execute)
+const element = React.createElement('h1', null, 'Hello, World!');</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q62: What are React fragments and when should you use them?
+        </div>
+        <div class="answer">
+            <p><strong>React Fragments</strong> let you group a list of children without adding extra nodes to the DOM. They're useful when you need to return multiple elements from a component but don't want to wrap them in a parent div.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Without fragments (adds extra div)
+return (
+  &lt;div&gt;
+    &lt;Header /&gt;
+    &lt;Main /&gt;
+    &lt;Footer /&gt;
+  &lt;/div&gt;
+);
+
+// With fragments (no extra DOM node)
+return (
+  &lt;&gt;
+    &lt;Header /&gt;
+    &lt;Main /&gt;
+    &lt;Footer /&gt;
+  &lt;/&gt;
+);</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q63: What is the difference between React elements and React components?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>React Elements</th>
+                    <th>React Components</th>
+                </tr>
+                <tr>
+                    <td>Definition</td>
+                    <td>Plain JavaScript objects describing DOM nodes</td>
+                    <td>Functions or classes that return React elements</td>
+                </tr>
+                <tr>
+                    <td>Reusability</td>
+                    <td>Not reusable</td>
+                    <td>Reusable and composable</td>
+                </tr>
+                <tr>
+                    <td>State</td>
+                    <td>No state or lifecycle</td>
+                    <td>Can have state and lifecycle</td>
+                </tr>
+                <tr>
+                    <td>Example</td>
+                    <td>&lt;div /&gt;, React.createElement('div')</td>
+                    <td>function Component() { return &lt;div /&gt;; }</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q64: What are pure functional components?
+        </div>
+        <div class="answer">
+            <p><strong>Pure functional components</strong> are components that:</p>
+            <ul>
+                <li>Always return the same output for the same input props</li>
+                <li>Have no side effects</li>
+                <li>Don't rely on external state</li>
+                <li>Can be optimized with React.memo</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>// Pure component
+function PureComponent({ name }) {
+  return &lt;div&gt;Hello, {name}!&lt;/div&gt;;
+}
+
+// Optimized with React.memo
+const MemoizedComponent = React.memo(PureComponent);</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q65: What is the purpose of React.forwardRef?
+        </div>
+        <div class="answer">
+            <p><strong>React.forwardRef</strong> is a higher-order component that allows you to pass a ref through a component to one of its children. It's useful when you need to expose a DOM node from a child component to a parent.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Child component with forwardRef
+const FancyButton = React.forwardRef((props, ref) =&gt; (
+  &lt;button ref={ref} className="fancy-button"&gt;
+    {props.children}
+  &lt;/button&gt;
+));
+
+// Parent component
+const App = () =&gt; {
+  const buttonRef = useRef(null);
+  
+  const handleClick = () =&gt; {
+    buttonRef.current.focus();
+  };
+  
+  return (
+    &lt;div&gt;
+      &lt;FancyButton ref={buttonRef}&gt;Click me&lt;/FancyButton&gt;
+      &lt;button onClick={handleClick}&gt;Focus button&lt;/button&gt;
+    &lt;/div&gt;
+  );
+};</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q66: How do you handle events in React components?
+        </div>
+        <div class="answer">
+            <p>React uses <strong>synthetic events</strong> that wrap native browser events. Event handlers are passed as props and follow naming conventions (camelCase, on + event name).</p>
+            
+            <div class="code-block" data-language="code"><pre><code>function Button() {
+  const handleClick = (event) =&gt; {
+    event.preventDefault();
+    console.log('Button clicked');
+  };
+  
+  return (
+    &lt;button onClick={handleClick}&gt;
+      Click me
+    &lt;/button&gt;
+  );
+}</code></pre></div>
+            
+            <h3>Key differences from native events:</h3>
+            <ul>
+                <li>Events are normalized across browsers</li>
+                <li>Events bubble and capture the same way</li>
+                <li>You can't return false to prevent default behavior (use preventDefault)</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q67: What is unidirectional data flow in React?
+        </div>
+        <div class="answer">
+            <p><strong>Unidirectional data flow</strong> means data flows in one direction - from parent to child components. This makes it easier to understand and debug applications.</p>
+            
+            <ul>
+                <li>Parent components pass data to children via props</li>
+                <li>Children cannot directly modify parent data</li>
+                <li>Children communicate back via callbacks</li>
+                <li>State is managed at the component level where it's needed</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Benefits:</strong> Predictable data flow, easier debugging, better component isolation.
+            </div>
+        </div>
+
+        <div class="question">
+            Q68: What are the most common approaches for styling a React application?
         </div>
         <div class="answer">
             <ul>
-                <li><strong>Unnecessary re-renders:</strong> Use React.memo, useMemo, useCallback</li>
-                <li><strong>Large bundle size:</strong> Code splitting, tree shaking, lazy loading</li>
-                <li><strong>Slow initial load:</strong> Server-side rendering, static generation</li>
-                <li><strong>Slow list rendering:</strong> Virtualization with react-window</li>
-                <li><strong>Memory leaks:</strong> Clean up subscriptions, event listeners</li>
-                <li><strong>Slow calculations:</strong> Memoize with useMemo</li>
-                <li><strong>Prop drilling:</strong> Use Context API or state management</li>
-                <li><strong>Too many state updates:</strong> Batch updates, useReducer</li>
+                <li><strong>CSS Modules:</strong> Scoped CSS classes</li>
+                <li><strong>CSS-in-JS:</strong> Styled-components, Emotion</li>
+                <li><strong>Utility-first:</strong> Tailwind CSS</li>
+                <li><strong>Component libraries:</strong> Material UI, Ant Design, Chakra UI</li>
+                <li><strong>Standard CSS:</strong> Global styles with CSS files</li>
+                <li><strong>Inline styles:</strong> Style objects in JSX</li>
             </ul>
+        </div>
+
+        <div class="question">
+            Q69: What is prop drilling and how can you avoid it?
+        </div>
+        <div class="answer">
+            <p><strong>Prop drilling</strong> is the process of passing data through multiple layers of components that don't need the data themselves, just to get it to a child component.</p>
+            
+            <h3>Solutions to avoid prop drilling:</h3>
+            <ul>
+                <li><strong>Context API:</strong> Share data across the component tree</li>
+                <li><strong>State management:</strong> Redux, Zustand, Jotai</li>
+                <li><strong>Composition:</strong> Pass components as children</li>
+                <li><strong>Custom hooks:</strong> Encapsulate data fetching logic</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q70: What is React Fiber?
+        </div>
+        <div class="answer">
+            <p><strong>React Fiber</strong> is the new reconciliation algorithm in React 16+. It enables:</p>
+            <ul>
+                <li>Incremental rendering (render work can be split into chunks)</li>
+                <li>Prioritization of updates (render high-priority updates first)</li>
+                <li>Ability to pause, abort, or reuse work</li>
+                <li>Better support for concurrent rendering</li>
+                <li>Improved error handling and recovery</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Key concept:</strong> Fiber made React's reconciliation algorithm incremental, allowing React to interrupt rendering work to handle higher-priority updates.
+            </div>
+        </div>
+
+        <div class="question">
+            Q71: What are portals in React?
+        </div>
+        <div class="answer">
+            <p><strong>React Portals</strong> provide a way to render children into a DOM node outside the parent component's hierarchy. They're useful for modals, tooltips, and dropdowns.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>import { createPortal } from 'react-dom';
+
+function Modal({ children }) {
+  return createPortal(
+    children,
+    document.getElementById('modal-root')
+  );
+}
+
+// Usage
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Modal&gt;
+        &lt;div className="modal"&gt;Modal content&lt;/div&gt;
+      &lt;/Modal&gt;
+    &lt;/div&gt;
+  );
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q72: What is the difference between React and Angular?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>React</th>
+                    <th>Angular</th>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>Library (UI only)</td>
+                    <td>Full framework</td>
+                </tr>
+                <tr>
+                    <td>Learning curve</td>
+                    <td>Easier, flexible</td>
+                    <td>Steeper, opinionated</td>
+                </tr>
+                <tr>
+                    <td>Architecture</td>
+                    <td>Component-based</td>
+                    <td>MVC-based</td>
+                </tr>
+                <tr>
+                    <td>Data binding</td>
+                    <td>One-way</td>
+                    <td>Two-way</td>
+                </tr>
+                <tr>
+                    <td>Language</td>
+                    <td>JavaScript/JSX</td>
+                    <td>TypeScript</td>
+                </tr>
+                <tr>
+                    <td>State management</td>
+                    <td>External (Redux, Context)</td>
+                    <td>Built-in (RxJS)</td>
+                </tr>
+                <tr>
+                    <td>Rendering</td>
+                    <td>Virtual DOM</td>
+                    <td>Real DOM with change detection</td>
+                </tr>
+            </table>
         </div>
 
         <div class="tip">
@@ -2554,9 +2834,10 @@ function KanbanBoard() {
             </ul>
         </div>
 
-        <div style="margin-top: 50px; padding: 20px; background: #512bd4; color: white; border-radius: 8px; text-align: center;">
-            <h3>End of React Interview Preparation Guide</h3>
-            <p>Comprehensive coverage from Comprehensive Guide level (All Experience Levels)</p>
+        <div class="footer">
+            <p><span class="highlight">🎯 Ready for Your React Interview?</span></p>
+            <p>Master these 72 comprehensive React interview questions covering fundamentals, hooks, state management, and best practices. React is the most popular frontend library - understanding its concepts deeply will make you a better frontend developer.</p>
+            <p><span class="highlight">💡 Tip:</span> Focus on understanding hooks, component lifecycle, state management patterns, and performance optimization. These are the areas where most React interview questions focus. Practice building scalable, maintainable React applications.</p>
         </div>
     </div>
 </body>

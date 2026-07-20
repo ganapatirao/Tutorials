@@ -2692,6 +2692,274 @@ services:
     platform: linux/arm64</code></pre></div>
         </div>
 
+        <div class="question">
+            Q71: What is the Docker build context, and why does it matter?
+        </div>
+        <div class="answer">
+            <p><strong>Docker build context</strong> is the set of files and directories located at the specified path or URL when building a Docker image. It matters because:</p>
+            <ul>
+                <li>All files in the context are sent to the Docker daemon during build</li>
+                <li>Large contexts slow down builds and increase network transfer</li>
+                <li>Use .dockerignore to exclude unnecessary files</li>
+                <li>Keep the build context minimal for faster builds</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code># Example .dockerignore
+node_modules
+.git
+*.log
+.env
+Dockerfile
+docker-compose.yml</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q72: What is the difference between EXPOSE and publishing ports with -p?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>EXPOSE</th>
+                    <th>-p (publish)</th>
+                </tr>
+                <tr>
+                    <td>Purpose</td>
+                    <td>Documentation only</td>
+                    <td>Actual port mapping</td>
+                </tr>
+                <tr>
+                    <td>Runtime</td>
+                    <td>Build time (Dockerfile)</td>
+                    <td>Run time (docker run)</td>
+                </tr>
+                <tr>
+                    <td>Effect</td>
+                    <td>No actual port opening</td>
+                    <td>Maps host port to container port</td>
+                </tr>
+                <tr>
+                    <td>Required</td>
+                    <td>No (optional)</td>
+                    <td>Yes for external access</td>
+                </tr>
+            </table>
+            
+            <div class="code-block" data-language="code"><pre><code># Dockerfile
+EXPOSE 8080
+
+# Command
+docker run -p 8080:8080 myapp</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q73: What is the difference between daemon level logging and container level logging in Docker?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Daemon Level</th>
+                    <th>Container Level</th>
+                </tr>
+                <tr>
+                    <td>Scope</td>
+                    <td>Global for all containers</td>
+                    <td>Per-container configuration</td>
+                </tr>
+                <tr>
+                    <td>Configuration</td>
+                    <td>/etc/docker/daemon.json</td>
+                    <td>--log-driver flag</td>
+                </tr>
+                <tr>
+                    <td>Priority</td>
+                    <td>Container level overrides daemon</td>
+                    <td>Higher priority</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Default logging for all containers</td>
+                    <td>Custom logging per application</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q74: What is Docker Content Trust?
+        </div>
+        <div class="answer">
+            <p><strong>Docker Content Trust (DCT)</strong> is a security feature that enables users to verify the integrity and publisher of Docker images. It provides:</p>
+            <ul>
+                <li><strong>Digital signatures:</strong> Images are signed by the publisher</li>
+                <li><strong>Verification:</strong> Clients can verify image authenticity</li>
+                <li><strong>Prevention:</strong> Prevents running unsigned or tampered images</li>
+                <li><strong>Delegations:</strong> Supports delegation of signing keys</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code># Enable Docker Content Trust
+export DOCKER_CONTENT_TRUST=1
+
+# Pull signed image
+docker pull myapp:signed</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q75: What are Docker object labels?
+        </div>
+        <div class="answer">
+            <p><strong>Docker labels</strong> are key-value pairs attached to Docker objects (images, containers, volumes, networks, etc.) for:</p>
+            <ul>
+                <li><strong>Metadata:</strong> Store information about the object</li>
+                <li><strong>Organization:</strong> Group and filter objects</li>
+                <li><strong>Automation:</strong> Enable programmatic management</li>
+                <li><strong>Documentation:</strong> Add descriptive information</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code># Dockerfile
+LABEL version="1.0"
+LABEL description="My application"
+LABEL maintainer="dev@example.com"
+
+# Command
+docker run --label env=prod myapp</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q76: What is the difference between Docker Community Edition (CE) and Enterprise Edition (EE)?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Docker CE</th>
+                    <th>Docker EE</th>
+                </tr>
+                <tr>
+                    <td>Cost</td>
+                    <td>Free</td>
+                    <td>Paid subscription</td>
+                </tr>
+                <tr>
+                    <td>Support</td>
+                    <td>Community</td>
+                    <td>Enterprise support</td>
+                </tr>
+                <tr>
+                    <td>Features</td>
+                    <td>Basic features</td>
+                    <td>Advanced security, scanning, management</td>
+                </tr>
+                <tr>
+                    <td>Certification</td>
+                    <td>None</td>
+                    <td>Certified containers and plugins</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Development, testing</td>
+                    <td>Production, enterprise</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q77: What is the purpose of the docker checkpoint command?
+        </div>
+        <div class="answer">
+            <p><strong>docker checkpoint</strong> is used to create checkpoints for running containers. It enables:</p>
+            <ul>
+                <li><strong>Container migration:</strong> Move containers between hosts</li>
+                <li><strong>State preservation:</strong> Save container memory state</li>
+                <li><strong>Fast restore:</strong> Restore containers from checkpoints</li>
+                <li><strong>CRIU integration:</strong> Uses Checkpoint/Restore in Userspace</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code># Create checkpoint
+docker checkpoint create mycontainer checkpoint1
+
+# Restore from checkpoint
+docker start --checkpoint checkpoint1 mycontainer</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q78: How do you inspect the metadata of a Docker image?
+        </div>
+        <div class="answer">
+            <p>Use the <strong>docker inspect</strong> command to view detailed metadata about Docker images:</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Inspect image metadata
+docker inspect myimage:latest
+
+# Inspect specific fields
+docker inspect --format='{{.Config.Env}}' myimage
+docker inspect --format='{{.Config.ExposedPorts}}' myimage
+docker inspect --format='{{.Size}}' myimage</code></pre></div>
+            
+            <p>Metadata includes:</p>
+            <ul>
+                <li>Image configuration (ENV, CMD, ENTRYPOINT)</li>
+                <li>Exposed ports</li>
+                <li>Volume definitions</li>
+                <li>Labels</li>
+                <li>Layer information</li>
+                <li>Image size</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q79: How do you limit the CPU and memory usage of a Docker container?
+        </div>
+        <div class="answer">
+            <p>Use resource constraints to limit container resource usage:</p>
+            
+            <div class="code-block" data-language="code"><pre><code># CPU limits
+docker run --cpus="1.5" myapp
+docker run --cpus=".5" myapp
+docker run --cpu-shares=512 myapp
+
+# Memory limits
+docker run -m 512m myapp
+docker run --memory="512m" --memory-swap="1g" myapp
+
+# Docker Compose
+services:
+  app:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q80: What is Docker system prune used for?
+        </div>
+        <div class="answer">
+            <p><strong>docker system prune</strong> removes unused Docker data to free up disk space:</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Remove unused data
+docker system prune
+
+# Remove all unused data including volumes
+docker system prune -a --volumes
+
+# Remove unused data older than 24 hours
+docker system prune --filter "until=24h"</code></pre></div>
+            
+            <p>It removes:</p>
+            <ul>
+                <li>Stopped containers</li>
+                <li>Unused networks</li>
+                <li>Dangling images</li>
+                <li>Unused build cache</li>
+                <li>Optionally: unused volumes and all unused images</li>
+            </ul>
+        </div>
+
         <div class="tip">
             <strong>Interview Tip:</strong> When discussing Docker, emphasize understanding of core concepts (images, containers, volumes), practical experience with Docker commands, and knowledge of security best practices. Be prepared to discuss real-world scenarios like multi-stage builds, Docker Compose, and troubleshooting.
         </div>
@@ -2712,9 +2980,10 @@ services:
             </ul>
         </div>
 
-        <div style="margin-top: 50px; padding: 20px; background: #2496ed; color: white; border-radius: 8px; text-align: center;">
-            <h3>End of Docker Interview Preparation Guide</h3>
-            <p>Comprehensive coverage with detailed questions and answers</p>
+        <div class="footer">
+            <p><span class="highlight">🎯 Ready for Your Docker Interview?</span></p>
+            <p>Master these 80 comprehensive Docker interview questions covering fundamentals, containerization, orchestration, and best practices. Docker is essential for modern DevOps - understanding containerization deeply will make you a better DevOps engineer.</p>
+            <p><span class="highlight">💡 Tip:</span> Focus on understanding Docker images, containers, networking, volumes, and security. These are the areas where most Docker interview questions focus. Practice building optimized Docker images and implementing container orchestration.</p>
         </div>
     </div>
 </body>

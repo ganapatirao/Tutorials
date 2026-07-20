@@ -3042,6 +3042,422 @@ spec:
   - clusterGroup: edge-clusters</code></pre></div>
         </div>
 
+        <div class="question">
+            Q71: What is the role of etcd in Kubernetes?
+        </div>
+        <div class="answer">
+            <p><strong>etcd</strong> is a distributed key-value store that serves as Kubernetes' backing store for all cluster data. It's critical because:</p>
+            <ul>
+                <li><strong>State storage:</strong> Stores the entire cluster state and configuration</li>
+                <li><strong>Consistency:</strong> Provides strong consistency guarantees</li>
+                <li><strong>Watch mechanism:</strong> Enables Kubernetes components to watch for changes</li>
+                <li><strong>Leader election:</strong> Used for controller leader election</li>
+                <li><strong>High availability:</strong> Can be run as a cluster for HA</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Important:</strong> etcd is the single source of truth for Kubernetes cluster state. If etcd is lost, the cluster is lost.
+            </div>
+        </div>
+
+        <div class="question">
+            Q72: Explain Kubernetes Admission Controllers.
+        </div>
+        <div class="answer">
+            <p><strong>Admission Controllers</strong> are plugins that intercept requests to the Kubernetes API server before objects are persisted. They provide:</p>
+            <ul>
+                <li><strong>Validation:</strong> Validate object configurations</li>
+                <li><strong>Mutation:</strong> Modify object configurations</li>
+                <li><strong>Security:</strong> Enforce security policies</li>
+                <li><strong>Customization:</strong> Implement custom logic</li>
+            </ul>
+            
+            <h3>Types:</h3>
+            <ul>
+                <li><strong>Mutating:</strong> Modify requests before they're processed</li>
+                <li><strong>Validating:</strong> Validate requests after mutation</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q73: What are Kubernetes Labels and Selectors?
+        </div>
+        <div class="answer">
+            <p><strong>Labels</strong> are key-value pairs attached to Kubernetes objects for identification and organization. <strong>Selectors</strong> are used to query objects based on labels.</p>
+            
+            <h3>Selector Types:</h3>
+            <ul>
+                <li><strong>Equality-based:</strong> Exact match (environment=production)</li>
+                <li><strong>Set-based:</strong> Set operations (environment in (production, staging))</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code># Labels
+metadata:
+  labels:
+    app: myapp
+    version: v1
+    environment: production
+
+# Selector
+selector:
+  matchLabels:
+    app: myapp
+  matchExpressions:
+    - key: environment
+      operator: In
+      values: [production, staging]</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q74: How does Kubernetes manage container networking?
+        </div>
+        <div class="answer">
+            <p>Kubernetes networking follows a flat model where every pod can communicate with every other pod without NAT. Key concepts:</p>
+            <ul>
+                <li><strong>Pod IP:</strong> Each pod gets a unique IP address</li>
+                <li><strong>Service discovery:</strong> Services provide stable endpoints</li>
+                <li><strong>Network policies:</strong> Control pod-to-pod communication</li>
+                <li><strong>CNI plugins:</strong> Implement networking (Calico, Flannel, Weave)</li>
+                <li><strong>DNS:</strong> CoreDNS provides DNS resolution</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q75: What is the Kubernetes Control Plane?
+        </div>
+        <div class="answer">
+            <p>The <strong>Control Plane</strong> manages the cluster state and makes global decisions. Components include:</p>
+            <ul>
+                <li><strong> kube-apiserver:</strong> Frontend for all API operations</li>
+                <li><strong>etcd:</strong> Key-value store for cluster data</li>
+                <li><strong>kube-scheduler:</strong> Schedules pods to nodes</li>
+                <li><strong>kube-controller-manager:</strong> Runs controller processes</li>
+                <li><strong>cloud-controller-manager:</strong> Interacts with cloud providers</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q76: Explain Kubernetes CronJobs.
+        </div>
+        <div class="answer">
+            <p><strong>CronJobs</strong> create Jobs on a repeating schedule. They're useful for:</p>
+            <ul>
+                <li>Periodic backups</li>
+                <li>Data processing jobs</li>
+                <li>Report generation</li>
+                <li>Database maintenance</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup
+spec:
+  schedule: "0 2 * * *"  # Run at 2 AM daily
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup
+            image: backup:latest
+          restartPolicy: OnFailure</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q77: What is Kubernetes Pod Affinity and Anti-Affinity?
+        </div>
+        <div class="answer">
+            <p><strong>Pod Affinity</strong> rules constrain which nodes pods can be scheduled on based on other pods.</p>
+            
+            <h3>Types:</h3>
+            <ul>
+                <li><strong>requiredDuringSchedulingIgnoredDuringExecution:</strong> Hard requirement</li>
+                <li><strong>preferredDuringSchedulingIgnoredDuringExecution:</strong> Soft preference</li>
+            </ul>
+            
+            <h3>Affinity Types:</h3>
+            <ul>
+                <li><strong>Pod affinity:</strong> Schedule near other pods</li>
+                <li><strong>Pod anti-affinity:</strong> Schedule away from other pods</li>
+                <li><strong>Node affinity:</strong> Schedule on specific nodes</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q78: What is a Kubernetes Job?
+        </div>
+        <div class="answer">
+            <p><strong>Jobs</strong> create one or more pods to execute a task and ensure successful completion. Use cases:</p>
+            <ul>
+                <li>Batch processing</li>
+                <li>One-time tasks</li>
+                <li>Parallel processing</li>
+                <li>Sequential processing</li>
+            </ul>
+            
+            <h3>Job Types:</h3>
+            <ul>
+                <li><strong>Non-parallel:</strong> One pod completes the job</li>
+                <li><strong>Parallel with fixed completion:</strong> Multiple pods with completion count</li>
+                <li><strong>Parallel:</strong> Multiple pods work in parallel</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q79: What is the purpose of Kubernetes Role and RoleBinding?
+        </div>
+        <div class="answer">
+            <p><strong>Role</strong> defines permissions within a namespace. <strong>RoleBinding</strong> grants those permissions to users, groups, or service accounts.</p>
+            
+            <div class="code-block" data-language="code"><pre><code># Role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+
+# RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pod-reader
+  namespace: default
+subjects:
+- kind: User
+  name: jane
+roleRef:
+  kind: Role
+  name: pod-reader</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q80: What is the difference between ReplicaSet and ReplicationController?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>ReplicationController</th>
+                    <th>ReplicaSet</th>
+                </tr>
+                <tr>
+                    <td>API version</td>
+                    <td>apps/v1 (legacy)</td>
+                    <td>apps/v1 (current)</td>
+                </tr>
+                <tr>
+                    <td>Selector</td>
+                    <td>Equality-based only</td>
+                    <td>Set-based selectors</td>
+                </tr>
+                <tr>
+                    <td>Use</td>
+                    <td>Deprecated</td>
+                    <td>Used by Deployments</td>
+                </tr>
+                <tr>
+                    <td>Recommendation</td>
+                    <td>Use ReplicaSet instead</td>
+                    <td>Preferred</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q81: What is Kubernetes Pod Security Policy (PSP)?
+        </div>
+        <div class="answer">
+            <p><strong>Pod Security Policies</strong> control security-sensitive aspects of pod specification. They enforce:</p>
+            <ul>
+                <li><strong>Privileged mode:</strong> Control privileged containers</li>
+                <li><strong>Host networking:</strong> Control host network access</li>
+                <li><strong>Volume types:</strong> Control volume usage</li>
+                <li><strong>Capabilities:</strong> Control Linux capabilities</li>
+                <li><strong>Run as user:</strong> Control user ID</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Note:</strong> PSPs are deprecated in Kubernetes 1.25+. Use Pod Security Admission instead.
+            </div>
+        </div>
+
+        <div class="question">
+            Q82: Explain Kubernetes Resource Quotas and Limit Ranges.
+        </div>
+        <div class="answer">
+            <p><strong>Resource Quotas</strong> limit aggregate resource consumption per namespace. <strong>Limit Ranges</strong> constrain resource allocation per pod or container.</p>
+            
+            <h3>Resource Quota:</h3>
+            <ul>
+                <li>Limit total CPU, memory, storage per namespace</li>
+                <li>Limit number of objects (pods, services, etc.)</li>
+                <li>Enforce multi-tenant resource isolation</li>
+            </ul>
+            
+            <h3>Limit Range:</h3>
+            <ul>
+                <li>Set default resource requests and limits</li>
+                <li>Set min/max resource constraints</li>
+                <li>Enforce resource ratios (request to limit)</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q83: What is Kubernetes Pod Priority and Preemption?
+        </div>
+        <div class="answer">
+            <p><strong>Pod Priority</strong> assigns importance to pods. <strong>Preemption</strong> allows high-priority pods to evict low-priority pods when resources are insufficient.</p>
+            
+            <h3>Priority Classes:</h3>
+            <ul>
+                <li><strong>System-cluster-critical:</strong> Highest priority</li>
+                <li><strong>System-node-critical:</strong> High priority</li>
+                <li><strong>Custom:</strong> User-defined priorities</li>
+                <li><strong>Default:</strong> No special priority</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q84: What are Kubernetes Taints and Tolerations?
+        </div>
+        <div class="answer">
+            <p><strong>Taints</strong> are applied to nodes to repel pods. <strong>Tolerations</strong> are applied to pods to allow them to schedule on tainted nodes.</p>
+            
+            <h3>Taint Effects:</h3>
+            <ul>
+                <li><strong>NoSchedule:</strong> Pod won't schedule unless it tolerates</li>
+                <li><strong>PreferNoSchedule:</strong> Scheduler tries to avoid</li>
+                <li><strong>NoExecute:</strong> Evicts pods that don't tolerate</li>
+            </ul>
+            
+            <h3>Use Cases:</h3>
+            <ul>
+                <li>Dedicated nodes (GPU, special hardware)</li>
+                <li>Node maintenance</li>
+                <li>Workload isolation</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q85: What is Kubernetes Cluster Autoscaler?
+        </div>
+        <div class="answer">
+            <p><strong>Cluster Autoscaler</strong> automatically adjusts the size of the Kubernetes cluster based on resource utilization. It:</p>
+            <ul>
+                <li><strong>Scales up:</strong> Adds nodes when pods can't be scheduled</li>
+                <li><strong>Scales down:</strong> Removes underutilized nodes</li>
+                <li><strong>Works with:</strong> AWS, GCP, Azure, and on-prem</li>
+                <li><strong>Considers:</strong> Pod requests, node limits, and unschedulable pods</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Note:</strong> Cluster Autoscaler scales nodes, HPA scales pods. They work together.
+            </div>
+        </div>
+
+        <div class="question">
+            Q86: What are Kubernetes sidecar containers?
+        </div>
+        <div class="answer">
+            <p><strong>Sidecar containers</strong> run in the same pod as the main application container. They provide:</p>
+            <ul>
+                <li><strong>Logging:</strong> Collect and ship logs</li>
+                <li><strong>Monitoring:</strong> Collect metrics</li>
+                <li><strong>Security:</strong> Proxies, firewalls</li>
+                <li><strong>Configuration:</strong> Config sync, secrets injection</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  containers:
+  - name: app
+    image: myapp:latest
+  - name: sidecar
+    image: log-collector:latest</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q87: What is a Kubernetes mutating admission webhook?
+        </div>
+        <div class="answer">
+            <p><strong>Mutating admission webhooks</strong> intercept requests to the Kubernetes API server and can modify the object before it's persisted. Use cases:</p>
+            <ul>
+                <li><strong>Inject sidecars:</strong> Automatically add sidecar containers</li>
+                <li><strong>Inject configs:</strong> Add ConfigMaps, Secrets</li>
+                <li><strong>Default values:</strong> Set default resource requests/limits</li>
+                <li><strong>Mutation:</strong> Modify labels, annotations</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q88: How do you implement zero-downtime Deployments in Kubernetes?
+        </div>
+        <div class="answer">
+            <p><strong>Zero-downtime deployments</strong> ensure no service interruption during updates:</p>
+            
+            <ul>
+                <li><strong>Rolling updates:</strong> Gradually replace pods</li>
+                <li><strong>Readiness probes:</strong> Ensure pods are ready before receiving traffic</li>
+                <li><strong>Graceful shutdown:</strong> Handle SIGTERM, finish in-flight requests</li>
+                <li><strong>Multiple replicas:</strong> Always have at least 2 replicas</li>
+                <li><strong>Service mesh:</strong> Use Istio for advanced traffic management</li>
+                <li><strong>Blue-green:</strong> Switch traffic between two deployments</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q89: What is CoreDNS in Kubernetes?
+        </div>
+        <div class="answer">
+            <p><strong>CoreDNS</strong> is the DNS service for Kubernetes cluster discovery. It provides:</p>
+            <ul>
+                <li><strong>Service discovery:</strong> DNS records for Services</li>
+                <li><strong>Pod discovery:</strong> A records for Pods</li>
+                <li><strong>External DNS:</strong> Resolution of external names</li>
+                <li><strong>Custom DNS:</strong> Configurable DNS entries</li>
+            </ul>
+            
+            <h3>DNS Record Formats:</h3>
+            <ul>
+                <li><strong>Service:</strong> myservice.default.svc.cluster.local</li>
+                <li><strong>Pod:</strong> 10-244-0-5.default.pod.cluster.local</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q90: How do you encrypt Kubernetes secrets in etcd?
+        </div>
+        <div class="answer">
+            <p><strong>Secret encryption</strong> protects sensitive data at rest in etcd:</p>
+            
+            <h3>Encryption Methods:</h3>
+            <ul>
+                <li><strong>Encryption at Rest:</strong> Encrypt etcd data</li>
+                <li><strong>KMS provider:</strong> Use cloud KMS for encryption keys</li>
+                <li><strong>Envelope encryption:</strong> Use data keys encrypted by KMS</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code># Enable encryption
+apiVersion: apiserver.config.k8s.io/v1
+kind: EncryptionConfiguration
+resources:
+- resources:
+  - secrets
+  providers:
+  - kms:
+    name: my-kms-provider
+    keys:
+    - name: key1
+      identity: <key-id></code></pre></div>
+        </div>
+
         <div class="tip">
             <strong>Interview Tip:</strong> When discussing Kubernetes, emphasize understanding of core concepts (pods, services, deployments), practical experience with kubectl commands, and knowledge of production best practices. Be prepared to discuss real-world scenarios like troubleshooting, scaling, and security.
         </div>
@@ -3057,14 +3473,15 @@ spec:
                 <li>Know security concepts (RBAC, ServiceAccounts)</li>
                 <li>Understand monitoring and logging</li>
                 <li>Know Helm and package management</li>
-                <li>Understand advanced concepts (CRDs, Operators)</li>
+                <li>Understand autoscaling and resource management</li>
                 <li>Know troubleshooting strategies</li>
             </ul>
         </div>
 
-        <div style="margin-top: 50px; padding: 20px; background: #326ce5; color: white; border-radius: 8px; text-align: center;">
-            <h3>End of Kubernetes Interview Preparation Guide</h3>
-            <p>Comprehensive coverage with detailed questions and answers</p>
+        <div class="footer">
+            <p><span class="highlight">🎯 Ready for Your Kubernetes Interview?</span></p>
+            <p>Master these 90 comprehensive Kubernetes interview questions covering fundamentals, orchestration, networking, and best practices. Kubernetes is essential for modern container orchestration - understanding its concepts deeply will make you a better DevOps engineer.</p>
+            <p><span class="highlight">💡 Tip:</span> Focus on understanding Pods, Deployments, Services, ConfigMaps, Secrets, and RBAC. These are the areas where most Kubernetes interview questions focus. Practice deploying and managing containerized applications at scale.</p>
         </div>
     </div>
 </body>

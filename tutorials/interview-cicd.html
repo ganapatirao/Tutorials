@@ -2976,6 +2976,180 @@ strategy:
     os: [ubuntu-latest, windows-latest, macos-latest]</code></pre></div>
         </div>
 
+        <div class="question">
+            Q71: What is Jenkins and how does it work in CI/CD?
+        </div>
+        <div class="answer">
+            <p><strong>Jenkins</strong> is an open-source automation server that enables CI/CD. It works by:</p>
+            <ul>
+                <li><strong>Pipelines:</strong> Define build, test, and deploy stages as code</li>
+                <li><strong>Plugins:</strong> Extensible ecosystem for various integrations</li>
+                <li><strong>Distributed builds:</strong> Execute jobs across multiple agents</li>
+                <li><strong>Triggers:</strong> SCM polling, webhooks, scheduled builds</li>
+                <li><strong>Jenkinsfile:</strong> Pipeline as code definition</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'kubectl apply -f k8s/'
+            }
+        }
+    }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q72: What is GitLab CI/CD?
+        </div>
+        <div class="answer">
+            <p><strong>GitLab CI/CD</strong> is a built-in CI/CD tool in GitLab that provides:</p>
+            <ul>
+                <li><strong>.gitlab-ci.yml:</strong> Pipeline definition in repository</li>
+                <li><strong>GitLab Runner:</strong> Execute jobs on various platforms</li>
+                <li><strong>Integrated registry:</strong> Built-in container registry</li>
+                <li><strong>Environments:</strong> Manage deployment environments</li>
+                <li><strong>Auto DevOps:</strong> Automated CI/CD configuration</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q73: How does GitHub Actions work?
+        </div>
+        <div class="answer">
+            <p><strong>GitHub Actions</strong> is GitHub's CI/CD platform that uses:</p>
+            <ul>
+                <li><strong>Workflows:</strong> YAML files in .github/workflows/</li>
+                <li><strong>Events:</strong> Trigger on push, pull request, schedule</li>
+                <li><strong>Jobs:</strong> Steps that run on runners</li>
+                <li><strong>Actions:</strong> Reusable workflow components</li>
+                <li><strong>Marketplace:</strong> Community-built actions</li>
+            </ul>
+            
+            <div class="code-block" data-language="code"><pre><code>name: CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: npm run build
+    - name: Test
+      run: npm test</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q74: What is a Jenkinsfile?
+        </div>
+        <div class="answer">
+            <p><strong>Jenkinsfile</strong> is a text file that contains the definition of a Jenkins Pipeline. It:</p>
+            <ul>
+                <li><strong>Pipeline as Code:</strong> Version controlled with source code</li>
+                <li><strong>Declarative or Scripted:</strong> Two syntax options</li>
+                <li><strong>Stages:</strong> Define pipeline phases</li>
+                <li><strong>Steps:</strong> Individual commands to execute</li>
+                <li><strong>Post:</strong> Define post-build actions</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q75: What is the purpose of caching in CI/CD?
+        </div>
+        <div class="answer">
+            <p><strong>Caching</strong> in CI/CD speeds up builds by storing frequently used data:</p>
+            <ul>
+                <li><strong>Dependencies:</strong> Cache npm, Maven, pip packages</li>
+                <li><strong>Build artifacts:</strong> Cache intermediate build outputs</li>
+                <li><strong>Docker layers:</strong> Cache Docker build layers</li>
+                <li><strong>Compilation cache:</strong> Cache compiled objects</li>
+                <li><strong>Reduced build time:</strong> Faster feedback loops</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q76: How do you handle secrets in CI/CD pipelines?
+        </div>
+        <div class="answer">
+            <p><strong>Secrets management</strong> is critical for CI/CD security:</p>
+            <ul>
+                <li><strong>Secret stores:</strong> Use HashiCorp Vault, AWS Secrets Manager</li>
+                <li><strong>CI/CD secrets:</strong> GitHub Secrets, GitLab Variables</li>
+                <li><strong>Environment variables:</strong> Inject at runtime</li>
+                <li><strong>Encryption:</strong> Encrypt secrets at rest</li>
+                <li><strong>Auditing:</strong> Log secret access</li>
+                <li><strong>Rotation:</strong> Regular secret rotation</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q77: What is ArgoCD?
+        </div>
+        <div class="answer">
+            <p><strong>ArgoCD</strong> is a GitOps continuous delivery tool for Kubernetes that:</p>
+            <ul>
+                <li><strong>Declarative:</strong> Desired state defined in Git</li>
+                <li><strong>Synchronizes:</strong> Auto-sync cluster state with Git</li>
+                <li><strong>Visualizes:</strong> Show deployment history and diffs</li>
+                <li><strong>Rollbacks:</strong> Easy rollback to previous states</li>
+                <li><strong>GitOps:</strong> Git as single source of truth</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q78: What is a multibranch pipeline in Jenkins?
+        </div>
+        <div class="answer">
+            <p><strong>Multibranch pipeline</strong> automatically creates pipeline jobs for each branch in a repository:</p>
+            <ul>
+                <li><strong>Branch detection:</strong> Scan repository for branches</li>
+                <li><strong>Dynamic jobs:</strong> Create job per branch</li>
+                <li><strong>PR detection:</strong> Build pull requests</li>
+                <li><strong>Organization folders:</strong> Scan entire organizations</li>
+                <li><strong>Branch-specific config:</strong> Jenkinsfile per branch</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q79: What is Spinnaker?
+        </div>
+        <div class="answer">
+            <p><strong>Spinnaker</strong> is a continuous delivery platform for multi-cloud deployments that provides:</p>
+            <ul>
+                <li><strong>Deployment strategies:</strong> Blue-green, canary, rolling</li>
+                <li><strong>Multi-cloud:</strong> Deploy to AWS, GCP, Azure, Kubernetes</li>
+                <li><strong>Pipeline management:</strong> Visual pipeline editor</li>
+                <li><strong>Integration:</strong> Works with Jenkins, Travis CI</li>
+                <li><strong>Rollback:</strong> One-click rollback capability</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q80: What is a webhook in CI/CD?
+        </div>
+        <div class="answer">
+            <p><strong>Webhook</strong> is an HTTP callback that triggers CI/CD pipelines:</p>
+            <ul>
+                <li><strong>Event-driven:</strong> Trigger on Git events (push, PR)</li>
+                <li><strong>HTTP POST:</strong> Send payload to CI/CD server</li>
+                <li><strong>Authentication:</strong> Use secret tokens for security</li>
+                <li><strong>Filtering:</strong> Filter events by branch, path</li>
+                <li><strong>Integration:</strong> Connect Git with CI/CD tools</li>
+            </ul>
+        </div>
+
         <div class="tip">
             <strong>Interview Tip:</strong> When discussing CI/CD, emphasize automation, security, testing, and reliability. Be prepared to discuss real-world scenarios, tool choices, and best practices for different cloud platforms. For senior positions, demonstrate knowledge of GitOps, progressive delivery, multi-cloud strategies, and observability.
         </div>
@@ -2990,9 +3164,10 @@ strategy:
             </ul>
         </div>
 
-        <div style="margin-top: 50px; padding: 20px; background: #512bd4; color: white; border-radius: 8px; text-align: center;">
-            <h3>End of CI/CD Pipeline Interview Preparation Guide</h3>
-            <p>Comprehensive coverage from Comprehensive Guide level (All Experience Levels)</p>
+        <div class="footer">
+            <p><span class="highlight">🎯 Ready for Your CI/CD Interview?</span></p>
+            <p>Master these 80 comprehensive CI/CD interview questions covering fundamentals, deployment strategies, automation, and best practices. CI/CD is essential for modern DevOps - understanding pipeline automation deeply will make you a better DevOps engineer.</p>
+            <p><span class="highlight">💡 Tip:</span> Focus on understanding CI vs CD, deployment strategies, IaC, GitOps, and security. These are the areas where most CI/CD interview questions focus. Practice building and optimizing CI/CD pipelines.</p>
         </div>
     </div>
 </body>

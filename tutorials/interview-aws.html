@@ -2805,6 +2805,496 @@ aws cloudfront create-invalidation \
   --paths /index.html /images/*</code></pre></div>
         </div>
 
+        <div class="question">
+            Q71: What is IAM, and why is it critical for security? Differentiate between an IAM User, Group, and Role.
+        </div>
+        <div class="answer">
+            <p><strong>IAM (Identity and Access Management)</strong> is a web service that controls access to AWS resources securely. It's critical for security because it provides:</p>
+            <ul>
+                <li><strong>Authentication:</strong> Verify who is accessing resources</li>
+                <li><strong>Authorization:</strong> Control what authenticated users can do</li>
+                <li><strong>Fine-grained access control:</strong> Least privilege principle</li>
+            </ul>
+            
+            <h3>Differences:</h3>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>IAM User</th>
+                    <th>IAM Group</th>
+                    <th>IAM Role</th>
+                </tr>
+                <tr>
+                    <td>Purpose</td>
+                    <td>Represents a person or application</td>
+                    <td>Collection of users</td>
+                    <td>Temporary credentials for services</td>
+                </tr>
+                <tr>
+                    <td>Login</td>
+                    <td>Can log in to console</td>
+                    <td>Cannot log in</td>
+                    <td>Cannot log in</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Human users or applications</td>
+                    <td>Manage permissions for users</td>
+                    <td>EC2, Lambda, cross-account access</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q72: What is the difference between an AWS Region and an Availability Zone (AZ)?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>AWS Region</th>
+                    <th>Availability Zone (AZ)</th>
+                </tr>
+                <tr>
+                    <td>Definition</td>
+                    <td>Geographical area with multiple AZs</td>
+                    <td>Isolated data center within a region</td>
+                </tr>
+                <tr>
+                    <td>Number</td>
+                    <td>Global (30+ regions)</td>
+                    <td>Multiple per region (2-6)</td>
+                </tr>
+                <tr>
+                    <td>Latency</td>
+                    <td>Higher (cross-region)</td>
+                    <td>Low (same region)</td>
+                </tr>
+                <tr>
+                    <td>Isolation</td>
+                    <td>Independent from other regions</td>
+                    <td>Isolated from other AZs</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Disaster recovery, compliance</td>
+                    <td>High availability, fault tolerance</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q73: Compare and contrast Security Groups and Network ACLs (NACLs).
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Security Groups</th>
+                    <th>Network ACLs (NACLs)</th>
+                </tr>
+                <tr>
+                    <td>Scope</td>
+                    <td>Instance level (EC2, RDS)</td>
+                    <td>Subnet level</td>
+                </tr>
+                <tr>
+                    <td>State</td>
+                    <td>Stateful (tracks connections)</td>
+                    <td>Stateless (no connection tracking)</td>
+                </tr>
+                <tr>
+                    <td>Rules</td>
+                    <td>Allow only (deny implicit)</td>
+                    <td>Allow and deny</td>
+                </tr>
+                <tr>
+                    <td>Order</td>
+                    <td>All rules evaluated</td>
+                    <td>Numbered order matters</td>
+                </tr>
+                <tr>
+                    <td>Protocol</td>
+                    <td>Layer 4 (port-based)</td>
+                    <td>Layer 3-4 (IP and port)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q74: Explain how AWS Key Management Service (KMS) works and define Envelope Encryption.
+        </div>
+        <div class="answer">
+            <p><strong>AWS KMS</strong> is a managed service that makes it easy to create and control encryption keys. It uses:</p>
+            <ul>
+                <li><strong>Customer Master Keys (CMKs):</strong> Top-level keys you create</li>
+                <li><strong>Data Keys:</strong> Generated by KMS to encrypt data</li>
+                <li><strong>Envelope Encryption:</strong> Data keys encrypt data, CMK encrypts data keys</li>
+            </ul>
+            
+            <h3>Envelope Encryption:</h3>
+            <ul>
+                <li>Generate a unique data key for each encryption operation</li>
+                <li>Encrypt data with the data key</li>
+                <li>Encrypt the data key with the CMK</li>
+                <li>Store encrypted data key alongside encrypted data</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Benefits:</strong> Better security, faster performance, easier key rotation.
+            </div>
+        </div>
+
+        <div class="question">
+            Q75: What is the purpose of S3 Object Lock and MFA Delete?
+        </div>
+        <div class="answer">
+            <p><strong>S3 Object Lock</strong> prevents objects from being deleted or overwritten for a fixed time or indefinitely. It provides:</p>
+            <ul>
+                <li><strong>WORM (Write Once Read Many):</strong> Compliance mode</li>
+                <li><strong>Governance mode:</strong> Can be overridden by privileged users</li>
+                <li><strong>Retention periods:</strong> Legal hold, compliance retention</li>
+            </ul>
+            
+            <p><strong>MFA Delete</strong> requires multi-factor authentication to delete objects, adding an extra layer of security.</p>
+        </div>
+
+        <div class="question">
+            Q76: What is the difference between an Elastic IP and a Public IP address?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Elastic IP</th>
+                    <th>Public IP</th>
+                </tr>
+                <tr>
+                    <td>Persistence</td>
+                    <td>Static, persists across instance stops</td>
+                    <td>Dynamic, changes on instance stop/start</td>
+                </tr>
+                <tr>
+                    <td>Association</td>
+                    <td>Can move between instances</td>
+                    <td>Tied to specific instance</td>
+                </tr>
+                <tr>
+                    <td>Cost</td>
+                    <td>Charged when not attached to running instance</td>
+                    <td>Free (included with instance)</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Production, DNS, failover</td>
+                    <td>Temporary, development</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q77: What is Amazon Route 53, and what routing policies does it support?
+        </div>
+        <div class="answer">
+            <p><strong>Amazon Route 53</strong> is a highly available and scalable Domain Name System (DNS) web service. It provides:</p>
+            <ul>
+                <li><strong>Domain registration</strong></li>
+                <li><strong>DNS hosting</strong></li>
+                <li><strong>Health checks</strong></li>
+                <li><strong>Traffic routing</strong></li>
+            </ul>
+            
+            <h3>Routing Policies:</h3>
+            <ul>
+                <li><strong>Simple:</strong> Route to a single resource</li>
+                <li><strong>Weighted:</strong> Distribute traffic based on weights</li>
+                <li><strong>Latency-based:</strong> Route to lowest latency region</li>
+                <li><strong>Failover:</strong> Route to backup when primary fails</li>
+                <li><strong>Geolocation:</strong> Route based on user location</li>
+                <li><strong>Geoproximity:</strong> Route based on proximity</li>
+                <li><strong>Multivalue answer:</strong> Return multiple healthy records</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q78: Explain the difference between VPC Peering and AWS Transit Gateway.
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>VPC Peering</th>
+                    <th>Transit Gateway</th>
+                </tr>
+                <tr>
+                    <td>Scale</td>
+                    <td>1:1 connection (limited)</td>
+                    <td>Hub-and-spoke (many-to-many)</td>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>High (many peering connections)</td>
+                    <td>Low (single attachment point)</td>
+                </tr>
+                <tr>
+                    <td>Transit</td>
+                    <td>No (non-transitive)</td>
+                    <td>Yes (transitive routing)</td>
+                </tr>
+                <tr>
+                    <td>Cost</td>
+                    <td>Data transfer charges</td>
+                    <td>Per attachment hour + data transfer</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Few VPCs, simple topology</td>
+                    <td>Many VPCs, complex topology</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q79: What factors do you consider when choosing an EC2 instance type?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Compute requirements:</strong> CPU cores, architecture (x86/ARM)</li>
+                <li><strong>Memory requirements:</strong> RAM size</li>
+                <li><strong>Storage:</strong> EBS optimized, instance store</li>
+                <li><strong>Network:</strong> Enhanced networking, bandwidth</li>
+                <li><strong>GPU:</strong> For ML, graphics processing</li>
+                <li><strong>Cost:</strong> On-demand, Reserved, Spot</li>
+                <li><strong>Workload type:</strong> General purpose, compute optimized, memory optimized, storage optimized</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q80: What is an Amazon Machine Image (AMI)?
+        </div>
+        <div class="answer">
+            <p><strong>AMI (Amazon Machine Image)</strong> is a template that contains the software configuration (OS, application server, applications) required to launch an EC2 instance.</p>
+            
+            <h3>AMI Types:</h3>
+            <ul>
+                <li><strong>EBS-backed:</strong> Root volume on EBS, can be stopped</li>
+                <li><strong>Instance store-backed:</strong> Root volume on instance store, cannot be stopped</li>
+            </ul>
+            
+            <h3>AMI Sources:</h3>
+            <ul>
+                <li>AWS Marketplace</li>
+                <li>AWS Quick Start AMIs</li>
+                <li>Custom AMIs (created from instances)</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q81: What are the different types of Elastic Load Balancers (ELB)?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>Application Load Balancer (ALB):</strong> Layer 7, HTTP/HTTPS, content-based routing, supports microservices</li>
+                <li><strong>Network Load Balancer (NLB):</strong> Layer 4, TCP/UDP/TLS, ultra-high performance, static IP</li>
+                <li><strong>Classic Load Balancer (CLB):</strong> Layer 4/7, legacy, being deprecated</li>
+                <li><strong>Gateway Load Balancer (GWLB):</strong> Layer 3, for virtual appliances</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q82: Explain EC2 Placement Groups and their use cases.
+        </div>
+        <div class="answer">
+            <p><strong>Placement Groups</strong> control the placement of EC2 instances to influence network performance and application availability.</p>
+            
+            <h3>Types:</h3>
+            <ul>
+                <li><strong>Cluster:</strong> Low latency, high network throughput (HPC, gaming)</li>
+                <li><strong>Partition:</strong> Spread instances across hardware (HDFS, Cassandra)</li>
+                <li><strong>Spread:</strong> Isolate instances (critical applications)</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q83: Explain AWS Lambda Cold Starts and methods to reduce them.
+        </div>
+        <div class="answer">
+            <p><strong>Cold Start</strong> occurs when Lambda needs to set up a new execution environment (download code, initialize runtime) before processing a request. This adds latency.</p>
+            
+            <h3>Methods to reduce cold starts:</h3>
+            <ul>
+                <li><strong>Provisioned Concurrency:</strong> Keep instances warm</li>
+                <li><strong>Optimize package size:</strong> Minimize dependencies</li>
+                <li><strong>Choose optimal runtime:</strong> Node.js, Python faster than Java</li>
+                <li><strong>Use SnapStart:</strong> Java specific optimization</li>
+                <li><strong>Keep functions warm:</strong> Scheduled pings</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q84: Explain the difference between S3, EBS, and EFS.
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Service</th>
+                    <th>Type</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td><strong>S3</strong></td>
+                    <td>Object storage</td>
+                    <td>Static assets, backups, data lake</td>
+                </tr>
+                <tr>
+                    <td><strong>EBS</strong></td>
+                    <td>Block storage</td>
+                    <td>EC2 boot volumes, databases</td>
+                </tr>
+                <tr>
+                    <td><strong>EFS</strong></td>
+                    <td>File storage</td>
+                    <td>Shared file system for EC2/Lambda</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q85: What is Amazon Aurora, and how is it different from standard RDS databases?
+        </div>
+        <div class="answer">
+            <p><strong>Amazon Aurora</strong> is a MySQL and PostgreSQL-compatible relational database engine that combines the performance and availability of commercial databases with the simplicity and cost-effectiveness of open-source databases.</p>
+            
+            <h3>Differences from standard RDS:</h3>
+            <ul>
+                <li><strong>Storage:</strong> Auto-scaling, distributed storage</li>
+                <li><strong>Performance:</strong> 5x faster than MySQL, 3x faster than PostgreSQL</li>
+                <li><strong>Availability:</strong> Multi-AZ with storage replication</li>
+                <li><strong>Cost:</strong> Pay for storage used, not provisioned</li>
+                <li><strong>Replication:</strong> Faster, less data loss</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q86: What is the difference between Amazon ECS and Amazon EKS?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Amazon ECS</th>
+                    <th>Amazon EKS</th>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>Managed container orchestration (proprietary)</td>
+                    <td>Managed Kubernetes (open standard)</td>
+                </tr>
+                <tr>
+                    <td>Learning curve</td>
+                    <td>Easier, AWS-specific</td>
+                    <td>Steeper, Kubernetes knowledge</td>
+                </tr>
+                <tr>
+                    <td>Portability</td>
+                    <td>AWS only</td>
+                    <td>Multi-cloud, on-premises</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>AWS-native applications</td>
+                    <td>Standard Kubernetes applications</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q87: Explain the difference between Monolithic and Microservices architecture.
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Monolithic</th>
+                    <th>Microservices</th>
+                </tr>
+                <tr>
+                    <td>Structure</td>
+                    <td>Single application</td>
+                    <td>Multiple independent services</td>
+                </tr>
+                <tr>
+                    <td>Deployment</td>
+                    <td>Deploy entire app</td>
+                    <td>Deploy individual services</td>
+                </tr>
+                <tr>
+                    <td>Scaling</td>
+                    <td>Scale entire app</td>
+                    <td>Scale individual services</td>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>Simpler initially</td>
+                    <td>More complex (distributed)</td>
+                </tr>
+                <tr>
+                    <td>Failure impact</td>
+                    <td>Affects entire app</td>
+                    <td>Affects only affected service</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q88: What is Blue/Green Deployment and Rolling Deployment in AWS?
+        </div>
+        <div class="answer">
+            <p><strong>Blue/Green Deployment:</strong></p>
+            <ul>
+                <li>Two identical production environments (blue and green)</li>
+                <li>Switch traffic from blue to green instantly</li>
+                <li>Zero downtime, instant rollback</li>
+                <li>Requires double resources</li>
+            </ul>
+            
+            <p><strong>Rolling Deployment:</strong></p>
+            <ul>
+                <li>Gradually replace instances with new version</li>
+                <li>Update instances one by one or in batches</li>
+                <li>Requires less resources</li>
+                <li>Slower rollback</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q89: How do you secure data at rest in AWS?
+        </div>
+        <div class="answer">
+            <ul>
+                <li><strong>KMS:</strong> Customer Managed Keys (CMKs) for encryption</li>
+                <li><strong>EBS encryption:</strong> Encrypt EBS volumes with KMS</li>
+                <li><strong>S3 encryption:</strong> SSE-S3, SSE-KMS, SSE-C</li>
+                <li><strong>RDS encryption:</strong> TDE encryption at rest</li>
+                <li><strong>DynamoDB encryption:</strong> At-rest encryption with KMS</li>
+                <li><strong>EFS encryption:</strong> File system encryption</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q90: What is AWS Elastic Beanstalk?
+        </div>
+        <div class="answer">
+            <p><strong>AWS Elastic Beanstalk</strong> is a PaaS service that makes it easy to deploy and scale applications. It:</p>
+            <ul>
+                <li>Automatically handles provisioning, load balancing, scaling</li>
+                <li>Supports multiple platforms (Node.js, Java, Python, .NET, etc.)</li>
+                <li>Provides monitoring and logging</li>
+                <li>One-click deployment</li>
+                <li>Underlying infrastructure still accessible</li>
+            </ul>
+        </div>
+
         <div class="tip">
             <strong>Interview Tip:</strong> When discussing AWS, emphasize understanding of the shared responsibility model, service selection based on use cases, cost optimization strategies, and security best practices. Be prepared to discuss real-world architectures and design decisions. For senior positions, demonstrate knowledge of hybrid solutions, cost management strategies, and advanced architecture patterns.
         </div>
@@ -2819,9 +3309,10 @@ aws cloudfront create-invalidation \
             </ul>
         </div>
 
-        <div style="margin-top: 50px; padding: 20px; background: #ff9900; color: white; border-radius: 8px; text-align: center;">
-            <h3>End of AWS Interview Preparation Guide</h3>
-            <p>Comprehensive coverage from Comprehensive Guide level (All Experience Levels)</p>
+        <div class="footer">
+            <p><span class="highlight">🎯 Ready for Your AWS Interview?</span></p>
+            <p>Master these 90 comprehensive AWS interview questions covering fundamentals, advanced concepts, and best practices. AWS is the leading cloud platform - understanding its services and architecture patterns will make you a better cloud engineer.</p>
+            <p><span class="highlight">💡 Tip:</span> Focus on understanding EC2, S3, Lambda, VPC networking, and security. These are the areas where most AWS interview questions focus. Practice designing scalable, secure, and cost-effective cloud architectures.</p>
         </div>
     </div>
 </body>
