@@ -293,21 +293,21 @@
         .code-block {
             background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
             color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
+            padding: 12px;
+            border-radius: 10px;
             overflow-x: auto;
             overflow-y: auto;
             font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            font-size: 13px;
+            margin: 15px 0;
+            line-height: 1.6;
+            border-left: 4px solid #dd0031;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             word-wrap: break-word;
             white-space: pre-wrap;
             max-width: 100%;
-            animation: codeAppear 0.5s ease both;
+            animation: codeAppear 0.4s ease both;
         }
         
         @keyframes codeAppear {
@@ -666,7 +666,30 @@
             .toc ol {
                 padding-left: 18px;
             }
-        }</style></head>
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(102, 126, 234, 0.25);
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            animation: slideUp 0.6s ease both;
+        }
+        
+        .footer p {
+            margin-bottom: 12px;
+        }
+        
+        .footer .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+    </style></head>
 <body>
     <div class="container">
         <a href="../index.html" class="back-button">
@@ -914,23 +937,14 @@ export class ProductComponent implements OnInit {
             <div class="code-block" data-language="code"><pre><code>// Attribute directive
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
-@Directive({
-  selector: '[appHighlight]'
-})
+@Directive({ selector: '[appHighlight]' })
 export class HighlightDirective {
   constructor(private el: ElementRef) {}
   
-  @HostListener('mouseenter') onMouseEnter() {
-    this.highlight('yellow');
-  }
+  @HostListener('mouseenter') onMouseEnter() => this.highlight('yellow');
+  @HostListener('mouseleave') onMouseLeave() => this.highlight(null);
   
-  @HostListener('mouseleave') onMouseLeave() {
-    this.highlight(null);
-  }
-  
-  private highlight(color: string) {
-    this.el.nativeElement.style.backgroundColor = color;
-  }
+  private highlight(color: string) => this.el.nativeElement.style.backgroundColor = color;
 }
 
 // Usage
@@ -970,13 +984,10 @@ export class HighlightDirective {
 // Custom pipe
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({
-  name: 'truncate'
-})
+@Pipe({ name: 'truncate' })
 export class TruncatePipe implements PipeTransform {
-  transform(value: string, limit: number): string {
-    return value.length &gt; limit ? value.substring(0, limit) + '...' : value;
-  }
+  transform(value: string, limit: number): string
+    => value.length > limit ? value.substring(0, limit) + '...' : value;
 }
 
 // Usage
@@ -1091,10 +1102,7 @@ const routes: Routes = [
   { path: '**', component: NotFoundComponent }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
+@NgModule({ imports: [RouterModule.forRoot(routes)], exports: [RouterModule] })
 export class AppRoutingModule { }
 
 // Router outlet
@@ -1107,9 +1115,7 @@ export class AppRoutingModule { }
 // Programmatic navigation
 constructor(private router: Router) {}
 
-navigateToProduct(id: number) {
-  this.router.navigate(['/products', id]);
-}</code></pre></div>
+navigateToProduct(id: number) => this.router.navigate(['/products', id]);</code></pre></div>
         </div>
 
         <div class="question">
@@ -1131,9 +1137,7 @@ export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
   
   canActivate(): boolean {
-    if (this.authService.isLoggedIn()) {
-      return true;
-    }
+    if (this.authService.isLoggedIn()) return true;
     this.router.navigate(['/login']);
     return false;
   }
@@ -1213,25 +1217,10 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
   constructor(private http: HttpClient) {}
   
-  // GET
-  getItems(): Observable&lt;Item[]&gt; {
-    return this.http.get&lt;Item[]&gt;('/api/items');
-  }
-  
-  // POST
-  createItem(item: Item): Observable&lt;Item&gt; {
-    return this.http.post&lt;Item&gt;('/api/items', item);
-  }
-  
-  // PUT
-  updateItem(id: number, item: Item): Observable&lt;Item&gt; {
-    return this.http.put&lt;Item&gt;(`/api/items/${id}`, item);
-  }
-  
-  // DELETE
-  deleteItem(id: number): Observable&lt;void&gt; {
-    return this.http.delete&lt;void&gt;(`/api/items/${id}`);
-  }
+  getItems(): Observable&lt;Item[]&gt; => this.http.get&lt;Item[]&gt;('/api/items');
+  createItem(item: Item): Observable&lt;Item&gt; => this.http.post&lt;Item&gt;('/api/items', item);
+  updateItem(id: number, item: Item): Observable&lt;Item&gt; => this.http.put&lt;Item&gt;(`/api/items/${id}`, item);
+  deleteItem(id: number): Observable&lt;void&gt; => this.http.delete&lt;void&gt;(`/api/items/${id}`);
 }</code></pre></div>
         </div>
 
@@ -1247,17 +1236,13 @@ export class AuthInterceptor implements HttpInterceptor {
   
   intercept(req: HttpRequest&lt;any&gt;, next: HttpHandler): Observable&lt;HttpEvent&lt;any&gt;&gt; {
     const token = this.authService.getToken();
-    const authReq = req.clone({
-      setHeaders: { Authorization: `Bearer ${token}` }
-    });
+    const authReq = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
     return next.handle(authReq);
   }
 }
 
 // Register interceptor
-providers: [
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-]</code></pre></div>
+providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1289,14 +1274,9 @@ this.http
   .get&lt;Item[]&gt;('/api/items')
   .pipe(
     map(items =&gt; items.filter(item =&gt; item.active)),
-    catchError(error =&gt; {
-      console.error(error);
-      return of([]);
-    })
+    catchError(error =&gt; { console.error(error); return of([]); })
   )
-  .subscribe(items =&gt; {
-    this.items = items;
-  });</code></pre></div>
+  .subscribe(items =&gt; this.items = items);</code></pre></div>
         </div>
 
         <div class="question">
@@ -1386,9 +1366,7 @@ export class ProductComponent {
 @Input() data: any;
 @Output() dataChanged = new EventEmitter&lt;any&gt;();
 
-onChange() {
-  this.dataChanged.emit(this.data);
-}</code></pre></div>
+onChange() => this.dataChanged.emit(this.data);</code></pre></div>
         </div>
 
         <div class="question">
@@ -1423,7 +1401,6 @@ onChange() {
             
             <div class="code-block" data-language="code"><pre><code>@ViewChild(ChildComponent) childComponent: ChildComponent;
 @ViewChild('myInput') inputElement: ElementRef;
-
 @ContentChild(ProjectedComponent) projectedComponent: ProjectedComponent;
 
 ngAfterViewInit() {
@@ -1442,16 +1419,10 @@ ngAfterViewInit() {
             </ul>
             
             <div class="code-block" data-language="code"><pre><code>// Pure (default)
-@Pipe({
-  name: 'truncate',
-  pure: true
-})
+@Pipe({ name: 'truncate', pure: true })
 
 // Impure
-@Pipe({
-  name: 'async',
-  pure: false
-})</code></pre></div>
+@Pipe({ name: 'async', pure: false })</code></pre></div>
         </div>
 
         <div class="question">
@@ -1484,18 +1455,12 @@ behaviorSubject.subscribe(value =&gt; console.log(value)); // Receives 'hello'</
             </ul>
             
             <div class="code-block" data-language="code"><pre><code>// switchMap - cancels previous
-searchTerms.pipe(
-  switchMap(term =&gt; this.http.search(term))
-).subscribe(results =&gt; {
-  this.results = results;
-});
+searchTerms.pipe(switchMap(term =&gt; this.http.search(term)))
+  .subscribe(results =&gt; this.results = results);
 
 // mergeMap - keeps all active
-ids.pipe(
-  mergeMap(id =&gt; this.http.getItem(id))
-).subscribe(item =&gt; {
-  this.items.push(item);
-});</code></pre></div>
+ids.pipe(mergeMap(id =&gt; this.http.getItem(id)))
+  .subscribe(item =&gt; this.items.push(item));</code></pre></div>
         </div>
 
         <div class="question">
@@ -1508,18 +1473,13 @@ ids.pipe(
 const routes: Routes = [
   {
     path: 'products',
-    loadChildren: () =&gt;
-      import('./products/products.module').then(m =&gt; m.ProductsModule)
+    loadChildren: () =&gt; import('./products/products.module').then(m =&gt; m.ProductsModule)
   }
 ];
 
 // Products module
 @NgModule({
-  imports: [
-    RouterModule.forChild([
-      { path: '', component: ProductsComponent }
-    ])
-  ]
+  imports: [RouterModule.forChild([{ path: '', component: ProductsComponent }])]
 })
 export class ProductsModule {}</code></pre></div>
         </div>
@@ -1578,9 +1538,7 @@ ng build --i18n-locale fr --i18n-file src/locale/messages.fr.xlf
 
 // Use LOCALE_ID
 import { LOCALE_ID, NgModule } from '@angular/core';
-@NgModule({
-  providers: [{ provide: LOCALE_ID, useValue: 'fr' }]
-})</code></pre></div>
+@NgModule({ providers: [{ provide: LOCALE_ID, useValue: 'fr' }] })</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1605,18 +1563,12 @@ import { LOCALE_ID, NgModule } from '@angular/core';
             Q32: How do you implement NgRx for state management?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Define actions
+            <div class="code-block" data-language="code"><pre><code>// Define actions
 import { createAction, props } from '@ngrx/store';
 
 export const loadProducts = createAction('[Product] Load Products');
-export const loadProductsSuccess = createAction(
-  '[Product] Load Products Success',
-  props&lt;{ products: Product[] }&gt;()
-);
-export const loadProductsFailure = createAction(
-  '[Product] Load Products Failure',
-  props&lt;{ error: string }&gt;()
-);
+export const loadProductsSuccess = createAction('[Product] Load Products Success', props&lt;{ products: Product[] }&gt;());
+export const loadProductsFailure = createAction('[Product] Load Products Failure', props&lt;{ error: string }&gt;());
 
 // Define reducer
 import { createReducer, on } from '@ngrx/store';
@@ -3809,9 +3761,10 @@ this.searchControl.valueChanges.pipe(
             </ul>
         </div>
 
-        <div style="margin-top: 50px; padding: 20px; background: #512bd4; color: white; border-radius: 8px; text-align: center;">
-            <h3>End of Angular Interview Preparation Guide</h3>
-            <p>Comprehensive coverage from Comprehensive Guide level (All Experience Levels)</p>
+        <div class="footer">
+            <p><span class="highlight">🎯 Ready for Your Angular Interview?</span></p>
+            <p>Master these comprehensive Angular interview questions covering fundamentals, advanced concepts, and best practices. Angular is a powerful framework - understanding its depth will make you a better frontend developer.</p>
+            <p><span class="highlight">💡 Tip:</span> Focus on understanding components, dependency injection, RxJS, and performance optimization. These are the areas where most Angular interview questions focus. Practice building scalable, maintainable applications.</p>
         </div>
     </div>
 </body>

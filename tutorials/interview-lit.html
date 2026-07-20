@@ -298,6 +298,28 @@
             border-top: 2px dashed #e0e0e0;
             padding-top: 40px;
         }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(102, 126, 234, 0.25);
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            animation: slideUp 0.6s ease both;
+        }
+        
+        .footer p {
+            margin-bottom: 12px;
+        }
+        
+        .footer .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -331,17 +353,7 @@
         </div>
         <div class="answer">
             <p><strong>Lit</strong> is a lightweight library for building fast, lightweight web components. It provides a simple base class for creating custom elements with reactive state and efficient rendering.</p>
-            
-            <h3>Key Features:</h3>
-            <ul>
-                <li><strong>Lightweight:</strong> Small bundle size (~5KB)</li>
-                <li><strong>Fast:</strong> Efficient rendering with declarative templates</li>
-                <li><strong>Web Components:</strong> Built on Web Components standards</li>
-                <li><strong>Reactive:</strong> Automatic updates when properties change</li>
-                <li><strong>TypeScript support:</strong> First-class TypeScript support</li>
-                <li><strong>Framework-agnostic:</strong> Works with any framework</li>
-                <li><strong>Declarative templates:</strong> HTML template literals</li>
-            </ul>
+            <p><strong>Key Features:</strong> Lightweight (small bundle size ~5KB), Fast (efficient rendering with declarative templates), Web Components (built on Web Components standards), Reactive (automatic updates when properties change), TypeScript support (first-class TypeScript support), Framework-agnostic (works with any framework), Declarative templates (HTML template literals).</p>
         </div>
 
         <div class="question">
@@ -349,14 +361,7 @@
         </div>
         <div class="answer">
             <p><strong>Web Components</strong> are a set of web platform APIs that allow you to create new custom, reusable, encapsulated HTML tags to use in web pages and web apps.</p>
-            
-            <h3>Web Components Standards:</h3>
-            <ul>
-                <li><strong>Custom Elements:</strong> Define new HTML elements</li>
-                <li><strong>Shadow DOM:</strong> Encapsulate DOM and styles</li>
-                <li><strong>HTML Templates:</strong> Define reusable markup</li>
-                <li><strong>ES Modules:</strong> Import and export JavaScript</li>
-            </ul>
+            <p><strong>Web Components Standards:</strong> Custom Elements (define new HTML elements), Shadow DOM (encapsulate DOM and styles), HTML Templates (define reusable markup), ES Modules (import and export JavaScript).</p>
         </div>
 
         <div class="page-break"></div>
@@ -457,13 +462,7 @@ customElements.define('my-element', MyElement);</code></pre></div>
             Q5: How do reactive properties work in Lit?
         </div>
         <div class="answer">
-            <p>Lit's reactive properties automatically trigger a re-render when they change. Lit uses a reactive system that:</p>
-            <ul>
-                <li>Tracks property changes</li>
-                <li>Schedules updates efficiently</li>
-                <li>Batches multiple changes</li>
-                <li>Updates only changed parts of the DOM</li>
-            </ul>
+            <p>Lit's reactive properties automatically trigger a re-render when they change. Lit uses a reactive system that tracks property changes, schedules updates efficiently, batches multiple changes, and updates only changed parts of the DOM.</p>
             
             <div class="code-block"><pre><code>static properties = {
   items: { type: Array },
@@ -487,10 +486,8 @@ render() {
             Q6: What is the difference between internal state and properties?
         </div>
         <div class="answer">
-            <ul>
-                <li><strong>Properties:</strong> Public, reactive, can be set from outside. Triggers re-render when changed.</li>
-                <li><strong>Internal state:</strong> Private, not reactive by default. Use for component-internal state that doesn't need to trigger re-render.</li>
-            </ul>
+            <p><strong>Properties:</strong> Public, reactive, can be set from outside. Triggers re-render when changed.</p>
+            <p><strong>Internal state:</strong> Private, not reactive by default. Use for component-internal state that doesn't need to trigger re-render.</p>
             
             <div class="code-block"><pre><code>// Property - reactive, public
 static properties = {
@@ -511,14 +508,7 @@ private _internalState = {
             Q7: How do you use Lit's template system?
         </div>
         <div class="answer">
-            <p>Lit uses <strong>html</strong> template tag function to create templates. It supports:</p>
-            <ul>
-                <li>Expression interpolation</li>
-                <li>Conditional rendering</li>
-                <li>Looping</li>
-                <li>Event handling</li>
-                <li>Directives</li>
-            </ul>
+            <p>Lit uses <strong>html</strong> template tag function to create templates. It supports expression interpolation, conditional rendering, looping, event handling, and directives.</p>
             
             <div class="code-block"><pre><code>render() {
   return html`
@@ -545,15 +535,7 @@ private _internalState = {
             Q8: What are Lit directives?
         </div>
         <div class="answer">
-            <p><strong>Directives</strong> are functions that modify template behavior. Lit provides several built-in directives:</p>
-            <ul>
-                <li><strong>repeat:</strong> Efficient list rendering with keying</li>
-                <li><strong>map:</strong> Simple array mapping</li>
-                <li><strong>classMap:</strong> Conditional class names</li>
-                <li><strong>styleMap:</strong> Conditional styles</li>
-                <li><strong>ifDefined:</strong> Render only if value is defined</li>
-                <li><strong>unsafeHTML:</strong> Render raw HTML (use with caution)</li>
-            </ul>
+            <p><strong>Directives</strong> are functions that modify template behavior. Lit provides several built-in directives: repeat (efficient list rendering with keying), map (simple array mapping), classMap (conditional class names), styleMap (conditional styles), ifDefined (render only if value is defined), unsafeHTML (render raw HTML - use with caution).</p>
             
             <div class="code-block"><pre><code>import { repeat } from 'lit/directives/repeat.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -736,10 +718,6 @@ describe('MyElement', () => {
                 <li>Enables component composition</li>
                 <li>Provides true encapsulation</li>
             </ul>
-            
-            <div class="important">
-                <strong>Important:</strong> Lit uses Shadow DOM by default, but you can opt out to use Light DOM if you need global style penetration.
-            </div>
         </div>
 
         <div class="question">
@@ -806,9 +784,154 @@ this.shadowRoot.querySelector('button')
 }</code></pre></div>
         </div>
 
+        <div class="question">
+            Q17: What is conditional rendering in Lit?
+        </div>
+        <div class="answer">
+            <p><strong>Conditional rendering</strong> in Lit allows you to conditionally include or exclude parts of your template based on component state.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>render() {
+  return html`
+    ${this.showContent 
+      ? html`<div>Content is visible</div>` 
+      : html`<div>Content is hidden</div>`
+    }
+  `;
+}</code></pre></div>
+            
+            <h3>Methods:</h3>
+            <ul>
+                <li><strong>Ternary operator:</strong> Simple if/else</li>
+                <li><strong>Logical AND:</strong> Render when condition is true</li>
+                <li><strong>Function calls:</strong> More complex logic</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q18: How do you work with lists and keys in Lit?
+        </div>
+        <div class="answer">
+            <p><strong>Lists and keys</strong> in Lit are handled using JavaScript array methods and the map function.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>render() {
+  return html`
+    <ul>
+      ${this.items.map((item, index) => html`
+        <li key="${item.id}">${item.name}</li>
+      `)}
+    </ul>
+  `;
+}</code></pre></div>
+            
+            <p><strong>Keys:</strong> Unique identifiers (help Lit track items), Performance (efficient updates), Stability (preserve component state).</p>
+        </div>
+
+        <div class="question">
+            Q19: How do you optimize Lit performance?
+        </div>
+        <div class="answer">
+            <p><strong>Performance optimization</strong> in Lit includes: Reactive properties (only update when properties change), Virtual DOM diffing (efficient DOM updates), Lazy loading (load components on demand), Code splitting (reduce bundle size), Debouncing (limit expensive operations), Memoization (cache computed values).</p>
+        </div>
+
+        <div class="question">
+            Q20: What is the difference between LitElement and HTMLElement?
+        </div>
+        <div class="answer">
+            <p><strong>LitElement:</strong> Base class is Lit library, features are reactive/templating/scoped styles, complexity is higher-level and easier, use case is production components.</p>
+            <p><strong>HTMLElement:</strong> Base class is native Web Component, features are basic custom element, complexity is lower-level and more manual, use case is simple custom elements.</p>
+        </div>
+
+        <div class="question">
+            Q21: What are reactive controllers in Lit?
+        </div>
+        <div class="answer">
+            <p><strong>Reactive controllers</strong> are objects that can be attached to Lit elements to share reactive logic across components.</p>
+            <p><strong>Benefits:</strong> Code reuse (share logic between components), Modularity (split complex logic), Lifecycle hooks (respond to element lifecycle), State management (external state integration).</p>
+        </div>
+
+        <div class="question">
+            Q22: How do you handle API calls in Lit?
+        </div>
+        <div class="answer">
+            <p><strong>API calls</strong> in Lit are typically handled in component lifecycle methods.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>class MyElement extends LitElement {
+  @property()
+  data = [];
+
+  async connectedCallback() {
+    super.connectedCallback();
+    this.data = await this.fetchData();
+  }
+
+  async fetchData() {
+    const response = await fetch('/api/data');
+    return response.json();
+  }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q23: What is the difference between @property and @state decorators?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>@property</th>
+                    <th>@state</th>
+                </tr>
+                <tr>
+                    <td>Scope</td>
+                    <td>Public API</td>
+                    <td>Internal state</td>
+                </tr>
+                <tr>
+                    <td>Attributes</td>
+                    <td>Reflects to HTML attributes</td>
+                    <td>Does not reflect</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Component configuration</td>
+                    <td>Internal data</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q24: How do you implement lazy loading in Lit?
+        </div>
+        <div class="answer">
+            <p><strong>Lazy loading</strong> in Lit can be implemented using dynamic imports and conditional rendering.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>class MyElement extends LitElement {
+  @property()
+  lazyComponent = null;
+
+  async loadComponent() {
+    const module = await import('./heavy-component.js');
+    this.lazyComponent = module.default;
+  }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q25: What is the role of the render() method in Lit?
+        </div>
+        <div class="answer">
+            <p>The <strong>render() method</strong> defines the template for a Lit component. It:</p>
+            <ul>
+                <li><strong>Returns:</strong> A TemplateResult from html tagged template</li>
+                <li><strong>Reactive:</strong> Called when properties change</li>
+                <li><strong>Efficient:</strong> Only updates changed parts</li>
+                <li><strong>Required:</strong> Must be implemented in LitElement subclasses</li>
+            </ul>
+        </div>
+
         <div class="footer">
             <p><span class="highlight">🎯 Ready for Your Lit Interview?</span></p>
-            <p>Master these 16 comprehensive Lit interview questions covering web components, reactive properties, templates, and styling. Lit is a lightweight library for building fast web components - understanding Lit deeply will make you a better web component developer.</p>
+            <p>Master these 25 comprehensive Lit interview questions covering web components, reactive properties, templates, and styling. Lit is a lightweight library for building fast web components - understanding Lit deeply will make you a better web component developer.</p>
             <p><span class="highlight">💡 Tip:</span> Focus on understanding web components, Shadow DOM, reactive properties, and Lit directives. These are the areas where most Lit interview questions focus. Practice building reusable web components.</p>
         </div>
     </div>

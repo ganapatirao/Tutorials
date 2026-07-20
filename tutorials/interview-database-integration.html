@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database & Integration Interview Preparation Guide</title>
-                <style>
+    <title>Database Integration Interview Questions</title>
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
         
         * {
@@ -162,16 +162,6 @@
             box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
         }
         
-        .back-button svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.3s ease;
-        }
-        
-        .back-button:hover svg {
-            transform: translateX(-5px);
-        }
-        
         h1 {
             color: #1a1a2e;
             font-size: 52px;
@@ -207,15 +197,14 @@
             transform: translateX(-50%);
             width: 140px;
             height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
+            animation: expandWidth 1s ease 0.5s both;
         }
         
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 140px; }
         }
         
         .subtitle {
@@ -228,129 +217,21 @@
         }
         
         h2 {
-            color: #1a1a2e;
-            font-size: 32px;
+            color: white;
+            font-size: 28px;
             font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            padding: 18px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            animation: slideIn 0.5s ease both;
         }
         
         @keyframes slideIn {
             from { opacity: 0; transform: translateX(-20px); }
             to { opacity: 1; transform: translateX(0); }
-        }
-        
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
-        }
-        
-        h3 {
-            color: #1a1a2e;
-            font-size: 26px;
-            font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
-        }
-        
-        .chapter {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
-            border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
-        }
-        
-        .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
-            overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.5s ease both;
-        }
-        
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-x: auto;
-        }
-        
-        
-        .toc {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 35px 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border-left: 8px solid #667eea;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        .toc h3 {
-            color: #1a1a2e;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .toc ol {
-            padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
-        }
-        
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
         }
         
         .question {
@@ -375,30 +256,15 @@
             animation: slideUp 0.5s ease both;
         }
         
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         .answer p {
             margin-bottom: 15px;
             color: #1a1a2e;
             line-height: 1.8;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
         }
         
         .answer strong {
@@ -406,47 +272,79 @@
             font-weight: 600;
         }
         
-        .page-break {
-            page-break-after: always;
-            margin: 60px 0;
-            border-top: 2px dashed #e0e0e0;
-            padding-top: 40px;
+        .code-block {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            color: #e0e0e0;
+            padding: 12px;
+            border-radius: 10px;
+            overflow-x: auto;
+            overflow-y: auto;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            margin: 15px 0;
+            line-height: 1.6;
+            border-left: 4px solid #3776ab;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            max-width: 100%;
+            animation: codeAppear 0.4s ease both;
         }
         
-        .important {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+        @keyframes codeAppear {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
         
-        .important strong {
-            color: #856404;
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
         }
         
-        .tip {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
+        .code-block code {
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
         
-        .tip strong {
-            color: #0c5460;
+        .toc {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 35px 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 8px solid #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            animation: slideUp 0.6s ease both;
+        }
+        
+        .toc h3 {
+            color: #1a1a2e;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .toc ol {
+            padding-left: 25px;
+            color: #4a4a68;
+            line-height: 2;
+        }
+        
+        .toc ol li {
+            margin-bottom: 8px;
+            font-weight: 500;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
+            margin: 20px 0;
             background: white;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         
         th {
@@ -455,11 +353,10 @@
             padding: 15px;
             text-align: left;
             font-weight: 600;
-            font-size: 15px;
         }
         
         td {
-            padding: 15px;
+            padding: 12px 15px;
             border-bottom: 1px solid #e9ecef;
             color: #4a4a68;
         }
@@ -472,2499 +369,874 @@
             background: #f8f9fa;
         }
         
-        p {
+        .answer ul, .answer ol {
+            margin: 20px 0;
+            padding-left: 30px;
             color: #1a1a2e;
-            line-height: 1.8;
-            margin-bottom: 15px;
         }
         
-        ul, ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        ul li, ol li {
+        .answer li {
             margin-bottom: 8px;
+            line-height: 1.8;
         }
         
-                
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(102, 126, 234, 0.25);
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            animation: slideUp 0.6s ease both;
+        }
+        
+        .footer p {
+            margin-bottom: 12px;
+        }
+        
+        .footer .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
         @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
-            }
+            body { padding: 12px 8px; }
+            .container { padding: 25px 20px; border-radius: 20px; }
+            h1 { font-size: 36px; }
+            .subtitle { font-size: 15px; margin-bottom: 25px; }
+            h2 { font-size: 22px; padding: 14px 20px; margin-top: 30px; }
+            .question { padding: 15px 20px; font-size: 16px; margin: 20px 0 12px 0; }
+            .answer { padding: 20px 25px; margin: 12px 0 20px 0; }
+            .code-block { padding: 15px; font-size: 13px; margin: 15px 0; }
+            .toc { padding: 25px 30px; margin: 30px 0; }
+            .toc ol { padding-left: 20px; line-height: 1.8; }
+            .back-button { padding: 12px 24px; font-size: 14px; margin-bottom: 20px; }
+            .footer { padding: 25px; margin-top: 35px; font-size: 14px; }
         }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
-            }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
-        }</style></head>
+    </style>
+</head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-        </a>
-        <h1>Database & Integration Interview Preparation Guide</h1>
-        <p class="subtitle">Comprehensive Interview Preparation for MongoDB, SQL, Kafka, Redis, Splunk, Dynatrace, and Glassbox</p>
-
+        <a href="../index.html" class="back-button">← Back to Tutorials</a>
+        
+        <h1>Database Integration Interview Questions</h1>
+        <p class="subtitle">Comprehensive guide covering 40+ database integration interview questions on SQL, NoSQL, cloud databases, ORM, connection pooling, and best practices with code examples</p>
+        
+        <h2>Table of Contents</h2>
         <div class="toc">
             <h3>Table of Contents</h3>
             <ol>
-                <li>SQL Database Fundamentals</li>
-                <li>MongoDB Fundamentals</li>
-                <li>Kafka Fundamentals</li>
-                <li>Redis Fundamentals</li>
-                <li>Splunk Fundamentals</li>
-                <li>Dynatrace Fundamentals</li>
-                <li>Glassbox Fundamentals</li>
-                <li>Integration Patterns</li>
-                <li>Database Performance & Optimization</li>
-                <li>Database Security & Compliance</li>
-                <li>Database Scaling & High Availability</li>
-                <li>Advanced Integration Scenarios</li>
-                <li>Common Interview Questions</li>
+                <li>Database Fundamentals</li>
+                <li>SQL Integration</li>
+                <li>NoSQL Integration</li>
+                <li>ORM and Data Access</li>
+                <li>Cloud Databases</li>
+                <li>Performance & Optimization</li>
+                <li>Security & Best Practices</li>
             </ol>
         </div>
 
-        <h2>1. SQL Database Fundamentals</h2>
+        <h2>1. Database Fundamentals</h2>
 
         <div class="question">
-            Q1: What are the ACID properties in databases?
+            Q1: What is database integration?
         </div>
         <div class="answer">
-            <p><strong>ACID</strong> stands for Atomicity, Consistency, Isolation, Durability - the key properties that guarantee database transactions are processed reliably:</p>
+            <p><strong>Database Integration Definition:</strong> The process of connecting an application to a database to store, retrieve, and manipulate data efficiently and securely.</p>
+            <p><strong>Key Components:</strong></p>
             <ul>
-                <li><strong>Atomicity:</strong> All operations in a transaction succeed or fail together</li>
-                <li><strong>Consistency:</strong> Database moves from one valid state to another valid state</li>
-                <li><strong>Isolation:</strong> Concurrent transactions don't interfere with each other</li>
-                <li><strong>Durability:</strong> Committed transactions persist even after system failure</li>
+                <li>Connection management (connection strings, pooling)</li>
+                <li>Query execution (SQL, NoSQL queries)</li>
+                <li>Data mapping (ORM, data transfer objects)</li>
+                <li>Transaction management</li>
+                <li>Error handling and retry logic</li>
             </ul>
         </div>
 
         <div class="question">
-            Q2: What is the difference between DELETE and TRUNCATE?
+            Q2: What are the types of databases?
         </div>
         <div class="answer">
             <table>
                 <tr>
-                    <th>Aspect</th>
-                    <th>DELETE</th>
-                    <th>TRUNCATE</th>
-                </tr>
-                <tr>
-                    <td>Operation</td>
-                    <td>DML (Data Manipulation Language)</td>
-                    <td>DDL (Data Definition Language)</td>
-                </tr>
-                <tr>
-                    <td>WHERE clause</td>
-                    <td>Supported</td>
-                    <td>Not supported</td>
-                </tr>
-                <tr>
-                    <td>Speed</td>
-                    <td>Slower (logs each row)</td>
-                    <td>Faster (logs page deallocation)</td>
-                </tr>
-                <tr>
-                    <td>Identity reset</td>
-                    <td>No</td>
-                    <td>Yes</td>
-                </tr>
-                <tr>
-                    <td>Triggers</td>
-                    <td>Fires</td>
-                    <td>Doesn't fire</td>
-                </tr>
-                <tr>
-                    <td>Rollback</td>
-                    <td>Can be rolled back</td>
-                    <td>Cannot be rolled back</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q3: What are the different types of joins in SQL?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Join Type</th>
+                    <th>Type</th>
                     <th>Description</th>
+                    <th>Examples</th>
                 </tr>
                 <tr>
-                    <td>INNER JOIN</td>
-                    <td>Returns rows when there is a match in both tables</td>
+                    <td>Relational (SQL)</td>
+                    <td>Structured data with tables, rows, columns</td>
+                    <td>MySQL, PostgreSQL, SQL Server</td>
                 </tr>
                 <tr>
-                    <td>LEFT JOIN</td>
-                    <td>Returns all rows from left table, matching rows from right</td>
+                    <td>Document (NoSQL)</td>
+                    <td>JSON-like documents</td>
+                    <td>MongoDB, CouchDB</td>
                 </tr>
                 <tr>
-                    <td>RIGHT JOIN</td>
-                    <td>Returns all rows from right table, matching rows from left</td>
+                    <td>Key-Value</td>
+                    <td>Simple key-value pairs</td>
+                    <td>Redis, DynamoDB</td>
                 </tr>
                 <tr>
-                    <td>FULL OUTER JOIN</td>
-                    <td>Returns all rows when there is a match in either table</td>
+                    <td>Column-Family</td>
+                    <td>Wide-column storage</td>
+                    <td>Cassandra, HBase</td>
                 </tr>
                 <tr>
-                    <td>CROSS JOIN</td>
-                    <td>Returns Cartesian product of tables</td>
+                    <td>Graph</td>
+                    <td>Nodes and relationships</td>
+                    <td>Neo4j, ArangoDB</td>
                 </tr>
             </table>
-            
-            <div class="code-block" data-language="code"><pre><code>
-// Inner Join
-SELECT p.Name, c.CategoryName
-FROM Products p
-INNER JOIN Categories c ON p.CategoryId = c.Id;
-
-// Left Join
-SELECT p.Name, c.CategoryName
-FROM Products p
-LEFT JOIN Categories c ON p.CategoryId = c.Id;</code></pre></div>
         </div>
 
         <div class="question">
-            Q4: What is the difference between WHERE and HAVING?
+            Q3: What is a connection string?
         </div>
         <div class="answer">
-            <ul>
-                <li><strong>WHERE:</strong> Filters rows before aggregation. Cannot use aggregate functions.</li>
-                <li><strong>HAVING:</strong> Filters groups after aggregation. Can use aggregate functions.</li>
-            </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>
-// WHERE - filters before grouping
-SELECT CategoryId, COUNT(*) as Count
-FROM Products
-WHERE Price &gt; 100
-GROUP BY CategoryId;
+            <p><strong>Connection String Definition:</strong> A string that specifies database connection parameters including server, database, credentials, and options.</p>
+            <div class="code-block"><pre><code>// SQL Server Connection String
+"Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;"
 
-// HAVING - filters after grouping
-SELECT CategoryId, COUNT(*) as Count
-FROM Products
-GROUP BY CategoryId
-HAVING COUNT(*) &gt; 10;</code></pre></div>
+// PostgreSQL Connection String
+"Host=localhost;Port=5432;Database=mydb;Username=myuser;Password=mypassword;"
+
+// MongoDB Connection String
+"mongodb://username:password@localhost:27017/mydatabase"</code></pre></div>
         </div>
 
-        <div class="page-break"></div>
-
-        <h2>2. MongoDB Fundamentals</h2>
-
         <div class="question">
-            Q5: What is MongoDB and what are its key features?
+            Q4: What is connection pooling?
         </div>
         <div class="answer">
-            <p><strong>MongoDB</strong> is a document-oriented NoSQL database that stores data in flexible, JSON-like documents.</p>
-            
-            <h3>Key Features:</h3>
+            <p><strong>Connection Pooling Definition:</strong> Reusing database connections instead of creating new ones for each request.</p>
+            <p><strong>Benefits:</strong></p>
             <ul>
-                <li><strong>Document-oriented:</strong> Stores data in BSON (Binary JSON) format</li>
-                <li><strong>Schema-less:</strong> Flexible schema design</li>
-                <li><strong>Horizontal scaling:</strong> Sharding for large datasets</li>
-                <li><strong>High availability:</strong> Replica sets for automatic failover</li>
-                <li><strong>Rich queries:</strong> Powerful aggregation framework</li>
-                <li><strong>Indexing:</strong> Secondary indexes for performance</li>
+                <li>Improved performance (no connection overhead)</li>
+                <li>Reduced resource usage</li>
+                <li>Better scalability</li>
+                <li>Faster response times</li>
             </ul>
+            <p><strong>Configuration:</strong> Pool size, timeout, max connections, idle timeout</p>
         </div>
 
         <div class="question">
-            Q6: What is the difference between SQL and MongoDB?
+            Q5: What is the difference between SQL and NoSQL?
         </div>
         <div class="answer">
             <table>
                 <tr>
                     <th>Aspect</th>
                     <th>SQL</th>
-                    <th>MongoDB</th>
-                </tr>
-                <tr>
-                    <td>Data Model</td>
-                    <td>Relational (tables)</td>
-                    <td>Document (collections)</td>
-                </tr>
-                <tr>
-                    <td>Schema</td>
-                    <td>Fixed schema</td>
-                    <td>Flexible schema</td>
-                </tr>
-                <tr>
-                    <td>Scaling</td>
-                    <td>Vertical (mostly)</td>
-                    <td>Horizontal (sharding)</td>
-                </tr>
-                <tr>
-                    <td>Relationships</td>
-                    <td>JOINs</td>
-                    <td>Embedding or referencing</td>
-                </tr>
-                <tr>
-                    <td>Transactions</td>
-                    <td>ACID compliant</td>
-                    <td>Multi-document ACID (since 4.0)</td>
-                </tr>
-                <tr>
-                    <td>Query Language</td>
-                    <td>SQL</td>
-                    <td>MQL (MongoDB Query Language)</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q7: How do you connect to MongoDB from .NET?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-// Install MongoDB.Driver NuGet package
-// MongoDB.Driver
-
-using MongoDB.Driver;
-using MongoDB.Bson;
-
-// Connection string
-var connectionString = "mongodb://localhost:27017";
-var client = new MongoClient(connectionString);
-var database = client.GetDatabase("mydb");
-var collection = database.GetCollection&lt;Product&gt;("products");
-
-// Insert
-var product = new Product { Name = "Laptop", Price = 999.99 };
-await collection.InsertOneAsync(product);
-
-// Find
-var products = await collection.Find(p =&gt; p.Price &gt; 100).ToListAsync();
-
-// Update
-var filter = Builders&lt;Product&gt;.Filter.Eq(p =&gt; p.Id, id);
-var update = Builders&lt;Product&gt;.Update.Set(p =&gt; p.Price, 899.99);
-await collection.UpdateOneAsync(filter, update);
-
-// Delete
-await collection.DeleteOneAsync(filter);</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q8: What is the difference between embedding and referencing in MongoDB?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Embedding:</strong> Store related data within the same document. Good for one-to-few relationships.</li>
-                <li><strong>Referencing:</strong> Store references to other documents. Good for one-to-many or many-to-many relationships.</li>
-            </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>
-// Embedding - one-to-few
-{
-  "_id": ObjectId("..."),
-  "name": "User",
-  "addresses": [
-    { "street": "123 Main St", "city": "NYC" },
-    { "street": "456 Oak Ave", "city": "LA" }
-  ]
-}
-
-// Referencing - one-to-many
-{
-  "_id": ObjectId("..."),
-  "name": "Author",
-  "bookIds": [ObjectId("..."), ObjectId("...")]
-}</code></pre></div>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>3. Kafka Fundamentals</h2>
-
-        <div class="question">
-            Q9: What is Apache Kafka and what are its key components?
-        </div>
-        <div class="answer">
-            <p><strong>Apache Kafka</strong> is a distributed event streaming platform for high-throughput, fault-tolerant, and scalable real-time data streaming.</p>
-            
-            <h3>Key Components:</h3>
-            <ul>
-                <li><strong>Topics:</strong> Categories or feeds of messages</li>
-                <li><strong>Producers:</strong> Applications that publish messages to topics</li>
-                <li><strong>Consumers:</strong> Applications that subscribe to topics and process messages</li>
-                <li><strong>Brokers:</strong> Kafka servers that store and serve messages</li>
-                <li><strong>Partitions:</strong> Divisions of topics for parallelism</li>
-                <li><strong>Consumer Groups:</strong> Groups of consumers that share topic consumption</li>
-                <li><strong>Zookeeper:</strong> Manages cluster metadata (deprecated in newer versions)</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q10: How do you produce and consume messages in Kafka using .NET?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-// Install Confluent.Kafka NuGet package
-using Confluent.Kafka;
-
-// Producer
-var config = new ProducerConfig
-{
-    BootstrapServers = "localhost:9092",
-    Acks = Acks.All
-};
-
-using var producer = new ProducerBuilder&lt;Null, string&gt;(config).Build();
-await producer.ProduceAsync("my-topic", 
-    new Message&lt;Null, string&gt; { Value = "Hello Kafka" });
-
-// Consumer
-var consumerConfig = new ConsumerConfig
-{
-    BootstrapServers = "localhost:9092",
-    GroupId = "my-consumer-group",
-    AutoOffsetReset = AutoOffsetReset.Earliest
-};
-
-using var consumer = new ConsumerBuilder&lt;Ignore, string&gt;(consumerConfig).Build();
-consumer.Subscribe("my-topic");
-
-while (true)
-{
-    var consumeResult = consumer.Consume();
-    Console.WriteLine($"Message: {consumeResult.Message.Value}");
-    consumer.Commit(consumeResult);
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q11: What is the difference between partitions and consumer groups?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Partitions:</strong> Divide a topic into multiple logs for parallelism. Each partition is ordered, but the topic as a whole is not.</li>
-                <li><strong>Consumer Groups:</strong> Allow multiple consumers to share the load of consuming from a topic. Each partition is consumed by exactly one consumer in a group.</li>
-            </ul>
-            
-            <div class="important">
-                <strong>Important:</strong> The number of consumers in a group should not exceed the number of partitions. Extra consumers will remain idle.
-            </div>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>4. Redis Fundamentals</h2>
-
-        <div class="question">
-            Q12: What is Redis and what are its key features?
-        </div>
-        <div class="answer">
-            <p><strong>Redis</strong> (Remote Dictionary Server) is an in-memory data structure store used as a database, cache, and message broker.</p>
-            
-            <h3>Key Features:</h3>
-            <ul>
-                <li><strong>In-memory storage:</strong> Extremely fast read/write operations</li>
-                <li><strong>Data structures:</strong> Strings, Hashes, Lists, Sets, Sorted Sets</li>
-                <li><strong>Persistence:</strong> Optional disk persistence (RDB, AOF)</li>
-                <li><strong>Replication:</strong> Master-slave replication for high availability</li>
-                <li><strong>Clustering:</strong> Horizontal scaling with Redis Cluster</li>
-                <li><strong>Pub/Sub:</strong> Publish/subscribe messaging</li>
-                <li><strong>Transactions:</strong> Multi-command transactions</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q13: How do you use Redis with .NET?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-// Install StackExchange.Redis NuGet package
-using StackExchange.Redis;
-
-// Connection
-var redis = ConnectionMultiplexer.Connect("localhost:6379");
-var db = redis.GetDatabase();
-
-// String operations
-db.StringSet("key", "value");
-var value = db.StringGet("key");
-
-// Hash operations
-db.HashSet("user:1", "name", "John");
-var name = db.HashGet("user:1", "name");
-
-// List operations
-db.ListLeftPush("mylist", "item1");
-db.ListRightPush("mylist", "item2");
-var item = db.ListRightPop("mylist");
-
-// Set operations
-db.SetAdd("myset", "member1");
-var isMember = db.SetContains("myset", "member1");
-
-// Sorted Set operations
-db.SortedSetAdd("leaderboard", "user1", 100);
-var rank = db.SortedSetRank("leaderboard", "user1");
-
-// Expiration
-db.KeyExpire("key", TimeSpan.FromMinutes(5));</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q14: What are the common use cases for Redis?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Caching:</strong> Cache database query results, API responses</li>
-                <li><strong>Session storage:</strong> Store user session data</li>
-                <li><strong>Leaderboards:</strong> Sorted sets for gaming/score tracking</li>
-                <li><strong>Rate limiting:</strong> Track API request counts</li>
-                <li><strong>Pub/Sub:</strong> Real-time messaging</li>
-                <li><strong>Geospatial:</strong> Location-based features</li>
-                <li><strong>Counters:</strong> Page views, likes, etc.</li>
-                <li><strong>Queues:</strong> Job queues with lists</li>
-            </ul>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>5. Splunk Fundamentals</h2>
-
-        <div class="question">
-            Q15: What is Splunk and what is it used for?
-        </div>
-        <div class="answer">
-            <p><strong>Splunk</strong> is a platform for searching, analyzing, and visualizing machine-generated data from applications, servers, and devices.</p>
-            
-            <h3>Key Features:</h3>
-            <ul>
-                <li><strong>Log aggregation:</strong> Collect logs from various sources</li>
-                <li><strong>Search and analysis:</strong> Powerful search language (SPL)</li>
-                <li><strong>Visualization:</strong> Dashboards and reports</li>
-                <li><strong>Alerting:</strong> Real-time alerts based on conditions</li>
-                <li><strong>Machine learning:</strong> Anomaly detection and predictive analytics</li>
-                <li><strong>Indexing:</strong> Fast indexing of data for quick searches</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q16: What is SPL (Search Processing Language)?
-        </div>
-        <div class="answer">
-            <p><strong>SPL</strong> is Splunk's search language for querying and manipulating data.</p>
-            
-            <div class="code-block" data-language="code"><pre><code>
-// Basic search
-index=web sourcetype=access_combined status=200
-
-// Filter and stats
-index=web | stats count by status
-
-// Timechart
-index=web | timechart count by status
-
-// Join data
-index=web | join type=inner userId [search index=users]</code></pre></div>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>6. Dynatrace Fundamentals</h2>
-
-        <div class="question">
-            Q17: What is Dynatrace and what are its key features?
-        </div>
-        <div class="answer">
-            <p><strong>Dynatrace</strong> is an AI-powered observability platform for monitoring applications, infrastructure, and user experience.</p>
-            
-            <h3>Key Features:</h3>
-            <ul>
-                <li><strong>Automatic discovery:</strong> Auto-discovers application topology</li>
-                <li><strong>Real user monitoring (RUM):</strong> User experience monitoring</li>
-                <li><strong>Application performance monitoring (APM):</strong> Code-level visibility</li>
-                <li><strong>Infrastructure monitoring:</strong> Server, container, cloud monitoring</li>
-                <li><strong>AI root cause analysis:</strong> Automatic problem detection and root cause</li>
-                <li><strong>Digital experience monitoring:</strong> Synthetic monitoring</li>
-                <li><strong>Log analytics:</strong> Log analysis and correlation</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q18: How does Dynatrace AI work?
-        </div>
-        <div class="answer">
-            <p>Dynatrace uses <strong>Davis AI</strong> to:</p>
-            <ul>
-                <li>Automatically detect anomalies and performance issues</li>
-                <li>Analyze relationships between components</li>
-                <li>Identify root causes of problems</li>
-                <li>Provide intelligent recommendations</li>
-                <li>Learn normal behavior patterns</li>
-                <li>Predict potential issues before they impact users</li>
-            </ul>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>7. Glassbox Fundamentals</h2>
-
-        <div class="question">
-            Q19: What is Glassbox and what is it used for?
-        </div>
-        <div class="answer">
-            <p><strong>Glassbox</strong> is an application performance monitoring (APM) tool that provides deep visibility into application behavior and performance.</p>
-            
-            <h3>Key Features:</h3>
-            <ul>
-                <li><strong>Code-level visibility:</strong> See exact code execution paths</li>
-                <li><strong>Transaction tracing:</strong> End-to-end transaction monitoring</li>
-                <li><strong>Database monitoring:</strong> SQL query performance analysis</li>
-                <li><strong>Exception tracking:</strong> Real-time exception monitoring</li>
-                <li><strong>Business transaction monitoring:</strong> Track business-critical operations</li>
-                <li><strong>Performance baselining:</strong> Establish performance baselines</li>
-            </ul>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>8. Integration Patterns</h2>
-
-        <div class="question">
-            Q20: What are common integration patterns?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Pattern</th>
-                    <th>Description</th>
-                    <th>Use Case</th>
-                </tr>
-                <tr>
-                    <td>Publish-Subscribe</td>
-                    <td>Decouples producers from consumers</td>
-                    <td>Event-driven architectures</td>
-                </tr>
-                <tr>
-                    <td>Message Queue</td>
-                    <td>Decouples senders from receivers</td>
-                    <td>Asynchronous processing</td>
-                </tr>
-                <tr>
-                    <td>CQRS</td>
-                    <td>Separates read and write models</td>
-                    <td>High-performance systems</td>
-                </tr>
-                <tr>
-                    <td>Event Sourcing</td>
-                    <td>Stores state changes as events</td>
-                    <td>Audit trails, temporal queries</td>
-                </tr>
-                <tr>
-                    <td>Saga</td>
-                    <td>Manages distributed transactions</td>
-                    <td>Multi-service transactions</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q21: How do you integrate Redis with ASP.NET Core?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-// Add Redis distributed cache
-builder.Services.AddStackExchangeRedisCache(options =&gt;
-{
-    options.Configuration = "localhost:6379";
-    options.InstanceName = "MyApp_";
-});
-
-// Use IDistributedCache
-public class ProductService
-{
-    private readonly IDistributedCache _cache;
-    private readonly IProductRepository _repository;
-    
-    public ProductService(IDistributedCache cache, IProductRepository repository)
-    {
-        _cache = cache;
-        _repository = repository;
-    }
-    
-    public async Task&lt;Product&gt; GetProductAsync(int id)
-    {
-        var cacheKey = $"product_{id}";
-        var cachedProduct = await _cache.GetStringAsync(cacheKey);
-        
-        if (cachedProduct != null)
-        {
-            return JsonSerializer.Deserialize&lt;Product&gt;(cachedProduct);
-        }
-        
-        var product = await _repository.GetByIdAsync(id);
-        await _cache.SetStringAsync(cacheKey, 
-            JsonSerializer.Serialize(product),
-            new DistributedCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10)
-            });
-        
-        return product;
-    }
-}</code></pre></div>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>9. Common Interview Questions</h2>
-
-        <div class="question">
-            Q22: What is the difference between RDBMS and NoSQL?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>RDBMS</th>
                     <th>NoSQL</th>
                 </tr>
                 <tr>
                     <td>Data Model</td>
-                    <td>Relational (tables)</td>
-                    <td>Document, Key-Value, Graph, Column-family</td>
+                    <td>Structured, relational</td>
+                    <td>Flexible, schema-less</td>
                 </tr>
                 <tr>
                     <td>Schema</td>
-                    <td>Fixed, predefined</td>
-                    <td>Flexible, dynamic</td>
+                    <td>Fixed schema</td>
+                    <td>Dynamic schema</td>
                 </tr>
                 <tr>
                     <td>Scaling</td>
-                    <td>Vertical (scale up)</td>
-                    <td>Horizontal (scale out)</td>
-                </tr>
-                <tr>
-                    <td>Consistency</td>
-                    <td>Strong consistency (ACID)</td>
-                    <td>Eventual consistency (BASE)</td>
+                    <td>Vertical scaling</td>
+                    <td>Horizontal scaling</td>
                 </tr>
                 <tr>
                     <td>Query Language</td>
                     <td>SQL</td>
-                    <td>Varies (JSON, MQL, etc.)</td>
+                    <td>Various (JSON, etc.)</td>
                 </tr>
                 <tr>
-                    <td>Best For</td>
-                    <td>Structured data, transactions</td>
-                    <td>Big data, unstructured data, rapid iteration</td>
+                    <td>Use Case</td>
+                    <td>Complex queries, transactions</td>
+                    <td>Big data, rapid development</td>
                 </tr>
             </table>
         </div>
 
+        <h2>2. SQL Integration</h2>
+
         <div class="question">
-            Q23: What is database indexing and when should you use it?
+            Q6: How do you integrate with SQL databases?
         </div>
         <div class="answer">
-            <p><strong>Database indexing</strong> creates data structures to improve query performance. Use indexes when:</p>
+            <p><strong>Integration Methods:</strong></p>
             <ul>
-                <li>Frequently queried columns</li>
-                <li>Columns used in WHERE, JOIN, ORDER BY clauses</li>
-                <li>Columns with high cardinality (many unique values)</li>
-                <li>Large tables where full table scans are slow</li>
+                <li>Native drivers (ADO.NET, JDBC, psycopg2)</li>
+                <li>ORM frameworks (Entity Framework, Hibernate, SQLAlchemy)</li>
+                <li>Micro-ORMs (Dapper, MyBatis)</li>
+                <li>Query builders (Knex.js, jOOQ)</li>
             </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>
-// Create index
-CREATE INDEX idx_product_name ON Products(Name);
+            <div class="code-block"><pre><code>// Python - Using SQLAlchemy ORM
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-// Composite index
-CREATE INDEX idx_product_category_price ON Products(CategoryId, Price);
+engine = create_engine('postgresql://user:password@localhost/db')
+Base = declarative_base()
 
-// Unique index
-CREATE UNIQUE INDEX idx_product_code ON Products(ProductCode);</code></pre></div>
-            
-            <div class="important">
-                <strong>Important:</strong> Indexes improve read performance but slow down write operations. Don't over-index.
-            </div>
+class User(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    email = Column(String)
+
+Session = sessionmaker(bind=engine)
+session = Session()
+
+# Query
+users = session.query(User).filter(User.name == 'John').all()</code></pre></div>
         </div>
 
         <div class="question">
-            Q24: What is database normalization?
+            Q7: What are database transactions?
         </div>
         <div class="answer">
-            <p><strong>Normalization</strong> is the process of organizing data to minimize redundancy and dependency. It involves dividing large tables into smaller, related tables and defining relationships between them.</p>
-            
-            <h3>Normal Forms:</h3>
+            <p><strong>Transaction Definition:</strong> A sequence of operations performed as a single logical unit of work.</p>
+            <p><strong>ACID Properties:</strong></p>
+            <ul>
+                <li><strong>Atomicity:</strong> All or nothing execution</li>
+                <li><strong>Consistency:</strong> Database remains consistent</li>
+                <li><strong>Isolation:</strong> Transactions don't interfere</li>
+                <li><strong>Durability:</strong> Committed changes persist</li>
+            </ul>
+            <div class="code-block"><pre><code>// Transaction Example
+try:
+    connection.begin()
+    cursor.execute("UPDATE accounts SET balance = balance - 100 WHERE id = 1")
+    cursor.execute("UPDATE accounts SET balance = balance + 100 WHERE id = 2")
+    connection.commit()
+except Exception as e:
+    connection.rollback()
+    raise e</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q8: What is SQL injection and how to prevent it?
+        </div>
+        <div class="answer">
+            <p><strong>SQL Injection Definition:</strong> Attack where malicious SQL is injected into queries.</p>
+            <p><strong>Prevention:</strong></p>
+            <ul>
+                <li>Use parameterized queries</li>
+                <li>Use ORM frameworks</li>
+                <li>Input validation and sanitization</li>
+                <li>Least privilege database access</li>
+            </ul>
+            <div class="code-block"><pre><code>// Vulnerable
+query = f"SELECT * FROM users WHERE name = '{user_input}'"
+
+// Safe - Parameterized
+query = "SELECT * FROM users WHERE name = %s"
+cursor.execute(query, (user_input,))</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q9: What are database indexes?
+        </div>
+        <div class="answer">
+            <p><strong>Index Definition:</strong> Data structures that improve query speed by allowing fast data lookup.</p>
+            <p><strong>Types:</strong></p>
+            <ul>
+                <li>B-Tree indexes (default for most databases)</li>
+                <li>Hash indexes (equality comparisons)</li>
+                <li>Full-text indexes (text search)</li>
+                <li>Composite indexes (multiple columns)</li>
+            </ul>
+            <p><strong>Tradeoffs:</strong> Faster reads, slower writes, increased storage</p>
+        </div>
+
+        <div class="question">
+            Q10: What is database normalization?
+        </div>
+        <div class="answer">
+            <p><strong>Normalization Definition:</strong> Process of organizing data to reduce redundancy and improve integrity.</p>
+            <p><strong>Normal Forms:</strong></p>
             <ul>
                 <li><strong>1NF:</strong> Atomic values, no repeating groups</li>
                 <li><strong>2NF:</strong> 1NF + no partial dependencies</li>
                 <li><strong>3NF:</strong> 2NF + no transitive dependencies</li>
-                <li><strong>BCNF:</strong> Stronger version of 3NF</li>
+                <li><strong>BCNF:</strong> Stricter version of 3NF</li>
             </ul>
         </div>
 
+        <h2>3. NoSQL Integration</h2>
+
         <div class="question">
-            Q25: What is the difference between primary key and unique key?
+            Q11: How do you integrate with MongoDB?
+        </div>
+        <div class="answer">
+            <div class="code-block"><pre><code>// Python - Using PyMongo
+from pymongo import MongoClient
+
+client = MongoClient('mongodb://localhost:27017/')
+db = client['mydatabase']
+collection = db['users']
+
+# Insert
+user = {'name': 'John', 'email': 'john@example.com'}
+collection.insert_one(user)
+
+# Query
+users = collection.find({'name': 'John'})
+
+# Update
+collection.update_one({'name': 'John'}, {'': {'email': 'new@email.com'}})
+
+# Delete
+collection.delete_one({'name': 'John'})</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q12: How do you integrate with Redis?
+        </div>
+        <div class="answer">
+            <div class="code-block"><pre><code>// Python - Using redis-py
+import redis
+
+r = redis.Redis(host='localhost', port=6379, db=0)
+
+# Set
+r.set('key', 'value')
+r.setex('session:123', 3600, 'user_data')  # Expires in 1 hour
+
+# Get
+value = r.get('key')
+
+# Hash operations
+r.hset('user:1', 'name', 'John')
+r.hset('user:1', 'email', 'john@example.com')
+user_data = r.hgetall('user:1')
+
+# List operations
+r.lpush('queue', 'task1')
+r.lpush('queue', 'task2')
+task = r.rpop('queue')</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q13: What is the difference between document and key-value databases?
         </div>
         <div class="answer">
             <table>
                 <tr>
                     <th>Aspect</th>
-                    <th>Primary Key</th>
-                    <th>Unique Key</th>
+                    <th>Document</th>
+                    <th>Key-Value</th>
                 </tr>
                 <tr>
-                    <td>Nullability</td>
-                    <td>Cannot be NULL</td>
-                    <td>Can be NULL (one per table)</td>
+                    <td>Data Structure</td>
+                    <td>Complex nested documents</td>
+                    <td>Simple key-value pairs</td>
                 </tr>
                 <tr>
-                    <td>Number per table</td>
-                    <td>Only one</td>
-                    <td>Multiple allowed</td>
+                    <td>Querying</td>
+                    <td>Rich query capabilities</td>
+                    <td>Key-based only</td>
                 </tr>
                 <tr>
-                    <td>Purpose</td>
-                    <td>Identify rows uniquely</td>
-                    <td>Enforce uniqueness</td>
+                    <td>Schema</td>
+                    <td>Flexible schema</td>
+                    <td>No schema</td>
                 </tr>
                 <tr>
-                    <td>Foreign Key</td>
-                    <td>Can be referenced</td>
-                    <td>Cannot be referenced</td>
+                    <td>Use Case</td>
+                    <td>Complex data, content management</td>
+                    <td>Caching, sessions, simple lookups</td>
                 </tr>
             </table>
         </div>
 
         <div class="question">
-            Q26: What is database sharding?
+            Q14: How do you handle relationships in NoSQL?
         </div>
         <div class="answer">
-            <p><strong>Sharding</strong> is a database scaling technique that splits large datasets across multiple database instances (shards) based on a shard key.</p>
-            
-            <h3>Benefits:</h3>
+            <p><strong>Relationship Strategies:</strong></p>
             <ul>
-                <li>Horizontal scaling</li>
-                <li>Improved performance</li>
-                <li>Better resource utilization</li>
+                <li><strong>Embedding:</strong> Store related data in same document (denormalization)</li>
+                <li><strong>Referencing:</strong> Store references/IDs to other documents</li>
+                <li><strong>Hybrid:</strong> Combination of both approaches</li>
             </ul>
-            
-            <h3>Challenges:</h3>
-            <ul>
-                <li>Complex queries across shards</li>
-                <li>Data rebalancing</li>
-                <li>Transaction management</li>
-            </ul>
+            <p><strong>Tradeoffs:</strong> Embedding = faster reads, harder updates; Referencing = slower reads, easier updates</p>
         </div>
 
         <div class="question">
-            Q27: What is database replication?
+            Q15: What is eventual consistency in NoSQL?
         </div>
         <div class="answer">
-            <p><strong>Replication</strong> is the process of copying data from one database server to another to ensure data availability and redundancy.</p>
-            
-            <h3>Replication Types:</h3>
+            <p><strong>Eventual Consistency Definition:</strong> System guarantees that if no new updates are made, eventually all accesses will return the last updated value.</p>
+            <p><strong>Key Points:</strong></p>
             <ul>
-                <li><strong>Master-Slave:</strong> One master, multiple read-only slaves</li>
-                <li><strong>Master-Master:</strong> Multiple masters, all can read/write</li>
-                <li><strong>Multi-Master:</strong> All nodes can read/write</li>
+                <li>Accepts temporary inconsistency</li>
+                <li>Converges to consistency over time</li>
+                <li>Common in distributed NoSQL databases</li>
+                <li>Tradeoff: consistency vs availability (CAP theorem)</li>
             </ul>
         </div>
 
+        <h2>4. ORM and Data Access</h2>
+
         <div class="question">
-            Q28: What is the difference between SQL Server and PostgreSQL?
+            Q16: What is an ORM?
+        </div>
+        <div class="answer">
+            <p><strong>ORM Definition:</strong> Object-Relational Mapping - technique to convert data between incompatible systems using object-oriented programming languages.</p>
+            <p><strong>Benefits:</strong></p>
+            <ul>
+                <li>Eliminates most SQL code</li>
+                <li>Type safety and compile-time checking</li>
+                <li>Easier to maintain and refactor</li>
+                <li>Database independence</li>
+            </ul>
+            <p><strong>Drawbacks:</strong> Performance overhead, complex queries can be difficult</p>
+        </div>
+
+        <div class="question">
+            Q17: What are popular ORM frameworks?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Language</th>
+                    <th>ORM Frameworks</th>
+                </tr>
+                <tr>
+                    <td>Python</td>
+                    <td>SQLAlchemy, Django ORM, Peewee</td>
+                </tr>
+                <tr>
+                    <td>Java</td>
+                    <td>Hibernate, JPA, MyBatis</td>
+                </tr>
+                <tr>
+                    <td>C#</td>
+                    <td>Entity Framework, Dapper, NHibernate</td>
+                </tr>
+                <tr>
+                    <td>Node.js</td>
+                    <td>Sequelize, TypeORM, Mongoose</td>
+                </tr>
+                <tr>
+                    <td>PHP</td>
+                    <td>Eloquent, Doctrine</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q18: What is the difference between ORM and micro-ORM?
         </div>
         <div class="answer">
             <table>
                 <tr>
                     <th>Aspect</th>
-                    <th>SQL Server</th>
-                    <th>PostgreSQL</th>
+                    <th>ORM</th>
+                    <th>Micro-ORM</th>
                 </tr>
                 <tr>
-                    <td>License</td>
-                    <td>Commercial (Express free)</td>
-                    <td>Open source</td>
-                </tr>
-                <tr>
-                    <td>Platform</td>
-                    <td>Windows primarily</td>
-                    <td>Cross-platform</td>
-                </tr>
-                <tr>
-                    <td>Features</td>
-                    <td>Rich feature set</td>
-                    <td>Extensible, advanced features</td>
+                    <td>Abstraction</td>
+                    <td>High-level, hides SQL</td>
+                    <td>Low-level, exposes SQL</td>
                 </tr>
                 <tr>
                     <td>Performance</td>
-                    <td>Excellent</td>
-                    <td>Excellent</td>
+                    <td>Slower (overhead)</td>
+                    <td>Faster (less overhead)</td>
                 </tr>
                 <tr>
-                    <td>Community</td>
-                    <td>Large commercial support</td>
-                    <td>Strong open source community</td>
+                    <td>Control</td>
+                    <td>Less control</td>
+                    <td>More control</td>
+                </tr>
+                <tr>
+                    <td>Learning Curve</td>
+                    <td>Steeper</td>
+                    <td>Easier</td>
                 </tr>
             </table>
         </div>
 
         <div class="question">
-            Q29: How do you implement connection pooling?
+            Q19: What is lazy loading in ORM?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-// Entity Framework Core connection pooling
-builder.Services.AddDbContext&lt;AppDbContext&gt;(options =&gt;
-    options.UseSqlServer(connectionString, sqlOptions =&gt;
-    {
-        sqlOptions.EnableRetryOnFailure(maxRetryCount: 5);
-        sqlOptions.CommandTimeout(30);
-        sqlOptions.MaxBatchSize(100);
-    }));
-
-// MongoDB connection pooling
-var settings = new MongoClientSettings
-{
-    Server = new MongoServerAddress("localhost", 27017),
-    MaxConnectionPoolSize = 100,
-    MinConnectionPoolSize = 10
-};
-var client = new MongoClient(settings);</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q30: What is the difference between synchronous and asynchronous database operations?
-        </div>
-        <div class="answer">
+            <p><strong>Lazy Loading Definition:</strong> Loading related data only when it's accessed, not when the parent object is loaded.</p>
+            <p><strong>Benefits:</strong></p>
             <ul>
-                <li><strong>Synchronous:</strong> Blocks the thread until the operation completes. Can lead to thread pool exhaustion under load.</li>
-                <li><strong>Asynchronous:</strong> Returns immediately, operation completes in background. Better scalability and resource utilization.</li>
+                <li>Reduced initial query time</li>
+                <li>Load only needed data</li>
+                <li>Better memory usage</li>
             </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>
-// Synchronous (avoid in web apps)
-var products = context.Products.ToList();
-
-// Asynchronous (preferred)
-var products = await context.Products.ToListAsync();</code></pre></div>
-            
-            <div class="tip">
-                <strong>Tip:</strong> Always use async/await for database operations in web applications to improve scalability.
-            </div>
+            <p><strong>Drawbacks:</strong> N+1 query problem, potential performance issues</p>
         </div>
-
-        <div class="page-break"></div>
-
-        <h2>9. Database Performance & Optimization (All Levels Level)</h2>
 
         <div class="question">
-            Q31: How do you optimize SQL query performance?
+            Q20: What is the N+1 query problem?
         </div>
         <div class="answer">
+            <p><strong>N+1 Problem Definition:</strong> When fetching N parent objects, the ORM executes N additional queries to fetch related data.</p>
+            <p><strong>Solution:</strong></p>
             <ul>
-                <li><strong>Indexing:</strong> Create appropriate indexes on frequently queried columns</li>
-                <li><strong>Query optimization:</strong> Use EXPLAIN/EXPLAIN ANALYZE to analyze query execution plans</li>
-                <li><strong>SELECT only needed columns:</strong> Avoid SELECT *</li>
-                <li><strong>Use WHERE instead of HAVING:</strong> Filter rows before aggregation</li>
-                <li><strong>Avoid functions on indexed columns:</strong> Prevents index usage</li>
-                <li><strong>Use proper JOIN types:</strong> INNER JOIN for required relationships, LEFT JOIN for optional</li>
-                <li><strong>Limit result sets:</strong> Use LIMIT/OFFSET or pagination</li>
-                <li><strong>Use stored procedures:</strong> For complex, frequently executed logic</li>
+                <li>Eager loading (fetch related data upfront)</li>
+                <li>Batch loading (fetch in batches)</li>
+                <li>Join queries</li>
             </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>
--- Bad: Function on indexed column
-SELECT * FROM Products WHERE YEAR(CreatedAt) = 2024;
+            <div class="code-block"><pre><code>// N+1 Problem
+users = session.query(User).all()  # 1 query
+for user in users:
+    print(user.orders)  # N queries
 
--- Good: Range query on indexed column
-SELECT * FROM Products WHERE CreatedAt &gt;= '2024-01-01' AND CreatedAt &lt; '2025-01-01';
-
--- Bad: SELECT *
-SELECT * FROM Users WHERE Id = 1;
-
--- Good: Select specific columns
-SELECT Id, Name, Email FROM Users WHERE Id = 1;</code></pre></div>
+// Solution - Eager Loading
+users = session.query(User).options(joinedload(User.orders)).all()</code></pre></div>
         </div>
+
+        <h2>5. Cloud Databases</h2>
 
         <div class="question">
-            Q32: What are database indexing strategies?
+            Q21: What are cloud databases?
         </div>
         <div class="answer">
+            <p><strong>Cloud Database Definition:</strong> Database services running on cloud platforms, offering managed database solutions.</p>
+            <p><strong>Benefits:</strong></p>
             <ul>
-                <li><strong>B-Tree Index:</strong> Default for most databases. Good for equality and range queries.</li>
-                <li><strong>Hash Index:</strong> Only for equality comparisons. Faster than B-Tree for exact matches.</li>
-                <li><strong>GIN Index:</strong> For array values and full-text search (PostgreSQL).</li>
-                <li><strong>GiST Index:</strong> For geometric data and full-text search.</li>
-                <li><strong>Composite Index:</strong> Index on multiple columns. Order matters.</li>
-                <li><strong>Partial Index:</strong> Index on subset of rows matching a condition.</li>
-                <li><strong>Covering Index:</strong> Index includes all columns needed by query.</li>
-                <li><strong>Clustered Index:</strong> Data stored in index order (one per table).</li>
-                <li><strong>Non-Clustered Index:</strong> Separate index structure with pointers to data.</li>
-            </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>
--- Create composite index
-CREATE INDEX idx_product_category_price ON Products(CategoryId, Price);
-
--- Create partial index
-CREATE INDEX idx_active_products ON Products(Name) WHERE IsActive = true;
-
--- Create covering index (INCLUDE clause in SQL Server)
-CREATE INDEX idx_product_covering ON Products(CategoryId) 
-INCLUDE (Name, Price, Stock);</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q33: How do you handle database query plan analysis?
-        </div>
-        <div class="answer">
-
-            <div class="code-block" data-language="code"><pre><code>
--- SQL Server
-SET STATISTICS IO ON;
-SET STATISTICS TIME ON;
-
--- Execute query
-SELECT * FROM Products WHERE CategoryId = 5;
-
--- View execution plan
--- Click "Display Estimated Execution Plan" or "Include Actual Execution Plan"
-
--- PostgreSQL
-EXPLAIN ANALYZE SELECT * FROM Products WHERE CategoryId = 5;
-
--- Key metrics to analyze:
--- - Seq Scan vs Index Scan
--- - Filter vs Index Cond
--- - Rows estimated vs actual
--- - Execution time
--- - Buffer hits/reads
-
--- MongoDB
-db.products.find({ categoryId: 5 }).explain("executionStats");
-
--- Key metrics:
-// - executionTimeMillis
-// - totalDocsExamined
-// - totalKeysExamined
-// - stage (IXSCAN vs COLLSCAN)</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q34: What is database partitioning and when should you use it?
-        </div>
-        <div class="answer">
-            <p><strong>Partitioning</strong> divides large tables into smaller, more manageable pieces while maintaining a single logical table.</p>
-            
-            <ul>
-                <li><strong>Range Partitioning:</strong> Based on value ranges (e.g., date ranges)</li>
-                <li><strong>List Partitioning:</strong> Based on discrete value lists</li>
-                <li><strong>Hash Partitioning:</strong> Based on hash function for even distribution</li>
-                <li><strong>Composite Partitioning:</strong> Combination of above methods</li>
-            </ul>
-
-            <div class="code-block" data-language="code"><pre><code>
--- Range partitioning by date (PostgreSQL)
-CREATE TABLE orders (
-    id SERIAL,
-    order_date DATE,
-    customer_id INT,
-    amount DECIMAL
-) PARTITION BY RANGE (order_date);
-
--- Create partitions
-CREATE TABLE orders_2024 PARTITION OF orders
-    FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
-
-CREATE TABLE orders_2025 PARTITION OF orders
-    FOR VALUES FROM ('2025-01-01') TO ('2026-01-01');
-
--- Benefits:
--- - Improved query performance (partition pruning)
--- - Easier maintenance (drop old partitions)
--- - Parallel query execution
--- - Better index efficiency</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q35: How do you implement database connection pooling?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-// HikariCP (Java)
-HikariConfig config = new HikariConfig();
-config.setJdbcUrl("jdbc:postgresql://localhost:5432/mydb");
-config.setUsername("user");
-config.setPassword("password");
-config.setMaximumPoolSize(20);
-config.setMinimumIdle(5);
-config.setConnectionTimeout(30000);
-config.setIdleTimeout(600000);
-config.setMaxLifetime(1800000);
-
-HikariDataSource dataSource = new HikariDataSource(config);
-
-// .NET Core (Entity Framework)
-builder.Services.AddDbContext&lt;AppDbContext&gt;(options =&gt;
-    options.UseSqlServer(connectionString, sqlOptions =&gt;
-    {
-        sqlOptions.EnableRetryOnFailure(maxRetryCount: 5);
-        sqlOptions.CommandTimeout(30);
-    }));
-
-// Connection string with pooling
-"Server=.;Database=MyDb;Pooling=true;Min Pool Size=5;Max Pool Size=100;Connection Lifetime=300;"
-
-// Node.js (pg)
-const { Pool } = require('pg');
-const pool = new Pool({
-    host: 'localhost',
-    database: 'mydb',
-    max: 20, // Maximum pool size
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000
-});</code></pre></div>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>10. Database Security & Compliance (All Levels Level)</h2>
-
-        <div class="question">
-            Q36: How do you implement database security best practices?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Principle of Least Privilege:</strong> Grant minimum required permissions</li>
-                <li><strong>Encryption at Rest:</strong> Use TDE (Transparent Data Encryption) or file system encryption</li>
-                <li><strong>Encryption in Transit:</strong> Use SSL/TLS for database connections</li>
-                <li><strong>Row-Level Security:</strong> Implement RLS policies for data access control</li>
-                <li><strong>Column-Level Encryption:</strong> Encrypt sensitive columns (SSN, credit cards)</li>
-                <li><strong>Auditing:</strong> Enable audit logging for sensitive operations</li>
-                <li><strong>Regular Backups:</strong> Automated, encrypted backups with retention policies</li>
-                <li><strong>Network Security:</strong> Database in private subnet, firewall rules</li>
-                <li><strong>Authentication:</strong> Strong passwords, MFA, integrated authentication</li>
-                <li><strong>Regular Updates:</strong> Keep database software patched</li>
+                <li>No server management</li>
+                <li>Automatic scaling</li>
+                <li>High availability and backups</li>
+                <li>Pay-as-you-go pricing</li>
             </ul>
         </div>
 
         <div class="question">
-            Q37: What is SQL injection and how do you prevent it?
-        </div>
-        <div class="answer">
-            <p><strong>SQL Injection</strong> is a code injection technique where malicious SQL is inserted into query strings.</p>
-
-            <div class="code-block" data-language="code"><pre><code>
--- Vulnerable code (DON'T DO THIS)
-string query = "SELECT * FROM Users WHERE Name = '" + userName + "'";
-// If userName = "' OR '1'='1", returns all users
-
--- Prevention methods:
-
-// 1. Parameterized queries (BEST)
-string query = "SELECT * FROM Users WHERE Name = @Name";
-SqlCommand command = new SqlCommand(query, connection);
-command.Parameters.AddWithValue("@Name", userName);
-
-// 2. ORM (Entity Framework)
-var user = await context.Users.FirstOrDefaultAsync(u =&gt; u.Name == userName);
-
-// 3. Stored procedures
-CREATE PROCEDURE GetUserByName
-    @Name NVARCHAR(100)
-AS
-BEGIN
-    SELECT * FROM Users WHERE Name = @Name
-END
-
-// 4. Input validation
-if (!Regex.IsMatch(userName, @"^[a-zA-Z0-9 ]*$"))
-{
-    throw new ArgumentException("Invalid input");
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q38: How do you implement data masking and anonymization?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
--- Dynamic Data Masking (SQL Server)
-CREATE TABLE Customers (
-    Id INT PRIMARY KEY,
-    Name NVARCHAR(100),
-    Email NVARCHAR(100) MASKED WITH (FUNCTION = 'email()'),
-    CreditCard NVARCHAR(20) MASKED WITH (FUNCTION = 'partial(0,"XXXX-XXXX-XXXX-",4)'),
-    SSN NVARCHAR(11) MASKED WITH (FUNCTION = 'default()')
-);
-
--- Grant unmask permission
-GRANT UNMASK TO UserWithAccess;
-
--- PostgreSQL using pgcrypto
-CREATE EXTENSION pgcrypto;
-
--- Encrypt data
-INSERT INTO sensitive_data (encrypted_field)
-VALUES (pgp_sym_encrypt('secret data', 'encryption_key'));
-
--- Decrypt data
-SELECT pgp_sym_decrypt(encrypted_field::bytea, 'encryption_key') 
-FROM sensitive_data;
-
--- Application-level masking
-public static string MaskEmail(string email)
-{
-    if (string.IsNullOrEmpty(email)) return email;
-    var parts = email.Split('@');
-    return parts[0].Substring(0, 2) + "****@" + parts[1];
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q39: How do you implement GDPR compliance in databases?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Data Minimization:</strong> Store only necessary data</li>
-                <li><strong>Right to be Forgotten:</strong> Implement data deletion procedures</li>
-                <li><strong>Data Portability:</strong> Export data in standard formats</li>
-                <li><strong>Consent Management:</strong> Track and manage user consent</li>
-                <li><strong>Data Breach Notification:</strong> Implement monitoring and alerting</li>
-                <li><strong>Pseudonymization:</strong> Replace identifying information with pseudonyms</li>
-                <li><strong>Access Control:</strong> Strict role-based access control</li>
-                <li><strong>Audit Logging:</strong> Log all data access and modifications</li>
-            </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>
-Right to be forgotten implementation
-CREATE PROCEDURE DeleteUserData
-    @UserId INT
-AS
-BEGIN
-    BEGIN TRANSACTION;
-    
-    -- Delete from child tables first
-    DELETE FROM UserOrders WHERE UserId = @UserId;
-    DELETE FROM UserSessions WHERE UserId = @UserId;
-    DELETE FROM UserPreferences WHERE UserId = @UserId;
-    
-    -- Anonymize instead of delete for audit trail
-    UPDATE Users 
-    SET 
-        Email = 'deleted_' + CAST(Id AS VARCHAR) + '@deleted.com',
-        Name = 'Deleted User',
-        Phone = NULL,
-        Address = NULL,
-        DeletedAt = GETUTCDATE()
-    WHERE Id = @UserId;
-    
-    COMMIT TRANSACTION;
-END</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q40: How do you implement database auditing?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-SQL Server Audit
-CREATE SERVER AUDIT MyServerAudit
-TO FILE (FILEPATH = 'C:\Audit\');
-
-ALTER SERVER AUDIT MyServerAudit WITH (STATE = ON);
-
-CREATE DATABASE AUDIT SPECIFICATION MyDatabaseAudit
-FOR SERVER AUDIT MyServerAudit
-ADD (SELECT, INSERT, UPDATE, DELETE ON SCHEMA::dbo BY PUBLIC);
-
-ALTER DATABASE AUDIT SPECIFICATION MyDatabaseAudit WITH (STATE = ON);
-
--- PostgreSQL using triggers
-CREATE TABLE audit_log (
-    id SERIAL PRIMARY KEY,
-    table_name VARCHAR(100),
-    operation VARCHAR(10),
-    old_data JSONB,
-    new_data JSONB,
-    changed_by VARCHAR(100),
-    changed_at TIMESTAMP DEFAULT NOW()
-);
-
-CREATE OR REPLACE FUNCTION audit_trigger()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF TG_OP = 'DELETE' THEN
-        INSERT INTO audit_log (table_name, operation, old_data, changed_by)
-        VALUES (TG_TABLE_NAME, TG_OP, row_to_json(OLD), current_user);
-        RETURN OLD;
-    ELSIF TG_OP = 'UPDATE' THEN
-        INSERT INTO audit_log (table_name, operation, old_data, new_data, changed_by)
-        VALUES (TG_TABLE_NAME, TG_OP, row_to_json(OLD), row_to_json(NEW), current_user);
-        RETURN NEW;
-    ELSIF TG_OP = 'INSERT' THEN
-        INSERT INTO audit_log (table_name, operation, new_data, changed_by)
-        VALUES (TG_TABLE_NAME, TG_OP, row_to_json(NEW), current_user);
-        RETURN NEW;
-    END IF;
-END;
-$$ LANGUAGE plpgsql;</code></pre></div>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>11. Database Scaling & High Availability (All Levels Level)</h2>
-
-        <div class="question">
-            Q41: What is the difference between vertical and horizontal scaling?
+            Q22: What are popular cloud database services?
         </div>
         <div class="answer">
             <table>
                 <tr>
-                    <th>Aspect</th>
-                    <th>Vertical Scaling (Scale Up)</th>
-                    <th>Horizontal Scaling (Scale Out)</th>
+                    <th>Provider</th>
+                    <th>Services</th>
                 </tr>
                 <tr>
-                    <td>Approach</td>
-                    <td>Add more resources to single server</td>
-                    <td>Add more servers to distribute load</td>
+                    <td>AWS</td>
+                    <td>RDS, DynamoDB, Aurora, ElastiCache, Redshift</td>
                 </tr>
                 <tr>
-                    <td>Cost</td>
-                    <td>Expensive (high-end hardware)</td>
-                    <td>Cost-effective (commodity hardware)</td>
+                    <td>Azure</td>
+                    <td>SQL Database, Cosmos DB, Cache for Redis</td>
                 </tr>
                 <tr>
-                    <td>Complexity</td>
-                    <td>Simple to implement</td>
-                    <td>Complex (requires coordination)</td>
+                    <td>Google Cloud</td>
+                    <td>Cloud SQL, Firestore, Bigtable, Memorystore</td>
                 </tr>
                 <tr>
-                    <td>Limit</td>
-                    <td>Hardware limits</td>
-                    <td>Theoretically unlimited</td>
-                </tr>
-                <tr>
-                    <td>Single Point of Failure</td>
-                    <td>Yes</td>
-                    <td>No (with proper design)</td>
+                    <td>Oracle</td>
+                    <td>Autonomous Database, NoSQL Database Service</td>
                 </tr>
             </table>
         </div>
 
         <div class="question">
-            Q42: How do you implement database replication?
+            Q23: How do you connect to AWS RDS?
         </div>
         <div class="answer">
+            <div class="code-block"><pre><code>// Python - Connecting to AWS RDS PostgreSQL
+import psycopg2
+from psycopg2 import pool
+
+# Connection string with SSL
+connection_string = "postgresql://user:password@rds-endpoint.amazonaws.com:5432/dbname?sslmode=require"
+
+# Connection pool
+connection_pool = psycopg2.pool.SimpleConnectionPool(
+    minconn=1,
+    maxconn=10,
+    dsn=connection_string
+)
+
+# Get connection
+connection = connection_pool.getconn()
+cursor = connection.cursor()
+cursor.execute("SELECT * FROM users")
+results = cursor.fetchall()
+connection_pool.putconn(connection)</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q24: How do you integrate with Azure Cosmos DB?
+        </div>
+        <div class="answer">
+            <div class="code-block"><pre><code>// Python - Using Azure Cosmos DB SDK
+from azure.cosmos import CosmosClient
+
+# Initialize client
+client = CosmosClient(
+    "https://account.documents.azure.com:443/",
+    credential="your-master-key"
+)
+
+# Get database and container
+database = client.get_database_client("mydatabase")
+container = database.get_container_client("users")
+
+# Insert item
+user = {"id": "1", "name": "John", "email": "john@example.com"}
+container.create_item(body=user)
+
+// Query
+users = container.query_items(
+    query="SELECT * FROM users WHERE name = @name",
+    parameters=[{"name": "name", "value": "John"}]
+)</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q25: What is serverless database?
+        </div>
+        <div class="answer">
+            <p><strong>Serverless Database Definition:</strong> Database that automatically scales compute and storage based on demand, with pay-per-use pricing.</p>
+            <p><strong>Examples:</strong></p>
             <ul>
-                <li><strong>Master-Slave Replication:</strong> One master writes, multiple slaves read. Good for read-heavy workloads.</li>
-                <li><strong>Master-Master Replication:</strong> Multiple nodes can write. Needs conflict resolution.</li>
-                <li><strong>Multi-Master Replication:</strong> All nodes can read and write. Complex but highly available.</li>
-                <li><strong>Synchronous Replication:</strong> Data copied before commit. Strong consistency, slower.</li>
-                <li><strong>Asynchronous Replication:</strong> Data copied after commit. Faster, potential data loss.</li>
-                <li><strong>Semi-Synchronous Replication:</strong> At least one slave confirms before commit. Balance of consistency and performance.</li>
+                <li>Aurora Serverless (AWS)</li>
+                <li>Cosmos DB Serverless (Azure)</li>
+                <li>Cloud SQL Serverless (Google Cloud)</li>
+                <li>Neon Serverless PostgreSQL</li>
             </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>
-PostgreSQL streaming replication
--- Primary server (postgresql.conf)
-wal_level = replica
-max_wal_senders = 5
-wal_keep_size = 1GB
-
--- Create replication user
-CREATE USER replicator WITH REPLICATION ENCRYPTED PASSWORD 'password';
-
--- pg_hba.conf on primary
-host replication replicator 192.168.1.0/24 md5
-
--- Standby server (recovery.conf)
-standby_mode = 'on'
-primary_conninfo = 'host=primary_host port=5432 user=replicator password=password'
-restore_command = 'cp /var/lib/postgresql/archive/%f %p'</code></pre></div>
+            <p><strong>Benefits:</strong> No capacity planning, auto-scaling, cost-effective for sporadic workloads</p>
         </div>
 
         <div class="question">
-            Q43: What is database sharding and how do you implement it?
+            Q26: What is database as a service (DBaaS)?
         </div>
         <div class="answer">
-            <p><strong>Sharding</strong> partitions data across multiple database instances (horizontal partitioning at the database level).</p>
-            
+            <p><strong>DBaaS Definition:</strong> Cloud service where the provider manages database infrastructure, including provisioning, scaling, backups, and maintenance.</p>
+            <p><strong>Features:</strong></p>
             <ul>
-                <li><strong>Hash-based Sharding:</strong> Consistent hash of shard key determines shard</li>
-                <li><strong>Range-based Sharding:</strong> Data ranges assigned to specific shards</li>
-                <li><strong>Directory-based Sharding:</strong> Lookup service maps keys to shards</li>
-                <li><strong>Geographic Sharding:</strong> Data located based on user location</li>
+                <li>Automated backups and point-in-time recovery</li>
+                <li>High availability with multi-AZ deployments</li>
+                <li>Read replicas for scaling reads</li>
+                <li>Automated patching and upgrades</li>
+                <li>Monitoring and alerting</li>
             </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>
-Application-level sharding example
-public class ShardingDbContextFactory
-{
-    private readonly Dictionary&lt;int, string&gt; _shardConnections;
-
-    public ShardingDbContextFactory()
-    {
-        _shardConnections = new Dictionary&lt;int, string&gt;
-        {
-            { 0, "Server=shard0;Database=MyDb;" },
-            { 1, "Server=shard1;Database=MyDb;" },
-            { 2, "Server=shard2;Database=MyDb;" }
-        };
-    }
-
-    public AppDbContext CreateContext(int shardKey)
-    {
-        var shardId = shardKey % _shardConnections.Count;
-        var connectionString = _shardConnections[shardId];
-        
-        var options = new DbContextOptionsBuilder&lt;AppDbContext&gt;()
-            .UseSqlServer(connectionString)
-            .Options;
-
-        return new AppDbContext(options);
-    }
-}
-
-// Consistent hashing for sharding
-public class ConsistentHash
-{
-    private readonly SortedDictionary&lt;int, string&gt; _ring = new SortedDictionary&lt;int, string&gt;();
-    private readonly int _virtualNodes = 100;
-
-    public void AddNode(string node)
-    {
-        for (int i = 0; i &lt; _virtualNodes; i++)
-        {
-            int hash = GetHashCode($"{node}:{i}");
-            _ring[hash] = node;
-        }
-    }
-
-    public string GetNode(string key)
-    {
-        int hash = GetHashCode(key);
-        var node = _ring.FirstOrDefault(x =&gt; x.Key &gt;= hash);
-        return node.Value ?? _ring.First().Value;
-    }
-}</code></pre></div>
         </div>
 
         <div class="question">
-            Q44: How do you implement database failover and disaster recovery?
+            Q27: How do you handle database migrations in cloud?
         </div>
         <div class="answer">
+            <p><strong>Migration Tools:</strong></p>
             <ul>
-                <li><strong>Active-Passive:</strong> Standby server takes over when primary fails</li>
-                <li><strong>Active-Active:</strong> Multiple servers handle traffic simultaneously</li>
-                <li><strong>Automatic Failover:</strong> System detects failure and switches automatically</li>
-                <li><strong>Manual Failover:</strong> Administrator initiates failover</li>
-                <li><strong>Point-in-Time Recovery:</strong> Restore to specific moment in time</li>
-                <li><strong>Geo-Redundancy:</strong> Replicate across different geographic regions</li>
+                <li>AWS Database Migration Service (DMS)</li>
+                <li>Azure Database Migration Service</li>
+                <li>Google Cloud Data Migration Service</li>
+                <li>Schema conversion tools</li>
             </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>
-SQL Server Always On Availability Groups
--- Create availability group
-CREATE AVAILABILITY GROUP MyAG
-FOR DATABASE MyDb
-REPLICA ON
-    'Server1' WITH (
-        ENDPOINT_URL = 'TCP://Server1:5022',
-        AVAILABILITY_MODE = SYNCHRONOUS_COMMIT,
-        FAILOVER_MODE = AUTOMATIC
-    ),
-    'Server2' WITH (
-        ENDPOINT_URL = 'TCP://Server2:5022',
-        AVAILABILITY_MODE = SYNCHRONOUS_COMMIT,
-        FAILOVER_MODE = AUTOMATIC
-    );
-
--- Connection string with failover
-"Server=ag_listener;Database=MyDb;MultiSubnetFailover=True;"
-
--- Point-in-time restore
-RESTORE DATABASE MyDb FROM DISK = 'backup.bak'
-WITH NORECOVERY, STOPAT = '2024-01-15 14:30:00';</code></pre></div>
+            <p><strong>Process:</strong> Assessment, schema conversion, data migration, validation, cutover</p>
         </div>
 
         <div class="question">
-            Q45: How do you implement database backup strategies?
+            Q28: What is read replica in cloud databases?
         </div>
         <div class="answer">
+            <p><strong>Read Replica Definition:</strong> Copy of the primary database that serves read traffic, improving performance and scalability.</p>
+            <p><strong>Benefits:</strong></p>
             <ul>
-                <li><strong>Full Backup:</strong> Complete database backup. Time-consuming, baseline for other backups.</li>
-                <li><strong>Differential Backup:</strong> Changes since last full backup. Faster than full.</li>
-                <li><strong>Transaction Log Backup:</strong> Changes since last log backup. Minimal downtime.</li>
-                <li><strong>Incremental Backup:</strong> Changes since last backup (any type).</li>
+                <li>Offload read traffic from primary</li>
+                <li>Geographic distribution</li>
+                <li>Reporting and analytics without affecting primary</li>
+                <li>Disaster recovery (promote to primary if needed)</li>
             </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>
-SQL Server backup strategy
--- Full backup (weekly, Sunday)
-BACKUP DATABASE MyDb TO DISK = 'C:\Backups\MyDb_Full.bak'
-WITH COMPRESSION, STATS = 10;
-
--- Differential backup (daily)
-BACKUP DATABASE MyDb TO DISK = 'C:\Backups\MyDb_Diff.bak'
-WITH DIFFERENTIAL, COMPRESSION, STATS = 10;
-
--- Transaction log backup (hourly)
-BACKUP LOG MyDb TO DISK = 'C:\Backups\MyDb_Log.trn'
-WITH COMPRESSION, STATS = 10;
-
--- PostgreSQL backup
--- Full backup
-pg_dump -U username -h localhost -F c -b -v -f backup.dump mydb
-
--- Restore
-pg_restore -U username -h localhost -d mydb backup.dump
-
--- Automated backup script (PowerShell)
-$backupPath = "C:\Backups"
-$date = Get-Date -Format "yyyyMMdd_HHmmss"
-$backupFile = "$backupPath\MyDb_$date.bak"
-
-sqlcmd -S localhost -Q "BACKUP DATABASE MyDb TO DISK = '$backupFile' WITH COMPRESSION"
-
-# Retention policy (keep last 30 days)
-Get-ChildItem $backupPath -Filter "MyDb_*.bak" | 
-    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-30) } | 
-    Remove-Item</code></pre></div>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>12. Advanced Integration Scenarios (All Levels Level)</h2>
-
-        <div class="question">
-            Q46: How do you implement event sourcing with Kafka?
-        </div>
-        <div class="answer">
-            <p><strong>Event Sourcing</strong> stores all state changes as a sequence of events. The current state is derived by replaying events.</p>
-            
-            <div class="code-block" data-language="code"><pre><code>
-Event model
-public interface IEvent
-{
-    Guid EventId { get; }
-    DateTime OccurredOn { get; }
-    string EventType { get; }
-}
-
-public class OrderCreatedEvent : IEvent
-{
-    public Guid EventId { get; } = Guid.NewGuid();
-    public DateTime OccurredOn { get; } = DateTime.UtcNow;
-    public string EventType =&gt; "OrderCreated";
-    public Guid OrderId { get; set; }
-    public Guid CustomerId { get; set; }
-    public decimal Amount { get; set; }
-}
-
-// Event store using Kafka
-public class EventStore
-{
-    private readonly IProducer&lt;string, string&gt; _producer;
-
-    public async Task SaveEventAsync&lt;T&gt;(T @event, string aggregateId)
-    {
-        var eventName = @event.GetType().Name;
-        var eventJson = JsonSerializer.Serialize(@event);
-        
-        var message = new Message&lt;string, string&gt;
-        {
-            Key = aggregateId,
-            Value = eventJson,
-            Headers = new Headers
-            {
-                { "eventType", Encoding.UTF8.GetBytes(eventName) },
-                { "eventId", Encoding.UTF8.GetBytes(@event.EventId.ToString()) }
-            }
-        };
-
-        await _producer.ProduceAsync("events-stream", message);
-    }
-}
-
-// Rebuilding state from events
-public class OrderAggregate
-{
-    public Guid OrderId { get; private set; }
-    public OrderStatus Status { get; private set; }
-    public decimal TotalAmount { get; private set; }
-
-    public void ApplyEvent(IEvent @event)
-    {
-        switch (@event)
-        {
-            case OrderCreatedEvent e:
-                OrderId = e.OrderId;
-                Status = OrderStatus.Created;
-                TotalAmount = e.Amount;
-                break;
-            case OrderPaidEvent e:
-                Status = OrderStatus.Paid;
-                break;
-            case OrderShippedEvent e:
-                Status = OrderStatus.Shipped;
-                break;
-        }
-    }
-}</code></pre></div>
         </div>
 
         <div class="question">
-            Q47: How do you implement CQRS with event sourcing?
+            Q29: What is multi-region database deployment?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-Command side (write)
-public class CreateOrderCommand
-{
-    public Guid CustomerId { get; set; }
-    public List&lt;OrderItem&gt; Items { get; set; }
-}
-
-public class CreateOrderCommandHandler
-{
-    private readonly EventStore _eventStore;
-
-    public async Task&lt;Guid&gt; Handle(CreateOrderCommand command)
-    {
-        var orderId = Guid.NewGuid();
-        var orderCreatedEvent = new OrderCreatedEvent
-        {
-            OrderId = orderId,
-            CustomerId = command.CustomerId,
-            Items = command.Items
-        };
-
-        await _eventStore.SaveEventAsync(orderCreatedEvent, orderId.ToString());
-        return orderId;
-    }
-}
-
-// Query side (read)
-public class OrderReadModel
-{
-    public Guid OrderId { get; set; }
-    public Guid CustomerId { get; set; }
-    public OrderStatus Status { get; set; }
-    public decimal TotalAmount { get; set; }
-    public DateTime CreatedAt { get; set; }
-}
-
-// Event projector (updates read model)
-public class OrderEventProjector
-{
-    private readonly IConsumer&lt;string, string&gt; _consumer;
-    private readonly ReadDbContext _readContext;
-
-    public async Task StartAsync()
-    {
-        _consumer.Subscribe("events-stream");
-
-        while (true)
-        {
-            var result = _consumer.Consume();
-            var @event = DeserializeEvent(result.Message.Value);
-
-            switch (@event)
-            {
-                case OrderCreatedEvent e:
-                    var readModel = new OrderReadModel
-                    {
-                        OrderId = e.OrderId,
-                        CustomerId = e.CustomerId,
-                        Status = OrderStatus.Created,
-                        TotalAmount = e.Items.Sum(i =&gt; i.Price * i.Quantity),
-                        CreatedAt = e.OccurredOn
-                    };
-                    _readContext.Orders.Add(readModel);
-                    break;
-            }
-
-            await _readContext.SaveChangesAsync();
-            _consumer.Commit(result);
-        }
-    }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q48: How do you implement distributed transactions with Kafka?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-Using Kafka Transactions (exactly-once semantics)
-public class OrderProcessor
-{
-    private readonly IProducer&lt;string, string&gt; _producer;
-    private readonly AppDbContext _dbContext;
-
-    public async Task ProcessOrderAsync(Order order)
-    {
-        // Begin transaction
-        using (var transaction = await _dbContext.Database.BeginTransactionAsync())
-        {
-            try
-            {
-                // Update database
-                _dbContext.Orders.Add(order);
-                await _dbContext.SaveChangesAsync();
-
-                // Produce to Kafka within transaction
-                _producer.InitTransactions(TimeSpan.FromSeconds(30));
-                _producer.BeginTransaction();
-
-                var message = new Message&lt;string, string&gt;
-                {
-                    Key = order.Id.ToString(),
-                    Value = JsonSerializer.Serialize(order)
-                };
-
-                _producer.Produce("orders-topic", message);
-
-                // Commit both transactions
-                _producer.CommitTransaction();
-                await transaction.CommitAsync();
-            }
-            catch (Exception)
-            {
-                _producer.AbortTransaction();
-                await transaction.RollbackAsync();
-                throw;
-            }
-        }
-    }
-}
-
-// Using Saga pattern for distributed transactions
-public class OrderSaga
-{
-    private readonly List&lt;ISagaStep&gt; _steps;
-
-    public async Task ExecuteAsync(Order order)
-    {
-        var executedSteps = new List&lt;ISagaStep&gt;();
-
-        foreach (var step in _steps)
-        {
-            try
-            {
-                await step.ExecuteAsync(order);
-                executedSteps.Add(step);
-            }
-            catch (Exception)
-            {
-                // Compensating actions
-                foreach (var executedStep in executedSteps.AsEnumerable().Reverse())
-                {
-                    await executedStep.CompensateAsync(order);
-                }
-                throw;
-            }
-        }
-    }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q49: How do you implement Redis as a distributed cache?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-Redis Cluster configuration
-services.AddStackExchangeRedisCache(options =&gt;
-{
-    options.Configuration = "localhost:6379,localhost:6380,localhost:6381";
-    options.InstanceName = "MyApp_";
-});
-
-// Distributed cache with sliding expiration
-public class CachedProductService
-{
-    private readonly IDistributedCache _cache;
-    private readonly ProductRepository _repository;
-
-    public async Task&lt;Product&gt; GetProductAsync(int id)
-    {
-        var cacheKey = $"product_{id}";
-        var cachedProduct = await _cache.GetStringAsync(cacheKey);
-
-        if (cachedProduct != null)
-        {
-            return JsonSerializer.Deserialize&lt;Product&gt;(cachedProduct);
-        }
-
-        var product = await _repository.GetByIdAsync(id);
-        
-        var cacheOptions = new DistributedCacheEntryOptions
-        {
-            SlidingExpiration = TimeSpan.FromMinutes(30),
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1)
-        };
-
-        await _cache.SetStringAsync(
-            cacheKey,
-            JsonSerializer.Serialize(product),
-            cacheOptions);
-
-        return product;
-    }
-}
-
-// Cache invalidation strategy
-public class CacheInvalidationService
-{
-    private readonly ISubscriber _subscriber;
-    private readonly IDistributedCache _cache;
-
-    public CacheInvalidationService(IConnectionMultiplexer redis)
-    {
-        _subscriber = redis.GetSubscriber();
-        _cache = new RedisCache(redis);
-    }
-
-    public void SubscribeToInvalidation()
-    {
-        _subscriber.Subscribe("cache-invalidation", async (channel, message) =&gt;
-        {
-            var cacheKey = message;
-            await _cache.RemoveAsync(cacheKey);
-        });
-    }
-
-    public async Task InvalidateCacheAsync(string cacheKey)
-    {
-        await _cache.RemoveAsync(cacheKey);
-        await _subscriber.PublishAsync("cache-invalidation", cacheKey);
-    }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q50: How do you implement MongoDB change streams?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-MongoDB Change Stream for real-time updates
-public class ChangeStreamProcessor
-{
-    private readonly IMongoCollection&lt;Order&gt; _ordersCollection;
-
-    public async Task ProcessChangesAsync()
-    {
-        var pipeline = new EmptyPipelineDefinition&lt;ChangeStreamDocument&lt;Order&gt;&gt;()
-            .Match(change =&gt; change.OperationType == ChangeOperationType.Insert ||
-                           change.OperationType == ChangeOperationType.Update ||
-                           change.OperationType == ChangeOperationType.Delete);
-
-        var options = new ChangeStreamOptions
-        {
-            FullDocument = ChangeStreamFullDocumentOption.UpdateLookup
-        };
-
-        using var cursor = await _ordersCollection.WatchAsync(pipeline, options);
-        
-        await cursor.ForEachAsync(async change =&gt;
-        {
-            switch (change.OperationType)
-            {
-                case ChangeOperationType.Insert:
-                    await HandleInsertAsync(change.FullDocument);
-                    break;
-                case ChangeOperationType.Update:
-                    await HandleUpdateAsync(change.FullDocument);
-                    break;
-                case ChangeOperationType.Delete:
-                    await HandleDeleteAsync(change.DocumentKey["_id"].AsGuid);
-                    break;
-            }
-        });
-    }
-
-    private async Task HandleInsertAsync(Order order)
-    {
-        // Update search index
-        await _searchIndex.IndexDocumentAsync(order);
-        
-        // Invalidate cache
-        await _cache.RemoveAsync($"order_{order.Id}");
-        
-        // Send notification
-        await _notificationService.SendAsync($"New order {order.Id}");
-    }
-}</code></pre></div>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>13. Common Interview Questions (All Levels)</h2>
-
-        <div class="question">
-            Q51: What is the CAP theorem and how does it apply to databases?
-        </div>
-        <div class="answer">
-            <p><strong>CAP Theorem</strong> states that a distributed system can only provide two of the following three guarantees:</p>
+            <p><strong>Multi-Region Definition:</strong> Deploying database across multiple geographic regions for performance, compliance, and disaster recovery.</p>
+            <p><strong>Strategies:</strong></p>
             <ul>
-                <li><strong>Consistency:</strong> All nodes see the same data at the same time</li>
-                <li><strong>Availability:</strong> Every request receives a response (success or failure)</li>
-                <li><strong>Partition Tolerance:</strong> System continues operating despite network partitions</li>
+                <li><strong>Active-Active:</strong> Multiple primary regions, read-write</li>
+                <li><strong>Active-Passive:</strong> One primary, replicas in other regions</li>
+                <li><strong>Global Tables:</strong> Automatic replication across regions</li>
             </ul>
-            
-            <table>
-                <tr>
-                    <th>System Type</th>
-                    <th>Properties</th>
-                    <th>Examples</th>
-                </tr>
-                <tr>
-                    <td>CA</td>
-                    <td>Consistency + Availability (no partition tolerance)</td>
-                    <td>Single-node RDBMS</td>
-                </tr>
-                <tr>
-                    <td>CP</td>
-                    <td>Consistency + Partition Tolerance</td>
-                    <td>MongoDB, HBase, Redis</td>
-                </tr>
-                <tr>
-                    <td>AP</td>
-                    <td>Availability + Partition Tolerance</td>
-                    <td>Cassandra, DynamoDB, CouchDB</td>
-                </tr>
-            </table>
         </div>
 
         <div class="question">
-            Q52: What is the difference between OLTP and OLAP?
+            Q30: How do you secure cloud databases?
         </div>
         <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>OLTP (Online Transaction Processing)</th>
-                    <th>OLAP (Online Analytical Processing)</th>
-                </tr>
-                <tr>
-                    <td>Purpose</td>
-                    <td>Day-to-day operations</td>
-                    <td>Analysis and reporting</td>
-                </tr>
-                <tr>
-                    <td>Queries</td>
-                    <td>Simple, fast, frequent</td>
-                    <td>Complex, long-running, batch</td>
-                </tr>
-                <tr>
-                    <td>Data Volume</td>
-                    <td>Current data</td>
-                    <td>Historical data</td>
-                </tr>
-                <tr>
-                    <td>Users</td>
-                    <td>Many concurrent users</td>
-                    <td>Few analysts</td>
-                </tr>
-                <tr>
-                    <td>Normalization</td>
-                    <td>Highly normalized</td>
-                    <td>Denormalized (star schema)</td>
-                </tr>
-                <tr>
-                    <td>Examples</td>
-                    <td>Order processing, banking</td>
-                    <td>Data warehousing, BI</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q53: What is eventual consistency?
-        </div>
-        <div class="answer">
-            <p><strong>Eventual Consistency</strong> is a consistency model where, given no new updates, all accesses to a data item will eventually return the last updated value.</p>
-            
+            <p><strong>Security Measures:</strong></p>
             <ul>
-                <li><strong>Strong Consistency:</strong> Reads always return the latest write (CP systems)</li>
-                <li><strong>Eventual Consistency:</strong> Reads may return stale data, but converge over time (AP systems)</li>
-                <li><strong>Causal Consistency:</strong> Causally related operations are seen by all nodes in order</li>
-                <li><strong>Read Your Writes:</strong> Client always sees its own writes</li>
+                <li>VPC/private network isolation</li>
+                <li>Encryption at rest and in transit</li>
+                <li>IAM roles and policies</li>
+                <li>Network security groups/firewalls</li>
+                <li>Auditing and logging</li>
+                <li>SSL/TLS connections</li>
             </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>
-Eventual consistency example with DynamoDB
-// Write to primary region
-await dynamoClient.PutItemAsync(new PutItemRequest
-{
-    TableName = "Orders",
-    Item = new Dictionary&lt;string, AttributeValue&gt;
-    {
-        { "OrderId", new AttributeValue { S = orderId } },
-        { "Status", new AttributeValue { S = "Processed" } }
-    }
-});
-
-// Read from replica region (may return stale data)
-var response = await dynamoClient.GetItemAsync(new GetItemRequest
-{
-    TableName = "Orders",
-    Key = new Dictionary&lt;string, AttributeValue&gt;
-    {
-        { "OrderId", new AttributeValue { S = orderId } }
-    },
-    ConsistentRead = false // Set to true for strong consistency
-});</code></pre></div>
         </div>
+
+        <h2>6. Performance & Optimization</h2>
 
         <div class="question">
-            Q54: How do you implement database connection string security?
+            Q31: How do you optimize database performance?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-Store in Azure Key Vault
-public class SecretConfigurationProvider
-{
-    private readonly SecretClient _secretClient;
-
-    public string GetConnectionString(string secretName)
-    {
-        var secret = _secretClient.GetSecret(secretName);
-        return secret.Value.Value;
-    }
-}
-
-// Use in configuration
-builder.Configuration.AddAzureKeyVault(
-    new Uri($"https://{keyVaultName}.vault.azure.net/"),
-    new DefaultAzureCredential());
-
-// Environment variables (Docker/Kubernetes)
-environment:
-  - ConnectionStrings__DefaultConnection=Server=db;Database=MyDb;User Id=user;Password=pass
-
-// User Secrets (development)
-dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=..."
-
-// Encrypted configuration section
-public static void ProtectConfiguration()
-{
-    var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-    var section = config.GetSection("connectionStrings");
-    
-    section.SectionInformation.ProtectSection("DataProtectionConfigurationProvider");
-    section.SectionInformation.ForceSave = true;
-    config.Save();
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q55: How do you monitor database performance?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-Using Application Insights with SQL
-builder.Services.AddApplicationInsightsTelemetry();
-builder.Services.AddApplicationInsightsKubernetesEnricher();
-
-// Custom dependency tracking
-var telemetryClient = new TelemetryClient();
-var stopwatch = Stopwatch.StartNew();
-
-try
-{
-    await context.Products.ToListAsync();
-    stopwatch.Stop();
-    
-    telemetryClient.TrackDependency(
-        "SQL",
-        "Query",
-        DateTime.Now,
-        stopwatch.Elapsed,
-        true);
-}
-catch (Exception ex)
-{
-    stopwatch.Stop();
-    telemetryClient.TrackDependency(
-        "SQL",
-        "Query",
-        DateTime.Now,
-        stopwatch.Elapsed,
-        false);
-    telemetryClient.TrackException(ex);
-}
-
-// Prometheus metrics for PostgreSQL
-# Enable pg_stat_statements
-shared_preload_libraries = 'pg_stat_statements'
-
-# Query to get slow queries
-SELECT 
-    query,
-    calls,
-    total_exec_time,
-    mean_exec_time,
-    max_exec_time
-FROM pg_stat_statements
-ORDER BY mean_exec_time DESC
-LIMIT 10;</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q56: How do you implement database migrations in production?
-        </div>
-        <div class="answer">
+            <p><strong>Optimization Techniques:</strong></p>
             <ul>
-                <li><strong>Version Control:</strong> Store migration scripts in version control</li>
-                <li><strong>Testing:</strong> Test migrations on staging environment first</li>
-                <li><strong>Backups:</strong> Create backup before running migration</li>
-                <li><strong>Rollback Plan:</strong> Have rollback script ready</li>
-                <li><strong>Zero Downtime:</strong> Use online schema changes where possible</li>
-                <li><strong>Blue-Green Deployment:</strong> Deploy to new environment, switch traffic</li>
-                <li><strong>Canary Release:</strong> Roll out to subset of servers first</li>
+                <li>Proper indexing strategy</li>
+                <li>Query optimization (avoid SELECT *)</li>
+                <li>Connection pooling</li>
+                <li>Caching (Redis, Memcached)</li>
+                <li>Read replicas for scaling reads</li>
+                <li>Partitioning and sharding</li>
             </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>
-EF Core migration strategy
-public class MigrationService
-{
-    public async Task ApplyMigrationsAsync()
-    {
-        // Create backup
-        await CreateBackupAsync();
-
-        try
-        {
-            // Apply migration
-            using var context = new AppDbContext();
-            await context.Database.MigrateAsync();
-
-            // Verify migration
-            await VerifyMigrationAsync();
-        }
-        catch (Exception)
-        {
-            // Rollback
-            await RestoreBackupAsync();
-            throw;
-        }
-    }
-
-    private async Task CreateBackupAsync()
-    {
-        var sql = $"BACKUP DATABASE MyDb TO DISK = 'backup_{DateTime.Now:yyyyMMdd}.bak'";
-        await context.Database.ExecuteSqlRawAsync(sql);
-    }
-}</code></pre></div>
         </div>
 
         <div class="question">
-            Q57: How do you handle database schema drift?
+            Q32: What is database sharding?
         </div>
         <div class="answer">
-            <p><strong>Schema Drift</strong> occurs when the actual database schema differs from the expected schema due to manual changes or failed migrations.</p>
-            
-            <div class="code-block" data-language="code"><pre><code>
-Detect schema drift
-public class SchemaDriftDetector
-{
-    public async Task&lt;List&lt;string&gt;&gt; DetectDriftAsync()
-    {
-        var drift = new List&lt;string&gt;();
-        
-        using var context = new AppDbContext();
-        var model = context.Model;
-        
-        // Get actual database schema
-        var connection = context.Database.GetDbConnection();
-        await connection.OpenAsync();
-        
-        using var command = connection.CreateCommand();
-        command.CommandText = @"
-            SELECT TABLE_NAME, COLUMN_NAME, DATA_TYPE 
-            FROM INFORMATION_SCHEMA.COLUMNS
-            WHERE TABLE_SCHEMA = 'dbo'";
-        
-        using var reader = await command.ExecuteReaderAsync();
-        var actualColumns = new List&lt;(string Table, string Column, string Type)&gt;();
-        
-        while (await reader.ReadAsync())
-        {
-            actualColumns.Add((
-                reader.GetString(0),
-                reader.GetString(1),
-                reader.GetString(2)
-            ));
-        }
-
-        // Compare with expected schema
-        foreach (var entity in model.GetEntityTypes())
-        {
-            var tableName = entity.GetTableName();
-            foreach (var property in entity.GetProperties())
-            {
-                var columnName = property.GetColumnName();
-                var expectedType = GetColumnType(property);
-                
-                var actual = actualColumns.FirstOrDefault(c =&gt; 
-                    c.Table == tableName &amp;&amp; c.Column == columnName);
-                
-                if (actual == default)
-                {
-                    drift.Add($"Missing column: {tableName}.{columnName}");
-                }
-                else if (actual.Type != expectedType)
-                {
-                    drift.Add($"Type mismatch: {tableName}.{columnName} (expected {expectedType}, actual {actual.Type})");
-                }
-            }
-        }
-
-        return drift;
-    }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q58: How do you implement database read replicas?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-Read replica routing
-public class ReadReplicaDbContextFactory
-{
-    private readonly string _primaryConnectionString;
-    private readonly List&lt;string&gt; _replicaConnectionStrings;
-    private readonly Random _random = new Random();
-
-    public AppDbContext CreateReadContext()
-    {
-        // Round-robin load balancing
-        var replicaIndex = _random.Next(_replicaConnectionStrings.Count);
-        var connectionString = _replicaConnectionStrings[replicaIndex];
-        
-        var options = new DbContextOptionsBuilder&lt;AppDbContext&gt;()
-            .UseSqlServer(connectionString)
-            .Options;
-
-        return new AppDbContext(options);
-    }
-
-    public AppDbContext CreateWriteContext()
-    {
-        var options = new DbContextOptionsBuilder&lt;AppDbContext&gt;()
-            .UseSqlServer(_primaryConnectionString)
-            .Options;
-
-        return new AppDbContext(options);
-    }
-}
-
-// Usage in repository
-public class ProductRepository
-{
-    private readonly ReadReplicaDbContextFactory _contextFactory;
-
-    public async Task&lt;Product&gt; GetByIdAsync(int id)
-    {
-        // Read from replica
-        using var context = _contextFactory.CreateReadContext();
-        return await context.Products.FindAsync(id);
-    }
-
-    public async Task SaveAsync(Product product)
-    {
-        // Write to primary
-        using var context = _contextFactory.CreateWriteContext();
-        context.Products.Update(product);
-        await context.SaveChangesAsync();
-    }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q59: How do you implement database connection resilience?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-Polly retry policy for database connections
-public class DatabaseResiliencePolicy
-{
-    public static IAsyncPolicy&lt;HttpResponseMessage&gt; CreateRetryPolicy()
-    {
-        return Policy
-            .Handle&lt;SqlException&gt;(ex =&gt; IsTransientError(ex))
-            .Or&lt;TimeoutException&gt;()
-            .WaitAndRetryAsync(
-                retryCount: 3,
-                sleepDurationProvider: retryAttempt =&gt; TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
-                onRetry: (exception, timeSpan, retryCount, context) =&gt;
-                {
-                    Console.WriteLine($"Retry {retryCount} after {timeSpan.TotalSeconds}s due to: {exception.Message}");
-                });
-    }
-
-    private static bool IsTransientError(SqlException ex)
-    {
-        // Error codes for transient errors
-        int[] transientErrorNumbers = { 4060, 40197, 40501, 40613, 49918, 49919, 49920, 11001 };
-        return transientErrorNumbers.Contains(ex.Number);
-    }
-}
-
-// Circuit breaker pattern
-public static IAsyncPolicy CreateCircuitBreakerPolicy()
-{
-    return Policy
-        .Handle&lt;SqlException&gt;()
-        .CircuitBreakerAsync(
-            exceptionsAllowedBeforeBreaking: 5,
-            durationOfBreak: TimeSpan.FromSeconds(30),
-            onBreak: (ex, breakDelay) =&gt;
-            {
-                Console.WriteLine($"Circuit broken due to: {ex.Message}");
-            },
-            onReset: () =&gt;
-            {
-                Console.WriteLine("Circuit reset");
-            });
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q60: How do you implement database query timeouts?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>
-Entity Framework Core command timeout
-builder.Services.AddDbContext&lt;AppDbContext&gt;(options =&gt;
-    options.UseSqlServer(connectionString, sqlOptions =&gt;
-    {
-        sqlOptions.CommandTimeout(30); // 30 seconds
-        sqlOptions.EnableRetryOnFailure(maxRetryCount: 3);
-    }));
-
-// Per-query timeout
-var products = await context.Products
-    .FromSqlRaw("SELECT * FROM Products WITH (NOLOCK)")
-    .SetCommandTimeout(10)
-    .ToListAsync();
-
-// ADO.NET command timeout
-using var command = new SqlCommand(query, connection);
-command.CommandTimeout = 60; // 60 seconds
-
-// MongoDB query timeout
-var options = new FindOptions&lt;Product&gt;
-{
-    MaxTime = TimeSpan.FromSeconds(30)
-};
-
-var products = await collection
-    .Find(filter, options)
-    .ToListAsync();
-
-// Redis operation timeout
-var redis = ConnectionMultiplexer.Connect("localhost:6379,connectTimeout=5000,syncTimeout=5000");</code></pre></div>
-        </div>
-
-        <div class="tip">
-            <strong>Interview Tip:</strong> When discussing databases and integration, emphasize understanding of both SQL and NoSQL, performance considerations, and real-world integration patterns. Be prepared to discuss specific scenarios like caching strategies, message queuing, monitoring, and high availability. For senior positions, demonstrate knowledge of distributed systems, CAP theorem, eventual consistency, and disaster recovery strategies.
-        </div>
-
-        <div class="important">
-            <strong>Key Takeaways for Interview (Comprehensive Guide):</strong>
+            <p><strong>Sharding Definition:</strong> Horizontal partitioning of data across multiple database instances.</p>
+            <p><strong>Sharding Strategies:</strong></p>
             <ul>
-                <li><strong>All Levels (0-3 years):</strong> Understand ACID properties and transaction management, know the difference between SQL and NoSQL databases, be familiar with basic MongoDB operations, understand Kafka basics, know Redis data structures and basic use cases.</li>
-                <li><strong>All Levels (4-7 years):</strong> Know database optimization techniques (indexing, query plans), understand connection pooling and async operations, be familiar with monitoring tools (Splunk, Dynatrace), understand integration patterns (pub/sub, request-reply), know how to implement caching strategies.</li>
-                <li><strong>Advanced (8-10 years):</strong> Implement database security (encryption, SQL injection prevention), handle GDPR compliance, implement database auditing, understand database partitioning and sharding, implement database replication and failover, design backup and recovery strategies.</li>
-                <li><strong>All Levels (11-13 years):</strong> Implement event sourcing and CQRS patterns, handle distributed transactions with Kafka, implement distributed caching with Redis, use MongoDB change streams for real-time updates, understand CAP theorem and consistency models, design high-availability architectures, implement zero-downtime migrations, handle schema drift, implement circuit breakers and retry policies.</li>
+                <li><strong>Range-based:</strong> Data range determines shard</li>
+                <li><strong>Hash-based:</strong> Hash of key determines shard</li>
+                <li><strong>Geographic:</strong> Location determines shard</li>
+            </ul>
+            <p><strong>Benefits:</strong> Horizontal scaling, improved performance, better fault isolation</p>
+        </div>
+
+        <div class="question">
+            Q33: What is database partitioning?
+        </div>
+        <div class="answer">
+            <p><strong>Partitioning Definition:</strong> Dividing large tables into smaller, more manageable pieces.</p>
+            <p><strong>Types:</strong></p>
+            <ul>
+                <li><strong>Range partitioning:</strong> Based on value ranges</li>
+                <li><strong>List partitioning:</strong> Based on value lists</li>
+                <li><strong>Hash partitioning:</strong> Based on hash function</li>
+            </ul>
+            <p><strong>Benefits:</strong> Faster queries, easier maintenance, better performance</p>
+        </div>
+
+        <div class="question">
+            Q34: What is query optimization?
+        </div>
+        <div class="answer">
+            <p><strong>Query Optimization Techniques:</strong></p>
+            <ul>
+                <li>Use EXPLAIN/EXPLAIN ANALYZE to analyze queries</li>
+                <li>Avoid SELECT *, select only needed columns</li>
+                <li>Use appropriate indexes</li>
+                <li>Avoid functions on indexed columns in WHERE clause</li>
+                <li>Use LIMIT/OFFSET for pagination</li>
+                <li>Optimize JOINs</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q35: What is database caching?
+        </div>
+        <div class="answer">
+            <p><strong>Caching Definition:</strong> Storing frequently accessed data in fast storage to reduce database load.</p>
+            <p><strong>Caching Strategies:</strong></p>
+            <ul>
+                <li><strong>Read-through:</strong> Cache miss loads from DB, populates cache</li>
+                <li><strong>Write-through:</strong> Write to cache and DB synchronously</li>
+                <li><strong>Write-back:</strong> Write to cache, async write to DB</li>
+                <li><strong>Cache-aside:</strong> Application manages cache</li>
+            </ul>
+        </div>
+
+        <h2>7. Security & Best Practices</h2>
+
+        <div class="question">
+            Q36: How do you secure database connections?
+        </div>
+        <div class="answer">
+            <p><strong>Security Best Practices:</strong></p>
+            <ul>
+                <li>Use SSL/TLS for encrypted connections</li>
+                <li>Store credentials securely (environment variables, secret managers)</li>
+                <li>Use least privilege principle</li>
+                <li>Rotate credentials regularly</li>
+                <li>Use connection strings with authentication tokens</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q37: What is database encryption?
+        </div>
+        <div class="answer">
+            <p><strong>Encryption Types:</strong></p>
+            <ul>
+                <li><strong>At rest:</strong> Encrypt stored data (TDE, file system encryption)</li>
+                <li><strong>In transit:</strong> Encrypt data during transfer (SSL/TLS)</li>
+                <li><strong>Application-level:</strong> Encrypt sensitive data before storage</li>
+            </ul>
+            <p><strong>Key Management:</strong> Use cloud KMS services (AWS KMS, Azure Key Vault, Google KMS)</p>
+        </div>
+
+        <div class="question">
+            Q38: What is database auditing?
+        </div>
+        <div class="answer">
+            <p><strong>Auditing Definition:</strong> Tracking and logging database activities for security, compliance, and troubleshooting.</p>
+            <p><strong>Audit Events:</strong></p>
+            <ul>
+                <li>Login/logout attempts</li>
+                <li>Query execution</li>
+                <li>Data modifications</li>
+                <li>Schema changes</li>
+                <li>Privilege changes</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q39: What is database backup and recovery?
+        </div>
+        <div class="answer">
+            <p><strong>Backup Strategies:</strong></p>
+            <ul>
+                <li><strong>Full backup:</strong> Complete database backup</li>
+                <li><strong>Incremental backup:</strong> Changes since last backup</li>
+                <li><strong>Differential backup:</strong> Changes since last full backup</li>
+            </ul>
+            <p><strong>Recovery:</strong> Point-in-time recovery, backup retention policies, disaster recovery planning</p>
+        </div>
+
+        <div class="question">
+            Q40: What are database integration best practices?
+        </div>
+        <div class="answer">
+            <p><strong>Best Practices:</strong></p>
+            <ul>
+                <li>Use connection pooling</li>
+                <li>Implement retry logic for transient failures</li>
+                <li>Use parameterized queries to prevent SQL injection</li>
+                <li>Implement proper error handling</li>
+                <li>Use transactions for data consistency</li>
+                <li>Monitor database performance</li>
+                <li>Implement caching strategies</li>
+                <li>Use environment-specific configurations</li>
+                <li>Implement database migrations</li>
+                <li>Document database schema and relationships</li>
             </ul>
         </div>
 
         <div class="footer">
-            <p><span class="highlight">🎯 Ready for Your Database & Integration Interview?</span></p>
-            <p>Master these 60 comprehensive Database & Integration interview questions covering SQL, NoSQL, caching, message queues, and integration patterns. Database integration is essential for modern applications - understanding data persistence deeply will make you a better software engineer.</p>
-            <p><span class="highlight">💡 Tip:</span> Focus on understanding ACID properties, SQL vs NoSQL, Redis caching, Kafka messaging, and integration patterns. These are the areas where most database interview questions focus. Practice designing scalable data architectures.</p>
+            <p><span class="highlight">🎯 Ready for Your Database Integration Interview?</span></p>
+            <p>Master these 40 comprehensive database integration interview questions covering SQL, NoSQL, cloud databases, ORM, connection pooling, and best practices. Database integration is essential for modern applications - understanding database integration deeply will make you a better software engineer.</p>
+            <p><span class="highlight">💡 Tip:</span> Focus on understanding different database types, when to use each, connection management, transaction handling, and cloud database services. These are the areas where most database integration interview questions focus. Practice integrating with both SQL and NoSQL databases in your preferred language.</p>
         </div>
     </div>
 </body>
 </html>
-
-
-
-

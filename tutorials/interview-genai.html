@@ -669,142 +669,1329 @@
                 padding-left: 18px;
             }
         }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(102, 126, 234, 0.25);
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            animation: slideUp 0.6s ease both;
+        }
+        
+        .footer p {
+            margin-bottom: 12px;
+        }
+        
+        .footer .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
 </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-        </a>
+        <a href="../index.html" class="back-link">← Back to Tutorials</a>
         <h1>Generative AI Interview Questions</h1>
-                <p class="subtitle">Comprehensive guide covering GenAI interview questions covering transformers, LLMs, prompt engineering, fine-tuning, RAG with detailed explanations and code examples</p>
+        <p class="subtitle">Comprehensive guide covering 60+ GENAI interview questions on LLMs, transformers, RAG, prompt engineering, fine-tuning, and AI safety</p>
         
         <h2>Table of Contents</h2>
         <div class="toc">
             <h3>Table of Contents</h3>
             <ol>
-                <li>Fundamentals</li>
-                <li>Core Concepts</li>
-                <li>Implementation</li>
-                <li>Best Practices</li>
-                <li>Advanced Topics</li>
+                <li>LLM Fundamentals</li>
+                <li>Transformers & Architecture</li>
+                <li>Prompt Engineering</li>
+                <li>RAG & Vector Databases</li>
+                <li>Fine-Tuning & RLHF</li>
+                <li>AI Safety & Ethics</li>
             </ol>
         </div>
 
-        <h2>1. Fundamentals</h2>
+        <h2>1. LLM Fundamentals</h2>
 
         <div class="question">
-            Q1: What are the fundamental concepts in this subject</div>
+            Q1: What is a Large Language Model (LLM)?
+        </div>
         <div class="answer">
-            <p>The fundamental concepts form the foundation for understanding this subject. These include core terminology, basic principles, and essential knowledge required for advanced topics.</p>
-            <h3>Key Concepts:</h3>
+            <p><strong>LLM:</strong> Neural network trained on massive text data to understand and generate human-like text.</p>
+            <p><strong>Key Characteristics:</strong></p>
             <ul>
-                <li>Concept 1: Description of first fundamental concept</li>
-                <li>Concept 2: Description of second fundamental concept</li>
-                <li>Concept 3: Description of third fundamental concept</li>
+                <li>Billions of parameters</li>
+                <li>Trained on internet-scale data</li>
+                <li>Can perform various NLP tasks</li>
+                <li>Uses transformer architecture</li>
+            </ul>
+            <p><strong>Examples:</strong> GPT-4, Claude, Gemini, LLaMA.</p>
+        </div>
+
+        <div class="question">
+            Q2: What is the difference between Generative AI and Traditional AI?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Generative AI</th>
+                    <th>Traditional AI</th>
+                </tr>
+                <tr>
+                    <td>Output</td>
+                    <td>Creates new content</td>
+                    <td>Classifies/predicts existing data</td>
+                </tr>
+                <tr>
+                    <td>Training</td>
+                    <td>Self-supervised on unlabeled data</td>
+                    <td>Supervised on labeled data</td>
+                </tr>
+                <tr>
+                    <td>Use Cases</td>
+                    <td>Content creation, synthesis</td>
+                    <td>Classification, prediction</td>
+                </tr>
+                <tr>
+                    <td>Examples</td>
+                    <td>GPT, DALL-E, Midjourney</td>
+                    <td>Random Forest, SVM, CNN</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q3: What are embeddings and why are they useful?
+        </div>
+        <div class="answer">
+            <p><strong>Embeddings:</strong> Dense vector representations that capture semantic meaning of text.</p>
+            <p><strong>Benefits:</strong></p>
+            <ul>
+                <li>Capture semantic relationships</li>
+                <li>Enable similarity search</li>
+                <li>Reduce dimensionality</li>
+                <li>Transfer learning across tasks</li>
+            </ul>
+            <p><strong>Applications:</strong> RAG, semantic search, recommendation systems, clustering.</p>
+        </div>
+
+        <div class="question">
+            Q4: What is a vector database?
+        </div>
+        <div class="answer">
+            <p><strong>Vector Database:</strong> Database optimized for storing and searching high-dimensional vectors.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li>Approximate nearest neighbor search</li>
+                <li>High-dimensional indexing</li>
+                <li>Scalable storage</li>
+                <li>Real-time similarity search</li>
+            </ul>
+            <p><strong>Examples:</strong> Pinecone, Weaviate, Chroma, Milvus.</p>
+        </div>
+
+        <h2>2. Transformers & Architecture</h2>
+
+        <div class="question">
+            Q5: What is the transformer architecture?
+        </div>
+        <div class="answer">
+            <p><strong>Transformer:</strong> Neural network architecture using self-attention mechanism to process sequential data.</p>
+            <p><strong>Key Components:</strong></p>
+            <ul>
+                <li>Self-attention layers</li>
+                <li>Positional encoding</li>
+                <li>Multi-head attention</li>
+                <li>Feed-forward networks</li>
+            </ul>
+            <p><strong>Advantages:</strong> Parallel processing, long-range dependencies, no recurrence.</p>
+        </div>
+
+        <div class="question">
+            Q6: What is the attention mechanism?
+        </div>
+        <div class="answer">
+            <p><strong>Attention:</strong> Mechanism that allows model to focus on relevant parts of input when producing output.</p>
+            <p><strong>How it works:</strong></p>
+            <ol>
+                <li>Compute query, key, value vectors</li>
+                <li>Calculate attention scores (query · key)</li>
+                <li>Apply softmax to get weights</li>
+                <li>Weighted sum of values</li>
+            </ol>
+            <p><strong>Types:</strong> Self-attention, cross-attention, multi-head attention.</p>
+        </div>
+
+        <div class="question">
+            Q7: What is the difference between encoder-only, decoder-only, and encoder-decoder models?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Architecture</th>
+                    <th>Use Cases</th>
+                    <th>Examples</th>
+                </tr>
+                <tr>
+                    <td>Encoder-only</td>
+                    <td>Transformer encoder</td>
+                    <td>Understanding, classification</td>
+                    <td>BERT, RoBERTa</td>
+                </tr>
+                <tr>
+                    <td>Decoder-only</td>
+                    <td>Transformer decoder</td>
+                    <td>Generation, completion</td>
+                    <td>GPT, LLaMA</td>
+                </tr>
+                <tr>
+                    <td>Encoder-decoder</td>
+                    <td>Both encoder and decoder</td>
+                    <td>Translation, summarization</td>
+                    <td>T5, BART</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q8: What is positional encoding?
+        </div>
+        <div class="answer">
+            <p><strong>Positional Encoding:</strong> Technique to inject position information into transformer models.</p>
+            <p><strong>Why needed:</strong> Transformers process all tokens in parallel, losing sequential order.</p>
+            <p><strong>Types:</strong></p>
+            <ul>
+                <li>Sinusoidal (original transformer)</li>
+                <li>Learned embeddings</li>
+                <li>Relative position encoding</li>
+                <li>RoPE (Rotary Position Embedding)</li>
             </ul>
         </div>
 
-        <h2>2. Core Concepts</h2>
+        <h2>3. Prompt Engineering</h2>
 
         <div class="question">
-            Q2: What are the core principles and patterns</div>
+            Q9: What is prompt engineering?
+        </div>
         <div class="answer">
-            <p>Understanding the core principles is essential for mastering this subject. This section explores the most important concepts and their applications in real-world scenarios.</p>
-            <h3>Key Principles:</h3>
+            <p><strong>Prompt Engineering:</strong> Art of crafting effective prompts to get desired outputs from LLMs.</p>
+            <p><strong>Techniques:</strong></p>
             <ul>
-                <li>Principle 1: Description of the first key principle</li>
-                <li>Principle 2: Description of the second key principle</li>
-                <li>Principle 3: Description of the third key principle</li>
+                <li>Zero-shot prompting</li>
+                <li>Few-shot prompting</li>
+                <li>Chain-of-thought prompting</li>
+                <li>Role-playing</li>
+                <li>Context injection</li>
             </ul>
         </div>
 
-        <h2>3. Implementation</h2>
+        <div class="question">
+            Q10: What is the difference between zero-shot, one-shot, and few-shot prompting?
+        </div>
+        <div class="answer">
+            <p><strong>Zero-shot:</strong> No examples provided, only task description.</p>
+            <p><strong>One-shot:</strong> One example provided to guide the model.</p>
+            <p><strong>Few-shot:</strong> Multiple examples provided (typically 3-5) for better guidance.</p>
+            <p><strong>Tradeoff:</strong> More examples = better performance but higher token cost and latency.</p>
+        </div>
 
         <div class="question">
-            Q3: How do you implement these concepts in practice</div>
+            Q11: What is chain-of-thought prompting?
+        </div>
         <div class="answer">
-            <p>This chapter provides practical implementation examples with code snippets and real-world scenarios to help you apply the concepts learned.</p>
-            <div class="code-block"><pre><code># Transformer attention mechanism
-import torch
-import torch.nn as nn
-
-class MultiHeadAttention(nn.Module):
-    def __init__(self, d_model, num_heads):
-        super().__init__()
-        self.d_model = d_model
-        self.num_heads = num_heads
-        self.head_dim = d_model // num_heads
-        
-        self.W_q = nn.Linear(d_model, d_model)
-        self.W_k = nn.Linear(d_model, d_model)
-        self.W_v = nn.Linear(d_model, d_model)
-        self.W_o = nn.Linear(d_model, d_model)
-    
-    def forward(self, x):
-        batch_size = x.size(0)
-        Q = self.W_q(x).view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
-        K = self.W_k(x).view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
-        V = self.W_v(x).view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
-        
-        scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.head_dim ** 0.5)
-        attention = torch.softmax(scores, dim=-1)
-        output = torch.matmul(attention, V)
-        output = output.transpose(1, 2).contiguous().view(batch_size, -1, self.d_model)
-        return self.W_o(output)</code></pre></div>
-
-        <h2>4. Best Practices</h2>
-
-        <div class="question">
-            Q4: What are the industry best practices and standards</div>
-        <div class="answer">
-            <p>Learn industry best practices and standards for professional development and production environments. These guidelines ensure code quality, maintainability, and scalability.</p>
-            <h3>Best Practices:</h3>
+            <p><strong>Chain-of-Thought (CoT):</strong> Prompting technique that encourages models to show reasoning steps.</p>
+            <p><strong>Benefits:</strong></p>
             <ul>
-                <li>Use clear and descriptive naming conventions</li>
-                <li>Follow established coding standards</li>
-                <li>Write comprehensive documentation</li>
-                <li>Implement proper error handling</li>
-                <li>Optimize for performance and readability</li>
+                <li>Improves complex reasoning</li>
+                <li>Reduces errors</li>
+                <li>Provides interpretability</li>
+            </ul>
+            <p><strong>Example:</strong> "Let's think step by step to solve this problem."</p>
+        </div>
+
+        <div class="question">
+            Q12: What is temperature in LLM generation?
+        </div>
+        <div class="answer">
+            <p><strong>Temperature:</strong> Hyperparameter controlling randomness in token selection.</p>
+            <p><strong>Low temperature (0.1-0.3):</strong> More deterministic, focused outputs.</p>
+            <p><strong>High temperature (0.7-1.0):</strong> More random, creative outputs.</p>
+            <p><strong>Use cases:</strong> Low for factual answers, high for creative writing.</p>
+        </div>
+
+        <h2>4. RAG & Vector Databases</h2>
+
+        <div class="question">
+            Q13: What is RAG (Retrieval-Augmented Generation)?
+        </div>
+        <div class="answer">
+            <p><strong>RAG:</strong> Framework that combines retrieval systems with LLMs to improve accuracy and reduce hallucinations.</p>
+            <p><strong>Components:</strong></p>
+            <ol>
+                <li>Document ingestion and chunking</li>
+                <li>Embedding generation</li>
+                <li>Vector storage</li>
+                <li>Retrieval (similarity search)</li>
+                <li>Generation with retrieved context</li>
+            </ol>
+        </div>
+
+        <div class="question">
+            Q14: When should you use RAG vs fine-tuning?
+        </div>
+        <div class="answer">
+            <p><strong>Use RAG when:</strong></p>
+            <ul>
+                <li>Need access to dynamic information</li>
+                <li>Want to reduce hallucinations</li>
+                <li>Need to cite sources</li>
+                <li>Data changes frequently</li>
+            </ul>
+            <p><strong>Use fine-tuning when:</strong></p>
+            <ul>
+                <li>Need specific domain knowledge</li>
+                <li>Want to change model behavior/style</li>
+                <li>Have large domain-specific dataset</li>
+                <li>Need lower latency</li>
             </ul>
         </div>
-        
-        <h2>5. Advanced Topics</h2>
 
         <div class="question">
-            Q5: What are the advanced techniques and optimizations</div>
+            Q15: What is semantic search vs keyword search?
+        </div>
         <div class="answer">
-            <p>Explore advanced techniques, optimizations, and cutting-edge approaches in this field. These topics are essential for senior-level understanding and expert-level implementation.</p>
-            <div class="code-block"><pre><code># Transformer attention mechanism
-import torch
-import torch.nn as nn
+            <p><strong>Keyword Search:</strong> Matches exact words or phrases.</p>
+            <p><strong>Semantic Search:</strong> Matches meaning and intent using embeddings.</p>
+            <p><strong>Advantages of semantic:</strong></p>
+            <ul>
+                <li>Handles synonyms</li>
+                <li>Understands context</li>
+                <li>Better for natural language queries</li>
+            </ul>
+        </div>
 
-class MultiHeadAttention(nn.Module):
-    def __init__(self, d_model, num_heads):
-        super().__init__()
-        self.d_model = d_model
-        self.num_heads = num_heads
-        self.head_dim = d_model // num_heads
+        <h2>5. Fine-Tuning & RLHF</h2>
+
+        <div class="question">
+            Q16: What is fine-tuning?
+        </div>
+        <div class="answer">
+            <p><strong>Fine-tuning:</strong> Process of adapting a pre-trained model to specific task or domain.</p>
+            <p><strong>Types:</strong></p>
+            <ul>
+                <li>Full fine-tuning (all parameters)</li>
+                <li>LoRA (Low-Rank Adaptation)</li>
+                <li>QLoRA (Quantized LoRA)</li>
+                <li>Adapter layers</li>
+            </ul>
+            <p><strong>Benefits:</strong> Improved performance on specific tasks, reduced latency, smaller model size.</p>
+        </div>
+
+        <div class="question">
+            Q17: What is LoRA?
+        </div>
+        <div class="answer">
+            <p><strong>LoRA (Low-Rank Adaptation):</strong> Parameter-efficient fine-tuning technique.</p>
+            <p><strong>How it works:</strong></p>
+            <ul>
+                <li>Freezes pre-trained weights</li>
+                <li>Adds trainable low-rank decomposition matrices</li>
+                <li>Dramatically reduces trainable parameters</li>
+            </ul>
+            <p><strong>Benefits:</strong> Faster training, less memory, easier to deploy multiple adapters.</p>
+        </div>
+
+        <div class="question">
+            Q18: What is RLHF (Reinforcement Learning from Human Feedback)?
+        </div>
+        <div class="answer">
+            <p><strong>RLHF:</strong> Technique to align LLMs with human preferences using reinforcement learning.</p>
+            <p><strong>Three stages:</strong></p>
+            <ol>
+                <li><strong>SFT:</strong> Supervised fine-tuning on human demonstrations</li>
+                <li><strong>Reward Model:</strong> Train model to predict human preferences</li>
+                <li><strong>PPO:</strong> Optimize policy using reward model</li>
+            </ol>
+            <p><strong>Goal:</strong> Make models helpful, harmless, and honest.</p>
+        </div>
+
+        <div class="question">
+            Q19: What is hallucination in LLMs?
+        </div>
+        <div class="answer">
+            <p><strong>Hallucination:</strong> When LLM generates false or fabricated information confidently.</p>
+            <p><strong>Causes:</strong></p>
+            <ul>
+                <li>Training data limitations</li>
+                <li>Model overconfidence</li>
+                <li>Lack of grounding</li>
+            </ul>
+            <p><strong>Mitigation:</strong> RAG, fact-checking, uncertainty quantification, human oversight.</p>
+        </div>
+
+        <h2>6. AI Safety & Ethics</h2>
+
+        <div class="question">
+            Q20: What is prompt injection?
+        </div>
+        <div class="answer">
+            <p><strong>Prompt Injection:</strong> Attack where users manipulate prompts to bypass safety measures.</p>
+            <p><strong>Examples:</strong></p>
+            <ul>
+                <li>Jailbreaking (bypassing restrictions)</li>
+                <li> DAN (Do Anything Now) prompts</li>
+                <li>Role-playing attacks</li>
+            </ul>
+            <p><strong>Defense:</strong> Input validation, output filtering, adversarial training.</p>
+        </div>
+
+        <div class="question">
+            Q21: What are the ethical considerations in generative AI?
+        </div>
+        <div class="answer">
+            <p><strong>Key Ethical Issues:</strong></p>
+            <ul>
+                <li>Copyright and data ownership</li>
+                <li>Deepfakes and misinformation</li>
+                <li>Bias and fairness</li>
+                <li>Privacy concerns</li>
+                <li>Environmental impact</li>
+                <li>Job displacement</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q22: What is AI alignment?
+        </div>
+        <div class="answer">
+            <p><strong>AI Alignment:</strong> Field focused on ensuring AI systems act in accordance with human values and intentions.</p>
+            <p><strong>Challenges:</strong></p>
+            <ul>
+                <li>Defining human values</li>
+                <li>Specification problems</li>
+                <li>Robustness to distribution shift</li>
+                <li>Outer alignment vs inner alignment</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q23: What is the difference between GPT and BERT?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>GPT</th>
+                    <th>BERT</th>
+                </tr>
+                <tr>
+                    <td>Architecture</td>
+                    <td>Decoder-only</td>
+                    <td>Encoder-only</td>
+                </tr>
+                <tr>
+                    <td>Training Objective</td>
+                    <td>Causal language modeling</td>
+                    <td>Masked language modeling</td>
+                </tr>
+                <tr>
+                    <td>Attention</td>
+                    <td>Unidirectional (left-to-right)</td>
+                    <td>Bidirectional</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Text generation</td>
+                    <td>Text understanding, classification</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q24: What is the difference between T5 and BART?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>T5</th>
+                    <th>BART</th>
+                </tr>
+                <tr>
+                    <td>Architecture</td>
+                    <td>Encoder-decoder</td>
+                    <td>Encoder-decoder</td>
+                </tr>
+                <tr>
+                    <td>Training Objective</td>
+                    <td>Span corruption (text-to-text)</td>
+                    <td>Denoising autoencoder</td>
+                </tr>
+                <tr>
+                    <td>Pretraining Data</td>
+                    <td>Colossal Clean Crawled Corpus (C4)</td>
+                    <td>Large text corpora</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Text-to-text tasks</td>
+                    <td>Summarization, translation</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q25: What is the difference between GPT-3 and GPT-4?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>GPT-3</th>
+                    <th>GPT-4</th>
+                </tr>
+                <tr>
+                    <td>Parameters</td>
+                    <td>175B</td>
+                    <td>1.76T (estimated)</td>
+                </tr>
+                <tr>
+                    <td>Context Window</td>
+                    <td>2048 tokens</td>
+                    <td>128K tokens</td>
+                </tr>
+                <tr>
+                    <td>Capabilities</td>
+                    <td>Text generation</td>
+                    <td>Multimodal (text + images)</td>
+                </tr>
+                <tr>
+                    <td>Reasoning</td>
+                    <td>Basic</td>
+                    <td>Advanced reasoning</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q26: What is the difference between LLaMA and GPT?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>LLaMA</th>
+                    <th>GPT</th>
+                </tr>
+                <tr>
+                    <td>Developer</td>
+                    <td>Meta (open-source)</td>
+                    <td>OpenAI (proprietary)</td>
+                </tr>
+                <tr>
+                    <td>Training Data</td>
+                    <td>Publicly available data</td>
+                    <td>Proprietary data</td>
+                </tr>
+                <tr>
+                    <td>Accessibility</td>
+                    <td>Open weights</td>
+                    <td>API-only</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Research, local deployment</td>
+                    <td>Commercial applications</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q27: What is the difference between Mistral and LLaMA?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Mistral</th>
+                    <th>LLaMA</th>
+                </tr>
+                <tr>
+                    <td>Developer</td>
+                    <td>Mistral AI</td>
+                    <td>Meta</td>
+                </tr>
+                <tr>
+                    <td>Architecture</td>
+                    <td>Sliding window attention</td>
+                    <td>Standard attention</td>
+                </tr>
+                <tr>
+                    <td>Efficiency</td>
+                    <td>More efficient</td>
+                    <td>Standard efficiency</td>
+                </tr>
+                <tr>
+                    <td>Context Window</td>
+                    <td>32K+</td>
+                    <td>4K-8K (varies by version)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q28: What is the difference between FLAN and GPT?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>FLAN</th>
+                    <th>GPT</th>
+                </tr>
+                <tr>
+                    <td>Training</td>
+                    <td>Instruction-tuned</td>
+                    <td>Pretrained + instruction-tuned</td>
+                </tr>
+                <tr>
+                    <td>Base Model</td>
+                    <td>LaMDA</td>
+                    <td>GPT architecture</td>
+                </tr>
+                <tr>
+                    <td>Focus</td>
+                    <td>Instruction following</td>
+                    <td>General language modeling</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Zero-shot tasks</td>
+                    <td>Few-shot tasks</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q29: What is the difference between instruction tuning and RLHF?
+        </div>
+        <div class="answer">
+            <p><strong>Instruction Tuning:</strong> Fine-tuning model on instruction-response pairs to follow instructions better.</p>
+            <p><strong>RLHF (Reinforcement Learning from Human Feedback):</strong> Using human feedback to train reward model, then optimizing policy with RL.</p>
+            <p><strong>Comparison:</strong></p>
+            <ul>
+                <li>Instruction tuning: Supervised learning, faster, simpler</li>
+                <li>RLHF: Reinforcement learning, slower, more complex, better alignment</li>
+            </ul>
+            <p><strong>Use case:</strong> Often used together - instruction tuning first, then RLHF for fine alignment.</p>
+        </div>
+
+        <div class="question">
+            Q30: What is the difference between zero-shot, one-shot, and few-shot learning?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Learning Type</th>
+                    <th>Examples</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Zero-shot</td>
+                    <td>0</td>
+                    <td>Model uses pretraining knowledge without examples</td>
+                </tr>
+                <tr>
+                    <td>One-shot</td>
+                    <td>1</td>
+                    <td>Model learns from single example</td>
+                </tr>
+                <tr>
+                    <td>Few-shot</td>
+                    <td>Few (2-10)</td>
+                    <td>Model learns from multiple examples</td>
+                </tr>
+            </table>
+            <p><strong>Use case:</strong> Few-shot learning typically works best for LLMs due to their pretraining.</p>
+        </div>
+
+        <div class="question">
+            Q31: What is the difference between chain-of-thought and standard prompting?
+        </div>
+        <div class="answer">
+            <p><strong>Standard Prompting:</strong> Direct question-answer format without intermediate reasoning.</p>
+            <p><strong>Chain-of-Thought (CoT):</strong> Prompting model to show step-by-step reasoning before final answer.</p>
+            <p><strong>Benefits of CoT:</strong></p>
+            <ul>
+                <li>Improves reasoning on complex tasks</li>
+                <li>Reduces errors</li>
+                <li>More interpretable</li>
+            </ul>
+            <p><strong>Use case:</strong> Math, logic, multi-step reasoning tasks.</p>
+        </div>
+
+        <div class="question">
+            Q32: What is the difference between self-consistency and chain-of-thought?
+        </div>
+        <div class="answer">
+            <p><strong>Chain-of-Thought:</strong> Single reasoning path to answer.</p>
+            <p><strong>Self-Consistency:</strong> Generate multiple reasoning paths, choose most consistent answer.</p>
+            <p><strong>Process:</strong></p>
+            <ol>
+                <li>Generate multiple CoT responses</li>
+                <li>Aggregate answers (majority vote)</li>
+                <li>Select most consistent answer</li>
+            </ol>
+            <p><strong>Benefits:</strong> Reduces randomness, improves accuracy on reasoning tasks.</p>
+        </div>
+
+        <div class="question">
+            Q33: What is the difference between tree-of-thought and chain-of-thought?
+        </div>
+        <div class="answer">
+            <p><strong>Chain-of-Thought:</strong> Linear reasoning path.</p>
+            <p><strong>Tree-of-Thought (ToT):</strong> Explores multiple reasoning branches like a tree, can backtrack.</p>
+            <p><strong>Benefits of ToT:</strong></p>
+            <ul>
+                <li>Can explore alternative solutions</li>
+                <li>Can backtrack from wrong paths</li>
+                <li>Better for complex problem-solving</li>
+            </ul>
+            <p><strong>Tradeoff:</strong> More computationally expensive than CoT.</p>
+        </div>
+
+        <div class="question">
+            Q34: What is the difference between ReAct and chain-of-thought?
+        </div>
+        <div class="answer">
+            <p><strong>Chain-of-Thought:</strong> Pure reasoning without external actions.</p>
+            <p><strong>ReAct (Reasoning + Acting):</strong> Interleaves reasoning with external tool use/actions.</p>
+            <p><strong>Process:</strong></p>
+            <ol>
+                <li>Reason about task</li>
+                <li>Take action (use tool)</li>
+                <li>Observe result</li>
+                <li>Repeat until done</li>
+            </ol>
+            <p><strong>Use case:</strong> Agents that need to interact with external systems (APIs, databases).</p>
+        </div>
+
+        <div class="question">
+            Q35: What is the difference between RAG and fine-tuning?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>RAG</th>
+                    <th>Fine-tuning</th>
+                </tr>
+                <tr>
+                    <td>Knowledge</td>
+                    <td>External retrieval</td>
+                    <td>Internal model weights</td>
+                </tr>
+                <tr>
+                    <td>Update</td>
+                    <td>Easy (update vector DB)</td>
+                    <td>Requires retraining</td>
+                </tr>
+                <tr>
+                    <td>Cost</td>
+                    <td>Lower</td>
+                    <td>Higher</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Dynamic knowledge</td>
+                    <td>Domain-specific knowledge</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q36: What is the difference between dense retrieval and sparse retrieval?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Sparse Retrieval</th>
+                    <th>Dense Retrieval</th>
+                </tr>
+                <tr>
+                    <td>Representation</td>
+                    <td>TF-IDF, BM25</td>
+                    <td>Embeddings</td>
+                </tr>
+                <tr>
+                    <td>Matching</td>
+                    <td>Keyword matching</td>
+                    <td>Semantic similarity</td>
+                </tr>
+                <tr>
+                    <td>Interpretability</td>
+                    <td>High</td>
+                    <td>Low</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Keyword search</td>
+                    <td>Semantic search</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q37: What is the difference between hybrid retrieval and dense retrieval?
+        </div>
+        <div class="answer">
+            <p><strong>Dense Retrieval:</strong> Uses embeddings for semantic similarity search.</p>
+            <p><strong>Hybrid Retrieval:</strong> Combines sparse (keyword) and dense (semantic) retrieval.</p>
+            <p><strong>Benefits of Hybrid:</strong></p>
+            <ul>
+                <li>Best of both worlds - keyword precision + semantic understanding</li>
+                <li>Handles rare terms better</li>
+                <li>More robust to different query types</li>
+            </ul>
+            <p><strong>Methods:</strong> Score fusion, reciprocal rank fusion (RRF).</p>
+        </div>
+
+        <div class="question">
+            Q38: What is the difference between FAISS and Pinecone?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>FAISS</th>
+                    <th>Pinecone</th>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>Open-source library</td>
+                    <td>Managed service</td>
+                </tr>
+                <tr>
+                    <td>Deployment</td>
+                    <td>Self-hosted</td>
+                    <td>Cloud-hosted</td>
+                </tr>
+                <tr>
+                    <td>Scalability</td>
+                    <td>Manual scaling</td>
+                    <td>Auto-scaling</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Research, custom deployment</td>
+                    <td>Production applications</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q39: What is the difference between HNSW and IVF in vector search?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>HNSW</th>
+                    <th>IVF</th>
+                </tr>
+                <tr>
+                    <td>Algorithm</td>
+                    <td>Graph-based (hierarchical)</td>
+                    <td>Clustering-based</td>
+                </tr>
+                <tr>
+                    <td>Accuracy</td>
+                    <td>Higher</td>
+                    <td>Lower</td>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td>Faster</td>
+                    <td>Slower</td>
+                </tr>
+                <tr>
+                    <td>Memory</td>
+                    <td>Higher</td>
+                    <td>Lower</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q40: What is the difference between chunking strategies in RAG?
+        </div>
+        <div class="answer">
+            <p><strong>Fixed-size chunking:</strong> Split text into fixed-size chunks (e.g., 512 tokens). Simple but may break context.</p>
+            <p><strong>Semantic chunking:</strong> Split at semantic boundaries (paragraphs, sections). Better context preservation.</p>
+            <p><strong>Recursive chunking:</strong> Hierarchical chunking for different granularity levels.</p>
+            <p><strong>Use case:</strong> Semantic chunking generally performs better for RAG as it preserves context better.</p>
+        </div>
+
+        <div class="question">
+            Q41: What is the difference between LoRA and full fine-tuning?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>LoRA</th>
+                    <th>Full Fine-tuning</th>
+                </tr>
+                <tr>
+                    <td>Parameters</td>
+                    <td>Low-rank adapters (1-5% of params)</td>
+                    <td>All parameters</td>
+                </tr>
+                <tr>
+                    <td>Memory</td>
+                    <td>Low</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>Storage</td>
+                    <td>Small (adapter weights)</td>
+                    <td>Large (full model)</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Resource-constrained fine-tuning</td>
+                    <td>Maximum performance</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q42: What is the difference between LoRA and QLoRA?
+        </div>
+        <div class="answer">
+            <p><strong>LoRA:</strong> Low-Rank Adaptation - adds trainable low-rank matrices to model.</p>
+            <p><strong>QLoRA:</strong> Quantized LoRA - combines LoRA with 4-bit quantization.</p>
+            <p><strong>Benefits of QLoRA:</strong></p>
+            <ul>
+                <li>Even lower memory requirements</li>
+                <li>Can fine-tune large models on single GPU</li>
+                <li>Maintains performance close to full fine-tuning</li>
+            </ul>
+            <p><strong>Use case:</strong> Fine-tuning very large models (70B+) with limited resources.</p>
+        </div>
+
+        <div class="question">
+            Q43: What is the difference between prefix tuning and LoRA?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Prefix Tuning</th>
+                    <th>LoRA</th>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td>Adds trainable prefix tokens</td>
+                    <td>Adds trainable low-rank matrices</td>
+                </tr>
+                <tr>
+                    <td>Parameters</td>
+                    <td>Very few</td>
+                    <td>Few (1-5%)</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Lower</td>
+                    <td>Higher</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Extremely resource-constrained</td>
+                    <td>General fine-tuning</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q44: What is the difference between P-tuning and prompt tuning?
+        </div>
+        <div class="answer">
+            <p><strong>Prompt Tuning:</strong> Adds trainable prompt embeddings at input layer.</p>
+            <p><strong>P-tuning:</strong> Uses LSTM to generate prompt embeddings (more flexible).</p>
+            <p><strong>P-tuning v2:</strong> Improved version with deep prompt tuning across all layers.</p>
+            <p><strong>Comparison:</strong> P-tuning v2 generally outperforms prompt tuning, especially for small models.</p>
+        </div>
+
+        <div class="question">
+            Q45: What is the difference between 4-bit and 8-bit quantization?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>4-bit</th>
+                    <th>8-bit</th>
+                </tr>
+                <tr>
+                    <td>Memory</td>
+                    <td>~25% of original</td>
+                    <td>~50% of original</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>More degradation</td>
+                    <td>Less degradation</td>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td>Faster inference</td>
+                    <td>Faster inference</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Extreme memory constraints</td>
+                    <td>Balance of performance and memory</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q46: What is the difference between GPTQ and AWQ quantization?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>GPTQ</th>
+                    <th>AWQ</th>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td>Optimal quantization</td>
+                    <td>Activation-aware quantization</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Good</td>
+                    <td>Better (especially for small models)</td>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td>Slower quantization</td>
+                    <td>Faster quantization</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>General quantization</td>
+                    <td>Small models, better performance</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q47: What is the difference between vLLM and TGI?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>vLLM</th>
+                    <th>TGI (Text Generation Inference)</th>
+                </tr>
+                <tr>
+                    <td>Developer</td>
+                    <td>vLLM team</td>
+                    <td>Hugging Face</td>
+                </tr>
+                <tr>
+                    <td>Key Feature</td>
+                    <td>PagedAttention</td>
+                    <td>Flash Attention, quantization</td>
+                </tr>
+                <tr>
+                    <td>Ecosystem</td>
+                    <td>Wider model support</td>
+                    <td>Hugging Face integration</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>High-throughput serving</td>
+                    <td>Production serving</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q48: What is the difference between PagedAttention and standard attention?
+        </div>
+        <div class="answer">
+            <p><strong>Standard Attention:</strong> Stores entire KV cache in memory, limits batch size and sequence length.</p>
+            <p><strong>PagedAttention:</strong> Pages KV cache like virtual memory, allows dynamic allocation.</p>
+            <p><strong>Benefits of PagedAttention:</strong></p>
+            <ul>
+                <li>Higher batch sizes</li>
+                <li>Longer sequences</li>
+                <li>Better memory utilization</li>
+                <li>Reduced memory fragmentation</li>
+            </ul>
+            <p><strong>Use case:</strong> vLLM for high-throughput LLM serving.</p>
+        </div>
+
+        <div class="question">
+            Q49: What is the difference between Flash Attention and standard attention?
+        </div>
+        <div class="answer">
+            <p><strong>Standard Attention:</strong> Materializes attention matrix, O(n²) memory and time complexity.</p>
+            <p><strong>Flash Attention:</strong> IO-aware exact attention, avoids materializing full matrix.</p>
+            <p><strong>Benefits of Flash Attention:</strong></p>
+            <ul>
+                <li>Linear memory complexity</li>
+                <li>Faster computation (2-4x)</li>
+                <li>Exact attention (no approximation)</li>
+            </ul>
+            <p><strong>Use case:</strong> Training and inference of long-context models.</p>
+        </div>
+
+        <div class="question">
+            Q50: What is the difference between speculative decoding and standard decoding?
+        </div>
+        <div class="answer">
+            <p><strong>Standard Decoding:</strong> Generate tokens one at a time sequentially.</p>
+            <p><strong>Speculative Decoding:</strong> Use small model to draft tokens, large model to verify in parallel.</p>
+            <p><strong>Benefits:</strong></p>
+            <ul>
+                <li>Faster generation (2-3x speedup)</li>
+                <li>Same quality as original model</li>
+                <li>No accuracy loss</li>
+            </ul>
+            <p><strong>Use case:</strong> High-throughput text generation serving.</p>
+        </div>
+
+        <div class="question">
+            Q51: What is the difference between beam search and greedy decoding?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Greedy Decoding</th>
+                    <th>Beam Search</th>
+                </tr>
+                <tr>
+                    <td>Selection</td>
+                    <td>Highest probability token</td>
+                    <td>Top-k sequences</td>
+                </tr>
+                <tr>
+                    <td>Quality</td>
+                    <td>Lower</td>
+                    <td>Higher</td>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td>Faster</td>
+                    <td>Slower</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Fast generation</td>
+                    <td>High-quality generation</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q52: What is the difference between top-k and top-p sampling?
+        </div>
+        <div class="answer">
+            <p><strong>Top-k Sampling:</strong> Sample from top-k most likely tokens.</p>
+            <p><strong>Top-p (Nucleus) Sampling:</strong> Sample from smallest set of tokens with cumulative probability ≥ p.</p>
+            <p><strong>Comparison:</strong></p>
+            <ul>
+                <li>Top-k: Fixed number of candidates, simpler</li>
+                <li>Top-p: Dynamic number, adapts to distribution</li>
+            </ul>
+            <p><strong>Use case:</strong> Often used together (top-k + top-p) for better diversity.</p>
+        </div>
+
+        <div class="question">
+            Q53: What is the difference between temperature and top-p sampling?
+        </div>
+        <div class="answer">
+            <p><strong>Temperature:</strong> Controls randomness by scaling logits. Higher = more random, lower = more deterministic.</p>
+            <p><strong>Top-p:</strong> Controls diversity by limiting token set.</p>
+            <p><strong>Comparison:</strong></p>
+            <ul>
+                <li>Temperature: Affects probability distribution shape</li>
+                <li>Top-p: Affects which tokens are considered</li>
+            </ul>
+            <p><strong>Use case:</strong> Often used together for controlled generation.</p>
+        </div>
+
+        <div class="question">
+            Q54: What is the difference between repetition penalty and presence penalty?
+        </div>
+        <div class="answer">
+            <p><strong>Repetition Penalty:</strong> Penalizes repeated tokens (including consecutive and non-consecutive).</p>
+            <p><strong>Presence Penalty:</strong> Penalizes tokens that have already appeared (regardless of repetition).</p>
+            <p><strong>Use case:</strong></p>
+            <ul>
+                <li>Repetition penalty: Reduce word/phrase repetition</li>
+                <li>Presence penalty: Encourage topic diversity</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q55: What is the difference between LangChain and LlamaIndex?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>LangChain</th>
+                    <th>LlamaIndex</th>
+                </tr>
+                <tr>
+                    <td>Focus</td>
+                    <td>General-purpose LLM orchestration</td>
+                    <td>Data indexing and retrieval</td>
+                </tr>
+                <tr>
+                    <td>Strength</td>
+                    <td>Chains, agents, tools</td>
+                    <td>RAG, data connectors</td>
+                </tr>
+                <tr>
+                    <td>Ecosystem</td>
+                    <td>Larger, more general</td>
+                    <td>Specialized for data</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Complex workflows</td>
+                    <td>Data-heavy applications</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q56: What is the difference between AutoGPT and BabyAGI?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>AutoGPT</th>
+                    <th>BabyAGI</th>
+                </tr>
+                <tr>
+                    <td>Focus</td>
+                    <td>Autonomous task execution</td>
+                    <td>Task management and execution</td>
+                </tr>
+                <tr>
+                    <td>Approach</td>
+                    <td>Goal-oriented</td>
+                    <td>Task-oriented</td>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>More complex</td>
+                    <td>Simpler</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Autonomous agents</td>
+                    <td>Task automation</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q57: What is the difference between function calling and tool use?
+        </div>
+        <div class="answer">
+            <p><strong>Function Calling:</strong> Structured way for LLM to call external functions (OpenAI format).</p>
+            <p><strong>Tool Use:</strong> General concept of LLM using external tools/APIs.</p>
+            <p><strong>Relationship:</strong> Function calling is a specific implementation of tool use.</p>
+            <p><strong>Benefits of Function Calling:</strong></p>
+            <ul>
+                <li>Structured output</li>
+                <li>Type safety</li>
+                <li>Better error handling</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q58: What is the difference between agents and chains?
+        </div>
+        <div class="answer">
+            <p><strong>Chains:</strong> Fixed sequence of operations. Deterministic flow.</p>
+            <p><strong>Agents:</strong> Autonomous decision-making. Can choose which tools/actions to take.</p>
+            <p><strong>Comparison:</strong></p>
+            <ul>
+                <li>Chains: Simpler, predictable, less flexible</li>
+                <li>Agents: More complex, adaptive, can handle dynamic tasks</li>
+            </ul>
+            <p><strong>Use case:</strong> Chains for fixed workflows, agents for dynamic problem-solving.</p>
+        </div>
+
+        <div class="question">
+            Q59: What is the difference between ReAct agent and Plan-and-Solve agent?
+        </div>
+        <div class="answer">
+            <p><strong>ReAct Agent:</strong> Interleaves reasoning and actions iteratively.</p>
+            <p><strong>Plan-and-Solve Agent:</strong> Plans entire sequence first, then executes.</p>
+            <p><strong>Comparison:</strong></p>
+            <ul>
+                <li>ReAct: More flexible, can adapt during execution</li>
+                <li>Plan-and-Solve: More efficient for known tasks, less adaptive</li>
+            </ul>
+            <p><strong>Use case:</strong> ReAct for exploration, Plan-and-Solve for structured tasks.</p>
+        </div>
+
+        <div class="question">
+            Q60: What is the difference between OpenAI function calling and Anthropic tool use?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>OpenAI</th>
+                    <th>Anthropic</th>
+                </tr>
+                <tr>
+                    <td>Format</td>
+                    <td>Function calling</td>
+                    <td>Tool use</td>
+                </tr>
+                <tr>
+                    <td>Parallel</td>
+                    <td>Multiple functions</td>
+                    <td>Multiple tools</td>
+                </tr>
+                <tr>
+                    <td>Control</td>
+                    <td>Developer controls</td>
+                    <td>Model controls</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Structured output</td>
+                    <td>Flexible tool interaction</td>
+                </tr>
+            </table>
+        </div>
         
-        self.W_q = nn.Linear(d_model, d_model)
-        self.W_k = nn.Linear(d_model, d_model)
-        self.W_v = nn.Linear(d_model, d_model)
-        self.W_o = nn.Linear(d_model, d_model)
-    
-    def forward(self, x):
-        batch_size = x.size(0)
-        Q = self.W_q(x).view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
-        K = self.W_k(x).view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
-        V = self.W_v(x).view(batch_size, -1, self.num_heads, self.head_dim).transpose(1, 2)
-        
-        scores = torch.matmul(Q, K.transpose(-2, -1)) / (self.head_dim ** 0.5)
-        attention = torch.softmax(scores, dim=-1)
-        output = torch.matmul(attention, V)
-        output = output.transpose(1, 2).contiguous().view(batch_size, -1, self.d_model)
-        return self.W_o(output)</code></pre></div>
+        <div class="footer">
+            <p><span class="highlight">🎯 Ready for Your Generative AI Interview?</span></p>
+            <p>Master these 60 comprehensive Generative AI interview questions covering LLMs, transformers, prompt engineering, RAG, fine-tuning, and AI safety. GenAI is revolutionizing content creation and automation - understanding GenAI deeply will make you a better AI engineer and researcher.</p>
+            <p><span class="highlight">💡 Tip:</span> Focus on understanding transformer architecture, attention mechanisms, RAG systems, fine-tuning techniques (LoRA, QLoRA), and prompt engineering strategies. These are the areas where most GenAI interview questions focus. Practice building RAG systems and fine-tuning models with tools like Hugging Face Transformers, LangChain, and vLLM.</p>
         </div>
     </div>
 </body>

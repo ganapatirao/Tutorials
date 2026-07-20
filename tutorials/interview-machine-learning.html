@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Machine Learning Interview Questions</title>
     <style>
-
-
-        @import url('https://fonts.googleapis.com/css2family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
         
         * {
             margin: 0;
@@ -164,16 +162,6 @@
             box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
         }
         
-        .back-button svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.3s ease;
-        }
-        
-        .back-button:hover svg {
-            transform: translateX(-5px);
-        }
-        
         h1 {
             color: #1a1a2e;
             font-size: 52px;
@@ -209,15 +197,14 @@
             transform: translateX(-50%);
             width: 140px;
             height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
+            animation: expandWidth 1s ease 0.5s both;
         }
         
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 140px; }
         }
         
         .subtitle {
@@ -230,129 +217,21 @@
         }
         
         h2 {
-            color: #1a1a2e;
-            font-size: 32px;
+            color: white;
+            font-size: 28px;
             font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            padding: 18px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            animation: slideIn 0.5s ease both;
         }
         
         @keyframes slideIn {
             from { opacity: 0; transform: translateX(-20px); }
             to { opacity: 1; transform: translateX(0); }
-        }
-        
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
-        }
-        
-        h3 {
-            color: #1a1a2e;
-            font-size: 26px;
-            font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
-        }
-        
-        .chapter {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
-            border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
-        }
-        
-        .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
-            overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.5s ease both;
-        }
-        
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-x: auto;
-        }
-        
-        
-        .toc {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 35px 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border-left: 8px solid #667eea;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        .toc h3 {
-            color: #1a1a2e;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .toc ol {
-            padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
-        }
-        
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
         }
         
         .question {
@@ -377,30 +256,15 @@
             animation: slideUp 0.5s ease both;
         }
         
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         .answer p {
             margin-bottom: 15px;
             color: #1a1a2e;
             line-height: 1.8;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
         }
         
         .answer strong {
@@ -408,47 +272,101 @@
             font-weight: 600;
         }
         
-        .page-break {
-            page-break-after: always;
-            margin: 60px 0;
-            border-top: 2px dashed #e0e0e0;
-            padding-top: 40px;
+        .code-block {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            color: #e0e0e0;
+            padding: 12px;
+            border-radius: 10px;
+            overflow-x: auto;
+            overflow-y: auto;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            margin: 15px 0;
+            line-height: 1.6;
+            border-left: 4px solid #3776ab;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            max-width: 100%;
+            animation: codeAppear 0.4s ease both;
         }
         
-        .important {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+        @keyframes codeAppear {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
         
-        .important strong {
-            color: #856404;
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
         }
         
-        .tip {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
+        .code-block code {
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
         
-        .tip strong {
-            color: #0c5460;
+        .toc {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 35px 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 8px solid #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            animation: slideUp 0.6s ease both;
+        }
+        
+        .toc h3 {
+            color: #1a1a2e;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .toc ol {
+            padding-left: 25px;
+            color: #4a4a68;
+            line-height: 2;
+        }
+        
+        .toc ol li {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(102, 126, 234, 0.25);
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            animation: slideUp 0.6s ease both;
+        }
+        
+        .footer p {
+            margin-bottom: 12px;
+        }
+        
+        .footer .highlight {
+            color: #667eea;
+            font-weight: 600;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
+            margin: 20px 0;
             background: white;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         
         th {
@@ -457,11 +375,10 @@
             padding: 15px;
             text-align: left;
             font-weight: 600;
-            font-size: 15px;
         }
         
         td {
-            padding: 15px;
+            padding: 12px 15px;
             border-bottom: 1px solid #e9ecef;
             color: #4a4a68;
         }
@@ -474,327 +391,1696 @@
             background: #f8f9fa;
         }
         
-        p {
+        .answer ul, .answer ol {
+            margin: 20px 0;
+            padding-left: 30px;
             color: #1a1a2e;
-            line-height: 1.8;
-            margin-bottom: 15px;
         }
         
-        ul, ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        ul li, ol li {
+        .answer li {
             margin-bottom: 8px;
+            line-height: 1.8;
         }
         
-                
+        .important {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+            border-left: 4px solid #ff9800;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .tip {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(56, 142, 60, 0.1) 100%);
+            border-left: 4px solid #4caf50;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
         @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
-            }
+            body { padding: 12px 8px; }
+            .container { padding: 25px 20px; border-radius: 20px; }
+            h1 { font-size: 36px; }
+            .subtitle { font-size: 15px; margin-bottom: 25px; }
+            h2 { font-size: 22px; padding: 14px 20px; margin-top: 30px; }
+            .question { padding: 15px 20px; font-size: 16px; margin: 20px 0 12px 0; }
+            .answer { padding: 20px 25px; margin: 12px 0 20px 0; }
+            .code-block { padding: 15px; font-size: 13px; margin: 15px 0; }
+            .toc { padding: 25px 30px; margin: 30px 0; }
+            .toc ol { padding-left: 20px; line-height: 1.8; }
+            .back-button { padding: 12px 24px; font-size: 14px; margin-bottom: 20px; }
+            .footer { padding: 25px; margin-top: 35px; font-size: 14px; }
         }
         
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
-            }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
+        h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2d2d2d;
+            margin: 25px 0 15px 0;
         }
-</style>
+        
+        .page-break {
+            page-break-before: always;
+            margin: 50px 0;
+        }
+        
+        .important {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+            border-left: 4px solid #ff9800;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .tip {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(56, 142, 60, 0.1) 100%);
+            border-left: 4px solid #4caf50;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-        </a>
+        <a href="../index.html" class="back-button">← Back to Tutorials</a>
+        
         <h1>Machine Learning Interview Questions</h1>
-                <p class="subtitle">Comprehensive guide covering ML interview questions covering algorithms, neural networks, model evaluation, MLOps, deployment with detailed explanations and code examples</p>
+        <p class="subtitle">Comprehensive guide covering 75+ ML interview questions on fundamentals, algorithms, evaluation, and system design</p>
         
         <h2>Table of Contents</h2>
         <div class="toc">
             <h3>Table of Contents</h3>
             <ol>
-                <li>Fundamentals</li>
-                <li>Core Concepts</li>
-                <li>Implementation</li>
-                <li>Best Practices</li>
-                <li>Advanced Topics</li>
+                <li>ML Fundamentals</li>
+                <li>Supervised Learning</li>
+                <li>Unsupervised Learning</li>
+                <li>Model Evaluation</li>
+                <li>Feature Engineering</li>
+                <li>Deep Learning</li>
+                <li>ML System Design</li>
+            </ol>
+        </div>
+        
+        <h2>1. ML Fundamentals</h2>
+
+        <div class="question">
+            Q1: What is the difference between supervised, unsupervised, and reinforcement learning?
+        </div>
+        <div class="answer">
+            <p><strong>Supervised Learning:</strong> Uses labeled data to learn mapping from inputs to outputs. Examples: classification, regression.</p>
+            <p><strong>Unsupervised Learning:</strong> Uses unlabeled data to discover patterns. Examples: clustering, dimensionality reduction.</p>
+            <p><strong>Reinforcement Learning:</strong> Learns through trial and error by receiving rewards/penalties. Examples: game playing, robotics.</p>
+        </div>
+
+        <div class="question">
+            Q2: What is the bias-variance tradeoff?
+        </div>
+        <div class="answer">
+            <p><strong>Bias:</strong> Error from oversimplified models (underfitting). High bias models miss relevant patterns.</p>
+            <p><strong>Variance:</strong> Error from over-sensitivity to training data (overfitting). High variance models capture noise.</p>
+            <p><strong>Tradeoff:</strong> Reducing bias typically increases variance, and vice versa. Goal is to find optimal balance minimizing total error.</p>
+            <p><strong>Total Error = Bias² + Variance + Irreducible Error</strong></p>
+        </div>
+
+        <div class="question">
+            Q3: What are overfitting and underfitting? How do you prevent them?
+        </div>
+        <div class="answer">
+            <p><strong>Overfitting:</strong> Model learns training data too well, including noise. Performs great on training data but poorly on new data.</p>
+            <p><strong>Underfitting:</strong> Model is too simple to capture underlying patterns. Performs poorly on both training and test data.</p>
+            <p><strong>Prevention methods:</strong></p>
+            <ul>
+                <li>More training data</li>
+                <li>Regularization (L1/L2, dropout)</li>
+                <li>Cross-validation</li>
+                <li>Early stopping</li>
+                <li>Feature selection</li>
+                <li>Ensemble methods</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q4: What is cross-validation and why is it important?
+        </div>
+        <div class="answer">
+            <p><strong>Cross-validation:</strong> Technique to assess model performance by splitting data into multiple subsets.</p>
+            <p><strong>Why important:</strong></p>
+            <ul>
+                <li>Provides more reliable performance estimate</li>
+                <li>Reduces overfitting to specific train/test split</li>
+                <li>Better use of limited data</li>
+                <li>Helps in hyperparameter tuning</li>
+            </ul>
+            <p><strong>K-fold cross-validation:</strong> Data split into K folds, each fold used once as validation while K-1 folds for training.</p>
+            <p><strong>Stratified K-fold:</strong> Preserves class distribution in each fold (important for imbalanced datasets).</p>
+        </div>
+
+        <div class="question">
+            Q5: What is the difference between parametric and non-parametric models?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Parametric</th>
+                    <th>Non-parametric</th>
+                </tr>
+                <tr>
+                    <td>Parameters</td>
+                    <td>Fixed number of parameters</td>
+                    <td>Grows with training data</td>
+                </tr>
+                <tr>
+                    <td>Flexibility</td>
+                    <td>Less flexible, strong assumptions</td>
+                    <td>More flexible, fewer assumptions</td>
+                </tr>
+                <tr>
+                    <td>Data Requirements</td>
+                    <td>Less data needed</td>
+                    <td>More data needed</td>
+                </tr>
+                <tr>
+                    <td>Examples</td>
+                    <td>Linear regression, logistic regression</td>
+                    <td>KNN, decision trees, SVM</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q6: What is the curse of dimensionality?
+        </div>
+        <div class="answer">
+            <p><strong>Curse of Dimensionality:</strong> As number of features increases, data becomes sparse, making it harder for algorithms to find patterns.</p>
+            <p><strong>Problems:</strong></p>
+            <ul>
+                <li>Exponential increase in required data</li>
+                <li>Distance metrics become less meaningful</li>
+                <li>Computational complexity increases</li>
+                <li>Overfitting becomes more likely</li>
+            </ul>
+            <p><strong>Solutions:</strong> Dimensionality reduction (PCA, t-SNE, UMAP), feature selection, regularization.</p>
+        </div>
+
+        <div class="question">
+            Q7: What is the difference between generative and discriminative models?
+        </div>
+        <div class="answer">
+            <p><strong>Generative Models:</strong> Learn joint distribution P(X,Y) to generate new samples. Can generate new data.</p>
+            <ul>
+                <li>Examples: Naive Bayes, GANs, VAEs</li>
+                <li>Useful when: Need to generate data, handle missing values</li>
+            </ul>
+            <p><strong>Discriminative Models:</strong> Learn conditional distribution P(Y|X) directly for classification.</p>
+            <ul>
+                <li>Examples: Logistic regression, SVM, neural networks</li>
+                <li>Useful when: Only need classification, typically better accuracy</li>
+            </ul>
+        </div>
+
+        <h2>2. Supervised Learning</h2>
+
+        <div class="question">
+            Q8: What is the difference between linear regression and logistic regression?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Linear Regression</th>
+                    <th>Logistic Regression</th>
+                </tr>
+                <tr>
+                    <td>Output</td>
+                    <td>Continuous values</td>
+                    <td>Probabilities (0-1)</td>
+                </tr>
+                <tr>
+                    <td>Task</td>
+                    <td>Regression</td>
+                    <td>Classification</td>
+                </tr>
+                <tr>
+                    <td>Activation</td>
+                    <td>None (linear)</td>
+                    <td>Sigmoid</td>
+                </tr>
+                <tr>
+                    <td>Loss Function</td>
+                    <td>MSE</td>
+                    <td>Log loss / Cross-entropy</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q9: What is the difference between L1 and L2 regularization?
+        </div>
+        <div class="answer">
+            <p><strong>L1 Regularization (Lasso):</strong></p>
+            <ul>
+                <li>Adds absolute value of coefficients as penalty</li>
+                <li>Can drive coefficients to exactly zero (feature selection)</li>
+                <li>Useful when you believe many features are irrelevant</li>
+            </ul>
+            <p><strong>L2 Regularization (Ridge):</strong></p>
+            <ul>
+                <li>Adds squared value of coefficients as penalty</li>
+                <li>Shrinks coefficients but rarely to exactly zero</li>
+                <li>Useful when you believe all features are relevant</li>
+            </ul>
+            <p><strong>Elastic Net:</strong> Combines both L1 and L2 regularization.</p>
+        </div>
+
+        <div class="question">
+            Q10: How does a decision tree work? What are its advantages and disadvantages?
+        </div>
+        <div class="answer">
+            <p><strong>How it works:</strong> Splits data based on feature values to maximize information gain or minimize impurity (Gini/entropy).</p>
+            <p><strong>Advantages:</strong></p>
+            <ul>
+                <li>Easy to interpret and visualize</li>
+                <li>Handles both numerical and categorical data</li>
+                <li>Requires little data preprocessing</li>
+                <li>Non-parametric (no assumptions about data distribution)</li>
+            </ul>
+            <p><strong>Disadvantages:</strong></p>
+            <ul>
+                <li>Prone to overfitting</li>
+                <li>Unstable (small data changes can cause large tree changes)</li>
+                <li>Can create biased trees if some classes dominate</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q11: What is Random Forest? How does it work?
+        </div>
+        <div class="answer">
+            <p><strong>Random Forest:</strong> Ensemble of decision trees using bagging (bootstrap aggregating).</p>
+            <p><strong>How it works:</strong></p>
+            <ol>
+                <li>Train multiple decision trees on different bootstrap samples</li>
+                <li>At each split, only consider random subset of features</li>
+                <li>Average predictions (regression) or majority vote (classification)</li>
+            </ol>
+            <p><strong>Advantages:</strong></p>
+            <ul>
+                <li>Reduces overfitting compared to single tree</li>
+                <li>Handles high-dimensional data well</li>
+                <li>Provides feature importance</li>
+                <li>Robust to noise and outliers</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q12: What is the difference between Random Forest and Gradient Boosting?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Random Forest</th>
+                    <th>Gradient Boosting</th>
+                </tr>
+                <tr>
+                    <td>Approach</td>
+                    <td>Parallel ensemble (bagging)</td>
+                    <td>Sequential ensemble (boosting)</td>
+                </tr>
+                <tr>
+                    <td>Training</td>
+                    <td>Trees built independently</td>
+                    <td>Trees built sequentially to fix errors</td>
+                </tr>
+                <tr>
+                    <td>Bias-Variance</td>
+                    <td>Reduces variance</td>
+                    <td>Reduces both bias and variance</td>
+                </tr>
+                <tr>
+                    <td>Overfitting</td>
+                    <td>Less prone</td>
+                    <td>More prone, needs tuning</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Good baseline</td>
+                    <td>Often higher accuracy with tuning</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q13: How does SVM work? What is the kernel trick?
+        </div>
+        <div class="answer">
+            <p><strong>SVM (Support Vector Machine):</strong> Finds optimal hyperplane that maximizes margin between classes.</p>
+            <p><strong>Key concepts:</strong></p>
+            <ul>
+                <li>Support vectors: Data points closest to decision boundary</li>
+                <li>Margin: Distance between decision boundary and support vectors</li>
+                <li>C parameter: Regularization parameter (tradeoff between margin width and misclassification)</li>
+            </ul>
+            <p><strong>Kernel Trick:</strong> Maps data to higher-dimensional space using kernel function without explicit computation.</p>
+            <p><strong>Common kernels:</strong> Linear, Polynomial, RBF (Gaussian), Sigmoid.</p>
+        </div>
+
+        <div class="question">
+            Q14: What is gradient descent and its variants?
+        </div>
+        <div class="answer">
+            <p><strong>Gradient Descent:</strong> Optimization algorithm to minimize loss function by iteratively moving towards minimum.</p>
+            <p><strong>Batch Gradient Descent:</strong></p>
+            <ul>
+                <li>Uses entire dataset for each update</li>
+                <li>Stable but computationally expensive</li>
+                <li>Can get stuck in local minima</li>
+            </ul>
+            <p><strong>Stochastic Gradient Descent (SGD):</strong></p>
+            <ul>
+                <li>Uses one random sample for each update</li>
+                <li>Faster but noisy updates</li>
+                <li>Can escape local minima</li>
+            </ul>
+            <p><strong>Mini-batch Gradient Descent:</strong></p>
+            <ul>
+                <li>Uses small batch of samples for each update</li>
+                <li>Balance between stability and speed</li>
+                <li>Most commonly used in practice</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q15: What is K-Nearest Neighbors (KNN)? How do you choose K?
+        </div>
+        <div class="answer">
+            <p><strong>KNN:</strong> Non-parametric algorithm that classifies based on K nearest neighbors.</p>
+            <p><strong>How it works:</strong></p>
+            <ol>
+                <li>Calculate distance between new point and all training points</li>
+                <li>Select K nearest neighbors</li>
+                <li>For classification: majority vote</li>
+                <li>For regression: average of K values</li>
+            </ol>
+            <p><strong>Choosing K:</strong></p>
+            <ul>
+                <li>Small K: More flexible, prone to overfitting</li>
+                <li>Large K: Smoother decision boundary, prone to underfitting</li>
+                <li>Common approach: Try K = sqrt(n) or use cross-validation</li>
+                <li>Odd K for binary classification to avoid ties</li>
+            </ul>
+        </div>
+
+        <h2>3. Unsupervised Learning</h2>
+
+        <div class="question">
+            Q16: What is K-Means clustering? How does it work?
+        </div>
+        <div class="answer">
+            <p><strong>K-Means:</strong> Partitions data into K clusters based on feature similarity.</p>
+            <p><strong>Algorithm:</strong></p>
+            <ol>
+                <li>Initialize K centroids randomly</li>
+                <li>Assign each point to nearest centroid</li>
+                <li>Recalculate centroids as mean of assigned points</li>
+                <li>Repeat until convergence</li>
+            </ol>
+            <p><strong>Choosing K:</strong> Elbow method, silhouette score, gap statistic.</p>
+            <p><strong>Limitations:</strong></p>
+            <ul>
+                <li>Requires specifying K</li>
+                <li>Sensitive to initial centroids</li>
+                <li>Assumes spherical clusters</li>
+                <li>Sensitive to outliers</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q17: What is the difference between K-Means and Hierarchical Clustering?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>K-Means</th>
+                    <th>Hierarchical Clustering</th>
+                </tr>
+                <tr>
+                    <td>Number of clusters</td>
+                    <td>Must specify K</td>
+                    <td>Can determine from dendrogram</td>
+                </tr>
+                <tr>
+                    <td>Approach</td>
+                    <td>Partition-based</td>
+                    <td>Agglomerative/Divisive</td>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>O(n) per iteration</td>
+                    <td>O(n²) or O(n³)</td>
+                </tr>
+                <tr>
+                    <td>Output</td>
+                    <td>Flat clusters</td>
+                    <td>Cluster hierarchy</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Large datasets</td>
+                    <td>Small datasets, need hierarchy</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q18: What is PCA (Principal Component Analysis)?
+        </div>
+        <div class="answer">
+            <p><strong>PCA:</strong> Dimensionality reduction technique that transforms data into orthogonal components capturing maximum variance.</p>
+            <p><strong>How it works:</strong></p>
+            <ol>
+                <li>Standardize the data</li>
+                <li>Compute covariance matrix</li>
+                <li>Compute eigenvectors and eigenvalues</li>
+                <li>Sort eigenvectors by eigenvalues</li>
+                <li>Project data onto top k eigenvectors</li>
+            </ol>
+            <p><strong>Use cases:</strong> Visualization, noise reduction, feature extraction, speeding up algorithms.</p>
+            <p><strong>Limitations:</strong> Linear technique, assumes orthogonal components, loses interpretability.</p>
+        </div>
+
+        <h2>4. Model Evaluation</h2>
+
+        <div class="question">
+            Q19: What are precision, recall, F1-score, and when to use each?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Formula</th>
+                    <th>When to Use</th>
+                </tr>
+                <tr>
+                    <td>Precision</td>
+                    <td>TP / (TP + FP)</td>
+                    <td>When false positives are costly (spam detection)</td>
+                </tr>
+                <tr>
+                    <td>Recall</td>
+                    <td>TP / (TP + FN)</td>
+                    <td>When false negatives are costly (disease detection)</td>
+                </tr>
+                <tr>
+                    <td>F1-Score</td>
+                    <td>2 * (Precision * Recall) / (Precision + Recall)</td>
+                    <td>When you need balance between precision and recall</td>
+                </tr>
+                <tr>
+                    <td>AUC-ROC</td>
+                    <td>Area under ROC curve</td>
+                    <td>When comparing models across different thresholds</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q20: What is a confusion matrix and what can you derive from it?
+        </div>
+        <div class="answer">
+            <p><strong>Confusion Matrix:</strong> Table showing actual vs predicted classifications.</p>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Predicted Positive</th>
+                    <th>Predicted Negative</th>
+                </tr>
+                <tr>
+                    <td>Actual Positive</td>
+                    <td>True Positive (TP)</td>
+                    <td>False Negative (FN)</td>
+                </tr>
+                <tr>
+                    <td>Actual Negative</td>
+                    <td>False Positive (FP)</td>
+                    <td>True Negative (TN)</td>
+                </tr>
+            </table>
+            <p><strong>Derived metrics:</strong> Accuracy, Precision, Recall, F1-Score, Specificity, AUC-ROC.</p>
+        </div>
+
+        <div class="question">
+            Q21: What is ROC-AUC vs PR-AUC? When does each metric mislead?
+        </div>
+        <div class="answer">
+            <p><strong>ROC-AUC:</strong> Area under Receiver Operating Characteristic curve. Plots TPR vs FPR.</p>
+            <p><strong>PR-AUC:</strong> Area under Precision-Recall curve. Plots Precision vs Recall.</p>
+            <p><strong>When ROC-AUC misleads:</strong> With highly imbalanced datasets, ROC-AUC can be overly optimistic.</p>
+            <p><strong>When PR-AUC is preferred:</strong> For imbalanced datasets where positive class is rare. PR-AUC focuses on performance on positive class.</p>
+            <div class="important">
+                <strong>Important:</strong> For imbalanced datasets (fraud detection, rare diseases), always use PR-AUC or F1-score instead of accuracy or ROC-AUC.
+            </div>
+        </div>
+
+        <div class="question">
+            Q22: How do you handle imbalanced datasets?
+        </div>
+        <div class="answer">
+            <p><strong>Resampling techniques:</strong></p>
+            <ul>
+                <li>Oversampling minority class (SMOTE)</li>
+                <li>Undersampling majority class</li>
+                <li>Hybrid approaches</li>
+            </ul>
+            <p><strong>Algorithmic approaches:</strong></p>
+            <ul>
+                <li>Use appropriate metrics (F1, AUC-ROC, PR-AUC)</li>
+                <li>Class weights in loss function</li>
+                <li>Ensemble methods with balanced subsampling</li>
+                <li>Anomaly detection techniques</li>
+            </ul>
+        </div>
+
+        <h2>5. Feature Engineering</h2>
+
+        <div class="question">
+            Q23: What is feature engineering and why is it important?
+        </div>
+        <div class="answer">
+            <p><strong>Feature Engineering:</strong> Process of creating new features from existing data to improve model performance.</p>
+            <p><strong>Techniques:</strong></p>
+            <ul>
+                <li>Scaling/normalization (Min-Max, StandardScaler)</li>
+                <li>One-hot encoding</li>
+                <li>Label encoding</li>
+                <li>Binning/discretization</li>
+                <li>Polynomial features</li>
+                <li>Interaction features</li>
+                <li>Domain-specific transformations</li>
+            </ul>
+            <p><strong>Importance:</strong> Good features can make simple models perform better than complex models with poor features.</p>
+        </div>
+
+        <div class="question">
+            Q24: How do you handle missing data?
+        </div>
+        <div class="answer">
+            <p><strong>Deletion methods:</strong></p>
+            <ul>
+                <li>Listwise deletion (remove rows with missing values)</li>
+                <li>Pairwise deletion (use available data for each calculation)</li>
+            </ul>
+            <p><strong>Imputation methods:</strong></p>
+            <ul>
+                <li>Mean/median/mode imputation</li>
+                <li>KNN imputation</li>
+                <li>Regression imputation</li>
+                <li>Multiple imputation</li>
+                <li>Domain-specific imputation</li>
+            </ul>
+            <div class="tip">
+                <strong>Tip:</strong> Always understand why data is missing before choosing imputation method. Missing data patterns can be informative.
+            </div>
+        </div>
+
+        <div class="question">
+            Q25: What is feature selection? What techniques do you use?
+        </div>
+        <div class="answer">
+            <p><strong>Feature Selection:</strong> Process of selecting most relevant features to improve model performance and reduce complexity.</p>
+            <p><strong>Techniques:</strong></p>
+            <ul>
+                <li><strong>Filter methods:</strong> Statistical tests (chi-square, ANOVA, correlation)</li>
+                <li><strong>Wrapper methods:</strong> Recursive Feature Elimination (RFE), forward/backward selection</li>
+                <li><strong>Embedded methods:</strong> Lasso, Ridge, tree-based feature importance</li>
+                <li><strong>Dimensionality reduction:</strong> PCA, t-SNE, UMAP</li>
+            </ul>
+        </div>
+
+        <h2>6. Deep Learning</h2>
+
+        <div class="question">
+            Q26: What is a neural network and how does it work?
+        </div>
+        <div class="answer">
+            <p><strong>Neural Network:</strong> Computing system inspired by biological neural networks.</p>
+            <p><strong>Components:</strong></p>
+            <ul>
+                <li>Neurons (processing units)</li>
+                <li>Weights (connection strengths)</li>
+                <li>Biases (thresholds)</li>
+                <li>Activation functions (non-linearity)</li>
+            </ul>
+            <p><strong>Learning:</strong> Adjusts weights through backpropagation to minimize error.</p>
+            <p><strong>Activation functions:</strong> ReLU, Sigmoid, Tanh, Softmax, Leaky ReLU, ELU.</p>
+        </div>
+
+        <div class="question">
+            Q27: What is backpropagation?
+        </div>
+        <div class="answer">
+            <p><strong>Backpropagation:</strong> Algorithm to train neural networks by calculating gradients of loss function with respect to weights.</p>
+            <p><strong>Process:</strong></p>
+            <ol>
+                <li>Forward pass: Compute predictions</li>
+                <li>Calculate error (loss)</li>
+                <li>Backward pass: Compute gradients using chain rule</li>
+                <li>Update weights using gradient descent</li>
             </ol>
         </div>
 
-        <h2>1. Fundamentals</h2>
-
         <div class="question">
-            Q1: What are the fundamental concepts in this subject</div>
+            Q28: What is the vanishing gradient problem?
+        </div>
         <div class="answer">
-            <p>The fundamental concepts form the foundation for understanding this subject. These include core terminology, basic principles, and essential knowledge required for advanced topics.</p>
-            <h3>Key Concepts:</h3>
+            <p><strong>Vanishing Gradient:</strong> Gradients become extremely small as they propagate backward through deep networks, preventing earlier layers from learning.</p>
+            <p><strong>Solutions:</strong></p>
             <ul>
-                <li>Concept 1: Description of first fundamental concept</li>
-                <li>Concept 2: Description of second fundamental concept</li>
-                <li>Concept 3: Description of third fundamental concept</li>
+                <li>ReLU activation function</li>
+                <li>Batch normalization</li>
+                <li>Residual connections (ResNet)</li>
+                <li>LSTM/GRU for RNNs</li>
+                <li>Proper weight initialization (Xavier, He)</li>
             </ul>
         </div>
 
-        <h2>2. Core Concepts</h2>
+        <div class="question">
+            Q29: What is a CNN (Convolutional Neural Network)?
+        </div>
+        <div class="answer">
+            <p><strong>CNN:</strong> Neural network designed for image processing using convolutional layers.</p>
+            <p><strong>Key Components:</strong></p>
+            <ul>
+                <li>Convolutional layers (detect features)</li>
+                <li>Pooling layers (reduce spatial dimensions)</li>
+                <li>Fully connected layers (classification)</li>
+            </ul>
+            <p><strong>Advantages:</strong> Translation invariance, parameter sharing, hierarchical feature learning.</p>
+            <p><strong>Applications:</strong> Image classification, object detection, image segmentation.</p>
+        </div>
 
         <div class="question">
-            Q2: What are the core principles and patterns</div>
+            Q30: What is an RNN (Recurrent Neural Network)?
+        </div>
         <div class="answer">
-            <p>Understanding the core principles is essential for mastering this subject. This section explores the most important concepts and their applications in real-world scenarios.</p>
-            <h3>Key Principles:</h3>
+            <p><strong>RNN:</strong> Neural network designed for sequential data with internal memory.</p>
+            <p><strong>How it works:</strong> Maintains hidden state that captures information from previous time steps.</p>
+            <p><strong>Limitations:</strong></p>
             <ul>
-                <li>Principle 1: Description of the first key principle</li>
-                <li>Principle 2: Description of the second key principle</li>
-                <li>Principle 3: Description of the third key principle</li>
+                <li>Vanishing/exploding gradients</li>
+                <li>Difficulty learning long-term dependencies</li>
+                <li>Sequential processing (can't be parallelized)</li>
+            </ul>
+            <p><strong>Solutions:</strong> LSTM, GRU, attention mechanisms.</p>
+        </div>
+
+        <h2>7. ML System Design</h2>
+
+        <div class="question">
+            Q31: How do you design an ML pipeline for production?
+        </div>
+        <div class="answer">
+            <p><strong>Key components:</strong></p>
+            <ol>
+                <li><strong>Data Ingestion:</strong> Collect and validate data from sources</li>
+                <li><strong>Data Preprocessing:</strong> Clean, transform, and feature engineer</li>
+                <li><strong>Model Training:</strong> Train and validate models</li>
+                <li><strong>Model Evaluation:</strong> Test on holdout data with relevant metrics</li>
+                <li><strong>Model Deployment:</strong> Serve model predictions via API</li>
+                <li><strong>Monitoring:</strong> Track performance, data drift, concept drift</li>
+                <li><strong>Retraining:</strong> Schedule periodic retraining with new data</li>
+                <li><strong>Logging:</strong> Track predictions and feature values for debugging</li>
+            </ol>
+            <div class="tip">
+                <strong>Tip:</strong> Use tools like MLflow, Kubeflow, or SageMaker for production ML pipelines.
+            </div>
+        </div>
+
+        <div class="question">
+            Q32: What is data drift vs concept drift?
+        </div>
+        <div class="answer">
+            <p><strong>Data Drift:</strong> Input data distribution changes over time (e.g., user demographics shift).</p>
+            <p><strong>Concept Drift:</strong> Relationship between input and output changes (e.g., user behavior pattern changes).</p>
+            <p><strong>Detection:</strong></p>
+            <ul>
+                <li>Monitor input distribution (KS test, PSI)</li>
+                <li>Monitor model performance over time</li>
+                <li>Track prediction distribution</li>
+            </ul>
+            <p><strong>Mitigation:</strong> Regular retraining, online learning, ensemble methods.</p>
+        </div>
+
+        <div class="question">
+            Q33: How do you monitor ML models in production?
+        </div>
+        <div class="answer">
+            <p><strong>Key metrics to monitor:</strong></p>
+            <ul>
+                <li>Model performance (accuracy, F1, AUC)</li>
+                <li>Prediction distribution</li>
+                <li>Feature distribution</li>
+                <li>Latency and throughput</li>
+                <li>Error rates and types</li>
+                <li>Data quality metrics</li>
+            </ul>
+            <p><strong>Tools:</strong> Prometheus, Grafana, MLflow, Evidently AI, Arize.</p>
+        </div>
+
+        <div class="question">
+            Q34: What is A/B testing in ML?
+        </div>
+        <div class="answer">
+            <p><strong>A/B Testing:</strong> Controlled experiment comparing two versions (A: control, B: treatment) to determine which performs better.</p>
+            <p><strong>Process:</strong></p>
+            <ol>
+                <li>Define hypothesis and metrics</li>
+                <li>Randomly assign users to groups</li>
+                <li>Run experiment for sufficient duration</li>
+                <li>Analyze results with statistical significance tests</li>
+            </ol>
+            <p><strong>Considerations:</strong> Sample size, statistical significance, practical significance, seasonality.</p>
+        </div>
+
+        <div class="question">
+            Q35: What is model interpretability? Why is it important?
+        </div>
+        <div class="answer">
+            <p><strong>Model Interpretability:</strong> Ability to understand and explain model predictions.</p>
+            <p><strong>Importance:</strong></p>
+            <ul>
+                <li>Debugging and improving models</li>
+                <li>Regulatory compliance (GDPR, CCPA)</li>
+                <li>Building user trust</li>
+                <li>Identifying bias and fairness issues</li>
+            </ul>
+            <p><strong>Techniques:</strong> LIME, SHAP, feature importance, partial dependence plots, attention visualization.</p>
+        </div>
+
+        <div class="question">
+            Q36: What is the difference between online and batch learning?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Batch Learning</th>
+                    <th>Online Learning</th>
+                </tr>
+                <tr>
+                    <td>Training</td>
+                    <td>Trained on full dataset at once</td>
+                    <td>Learns incrementally from data streams</td>
+                </tr>
+                <tr>
+                    <td>Updates</td>
+                    <td>Retraining required for new data</td>
+                    <td>Continuous updates</td>
+                </tr>
+                <tr>
+                    <td>Memory</td>
+                    <td>Requires storing all data</td>
+                    <td>Can process data once and discard</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Static datasets</td>
+                    <td>Streaming data, real-time systems</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q37: What is transfer learning?
+        </div>
+        <div class="answer">
+            <p><strong>Transfer Learning:</strong> Using knowledge from pre-trained model on one task to improve performance on related task.</p>
+            <p><strong>Benefits:</strong></p>
+            <ul>
+                <li>Faster training</li>
+                <li>Better performance with less data</li>
+                <li>Leverages learned features</li>
+            </ul>
+            <p><strong>Common approach:</strong> Freeze early layers, fine-tune later layers on new task.</p>
+            <p><strong>Examples:</strong> ImageNet models for computer vision, BERT for NLP.</p>
+        </div>
+
+        <div class="question">
+            Q38: What is ensemble learning?
+        </div>
+        <div class="answer">
+            <p><strong>Ensemble Learning:</strong> Combining multiple models to improve performance.</p>
+            <p><strong>Types:</strong></p>
+            <ul>
+                <li><strong>Bagging:</strong> Random Forest (reduces variance)</li>
+                <li><strong>Boosting:</strong> XGBoost, LightGBM (reduces bias and variance)</li>
+                <li><strong>Stacking:</strong> Meta-model on base models (combines strengths)</li>
+                <li><strong>Voting:</strong> Hard voting (majority) or soft voting (weighted probabilities)</li>
+            </ul>
+            <p><strong>Benefits:</strong> Improved accuracy, robustness, reduced overfitting.</p>
+        </div>
+
+        <div class="question">
+            Q39: What is hyperparameter tuning? What techniques do you use?
+        </div>
+        <div class="answer">
+            <p><strong>Hyperparameter Tuning:</strong> Process of finding optimal hyperparameters for machine learning model.</p>
+            <p><strong>Techniques:</strong></p>
+            <ul>
+                <li><strong>Grid Search:</strong> Exhaustive search over specified parameter values</li>
+                <li><strong>Random Search:</strong> Random sampling from parameter space (more efficient)</li>
+                <li><strong>Bayesian Optimization:</strong> Uses probabilistic model to guide search (SMOTE, TPE)</li>
+                <li><strong>Genetic Algorithms:</strong> Evolutionary approach</li>
+            </ul>
+            <p><strong>Tools:</strong> Scikit-learn GridSearchCV, Optuna, Hyperopt, Ray Tune.</p>
+        </div>
+
+        <div class="question">
+            Q40: What is the difference between bagging, boosting, and stacking?
+        </div>
+        <div class="answer">
+            <p><strong>Bagging (Bootstrap Aggregating):</strong></p>
+            <ul>
+                <li>Train multiple models independently on different bootstrap samples</li>
+                <li>Average predictions (regression) or vote (classification)</li>
+                <li>Example: Random Forest</li>
+                <li>Reduces variance</li>
+            </ul>
+            <p><strong>Boosting:</strong></p>
+            <ul>
+                <li>Train models sequentially, each correcting errors of previous</li>
+                <li>Weight models based on performance</li>
+                <li>Example: XGBoost, LightGBM, CatBoost</li>
+                <li>Reduces both bias and variance</li>
+            </ul>
+            <p><strong>Stacking:</strong></p>
+            <ul>
+                <li>Train multiple base models</li>
+                <li>Train meta-model on base model predictions</li>
+                <li>Meta-model learns to combine base models optimally</li>
+                <li>Can achieve better performance but more complex</li>
             </ul>
         </div>
 
-        <h2>3. Implementation</h2>
-
         <div class="question">
-            Q3: How do you implement these concepts in practice</div>
+            Q41: What is learning curve and how do you use it?
+        </div>
         <div class="answer">
-            <p>This chapter provides practical implementation examples with code snippets and real-world scenarios to help you apply the concepts learned.</p>
-            <div class="code-block"><pre><code># ML algorithm from scratch
-import numpy as np
-
-class LinearRegressionManual:
-    def __init__(self):
-        self.weights = None
-        self.bias = None
-    
-    def fit(self, X, y, learning_rate=0.01, epochs=1000):
-        n_samples, n_features = X.shape
-        self.weights = np.zeros(n_features)
-        self.bias = 0
-        
-        for _ in range(epochs):
-            y_pred = np.dot(X, self.weights) + self.bias
-            dw = (1/n_samples) * np.dot(X.T, (y_pred - y))
-            db = (1/n_samples) * np.sum(y_pred - y)
-            self.weights -= learning_rate * dw
-            self.bias -= learning_rate * db
-    
-    def predict(self, X):
-        return np.dot(X, self.weights) + self.bias</code></pre></div>
-
-        <h2>4. Best Practices</h2>
-
-        <div class="question">
-            Q4: What are the industry best practices and standards</div>
-        <div class="answer">
-            <p>Learn industry best practices and standards for professional development and production environments. These guidelines ensure code quality, maintainability, and scalability.</p>
-            <h3>Best Practices:</h3>
+            <p><strong>Learning Curve:</strong> Plot of model performance vs training set size.</p>
+            <p><strong>Interpretation:</strong></p>
             <ul>
-                <li>Use clear and descriptive naming conventions</li>
-                <li>Follow established coding standards</li>
-                <li>Write comprehensive documentation</li>
-                <li>Implement proper error handling</li>
-                <li>Optimize for performance and readability</li>
+                <li><strong>High bias:</strong> Training and validation errors converge at high value → need more features or complex model</li>
+                <li><strong>High variance:</strong> Training error low, validation error high → need more data or regularization</li>
+                <li><strong>Good fit:</strong> Both errors low and close → model is well-tuned</li>
+            </ul>
+            <p><strong>Use cases:</strong> Diagnose underfitting/overfitting, determine if more data would help, tune model complexity.</p>
+        </div>
+
+        <div class="question">
+            Q42: What is the difference between classification and regression?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Classification</th>
+                    <th>Regression</th>
+                </tr>
+                <tr>
+                    <td>Output</td>
+                    <td>Discrete categories</td>
+                    <td>Continuous values</td>
+                </tr>
+                <tr>
+                    <td>Goal</td>
+                    <td>Predict class labels</td>
+                    <td>Predict numerical values</td>
+                </tr>
+                <tr>
+                    <td>Metrics</td>
+                    <td>Accuracy, F1, AUC</td>
+                    <td>MSE, MAE, R²</td>
+                </tr>
+                <tr>
+                    <td>Algorithms</td>
+                    <td>Logistic regression, SVM, Random Forest</td>
+                    <td>Linear regression, Ridge, Lasso</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q43: What is SMOTE for imbalanced datasets?
+        </div>
+        <div class="answer">
+            <p><strong>SMOTE (Synthetic Minority Over-sampling Technique):</strong> Generates synthetic samples for minority class.</p>
+            <p><strong>How it works:</strong></p>
+            <ol>
+                <li>For each minority sample, find K nearest neighbors</li>
+                <li>Generate synthetic sample along line connecting sample and neighbor</li>
+                <li>Repeat until desired balance achieved</li>
+            </ol>
+            <p><strong>Advantages:</strong> Better than simple oversampling (reduces overfitting).</p>
+            <p><strong>Limitations:</strong> Can generate noisy samples, sensitive to outliers.</p>
+        </div>
+
+        <div class="question">
+            Q44: What is the difference between XGBoost, LightGBM, and CatBoost?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>XGBoost</th>
+                    <th>LightGBM</th>
+                    <th>CatBoost</th>
+                </tr>
+                <tr>
+                    <td>Growth Strategy</td>
+                    <td>Level-wise</td>
+                    <td>Leaf-wise</td>
+                    <td>Oblivious decision trees</td>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td>Fast</td>
+                    <td>Faster</td>
+                    <td>Fast</td>
+                </tr>
+                <tr>
+                    <td>Categorical Features</td>
+                    <td>Requires encoding</td>
+                    <td>Requires encoding</td>
+                    <td>Handles natively</td>
+                </tr>
+                <tr>
+                    <td>Overfitting</td>
+                    <td>Regularization needed</td>
+                    <td>More prone</td>
+                    <td>Built-in handling</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q45: What is the difference between LSTM and GRU?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>LSTM</th>
+                    <th>GRU</th>
+                </tr>
+                <tr>
+                    <td>Gates</td>
+                    <td>3 (input, forget, output)</td>
+                    <td>2 (reset, update)</td>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>More complex</td>
+                    <td>Simpler</td>
+                </tr>
+                <tr>
+                    <td>Parameters</td>
+                    <td>More parameters</td>
+                    <td>Fewer parameters</td>
+                </tr>
+                <tr>
+                    <td>Training Time</td>
+                    <td>Slower</td>
+                    <td>Faster</td>
+                </tr>
+                <tr>
+                    <td>Performance</td>
+                    <td>Better on larger datasets</td>
+                    <td>Comparable on smaller datasets</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q46: What is attention mechanism in deep learning?
+        </div>
+        <div class="answer">
+            <p><strong>Attention:</strong> Mechanism that allows model to focus on relevant parts of input when producing output.</p>
+            <p><strong>How it works:</strong></p>
+            <ol>
+                <li>Compute query, key, value vectors</li>
+                <li>Calculate attention scores (query · key)</li>
+                <li>Apply softmax to get weights</li>
+                <li>Weighted sum of values</li>
+            </ol>
+            <p><strong>Types:</strong> Self-attention, cross-attention, multi-head attention.</p>
+            <p><strong>Applications:</strong> Transformers, machine translation, image captioning, speech recognition.</p>
+        </div>
+
+        <div class="question">
+            Q47: What is the difference between batch normalization and layer normalization?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Batch Normalization</th>
+                    <th>Layer Normalization</th>
+                </tr>
+                <tr>
+                    <td>Normalization Axis</td>
+                    <td>Across batch (per feature)</td>
+                    <td>Across features (per sample)</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>CNNs, large batches</td>
+                    <td>RNNs, Transformers, small batches</td>
+                </tr>
+                <tr>
+                    <td>Training</td>
+                    <td>Requires batch statistics</td>
+                    <td>Independent of batch size</td>
+                </tr>
+                <tr>
+                    <td>Inference</td>
+                    <td>Uses running statistics</td>
+                    <td>Same as training</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q48: What is dropout and how does it prevent overfitting?
+        </div>
+        <div class="answer">
+            <p><strong>Dropout:</strong> Regularization technique that randomly drops neurons during training.</p>
+            <p><strong>How it works:</strong></p>
+            <ul>
+                <li>During training, randomly set some neuron outputs to zero</li>
+                <li>Forces network to learn redundant representations</li>
+                <li>Reduces co-adaptation between neurons</li>
+            </ul>
+            <p><strong>Benefits:</strong></p>
+            <ul>
+                <li>Reduces overfitting</li>
+                <li>Improves generalization</li>
+                <li>Acts as model ensemble</li>
+            </ul>
+            <p><strong>Typical dropout rates:</strong> 0.2-0.5 for hidden layers, 0.5-0.8 for input layers.</p>
+        </div>
+
+        <div class="question">
+            Q49: What is the difference between Autoencoder and PCA?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Autoencoder</th>
+                    <th>PCA</th>
+                </tr>
+                <tr>
+                    <td>Linearity</td>
+                    <td>Non-linear</td>
+                    <td>Linear</td>
+                </tr>
+                <tr>
+                    <td>Learning</td>
+                    <td>Neural network (learned)</td>
+                    <td>Eigendecomposition (fixed)</td>
+                </tr>
+                <tr>
+                    <td>Flexibility</td>
+                    <td>More flexible</td>
+                    <td>Less flexible</td>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>More complex</td>
+                    <td>Simpler</td>
+                </tr>
+                <tr>
+                    <td>Use Case</td>
+                    <td>Complex non-linear data</td>
+                    <td>Linear relationships</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q50: What is the difference between generative and discriminative models?
+        </div>
+        <div class="answer">
+            <p><strong>Generative Models:</strong> Learn joint distribution P(X,Y) to generate new samples.</p>
+            <ul>
+                <li>Examples: Naive Bayes, GANs, VAEs, LDA</li>
+                <li>Useful when: Need to generate data, handle missing values</li>
+            </ul>
+            <p><strong>Discriminative Models:</strong> Learn conditional distribution P(Y|X) directly for classification.</p>
+            <ul>
+                <li>Examples: Logistic regression, SVM, neural networks</li>
+                <li>Useful when: Only need classification, typically better accuracy</li>
             </ul>
         </div>
-        
-        <h2>5. Advanced Topics</h2>
 
         <div class="question">
-            Q5: What are the advanced techniques and optimizations</div>
+            Q51: What is the difference between K-Means and Hierarchical Clustering?
+        </div>
         <div class="answer">
-            <p>Explore advanced techniques, optimizations, and cutting-edge approaches in this field. These topics are essential for senior-level understanding and expert-level implementation.</p>
-            <div class="code-block"><pre><code># ML algorithm from scratch
-import numpy as np
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>K-Means</th>
+                    <th>Hierarchical Clustering</th>
+                </tr>
+                <tr>
+                    <td>Number of clusters</td>
+                    <td>Must specify K</td>
+                    <td>Can determine from dendrogram</td>
+                </tr>
+                <tr>
+                    <td>Approach</td>
+                    <td>Partition-based</td>
+                    <td>Agglomerative/Divisive</td>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>O(n) per iteration</td>
+                    <td>O(n²) or O(n³)</td>
+                </tr>
+                <tr>
+                    <td>Output</td>
+                    <td>Flat clusters</td>
+                    <td>Cluster hierarchy</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Large datasets</td>
+                    <td>Small datasets, need hierarchy</td>
+                </tr>
+            </table>
+        </div>
 
-class LinearRegressionManual:
-    def __init__(self):
-        self.weights = None
-        self.bias = None
-    
-    def fit(self, X, y, learning_rate=0.01, epochs=1000):
-        n_samples, n_features = X.shape
-        self.weights = np.zeros(n_features)
-        self.bias = 0
+        <div class="question">
+            Q52: What is DBSCAN clustering?
+        </div>
+        <div class="answer">
+            <p><strong>DBSCAN (Density-Based Spatial Clustering):</strong> Clustering algorithm based on density of data points.</p>
+            <p><strong>Key parameters:</strong></p>
+            <ul>
+                <li>Epsilon (ε): Maximum distance between two samples to be considered neighbors</li>
+                <li>MinPts: Minimum number of samples in a neighborhood to form a cluster</li>
+            </ul>
+            <p><strong>Advantages:</strong></p>
+            <ul>
+                <li>Can find arbitrarily shaped clusters</li>
+                <li>Does not require specifying number of clusters</li>
+                <li>Handles outliers well</li>
+            </ul>
+            <p><strong>Disadvantages:</strong> Sensitive to parameter selection, struggles with varying densities.</p>
+        </div>
+
+        <div class="question">
+            Q53: What is t-SNE vs UMAP for dimensionality reduction?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>t-SNE</th>
+                    <th>UMAP</th>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td>Slower</td>
+                    <td>Faster</td>
+                </tr>
+                <tr>
+                    <td>Scalability</td>
+                    <td>Less scalable</td>
+                    <td>More scalable</td>
+                </tr>
+                <tr>
+                    <td>Global Structure</td>
+                    <td>Poor preservation</td>
+                    <td>Better preservation</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Visualization</td>
+                    <td>Visualization + general dimensionality reduction</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q54: What is the difference between correlation and covariance?
+        </div>
+        <div class="answer">
+            <p><strong>Covariance:</strong> Measure of how two variables change together. Scale-dependent.</p>
+            <p><strong>Correlation:</strong> Normalized covariance (between -1 and 1). Scale-independent.</p>
+            <p><strong>Formula:</strong> Correlation = Covariance(X,Y) / (σX * σY)</p>
+            <p><strong>Use case:</strong> Correlation is preferred for comparison as it's unitless and bounded.</p>
+        </div>
+
+        <div class="question">
+            Q55: What is the difference between Type I and Type II errors?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Error Type</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Type I (False Positive)</td>
+                    <td>Rejecting true null hypothesis</td>
+                    <td>Healthy person diagnosed with disease</td>
+                </tr>
+                <tr>
+                    <td>Type II (False Negative)</td>
+                    <td>Failing to reject false null hypothesis</td>
+                    <td>Sick person diagnosed as healthy</td>
+                </tr>
+            </table>
+            <p><strong>Tradeoff:</strong> Reducing Type I error typically increases Type II error, and vice versa.</p>
+        </div>
+
+        <div class="question">
+            Q56: What is p-value and statistical significance?
+        </div>
+        <div class="answer">
+            <p><strong>p-value:</strong> Probability of obtaining results at least as extreme as observed, assuming null hypothesis is true.</p>
+            <p><strong>Statistical significance:</strong> Typically p < 0.05 (5% significance level).</p>
+            <p><strong>Interpretation:</strong></p>
+            <ul>
+                <li>p < 0.05: Reject null hypothesis (statistically significant)</li>
+                <li>p ≥ 0.05: Fail to reject null hypothesis (not statistically significant)</li>
+            </ul>
+            <div class="important">
+                <strong>Important:</strong> Statistical significance does not imply practical significance. Large datasets can yield statistically significant results for trivial effects.
+            </div>
+        </div>
+
+        <div class="question">
+            Q57: What is the difference between Mann-Whitney U test and t-test?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>t-test</th>
+                    <th>Mann-Whitney U test</th>
+                </tr>
+                <tr>
+                    <td>Data Distribution</td>
+                    <td>Assumes normal distribution</td>
+                    <td>Non-parametric (no distribution assumption)</td>
+                </tr>
+                <tr>
+                    <td>Data Type</td>
+                    <td>Continuous</td>
+                    <td>Ordinal or continuous</td>
+                </tr>
+                <tr>
+                    <td>Outliers</td>
+                    <td>Sensitive</td>
+                    <td>Robust</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Normal data, large samples</td>
+                    <td>Non-normal data, small samples</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q58: What is the difference between ANOVA and t-test?
+        </div>
+        <div class="answer">
+            <p><strong>t-test:</strong> Compares means of two groups.</p>
+            <p><strong>ANOVA (Analysis of Variance):</strong> Compares means of three or more groups.</p>
+            <p><strong>Why ANOVA instead of multiple t-tests:</strong></p>
+            <ul>
+                <li>Multiple t-tests increase Type I error rate</li>
+                <li>ANOVA controls overall error rate</li>
+                <li>More efficient for multiple comparisons</li>
+            </ul>
+            <p><strong>Types:</strong> One-way ANOVA (one factor), Two-way ANOVA (two factors).</p>
+        </div>
+
+        <div class="question">
+            Q59: What is the difference between one-hot encoding and label encoding?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Label Encoding</th>
+                    <th>One-Hot Encoding</th>
+                </tr>
+                <tr>
+                    <td>Representation</td>
+                    <td>Integer values (0, 1, 2...)</td>
+                    <td>Binary vectors</td>
+                </tr>
+                <tr>
+                    <td>Dimensionality</td>
+                    <td>Single column</td>
+                    <td>Multiple columns (one per category)</td>
+                </tr>
+                <tr>
+                    <td>Ordinal Relationship</td>
+                    <td>Implies order (may be incorrect)</td>
+                    <td>No ordinal relationship</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Ordinal categories</td>
+                    <td>Nominal categories</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q60: What is the difference between StandardScaler and MinMaxScaler?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>StandardScaler</th>
+                    <th>MinMaxScaler</th>
+                </tr>
+                <tr>
+                    <td>Formula</td>
+                    <td>(x - μ) / σ</td>
+                    <td>(x - min) / (max - min)</td>
+                </tr>
+                <tr>
+                    <td>Range</td>
+                    <td>Approximately [-3, 3]</td>
+                    <td>[0, 1]</td>
+                </tr>
+                <tr>
+                    <td>Outliers</td>
+                    <td>Robust</td>
+                    <td>Sensitive</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Normally distributed data</td>
+                    <td>Non-normal data, neural networks</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q61: What is the difference between RobustScaler and StandardScaler?
+        </div>
+        <div class="answer">
+            <p><strong>StandardScaler:</strong> Uses mean and standard deviation. Sensitive to outliers.</p>
+            <p><strong>RobustScaler:</strong> Uses median and interquartile range (IQR). Robust to outliers.</p>
+            <p><strong>Formula:</strong> (x - median) / IQR</p>
+            <p><strong>Use case:</strong> RobustScaler is preferred when data contains outliers.</p>
+        </div>
+
+        <div class="question">
+            Q62: What is the difference between accuracy and balanced accuracy?
+        </div>
+        <div class="answer">
+            <p><strong>Accuracy:</strong> (TP + TN) / (TP + TN + FP + FN). Can be misleading for imbalanced datasets.</p>
+            <p><strong>Balanced Accuracy:</strong> Average of recall for each class. Accounts for class imbalance.</p>
+            <p><strong>Formula:</strong> (Recall_class1 + Recall_class2 + ...) / n_classes</p>
+            <p><strong>Use case:</strong> Balanced accuracy is preferred for imbalanced datasets.</p>
+        </div>
+
+        <div class="question">
+            Q63: What is the difference between macro, micro, and weighted F1-score?
+        </div>
+        <div class="answer">
+            <p><strong>Macro F1:</strong> Average of F1-scores for each class (treats all classes equally).</p>
+            <p><strong>Micro F1:</strong> Calculates F1 globally by counting total TP, FP, FN (treats all instances equally).</p>
+            <p><strong>Weighted F1:</strong> Average of F1-scores weighted by support (number of instances per class).</p>
+            <p><strong>Use case:</strong></p>
+            <ul>
+                <li>Macro: When all classes are equally important</li>
+                <li>Micro: When class imbalance is not a concern</li>
+                <li>Weighted: When you want to account for class imbalance</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q64: What is the difference between log loss and cross-entropy?
+        </div>
+        <div class="answer">
+            <p><strong>Log Loss (Logarithmic Loss):</strong> Measures performance of classification models where output is probability.</p>
+            <p><strong>Cross-Entropy:</strong> Generalization of log loss for multi-class classification.</p>
+            <p><strong>Binary classification:</strong> Log loss = Cross-entropy</p>
+            <p><strong>Multi-class classification:</strong> Cross-entropy extends log loss to multiple classes</p>
+            <p><strong>Properties:</strong> Lower is better, penalizes confident wrong predictions heavily.</p>
+        </div>
+
+        <div class="question">
+            Q65: What is the difference between MSE, MAE, and RMSE?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Formula</th>
+                    <th>Characteristics</th>
+                </tr>
+                <tr>
+                    <td>MSE (Mean Squared Error)</td>
+                    <td>Σ(y - ŷ)² / n</td>
+                    <td>Penalizes large errors heavily, differentiable</td>
+                </tr>
+                <tr>
+                    <td>MAE (Mean Absolute Error)</td>
+                    <td>Σ|y - ŷ| / n</td>
+                    <td>Robust to outliers, not differentiable at 0</td>
+                </tr>
+                <tr>
+                    <td>RMSE (Root MSE)</td>
+                    <td>√MSE</td>
+                    <td>Same units as target, interpretable</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q66: What is the difference between R² and Adjusted R²?
+        </div>
+        <div class="answer">
+            <p><strong>R² (R-squared):</strong> Proportion of variance explained by model. Always increases with more features.</p>
+            <p><strong>Adjusted R²:</strong> R² adjusted for number of predictors. Penalizes adding irrelevant features.</p>
+            <p><strong>Formula:</strong> Adjusted R² = 1 - (1-R²)(n-1)/(n-p-1)</p>
+            <p><strong>Use case:</strong> Adjusted R² is preferred for comparing models with different numbers of features.</p>
+        </div>
+
+        <div class="question">
+            Q67: What is the difference between Huber loss and MSE?
+        </div>
+        <div class="answer">
+            <p><strong>MSE:</strong> Quadratic loss for all errors. Sensitive to outliers.</p>
+            <p><strong>Huber Loss:</strong> Quadratic for small errors, linear for large errors. Robust to outliers.</p>
+            <p><strong>Formula:</strong></p>
+            <ul>
+                <li>If |error| ≤ δ: 0.5 * error²</li>
+                <li>If |error| > δ: δ * (|error| - 0.5 * δ)</li>
+            </ul>
+            <p><strong>Use case:</strong> Huber loss is preferred when data contains outliers.</p>
+        </div>
+
+        <div class="question">
+            Q68: What is the difference between L1 and L2 distance metrics?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Formula</th>
+                    <th>Characteristics</th>
+                </tr>
+                <tr>
+                    <td>L1 (Manhattan)</td>
+                    <td>Σ|x - y|</td>
+                    <td>Robust to outliers, sparse solutions</td>
+                </tr>
+                <tr>
+                    <td>L2 (Euclidean)</td>
+                    <td>√Σ(x - y)²</td>
+                    <td>Sensitive to outliers, smooth</td>
+                </tr>
+            </table>
+            <p><strong>Use case:</strong> L1 for feature selection, L2 for smooth optimization.</p>
+        </div>
+
+        <div class="question">
+            Q69: What is the difference between cosine similarity and cosine distance?
+        </div>
+        <div class="answer">
+            <p><strong>Cosine Similarity:</strong> Measures cosine of angle between vectors. Range: [-1, 1]. Higher = more similar.</p>
+            <p><strong>Cosine Distance:</strong> 1 - Cosine Similarity. Range: [0, 2]. Lower = more similar.</p>
+            <p><strong>Formula:</strong> Cosine Similarity = (A · B) / (||A|| * ||B||)</p>
+            <p><strong>Use case:</strong> Text analysis, recommendation systems, document similarity.</p>
+        </div>
+
+        <div class="question">
+            Q70: What is the difference between Jaccard similarity and cosine similarity?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Jaccard Similarity</th>
+                    <th>Cosine Similarity</th>
+                </tr>
+                <tr>
+                    <td>Definition</td>
+                    <td>Intersection / Union</td>
+                    <td>Cosine of angle</td>
+                </tr>
+                <tr>
+                    <td>Range</td>
+                    <td>[0, 1]</td>
+                    <td>[-1, 1]</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Set similarity, binary data</td>
+                    <td>Vector similarity, text data</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q71: What is the difference between silhouette score and Davies-Bouldin index?
+        </div>
+        <div class="answer">
+            <p><strong>Silhouette Score:</strong> Measures how similar an object is to its own cluster compared to other clusters. Range: [-1, 1]. Higher = better.</p>
+            <p><strong>Davies-Bouldin Index:</strong> Average similarity between each cluster and its most similar cluster. Lower = better.</p>
+            <p><strong>Use case:</strong> Both used for evaluating clustering quality. Silhouette is more intuitive, Davies-Bouldin is faster to compute.</p>
+        </div>
+
+        <div class="question">
+            Q72: What is the difference between elbow method and silhouette method for choosing K?
+        </div>
+        <div class="answer">
+            <p><strong>Elbow Method:</strong> Plots within-cluster sum of squares (WCSS) vs K. Choose K at "elbow" point.</p>
+            <p><strong>Silhouette Method:</strong> Plots silhouette score vs K. Choose K with highest score.</p>
+            <p><strong>Comparison:</strong></p>
+            <ul>
+                <li>Elbow: Subjective, may not have clear elbow</li>
+                <li>Silhouette: More objective, considers both cohesion and separation</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q73: What is the difference between linkage methods in hierarchical clustering?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                    <th>Characteristics</th>
+                </tr>
+                <tr>
+                    <td>Single</td>
+                    <td>Minimum distance between clusters</td>
+                    <td>Can create long chains, sensitive to noise</td>
+                </tr>
+                <tr>
+                    <td>Complete</td>
+                    <td>Maximum distance between clusters</td>
+                    <td>Compact clusters, sensitive to outliers</td>
+                </tr>
+                <tr>
+                    <td>Average</td>
+                    <td>Average distance between clusters</td>
+                    <td>Balanced, commonly used</td>
+                </tr>
+                <tr>
+                    <td>Ward</td>
+                    <td>Minimizes variance within clusters</td>
+                    <td>Similar to K-Means, works well</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q74: What is the difference between Naive Bayes and Logistic Regression?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Naive Bayes</th>
+                    <th>Logistic Regression</th>
+                </tr>
+                <tr>
+                    <td>Approach</td>
+                    <td>Generative (P(X,Y))</td>
+                    <td>Discriminative (P(Y|X))</td>
+                </tr>
+                <tr>
+                    <td>Assumptions</td>
+                    <td>Feature independence</td>
+                    <td>No independence assumption</td>
+                </tr>
+                <tr>
+                    <td>Training Speed</td>
+                    <td>Very fast</td>
+                    <td>Fast</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>High-dimensional data, text</td>
+                    <td>General classification</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q75: What is the difference between Gaussian Naive Bayes and Multinomial Naive Bayes?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Gaussian NB</th>
+                    <th>Multinomial NB</th>
+                </tr>
+                <tr>
+                    <td>Data Type</td>
+                    <td>Continuous</td>
+                    <td>Discrete (counts)</td>
+                </tr>
+                <tr>
+                    <td>Distribution</td>
+                    <td>Normal (Gaussian)</td>
+                    <td>Multinomial</td>
+                </tr>
+                <tr>
+                    <td>Use case</td>
+                    <td>Continuous features</td>
+                    <td>Text classification, word counts</td>
+                </tr>
+            </table>
+        </div>
         
-        for _ in range(epochs):
-            y_pred = np.dot(X, self.weights) + self.bias
-            dw = (1/n_samples) * np.dot(X.T, (y_pred - y))
-            db = (1/n_samples) * np.sum(y_pred - y)
-            self.weights -= learning_rate * dw
-            self.bias -= learning_rate * db
-    
-    def predict(self, X):
-        return np.dot(X, self.weights) + self.bias</code></pre></div>
+        <div class="footer">
+            <p><span class="highlight">🎯 Ready for Your Machine Learning Interview?</span></p>
+            <p>Master these 75 comprehensive Machine Learning interview questions covering fundamentals, supervised/unsupervised learning, evaluation, feature engineering, deep learning, and ML system design. ML is essential for data-driven decision-making - understanding ML deeply will make you a better data scientist or ML engineer.</p>
+            <p><span class="highlight">💡 Tip:</span> Focus on understanding bias-variance tradeoff, evaluation metrics (especially for imbalanced datasets), ensemble methods, and practical ML system design. These are the areas where most ML interview questions focus. Practice building end-to-end ML pipelines with tools like scikit-learn, TensorFlow, and PyTorch.</p>
         </div>
     </div>
 </body>

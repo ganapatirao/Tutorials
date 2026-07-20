@@ -293,21 +293,21 @@
         .code-block {
             background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
             color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
+            padding: 12px;
+            border-radius: 10px;
             overflow-x: auto;
             overflow-y: auto;
             font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            font-size: 13px;
+            margin: 15px 0;
+            line-height: 1.6;
+            border-left: 4px solid #dd0031;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             word-wrap: break-word;
             white-space: pre-wrap;
             max-width: 100%;
-            animation: codeAppear 0.5s ease both;
+            animation: codeAppear 0.4s ease both;
         }
         
         @keyframes codeAppear {
@@ -489,6 +489,27 @@
             margin-bottom: 8px;
         }
         
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(102, 126, 234, 0.25);
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            animation: slideUp 0.6s ease both;
+        }
+        
+        .footer p {
+            margin-bottom: 12px;
+        }
+        
+        .footer .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
                 
         @media (max-width: 768px) {
             body {
@@ -926,34 +947,17 @@ public class MyController : ControllerBase
                 <li>Is added to the pipeline in the Program.cs file</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// Custom middleware example
+            <div class="code-block" data-language="code"><pre><code>// Custom middleware
 public class CustomMiddleware
 {
   private readonly RequestDelegate _next;
-
-  public CustomMiddleware(RequestDelegate next)
-  {
-    _next = next;
-  }
+  public CustomMiddleware(RequestDelegate next) => _next = next;
 
   public async Task InvokeAsync(HttpContext context)
   {
-    // Before next middleware
-    await context.Response.WriteAsync("Before next middleware&lt;br&gt;");
-
+    await context.Response.WriteAsync("Before next&lt;br&gt;");
     await _next(context);
-
-    // After next middleware
-    await context.Response.WriteAsync("After next middleware&lt;br&gt;");
-  }
-}
-
-// Extension method for registration
-public static class CustomMiddlewareExtensions
-{
-  public static IApplicationBuilder UseCustomMiddleware(this IApplicationBuilder builder)
-  {
-    return builder.UseMiddleware&lt;CustomMiddleware&gt;();
+    await context.Response.WriteAsync("After next&lt;br&gt;");
   }
 }</code></pre></div>
         </div>
@@ -1122,25 +1126,17 @@ app.Run();</code></pre></div>
                 <li><strong>Result filters:</strong> Run before and after result execution</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// Action filter example
+            <div class="code-block" data-language="code"><pre><code>// Action filter
 public class LogActionFilter : ActionFilterAttribute
 {
     private readonly ILogger&lt;LogActionFilter&gt; _logger;
-    
-    public LogActionFilter(ILogger&lt;LogActionFilter&gt; logger)
-    {
-        _logger = logger;
-    }
+    public LogActionFilter(ILogger&lt;LogActionFilter&gt; logger) => _logger = logger;
     
     public override void OnActionExecuting(ActionExecutingContext context)
-    {
-        _logger.LogInformation($"Executing: {context.ActionDescriptor.DisplayName}");
-    }
+        => _logger.LogInformation($"Executing: {context.ActionDescriptor.DisplayName}");
     
     public override void OnActionExecuted(ActionExecutedContext context)
-    {
-        _logger.LogInformation($"Executed: {context.ActionDescriptor.DisplayName}");
-    }
+        => _logger.LogInformation($"Executed: {context.ActionDescriptor.DisplayName}");
 }</code></pre></div>
         </div>
 
@@ -1257,7 +1253,7 @@ public async Task&lt;IActionResult&gt; Get(int id)
             
             <div class="code-block" data-language="code"><pre><code>// JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =&gt;
+    .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -1807,30 +1803,13 @@ public async Task&lt;string&gt; ProcessDataAsync(string data)
         <div class="answer">
             <p>The <strong>Circuit Breaker pattern</strong> prevents cascading failures by stopping requests to a failing service after a threshold is reached.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Using Polly for Circuit Breaker
+            <div class="code-block" data-language="code"><pre><code>// Polly Circuit Breaker
 builder.Services.AddHttpClient("ExternalApi")
-    .AddTransientHttpErrorPolicy(policy =&gt;
-        policy.OrResult(response =&gt; response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+    .AddTransientHttpErrorPolicy(policy =>
+        policy.OrResult(response => response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
               .CircuitBreakerAsync(
                   handledEventsAllowedBeforeBreaking: 3,
-                  durationOfBreak: TimeSpan.FromSeconds(30)));
-
-// Usage in service
-public class ExternalService
-{
-    private readonly IHttpClientFactory _httpClientFactory;
-
-    public ExternalService(IHttpClientFactory httpClientFactory)
-    {
-        _httpClientFactory = httpClientFactory;
-    }
-
-    public async Task&lt;string&gt; GetDataAsync()
-    {
-        var client = _httpClientFactory.CreateClient("ExternalApi");
-        return await client.GetStringAsync("/api/data");
-    }
-}</code></pre></div>
+                  durationOfBreak: TimeSpan.FromSeconds(30)));</code></pre></div>
             
             <div class="important">
                 <strong>Important:</strong> Combine Circuit Breaker with Retry pattern for resilience. Use different thresholds for different services based on their criticality.
@@ -2055,9 +2034,7 @@ public class OrderCreatedConsumer : IConsumer&lt;OrderCreatedEvent&gt;
             <p><strong>CQRS (Command Query Responsibility Segregation)</strong> separates read and write operations for better scalability.</p>
             
             <div class="code-block" data-language="code"><pre><code>// Command interface
-public interface ICommand&lt;TResult&gt;
-{
-}
+public interface ICommand&lt;TResult&gt; { }
 
 public interface ICommandHandler&lt;TCommand, TResult&gt;
     where TCommand : ICommand&lt;TResult&gt;
@@ -2066,9 +2043,7 @@ public interface ICommandHandler&lt;TCommand, TResult&gt;
 }
 
 // Query interface
-public interface IQuery&lt;TResult&gt;
-{
-}
+public interface IQuery&lt;TResult&gt; { }
 
 public interface IQueryHandler&lt;TQuery, TResult&gt;
     where TQuery : IQuery&lt;TResult&gt;
@@ -2076,30 +2051,16 @@ public interface IQueryHandler&lt;TQuery, TResult&gt;
     Task&lt;TResult&gt; Handle(TQuery query);
 }
 
-// Command implementation
-public record CreateProductCommand(
-    string Name,
-    decimal Price,
-    int CategoryId
-) : ICommand&lt;int&gt;;
+// Command example
+public record CreateProductCommand(string Name, decimal Price, int CategoryId)
+    : ICommand&lt;int&gt;;
 
-public class CreateProductCommandHandler 
-    : ICommandHandler&lt;CreateProductCommand, int&gt;
+public class CreateProductCommandHandler : ICommandHandler&lt;CreateProductCommand, int&gt;
 {
-    private readonly AppDbContext _context;
-    
     public async Task&lt;int&gt; Handle(CreateProductCommand command)
     {
-        var product = new Product
-        {
-            Name = command.Name,
-            Price = command.Price,
-            CategoryId = command.CategoryId
-        };
-        
-        _context.Products.Add(product);
-        await _context.SaveChangesAsync();
-        
+        var product = new Product { Name = command.Name, Price = command.Price };
+        // Save to database and return ID
         return product.Id;
     }
 }
@@ -2263,7 +2224,7 @@ public class PercentageFilter : IFeatureFilter
         <div class="answer">
             <p><strong>Database sharding</strong> distributes data across multiple databases for horizontal scaling.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Sharding strategy based on tenant ID
+            <div class="code-block" data-language="code"><pre><code>// Sharding strategy
 public interface IShardingStrategy
 {
     string GetShardKey(object entity);
@@ -2272,59 +2233,12 @@ public interface IShardingStrategy
 
 public class TenantShardingStrategy : IShardingStrategy
 {
-    private readonly IConfiguration _configuration;
-    
     public string GetShardKey(object entity)
-    {
-        if (entity is ITenantEntity tenantEntity)
-        {
-            return tenantEntity.TenantId.ToString();
-        }
-        throw new ArgumentException("Entity must implement ITenantEntity");
-    }
+        => entity is ITenantEntity tenantEntity ? tenantEntity.TenantId.ToString() 
+            : throw new ArgumentException("Entity must implement ITenantEntity");
     
     public string GetConnectionString(string shardKey)
-    {
-        return _configuration.GetConnectionString($"Shard_{shardKey}");
-    }
-}
-
-// Sharded DbContext factory
-public class ShardedDbContextFactory
-{
-    private readonly IShardingStrategy _shardingStrategy;
-    private readonly IServiceScopeFactory _scopeFactory;
-    
-    public async Task&lt;AppDbContext&gt; CreateDbContextAsync(object entity)
-    {
-        var shardKey = _shardingStrategy.GetShardKey(entity);
-        var connectionString = _shardingStrategy.GetConnectionString(shardKey);
-        
-        var optionsBuilder = new DbContextOptionsBuilder&lt;AppDbContext&gt;();
-        optionsBuilder.UseSqlServer(connectionString);
-        
-        return new AppDbContext(optionsBuilder.Options);
-    }
-}
-
-// Repository with sharding
-public class ShardedRepository&lt;T&gt; where T : class, ITenantEntity
-{
-    private readonly ShardedDbContextFactory _contextFactory;
-    
-    public async Task AddAsync(T entity)
-    {
-        using var context = await _contextFactory.CreateDbContextAsync(entity);
-        context.Set&lt;T&gt;().Add(entity);
-        await context.SaveChangesAsync();
-    }
-    
-    public async Task&lt;T&gt; GetByIdAsync(int id, string tenantId)
-    {
-        var entity = new T { Id = id, TenantId = tenantId };
-        using var context = await _contextFactory.CreateDbContextAsync(entity);
-        return await context.Set&lt;T&gt;().FindAsync(id);
-    }
+        => _configuration.GetConnectionString($"Shard_{shardKey}");
 }</code></pre></div>
         </div>
 
@@ -2392,49 +2306,23 @@ builder.Services.AddScoped&lt;IReadOnlyDbContext, ReadOnlyDbContext&gt;();</code
         <div class="answer">
             <p><strong>API gateway</strong> provides a single entry point for multiple microservices.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Using YARP (Yet Another Reverse Proxy)
+            <div class="code-block" data-language="code"><pre><code>// YARP configuration
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
-// appsettings.json
+// appsettings.json (simplified)
 {
   "ReverseProxy": {
     "Routes": {
       "products-route": {
         "ClusterId": "products-cluster",
-        "Match": {
-          "Path": "/api/products/{**catch-all}"
-        },
-        "Transforms": [
-          { "PathRemovePrefix": "/api" }
-        ]
-      },
-      "orders-route": {
-        "ClusterId": "orders-cluster",
-        "Match": {
-          "Path": "/api/orders/{**catch-all}"
-        },
-        "Transforms": [
-          { "PathRemovePrefix": "/api" }
-        ]
+        "Match": { "Path": "/api/products/{**catch-all}" }
       }
     },
     "Clusters": {
       "products-cluster": {
         "Destinations": {
-          "products-primary": {
-            "Address": "https://products-service:5001"
-          },
-          "products-secondary": {
-            "Address": "https://products-service-backup:5001"
-          }
-        }
-      },
-      "orders-cluster": {
-        "Destinations": {
-          "orders-primary": {
-            "Address": "https://orders-service:5002"
-          }
+          "products-primary": { "Address": "https://products-service:5001" }
         }
       }
     }
@@ -2455,14 +2343,14 @@ app.Run();</code></pre></div>
         <div class="answer">
             <p><strong>OAuth 2.0</strong> and <strong>OpenID Connect</strong> provide secure authentication and authorization.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Using OpenID Connect
-builder.Services.AddAuthentication(options =&gt;
+            <div class="code-block" data-language="code"><pre><code>// OpenID Connect
+builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
 })
 .AddCookie()
-.AddOpenIdConnect(options =&gt;
+.AddOpenIdConnect(options =>
 {
     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.Authority = "https://identityserver.example.com";
@@ -2471,41 +2359,13 @@ builder.Services.AddAuthentication(options =&gt;
     options.ResponseType = "code";
     options.SaveTokens = true;
     options.GetClaimsFromUserInfoEndpoint = true;
-    options.Scope.Add("openid");
-    options.Scope.Add("profile");
-    options.Scope.Add("email");
-    options.Scope.Add("api1");
+    options.Scope.Add("openid profile email api1");
     options.TokenValidationParameters = new TokenValidationParameters
     {
         NameClaimType = "name",
         RoleClaimType = "role"
     };
-});
-
-// Resource server configuration
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", options =&gt;
-    {
-        options.Authority = "https://identityserver.example.com";
-        options.Audience = "api1";
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ClockSkew = TimeSpan.Zero
-        };
-    });
-
-// Protected API endpoint
-[Authorize]
-[HttpGet("profile")]
-public IActionResult GetProfile()
-{
-    var claims = User.Claims.Select(c =&gt; new { c.Type, c.Value });
-    return Ok(claims);
-}</code></pre></div>
+});</code></pre></div>
         </div>
 
         <div class="question">
@@ -2514,68 +2374,35 @@ public IActionResult GetProfile()
         <div class="answer">
             <p><strong>GraphQL</strong> provides a flexible query language for APIs.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Using HotChocolate
+            <div class="code-block" data-language="code"><pre><code>// HotChocolate GraphQL
 builder.Services
     .AddGraphQLServer()
     .AddQueryType&lt;Query&gt;()
     .AddMutationType&lt;Mutation&gt;()
-    .AddSubscriptionType&lt;Subscription&gt;()
-    .AddType&lt;ProductType&gt;()
     .AddProjections()
     .AddFiltering()
     .AddSorting();
 
-// Query type
 public class Query
 {
-    [UseProjection]
-    [UseFiltering]
-    [UseSorting]
+    [UseProjection, UseFiltering, UseSorting]
     public IQueryable&lt;Product&gt; GetProducts([Service] AppDbContext context)
-    {
-        return context.Products;
-    }
+        => context.Products;
     
-    public async Task&lt;Product&gt; GetProductAsync(
-        int id, 
-        [Service] AppDbContext context)
-    {
-        return await context.Products.FindAsync(id);
-    }
+    public async Task&lt;Product&gt; GetProductAsync(int id, [Service] AppDbContext context)
+        => await context.Products.FindAsync(id);
 }
 
-// Mutation type
 public class Mutation
 {
-    public async Task&lt;Product&gt; CreateProductAsync(
-        CreateProductInput input,
-        [Service] AppDbContext context)
+    public async Task&lt;Product&gt; CreateProductAsync(CreateProductInput input, [Service] AppDbContext context)
     {
-        var product = new Product
-        {
-            Name = input.Name,
-            Price = input.Price,
-            CategoryId = input.CategoryId
-        };
-        
+        var product = new Product { Name = input.Name, Price = input.Price };
         context.Products.Add(product);
         await context.SaveChangesAsync();
-        
         return product;
     }
-}
-
-// Input type
-public class CreateProductInput
-{
-    public string Name { get; set; }
-    public decimal Price { get; set; }
-    public int CategoryId { get; set; }
-}
-
-// Program.cs
-app.MapGraphQL();
-app.UseWebSockets();</code></pre></div>
+}</code></pre></div>
         </div>
 
         <div class="question">
@@ -2584,76 +2411,29 @@ app.UseWebSockets();</code></pre></div>
         <div class="answer">
             <p><strong>SignalR with Redis backplane</strong> enables real-time communication across multiple servers.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Configure SignalR with Redis backplane
+            <div class="code-block" data-language="code"><pre><code>// SignalR with Redis backplane
 builder.Services.AddSignalR()
-    .AddStackExchangeRedis(connectionString, options =&gt;
+    .AddStackExchangeRedis(connectionString, options =>
     {
         options.Configuration.ChannelPrefix = "MyApp";
     });
 
-// Hub for real-time analytics
 public class AnalyticsHub : Hub
 {
-    private readonly IAnalyticsService _analyticsService;
-    
     public async Task JoinGroup(string groupName)
-    {
-        await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-    }
-    
-    public async Task LeaveGroup(string groupName)
-    {
-        await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
-    }
+        => await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
     
     public async Task SubscribeToMetric(string metricName)
-    {
-        await Groups.AddToGroupAsync(Context.ConnectionId, $"metric-{metricName}");
-    }
+        => await Groups.AddToGroupAsync(Context.ConnectionId, $"metric-{metricName}");
 }
 
-// Analytics service
 public class AnalyticsService
 {
     private readonly IHubContext&lt;AnalyticsHub&gt; _hubContext;
     
     public async Task PublishMetricAsync(string metricName, object value)
-    {
-        await _hubContext.Clients.Group($"metric-{metricName}")
-            .SendAsync("MetricUpdate", new
-            {
-                Metric = metricName,
-                Value = value,
-                Timestamp = DateTime.UtcNow
-            });
-    }
-    
-    public async Task PublishDashboardUpdateAsync(DashboardData data)
-    {
-        await _hubContext.Clients.Group("dashboard")
-            .SendAsync("DashboardUpdate", data);
-    }
-}
-
-// Background service for metrics collection
-public class MetricsCollectorService : BackgroundService
-{
-    private readonly IAnalyticsService _analyticsService;
-    
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-    {
-        while (!stoppingToken.IsCancellationRequested)
-        {
-            var metrics = await CollectMetricsAsync();
-            
-            foreach (var metric in metrics)
-            {
-                await _analyticsService.PublishMetricAsync(metric.Name, metric.Value);
-            }
-            
-            await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
-        }
-    }
+        => await _hubContext.Clients.Group($"metric-{metricName}")
+            .SendAsync("MetricUpdate", new { Metric = metricName, Value = value, Timestamp = DateTime.UtcNow });
 }</code></pre></div>
         </div>
 
@@ -2663,56 +2443,14 @@ public class MetricsCollectorService : BackgroundService
         <div class="answer">
             <p><strong>Connection pooling optimization</strong> reduces connection overhead and improves performance.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Configure connection pooling
-builder.Services.AddDbContext&lt;AppDbContext&gt;(options =&gt;
-{
-    options.UseSqlServer(connectionString, sqlOptions =&gt;
+            <div class="code-block" data-language="code"><pre><code>// Connection pooling
+builder.Services.AddDbContext&lt;AppDbContext&gt;(options =>
+    options.UseSqlServer(connectionString, sqlOptions =>
     {
-        sqlOptions.EnableRetryOnFailure(
-            maxRetryCount: 5,
-            maxRetryDelay: TimeSpan.FromSeconds(30),
-            errorNumbersToAdd: null);
-        
-        // Configure command timeout
+        sqlOptions.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(30));
         sqlOptions.CommandTimeout(30);
-        
-        // Configure connection resiliency
-        sqlOptions.EnableRetryOnFailure();
-    });
-    
-    // Configure connection pool size
-    options.UseSqlServer(connectionString, sqlOptions =&gt;
-    {
         sqlOptions.MaxBatchSize(100);
-    });
-});
-
-// Custom connection pool management
-public class ConnectionPoolMonitor
-{
-    private readonly ILogger&lt;ConnectionPoolMonitor&gt; _logger;
-    
-    public void MonitorConnectionPool(DbConnection connection)
-    {
-        var stats = ((SqlConnection)connection).GetStatistics();
-        
-        _logger.LogInformation(
-            "Connection Pool Stats - " +
-            "Connections: {Total}, " +
-            "Active: {Active}, " +
-            "Idle: {Idle}, " +
-            "Broken: {Broken}",
-            stats.Connections,
-            stats.ActiveConnections,
-            stats.IdleConnections,
-            stats.BrokenConnections);
-    }
-}
-
-// Connection string optimization
-"DefaultConnection": "Server=myServer;Database=myDb;User Id=myUser;Password=myPassword;" +
-    "Max Pool Size=100;Min Pool Size=10;Connection Timeout=30;" +
-    "Pooling=true;Connection Lifetime=300;"</code></pre></div>
+    }));</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -2785,7 +2523,6 @@ public class OrderService
         var order = await _repository.GetByIdAsync(orderId);
         order.Confirm();
         await _repository.SaveAsync(order);
-        
         await _notificationService.SendOrderConfirmationAsync(order);
     }
 }</code></pre></div>
@@ -2798,27 +2535,17 @@ public class OrderService
             <p><strong>Domain-Driven Design</strong> focuses on core domain logic and domain models.</p>
             
             <div class="code-block" data-language="code"><pre><code>// Value Object (immutable)
-public record Money
+public record Money(decimal Amount, string Currency)
 {
-    public decimal Amount { get; }
-    public string Currency { get; }
-    
-    public Money(decimal amount, string currency)
+    public Money(decimal amount, string currency) : this(amount, currency)
     {
-        if (amount &lt; 0)
-            throw new ArgumentException("Amount cannot be negative");
-        
-        Amount = amount;
-        Currency = currency;
+        if (amount < 0) throw new ArgumentException("Amount cannot be negative");
     }
     
     public Money Add(Money other)
-    {
-        if (Currency != other.Currency)
-            throw new ArgumentException("Cannot add different currencies");
-        
-        return new Money(Amount + other.Amount, Currency);
-    }
+        => Currency != other.Currency 
+            ? throw new ArgumentException("Cannot add different currencies")
+            : new Money(Amount + other.Amount, Currency);
 }
 
 // Entity (has identity)
@@ -2827,7 +2554,6 @@ public class Product : IAggregateRoot
     public Guid Id { get; private set; }
     public string Name { get; private set; }
     public Money Price { get; private set; }
-    
     private readonly List&lt;DomainEvent&gt; _domainEvents = new();
     public IReadOnlyCollection&lt;DomainEvent&gt; DomainEvents =&gt; _domainEvents.AsReadOnly();
     
@@ -2836,51 +2562,6 @@ public class Product : IAggregateRoot
         Id = id;
         Name = name;
         Price = price;
-    }
-    
-    public void UpdatePrice(Money newPrice)
-    {
-        var oldPrice = Price;
-        Price = newPrice;
-        
-        _domainEvents.Add(new PriceUpdatedEvent(Id, oldPrice, newPrice));
-    }
-    
-    public void ClearDomainEvents()
-    {
-        _domainEvents.Clear();
-    }
-}
-
-// Domain Event
-public record PriceUpdatedEvent(
-    Guid ProductId,
-    Money OldPrice,
-    Money NewPrice
-) : DomainEvent;
-
-// Repository
-public interface IProductRepository
-{
-    Task&lt;Product&gt; GetByIdAsync(Guid id);
-    Task AddAsync(Product product);
-    Task SaveAsync();
-}
-
-// Application Service with Unit of Work
-public class ProductService
-{
-    private readonly IProductRepository _repository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IDomainEventDispatcher _eventDispatcher;
-    
-    public async Task UpdatePriceAsync(Guid productId, Money newPrice)
-    {
-        var product = await _repository.GetByIdAsync(productId);
-        product.UpdatePrice(newPrice);
-        
-        await _unitOfWork.SaveChangesAsync();
-        await _eventDispatcher.DispatchAsync(product.DomainEvents);
     }
 }</code></pre></div>
         </div>
@@ -2897,83 +2578,25 @@ public class OrderSaga
     private readonly IOrderRepository _orderRepository;
     private readonly IInventoryService _inventoryService;
     private readonly IPaymentService _paymentService;
-    private readonly IShippingService _shippingService;
     
-    public async Task ExecuteAsync(CreateOrderCommand command)
+    public async Task ProcessOrderAsync(Guid orderId)
     {
-        var order = new Order(command.CustomerId, command.Items);
-        await _orderRepository.AddAsync(order);
+        var order = await _orderRepository.GetByIdAsync(orderId);
         
-        try
-        {
-            // Step 1: Reserve inventory
-            await _inventoryService.ReserveAsync(order.Id, order.Items);
-            
-            // Step 2: Process payment
-            var paymentResult = await _paymentService.ProcessAsync(
-                order.Id, 
-                order.TotalAmount);
-            
-            if (!paymentResult.Success)
-            {
-                // Compensate: Release inventory
-                await _inventoryService.ReleaseAsync(order.Id, order.Items);
-                order.MarkAsFailed("Payment failed");
-                await _orderRepository.UpdateAsync(order);
-                return;
-            }
-            
-            // Step 3: Create shipment
-            await _shippingService.CreateShipmentAsync(order.Id, order.ShippingAddress);
-            
-            order.MarkAsCompleted();
-            await _orderRepository.UpdateAsync(order);
-        }
-        catch (Exception ex)
-        {
-            // Compensate: Rollback all steps
-            await CompensateAsync(order);
-            order.MarkAsFailed(ex.Message);
-            await _orderRepository.UpdateAsync(order);
-        }
-    }
-    
-    private async Task CompensateAsync(Order order)
-    {
-        await _inventoryService.ReleaseAsync(order.Id, order.Items);
-        await _paymentService.RefundAsync(order.Id, order.TotalAmount);
-        await _shippingService.CancelShipmentAsync(order.Id);
-    }
-}
-
-// Choreography-based saga using events
-public class OrderCreatedSagaHandler : IConsumer&lt;OrderCreatedEvent&gt;
-{
-    public async Task Consume(ConsumeContext&lt;OrderCreatedEvent&gt; context)
-    {
-        // Reserve inventory
-        await _inventoryService.ReserveAsync(context.Message.OrderId, context.Message.Items);
+        // Step 1: Reserve inventory
+        await _inventoryService.ReserveItemsAsync(order.Items);
         
-        // Publish next event
-        await context.Publish(new InventoryReservedEvent(context.Message.OrderId));
-    }
-}
-
-public class InventoryReservedSagaHandler : IConsumer&lt;InventoryReservedEvent&gt;
-{
-    public async Task Consume(ConsumeContext&lt;InventoryReservedEvent&gt; context)
-    {
-        // Process payment
-        var result = await _paymentService.ProcessAsync(context.Message.OrderId);
+        // Step 2: Process payment
+        var paymentResult = await _paymentService.ProcessPaymentAsync(order);
+        if (!paymentResult.Success)
+        {
+            await _inventoryService.ReleaseItemsAsync(order.Items);
+            throw new Exception("Payment failed");
+        }
         
-        if (result.Success)
-        {
-            await context.Publish(new PaymentProcessedEvent(context.Message.OrderId));
-        }
-        else
-        {
-            await context.Publish(new PaymentFailedEvent(context.Message.OrderId));
-        }
+        // Step 3: Confirm order
+        order.Confirm();
+        await _orderRepository.SaveAsync(order);
     }
 }</code></pre></div>
         </div>
@@ -2984,7 +2607,7 @@ public class InventoryReservedSagaHandler : IConsumer&lt;InventoryReservedEvent&
         <div class="answer">
             <p><strong>Strangler Fig pattern</strong> gradually replaces legacy systems by building new functionality around the old system.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// API gateway that routes to legacy or new service
+            <div class="code-block" data-language="code"><pre><code>// Strangler Fig pattern
 public class MigrationGateway
 {
     private readonly ILegacyServiceClient _legacyClient;
@@ -2992,75 +2615,15 @@ public class MigrationGateway
     private readonly IMigrationConfiguration _config;
     
     public async Task&lt;OrderDto&gt; GetOrderAsync(int orderId)
-    {
-        // Check if this order is migrated
-        if (await _config.IsMigratedAsync("Order", orderId))
-        {
-            return await _newClient.GetOrderAsync(orderId);
-        }
-        
-        // Fall back to legacy system
-        return await _legacyClient.GetOrderAsync(orderId);
-    }
+        => await _config.IsMigratedAsync("Order", orderId)
+            ? await _newClient.GetOrderAsync(orderId)
+            : await _legacyClient.GetOrderAsync(orderId);
     
     public async Task&lt;OrderDto&gt; CreateOrderAsync(CreateOrderRequest request)
     {
-        // Always create in new system
         var order = await _newClient.CreateOrderAsync(request);
-        
-        // Mark as migrated
         await _config.MarkAsMigratedAsync("Order", order.Id);
-        
         return order;
-    }
-}
-
-// Feature flag for gradual rollout
-public class FeatureBasedRouter
-{
-    private readonly IFeatureManager _featureManager;
-    private readonly ILegacyService _legacyService;
-    private readonly INewService _newService;
-    
-    public async Task&lt;T&gt; ExecuteAsync&lt;T&gt;(string featureName, Func&lt;ILegacyService, Task&lt;T&gt;&gt; legacy, Func&lt;INewService, Task&lt;T&gt;&gt; @new)
-    {
-        if (await _featureManager.IsEnabledAsync(featureName))
-        {
-            return await @new(_newService);
-        }
-        
-        return await legacy(_legacyService);
-    }
-}
-
-// Data synchronization
-public class DataSyncService : BackgroundService
-{
-    private readonly ILegacyRepository _legacyRepo;
-    private readonly INewRepository _newRepo;
-    
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-    {
-        while (!stoppingToken.IsCancellationRequested)
-        {
-            // Sync data from legacy to new system
-            var legacyOrders = await _legacyRepo.GetOrdersModifiedSinceAsync(_lastSyncTime);
-            
-            foreach (var order in legacyOrders)
-            {
-                if (!await _newRepo.ExistsAsync(order.Id))
-                {
-                    await _newRepo.AddAsync(MapToNewModel(order));
-                }
-                else
-                {
-                    await _newRepo.UpdateAsync(MapToNewModel(order));
-                }
-            }
-            
-            _lastSyncTime = DateTime.UtcNow;
-            await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
-        }
     }
 }</code></pre></div>
         </div>
@@ -3071,66 +2634,16 @@ public class DataSyncService : BackgroundService
         <div class="answer">
             <p><strong>Bulkhead pattern</strong> isolates resources to prevent cascading failures.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Using Polly for bulkhead isolation
+            <div class="code-block" data-language="code"><pre><code>// Bulkhead pattern with Polly
 builder.Services.AddHttpClient("ExternalApi")
     .AddPolicyHandler(Policy.BulkheadAsync(
         maxParallelization: 10,
         maxQueuingActions: 20,
-        onBulkheadRejectedAsync: context =&gt;
+        onBulkheadRejectedAsync: context =>
         {
-            _logger.LogWarning("Bulkhead rejected - too many concurrent requests");
+            Console.WriteLine("Bulkhead rejected - queue full");
             return Task.CompletedTask;
-        }));
-
-// Custom bulkhead implementation
-public class BulkheadSemaphore
-{
-    private readonly SemaphoreSlim _semaphore;
-    private readonly ILogger&lt;BulkheadSemaphore&gt; _logger;
-    
-    public BulkheadSemaphore(int maxConcurrent, ILogger&lt;BulkheadSemaphore&gt; logger)
-    {
-        _semaphore = new SemaphoreSlim(maxConcurrent, maxConcurrent);
-        _logger = logger;
-    }
-    
-    public async Task&lt;T&gt; ExecuteAsync&lt;T&gt;(Func&lt;Task&lt;T&gt;&gt; operation)
-    {
-        if (!await _semaphore.WaitAsync(TimeSpan.FromSeconds(5)))
-        {
-            _logger.LogWarning("Bulkhead rejected - timeout waiting for semaphore");
-            throw new BulkheadRejectedException("Operation rejected due to bulkhead limit");
-        }
-        
-        try
-        {
-            return await operation();
-        }
-        finally
-        {
-            _semaphore.Release();
-        }
-    }
-}
-
-// Usage in service
-public class ExternalApiService
-{
-    private readonly BulkheadSemaphore _bulkhead;
-    
-    public ExternalApiService(BulkheadSemaphore bulkhead)
-    {
-        _bulkhead = bulkhead;
-    }
-    
-    public async Task&lt;Data&gt; GetDataAsync()
-    {
-        return await _bulkhead.ExecuteAsync(async () =&gt;
-        {
-            return await _httpClient.GetAsync("/api/data");
-        });
-    }
-}</code></pre></div>
+        }));</code></pre></div>
         </div>
 
         <div class="footer">
