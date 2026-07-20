@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -185,10 +185,13 @@
             <p><strong>Reference types</strong> store a reference (memory address) to the actual data, which is stored on the heap. They include classes, interfaces, delegates, arrays, and strings. When you assign a reference type to another variable, only the reference is copied, not the actual data.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ValueReferenceTypes.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ValueReferenceTypes.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">int</span> a = <span class="number">10</span>;
@@ -210,10 +213,13 @@ obj2.<span class="property">Value</span> = <span class="number">20</span>;      
             <p><strong>Class</strong> is a reference type stored on the heap. Classes support inheritance, can be abstract, and are passed by reference. Use classes for larger objects or when inheritance is needed.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">StructClass.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">StructClass.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">Point</span> { <span class="keyword">public</span> <span class="keyword">int</span> <span class="property">X</span>; <span class="keyword">public</span> <span class="keyword">int</span> <span class="property">Y</span>; }
@@ -237,10 +243,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p>Both represent a sequence of Unicode characters and are immutable (once created, cannot be changed). The choice between string and String is purely stylistic - most C# developers prefer the lowercase string.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">String.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">String.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">string</span> s1 = <span class="string">"hello"</span>;
@@ -256,10 +265,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>readonly</strong> fields can be initialized at declaration or in the constructor. They can be assigned only once (either at declaration or in constructor). readonly fields are runtime constants and can be of any type.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ConstReadonly.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ConstReadonly.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">class</span> <span class="type">Constants</span>
@@ -282,10 +294,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Instance</strong> members belong to a specific object instance. Each object has its own copy of instance members. They can only be accessed through an instance of the class.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">StaticInstance.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">StaticInstance.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">class</span> <span class="type">Counter</span>
@@ -309,10 +324,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>virtual</strong> methods have a default implementation but can be overridden in derived classes. The base class provides a default behavior that derived classes can choose to override or use as-is.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">AbstractVirtual.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">AbstractVirtual.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="type">Shape</span>
@@ -344,10 +362,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Abstract class</strong> can contain both abstract members (no implementation) and concrete members (with implementation). A class can inherit from only one abstract class.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">InterfaceAbstract.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">InterfaceAbstract.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">interface</span> <span class="type">IShape</span>
@@ -376,10 +397,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>override</strong> is used to provide a new implementation for a virtual or abstract method from a base class.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">SealedOverride.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">SealedOverride.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">class</span> <span class="type">BaseClass</span>
@@ -418,10 +442,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>protected internal</strong> - Accessible within the same assembly OR from derived classes in any assembly</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">AccessModifiers.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">AccessModifiers.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">class</span> <span class="type">AccessModifiers</span>
@@ -450,10 +477,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             </ul>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">DataTypes.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">DataTypes.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">int</span> age = <span class="number">25</span>;
@@ -473,10 +503,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>decimal</strong> is a 128-bit decimal type with 28-29 digits of precision. It's used for financial calculations where precision is critical.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">FloatDoubleDecimal.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">FloatDoubleDecimal.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">float</span> f = <span class="number">3.14f</span>;
@@ -495,10 +528,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Explicit conversion</strong> requires a cast operator and is used when converting from a larger type to a smaller type, which may result in data loss.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">TypeConversion.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">TypeConversion.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Implicit conversion - no data loss</span>
@@ -519,10 +555,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Explicit type</strong> declaration specifies the type explicitly. It makes the code more readable and is preferred when the type isn't obvious from the right side.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">VarExplicit.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">VarExplicit.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Using var - type inferred</span>
@@ -544,10 +583,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Nullable reference types</strong> are a compiler feature that makes reference types non-nullable by default. You must explicitly mark them as nullable (T?) to allow null values.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">NullableTypes.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">NullableTypes.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Nullable value type</span>
@@ -571,10 +613,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>??</strong> (null-coalescing operator) returns the left-hand operand if it's not null, otherwise it returns the right-hand operand. It's used to provide a default value for nullable types.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">NullCoalescing.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">NullCoalescing.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">string</span>? name = <span class="keyword">null</span>;
@@ -591,10 +636,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>?.</strong> (null-conditional operator) returns null if the left-hand operand is null, otherwise it accesses the member. It's used to safely access members of potentially null objects.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">NullConditional.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">NullConditional.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">string</span>? name = <span class="keyword">null</span>;
@@ -612,10 +660,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Equals()</strong> method is inherited from Object and compares values. For reference types, it compares references by default but can be overridden to compare values.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">EqualsOperator.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">EqualsOperator.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">string</span> s1 = <span class="string">"hello"</span>;
@@ -638,10 +689,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>as</strong> operator attempts to cast an expression to a specified type. If the cast fails, it returns null instead of throwing an exception.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">IsAs.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">IsAs.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">object</span> obj = <span class="string">"hello"</span>;
@@ -667,10 +721,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>nameof</strong> operator returns the name of a variable, type, or member as a string. It's evaluated at compile time and is useful for avoiding hard-coded strings in code.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Nameof.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Nameof.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">string</span> className = <span class="keyword">nameof</span>(<span class="type">MyClass</span>);  <span class="comment">// "MyClass"</span>
@@ -694,10 +751,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>while loop</strong> is used when you don't know the number of iterations and the loop continues as long as the condition is true.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Loops.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Loops.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// for loop</span>
@@ -730,10 +790,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>return</strong> exits the current method and optionally returns a value to the caller.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">BreakContinueReturn.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">BreakContinueReturn.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// break</span>
@@ -764,10 +827,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>switch expression</strong> is a more concise syntax introduced in C# 8 that returns a value and uses => syntax. It's an expression that can be assigned to a variable.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">SwitchExpression.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">SwitchExpression.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Switch statement</span>
@@ -801,10 +867,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>using statement</strong> ensures that IDisposable objects are properly disposed. It's syntactic sugar for a try-finally block that calls Dispose(). It's essential for managing resources like file handles and database connections.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">UsingStatement.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">UsingStatement.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// using statement</span>
@@ -831,10 +900,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>out</strong> parameter passes a reference to a variable that must be assigned by the method before returning. The variable doesn't need to be initialized before being passed.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">RefOut.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">RefOut.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// ref parameter</span>
@@ -861,10 +933,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Optional parameters</strong> have default values and can be omitted when calling the method. They must come after required parameters.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ParamsOptional.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ParamsOptional.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// params parameter</span>
@@ -894,10 +969,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Named arguments</strong> specify the parameter name followed by a colon and the value. They can be passed in any order and improve code readability.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">NamedArguments.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">NamedArguments.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Positional arguments</span>
@@ -918,10 +996,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Method overriding</strong> is runtime polymorphism where a derived class provides a new implementation for a virtual method from a base class.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">OverloadingOverriding.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">OverloadingOverriding.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Method overloading</span>
@@ -957,10 +1038,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Regular methods</strong> are defined within the class itself and have direct access to private members.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ExtensionMethods.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ExtensionMethods.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Extension method</span>
@@ -985,10 +1069,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Lambda expressions</strong> are anonymous functions that can be used to create delegates or expression trees. They're more concise but have some limitations compared to local functions.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">LocalFunctionLambda.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">LocalFunctionLambda.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Local function</span>
@@ -1013,10 +1100,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Traditional properties</strong> explicitly define the backing field and can include custom logic in the getter/setter.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Properties.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Properties.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Auto-implemented property</span>
@@ -1039,10 +1129,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>init-only properties</strong> can be set during object initialization or with a with expression. They're immutable after initialization but can be set in object initializers.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">InitOnly.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">InitOnly.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">class</span> <span class="type">Person</span>
@@ -1068,10 +1161,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Properties</strong> expose data as public members with get and set accessors. They use named accessors and don't support parameters.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Indexers.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Indexers.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">class</span> <span class="type">SampleCollection</span>
@@ -1097,10 +1193,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>required properties</strong> must be set during object initialization. The compiler enforces this requirement at compile time. They're useful for ensuring that essential properties are always initialized.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">RequiredProperties.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">RequiredProperties.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">class</span> <span class="type">Person</span>
@@ -1122,10 +1221,13 @@ person2.<span class="property">Age</span> = <span class="number">30</span>;     
             <p><strong>Delegate</strong> is a type-safe function pointer that references a method. Delegates are used to pass methods as arguments to other methods. They are the foundation for events in C#.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Delegate.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Delegate.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Declare delegate</span>
@@ -1150,10 +1252,13 @@ del(<span class="string">"Hello"</span>);</code>
             <p><strong>Func</strong> and <strong>Action</strong> are predefined generic delegates. Func returns a value, Action doesn't. They eliminate the need to declare custom delegate types.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">FuncAction.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">FuncAction.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Custom delegate</span>
@@ -1174,10 +1279,13 @@ del(<span class="string">"Hello"</span>);</code>
             <p><strong>Single-cast delegate</strong> references only one method. In C#, all delegates are multicast, but you can treat them as single-cast by only assigning one method.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">MulticastDelegate.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">MulticastDelegate.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public delegate</span> <span class="keyword">void</span> <span class="type">MessageDelegate</span>(<span class="keyword">string</span> message);
@@ -1197,10 +1305,13 @@ del(<span class="string">"Hello"</span>);  <span class="comment">// Calls all th
             <p><strong>Delegate</strong> can be invoked from anywhere it's accessible. Events add a layer of protection by restricting invocation to the declaring class.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Event.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Event.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">class</span> <span class="type">Publisher</span>
@@ -1223,10 +1334,13 @@ del(<span class="string">"Hello"</span>);  <span class="comment">// Calls all th
             <p><strong>Custom delegate</strong> is a delegate you define yourself. Use it when you need a different signature than the standard EventHandler pattern.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">EventHandler.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">EventHandler.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Standard EventHandler</span>
@@ -1246,10 +1360,13 @@ del(<span class="string">"Hello"</span>);  <span class="comment">// Calls all th
             <p><strong>async/await</strong> is a language feature for writing asynchronous code that looks synchronous. The async keyword marks a method as asynchronous, and await suspends execution until the awaited task completes.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">AsyncAwait.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">AsyncAwait.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public async</span> <span class="type">Task</span><<span class="keyword">string</span>> <span class="method">GetDataAsync</span>()
@@ -1270,10 +1387,13 @@ del(<span class="string">"Hello"</span>);  <span class="comment">// Calls all th
             <p><strong>Task&lt;T&gt;</strong> represents an asynchronous operation that returns a value of type T. The Result property contains the returned value after the task completes.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">TaskTaskT.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">TaskTaskT.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Task - no return value</span>
@@ -1298,10 +1418,13 @@ del(<span class="string">"Hello"</span>);  <span class="comment">// Calls all th
             <p><strong>ConfigureAwait(true)</strong> captures the current context and resumes on it. This is the default behavior and is needed when you need to access UI elements or HttpContext.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ConfigureAwait.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ConfigureAwait.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Library code - use ConfigureAwait(false)</span>
@@ -1327,10 +1450,13 @@ del(<span class="string">"Hello"</span>);  <span class="comment">// Calls all th
             <p><strong>Task</strong> is a class that always represents an asynchronous operation. It has more allocation overhead but is more flexible.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ValueTask.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ValueTask.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// ValueTask - better for operations that may complete synchronously</span>
@@ -1350,10 +1476,13 @@ del(<span class="string">"Hello"</span>);  <span class="comment">// Calls all th
             <p><strong>async Task</strong> is the standard way to write async methods. It can be awaited and exceptions can be caught by the caller.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">AsyncVoid.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">AsyncVoid.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// async void - only for event handlers</span>
@@ -1378,10 +1507,13 @@ del(<span class="string">"Hello"</span>);  <span class="comment">// Calls all th
             <p><strong>Generics</strong> allow you to define type-safe data structures without committing to a specific data type. They provide type safety, performance improvements, and code reuse.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Generics.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Generics.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Generic class</span>
@@ -1406,10 +1538,13 @@ del(<span class="string">"Hello"</span>);  <span class="comment">// Calls all th
             <p><strong>Generic method</strong> is a method that has its own type parameters, independent of the class's type parameters. It can be called with different type arguments each time.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">GenericClassMethod.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">GenericClassMethod.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Generic class</span>
@@ -1436,10 +1571,13 @@ del(<span class="string">"Hello"</span>);  <span class="comment">// Calls all th
             <p><strong>Contravariance</strong> allows you to use a more generic (less derived) type than originally specified. It works with the 'in' keyword.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">CovarianceContravariance.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">CovarianceContravariance.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Covariance - out keyword</span>
@@ -1461,10 +1599,13 @@ del(<span class="string">"Hello"</span>);  <span class="comment">// Calls all th
             <p><strong>IEnumerable&lt;T&gt;</strong> is an interface that represents a sequence. It's read-only and supports deferred execution. It's used for iteration and LINQ queries.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ListIEnumerable.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ListIEnumerable.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// List<T> - concrete, modifiable</span>
@@ -1488,10 +1629,13 @@ list.<span class="method">Add</span>(<span class="number">4</span>);
             <p><strong>Hashtable</strong> is a non-generic collection that stores key-value pairs as objects. It's not type-safe and requires boxing/unboxing, leading to performance issues.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">DictionaryHashtable.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">DictionaryHashtable.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Dictionary - type-safe</span>
@@ -1510,10 +1654,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>Generic constraints</strong> restrict the types that can be used as type arguments for a generic type or method. They ensure that the type argument meets certain requirements.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">GenericConstraints.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">GenericConstraints.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// where T : class - reference type</span>
@@ -1535,10 +1682,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>Exception handling</strong> is a mechanism to handle runtime errors gracefully. It uses try-catch-finally blocks to catch and handle exceptions, preventing application crashes.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ExceptionHandling.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ExceptionHandling.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">try</span>
@@ -1563,10 +1713,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>throw ex</strong> resets the stack trace to the current location. This loses information about where the original exception occurred.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Throw.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Throw.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">try</span>
@@ -1589,10 +1742,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>using</strong> statement ensures that IDisposable objects are disposed properly. It's syntactic sugar for try-finally with Dispose.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">FinallyUsing.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">FinallyUsing.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Finally block</span>
@@ -1620,10 +1776,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>Custom exceptions</strong> are user-defined exceptions that inherit from Exception. They provide domain-specific error information.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">CustomException.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">CustomException.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">class</span> <span class="type">InvalidUserException</span> : <span class="type">Exception</span>
@@ -1642,10 +1801,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>unchecked</strong> allows arithmetic overflow to wrap around without throwing an exception (default behavior).</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">CheckedUnchecked.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">CheckedUnchecked.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">checked</span>
@@ -1670,10 +1832,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>Garbage Collection (GC)</strong> is an automatic memory management feature that automatically reclaims memory occupied by objects that are no longer in use. It prevents memory leaks and simplifies development.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">GarbageCollection.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">GarbageCollection.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">class</span> <span class="type">MyClass</span>
@@ -1700,10 +1865,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>IAsyncDisposable</strong> provides a DisposeAsync method for releasing unmanaged resources asynchronously, which is useful for I/O-bound cleanup operations.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">IDisposableAsync.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">IDisposableAsync.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">class</span> <span class="type">Resource</span> : <span class="type">IDisposable</span>
@@ -1725,10 +1893,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>WeakReference</strong> allows the object to be garbage collected even if it's still referenced. It's useful for caching.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">WeakReference.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">WeakReference.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Strong reference - prevents GC</span>
@@ -1751,10 +1922,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>Unboxing</strong> is the process of converting a reference type back to a value type. It copies the value from the heap to the stack.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">BoxingUnboxing.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">BoxingUnboxing.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">int</span> value = <span class="number">42</span>;
@@ -1778,10 +1952,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>Heap</strong> is a memory area that stores reference type objects. It's managed by the garbage collector and is slower than the stack.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">StackHeap.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">StackHeap.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Stack - value types</span>
@@ -1806,10 +1983,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>class</strong> is a traditional reference type with reference-based equality. It's mutable by default and requires manual implementation of equality.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">RecordClass.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">RecordClass.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">public</span> <span class="keyword">record</span> <span class="type">Person</span>(<span class="keyword">string</span> <span class="property">Name</span>, <span class="keyword">int</span> <span class="property">Age</span>);
@@ -1828,10 +2008,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>Pattern matching</strong> is a feature that allows you to test if a value matches a certain pattern and extract information from it. It includes type patterns, property patterns, relational patterns, and more.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">PatternMatching.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">PatternMatching.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">object</span> obj = <span class="string">"hello"</span>;
@@ -1860,10 +2043,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>Memory&lt;T&gt;</strong> can be stored on the heap and used in async scenarios. It's a stack-only wrapper for Memory&lt;T&gt;.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">SpanMemory.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">SpanMemory.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Span - stack-only, cannot be used in async</span>
@@ -1885,10 +2071,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>ref struct</strong> is a stack-only type that cannot be boxed, stored on the heap, or implement interfaces. It's used for high-performance scenarios.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">RefStruct.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">RefStruct.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Regular struct</span>
@@ -1912,10 +2101,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>default(T)</strong> explicitly specifies the type. It's the older syntax but still useful when type inference isn't possible.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Default.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Default.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// With type inference (C# 7.1+)</span>
@@ -1938,10 +2130,13 @@ hashtable[<span class="string">"one"</span>] = <span class="number">1</span>;</c
             <p><strong>ref local</strong> is a variable that stores a reference to another variable. Changes to the ref local affect the original variable.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">RefReturnLocal.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">RefReturnLocal.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">private</span> <span class="keyword">int</span>[] _numbers = { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> };
@@ -1962,10 +2157,13 @@ num = <span class="number">10</span>;  <span class="comment">// Modifies _number
             <p><strong>struct</strong> is mutable by default. Its fields can be modified after creation.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ReadonlyStruct.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ReadonlyStruct.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// readonly struct - immutable</span>
@@ -1991,10 +2189,13 @@ num = <span class="number">10</span>;  <span class="comment">// Modifies _number
             <p><strong>Unsafe code</strong> can use pointers and direct memory manipulation. It requires the unsafe keyword and can bypass CLR safety checks.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">UnsafeCode.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">UnsafeCode.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Safe code</span>
@@ -2017,10 +2218,13 @@ numbers[<span class="number">0</span>] = <span class="number">1</span>;
             <p><strong>Heap allocation</strong> allocates memory on the managed heap. It's garbage-collected and can hold larger objects. It's the default allocation method in C#.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Stackalloc.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Stackalloc.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// stackalloc - stack allocation (unsafe)</span>
@@ -2043,10 +2247,13 @@ buffer[<span class="number">0</span>] = <span class="number">1</span>;</code>
             <p><strong>Caller member name</strong> (CallerMemberName) attribute captures the name of the calling method or property. It's useful for logging and INotifyPropertyChanged.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">CallerInfo.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">CallerInfo.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">using</span> <span class="type">System.Runtime.CompilerServices</span>;
@@ -2069,10 +2276,13 @@ buffer[<span class="number">0</span>] = <span class="number">1</span>;</code>
             <p><strong>string</strong> is immutable and stored in plain text in memory. It stays in memory until garbage collected, making it unsuitable for sensitive data.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">SecureString.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">SecureString.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">using</span> <span class="type">System.Security</span>;
@@ -2096,10 +2306,13 @@ buffer[<span class="number">0</span>] = <span class="number">1</span>;</code>
             <p><strong>Encryption</strong> is a two-way function that converts data to unreadable format using a key. It can be decrypted with the correct key. Used for data protection in transit and at rest.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">HashingEncryption.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">HashingEncryption.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">using</span> <span class="type">System.Security.Cryptography</span>;
@@ -2126,10 +2339,13 @@ buffer[<span class="number">0</span>] = <span class="number">1</span>;</code>
             <p><strong>Asymmetric encryption</strong> uses a public key for encryption and a private key for decryption. It's slower but doesn't require secure key exchange. Examples: RSA, ECC.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">EncryptionTypes.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">EncryptionTypes.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Symmetric encryption (AES)</span>
@@ -2155,10 +2371,13 @@ buffer[<span class="number">0</span>] = <span class="number">1</span>;</code>
             <p><strong>Security Transparency</strong> is a security model that distinguishes between security-critical code (can perform privileged operations) and transparent code (cannot). It's the modern approach in .NET.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">SecurityTransparency.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">SecurityTransparency.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Security-critical code</span>
@@ -2184,10 +2403,13 @@ buffer[<span class="number">0</span>] = <span class="number">1</span>;</code>
             <p><strong>IPrincipal</strong> is an interface that represents the security context of a user, including their identity and roles. It's used for programmatic security checks.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">PrincipalPermission.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">PrincipalPermission.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">using</span> <span class="type">System.Security.Permissions</span>;
@@ -2215,10 +2437,13 @@ buffer[<span class="number">0</span>] = <span class="number">1</span>;</code>
             <p><strong>Reflection</strong> is the ability to inspect and manipulate types, methods, properties, and other members at runtime. It allows you to dynamically create instances, invoke methods, and access fields without knowing them at compile time.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Reflection.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Reflection.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">using</span> <span class="type">System.Reflection</span>;
@@ -2244,10 +2469,13 @@ method.<span class="method">Invoke</span>(instance, <span class="keyword">null</
             <p><strong>TypeInfo</strong> is part of the Reflection API in .NET Core/5+. It provides richer type information and is obtained through GetTypeInfo() on Type.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">TypeInfo.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">TypeInfo.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Type (classic reflection)</span>
@@ -2267,10 +2495,13 @@ method.<span class="method">Invoke</span>(instance, <span class="keyword">null</
             <p><strong>Default binding</strong> returns only public instance members. BindingFlags allows you to get private, static, and other non-public members.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">BindingFlags.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">BindingFlags.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Default - public instance only</span>
@@ -2291,10 +2522,13 @@ method.<span class="method">Invoke</span>(instance, <span class="keyword">null</
             <p><strong>new keyword</strong> creates an instance at compile time. It's type-safe and faster but requires the type to be known at compile time.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Activator.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Activator.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Compile-time creation (new)</span>
@@ -2316,10 +2550,13 @@ method.<span class="method">Invoke</span>(instance, <span class="keyword">null</
             <p><strong>Reflection</strong> explicitly inspects and invokes members at runtime. It's more verbose but provides more control and information about types.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">DynamicReflection.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">DynamicReflection.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Dynamic - simple but runtime errors</span>
@@ -2341,10 +2578,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>Attributes</strong> are declarative tags that provide additional information about program elements (classes, methods, properties, etc.). They can be used by the compiler, runtime, or custom tools to modify behavior or provide metadata.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Attributes.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Attributes.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code>[<span class="type">Serializable</span>]
@@ -2366,10 +2606,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>Conditional</strong> makes method execution dependent on a preprocessor symbol. The method is only compiled if the symbol is defined. It's used for debug-specific code.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ObsoleteConditional.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ObsoleteConditional.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code>[<span class="type">Obsolete</span>(<span class="string">"Use NewMethod instead"</span>, <span class="keyword">true</span>)]
@@ -2390,10 +2633,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>Custom attributes</strong> are user-defined by inheriting from Attribute. They allow you to add custom metadata and behavior to your code.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">CustomAttribute.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">CustomAttribute.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Custom attribute</span>
@@ -2421,10 +2667,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>AttributeTargets</strong> is an enum that specifies the valid targets for an attribute (Class, Method, Property, Field, etc.).</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">AttributeUsage.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">AttributeUsage.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Allow on classes and methods, multiple times</span>
@@ -2446,10 +2695,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>Attribute inheritance</strong> controls whether attributes are inherited by derived classes. The Inherited property in AttributeUsage specifies this behavior.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">AttributeReflection.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">AttributeReflection.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Get attributes via reflection</span>
@@ -2470,10 +2722,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>Serialization</strong> is the process of converting an object into a stream of bytes to store it or transmit it. Deserialization is the reverse process of reconstructing the object from the stream.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Serialization.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Serialization.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code>[<span class="type">Serializable</span>]
@@ -2496,10 +2751,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>JSON serialization</strong> converts objects to JSON text format. It's human-readable, language-agnostic, and widely used for web APIs. Used for cross-platform communication.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">SerializationTypes.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">SerializationTypes.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">using</span> <span class="type">System.Text.Json</span>;
@@ -2520,10 +2778,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>IXmlSerializable</strong> interface allows custom XML serialization control. It provides ReadXml and WriteXml methods for custom XML format.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">SerializableInterfaces.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">SerializableInterfaces.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// ISerializable</span>
@@ -2547,10 +2808,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>DataContract</strong> is part of WCF and provides fine-grained control over serialization. You explicitly mark members with DataMember and can control names and order.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">DataContract.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">DataContract.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Serializable - all fields</span>
@@ -2577,10 +2841,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>XML serialization</strong> produces structured XML documents. It's more verbose but supports schemas and namespaces. Used in legacy systems and SOAP services.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">JsonXml.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">JsonXml.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">using</span> <span class="type">System.Text.Json</span>;
@@ -2605,10 +2872,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>Task</strong> is a higher-level abstraction representing an asynchronous operation. It uses the thread pool efficiently and is the recommended way to write async/parallel code.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ThreadTask.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ThreadTask.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Thread - low-level, expensive</span>
@@ -2629,10 +2899,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>ThreadPool</strong> maintains a pool of worker threads that can be reused. It's more efficient as it reuses threads and manages concurrency automatically.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ThreadPool.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ThreadPool.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Thread - creates new thread</span>
@@ -2653,10 +2926,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>Task.WhenAll</strong> is used to await multiple independent tasks to complete. It's non-blocking and used with async/await.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ParallelWhenAll.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ParallelWhenAll.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Parallel.For - data parallelism, blocking</span>
@@ -2675,10 +2951,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>Monitor</strong> provides more control with Enter, Exit, TryEnter, Wait, and Pulse methods. It's used when you need more advanced synchronization.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">LockMonitor.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">LockMonitor.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">private readonly</span> <span class="keyword">object</span> _lock = <span class="keyword">new</span> <span class="keyword">object</span>();
@@ -2709,10 +2988,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>Semaphore</strong> allows a specified number of threads to access a resource concurrently. It's used to limit concurrent access to a resource pool.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">MutexSemaphore.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">MutexSemaphore.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Mutex - one thread at a time</span>
@@ -2742,10 +3024,13 @@ method.<span class="method">Invoke</span>(obj, <span class="keyword">null</span>
             <p><strong>FileInfo</strong> is an instance class that provides file information and operations. It's more efficient for multiple operations as it caches file information.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">FileFileInfo.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">FileFileInfo.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// File - static methods</span>
@@ -2766,10 +3051,13 @@ file.<span class="method">Delete</span>();</code>
             <p><strong>FileStream</strong> is a concrete implementation for file I/O. It provides file-specific features like file handles, sharing modes, and file attributes.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">StreamFileStream.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">StreamFileStream.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Stream - abstract base</span>
@@ -2793,10 +3081,13 @@ file.<span class="method">Delete</span>();</code>
             <p><strong>StringReader</strong> reads characters from a string. It's used for parsing or processing in-memory strings.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ReaderTypes.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ReaderTypes.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// StreamReader - from stream/file</span>
@@ -2820,10 +3111,13 @@ file.<span class="method">Delete</span>();</code>
             <p><strong>BufferedStream</strong> wraps another stream and adds a buffer to reduce the number of I/O operations. It improves performance for small, frequent reads/writes.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">MemoryBufferedStream.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">MemoryBufferedStream.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// MemoryStream - in-memory</span>
@@ -2848,10 +3142,13 @@ file.<span class="method">Delete</span>();</code>
             <p><strong>TextReader/TextWriter</strong> read and write text data. They're human-readable and handle encoding but are less compact.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">BinaryTextWriter.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">BinaryTextWriter.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// BinaryWriter - binary format</span>
