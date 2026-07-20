@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -439,6 +439,28 @@
             color: #0c5460;
         }
         
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(102, 126, 234, 0.25);
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            animation: slideUp 0.6s ease both;
+        }
+        
+        .footer p {
+            margin-bottom: 12px;
+        }
+        
+        .footer .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
@@ -808,13 +830,13 @@
                     <td>float</td>
                     <td>Single-precision floating point</td>
                     <td>4 bytes</td>
-                    <td>±3.4E-38 to ±3.4E+38</td>
+                    <td>Â±3.4E-38 to Â±3.4E+38</td>
                 </tr>
                 <tr>
                     <td>double</td>
                     <td>Double-precision floating point</td>
                     <td>8 bytes</td>
-                    <td>±1.7E-308 to ±1.7E+308</td>
+                    <td>Â±1.7E-308 to Â±1.7E+308</td>
                 </tr>
                 <tr>
                     <td>void</td>
@@ -865,18 +887,10 @@ double pi = 3.14159265359;</code></pre></div>
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
-
-int main() {
-    int age;
-    
-    printf("Enter your age: ");
-    scanf("%d", &age); // Needs address (&)
-    
-    printf("Your age is: %d\n", age);
-    
-    return 0;
-}</code></pre></div>
+            <div class="code-block" data-language="code"><pre><code>int age;
+printf("Enter age: ");
+scanf("%d", &age);  // Needs address
+printf("Age: %d", age);</code></pre></div>
         </div>
 
         <div class="question">
@@ -886,21 +900,10 @@ int main() {
             <p>In printf, both %d and %i are identical - they both print integers.</p>
             <p>In scanf, %d expects a decimal integer, while %i can accept decimal, octal (with 0 prefix), or hexadecimal (with 0x prefix).</p>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
-
-int main() {
-    int num1, num2;
-    
-    // %d - decimal only
-    scanf("%d", &num1);
-    
-    // %i - decimal, octal, or hexadecimal
-    scanf("%i", &num2);
-    
-    printf("num1: %d, num2: %d\n", num1, num2);
-    
-    return 0;
-}</code></pre></div>
+            <div class="code-block" data-language="code"><pre><code>int num1, num2;
+scanf("%d", &num1);   // Decimal only
+scanf("%i", &num2);   // Decimal, octal, or hex
+printf("num1: %d, num2: %d", num1, num2);</code></pre></div>
         </div>
 
         <div class="question">
@@ -910,25 +913,10 @@ int main() {
             <p><strong>++i (Pre-increment)</strong>: Increments the value first, then uses it.</p>
             <p><strong>i++ (Post-increment)</strong>: Uses the value first, then increments it.</p>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
-
-int main() {
-    int i = 5;
-    int j;
-    
-    // Pre-increment
-    j = ++i; // i becomes 6, j becomes 6
-    printf("i = %d, j = %d\n", i, j); // i = 6, j = 6
-    
-    // Reset
-    i = 5;
-    
-    // Post-increment
-    j = i++; // j becomes 5, i becomes 6
-    printf("i = %d, j = %d\n", i, j); // i = 6, j = 5
-    
-    return 0;
-}</code></pre></div>
+            <div class="code-block" data-language="code"><pre><code>int i = 5;
+int j = ++i;  // i=6, j=6 (pre-increment)
+i = 5;
+j = i++;     // j=5, i=6 (post-increment)</code></pre></div>
         </div>
 
         <h2>3. Control Structures</h2>
@@ -1011,23 +999,9 @@ return;   // Return from function</code></pre></div>
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
-
-int main() {
-    int i = 5;
-    
-    // while loop - may not execute
-    while (i < 5) {
-        printf("This won't print\n");
-    }
-    
-    // do-while loop - executes at least once
-    do {
-        printf("This will print once\n");
-    } while (i < 5);
-    
-    return 0;
-}</code></pre></div>
+            <div class="code-block" data-language="code"><pre><code>int i = 5;
+while (i < 5) { }          // Won't execute
+do { } while (i < 5);      // Executes once</code></pre></div>
         </div>
 
         <h2>4. Functions</h2>
@@ -1064,35 +1038,15 @@ int main() {
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+            <div class="code-block" data-language="code"><pre><code>// Call by value - copy
+void swapByValue(int a, int b) { int temp = a; a = b; b = temp; }
 
-// Call by value
-void swapByValue(int a, int b) {
-    int temp = a;
-    a = b;
-    b = temp;
-    // Original values unchanged
-}
+// Call by reference - pointer
+void swapByReference(int *a, int *b) { int temp = *a; *a = *b; *b = temp; }
 
-// Call by reference
-void swapByReference(int *a, int *b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-    // Original values changed
-}
-
-int main() {
-    int x = 10, y = 20;
-    
-    swapByValue(x, y);
-    printf("After swapByValue: x=%d, y=%d\n", x, y); // x=10, y=20
-    
-    swapByReference(&x, &y);
-    printf("After swapByReference: x=%d, y=%d\n", x, y); // x=20, y=10
-    
-    return 0;
-}</code></pre></div>
+int x = 10, y = 20;
+swapByValue(x, y);       // x=10, y=20 (unchanged)
+swapByReference(&x, &y); // x=20, y=10 (changed)</code></pre></div>
         </div>
 
         <div class="question">
@@ -1101,29 +1055,14 @@ int main() {
         <div class="answer">
             <p>Recursion is when a function calls itself to solve a problem. Each recursive call works on a smaller instance of the problem.</p>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
-
-// Factorial using recursion
-int factorial(int n) {
-    if (n <= 1) { // Base case
-        return 1;
-    }
-    return n * factorial(n - 1); // Recursive case
+            <div class="code-block" data-language="code"><pre><code>int factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
 }
 
-// Fibonacci using recursion
 int fibonacci(int n) {
-    if (n <= 1) {
-        return n;
-    }
+    if (n <= 1) return n;
     return fibonacci(n - 1) + fibonacci(n - 2);
-}
-
-int main() {
-    printf("Factorial of 5: %d\n", factorial(5)); // 120
-    printf("Fibonacci of 10: %d\n", fibonacci(10)); // 55
-    
-    return 0;
 }</code></pre></div>
             
             <div class="tip">
@@ -1165,24 +1104,14 @@ int main() {
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+            <div class="code-block" data-language="code"><pre><code>int arr[5] = {1, 2, 3, 4, 5};
+int *ptr = arr;  // Array decays to pointer
 
-int main() {
-    int arr[5] = {1, 2, 3, 4, 5};
-    int *ptr = arr; // Array name decays to pointer
-    
-    printf("arr[2]: %d\n", arr[2]); // 3
-    printf("*(ptr+2): %d\n", *(ptr+2)); // 3
-    
-    // Array cannot be reassigned
-    // arr = ptr; // Error
-    
-    // Pointer can be reassigned
-    int x = 10;
-    ptr = &x;
-    
-    return 0;
-}</code></pre></div>
+arr[2] = 10;    // OK
+*(ptr + 2) = 10; // OK
+
+// arr = ptr;  // Error - array can't be reassigned
+ptr = &arr[0];  // OK - pointer can be reassigned</code></pre></div>
         </div>
 
         <div class="question">
@@ -1191,26 +1120,11 @@ int main() {
         <div class="answer">
             <p>In C, strings are arrays of characters terminated by a null character ('\0'). The null character marks the end of the string.</p>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
-#include <string.h>
+            <div class="code-block" data-language="code"><pre><code>char str1[] = "Hello";  // 'H','e','l','l','o','\0'
+char str2[] = {'H', 'i', '\0'};
+char str3[] = {'H', 'e', 'l', 'l', 'o'}; // Not null-terminated
 
-int main() {
-    // String literal (null-terminated)
-    char str1[] = "Hello";
-    // H e l l o \0
-    
-    // Manual string
-    char str2[] = {'H', 'i', '\0'};
-    
-    // Without null terminator - undefined behavior
-    char str3[] = {'H', 'e', 'l', 'l', 'o'}; // Not a valid string
-    
-    printf("str1: %s\n", str1); // Hello
-    printf("str2: %s\n", str2); // Hi
-    printf("Length of str1: %zu\n", strlen(str1)); // 5
-    
-    return 0;
-}</code></pre></div>
+strlen(str1);  // 5 (doesn't count '\0')</code></pre></div>
             
             <div class="important">
                 <strong>Important:</strong> Always ensure strings are null-terminated. Functions like strlen, strcpy, etc. rely on the null terminator.
@@ -1232,23 +1146,11 @@ int main() {
                 <li>Efficient array handling</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+            <div class="code-block" data-language="code"><pre><code>int num = 10;
+int *ptr = &num;
 
-int main() {
-    int num = 42;
-    int *ptr;      // Pointer declaration
-    ptr = &num;    // Store address of num
-    
-    printf("Value of num: %d\n", num);        // 42
-    printf("Address of num: %p\n", &num);     // Address
-    printf("Value of ptr: %p\n", ptr);        // Address
-    printf("Value pointed by ptr: %d\n", *ptr); // 42
-    
-    *ptr = 100;    // Modify value through pointer
-    printf("New value of num: %d\n", num);    // 100
-    
-    return 0;
-}</code></pre></div>
+*ptr = 20;     // Modify value through pointer
+printf("%d", num);  // 20</code></pre></div>
         </div>
 
         <div class="question">
@@ -1258,20 +1160,13 @@ int main() {
             <p><strong>*ptr</strong> (Dereference operator): Gets the value stored at the address pointed to by ptr.</p>
             <p><strong>&ptr</strong> (Address-of operator): Gets the memory address of the variable ptr.</p>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+            <div class="code-block" data-language="code"><pre><code>int num = 10;
+int *ptr = &num;
 
-int main() {
-    int num = 10;
-    int *ptr = &num;
-    
-    printf("num: %d\n", num);        // 10
-    printf("*ptr: %d\n", *ptr);      // 10 (value at address)
-    printf("&num: %p\n", &num);      // Address of num
-    printf("ptr: %p\n", ptr);        // Address stored in ptr
-    printf("&ptr: %p\n", &ptr);      // Address of ptr variable
-    
-    return 0;
-}</code></pre></div>
+*ptr;  // Value at address (10)
+&num;  // Address of num
+ptr;   // Address stored in ptr
+&ptr;  // Address of ptr variable</code></pre></div>
         </div>
 
         <div class="question">
@@ -1280,29 +1175,13 @@ int main() {
         <div class="answer">
             <p>Pointer arithmetic allows you to perform arithmetic operations on pointers. The operations are scaled by the size of the data type.</p>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+            <div class="code-block" data-language="code"><pre><code>int arr[] = {10, 20, 30, 40, 50};
+int *ptr = arr;
 
-int main() {
-    int arr[] = {10, 20, 30, 40, 50};
-    int *ptr = arr;
-    
-    printf("*ptr: %d\n", *ptr);      // 10
-    printf("*(ptr+1): %d\n", *(ptr+1)); // 20
-    printf("*(ptr+2): %d\n", *(ptr+2)); // 30
-    
-    ptr++; // Move to next integer (adds 4 bytes typically)
-    printf("After ptr++: %d\n", *ptr); // 20
-    
-    ptr += 2; // Move ahead by 2 integers
-    printf("After ptr+=2: %d\n", *ptr); // 40
-    
-    // Difference between pointers
-    int *ptr1 = &arr[0];
-    int *ptr2 = &arr[3];
-    printf("Difference: %ld\n", ptr2 - ptr1); // 3
-    
-    return 0;
-}</code></pre></div>
+*ptr;        // 10
+*(ptr + 1);  // 20 (scaled by sizeof(int))
+ptr++;       // Moves to next element
+ptr += 2;    // Moves ahead by 2 elements</code></pre></div>
         </div>
 
         <h2>7. Memory Management</h2>
@@ -1319,29 +1198,10 @@ int main() {
                 <li><strong>free</strong>: Deallocates previously allocated memory</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
-#include <stdlib.h>
-
-int main() {
-    // malloc - uninitialized
-    int *ptr1 = (int*)malloc(5 * sizeof(int));
-    if (ptr1 == NULL) {
-        printf("Memory allocation failed\n");
-        return 1;
-    }
-    
-    // calloc - initialized to zero
-    int *ptr2 = (int*)calloc(5, sizeof(int));
-    
-    // realloc - resize
-    ptr1 = (int*)realloc(ptr1, 10 * sizeof(int));
-    
-    // free - deallocate
-    free(ptr1);
-    free(ptr2);
-    
-    return 0;
-}</code></pre></div>
+            <div class="code-block" data-language="code"><pre><code>int *ptr1 = malloc(5 * sizeof(int));  // Uninitialized
+int *ptr2 = calloc(5, sizeof(int));    // Initialized to zero
+ptr1 = realloc(ptr1, 10 * sizeof(int)); // Resize
+free(ptr1);  free(ptr2);  // Deallocate</code></pre></div>
             
             <div class="important">
                 <strong>Important:</strong> Always check if malloc/calloc returns NULL (allocation failed). Always free allocated memory to prevent memory leaks.
@@ -1438,35 +1298,12 @@ int main() {
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+            <div class="code-block" data-language="code"><pre><code>struct Student { int id; char name[20]; float marks; };
+union Data { int i; float f; char str[20]; };
 
-struct Student {
-    int id;
-    char name[20];
-    float marks;
-};
-
-union Data {
-    int i;
-    float f;
-    char str[20];
-};
-
-int main() {
-    struct Student s = {1, "John", 85.5};
-    printf("Struct size: %zu\n", sizeof(s)); // Sum of all members
-    
-    union Data d;
-    d.i = 10;
-    printf("Union size: %zu\n", sizeof(d)); // Size of largest member
-    printf("d.i: %d\n", d.i); // 10
-    
-    d.f = 3.14;
-    printf("d.f: %f\n", d.f); // 3.14
-    printf("d.i: %d\n", d.i); // Undefined (corrupted)
-    
-    return 0;
-}</code></pre></div>
+struct Student s = {1, "John", 85.5};  // Size: sum of all members
+union Data d;
+d.i = 10;  // Only one member active at a time</code></pre></div>
         </div>
 
         <div class="question">
@@ -1475,36 +1312,13 @@ int main() {
         <div class="answer">
             <p>typedef is used to create a new name (alias) for an existing data type. It improves code readability and makes it easier to change types later.</p>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
-
-// Basic typedef
-typedef unsigned int uint;
+            <div class="code-block" data-language="code"><pre><code>typedef unsigned int uint;
 typedef int* IntPtr;
-
-// Struct typedef
-typedef struct {
-    int x;
-    int y;
-} Point;
-
-// Function pointer typedef
+typedef struct { int x; int y; } Point;
 typedef int (*Operation)(int, int);
 
-int add(int a, int b) {
-    return a + b;
-}
-
-int main() {
-    uint age = 25;
-    IntPtr ptr = &age;
-    
-    Point p = {10, 20};
-    
-    Operation op = add;
-    printf("Result: %d\n", op(5, 3)); // 8
-    
-    return 0;
-}</code></pre></div>
+uint age = 25;
+Point p = {10, 20};</code></pre></div>
         </div>
 
         <h2>9. File Handling</h2>
@@ -1544,38 +1358,14 @@ int main() {
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+            <div class="code-block" data-language="code"><pre><code>FILE *file = fopen("test.txt", "w");
+fprintf(file, "Hello, World!\n");
+fclose(file);
 
-int main() {
-    FILE *file;
-    
-    // Write to file
-    file = fopen("test.txt", "w");
-    if (file == NULL) {
-        printf("Error opening file\n");
-        return 1;
-    }
-    
-    fprintf(file, "Hello, World!\n");
-    fputs("This is C programming.\n", file);
-    fclose(file);
-    
-    // Read from file
-    file = fopen("test.txt", "r");
-    if (file == NULL) {
-        printf("Error opening file\n");
-        return 1;
-    }
-    
-    char buffer[100];
-    while (fgets(buffer, sizeof(buffer), file) != NULL) {
-        printf("%s", buffer);
-    }
-    
-    fclose(file);
-    
-    return 0;
-}</code></pre></div>
+file = fopen("test.txt", "r");
+char buffer[100];
+fgets(buffer, sizeof(buffer), file);  // Read line
+fclose(file);</code></pre></div>
         </div>
 
         <h2>10. Preprocessor Directives</h2>
@@ -1617,26 +1407,11 @@ int main() {
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+            <div class="code-block" data-language="code"><pre><code>#define PI 3.14159
+const float pi = 3.14159f;
 
-#define PI 3.14159
-#define MAX 100
-
-int main() {
-    const float pi = 3.14159f;
-    const int max = 100;
-    
-    printf("#define PI: %f\n", PI);
-    printf("const pi: %f\n", pi);
-    
-    // Cannot modify const
-    // pi = 3.0; // Error
-    
-    // #define can be undefined
-    #undef MAX
-    
-    return 0;
-}</code></pre></div>
+#undef PI  // Can undefine #define
+// pi = 3.0;  // Error - can't modify const</code></pre></div>
         </div>
 
         <div class="question">
@@ -1660,6 +1435,312 @@ int main() {
             </div>
         </div>
 
+        <div class="question">
+            Q23: What is a segmentation fault (SIGSEGV) in C?
+        </div>
+        <div class="answer">
+            <p>Segmentation fault occurs when program attempts to access memory it doesn't have permission to access. Common causes: dereferencing NULL pointer, accessing array out of bounds, writing to read-only memory, using freed memory (dangling pointer), stack overflow.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+
+int main() {
+    int *ptr = NULL;
+    *ptr = 10; // Segmentation fault
+    
+    return 0;
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q24: Does sizeof() evaluate the expression passed to it?
+        </div>
+        <div class="answer">
+            <p>No, sizeof() does not evaluate the expression. It only determines the type at compile-time. Example: sizeof(a++) doesn't increment a - only the type is considered for size calculation.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+
+int main() {
+    int a = 5;
+    printf("%zu", sizeof(a++)); // a remains 5
+    printf("%d", a); // Still 5
+    
+    return 0;
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q25: What is the difference between NULL, 0, and '\0'?
+        </div>
+        <div class="answer">
+            <p><strong>NULL:</strong> Null pointer ((void*)0). <strong>0:</strong> Integer constant (can represent null pointer in pointer context). <strong>'\0':</strong> Null character used to terminate strings (ASCII 0).</p>
+            
+            <div class="code-block" data-language="code"><pre><code>int *ptr = NULL;  // Null pointer
+int num = 0;      // Integer
+char ch = '\0';   // Null character (ASCII 0)</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q26: What are UART, SPI, and I2C communication protocols?
+        </div>
+        <div class="answer">
+            <p><strong>UART:</strong> Asynchronous, 2 wires (TX, RX), simple, moderate speed. <strong>SPI:</strong> Synchronous, 4 wires (MOSI, MISO, SCLK, SS), high speed, full-duplex. <strong>I2C:</strong> Synchronous, 2 wires (SDA, SCL), slower, multi-device addressing.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// UART - Simple, 2 wires
+// SPI - Fast, 4 wires, full-duplex
+// I2C - Slower, 2 wires, multi-device
+
+// UART initialization (pseudocode)
+UART->BAUD = 9600;
+UART->CTRL = UART_ENABLE | UART_TX_ENABLE;</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q27: What is a watchdog timer (WDT) in embedded systems?
+        </div>
+        <div class="answer">
+            <p>Hardware timer that resets microcontroller if software becomes unresponsive. Program must periodically "kick" watchdog before timeout expires. Used for safety-critical systems to recover from hangs or deadlocks.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// Watchdog timer (pseudocode)
+WDT->CTRL = WDT_ENABLE | WDT_TIMEOUT_2S;
+
+while (1) {
+    do_work();
+    WDT->REFRESH = 0xAA55; // Kick watchdog
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q28: What is memory-mapped I/O in Embedded C?
+        </div>
+        <div class="answer">
+            <p>Hardware registers assigned fixed memory addresses, accessed like variables. Use volatile keyword to prevent compiler optimization. Example: #define PORTB (*(volatile unsigned char*)0x25).</p>
+            
+            <div class="code-block" data-language="code"><pre><code>#define PORTB (*(volatile unsigned char*)0x25)
+
+// Access hardware register
+PORTB = 0xFF; // Write to register
+unsigned char value = PORTB; // Read from register</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q29: What is the difference between deep copy and shallow copy in C?
+        </div>
+        <div class="answer">
+            <p><strong>Shallow copy:</strong> Copies pointer addresses, not data. Both pointers point to same memory. <strong>Deep copy:</strong> Copies actual data, allocates new memory. Changes don't affect original.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+#include <string.h>
+
+// Shallow copy (problematic)
+char *ptr1 = malloc(10);
+strcpy(ptr1, "Hello");
+char *ptr2 = ptr1; // Same memory
+
+// Deep copy (correct)
+char *ptr3 = malloc(10);
+strcpy(ptr3, ptr1); // New memory</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q30: What is a buffer overflow?
+        </div>
+        <div class="answer">
+            <p>Writing data beyond allocated memory boundaries. Can crash program, corrupt memory, or enable security exploits. Prevented by bounds checking, using safe functions (fgets, strncpy).</p>
+            
+            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+
+// Unsafe - buffer overflow
+char buffer[5];
+strcpy(buffer, "HelloWorld"); // Overflow!
+
+// Safe - use fgets
+fgets(buffer, sizeof(buffer), stdin);</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q31: What is undefined behavior in C?
+        </div>
+        <div class="answer">
+            <p>Code with no specified behavior in C standard. Results unpredictable: may crash, work incorrectly, or appear to work. Examples: dereferencing NULL, signed integer overflow, using uninitialized variables.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>int *ptr = NULL;     // Undefined: dereferencing NULL
+int arr[5];
+arr[10] = 5;         // Undefined: out of bounds
+int x;               // Undefined: uninitialized</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q32: What is the difference between char *s and char s[]?
+        </div>
+        <div class="answer">
+            <p><strong>char *s:</strong> Pointer to string (modifiable address, may point to read-only memory). <strong>char s[]:</strong> Array of characters (modifiable content, allocated on stack).</p>
+            
+            <div class="code-block" data-language="code"><pre><code>char *p = "Hello";  // May be read-only
+char a[] = "Hello"; // Modifiable
+
+p[0] = 'h'; // Undefined behavior
+a[0] = 'h'; // OK</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q33: What is a restrict keyword in C?
+        </div>
+        <div class="answer">
+            <p>Tells compiler that pointer is only way to access object. Enables compiler optimizations. Used in function parameters to promise no aliasing.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>void copy(int *restrict dest, int *restrict src, int n) {
+    // Compiler knows dest and src don't overlap
+    for (int i = 0; i < n; i++) {
+        dest[i] = src[i];
+    }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q34: What is the difference between struct and class in C++?
+        </div>
+        <div class="answer">
+            <p><strong>struct:</strong> Default public members, C-compatible. <strong>class:</strong> Default private members, C++ features (inheritance, methods). In C, only structs exist.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>// C - only structs
+struct Point { int x; int y; };
+
+// C++ - struct (public) vs class (private)
+struct PointStruct { int x; };  // public
+class PointClass { int x; };    // private</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q35: What is the difference between union and struct?
+        </div>
+        <div class="answer">
+            <p><strong>struct:</strong> Each member has separate memory. Size = sum of all members. <strong>union:</strong> All members share same memory. Size = size of largest member. Only one member active at a time.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>struct S {
+    int a;
+    char b;
+}; // Size: 8 (with padding)
+
+union U {
+    int a;
+    char b;
+}; // Size: 4 (largest member)</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q36: What is the difference between typedef and #define?
+        </div>
+        <div class="answer">
+            <p><strong>typedef:</strong> Creates type alias, type-checked, processed by compiler. <strong>#define:</strong> Text substitution, no type checking, processed by preprocessor.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>typedef unsigned int uint; // Type alias
+#define uint unsigned int   // Text substitution
+
+uint x = 10; // Type-checked
+#define y 20  // No type checking</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q37: What is the difference between const and #define?
+        </div>
+        <div class="answer">
+            <p><strong>const:</strong> Variable with fixed value, type-checked, scoped. <strong>#define:</strong> Macro, text substitution, no type, global scope. Use const for type safety.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>#define MAX 100   // Global, no type
+const int max = 100; // Scoped, type-checked
+
+void func() {
+    const int local = 50; // Local const
+    // MAX is also available here
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q38: What is the difference between array and pointer?
+        </div>
+        <div class="answer">
+            <p><strong>array:</strong> Fixed size, contiguous memory, sizeof returns total size. <strong>pointer:</strong> Stores address, can be reassigned, sizeof returns pointer size. Array decays to pointer.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>int arr[5] = {1, 2, 3, 4, 5};
+int *ptr = arr;
+
+sizeof(arr); // 20 (5 * 4)
+sizeof(ptr); // 8 (pointer size)
+
+arr = ptr; // Error
+ptr = &arr[0]; // OK</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q39: What is the difference between i++ and ++i in complex expression?
+        </div>
+        <div class="answer">
+            <p><strong>++i:</strong> Pre-increment, returns incremented value. <strong>i++:</strong> Post-increment, returns original value. In complex expressions, order matters for side effects.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>int i = 5, j;
+j = ++i; // i=6, j=6
+j = i++; // j=6, i=7
+
+int arr[] = {1, 2, 3};
+int x = arr[i++] + arr[++i]; // Undefined!</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q40: What is the difference between = and ==?
+        </div>
+        <div class="answer">
+            <p><strong>=:</strong> Assignment operator, assigns value. <strong>==:</strong> Equality operator, compares values. Common mistake: using = in condition instead of ==.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>int x = 10; // Assignment
+if (x == 10) // Comparison
+    printf("Equal");
+
+if (x = 5) // Wrong! Always true
+    printf("This runs");</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q41: What is the difference between && and &?
+        </div>
+        <div class="answer">
+            <p><strong>&&:</strong> Logical AND, short-circuits (stops if first false). <strong>&:</strong> Bitwise AND, evaluates both operands, operates on bits.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>int a = 5, b = 0;
+
+if (a && b) // Logical AND (false)
+    printf("Won't print");
+
+if (a & b) // Bitwise AND (0)
+    printf("Won't print");
+
+if (a && (a = 0)) // Short-circuit, a unchanged
+    printf("Won't print");</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q42: What is the difference between || and |?
+        </div>
+        <div class="answer">
+            <p><strong>||:</strong> Logical OR, short-circuits (stops if first true). <strong>|:</strong> Bitwise OR, evaluates both operands, operates on bits.</p>
+            
+            <div class="code-block" data-language="code"><pre><code>int a = 5, b = 0;
+
+if (a || b) // Logical OR (true)
+    printf("Will print");
+
+if (a | b) // Bitwise OR (5)
+    printf("Will print");
+
+if (a || (a = 0)) // Short-circuit, a unchanged
+    printf("Will print");</code></pre></div>
+        </div>
+
+        <div class="footer">
+            <p><span class="highlight">🎯 Ready for Your C Interview?</span></p>
+            <p>Master these 42 comprehensive C interview questions covering fundamentals, memory management, pointers, and advanced concepts. C is the foundation of modern programming - understanding C deeply will make you a better programmer in any language.</p>
+            <p><span class="highlight">💡 Tip:</span> Focus on understanding memory management, pointers, and the difference between stack and heap. These are the areas where most C interview questions focus. Practice writing C code without relying on higher-level abstractions.</p>
+        </div>
     </div>
 </body>
 </html>
+
