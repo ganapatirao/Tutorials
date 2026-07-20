@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lit Interview Preparation Guide</title>
-                <style>
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
         
         * {
@@ -98,24 +98,6 @@
             100% { background-position: 300% 0; }
         }
         
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
-        }
-        
         .back-button {
             display: inline-flex;
             align-items: center;
@@ -132,44 +114,11 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-button:hover::before {
-            left: 100%;
         }
         
         .back-button:hover {
             transform: translateY(-4px) scale(1.05);
             box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
-        }
-        
-        .back-button svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.3s ease;
-        }
-        
-        .back-button:hover svg {
-            transform: translateX(-5px);
         }
         
         h1 {
@@ -178,44 +127,11 @@
             font-weight: 800;
             text-align: center;
             margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 35px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
-            border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
         
         .subtitle {
@@ -223,8 +139,6 @@
             font-size: 18px;
             color: #4a4a68;
             margin-bottom: 40px;
-            font-weight: 500;
-            animation: fadeIn 1s ease 0.4s both;
         }
         
         h2 {
@@ -238,23 +152,6 @@
             border-left: 8px solid #667eea;
             border-radius: 0 20px 20px 0;
             box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
         }
         
         h3 {
@@ -265,92 +162,6 @@
             margin-bottom: 20px;
             padding-left: 25px;
             border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
-        }
-        
-        .chapter {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
-            border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
-        }
-        
-        .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
-            overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.5s ease both;
-        }
-        
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-x: auto;
-        }
-        
-        
-        .toc {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 35px 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border-left: 8px solid #667eea;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        .toc h3 {
-            color: #1a1a2e;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .toc ol {
-            padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
-        }
-        
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
         }
         
         .question {
@@ -361,8 +172,6 @@
             margin: 25px 0 15px 0;
             font-weight: 600;
             font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
         }
         
         .answer {
@@ -372,7 +181,6 @@
             margin: 15px 0 25px 0;
             border-left: 6px solid #764ba2;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            animation: slideUp 0.5s ease both;
         }
         
         .answer p {
@@ -397,46 +205,47 @@
             line-height: 1.8;
         }
         
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
+        .code-block {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            color: #e0e0e0;
+            padding: 45px;
+            border-radius: 20px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 15px;
+            margin: 35px 0;
+            line-height: 1.8;
+            border-left: 8px solid #dd0031;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
         }
         
-        .answer strong {
-            color: #667eea;
-            font-weight: 600;
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
         }
         
-        .page-break {
-            page-break-after: always;
-            margin: 60px 0;
-            border-top: 2px dashed #e0e0e0;
-            padding-top: 40px;
+        .toc {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 35px 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 8px solid #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
         }
         
-        .important {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+        .toc h3 {
+            color: #1a1a2e;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-left: 0;
+            border-left: none;
         }
         
-        .important strong {
-            color: #856404;
-        }
-        
-        .tip {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
-        }
-        
-        .tip strong {
-            color: #0c5460;
+        .toc ol {
+            padding-left: 25px;
+            color: #4a4a68;
+            line-height: 2;
         }
         
         table {
@@ -455,7 +264,6 @@
             padding: 15px;
             text-align: left;
             font-weight: 600;
-            font-size: 15px;
         }
         
         td {
@@ -468,213 +276,33 @@
             border-bottom: none;
         }
         
-        tr:hover td {
-            background: #f8f9fa;
+        .important {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 6px solid #ffc107;
         }
         
-        p {
-            color: #1a1a2e;
-            line-height: 1.8;
-            margin-bottom: 15px;
+        .tip {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 6px solid #17a2b8;
         }
         
-        ul, ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
+        .page-break {
+            page-break-after: always;
+            margin: 60px 0;
+            border-top: 2px dashed #e0e0e0;
+            padding-top: 40px;
         }
-        
-        ul li, ol li {
-            margin-bottom: 8px;
-        }
-        
-                
-        @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
-            }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
-        }</style></head>
+    </style>
+</head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-        </a>
+        <a href="../index.html" class="back-button">Back to Home</a>
         <h1>Lit Interview Preparation Guide</h1>
         <p class="subtitle">Comprehensive Interview Preparation with In-Depth Concepts, Code Examples, and Best Practices</p>
 
@@ -739,7 +367,7 @@
             Q3: How do you create a Lit component?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>import { LitElement, html, css } from 'lit';
+            <div class="code-block"><pre><code>import { LitElement, html, css } from 'lit';
 
 class MyElement extends LitElement {
   static styles = css`
@@ -762,9 +390,9 @@ class MyElement extends LitElement {
   
   render() {
     return html`
-      &lt;h1&gt;Hello, ${this.name}!&lt;/h1&gt;
-      &lt;p&gt;Count: ${this.count}&lt;/p&gt;
-      &lt;button @click=${this._increment}&gt;Increment&lt;/button&gt;
+      <h1>Hello, ${this.name}!</h1>
+      <p>Count: ${this.count}</p>
+      <button @click="${this._increment}">Increment</button>
     `;
   }
   
@@ -811,7 +439,7 @@ customElements.define('my-element', MyElement);</code></pre></div>
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>static properties = {
+            <div class="code-block"><pre><code>static properties = {
   name: { type: String },
   count: { type: Number },
   active: { type: Boolean },
@@ -837,20 +465,20 @@ customElements.define('my-element', MyElement);</code></pre></div>
                 <li>Updates only changed parts of the DOM</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>static properties = {
+            <div class="code-block"><pre><code>static properties = {
   items: { type: Array },
   selected: { type: Number }
 };
 
 render() {
   return html`
-    &lt;ul&gt;
-      ${this.items.map((item, index) =&gt; html`
-        &lt;li class="${index === this.selected ? 'selected' : ''}"&gt;
+    <ul>
+      ${this.items.map((item, index) => html`
+        <li class="${index === this.selected ? 'selected' : ''}">
           ${item.name}
-        &lt;/li&gt;
+        </li>
       `)}
-    &lt;/ul&gt;
+    </ul>
   `;
 }</code></pre></div>
         </div>
@@ -864,7 +492,7 @@ render() {
                 <li><strong>Internal state:</strong> Private, not reactive by default. Use for component-internal state that doesn't need to trigger re-render.</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// Property - reactive, public
+            <div class="code-block"><pre><code>// Property - reactive, public
 static properties = {
   count: { type: Number }
 };
@@ -892,23 +520,23 @@ private _internalState = {
                 <li>Directives</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>render() {
+            <div class="code-block"><pre><code>render() {
   return html`
-    &lt;div&gt;
-      &lt;h1&gt;${this.title}&lt;/h1&gt;
+    <div>
+      <h1>${this.title}</h1>
       
-      ${this.items.length &gt; 0 ? html`
-        &lt;ul&gt;
-          ${this.items.map(item =&gt; html`
-            &lt;li&gt;${item.name}&lt;/li&gt;
+      ${this.items.length > 0 ? html`
+        <ul>
+          ${this.items.map(item => html`
+            <li>${item.name}</li>
           `)}
-        &lt;/ul&gt;
+        </ul>
       ` : html`
-        &lt;p&gt;No items&lt;/p&gt;
+        <p>No items</p>
       `}
       
-      &lt;button @click=${this.handleClick}&gt;Click&lt;/button&gt;
-    &lt;/div&gt;
+      <button @click="${this.handleClick}">Click</button>
+    </div>
   `;
 }</code></pre></div>
         </div>
@@ -927,19 +555,19 @@ private _internalState = {
                 <li><strong>unsafeHTML:</strong> Render raw HTML (use with caution)</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>import { repeat } from 'lit/directives/repeat.js';
+            <div class="code-block"><pre><code>import { repeat } from 'lit/directives/repeat.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
 render() {
   return html`
-    &lt;div class="${classMap({ active: this.isActive })}"&gt;
-      ${repeat(this.items, (item) =&gt; item.id, (item, index) =&gt; html`
-        &lt;div style="${styleMap({ color: item.color })}"&gt;
+    <div class="${classMap({ active: this.isActive })}">
+      ${repeat(this.items, (item) => item.id, (item, index) => html`
+        <div style="${styleMap({ color: item.color })}">
           ${item.name}
-        &lt;/div&gt;
+        </div>
       `)}
-    &lt;/div&gt;
+    </div>
   `;
 }</code></pre></div>
         </div>
@@ -954,7 +582,7 @@ render() {
         <div class="answer">
             <p>Lit components use <strong>Shadow DOM</strong> by default, which encapsulates styles. Styles are defined in the static styles property.</p>
             
-            <div class="code-block" data-language="code"><pre><code>import { css } from 'lit';
+            <div class="code-block"><pre><code>import { css } from 'lit';
 
 class MyElement extends LitElement {
   static styles = css`
@@ -992,23 +620,6 @@ class MyElement extends LitElement {
                 <li><strong>Scoped styles:</strong> Defined in static styles property. Encapsulated to component's Shadow DOM. Don't leak out or get affected by external styles.</li>
                 <li><strong>Global styles:</strong> Can be applied to light DOM or shared across components. Use constructable stylesheets or global CSS.</li>
             </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>// Scoped (Shadow DOM)
-static styles = css`
-  :host { display: block; }
-`;
-
-// Global (Light DOM)
-const globalStyle = css`
-  .global-class { color: red; }
-`;
-
-render() {
-  return html`
-    &lt;style&gt;${globalStyle}&lt;/style&gt;
-    &lt;div class="global-class"&gt;Global styled&lt;/div&gt;
-  `;
-}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1028,34 +639,6 @@ render() {
                 <li><strong>updated():</strong> Called after update. Post-render logic.</li>
                 <li><strong>firstUpdated():</strong> Called after first update. One-time setup.</li>
             </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>class MyElement extends LitElement {
-  connectedCallback() {
-    super.connectedCallback();
-    // Set up event listeners, timers
-    this._interval = setInterval(() =&gt; this._tick(), 1000);
-  }
-  
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    // Clean up
-    clearInterval(this._interval);
-  }
-  
-  willUpdate(changedProperties) {
-    // Modify properties before render
-    if (changedProperties.has('value')) {
-      this._processedValue = this._process(this.value);
-    }
-  }
-  
-  updated(changedProperties) {
-    // Post-render logic
-    if (changedProperties.has('items')) {
-      this._scrollToBottom();
-    }
-  }
-}</code></pre></div>
         </div>
 
         <div class="page-break"></div>
@@ -1068,19 +651,19 @@ render() {
         <div class="answer">
             <p>Lit components can be tested with standard web component testing tools like Web Test Runner or @web/tester.</p>
             
-            <div class="code-block" data-language="code"><pre><code>import { fixture, expect } from '@open-wc/testing';
+            <div class="code-block"><pre><code>import { fixture, expect } from '@open-wc/testing';
 import { MyElement } from './my-element.js';
 
-describe('MyElement', () =&gt; {
-  it('renders a greeting', async () =&gt; {
-    const el = await fixture('&lt;my-element name="World"&gt;&lt;/my-element&gt;');
+describe('MyElement', () => {
+  it('renders a greeting', async () => {
+    const el = await fixture('<my-element name="World"></my-element>');
     
     const h1 = el.shadowRoot.querySelector('h1');
     expect(h1.textContent).to.equal('Hello, World!');
   });
   
-  it('increments count on button click', async () =&gt; {
-    const el = await fixture('&lt;my-element&gt;&lt;/my-element&gt;');
+  it('increments count on button click', async () => {
+    const el = await fixture('<my-element></my-element>');
     const button = el.shadowRoot.querySelector('button');
     
     button.click();
@@ -1138,50 +721,12 @@ describe('MyElement', () =&gt; {
             </table>
         </div>
 
-        <div class="question">
-            Q14: What is the difference between Lit and Angular?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Lit</th>
-                    <th>Angular</th>
-                </tr>
-                <tr>
-                    <td>Bundle Size</td>
-                    <td>~5KB</td>
-                    <td>~200KB+</td>
-                </tr>
-                <tr>
-                    <td>TypeScript</td>
-                    <td>Optional</td>
-                    <td>Required</td>
-                </tr>
-                <tr>
-                    <td>Architecture</td>
-                    <td>Component library</td>
-                    <td>Full framework</td>
-                </tr>
-                <tr>
-                    <td>Web Components</td>
-                    <td>Native</td>
-                    <td>Elements API</td>
-                </tr>
-                <tr>
-                    <td>Learning Curve</td>
-                    <td>Low</td>
-                    <td>High</td>
-                </tr>
-            </table>
-        </div>
-
         <div class="page-break"></div>
 
-        <h2>9. Common Interview Questions</h2>
+        <h2>12. Common Interview Questions</h2>
 
         <div class="question">
-            Q15: What is Shadow DOM and why is it important?
+            Q14: What is Shadow DOM and why is it important?
         </div>
         <div class="answer">
             <p><strong>Shadow DOM</strong> is a web standard that provides encapsulation for DOM and styles. It:</p>
@@ -1198,1082 +743,68 @@ describe('MyElement', () =&gt; {
         </div>
 
         <div class="question">
-            Q16: What is the difference between render and firstUpdated?
+            Q15: What is the difference between @event and .addEventListener?
         </div>
         <div class="answer">
             <ul>
-                <li><strong>render:</strong> Called every time properties change. Returns the template to render.</li>
-                <li><strong>firstUpdated:</strong> Called only once after the first render. Used for one-time setup like initializing third-party libraries.</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q17: How do you handle events in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>// Event handling in template
-render() {
-  return html`
-    &lt;button @click=${this.handleClick}&gt;Click&lt;/button&gt;
-    &lt;input @input=${this.handleInput}&gt;
-    &lt;div @mouseover=${this.handleHover}&gt;Hover&lt;/div&gt;
-  `;
-}
-
-handleClick(event) {
-  console.log('Clicked:', event);
-}
-
-handleInput(event) {
-  this.value = event.target.value;
-}
-
-handleHover(event) {
-  console.log('Hovered at:', event.clientX, event.clientY);
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q18: What is the difference between @event and @event:capture?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>@event:</strong> Bubbling phase. Event bubbles up from target to ancestors.</li>
-                <li><strong>@event:capture:</strong> Capture phase. Event flows down from ancestors to target.</li>
+                <li><strong>@event:</strong> Lit's declarative event handling. Cleaner syntax, automatically bound to component instance.</li>
+                <li><strong>.addEventListener:</strong> Standard DOM API. More verbose, manual binding required, but more control.</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>&lt;div @click=${this.handleParentClick}&gt;
-  &lt;button @click=${this.handleChildClick}&gt;Click&lt;/button&gt;
-&lt;/div&gt;
+            <div class="code-block"><pre><code>// Lit's @event
+<button @click="${this.handleClick}">Click</button>
 
-&lt;div @click:capture=${this.handleParentClick}&gt;
-  &lt;button @click=${this.handleChildClick}&gt;Click&lt;/button&gt;
-&lt;/div&gt;</code></pre></div>
+// addEventListener
+this.shadowRoot.querySelector('button')
+  .addEventListener('click', this.handleClick.bind(this));</code></pre></div>
         </div>
 
         <div class="question">
-            Q19: How do you create a custom directive?
+            Q16: How do you handle forms in Lit?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>import { directive } from 'lit/directive.js';
-
-const myDirective = directive((value) =&gt; (part) =&gt; {
-  part.setValue(value.toUpperCase());
-});
-
-// Usage
-render() {
-  return html`
-    &lt;span&gt;${myDirective(this.text)}&lt;/span&gt;
-  `;
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q20: What is the difference between properties and attributes?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Properties:</strong> JavaScript object properties. Can be any type. Used in component logic.</li>
-                <li><strong>Attributes:</strong> HTML attributes. Always strings. Used in HTML markup.</li>
-            </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>// In HTML
-&lt;my-element name="John" count="5"&gt;&lt;/my-element&gt;
-
-// In JavaScript
-const el = document.querySelector('my-element');
-el.name = 'John';  // Property
-el.setAttribute('name', 'John');  // Attribute</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q21: How do you handle async operations in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>class MyElement extends LitElement {
+            <div class="code-block"><pre><code>class MyForm extends LitElement {
   static properties = {
-    data: { type: Array }
+    username: { type: String },
+    email: { type: String }
   };
   
-  async connectedCallback() {
-    super.connectedCallback();
-    await this._loadData();
-  }
-  
-  async _loadData() {
-    this.data = await fetch('/api/data').then(r =&gt; r.json());
-  }
-  
-  render() {
-    if (!this.data) {
-      return html`&lt;p&gt;Loading...&lt;/p&gt;`;
-    }
-    
-    return html`
-      &lt;ul&gt;
-        ${this.data.map(item =&gt; html`&lt;li&gt;${item.name}&lt;/li&gt;`)}
-      &lt;/ul&gt;
-    `;
-  }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q22: What is the difference between Lit and Polymer?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Polymer:</strong> Legacy library. Larger bundle. More complex API. Deprecated.</li>
-                <li><strong>Lit:</strong> Modern successor. Smaller bundle. Simpler API. Actively maintained.</li>
-            </ul>
-            
-            <div class="tip">
-                <strong>Tip:</strong> Lit is the recommended way to build web components today. Polymer is deprecated and should not be used for new projects.
-            </div>
-        </div>
-
-        <div class="question">
-            Q23: How do you handle slot content in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>class MyElement extends LitElement {
-  render() {
-    return html`
-      &lt;div&gt;
-        &lt;slot name="header"&gt;&lt;/slot&gt;
-        &lt;slot&gt;Default content&lt;/slot&gt;
-        &lt;slot name="footer"&gt;&lt;/slot&gt;
-      &lt;/div&gt;
-    `;
-  }
-}
-
-// Usage
-&lt;my-element&gt;
-  &lt;div slot="header"&gt;Header&lt;/div&gt;
-  &lt;div&gt;Main content&lt;/div&gt;
-  &lt;div slot="footer"&gt;Footer&lt;/div&gt;
-&lt;/my-element&gt;</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q24: What is the difference between Shadow DOM and Light DOM?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Shadow DOM</th>
-                    <th>Light DOM</th>
-                </tr>
-                <tr>
-                    <td>Encapsulation</td>
-                    <td>Encapsulated</td>
-                    <td>Not encapsulated</td>
-                </tr>
-                <tr>
-                    <td>Styles</td>
-                    <td>Scoped</td>
-                    <td>Global</td>
-                </tr>
-                <tr>
-                    <td>Default in Lit</td>
-                    <td>Yes</td>
-                    <td>No (opt-in)</td>
-                </tr>
-                <tr>
-                    <td>Use Case</td>
-                    <td>Reusable components</td>
-                    <td>Layout components</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q25: How do you use Lit with TypeScript?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-
-@customElement('my-element')
-export class MyElement extends LitElement {
-  @property({ type: String })
-  name = 'World';
-  
-  @property({ type: Number })
-  count = 0;
-  
-  private _internalState = { data: null };
-  
-  render() {
-    return html`
-      &lt;h1&gt;Hello, ${this.name}!&lt;/h1&gt;
-      &lt;p&gt;Count: ${this.count}&lt;/p&gt;
-    `;
-  }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q26: What is the difference between @property and @state?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>@property:</strong> Public reactive property. Can be set from outside. Triggers re-render.</li>
-                <li><strong>@state:</strong> Private reactive property. Cannot be set from outside. Triggers re-render.</li>
-            </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>@property({ type: String })
-name = 'World';
-
-@state()
-private _count = 0;</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q27: How do you optimize Lit component performance?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Use repeat directive:</strong> Efficient list rendering with keying</li>
-                <li><strong>Avoid unnecessary re-renders:</strong> Use internal state for non-rendering values</li>
-                <li><strong>Debounce updates:</strong> For frequently changing values</li>
-                <li><strong>Lazy load components:</strong> For large applications</li>
-                <li><strong>Use virtual scrolling:</strong> For long lists</li>
-            </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>import { repeat } from 'lit/directives/repeat.js';
-
-render() {
-  return html`
-    ${repeat(this.items, (item) =&gt; item.id, (item) =&gt; html`
-      &lt;div&gt;${item.name}&lt;/div&gt;
-    `)}
-  `;
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q28: What is the difference between Lit and Stencil?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Lit</th>
-                    <th>Stencil</th>
-                </tr>
-                <tr>
-                    <td>Focus</td>
-                    <td>Component library</td>
-                    <td>Compiler for web components</td>
-                </tr>
-                <tr>
-                    <td>Output</td>
-                    <td>Runtime library</td>
-                    <td>Compiled vanilla JS</td>
-                </tr>
-                <tr>
-                    <td>Bundle Size</td>
-                    <td>~5KB runtime</td>
-                    <td>Zero runtime</td>
-                </tr>
-                <tr>
-                    <td>TypeScript</td>
-                    <td>Optional</td>
-                    <td>Required</td>
-                </tr>
-                <tr>
-                    <td>Decorators</td>
-                    <td>Optional</td>
-                    <td>Required</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q29: How do you handle form inputs in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>class FormElement extends LitElement {
-  static properties = {
-    value: { type: String }
-  };
-  
-  render() {
-    return html`
-      &lt;input
-        value="${this.value}"
-        @input="${this._handleInput}"
-        placeholder="Enter text"
-      /&gt;
-      &lt;p&gt;Value: ${this.value}&lt;/p&gt;
-    `;
-  }
-  
-  _handleInput(event) {
-    this.value = event.target.value;
-  }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q30: What is the difference between declarative shadow DOM and Lit's approach?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Declarative Shadow DOM:</strong> Web standard for server-side rendering of shadow DOM. Uses template with shadowrootmode attribute.</li>
-                <li><strong>Lit's approach:</strong> Programmatic shadow DOM creation. More flexible, works in all browsers.</li>
-            </ul>
-            
-            <div class="code-block" data-language="code"><pre><code>// Declarative Shadow DOM
-&lt;template shadowrootmode="open"&gt;
-  &lt;style&gt;:host { color: red; }&lt;/style&gt;
-  &lt;slot&gt;&lt;/slot&gt;
-&lt;/template&gt;</code></pre></div>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>9. Advanced Lit Patterns (All Levels Level)</h2>
-
-        <div class="question">
-            Q31: How do you implement a compound component pattern in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Parent component
-class Tabs extends LitElement {
-  static properties = {
-    active: { type: Number }
-  };
-
-  static styles = css`
-    :host { display: block; }
-    ::slotted(.tab) { padding: 10px; cursor: pointer; }
-    ::slotted(.tab.active) { background: #ddd; }
-  `;
-
-  render() {
-    return html`
-      &lt;slot @slotchange="${this._handleSlotChange}"&gt;&lt;/slot&gt;
-      &lt;slot name="panel"&gt;&lt;/slot&gt;
-    `;
-  }
-
-  _handleSlotChange(e) {
-    const tabs = e.target.assignedElements({ flatten: true });
-    tabs.forEach((tab, index) =&gt; {
-      tab.addEventListener('click', () =&gt; {
-        this.active = index;
-        this._updatePanels();
-      });
-    });
-  }
-
-  _updatePanels() {
-    const panels = this.shadowRoot.querySelectorAll('slot[name="panel"]')
-      .assignedElements({ flatten: true });
-    panels.forEach((panel, index) =&gt; {
-      panel.style.display = index === this.active ? 'block' : 'none';
-    });
-  }
-}
-
-// Usage
-&lt;my-tabs&gt;
-  &lt;div class="tab"&gt;Tab 1&lt;/div&gt;
-  &lt;div class="tab"&gt;Tab 2&lt;/div&gt;
-  &lt;div slot="panel"&gt;Panel 1&lt;/div&gt;
-  &lt;div slot="panel"&gt;Panel 2&lt;/div&gt;
-&lt;/my-tabs&gt;</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q32: How do you implement a custom directive in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Custom directive for lazy loading
-const lazyLoad = directive((importFn) =&gt; (part) =&gt; {
-  part.setValue('');
-  importFn().then((module) =&gt; {
-    part.setValue(module.default);
-    part.commit();
-  });
-});
-
-class LazyComponent extends LitElement {
-  render() {
-    return html`
-      ${lazyLoad(() =&gt; import('./heavy-component.js'))}
-    `;
-  }
-}
-
-// Custom directive for event delegation
-const delegate = directive((eventName, handler) =&gt; (part) =&gt; {
-  const element = part.committer?.element;
-  if (element) {
-    element.addEventListener(eventName, (e) =&gt; {
-      if (e.target.matches(part.selector)) {
-        handler(e);
-      }
-    });
-  }
-});
-
-class ListComponent extends LitElement {
-  render() {
-    return html`
-      &lt;ul ${delegate('click', this._handleItemClick)}&gt;
-        ${this.items.map(item =&gt; html`&lt;li data-id="${item.id}"&gt;${item.name}&lt;/li&gt;`)}
-      &lt;/ul&gt;
-    `;
-  }
-
-  _handleItemClick(e) {
-    const id = e.target.dataset.id;
-    console.log('Clicked:', id);
-  }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q33: How do you implement a mixin in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Mixin for click tracking
-const ClickTracker = (superclass) =&gt; class extends superclass {
-  _trackClick(event) {
-    console.log('Click tracked:', event.target);
-    super._handleClick?.(event);
-  }
-};
-
-// Mixin for localization
-const Localizable = (superclass) =&gt; class extends superclass {
-  static properties = {
-    locale: { type: String }
-  };
-
-  t(key) {
-    const translations = {
-      en: { hello: 'Hello' },
-      fr: { hello: 'Bonjour' }
-    };
-    return translations[this.locale]?.[key] || key;
-  }
-};
-
-// Apply multiple mixins
-class MyElement extends Localizable(ClickTracker(LitElement)) {
-  static properties = {
-    locale: { type: String }
-  };
-
-  render() {
-    return html`
-      &lt;button @click="${this._trackClick}"&gt;${this.t('hello')}&lt;/button&gt;
-    `;
-  }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q34: How do you implement a controller in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Controller for managing child elements
-class ResizeController {
-  constructor(host, callback) {
-    this.host = host;
-    this.callback = callback;
-    this.observer = new ResizeObserver((entries) =&gt; {
-      this.callback(entries[0].contentRect);
-    });
-    this.host.addController(this);
-  }
-
-  hostConnected() {
-    this.observer.observe(this.host);
-  }
-
-  hostDisconnected() {
-    this.observer.disconnect();
-  }
-}
-
-class ResizableElement extends LitElement {
   constructor() {
     super();
-    new ResizeController(this, (rect) =&gt; {
-      console.log('Size:', rect.width, rect.height);
-    });
+    this.username = '';
+    this.email = '';
   }
-
-  render() {
-    return html`&lt;div&gt;Resize me&lt;/div&gt;`;
-  }
-}</code></pre></div>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>10. Lit 3+ Features (All Levels Level)</h2>
-
-        <div class="question">
-            Q35: What are the new features in Lit 3?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Decorators:</strong> Built-in decorator support without experimentalDecorators</li>
-                <li><strong>Event Replay:</strong> Events fired before upgrade are replayed</li>
-                <li><strong>Scoped Elements:</strong> Better scoped element registration</li>
-                <li><strong>Improved TypeScript:</strong> Better type inference and type safety</li>
-                <li><strong>Performance:</strong> Faster rendering and smaller bundle size</li>
-                <li><strong>Declarative Shadow DOM:</strong> Native support for declarative shadow DOM</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q36: How do you use decorators in Lit 3?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>import { LitElement, html, css } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-
-@customElement('my-element')
-class MyElement extends LitElement {
-  @property({ type: String })
-  name = '';
-
-  @state()
-  private _count = 0;
-
-  static styles = css`
-    :host { display: block; }
-  `;
-
+  
   render() {
     return html`
-      &lt;p&gt;Hello ${this.name}&lt;/p&gt;
-      &lt;p&gt;Count: ${this._count}&lt;/p&gt;
-      &lt;button @click="${this._increment}"&gt;Increment&lt;/button&gt;
+      <form @submit="${this._handleSubmit}">
+        <input
+          type="text"
+          name="username"
+          .value="${this.username}"
+          @input="${this._handleInput}"
+        />
+        <input
+          type="email"
+          name="email"
+          .value="${this.email}"
+          @input="${this._handleInput}"
+        />
+        <button type="submit">Submit</button>
+      </form>
     `;
   }
-
-  private _increment() {
-    this._count++;
-  }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q37: How do you implement scoped elements in Lit 3?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>import { ScopedElementsMixin } from '@lit-labs/scoped-registry-mixin';
-
-class MyElement extends ScopedElementsMixin(LitElement) {
-  static get scopedElements() {
-    return {
-      'my-button': MyButton,
-      'my-input': MyInput
-    };
-  }
-
-  render() {
-    return html`
-      &lt;my-button&gt;Click&lt;/my-button&gt;
-      &lt;my-input&gt;&lt;/my-input&gt;
-    `;
-  }
-}
-
-// Benefits:
-// - Elements are scoped to component
-// - No global custom element registration
-// - Better encapsulation
-// - Avoids naming conflicts</code></pre></div>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>11. Performance Optimization (All Levels Level)</h2>
-
-        <div class="question">
-            Q38: How do you optimize Lit component performance?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Use @state for internal state:</strong> Only re-renders when state changes</li>
-                <li><strong>Avoid expensive computations in render:</strong> Memoize results</li>
-                <li><strong>Use directives for repeated patterns:</strong> Reduce template complexity</li>
-                <li><strong>Lazy load components:</strong> Use dynamic imports</li>
-                <li><strong>Virtualize long lists:</strong> Use windowing techniques</li>
-                <li><strong>Batch property updates:</strong> Use requestUpdateAsync</li>
-                <li><strong>Avoid unnecessary re-renders:</strong> Use hasChanged option</li>
-            </ul>
-            
-            <div class="code-block" data-language="code"><pre><code> Custom hasChanged for performance
-class OptimizedElement extends LitElement {
-  static properties = {
-    data: {
-      hasChanged: (newVal, oldVal) =&gt; {
-        // Only update if data actually changed
-        return JSON.stringify(newVal) !== JSON.stringify(oldVal);
-      }
-    }
-  }
-
-  render() {
-    return html`&lt;div&gt;${this.data}&lt;/div&gt;`;
-  }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q39: How do you implement virtual scrolling in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>import { VirtualScroller } from '@lit-labs/virtual-scroller';
-
-class VirtualList extends LitElement {
-  static properties = {
-    items: { type: Array }
-  };
-
-  render() {
-    return html`
-      &lt;virtual-scroller
-        .items="${this.items}"
-        .itemRenderer="${this._renderItem}"
-      &gt;&lt;/virtual-scroller&gt;
-    `;
-  }
-
-  _renderItem(item) {
-    return html`&lt;div&gt;${item.name}&lt;/div&gt;`;
-  }
-}
-
-customElements.define('virtual-list', VirtualList);
-customElements.define('virtual-scroller', VirtualScroller);</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q40: How do you implement lazy loading in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>class LazyLoadElement extends LitElement {
-  static properties = {
-    component: { type: String }
-  };
-
-  @state()
-  private _loadedComponent = null;
-
-  async _loadComponent() {
-    if (!this._loadedComponent &amp;&amp; this.component) {
-      const module = await import(`./${this.component}.js`);
-      this._loadedComponent = module.default;
-    }
-  }
-
-  render() {
-    if (!this._loadedComponent) {
-      return html`&lt;div&gt;Loading...&lt;/div&gt;`;
-    }
-    return html`&lt;${this._loadedComponent}&gt;&lt;/${this._loadedComponent}&gt;`;
-  }
-
-  updated(changedProperties) {
-    super.updated(changedProperties);
-    if (changedProperties.has('component')) {
-      this._loadComponent();
-    }
-  }
-}</code></pre></div>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>12. Common Interview Questions (All Levels)</h2>
-
-        <div class="question">
-            Q41: What is the difference between Lit and React?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Lit</th>
-                    <th>React</th>
-                </tr>
-                <tr>
-                    <td>Bundle Size</td>
-                    <td>~5KB</td>
-                    <td>~40KB (React + ReactDOM)</td>
-                </tr>
-                <tr>
-                    <td>Standard</td>
-                    <td>Web Components</td>
-                    <td>Virtual DOM</td>
-                </tr>
-                <tr>
-                    <td>Framework</td>
-                    <td>Framework-agnostic</td>
-                    <td>Requires React runtime</td>
-                </tr>
-                <tr>
-                    <td>Styling</td>
-                    <td>Shadow DOM encapsulation</td>
-                    <td>CSS-in-JS or CSS modules</td>
-                </tr>
-                <tr>
-                    <td>Learning Curve</td>
-                    <td>Low</td>
-                    <td>Medium</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q42: How do you handle accessibility in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>class AccessibleButton extends LitElement {
-  static properties = {
-    label: { type: String },
-    disabled: { type: Boolean }
-  };
-
-  render() {
-    return html`
-      &lt;button
-        ?disabled="${this.disabled}"
-        aria-label="${this.label}"
-        aria-disabled="${this.disabled}"
-        @click="${this._handleClick}"
-      &gt;
-        &lt;slot&gt;&lt;/slot&gt;
-      &lt;/button&gt;
-    `;
-  }
-
-  _handleClick() {
-    if (!this.disabled) {
-      this.dispatchEvent(new CustomEvent('action', {
-        bubbles: true,
-        composed: true
-      }));
-    }
-  }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q43: How do you implement server-side rendering with Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Using declarative shadow DOM
-import { render } from '@lit-labs/ssr';
-
-const ssrResult = await render(html`
-  &lt;my-element&gt;Content&lt;/my-element&gt;
-`);
-
-// Output includes declarative shadow DOM
-console.log(ssrResult.html);
-
-// Node.js server example
-import express from 'express';
-import { render } from '@lit-labs/ssr/lib/lib/render-with-global-dom-shim.cjs.js';
-
-const app = express();
-
-app.get('/', async (req, res) =&gt; {
-  const result = await render(html`&lt;my-app&gt;&lt;/my-app&gt;`);
-  res.send(`
-    &lt;!DOCTYPE html&gt;
-    &lt;html&gt;
-      &lt;head&gt;&lt;/head&gt;
-      &lt;body&gt;${result.html}&lt;/body&gt;
-    &lt;/html&gt;
-  `);
-});</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q44: How do you implement internationalization in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>import { localize } from '@lit/localize';
-
-localize.initialize({
-  sourceLocale: 'en',
-  targetLocales: ['en', 'fr', 'es'],
-  loadLocale: (locale) =&gt; import(`./locales/${locale}.js`)
-});
-
-class LocalizedElement extends LitElement {
-  render() {
-    return html`
-      &lt;h1&gt;${msg('Welcome')}&lt;/h1&gt;
-      &lt;p&gt;${msg('Hello', { name: 'World' })}&lt;/p&gt;
-    `;
-  }
-}
-
-// locales/en.js
-export const sourceLocale = 'en';
-export const templates = {
-  'Welcome': 'Welcome',
-  'Hello': 'Hello {name}'
-};</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q45: How do you implement theming in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Using CSS custom properties for theming
-class ThemedElement extends LitElement {
-  static styles = css`
-    :host {
-      --primary-color: #007bff;
-      --background-color: #ffffff;
-      --text-color: #333333;
-      display: block;
-      padding: 16px;
-      background: var(--background-color);
-      color: var(--text-color);
-    }
-    
-    button {
-      background: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 8px 16px;
-    }
-  `;
-
-  render() {
-    return html`
-      &lt;button&gt;Themed Button&lt;/button&gt;
-    `;
-  }
-}
-
-// Override theme in parent
-document.documentElement.style.setProperty('--primary-color', '#ff0000');</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q46: How do you implement form validation in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>class ValidatedInput extends LitElement {
-  static properties = {
-    value: { type: String },
-    required: { type: Boolean },
-    pattern: { type: String },
-    error: { type: String }
-  };
-
-  render() {
-    return html`
-      &lt;input
-        value="${this.value}"
-        ?required="${this.required}"
-        pattern="${this.pattern}"
-        @input="${this._handleInput}"
-        @invalid="${this._handleInvalid}"
-      /&gt;
-      ${this.error ? html`&lt;span class="error"&gt;${this.error}&lt;/span&gt;` : ''}
-    `;
-  }
-
+  
   _handleInput(e) {
-    this.value = e.target.value;
-    this.error = '';
+    this[e.target.name] = e.target.value;
   }
-
-  _handleInvalid(e) {
-    this.error = e.target.validationMessage;
-  }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q47: How do you implement animation in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>class AnimatedElement extends LitElement {
-  static styles = css`
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    .animated {
-      animation: fadeIn 0.3s ease-in;
-    }
-  `;
-
-  @state()
-  private _visible = false;
-
-  render() {
-    return html`
-      &lt;div class="${this._visible ? 'animated' : ''}"&gt;
-        ${this._visible ? 'Content' : ''}
-      &lt;/div&gt;
-      &lt;button @click="${this._toggle}"&gt;Toggle&lt;/button&gt;
-    `;
-  }
-
-  _toggle() {
-    this._visible = !this._visible;
-  }
-}</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q48: How do you implement drag and drop in Lit?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>class DraggableElement extends LitElement {
-  render() {
-    return html`
-      &lt;div
-        draggable="true"
-        @dragstart="${this._handleDragStart}"
-        @dragend="${this._handleDragEnd}"
-      &gt;
-        Drag me
-      &lt;/div&gt;
-    `;
-  }
-
-  _handleDragStart(e) {
-    e.dataTransfer.setData('text/plain', 'dragged-data');
-    this.classList.add('dragging');
-  }
-
-  _handleDragEnd() {
-    this.classList.remove('dragging');
-  }
-}
-
-class DropZone extends LitElement {
-  render() {
-    return html`
-      &lt;div
-        @dragover="${this._handleDragOver}"
-        @drop="${this._handleDrop}"
-      &gt;
-        Drop here
-      &lt;/div&gt;
-    `;
-  }
-
-  _handleDragOver(e) {
+  
+  _handleSubmit(e) {
     e.preventDefault();
-  }
-
-  _handleDrop(e) {
-    e.preventDefault();
-    const data = e.dataTransfer.getData('text/plain');
-    console.log('Dropped:', data);
+    console.log(this.username, this.email);
   }
 }</code></pre></div>
-        </div>
-
-        <div class="question">
-            Q49: What are the best practices for Lit development?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Use TypeScript:</strong> Provides type safety and better IDE support</li>
-                <li><strong>Follow naming conventions:</strong> Use kebab-case for custom element names</li>
-                <li><strong>Encapsulate styles:</strong> Use Shadow DOM for style isolation</li>
-                <li><strong>Use reactive properties:</strong> Leverage @property and @state decorators</li>
-                <li><strong>Optimize rendering:</strong> Avoid expensive operations in render</li>
-                <li><strong>Test components:</strong> Write unit tests with Web Test Runner</li>
-                <li><strong>Document components:</strong> Use JSDoc for documentation</li>
-                <li><strong>Use directives:</strong> Create reusable directives for common patterns</li>
-                <li><strong>Handle accessibility:</strong> Implement ARIA attributes and keyboard navigation</li>
-                <li><strong>Bundle optimization:</strong> Use code splitting and tree shaking</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q50: How do you integrate Lit with other frameworks?
-        </div>
-        <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> With React
-import React, { useEffect, useRef } from 'react';
-
-function ReactWrapper() {
-  const ref = useRef();
-
-  useEffect(() =&gt; {
-    import('./my-element.js').then(() =&gt; {
-      // Custom element is now registered
-    });
-  }, []);
-
-  return &lt;my-element ref={ref} prop="value"&gt;&lt;/my-element&gt;;
-}
-
-// With Angular
-@Component({
-  selector: 'app-wrapper',
-  template: '&lt;my-element [prop]="value"&gt;&lt;/my-element&gt;',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
-})
-export class AppComponent {
-  value = 'Hello';
-}
-
-// With Vue
-&lt;template&gt;
-  &lt;my-element :prop="value"&gt;&lt;/my-element&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-export default {
-  data() {
-    return { value: 'Hello' };
-  }
-}
-&lt;/script&gt;</code></pre></div>
-        </div>
-
-        <div class="tip">
-            <strong>Interview Tip:</strong> When discussing Lit, emphasize its lightweight nature, Web Components standards compliance, and framework-agnostic design. Be prepared to discuss Shadow DOM, reactive properties, performance optimization, and how Lit compares to other frameworks. For senior positions, demonstrate knowledge of advanced patterns like controllers, mixins, custom directives, and Lit 3 features.
-        </div>
-
-        <div class="important">
-            <strong>Key Takeaways for Interview (Comprehensive Guide):</strong>
-            <ul>
-                <li><strong>All Levels (0-3 years):</strong> Understand Web Components standards, know Shadow DOM and encapsulation, understand reactive properties (@property, @state), know Lit's template system with html tag, understand basic lifecycle methods, know styling approaches with CSS and scoped styles.</li>
-                <li><strong>All Levels (4-7 years):</strong> Understand directives and when to use them, know how to handle events and event delegation, implement slots for content projection, understand property options (type, attribute, reflect), know how to test Lit components with Web Test Runner, understand controlled vs uncontrolled patterns.</li>
-                <li><strong>Advanced (8-10 years):</strong> Implement advanced patterns like compound components, create custom directives, use mixins for code reuse, implement controllers for complex logic, optimize performance with hasChanged and memoization, implement lazy loading and code splitting, understand declarative shadow DOM for SSR.</li>
-                <li><strong>All Levels (11-13 years):</strong> Use Lit 3 decorators and scoped elements, implement server-side rendering with @lit-labs/ssr, design component libraries with proper encapsulation, implement advanced controllers and directives, optimize bundle size and rendering performance, integrate Lit with multiple frameworks, design scalable component architecture.</li>
-            </ul>
-        </div>
-
-        <div style="margin-top: 50px; padding: 20px; background: #512bd4; color: white; border-radius: 8px; text-align: center;">
-            <h3>End of Lit Interview Preparation Guide</h3>
-            <p>Comprehensive coverage from Comprehensive Guide level (All Experience Levels)</p>
         </div>
     </div>
 </body>
 </html>
-
-
-
-
