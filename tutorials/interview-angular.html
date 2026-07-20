@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -34,8 +34,40 @@
             padding: 12px 16px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 8px;
             border-bottom: 1px solid #3e3e42;
+        }
+        
+        .code-editor-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .copy-button {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .copy-button:hover {
+            background: #4e4e52;
+            color: #ffffff;
+        }
+        
+        .copy-button.copied {
+            background: #27ca40;
+            color: #ffffff;
         }
         
         .code-editor-dot {
@@ -130,10 +162,13 @@
             <p><strong>Angular</strong> is a TypeScript-based open-source web application framework led by Google. It's a complete rewrite of AngularJS (Angular 1.x) and provides a comprehensive platform for building single-page applications (SPAs). Angular uses TypeScript for type safety, provides built-in dependency injection, two-way data binding, and a component-based architecture.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">app.component.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">app.component.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">Component</span> } <span class="keyword">from</span> <span class="string">'@angular/core'</span>;
@@ -155,10 +190,13 @@
             <p><strong>Angular (2+)</strong> uses TypeScript and follows component-based architecture. It provides better performance, mobile support, improved dependency injection, and a more modular structure. Angular is a complete rewrite, not an upgrade.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">comparison.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">comparison.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// AngularJS (JavaScript)</span>
@@ -181,10 +219,13 @@
             <p><strong>TypeScript</strong> is a superset of JavaScript that adds static typing, interfaces, classes, and other features. Angular uses TypeScript because it provides better tooling, early error detection, improved code readability, and enhanced IDE support with IntelliSense.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">types.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">types.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// TypeScript with type annotations</span>
@@ -214,10 +255,13 @@
             <p><strong>Angular CLI</strong> (Command Line Interface) is a tool to initialize, develop, scaffold, and maintain Angular applications. It provides commands for creating components, services, modules, and running the development server with hot module replacement.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">terminal</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">terminal</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment"># Create new Angular project</span>
@@ -245,10 +289,13 @@
             <p><strong>Component</strong> is the fundamental building block of Angular applications. A component consists of a TypeScript class, HTML template, CSS styles, and metadata decorator. Components control a patch of screen called a view.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">product.component.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">product.component.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">Component</span>, <span class="type">OnInit</span> } <span class="keyword">from</span> <span class="string">'@angular/core'</span>;
@@ -274,10 +321,13 @@
             <p><strong>Component Lifecycle</strong> hooks allow you to tap into key moments in a component's life: ngOnChanges (input changes), ngOnInit (after constructor), ngDoCheck (custom change detection), ngAfterContentInit (content projection), ngAfterContentChecked, ngAfterViewInit (view initialization), ngAfterViewChecked, and ngOnDestroy (cleanup).</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">lifecycle.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">lifecycle.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">Component</span>, <span class="type">OnInit</span>, <span class="type">OnDestroy</span> } <span class="keyword">from</span> <span class="string">'@angular/core'</span>;
@@ -308,10 +358,13 @@
             <p><strong>@Input</strong> decorator marks a property as an input that receives data from a parent component. <strong>@Output</strong> decorator marks a property as an output that emits events to a parent component using EventEmitter.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">child.component.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">child.component.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">Component</span>, <span class="type">Input</span>, <span class="type">Output</span>, <span class="type">EventEmitter</span> } <span class="keyword">from</span> <span class="string">'@angular/core'</span>;
@@ -334,10 +387,13 @@
             <p><strong>Content projection</strong> allows you to project content from a parent component into a child component using ng-content. It's useful for creating reusable components with flexible content.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">card.component.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">card.component.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Child component template</span>
@@ -361,10 +417,13 @@
             <p><strong>Data Binding</strong> types: Interpolation {{}} (one-way), Property binding [] (one-way), Event binding () (one-way), Two-way binding [()] (bidirectional), and Attribute binding. Data binding synchronizes data between component and template.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">binding.html</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">binding.html</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Interpolation</span>
@@ -388,10 +447,13 @@
             <p><strong>ngModel</strong> is a directive that implements two-way data binding. It combines property binding [value] and event binding (input) into a single syntax. Requires FormsModule to be imported in the module.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">app.module.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">app.module.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">FormsModule</span> } <span class="keyword">from</span> <span class="string">'@angular/forms'</span>;
@@ -410,10 +472,13 @@
             <p><strong>Attribute binding</strong> [attr.] sets HTML attributes like colspan, aria-label. Use it when there's no corresponding DOM property.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">binding.html</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">binding.html</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Property binding</span>
@@ -430,10 +495,13 @@
             <p><strong>Class binding</strong> [class.className] conditionally adds/removes CSS classes. <strong>Style binding</strong> [style.styleProperty] dynamically sets inline styles. Both support object and string syntax.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">styles.html</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">styles.html</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Class binding</span>
@@ -452,10 +520,13 @@
             <p><strong>Safe navigation operator (?)</strong> prevents null reference errors. It returns null if the object is null instead of throwing an error. Useful when properties might not be initialized.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">safe.html</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">safe.html</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Without safe navigation - throws error if user is null</span>
@@ -474,10 +545,13 @@
             <p><strong>Directives</strong> are classes that add additional behavior to elements. Types: <strong>Components</strong> (directives with template), <strong>Attribute directives</strong> (change appearance/behavior), <strong>Structural directives</strong> (change DOM layout).</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">directive-types.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">directive-types.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Component - directive with template</span>
@@ -497,10 +571,13 @@
             <p><strong>Built-in structural directives:</strong> *ngIf (conditional rendering), *ngFor (loop through arrays), *ngSwitch (switch statement), and *ngSwitchCase/*ngSwitchDefault. They add/remove elements from the DOM.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">directives.html</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">directives.html</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// *ngIf - conditional rendering</span>
@@ -525,10 +602,13 @@
             <p><strong>Built-in attribute directives:</strong> ngClass (add/remove classes), ngStyle (set inline styles), ngModel (two-way binding). They modify the appearance or behavior of elements without changing the DOM structure.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">attribute.html</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">attribute.html</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// ngClass - dynamic classes</span>
@@ -545,10 +625,13 @@
             <p><strong>Custom attribute directives</strong> are created using the @Directive decorator. They can listen to events using @HostListener and manipulate the DOM using ElementRef.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">highlight.directive.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">highlight.directive.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">Directive</span>, <span class="type">ElementRef</span>, <span class="type">HostListener</span> } <span class="keyword">from</span> <span class="string">'@angular/core'</span>;
@@ -576,10 +659,13 @@
             <p><strong>Pipes</strong> transform data in templates. Angular provides built-in pipes and allows custom pipes. Pipes are used with the pipe operator (|).</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">pipes.html</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">pipes.html</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Built-in pipes</span>
@@ -599,10 +685,13 @@
             <p><strong>Custom pipes</strong> are created using the @Pipe decorator and implementing PipeTransform interface.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">truncate.pipe.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">truncate.pipe.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">Pipe</span>, <span class="type">PipeTransform</span> } <span class="keyword">from</span> <span class="string">'@angular/core'</span>;
@@ -634,10 +723,13 @@
             <p><strong>Dependency Injection (DI)</strong> is a design pattern where dependencies are provided to a class rather than the class creating them. Angular has a built-in hierarchical DI system.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">product.service.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">product.service.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">Injectable</span> } <span class="keyword">from</span> <span class="string">'@angular/core'</span>;
@@ -661,10 +753,13 @@
             <p><strong>Injectors:</strong> Root injector (app-level), Module injector (NgModule-level), Element injector (component-level), and Platform injector (platform-level). Angular's DI system follows a hierarchical injector tree.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">injectors.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">injectors.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Root injector - app level</span>
@@ -684,10 +779,13 @@
             <p><strong>providedIn: 'root'</strong> registers the service as a singleton at the root level. This creates a single instance shared across the entire application and enables tree-shaking for better bundle optimization.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">service.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">service.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Injectable</span>({
@@ -705,10 +803,13 @@
             <p><strong>NgModule</strong> is a class decorated with @NgModule that groups related components, directives, pipes, and services. It defines the compilation context for a set of components.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">app.module.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">app.module.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@NgModule</span>({
@@ -728,10 +829,13 @@
             <p><strong>imports:</strong> Other modules whose exported components, directives, and pipes are needed in this module's templates.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">module.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">module.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@NgModule</span>({
@@ -748,10 +852,13 @@
             <p><strong>Lazy loading</strong> loads feature modules on demand when the user navigates to their route. This improves initial load time by only loading the necessary code.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">app-routing.module.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">app-routing.module.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">const</span> <span class="variable">routes</span>: <span class="type">Routes</span> = [
@@ -772,10 +879,13 @@
             <p><strong>Angular Router</strong> enables navigation from one view to another as users perform application tasks. It maps URL paths to components and manages browser history.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">app-routing.module.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">app-routing.module.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">const</span> <span class="variable">routes</span>: <span class="type">Routes</span> = [
@@ -799,10 +909,13 @@
             <p><strong>Route guards</strong> control navigation to and from routes. Types: CanActivate (can navigate to route), CanActivateChild (can navigate to child routes), CanDeactivate (can navigate away), CanLoad (can module be loaded), CanMatch (can route match).</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">auth.guard.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">auth.guard.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Injectable</span>({ <span class="property">providedIn</span>: <span class="string">'root'</span> })
@@ -824,10 +937,13 @@
             <p><strong>Route resolvers</strong> fetch data before a route is activated. They ensure that data is available when the component loads, preventing the component from rendering with incomplete data.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">resolver.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">resolver.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Injectable</span>({ <span class="property">providedIn</span>: <span class="string">'root'</span> })
@@ -886,10 +1002,13 @@
             <p><strong>Reactive forms</strong> are created using FormGroup, FormControl, and Validators from @angular/forms. They provide explicit control over form state and validation.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">reactive-form.component.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">reactive-form.component.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">FormGroup</span>, <span class="type">FormControl</span>, <span class="type">Validators</span> } <span class="keyword">from</span> <span class="string">'@angular/forms'</span>;
@@ -915,10 +1034,13 @@
             <p><strong>Custom validators</strong> are functions that take a control and return ValidationErrors or null. They can be synchronous or async validators.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">validators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">validators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">export function</span> <span class="method">positiveNumber</span>(<span class="variable">control</span>: <span class="type">AbstractControl</span>): <span class="type">ValidationErrors</span> | <span class="keyword">null</span> {
@@ -942,10 +1064,13 @@
             <p><strong>HTTP Client</strong> from @angular/common/http provides methods for GET, POST, PUT, DELETE, and other HTTP operations. It returns Observables for handling responses asynchronously.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">api.service.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">api.service.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">HttpClient</span> } <span class="keyword">from</span> <span class="string">'@angular/common/http'</span>;
@@ -971,10 +1096,13 @@
             <p><strong>HTTP interceptors</strong> intercept HTTP requests and responses to add common logic like authentication, logging, or error handling. They transform or handle HTTP operations before they reach the server or after the response is received.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">auth.interceptor.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">auth.interceptor.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Injectable</span>()
@@ -1000,10 +1128,13 @@
             <p><strong>Observable</strong> is a representation of any set of values over any amount of time. It's the primary data structure in Angular for handling asynchronous operations. Observables are lazy and can be cancelled.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">observable.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">observable.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">Observable</span> } <span class="keyword">from</span> <span class="string">'rxjs'</span>;
@@ -1056,10 +1187,13 @@
             <p><strong>Common operators:</strong> map (transform), filter (filter values), switchMap (cancel previous), mergeMap (merge observables), debounceTime (delay), distinctUntilChanged (distinct values), catchError (handle errors), tap (side effects), take (limit emissions), retry (retry on error).</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">operators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">operators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">map</span>, <span class="type">filter</span>, <span class="type">catchError</span> } <span class="keyword">from</span> <span class="string">'rxjs/operators'</span>;
@@ -1079,10 +1213,13 @@
             <p><strong>BehaviorSubject:</strong> Has initial value. New subscribers receive the latest value immediately upon subscription.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">subjects.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">subjects.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Subject</span>
@@ -1104,10 +1241,13 @@
             <p><strong>mergeMap:</strong> Keeps all observables active. Good for parallel operations.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">operators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">operators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// switchMap - cancel previous</span>
@@ -1126,10 +1266,13 @@
             <p>Angular uses <strong>zone.js</strong> to detect changes. When an event occurs (click, HTTP response, timer), Zone triggers change detection. Angular then checks all components for changes by comparing current state with previous state.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">component.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">component.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Component</span>({
@@ -1152,10 +1295,13 @@
             <p><strong>OnPush</strong> change detection only checks a component when its input references change or events occur within the component. This improves performance by reducing unnecessary change detection cycles.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">onpush.component.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">onpush.component.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Component</span>({
@@ -1174,10 +1320,13 @@
             <p><strong>Memory leaks</strong> occur when subscriptions are not cleaned up when components are destroyed. Use ngOnDestroy and operators like takeUntil, take, or async pipe to prevent leaks.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">cleanup.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">cleanup.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">export class</span> <span class="type">ProductComponent</span> <span class="keyword">implements</span> <span class="type">OnDestroy</span> {
@@ -1203,10 +1352,13 @@
             <p><strong>trackBy</strong> improves performance by telling Angular how to track items in a list. It prevents unnecessary DOM re-creation when items are reordered.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">trackby.html</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">trackby.html</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code>&lt;<span class="type">div</span> *<span class="variable">ngFor</span>=<span class="string">"let item of items; trackBy: trackById"</span>&gt;
@@ -1227,10 +1379,13 @@
             <p><strong>NgRx</strong> is a state management library for Angular inspired by Redux. It provides a single source of truth, predictable state updates using actions and reducers, and side effects using effects.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">actions.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">actions.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">createAction</span>, <span class="type">createReducer</span>, <span class="type">on</span> } <span class="keyword">from</span> <span class="string">'@ngrx/store'</span>;
@@ -1250,10 +1405,13 @@
             <p><strong>Signals</strong> are a new feature in Angular for reactive state management. They are wrappers around values that notify consumers when the value changes. Signals enable fine-grained reactivity without zone.js.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">signals.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">signals.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">signal</span>, <span class="type">computed</span>, <span class="type">effect</span> } <span class="keyword">from</span> <span class="string">'@angular/core'</span>;
@@ -1282,10 +1440,13 @@
             <p><strong>Signals</strong> are a simpler, built-in reactive primitive for local component state. They're easier to use and don't require additional libraries.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">comparison.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">comparison.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// NgRx - complex state management</span>
@@ -1306,10 +1467,13 @@
             <p><strong>Component testing</strong> uses TestBed to create component instances, ComponentFixture to interact with the component, and Jasmine/Karma for assertions.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">product.component.spec.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">product.component.spec.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">describe</span>(<span class="string">'ProductComponent'</span>, () => {
@@ -1339,10 +1503,13 @@
             <p><strong>TestBed</strong> is Angular's primary utility for configuring and creating component instances for testing. It sets up a module environment similar to the application runtime.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">testbed.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">testbed.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">beforeEach</span>(<span class="keyword">async</span> () => {
@@ -1361,10 +1528,13 @@
             <p><strong>Service testing</strong> involves creating service instances, mocking dependencies, and testing methods with Jasmine/Karma.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">product.service.spec.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">product.service.spec.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">describe</span>(<span class="string">'ProductService'</span>, () => {
@@ -1390,10 +1560,13 @@
             <p><strong>Performance optimization:</strong> Use OnPush change detection, implement trackBy for ngFor, lazy load modules, use virtual scrolling for large lists, enable AOT compilation, optimize bundle size with tree-shaking, and use server-side rendering.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">optimization.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">optimization.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Component</span>({
@@ -1414,10 +1587,13 @@
             <p><strong>Virtual scrolling</strong> renders only visible items in a list, improving performance for large datasets. Angular CDK provides the ScrollingModule for this.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">virtual-scroll.html</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">virtual-scroll.html</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code>&lt;<span class="type">cdk-virtual-scroll-viewport</span> <span class="property">itemSize</span>=<span class="string">"50"</span>&gt;
@@ -1434,10 +1610,13 @@
             <p><strong>AOT (Ahead-of-Time)</strong> compilation compiles Angular templates during the build process, resulting in faster rendering and smaller bundle sizes. JIT (Just-in-Time) compiles templates in the browser at runtime.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">angular.json</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">angular.json</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="string">"build"</span>: {
@@ -1459,10 +1638,13 @@
             <p><strong>Angular Elements</strong> allows you to package Angular components as custom web components that can be used in any framework or vanilla JavaScript application.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">elements.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">elements.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">createCustomElement</span> } <span class="keyword">from</span> <span class="string">'@angular/elements'</span>;
@@ -1498,10 +1680,13 @@
             <p><strong>Standalone Components</strong> are components that don't need to be declared in NgModule. They can directly import other components, directives, and pipes. This simplifies the module system and makes components more reusable.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">standalone.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">standalone.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Component</span>({
@@ -1520,10 +1705,13 @@
             <p><strong>ViewChild</strong> queries elements within the component's template. <strong>ContentChild</strong> queries content projected into the component using ng-content.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">queries.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">queries.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@ViewChild</span>(<span class="string">'childElement'</span>) <span class="property">child</span>: <span class="type">ElementRef</span>;
@@ -1557,10 +1745,13 @@
             <p><strong>Advanced RxJS patterns</strong> include combining multiple streams, error handling strategies, and complex transformations using operators like combineLatest, forkJoin, withLatestFrom, switchMap, catchError, retry, debounceTime, and distinctUntilChanged.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">advanced-rxjs.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">advanced-rxjs.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">combineLatest</span>, <span class="type">forkJoin</span>, <span class="type">withLatestFrom</span> } <span class="keyword">from</span> <span class="string">'rxjs'</span>;
@@ -1580,10 +1771,13 @@
             <p><strong>Bundle optimization</strong> involves analyzing and reducing the size of your JavaScript bundles. Use ng build --stats-json to analyze bundle size, implement lazy loading, use tree-shakeable providers, and enable AOT compilation.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">angular.json</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">angular.json</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="string">"build"</span>: {
@@ -1601,10 +1795,13 @@
             <p><strong>Micro-frontend architecture</strong> allows multiple teams to work on different parts of an application independently using Angular Elements or Module Federation.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">webpack.config.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">webpack.config.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">const</span> <span class="variable">ModuleFederationPlugin</span> = <span class="method">require</span>(<span class="string">'@angular-architects/module-federation'</span>);
@@ -1628,10 +1825,13 @@
             <p><strong>Advanced security</strong> includes CSRF protection, XSS prevention, secure authentication with JWT, and implementing security headers via HTTP interceptors.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">security.interceptor.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">security.interceptor.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Injectable</span>()
@@ -1655,10 +1855,13 @@
             <p><strong>Advanced testing</strong> includes integration tests with TestBed, component testing with inputs and outputs, directive testing, E2E testing with Cypress or Playwright, and testing HTTP interceptors.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">e2e.spec.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">e2e.spec.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">describe</span>(<span class="string">'Product Page'</span>, () => {
@@ -1676,10 +1879,13 @@
             <p><strong>Advanced component patterns</strong> include container/presentational pattern (smart/dumb components), composition pattern with content projection, higher-order components, and mixin patterns using TypeScript.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">container.component.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">container.component.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Component</span>({
@@ -1698,10 +1904,13 @@
             <p><strong>Advanced routing</strong> includes custom route resolvers, multiple route guards (CanActivate, CanDeactivate), dynamic route configuration, custom preloading strategies, query parameters, fragments, and custom route reuse strategies.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">resolver.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">resolver.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Injectable</span>({ <span class="property">providedIn</span>: <span class="string">'root'</span> })
@@ -1721,10 +1930,13 @@
             <p><strong>Angular Universal</strong> enables server-side rendering for improved SEO and initial load performance. Use TransferState to share data between server and client, handle browser-specific code with isPlatformBrowser/isPlatformServer, and manage SEO meta tags.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ssr.component.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ssr.component.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">isPlatformBrowser</span>, <span class="type">isPlatformServer</span> } <span class="keyword\">from</span> <span class="string">'@angular/common'</span>;
@@ -1748,10 +1960,13 @@
             <p><strong>PWA features</strong> include offline support with service workers, push notifications, app shell for instant loading, background sync, and install prompts. Use @angular/pwa to add PWA support.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">manifest.json</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">manifest.json</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code>{
@@ -1771,10 +1986,13 @@
             <p><strong>Advanced form patterns</strong> include custom async validators, cross-field validators, dynamic form builders, form state management with Signals, and form debouncing with RxJS operators.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">async-validator.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">async-validator.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">export function</span> <span class="method">uniqueEmail</span>(<span class="variable">service</span>: <span class="type">UserService</span>) {
@@ -1800,10 +2018,13 @@
             <p><strong>BehaviorSubject</strong> holds the latest value and emits it to new subscribers. <strong>ReplaySubject</strong> can replay a specified number of previous emissions to new subscribers.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">subjects.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">subjects.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// BehaviorSubject - emits latest value</span>
@@ -1820,10 +2041,13 @@
             <p><strong>switchMap:</strong> Cancels previous when new arrives. <strong>concatMap:</strong> Processes sequentially. <strong>mergeMap:</strong> Processes in parallel. <strong>exhaustMap:</strong> Ignores new while current is active.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">operators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">operators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// switchMap - cancel previous</span>
@@ -1851,10 +2075,13 @@
             <p><strong>debounceTime</strong> waits for a pause in emissions before emitting the latest. <strong>throttleTime</strong> emits at most once per time period.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">timing.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">timing.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// debounceTime - wait for pause</span>
@@ -1871,10 +2098,13 @@
             <p><strong>map</strong> transforms values in the stream. <strong>tap</strong> performs side effects without changing the stream, useful for logging or debugging.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">operators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">operators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// map - transform values</span>
@@ -1896,10 +2126,13 @@
             <p><strong>filter</strong> removes values based on a predicate. <strong>distinctUntilChanged</strong> removes consecutive duplicate values.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">operators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">operators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// filter - remove based on predicate</span>
@@ -1916,10 +2149,13 @@
             <p><strong>scan</strong> emits accumulated value for each source emission. <strong>reduce</strong> only emits final accumulated value when source completes.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">operators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">operators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// scan - emit for each emission</span>
@@ -1936,10 +2172,13 @@
             <p><strong>share</strong> multicasts to multiple subscribers. <strong>shareReplay</strong> multicasts and replays a specified number of emissions to late subscribers.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">operators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">operators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// share - multicast without replay</span>
@@ -1961,10 +2200,13 @@
             <p><strong>delay</strong> delays all emissions by a fixed duration. <strong>delayWhen</strong> delays each emission based on a notifier observable.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">operators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">operators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// delay - fixed duration</span>
@@ -1981,10 +2223,13 @@
             <p><strong>retry</strong> retries a fixed number of times immediately. <strong>retryWhen</strong> retries based on a notifier observable, allowing custom retry logic.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">operators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">operators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// retry - fixed number of retries</span>
@@ -2006,10 +2251,13 @@
             <p><strong>forkJoin</strong> waits for all observables to complete then emits last values. <strong>combineLatest</strong> emits whenever any observable emits with latest values from all.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">operators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">operators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// forkJoin - wait for all to complete</span>
@@ -2026,10 +2274,13 @@
             <p><strong>zip</strong> emits when all have emitted at the same index. <strong>combineLatest</strong> emits whenever any emits with latest values from all.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">operators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">operators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// zip - emit at same index</span>
@@ -2051,10 +2302,13 @@
             <p><strong>interval</strong> emits sequential numbers at regular intervals. <strong>timer</strong> emits after a delay then optionally at intervals.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">operators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">operators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// interval - emit at regular intervals</span>
@@ -2071,10 +2325,13 @@
             <p><strong>from</strong> creates observable from array, promise, or iterable. <strong>of</strong> creates observable that emits specified values then completes.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">operators.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">operators.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// from - from array/iterable</span>
@@ -2091,10 +2348,13 @@
             <p><strong>fromEvent</strong> creates observable from DOM events. <strong>fromEventPattern</strong> creates observable from add/remove handler pattern for custom event APIs.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">events.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">events.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// fromEvent - DOM events</span>
@@ -2116,10 +2376,13 @@
             <p><strong>Scalable architecture</strong> includes using feature modules, lazy loading, shared modules, core module for singletons, state management with NgRx or Signals, clear folder structure, and consistent naming conventions. Use container/presentational pattern for components and implement proper error handling and logging.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">folder-structure.txt</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">folder-structure.txt</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Scalable folder structure</span>
@@ -2140,10 +2403,13 @@
             <p><strong>Complex state management</strong> involves using NgRx for predictable state updates with actions, reducers, effects, and selectors. For simpler needs, use service-based state with BehaviorSubject or Signals. Implement feature-based state slicing and normalize data structure.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">reducer.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">reducer.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">export function</span> <span class="method">productReducer</span>(<span class="variable">state</span>: <span class="type">ProductState</span>, <span class="variable">action</span>: <span class="type">ProductAction</span>): <span class="type">ProductState</span> {
@@ -2163,10 +2429,13 @@
             <p><strong>i18n</strong> in Angular uses i18n attribute in templates, extraction with xliff or xlf2 format, and build-time locale substitution. Use DatePipe, CurrencyPipe, and DecimalPipe for localized formatting. Implement locale detection and language switching.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">i18n.html</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">i18n.html</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code>&lt;<span class="type">h1</span> <span class="variable">i18n</span>&gt;Welcome&lt;/<span class="type">h1</span>&gt;
@@ -2181,10 +2450,13 @@
             <p><strong>Accessibility</strong> includes using ARIA attributes, semantic HTML, keyboard navigation support, focus management, screen reader announcements, and color contrast compliance. Use Angular CDK a11y utilities and test with screen readers.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">a11y.html</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">a11y.html</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code>&lt;<span class="type">button</span> [<span class="property">attr.aria-label</span>]=<span class="string">"'Close dialog'"</span>&gt;&times;&lt;/<span class="type">button</span>&gt;
@@ -2199,10 +2471,13 @@
             <p><strong>Custom animations</strong> use BrowserAnimationsModule with @animations decorator. Define transitions, keyframes, and states. Use query, stagger, and animate functions for complex animations. Trigger animations with @Input bindings or template syntax.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">animations.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">animations.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">trigger</span>, <span class="type">state</span>, <span class="type">style</span>, <span class="type">transition</span>, <span class="type">animate</span> } <span class="keyword\">from</span> <span class="string">'@angular/animations'</span>;
@@ -2226,10 +2501,13 @@
             <p><strong>Server-side caching</strong> includes HTTP caching headers (ETag, Cache-Control), service worker caching strategies (CacheFirst, NetworkFirst, StaleWhileRevalidate), and application-level caching with RxJS shareReplay or localStorage.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">cache.service.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">cache.service.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Injectable</span>({ <span class="property">providedIn</span>: <span class="string">'root'</span> })
@@ -2253,10 +2531,13 @@
             <p><strong>Real-time features</strong> use WebSockets with libraries like Socket.io or native WebSocket API, Server-Sent Events (SSE) for one-way updates, or polling with RxJS intervals. Handle connection lifecycle, reconnection logic, and message serialization.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">websocket.service.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">websocket.service.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Injectable</span>({ <span class="property">providedIn</span>: <span class="string">'root'</span> })
@@ -2277,10 +2558,13 @@
             <p><strong>Offline-first</strong> uses service workers for caching, IndexedDB for local storage, sync queues for offline changes, and conflict resolution strategies. Use Angular Service Worker or Workbox for service worker management.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ngsw-config.json</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ngsw-config.json</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code>{
@@ -2303,10 +2587,13 @@
             <p><strong>Multi-tenant architecture</strong> includes tenant identification from subdomain or URL, tenant-specific configuration loading, isolated state per tenant, shared component library, and tenant-specific theming. Use lazy loading for tenant-specific modules.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">tenant.service.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">tenant.service.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="decorator">@Injectable</span>({ <span class="property">providedIn</span>: <span class="string">'root'</span> })
@@ -2327,10 +2614,13 @@
             <p><strong>Migration strategy</strong> includes using ngUpgrade for hybrid applications, running both frameworks simultaneously, migrating incrementally by route or component, rewriting services to Angular patterns, and eventually removing AngularJS dependencies. Use Angular's built-in upgrade utilities and follow the upgrade guide.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">upgrade.ts</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">upgrade.ts</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">UpgradeModule</span> } <span class="keyword\">from</span> <span class="string">'@angular/upgrade/static'</span>;
@@ -2355,5 +2645,27 @@
             <p><span class="highlight">💡 Tip:</span> Focus on understanding components, dependency injection, RxJS, and performance optimization. These are the areas where most Angular interview questions focus. Practice building scalable, maintainable applications.</p>
         </div>
     </div>
+    <script>
+        function copyCode(button) {
+            const codeEditor = button.closest('.code-editor');
+            const codeContent = codeEditor.querySelector('.code-editor-content code');
+            const text = codeContent.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>

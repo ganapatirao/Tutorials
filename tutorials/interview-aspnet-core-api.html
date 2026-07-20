@@ -1,0 +1,2863 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP.NET Core API Interview Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #1a1a2e; background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%); background-size: 400% 400%; animation: gradientShift 20s ease infinite; min-height: 100vh; padding: 25px 20px; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .container { max-width: 1100px; margin: 0 auto; padding: 50px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px); border-radius: 32px; box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3); }
+        .back-button { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 30px; font-weight: 700; margin-bottom: 30px; }
+        h1 { color: #1a1a2e; font-size: 52px; font-weight: 800; text-align: center; margin-bottom: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { text-align: center; font-size: 18px; color: #4a4a68; margin-bottom: 40px; }
+        h2 { color: white; font-size: 28px; font-weight: 700; margin-top: 40px; margin-bottom: 25px; padding: 18px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; }
+        .question { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; border-radius: 15px; margin: 25px 0 15px 0; font-weight: 600; font-size: 18px; }
+        .answer { background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%); padding: 30px 35px; border-radius: 15px; margin: 15px 0 25px 0; border-left: 6px solid #764ba2; }
+        .answer p { margin-bottom: 15px; color: #1a1a2e; }
+        .answer strong { color: #667eea; }
+        .answer ul { padding-left: 25px; margin-bottom: 15px; }
+        .answer h3 { color: #667eea; margin: 20px 0 10px 0; font-size: 16px; }
+        .answer table { width: 100%; border-collapse: collapse; margin: 25px 0; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
+        .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 25px 0; border-radius: 12px; }
+        .answer th { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; text-align: left; font-weight: 600; font-size: 15px; white-space: nowrap; }
+        .answer td { padding: 15px; border-bottom: 1px solid #e9ecef; color: #4a4a68; white-space: nowrap; }
+        .answer tr:last-child td { border-bottom: none; }
+        .answer tr:hover td { background: #f8f9fa; }
+        .highlight { color: #667eea; font-weight: 700; }
+        .toc {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 35px 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 8px solid #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+        .toc h3 { color: #667eea; font-size: 22px; margin-bottom: 20px; }
+        .toc ol { padding-left: 25px; }
+        .toc li { margin-bottom: 12px; color: #4a4a68; font-weight: 500; }
+        .code-block { background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%); color: #e0e0e0; padding: 12px; border-radius: 10px; border-left: 4px solid #512BD4; font-family: 'Fira Code', monospace; font-size: 13px; margin: 15px 0; }
+        .code-editor {
+            background: #1e1e1e;
+            border-radius: 12px;
+            margin: 20px 0;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3e3e42;
+        }
+        
+        .code-editor-header {
+            background: #2d2d2d;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            border-bottom: 1px solid #3e3e42;
+        }
+        
+        .code-editor-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .copy-button {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .copy-button:hover {
+            background: #4e4e52;
+            color: #ffffff;
+        }
+        
+        .copy-button.copied {
+            background: #27ca40;
+            color: #ffffff;
+        }
+        
+        .code-editor-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .code-editor-dot.red { background: #ff5f56; }
+        .code-editor-dot.yellow { background: #ffbd2e; }
+        .code-editor-dot.green { background: #27ca40; }
+        
+        .code-editor-title {
+            color: #9cdcfe;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            margin-left: 12px;
+        }
+        
+        .code-editor-content {
+            padding: 20px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #d4d4d4;
+            overflow-x: auto;
+            background: #1e1e1e;
+        }
+        
+        .code-editor-content code {
+            display: block;
+            white-space: pre;
+        }
+        
+        .keyword { color: #569cd6; }
+        .type { color: #4ec9b0; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; font-style: italic; }
+        .number { color: #b5cea8; }
+        .method { color: #dcdcaa; }
+        .property { color: #9cdcfe; }
+        .variable { color: #9cdcfe; }
+        .operator { color: #d4d4d4; }
+        .decorator { color: #c586c0; }
+        .tag { color: #569cd6; }
+        .tip { background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-left: 4px solid #667eea; padding: 15px 20px; margin: 15px 0; border-radius: 8px; }
+        .footer { text-align: center; margin-top: 50px; padding: 35px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%); border-radius: 20px; }
+        .page-break { page-break-before: always; margin-top: 60px; }
+        @media (max-width: 768px) {
+            body { padding: 15px 10px; }
+            .container { padding: 25px 20px; border-radius: 20px; }
+            h1 { font-size: 32px; }
+            .subtitle { font-size: 16px; }
+            h2 { font-size: 22px; padding: 14px 20px; }
+            .question { font-size: 16px; padding: 16px 20px; }
+            .answer { padding: 20px 20px; }
+            .code-editor-content { padding: 15px; font-size: 12px; }
+            .code-editor-title { font-size: 11px; }
+            .footer { padding: 25px 20px; }
+            table { font-size: 13px; }
+            th { padding: 12px 10px; font-size: 13px; }
+            td { padding: 12px 10px; font-size: 13px; }
+            .table-wrapper { margin: 20px 0; }
+        }
+        @media (max-width: 480px) {
+            body { padding: 10px 5px; }
+            .container { padding: 20px 15px; border-radius: 16px; }
+            h1 { font-size: 26px; }
+            .subtitle { font-size: 14px; }
+            h2 { font-size: 20px; padding: 12px 16px; }
+            .question { font-size: 15px; padding: 14px 16px; }
+            .answer { padding: 18px 16px; }
+            .code-editor-content { padding: 12px; font-size: 11px; }
+            .code-editor-title { font-size: 10px; }
+            .back-button { padding: 12px 20px; font-size: 14px; }
+            table { font-size: 11px; }
+            th { padding: 10px 8px; font-size: 11px; }
+            td { padding: 10px 8px; font-size: 11px; }
+            .table-wrapper { margin: 15px 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-button">Back to Home</a>
+        <h1>ASP.NET Core API Interview Guide</h1>
+        <p class="subtitle">Comprehensive Interview Preparation with In-Depth Concepts, Code Examples, and Best Practices</p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>Web API Fundamentals</li>
+                <li>Model Binding and Validation</li>
+                <li>Dependency Injection</li>
+                <li>Middleware</li>
+                <li>Authentication and Authorization</li>
+                <li>Entity Framework Core</li>
+                <li>API Versioning and Documentation</li>
+                <li>CORS and Security</li>
+                <li>Caching and Performance</li>
+                <li>Testing</li>
+                <li>Configuration and Settings</li>
+                <li>Health Checks</li>
+                <li>Rate Limiting</li>
+                <li>Logging and Monitoring</li>
+                <li>Minimal APIs</li>
+                <li>SignalR and WebSockets</li>
+                <li>gRPC</li>
+                <li>File Uploads and Streaming</li>
+                <li>Performance Optimization</li>
+                <li>Deployment</li>
+                <li>API Design Patterns</li>
+                <li>JSON Handling</li>
+                <li>Advanced DI</li>
+                <li>Advanced Routing</li>
+                <li>Advanced Caching</li>
+                <li>Advanced Security</li>
+                <li>Advanced Authentication</li>
+                <li>Advanced Authorization</li>
+                <li>Advanced API Design</li>
+                <li>Advanced Performance</li>
+                <li>Entity Framework Core Advanced</li>
+                <li>Testing Advanced</li>
+                <li>Advanced Middleware</li>
+                <li>API Gateway and Microservices</li>
+                <li>Background Services</li>
+                <li>Advanced Validation</li>
+                <li>OpenAPI Advanced</li>
+                <li>Advanced Configuration</li>
+                <li>Advanced Health Checks</li>
+                <li>Advanced Rate Limiting</li>
+                <li>Advanced Logging</li>
+                <li>Advanced File Operations</li>
+                <li>Advanced SignalR</li>
+                <li>Advanced gRPC</li>
+                <li>Advanced Minimal APIs</li>
+            </ol>
+        </div>
+
+        <h2>1. Web API Fundamentals</h2>
+        <div class="question">Q1: What is ASP.NET Core Web API?</div>
+        <div class="answer">
+            <p><strong>ASP.NET Core Web API</strong> is a framework for building HTTP services that can be consumed by various clients including browsers, mobile devices, and other applications. It's built on top of ASP.NET Core and follows RESTful architecture principles.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>RESTful Support:</strong> Built-in support for REST architectural patterns</li>
+                <li><strong>Content Negotiation:</strong> Automatic response format selection (JSON, XML, etc.)</li>
+                <li><strong>Model Binding:</strong> Automatic mapping of HTTP requests to action parameters</li>
+                <li><strong>Validation:</strong> Built-in model validation with data annotations</li>
+                <li><strong>Dependency Injection:</strong> Full DI support for service management</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/ProductController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">using</span> <span class="type">Microsoft.AspNetCore.Mvc</span>;
+
+<span class="keyword">namespace</span> <span class="type">MyApi</span>.Controllers;
+
+[<span class="decorator">ApiController</span>]
+[<span class="decorator">Route</span>(<span class="string">"api/[controller]"</span>)]
+<span class="keyword">public class</span> <span class="type">ProductController</span> : <span class="type">ControllerBase</span>
+{
+    [<span class="decorator">HttpGet</span>]
+    <span class="keyword">public</span> <span class="type">IEnumerable</span>&lt;<span class="type">string</span>&gt; <span class="method">Get</span>()
+    {
+        <span class="keyword">return new</span> <span class="type">string</span>[] { <span class="string">"Product1"</span>, <span class="string">"Product2"</span> };
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q2: What are the main HTTP methods used in REST APIs?</div>
+        <div class="answer">
+            <p>REST APIs use standard HTTP methods, each with specific semantics and idempotency characteristics:</p>
+            
+            <h3>HTTP Methods:</h3>
+            <ul>
+                <li><strong>GET:</strong> Retrieve resources. Idempotent and safe.</li>
+                <li><strong>POST:</strong> Create new resources. Not idempotent.</li>
+                <li><strong>PUT:</strong> Update/replace entire resources. Idempotent.</li>
+                <li><strong>PATCH:</strong> Partial update of resources. Not idempotent.</li>
+                <li><strong>DELETE:</strong> Remove resources. Idempotent.</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/UserController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>[<span class="decorator">HttpGet</span>(<span class="string">"{id}"</span>)]      <span class="comment">// GET api/user/5</span>
+<span class="keyword">public</span> <span class="type">User</span> <span class="method">Get</span>(<span class="type">int</span> id) { }
+
+[<span class="decorator">HttpPost</span>]           <span class="comment">// POST api/user</span>
+<span class="keyword">public</span> <span class="type">IActionResult</span> <span class="method">Create</span>([<span class="decorator">FromBody</span>] <span class="type">User</span> user) { }
+
+[<span class="decorator">HttpPut</span>(<span class="string">"{id}"</span>)]      <span class="comment">// PUT api/user/5</span>
+<span class="keyword">public</span> <span class="type">IActionResult</span> <span class="method">Update</span>(<span class="type">int</span> id, [<span class="decorator">FromBody</span>] <span class="type">User</span> user) { }
+
+[<span class="decorator">HttpPatch</span>(<span class="string">"{id}"</span>)]   <span class="comment">// PATCH api/user/5</span>
+<span class="keyword">public</span> <span class="type">IActionResult</span> <span class="method">Patch</span>(<span class="type">int</span> id, [<span class="decorator">FromBody</span>] <span class="type">JsonPatchDocument</span>&lt;<span class="type">User</span>&gt; patch) { }
+
+[<span class="decorator">HttpDelete</span>(<span class="string">"{id}"</span>)]  <span class="comment">// DELETE api/user/5</span>
+<span class="keyword">public</span> <span class="type">IActionResult</span> <span class="method">Delete</span>(<span class="type">int</span> id) { }</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q3: What is the difference between ControllerBase and Controller?</div>
+        <div class="answer">
+            <p><strong>ControllerBase</strong> is the base class for API controllers without view support. <strong>Controller</strong> inherits from ControllerBase and adds view support for MVC applications.</p>
+            
+            <h3>Key Differences:</h3>
+            <ul>
+                <li><strong>ControllerBase:</strong> Used for Web APIs. No view-related methods. Lightweight.</li>
+                <li><strong>Controller:</strong> Used for MVC with views. Includes View(), PartialView(), etc.</li>
+                <li><strong>Recommendation:</strong> Use ControllerBase for APIs to avoid unnecessary dependencies.</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/ApiController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Use ControllerBase for Web API</span>
+[<span class="decorator">ApiController</span>]
+<span class="keyword">public class</span> <span class="type">MyApiController</span> : <span class="type">ControllerBase</span>
+{
+    <span class="comment">// Has Ok(), NotFound(), BadRequest(), etc.</span>
+    <span class="comment">// No view support</span>
+}
+
+<span class="comment">// Use Controller for MVC with views</span>
+<span class="keyword">public class</span> <span class="type">MyMvcController</span> : <span class="type">Controller</span>
+{
+    <span class="comment">// Has View(), PartialView() plus all ControllerBase methods</span>
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q4: What does the [ApiController] attribute do?</div>
+        <div class="answer">
+            <p>The <strong>[ApiController]</strong> attribute enables automatic API-specific behaviors that simplify Web API development.</p>
+            
+            <h3>Automatic Behaviors:</h3>
+            <ul>
+                <li><strong>Automatic 400 Response:</strong> Returns HTTP 400 on validation errors</li>
+                <li><strong>Model Binding Inference:</strong> Automatically binds from request body for complex types</li>
+                <li><strong>Problem Details:</strong> Standardized error responses (RFC 7807)</li>
+                <li><strong>Route Inference:</strong> Infers routes from action names</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/OrderController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>[<span class="decorator">ApiController</span>]
+[<span class="decorator">Route</span>(<span class="string">"api/[controller]"</span>)]
+<span class="keyword">public class</span> <span class="type">OrderController</span> : <span class="type">ControllerBase</span>
+{
+    [<span class="decorator">HttpPost</span>]
+    <span class="keyword">public</span> <span class="type">IActionResult</span> <span class="method">Create</span>(<span class="type">OrderDto</span> order)
+    {
+        <span class="comment">// Automatic 400 response if validation fails</span>
+        <span class="comment">// No need for if (!ModelState.IsValid) check</span>
+        <span class="keyword">return</span> <span class="type">Ok</span>(order);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q5: What is attribute routing in Web API?</div>
+        <div class="answer">
+            <p><strong>Attribute routing</strong> uses attributes to define routes directly on controllers and actions, providing more control over URL patterns. It's the default routing method in ASP.NET Core Web API.</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li><strong>Flexibility:</strong> Define custom URL patterns</li>
+                <li><strong>Clarity:</strong> Routes are visible on the controller/action</li>
+                <li><strong>Versioning:</strong> Easy to implement API versioning</li>
+                <li><strong>Constraints:</strong> Apply route constraints at attribute level</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/CustomerController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>[<span class="decorator">Route</span>(<span class="string">"api/customers"</span>)]
+<span class="keyword">public class</span> <span class="type">CustomerController</span> : <span class="type">ControllerBase</span>
+{
+    [<span class="decorator">HttpGet</span>]                           <span class="comment">// GET api/customers</span>
+    [<span class="decorator">Route</span>(<span class="string">"active"</span>)]                 <span class="comment">// GET api/customers/active</span>
+    <span class="keyword">public</span> <span class="type">IActionResult</span> <span class="method">GetActive</span>() { }
+
+    [<span class="decorator">HttpGet</span>(<span class="string">"{id:int}"</span>)]             <span class="comment">// GET api/customers/5</span>
+    <span class="keyword">public</span> <span class="type">IActionResult</span> <span class="method">GetById</span>(<span class="type">int</span> id) { }
+
+    [<span class="decorator">HttpGet</span>(<span class="string">"{id}/orders"</span>)]          <span class="comment">// GET api/customers/5/orders</span>
+    <span class="keyword">public</span> <span class="type">IActionResult</span> <span class="method">GetOrders</span>(<span class="type">int</span> id) { }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>2. Model Binding and Validation</h2>
+        <div class="question">Q6: What are the different model binding sources?</div><div class=\"answer\">
+            <p>Model binding sources determine where data comes from in the HTTP request:</p>
+            
+            <h3>Binding Sources:</h3>
+            <ul>
+                <li><strong>[FromBody]:</strong> Request body (JSON, XML)</li>
+                <li><strong>[FromQuery]:</strong> Query string parameters</li>
+                <li><strong>[FromRoute]:</strong> URL route data</li>
+                <li><strong>[FromForm]:</strong> Form data</li>
+                <li><strong>[FromHeader]:</strong> HTTP headers</li>
+                <li><strong>[FromServices]:</strong> Dependency injection</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/SearchController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>[<span class="decorator">HttpPost</span>(<span class="string">"search"</span>)]
+<span class="keyword">public</span> <span class="type">IActionResult</span> <span class="method">Search</span>(
+    [<span class="decorator">FromBody</span>] <span class="type">SearchCriteria</span> criteria,    <span class="comment">// Request body JSON</span>
+    [<span class="decorator">FromQuery</span>] <span class="type">int</span> page = 1,              <span class="comment">// ?page=1</span>
+    [<span class="decorator">FromRoute</span>] <span class="type">string</span> category,         <span class="comment">// Route parameter</span>
+    [<span class="decorator">FromHeader</span>] <span class="type">string</span> authorization,   <span class="comment">// HTTP header</span>
+    [<span class="decorator">FromServices</span>] <span class="type">ILogger</span>&lt;<span class="type">SearchController</span>&gt; logger) <span class="comment">// DI</span>
+{
+    <span class="keyword">return</span> <span class="type">Ok</span>();
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q7: How do you validate models in Web API?</div>
+        <div class="answer">
+            <p>Use <strong>data annotations</strong> attributes on model properties for validation. With [ApiController], validation errors automatically return HTTP 400 Bad Request.</p>
+            
+            <h3>Validation Attributes:</h3>
+            <ul>
+                <li><strong>[Required]:</strong> Property must have a value</li>
+                <li><strong>[StringLength]:</strong> String length constraints</li>
+                <li><strong>[Range]:</strong> Numeric range validation</li>
+                <li><strong>[EmailAddress]:</strong> Email format validation</li>
+                <li><strong>[RegularExpression]:</strong> Pattern matching</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Models/ProductDto.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">ProductDto</span>
+{
+    <span class="keyword">public int</span> <span class="property">Id</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+
+    [<span class="decorator">Required</span>]
+    [<span class="decorator">StringLength</span>(100)]
+    <span class="keyword">public string</span> <span class="property">Name</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+
+    [<span class="decorator">Range</span>(0.01, 10000)]
+    <span class="keyword">public decimal</span> <span class="property">Price</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+
+    [<span class="decorator">EmailAddress</span>]
+    <span class="keyword">public string</span> <span class="property">Email</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>3. Dependency Injection</h2>
+        <div class="question">Q8: What is Dependency Injection in ASP.NET Core?</div>
+        <div class="answer">
+            <p><strong>Dependency Injection (DI)</strong> is a design pattern where dependencies are injected into classes rather than created internally. ASP.NET Core has built-in DI support with three service lifetimes.</p>
+            
+            <h3>Service Lifetimes:</h3>
+            <ul>
+                <li><strong>Transient:</strong> New instance each time it's requested</li>
+                <li><strong>Scoped:</strong> One instance per HTTP request</li>
+                <li><strong>Singleton:</strong> One instance for the entire application lifetime</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">var</span> builder = <span class="type">WebApplication</span>.<span class="method">CreateBuilder</span>(args);
+
+<span class="comment">// Register services</span>
+builder.Services.<span class="method">AddTransient</span>&lt;<span class="type">IMyTransientService</span>, <span class="type">MyTransientService</span>&gt;();
+builder.Services.<span class="method">AddScoped</span>&lt;<span class="type">IMyScopedService</span>, <span class="type">MyScopedService</span>&gt;();
+builder.Services.<span class="method">AddSingleton</span>&lt;<span class="type">IMySingletonService</span>, <span class="type">MySingletonService</span>&gt;();
+
+<span class="keyword">var</span> app = builder.<span class="method">Build</span>();</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q9: What is the difference between AddTransient, AddScoped, and AddSingleton?</div>
+        <div class="answer">
+            <p>The three service lifetimes determine how instances are created and managed:</p>
+            
+            <h3>Lifetime Comparison:</h3>
+            <ul>
+                <li><strong>AddTransient:</strong> Creates a new instance every time it's requested. Use for lightweight, stateless services.</li>
+                <li><strong>AddScoped:</strong> Creates one instance per HTTP request. Use for services that need to maintain state within a request.</li>
+                <li><strong>AddSingleton:</strong> Creates one instance for the entire application lifetime. Use for stateless services or caches.</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Transient: New instance every time</span>
+builder.Services.<span class="method">AddTransient</span>&lt;<span class="type">ILogger</span>, <span class="type">ConsoleLogger</span>&gt;();
+
+<span class="comment">// Scoped: One instance per HTTP request</span>
+builder.Services.<span class="method">AddScoped</span>&lt;<span class="type">IRepository</span>, <span class="type">Repository</span>&gt;();
+
+<span class="comment">// Singleton: One instance for app lifetime</span>
+builder.Services.<span class="method">AddSingleton</span>&lt;<span class="type">ICacheService</span>, <span class="type">MemoryCacheService</span>&gt;();</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>4. Middleware</h2>
+        <div class="question">Q10: What is Middleware in ASP.NET Core?</div>
+        <div class="answer">
+            <p><strong>Middleware</strong> is software that handles requests and responses in a pipeline. Each middleware component can process requests, pass them to the next component, and modify responses.</p>
+            
+            <h3>Middleware Pipeline:</h3>
+            <ul>
+                <li><strong>Sequential Processing:</strong> Middleware executes in the order registered</li>
+                <li><strong>Request/Response:</strong> Can modify both incoming requests and outgoing responses</li>
+                <li><strong>Short-circuiting:</strong> Can terminate the pipeline early</li>
+                <li><strong>Order Matters:</strong> Registration order is critical</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">var</span> app = builder.<span class="method">Build</span>();
+
+<span class="comment">// Middleware pipeline order</span>
+app.<span class="method">UseExceptionHandler</span>(<span class="string">"/error"</span>);
+app.<span class="method">UseHttpsRedirection</span>();
+app.<span class="method">UseStaticFiles</span>();
+app.<span class="method">UseRouting</span>();
+app.<span class="method">UseAuthentication</span>();
+app.<span class="method">UseAuthorization</span>();
+app.<span class="method">MapControllers</span>();
+
+app.<span class="method">Run</span>();</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q11: How do you create custom middleware?</div>
+        <div class="answer">
+            <p>Custom middleware can be created as a class with an <strong>Invoke</strong> or <strong>InvokeAsync</strong> method that accepts HttpContext and a RequestDelegate.</p>
+            
+            <h3>Steps to Create Custom Middleware:</h3>
+            <ul>
+                <li>Create a class with a constructor accepting RequestDelegate</li>
+                <li>Implement InvokeAsync method with HttpContext parameter</li>
+                <li>Call _next(context) to pass to the next middleware</li>
+                <li>Register with app.UseMiddleware&lt;T&gt;() in Program.cs</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Middleware/LoggingMiddleware.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">LoggingMiddleware</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">RequestDelegate</span> _next;
+
+    <span class="keyword">public</span> <span class="method">LoggingMiddleware</span>(<span class="type">RequestDelegate</span> next)
+    {
+        _next = next;
+    }
+
+    <span class="keyword">public async</span> <span class="type">Task</span> <span class="method">InvokeAsync</span>(<span class="type">HttpContext</span> context)
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>($<span class="string">"Request: {context.Request.Path}"</span>);
+        <span class="keyword">await</span> _next(context);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>($<span class="string">"Response: {context.Response.StatusCode}"</span>);
+    }
+}
+
+<span class="comment">// Registration in Program.cs</span>
+app.<span class="method">UseMiddleware</span>&lt;<span class="type">LoggingMiddleware</span>&gt;();</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>5. Authentication and Authorization</h2>
+        <div class="question">Q12: How is authentication implemented in ASP.NET Core?</div>
+        <div class="answer">
+            <p>Authentication is implemented using <strong>ASP.NET Core Identity</strong>, <strong>JWT Bearer tokens</strong>, or other authentication schemes. Configure authentication in Program.cs with AddAuthentication and UseAuthentication middleware.</p>
+            
+            <h3>Authentication Options:</h3>
+            <ul>
+                <li><strong>JWT Bearer:</strong> Token-based authentication for APIs</li>
+                <li><strong>Cookie:</strong> Session-based authentication for web apps</li>
+                <li><strong>OpenID Connect:</strong> OAuth 2.0 / OpenID Connect providers</li>
+                <li><strong>Custom:</strong> Implement custom authentication handlers</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Services.<span class="method">AddAuthentication</span>(<span class="type">JwtBearerDefaults</span>.AuthenticationScheme)
+    .<span class="method">AddJwtBearer</span>(options =>
+    {
+        options.TokenValidationParameters = <span class="keyword">new</span> <span class="type">TokenValidationParameters</span>
+        {
+            ValidateIssuer = <span class="keyword">true</span>,
+            ValidateAudience = <span class="keyword">true</span>,
+            ValidateLifetime = <span class="keyword">true</span>,
+            ValidIssuer = <span class="string">"https://myapi.com"</span>,
+            ValidAudience = <span class="string">"https://myapp.com"</span>,
+            IssuerSigningKey = <span class="keyword">new</span> <span class="type">SymmetricSecurityKey</span>(
+                <span class="type">Encoding</span>.<span class="type">UTF8</span>.<span class="method">GetBytes</span>(builder.Configuration[<span class="string">"Jwt:Key"</span>]))
+        };
+    });
+
+app.<span class="method">UseAuthentication</span>();</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q13: What is the difference between Authentication and Authorization?</div>
+        <div class="answer">
+            <p><strong>Authentication</strong> verifies who the user is (identity). <strong>Authorization</strong> determines what the user can do (permissions). Authentication must happen before authorization.</p>
+            
+            <h3>Key Differences:</h3>
+            <ul>
+                <li><strong>Authentication:</strong> "Who are you?" - Identity verification</li>
+                <li><strong>Authorization:</strong> "What can you do?" - Permission control</li>
+                <li><strong>Order:</strong> Authentication first, then authorization</li>
+                <li><strong>Use Case:</strong> Use authentication to identify users, authorization to control access</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Authentication: Who are you?</span>
+app.<span class="method">UseAuthentication</span>();
+
+<span class="comment">// Authorization: What can you do?</span>
+app.<span class="method">UseAuthorization</span>();</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>6. Entity Framework Core</h2>
+        <div class="question">Q14: What is Entity Framework Core?</div>
+        <div class="answer">
+            <p><strong>Entity Framework Core (EF Core)</strong> is an ORM (Object-Relational Mapper) that enables .NET developers to work with databases using .NET objects. It eliminates most data access code and supports LINQ queries, change tracking, and migrations.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>ORM:</strong> Maps database tables to .NET classes</li>
+                <li><strong>LINQ:</strong> Query databases using LINQ syntax</li>
+                <li><strong>Change Tracking:</strong> Automatically tracks entity changes</li>
+                <li><strong>Migrations:</strong> Database schema versioning</li>
+                <li><strong>Multiple Providers:</strong> SQL Server, PostgreSQL, MySQL, SQLite, etc.</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Data/AppDbContext.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">AppDbContext</span> : <span class="type">DbContext</span>
+{
+    <span class="keyword">public</span> <span class="type">DbSet</span>&lt;<span class="type">Product</span>&gt; <span class="property">Products</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public</span> <span class="type">DbSet</span>&lt;<span class="type">Category</span>&gt; <span class="property">Categories</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+
+    <span class="keyword">protected override void</span> <span class="method">OnConfiguring</span>(<span class="type">DbContextOptionsBuilder</span> optionsBuilder)
+    {
+        optionsBuilder.<span class="method">UseSqlServer</span>(<span class="string">"ConnectionString"</span>);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q15: What is the Repository pattern?</div>
+        <div class="answer">
+            <p>The <strong>Repository pattern</strong> mediates between domain and data mapping layers, providing collection-like access to domain objects. It abstracts data access logic and makes code more testable and maintainable.</p>
+            
+            <h3>Benefits:</h3>
+            <ul>
+                <li><strong>Abstraction:</strong> Hides data access implementation details</li>
+                <li><strong>Testability:</strong> Easy to mock for unit testing</li>
+                <li><strong>Separation of Concerns:</strong> Separates business logic from data access</li>
+                <li><strong>Centralized Logic:</strong> Data access logic in one place</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Repositories/IProductRepository.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">IProductRepository</span>
+{
+    <span class="type">Task</span>&lt;<span class="type">IEnumerable</span>&lt;<span class="type">Product</span>&gt;&gt; <span class="method">GetAllAsync</span>();
+    <span class="type">Task</span>&lt;<span class="type">Product</span>&gt; <span class="method">GetByIdAsync</span>(<span class="type">int</span> id);
+    <span class="type">Task</span> <span class="method">AddAsync</span>(<span class="type">Product</span> product);
+    <span class="type">Task</span> <span class="method">UpdateAsync</span>(<span class="type">Product</span> product);
+    <span class="type">Task</span> <span class="method">DeleteAsync</span>(<span class="type">int</span> id);
+}
+
+<span class="keyword">public class</span> <span class="type">ProductRepository</span> : <span class="type">IProductRepository</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">AppDbContext</span> _context;
+
+    <span class="keyword">public</span> <span class="method">ProductRepository</span>(<span class="type">AppDbContext</span> context)
+    {
+        _</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>7. API Versioning and Documentation</h2>
+        <div class="question">Q16: How do you implement API versioning?</div>
+        <div class="answer">
+            <p><strong>API versioning</strong> allows multiple versions of an API to coexist, enabling backward compatibility. Common approaches include URL path versioning, query string versioning, header versioning, or media type versioning.</p>
+            
+            <h3>Versioning Strategies:</h3>
+            <ul>
+                <li><strong>URL Path:</strong> /api/v1/products, /api/v2/products</li>
+                <li><strong>Query String:</strong> /api/products?version=1</li>
+                <li><strong>Header:</strong> api-version: 1.0</li>
+                <li><strong>Media Type:</strong> application/vnd.myapi.v1+json</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Services.<span class="method">AddApiVersioning</span>(options =>
+{
+    options.DefaultApiVersion = <span class="keyword">new</span> <span class="type">ApiVersion</span>(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = <span class="keyword">true</span>;
+    options.ReportApiVersions = <span class="keyword">true</span>;
+});
+
+builder.Services.<span class="method">AddVersionedApiExplorer</span>(options =>
+{
+    options.GroupNameFormat = <span class="string">"'v'VVV"</span>;
+    options.SubstituteApiVersionInUrl = <span class="keyword">true</span>;
+});
+
+[<span class="decorator">ApiVersion</span>(<span class="string">"1.0"</span>)]
+[<span class="decorator">Route</span>(<span class="string">"api/v{version:apiVersion}/[controller]"</span>)]
+<span class="keyword">public class</span> <span class="type">ProductsController</span> : <span class="type">ControllerBase</span>
+{
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q17: What is Swagger/OpenAPI?</div>
+        <div class="answer">
+            <p><strong>OpenAPI (formerly Swagger)</strong> is a specification for describing REST APIs. It provides interactive documentation, client SDK generation, and API testing. ASP.NET Core includes Swashbuckle for Swagger integration.</p>
+            
+            <h3>Swagger Benefits:</h3>
+            <ul>
+                <li><strong>Interactive Documentation:</strong> UI for exploring API endpoints</li>
+                <li><strong>Client Generation:</strong> Auto-generate client SDKs</li>
+                <li><strong>Testing:</strong> Test API directly from the UI</li>
+                <li><strong>Standardization:</strong> Industry-standard API description format</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Services.<span class="method">AddEndpointsApiExplorer</span>();
+builder.Services.<span class="method">AddSwaggerGen</span>(c =>
+{
+    c.<span class="method">SwaggerDoc</span>(<span class="string">"v1"</span>, <span class="keyword">new</span> <span class="type">OpenApiInfo</span>
+    {
+        Title = <span class="string">"My API"</span>,
+        Version = <span class="string">"v1"</span>,
+        Description = <span class="string">"API Documentation"</span>
+    });
+});
+
+app.<span class="method">UseSwagger</span>();
+app.<span class="method">UseSwaggerUI</span>(c =>
+{
+    c.<span class="method">SwaggerEndpoint</span>(<span class="string">"/swagger/v1/swagger.json"</span>, <span class="string">"My API V1"</span>);
+});</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>8. CORS and Security</h2>
+        <div class="question">Q18: What is CORS and why is it needed?</div>
+        <div class="answer">
+            <p><strong>CORS (Cross-Origin Resource Sharing)</strong> is a security feature that restricts web pages from making requests to a different domain than the one that served the page. It's needed when your API is called from a frontend on a different origin.</p>
+            
+            <h3>CORS Headers:</h3>
+            <ul>
+                <li><strong>Access-Control-Allow-Origin:</strong> Specifies allowed origins</li>
+                <li><strong>Access-Control-Allow-Methods:</strong> Specifies allowed HTTP methods</li>
+                <li><strong>Access-Control-Allow-Headers:</strong> Specifies allowed headers</li>
+                <li><strong>Access-Control-Allow-Credentials:</strong> Allows cookies</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Services.<span class="method">AddCors</span>(options =>
+{
+    options.<span class="method">AddPolicy</span>(<span class="string">"AllowSpecificOrigin"</span>,
+        builder => builder
+            .<span class="method">WithOrigins</span>(<span class="string">"https://myapp.com"</span>)
+            .<span class="method">AllowAnyMethod</span>()
+            .<span class="method">AllowAnyHeader</span>()
+            .<span class="method">AllowCredentials</span>());
+});
+
+app.<span class="method">UseCors</span>(<span class="string">"AllowSpecificOrigin"</span>);</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q19: How do you handle exceptions in Web API?</div>
+        <div class="answer">
+            <p>Use <strong>exception handling middleware</strong> or <strong>exception filters</strong> to handle errors globally and return appropriate HTTP responses.</p>
+            
+            <h3>Exception Handling Approaches:</h3>
+            <ul>
+                <li><strong>UseExceptionHandler:</strong> Global exception handling middleware</li>
+                <li><strong>Exception Filters:</strong> Controller-level exception handling</li>
+                <li><strong>Problem Details:</strong> RFC 7807 standardized error format</li>
+                <li><strong>Custom Error Responses:</strong> Return specific error DTOs</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>app.<span class="method">UseExceptionHandler</span>(<span class="string">"/error"</span>);
+
+app.<span class="method">Map</span>(<span class="string">"/error"</span>, (app) =>
+{
+    app.<span class="method">Run</span>(async context =>
+    {
+        context.Response.StatusCode = 500;
+        <span class="keyword">await</span> context.Response.<span class="method">WriteAsJsonAsync</span>(<span class="keyword">new</span>
+        {
+            error = <span class="string">"An error occurred processing your request."</span>
+        });
+    });
+});</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>9. Caching and Performance</h2>
+        <div class="question">Q20: What is response caching in Web API?</div>
+        <div class="answer">
+            <p><strong>Response caching</strong> stores HTTP responses to reduce server load and improve performance. Use the [ResponseCache] attribute to control caching behavior.</p>
+            
+            <h3>Caching Options:</h3>
+            <ul>
+                <li><strong>Duration:</strong> How long to cache the response</li>
+                <li><strong>Location:</strong> Where to cache (client, CDN, server)</li>
+                <li><strong>NoStore:</strong> Disable caching</li>
+                <li><strong>VaryByHeader:</strong> Cache based on headers</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/ProductController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>[<span class="decorator">HttpGet</span>]
+[<span class="decorator">ResponseCache</span>(Duration = 60, Location = <span class="type">ResponseCacheLocation</span>.Any)]
+<span class="keyword">public</span> <span class="type">IActionResult</span> <span class="method">Get</span>()
+{
+    <span class="keyword">return</span> <span class="type">Ok</span>(_repository.<span class="method">GetAll</span>());
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q21: What is in-memory caching vs distributed caching?</div>
+        <div class="answer">
+            <p><strong>In-memory caching</strong> stores data in the application's memory, while <strong>distributed caching</strong> stores data in a shared cache like Redis, accessible across multiple server instances.</p>
+            
+            <h3>Comparison:</h3>
+            <ul>
+                <li><strong>In-Memory:</strong> Fast, single-server, lost on restart</li>
+                <li><strong>Distributed:</strong> Slower, multi-server, persists across restarts</li>
+                <li><strong>Use In-Memory:</strong> Single instance, simple apps</li>
+                <li><strong>Use Distributed:</strong> Multi-instance, production apps</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// In-Memory Cache</span>
+builder.Services.<span class="method">AddMemoryCache</span>();
+
+<span class="comment">// Distributed Cache (Redis)</span>
+builder.Services.<span class="method">AddStackExchangeRedisCache</span>(options =>
+{
+    options.Configuration = <span class="string">"localhost:6379"</span>;
+});</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>10. File Uploads and Streaming</h2>
+        <div class="question">Q22: How do you handle file uploads in Web API?</div>
+        <div class="answer">
+            <p>Use <strong>IFormFile</strong> to handle file uploads. Configure maximum file size limits and validate file types for security.</p>
+            
+            <h3>File Upload Best Practices:</h3>
+            <ul>
+                <li><strong>Size Limits:</strong> Configure max file size in Program.cs</li>
+                <li><strong>Validation:</strong> Check file type and content</li>
+                <li><strong>Storage:</strong> Save to disk, cloud storage, or database</li>
+                <li><strong>Security:</strong> Validate and sanitize file names</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/FileController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>[<span class="decorator">HttpPost</span>(<span class="string">"upload"</span>)]
+[<span class="decorator">RequestSizeLimit</span>(10485760)]
+<span class="keyword">public async</span> <span class="type">Task</span>&lt;<span class="type">IActionResult</span>&gt; <span class="method">Upload</span>(<span class="type">IFormFile</span> file)
+{
+    <span class="keyword">if</span> (file == <span class="keyword">null</span> || file.Length == 0)
+        <span class="keyword">return</span> <span class="type">BadRequest</span>();
+
+    <span class="keyword">var</span> path = <span class="type">Path</span>.<span class="method">Combine</span>(<span class="type">Directory</span>.<span class="method">GetCurrentDirectory</span>(), <span class="string">"Uploads"</span>, file.FileName);
+    <span class="keyword">using</span> (<span class="keyword">var</span> stream = <span class="keyword">new</span> <span class="type">FileStream</span>(path, <span class="type">FileMode</span>.Create))
+    {
+        <span class="keyword">await</span> file.<span class="method">CopyToAsync</span>(stream);
+    }
+    
+    <span class="keyword">return</span> <span class="type">Ok</span>(<span class="keyword">new</span> { path });
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>11. Testing</h2>
+        <div class="question">Q23: How do you test Web API controllers?</div>
+        <div class="answer">
+            <p>Use <strong>unit testing</strong> with xUnit or NUnit and <strong>integration testing</strong> with WebApplicationFactory to test API endpoints.</p>
+            
+            <h3>Testing Approaches:</h3>
+            <ul>
+                <li><strong>Unit Tests:</strong> Test controller logic in isolation</li>
+                <li><strong>Integration Tests:</strong> Test full HTTP requests/responses</li>
+                <li><strong>Moq:</strong> Mock dependencies for unit tests</li>
+                <li><strong>WebApplicationFactory:</strong> Test in-memory server</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Tests/ProductControllerTests.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>[<span class="decorator">Fact</span>]
+<span class="keyword">public async</span> <span class="type">Task</span> <span class="method">Get_ReturnsProducts</span>()
+{
+    <span class="comment">// Arrange</span>
+    <span class="keyword">var</span> mockRepo = <span class="keyword">new</span> <span class="type">Mock</span>&lt;<span class="type">IProductRepository</span>&gt;();
+    mockRepo.<span class="method">Setup</span>(r => r.<span class="method">GetAllAsync</span>()).<span class="method">ReturnsAsync</span>(GetTestProducts());
+    <span class="keyword">var</span> controller = <span class="keyword">new</span> <span class="type">ProductController</span>(mockRepo.Object);
+
+    <span class="comment">// Act</span>
+    <span class="keyword">var</span> result = <span class="keyword">await</span> controller.<span class="method">Get</span>();
+
+    <span class="comment">// Assert</span>
+    <span class="keyword">var</span> okResult = <span class="type">Assert</span>.<span class="method">IsType</span>&lt;<span class="type">OkObjectResult</span>&gt;(result);
+    <span class="keyword">var</span> products = <span class="type">Assert</span>.<span class="method">IsType</span>&lt;<span class="type">List</span>&lt;<span class="type">Product</span>&gt;&gt;(okResult.Value);
+    <span class="type">Assert</span>.<span class="method">Equal</span>(2, products.<span class="property">Count</span>);
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>12. Configuration and Settings</h2>
+        <div class="question">Q24: How do you manage configuration in ASP.NET Core?</div>
+        <div class="answer">
+            <p>Use the <strong>IConfiguration</strong> interface and <strong>Options pattern</strong> to manage configuration from appsettings.json, environment variables, and other sources.</p>
+            
+            <h3>Configuration Sources:</h3>
+            <ul>
+                <li><strong>appsettings.json:</strong> Application settings</li>
+                <li><strong>Environment Variables:</strong> Deployment-specific settings</li>
+                <li><strong>Command Line:</strong> Runtime arguments</li>
+                <li><strong>Key Vault:</strong> Secure secrets storage</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">var</span> builder = <span class="type">WebApplication</span>.<span class="method">CreateBuilder</span>(args);
+
+builder.Configuration.<span class="method">AddJsonFile</span>(<span class="string">"appsettings.json"</span>);
+builder.Configuration.<span class="method">AddEnvironmentVariables</span>();
+
+builder.Services.<span class="method">Configure</span>&lt;<span class="type">ApiSettings</span>&gt;(
+    builder.Configuration.<span class="method">GetSection</span>(<span class="string">"ApiSettings"</span>));</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>13. Health Checks</h2>
+        <div class="question">Q25: What are health checks in ASP.NET Core?</div>
+        <div class="answer">
+            <p><strong>Health checks</strong> allow you to monitor the status of your API and its dependencies (database, external services, etc.). They're exposed via HTTP endpoints for monitoring tools.</p>
+            
+            <h3>Health Check Benefits:</h3>
+            <ul>
+                <li><strong>Monitoring:</strong> Check API health status</li>
+                <li><strong>Load Balancing:</strong> Route traffic away from unhealthy instances</li>
+                <li><strong>Dependency Checks:</strong> Verify database and external service connectivity</li>
+                <li><strong>Kubernetes:</strong> Liveness and readiness probes</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Services.<span class="method">AddHealthChecks</span>()
+    .<span class="method">AddDbContextCheck</span>&lt;<span class="type">AppDbContext</span>&gt;()
+    .<span class="method">AddSqlServer</span>(builder.Configuration.<span class="method">GetConnectionString</span>(<span class="string">"DefaultConnection"</span>));
+
+app.<span class="method">MapHealthChecks</span>(<span class="string">"/health"</span>);</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>14. Rate Limiting</h2>
+        <div class="question">Q26: How do you implement rate limiting in Web API?</div>
+        <div class="answer">
+            <p>Use <strong>rate limiting middleware</strong> or third-party libraries like AspNetCoreRateLimit to control the number of requests a client can make within a time period.</p>
+            
+            <h3>Rate Limiting Strategies:</h3>
+            <ul>
+                <li><strong>IP-based:</strong> Limit by client IP address</li>
+                <li><strong>API Key:</strong> Limit by API key</li>
+                <li><strong>Endpoint-specific:</strong> Different limits per endpoint</li>
+                <li><strong>Sliding Window:</strong> Time-based rolling limits</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Services.<span class="method">AddRateLimiter</span>(options =>
+{
+    options.<span class="method">AddPolicy</span>(<span class="string">"FixedWindow"</span>, context =>
+        <span class="type">RateLimitPartition</span>.<span class="method">GetSlidingWindowLimiter</span>(
+            context.Connection.RemoteIpAddress?.ToString() ?? <span class="string">"anonymous"</span>,
+            _ => <span class="keyword">new</span> <span class="type">SlidingWindowRateLimiterOptions</span>
+            {
+                PermitLimit = 100,
+                Window = <span class="type">TimeSpan</span>.<span class="method">FromMinutes</span>(1),
+                SegmentsPerWindow = 2
+            }));
+});
+
+app.<span class="method">UseRateLimiter</span>();</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>15. Logging and Monitoring</h2>
+        <div class="question">Q27: How do you implement logging in Web API?</div>
+        <div class="answer">
+            <p>Use the built-in <strong>ILogger</strong> interface to log messages at different levels (Trace, Debug, Information, Warning, Error, Critical). Configure logging providers for different outputs.</p>
+            
+            <h3>Logging Levels:</h3>
+            <ul>
+                <li><strong>Trace:</strong> Most detailed information</li>
+                <li><strong>Debug:</strong> Debugging information</li>
+                <li><strong>Information:</strong> General flow information</li>
+                <li><strong>Warning:</strong> Unexpected but not errors</li>
+                <li><strong>Error:</strong> Error events</li>
+                <li><strong>Critical:</strong> Critical failure events</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/ProductController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">private readonly</span> <span class="type">ILogger</span>&lt;<span class="type">ProductController</span>&gt; _logger;
+
+<span class="keyword">public</span> <span class="method">ProductController</span>(<span class="type">ILogger</span>&lt;<span class="type">ProductController</span>&gt; logger)
+{
+    _logger = logger;
+}
+
+[<span class="decorator">HttpGet</span>]
+<span class="keyword">public</span> <span class="type">IActionResult</span> <span class="method">Get</span>()
+{
+    _logger.<span class="method">LogInformation</span>(<span class="string">"Getting all products"</span>);
+    <span class="keyword">return</span> <span class="type">Ok</span>(_repository.<span class="method">GetAll</span>());
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>16. Minimal APIs</h2>
+        <div class="question">Q28: What are Minimal APIs?</div>
+        <div class="answer">
+            <p><strong>Minimal APIs</strong> are a simplified way to build HTTP APIs with minimal code. They eliminate the need for controllers and use lambda-based endpoint definitions directly in Program.cs.</p>
+            
+            <h3>Minimal API Benefits:</h3>
+            <ul>
+                <li><strong>Simplicity:</strong> Less boilerplate code</li>
+                <li><strong>Performance:</strong> Lower overhead</li>
+                <li><strong>Modern:</strong> Uses modern C# features</li>
+                <li><strong>Flexibility:</strong> Mix with controller-based APIs</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">var</span> builder = <span class="type">WebApplication</span>.<span class="method">CreateBuilder</span>(args);
+<span class="keyword">var</span> app = builder.<span class="method">Build</span>();
+
+app.<span class="method">MapGet</span>(<span class="string">"/products"</span>, () => <span class="keyword">new</span>[] { <span class="string">"Product1"</span>, <span class="string">"Product2"</span> });
+app.<span class="method">MapPost</span>(<span class="string">"/products"</span>, (<span class="type">Product</span> product) => <span class="type">Results</span>.<span class="method">Created</span>(<span class="string">"/products/1"</span>, product));
+app.<span class="method">MapPut</span>(<span class="string">"/products/{id}"</span>, (<span class="type">int</span> id, <span class="type">Product</span> product) => <span class="type">Results</span>.<span class="method">NoContent</span>());
+app.<span class="method">MapDelete</span>(<span class="string">"/products/{id}"</span>, (<span class="type">int</span> id) => <span class="type">Results</span>.<span class="method">NoContent</span>());
+
+app.<span class="method">Run</span>();</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>17. SignalR and WebSockets</h2>
+        <div class="question">Q29: What is SignalR?</div>
+        <div class="answer">
+            <p><strong>SignalR</strong> is a library for adding real-time web functionality to apps. It enables bi-directional communication between server and client using WebSockets, Server-Sent Events, or Long Polling.</p>
+            
+            <h3>SignalR Use Cases:</h3>
+            <ul>
+                <li><strong>Real-time Notifications:</strong> Live updates</li>
+                <li><strong>Chat Applications:</strong> Instant messaging</li>
+                <li><strong>Collaboration:</strong> Real-time editing</li>
+                <li><strong>Dashboard Updates:</strong> Live data feeds</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Hubs/NotificationHub.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">NotificationHub</span> : <span class="type">Hub</span>
+{
+    <span class="keyword">public async</span> <span class="type">Task</span> <span class="method">SendNotification</span>(<span class="type">string</span> message)
+    {
+        <span class="keyword">await</span> <span class="type">Clients</span>.All.<span class="method">SendAsync</span>(<span class="string">"ReceiveNotification"</span>, message);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>18. gRPC</h2>
+        <div class="question">Q30: What is gRPC?</div>
+        <div class="answer">
+            <p><strong>gRPC</strong> is a high-performance RPC framework using Protocol Buffers. It's ideal for microservices communication, offering better performance than REST for internal service-to-service calls.</p>
+            
+            <h3>gRPC Benefits:</h3>
+            <ul>
+                <li><strong>Performance:</strong> Binary serialization, HTTP/2</li>
+                <li><strong>Strong Typing:</strong> Protocol Buffers schema</li>
+                <li><strong>Streaming:</strong> Bi-directional streaming</li>
+                <li><strong>Code Generation:</strong> Auto-generated clients</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Protos/product.proto</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>syntax = <span class="string">"proto3"</span>;
+
+service ProductService {
+  rpc GetProduct (ProductRequest) returns (ProductResponse);
+  rpc GetProducts (Empty) returns (stream ProductResponse);
+}
+
+message ProductRequest {
+  int32 id = 1;
+}
+
+message ProductResponse {
+  int32 id = 1;
+  string name = 2;
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>19. Entity Framework Core Advanced</h2>
+        <div class="question">Q31: What are EF Core migrations?</div>
+        <div class="answer">
+            <p><strong>Migrations</strong> allow you to evolve your database schema over time. Each migration represents a change to the database schema, applied incrementally.</p>
+            
+            <h3>Migration Commands:</h3>
+            <ul>
+                <li><strong>Add-Migration:</strong> Create a new migration</li>
+                <li><strong>Update-Database:</strong> Apply pending migrations</li>
+                <li><strong>Remove-Migration:</strong> Remove the last migration</li>
+                <li><strong>Script-Migration:</strong> Generate SQL script</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Package Manager Console</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>Add-Migration InitialCreate
+Update-Database
+Script-Migration</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q32: What is the difference between eager, lazy, and explicit loading?</div>
+        <div class="answer">
+            <p>These are different strategies for loading related data in EF Core.</p>
+            
+            <h3>Loading Strategies:</h3>
+            <ul>
+                <li><strong>Eager Loading:</strong> Load related data with Include() in single query</li>
+                <li><strong>Lazy Loading:</strong> Load related data automatically when accessed</li>
+                <li><strong>Explicit Loading:</strong> Load related data manually with Load()</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/ProductController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Eager Loading</span>
+<span class="keyword">var</span> products = _context.Products.<span class="method">Include</span>(p => p.Category).<span class="method">ToList</span>();
+
+<span class="comment">// Lazy Loading (requires virtual navigation properties)</span>
+<span class="keyword">var</span> product = _context.Products.<span class="method">First</span>();
+<span class="keyword">var</span> category = product.Category; <span class="comment">// Loaded automatically</span>
+
+<span class="comment">// Explicit Loading</span>
+<span class="keyword">var</span> product = _context.Products.<span class="method">First</span>();
+_context.<span class="method">Entry</span>(product).<span class="method">Reference</span>(p => p.Category).<span class="method">Load</span>();</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q33: What is the difference between Add, Attach, and Update?</div>
+        <div class="answer">
+            <p>These methods determine how EF Core tracks entity state when adding or modifying entities.</p>
+            
+            <h3>Entity States:</h3>
+            <ul>
+                <li><strong>Add:</strong> Marks entity as Added (insert on SaveChanges)</li>
+                <li><strong>Attach:</strong> Marks entity as Unchanged (no changes)</li>
+                <li><strong>Update:</strong> Marks entity as Modified (update on SaveChanges)</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Data/ProductRepository.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Add - Insert new entity</span>
+_context.Products.<span class="method">Add</span>(product);
+
+<span class="comment">// Attach - Entity exists, no changes</span>
+_context.Products.<span class="method">Attach</span>(product);
+
+<span class="comment">// Update - Entity exists, has changes</span>
+_context.Products.<span class="method">Update</span>(product);</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q34: What is the difference between HasData and Seed Data?</div>
+        <div class="answer">
+            <p><strong>HasData</strong> is used in OnModelCreating to seed data that's part of the model, while custom seed data can be added in OnModelCreating or using migration SQL.</p>
+            
+            <h3>Seeding Approaches:</h3>
+            <ul>
+                <li><strong>HasData:</strong> Seed data in model configuration</li>
+                <li><strong>Migration SQL:</strong> Custom SQL in migrations</li>
+                <li><strong>OnModelCreating:</strong> Programmatic seeding</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Data/AppDbContext.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">protected override void</span> <span class="method">OnModelCreating</span>(<span class="type">ModelBuilder</span> modelBuilder)
+{
+    modelBuilder.<span class="method">Entity</span>&lt;<span class="type">Category</span>&gt;().<span class="method">HasData</span>(
+        <span class="keyword">new</span> <span class="type">Category</span> { Id = 1, Name = <span class="string">"Electronics"</span> },
+        <span class="keyword">new</span> <span class="type">Category</span> { Id = 2, Name = <span class="string">"Books"</span> }
+    );
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>20. Security Advanced</h2>
+        <div class="question">Q35: What is the difference between HTTPS and HTTP?</div>
+        <div class="answer">
+            <p><strong>HTTPS</strong> encrypts data between client and server using TLS/SSL, while <strong>HTTP</strong> sends data in plain text. HTTPS is essential for secure APIs.</p>
+            
+            <h3>HTTPS Benefits:</h3>
+            <ul>
+                <li><strong>Encryption:</strong> Data is encrypted in transit</li>
+                <li><strong>Authentication:</strong> Server identity verification</li>
+                <li><strong>Integrity:</strong> Data cannot be tampered with</li>
+                <li><strong>SEO:</strong> Better search engine ranking</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">var</span> builder = <span class="type">WebApplication</span>.<span class="method">CreateBuilder</span>(args);
+builder.Services.<span class="method">AddHsts</span>(options =>
+{
+    options.<span class="property">IncludeSubDomains</span> = <span class="keyword">true</span>;
+    options.<span class="property">MaxAge</span> = <span class="type">TimeSpan</span>.<span class="method">FromDays</span>(365);
+});
+
+<span class="keyword">var</span> app = builder.<span class="method">Build</span>();
+app.<span class="method">UseHsts</span>();
+app.<span class="method">UseHttpsRedirection</span>();</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q36: What is the difference between secrets and configuration?</div>
+        <div class="answer">
+            <p><strong>Secrets</strong> are sensitive data (passwords, API keys) stored securely, while <strong>configuration</strong> is general app settings. Use Secret Manager in development and Azure Key Vault in production.</p>
+            
+            <h3>Secret Management:</h3>
+            <ul>
+                <li><strong>Secret Manager:</strong> Development-time secrets</li>
+                <li><strong>Environment Variables:</strong> Production secrets</li>
+                <li><strong>Key Vault:</strong> Secure cloud storage</li>
+                <li><strong>Never commit secrets to source control</strong></li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Configuration.<span class="method">AddUserSecrets</span>&lt;<span class="type">Program</span>&gt;();
+builder.Configuration.<span class="method">AddAzureKeyVault</span>(vaultUri, clientId, clientSecret);</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q37: What is the difference between authentication schemes?</div>
+        <div class="answer">
+            <p>ASP.NET Core supports multiple authentication schemes including JWT Bearer, Cookie, OpenID Connect, and custom schemes.</p>
+            
+            <h3>Authentication Schemes:</h3>
+            <ul>
+                <li><strong>JWT Bearer:</strong> Token-based for APIs</li>
+                <li><strong>Cookie:</strong> Session-based for web apps</li>
+                <li><strong>OpenID Connect:</strong> OAuth 2.0 / OIDC providers</li>
+                <li><strong>Custom:</strong> Implement IAuthenticationHandler</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Services.<span class="method">AddAuthentication</span>()
+    .<span class="method">AddCookie</span>(<span class="string">"CookieScheme"</span>)
+    .<span class="method">AddJwtBearer</span>(<span class="string">"JwtScheme"</span>, options => { });
+
+<span class="comment">// Use specific scheme</span>
+[<span class="decorator">Authorize</span>(AuthenticationSchemes = <span class="string">"JwtScheme"</span>)]</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>21. Performance Optimization</h2>
+        <div class="question">Q38: What is async/await in Web API?</div>
+        <div class="answer">
+            <p><strong>Async/await</strong> allows non-blocking I/O operations, improving scalability by freeing threads while waiting for I/O operations to complete.</p>
+            
+            <h3>Async Benefits:</h3>
+            <ul>
+                <li><strong>Scalability:</strong> Handle more concurrent requests</li>
+                <li><strong>Responsiveness:</strong> Better user experience</li>
+                <li><strong>Resource Efficiency:</strong> Fewer blocked threads</li>
+                <li><strong>Best Practice:</strong> Use async for I/O operations</li>
+            </ul>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/ProductController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>[<span class="decorator">HttpGet</span>]
+<span class="keyword">public async</span> <span class="type">Task</span>&lt;<span class="type">IActionResult</span>&gt; <span class="method">Get</span>()
+{
+    <span class="keyword">var</span> products = <span class="keyword">await</span> _repository.<span class="method">GetAllAsync</span>();
+    <span class="keyword">return</span> <span class="type">Ok</span>(products);
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q39: What is the difference between synchronous and asynchronous operations?</div>
+        <div class="answer">
+            <p><strong>Synchronous</strong> operations block the thread until complete, while <strong>asynchronous</strong> operations return immediately and continue when the operation completes.</p>
+            
+            <h3>Comparison:</h3>
+            <ul>
+                <li><strong>Sync:</strong> Simpler code, blocks thread, less scalable</li>
+                <li><strong>Async:</strong> More complex code, non-blocking, more scalable</li>
+                <li><strong>Use Sync:</strong> CPU-bound operations</li>
+                <li><strong>Use Async:</strong> I/O-bound operations (database, HTTP)</li>
+            </ul>
+        </div>
+
+        <div class="question">Q40: What is response compression?</div>
+        <div class="answer">
+            <p><strong>Response compression</strong> reduces the size of HTTP responses using Gzip or Brotli compression, improving bandwidth usage and load times.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Services.<span class="method">AddResponseCompression</span>(options =>
+{
+    options.<span class="property">EnableForHttps</span> = <span class="keyword">true</span>;
+    options.<span class="property">Providers</span>.<span class="method">Add</span>&lt;<span class="type">BrotliCompressionProvider</span>&gt;();
+    options.<span class="property">Providers</span>.<span class="method">Add</span>&lt;<span class="type">GzipCompressionProvider</span>&gt;();
+});
+
+app.<span class="method">UseResponseCompression</span>();</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>22. Deployment</h2>
+        <div class="question">Q41: What is the difference between development and production environments?</div>
+        <div class="answer">
+            <p><strong>Development</strong> environment has detailed errors, debug symbols, and hot reload. <strong>Production</strong> environment is optimized, secure, and has minimal error details.</p>
+            
+            <h3>Environment Differences:</h3>
+            <ul>
+                <li><strong>Development:</strong> Detailed errors, debug mode, hot reload</li>
+                <li><strong>Production:</strong> Optimized, secure, generic errors</li>
+                <li><strong>Staging:</strong> Production-like for testing</li>
+                <li><strong>Use ASPNETCORE_ENVIRONMENT variable</strong></li>
+            </ul>
+        </div>
+
+        <div class="question">Q42: What is Docker for ASP.NET Core?</div>
+        <div class="answer">
+            <p><strong>Docker</strong> containerizes your ASP.NET Core application, ensuring consistent behavior across different environments and simplifying deployment.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Dockerfile</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+COPY . .
+RUN dotnet restore
+RUN dotnet publish -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "MyApi.dll"]</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q43: What is the difference between IIS and Kestrel?</div>
+        <div class="answer">
+            <p><strong>Kestrel</strong> is the built-in cross-platform web server. <strong>IIS</strong> is a Windows web server that can act as a reverse proxy for Kestrel.</p>
+            
+            <h3>Server Roles:</h3>
+            <ul>
+                <li><strong>Kestrel:</strong> Internal web server, handles HTTP requests</li>
+                <li><strong>IIS:</strong> Reverse proxy, provides Windows integration</li>
+                <li><strong>Nginx/Apache:</strong> Reverse proxy on Linux</li>
+                <li><strong>Production:</strong> Use reverse proxy for security</li>
+            </ul>
+        </div>
+
+        <h2>23. API Design Patterns</h2>
+        <div class="question">Q44: What is the difference between REST and GraphQL?</div>
+        <div class="answer">
+            <p><strong>REST</strong> uses multiple endpoints for different resources. <strong>GraphQL</strong> uses a single endpoint with a query language to fetch exactly the data needed.</p>
+            
+            <h3>Comparison:</h3>
+            <ul>
+                <li><strong>REST:</strong> Multiple endpoints, over/under-fetching, caching built-in</li>
+                <li><strong>GraphQL:</strong> Single endpoint, exact data, no built-in caching</li>
+                <li><strong>Use REST:</strong> Standard APIs, caching important</li>
+                <li><strong>Use GraphQL:</strong> Complex data requirements, mobile apps</li>
+            </ul>
+        </div>
+
+        <div class="question">Q45: What is the difference between GET and POST for data retrieval?</div>
+        <div class="answer">
+            <p><strong>GET</strong> is idempotent and safe, used for retrieving data. <strong>POST</strong> is not idempotent, typically used for creating data but can retrieve with complex parameters.</p>
+            
+            <h3>When to Use:</h3>
+            <ul>
+                <li><strong>GET:</strong> Simple queries, cacheable, bookmarkable</li>
+                <li><strong>POST:</strong> Complex queries, large payloads, non-cacheable</li>
+                <li><strong>GET Limit:</strong> URL length limits</li>
+                <li><strong>POST:</strong> Body has no size limit</li>
+            </ul>
+        </div>
+
+        <div class="question">Q46: What is HATEOAS in REST APIs?</div>
+        <div class="answer">
+            <p><strong>HATEOAS (Hypermedia as the Engine of Application State)</strong> is a REST constraint where responses contain links to related resources, allowing clients to discover actions dynamically.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Models/ProductDto.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">ProductDto</span>
+{
+    <span class="keyword">public int</span> <span class="property">Id</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">Name</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public</span> <span class="type">List</span>&lt;<span class="type">Link</span>&gt; <span class="property">Links</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}
+
+<span class="comment">// Response includes links to related resources</span>
+{
+  <span class="string">"id"</span>: 1,
+  <span class="string">"name"</span>: <span class="string">"Product"</span>,
+  <span class="string">"links"</span>: [
+    { <span class="string">"rel"</span>: <span class="string">"self"</span>, <span class="string">"href"</span>: <span class="string">"/api/products/1"</span> },
+    { <span class="string">"rel"</span>: <span class="string">"category"</span>, <span class="string">"href"</span>: <span class="string">"/api/products/1/category"</span> }
+  ]
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>24. Testing Advanced</h2>
+        <div class="question">Q47: What is the difference between unit and integration tests?</div>
+        <div class="answer">
+            <p><strong>Unit tests</strong> test individual components in isolation. <strong>Integration tests</strong> test how components work together, including database and external services.</p>
+            
+            <h3>Testing Pyramid:</h3>
+            <ul>
+                <li><strong>Unit Tests:</strong> Fast, isolated, many tests</li>
+                <li><strong>Integration Tests:</strong> Slower, test interactions, fewer tests</li>
+                <li><strong>E2E Tests:</strong> Slowest, test full user flows, fewest tests</li>
+            </ul>
+        </div>
+
+        <div class="question">Q48: What is WebApplicationFactory?</div>
+        <div class="answer">
+            <p><strong>WebApplicationFactory</strong> creates an in-memory TestServer for integration testing, providing a realistic HTTP environment without network overhead.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Tests/ApiTests.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">ApiTests</span> : <span class="type">IClassFixture</span>&lt;<span class="type">WebApplicationFactory</span>&lt;<span class="type">Program</span>&gt;&gt;
+{
+    <span class="keyword">private readonly</span> <span class="type">HttpClient</span> _client;
+
+    <span class="keyword">public</span> <span class="method">ApiTests</span>(<span class="type">WebApplicationFactory</span>&lt;<span class="type">Program</span>&gt; factory)
+    {
+        _client = factory.<span class="method">CreateClient</span>();
+    }
+
+    [<span class="decorator">Fact</span>]
+    <span class="keyword">public async</span> <span class="type">Task</span> <span class="method">GetProducts_ReturnsSuccess</span>()
+    {
+        <span class="keyword">var</span> response = <span class="keyword">await</span> _client.<span class="method">GetAsync</span>(<span class="string">"/api/products"</span>);
+        response.StatusCode.<span class="method">Should</span>().<span class="method">Be</span>(<span class="type">HttpStatusCode</span>.OK);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q49: What is Moq?</div>
+        <div class="answer">
+            <p><strong>Moq</strong> is a mocking library for .NET that allows you to create mock objects for dependencies in unit tests, isolating the code under test.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Tests/ProductControllerTests.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">var</span> mockRepo = <span class="keyword">new</span> <span class="type">Mock</span>&lt;<span class="type">IProductRepository</span>&gt;();
+mockRepo.<span class="method">Setup</span>(r => r.<span class="method">GetByIdAsync</span>(1))
+    .<span class="method">ReturnsAsync</span>(<span class="keyword">new</span> <span class="type">Product</span> { Id = 1, Name = <span class="string">"Test"</span> });
+
+mockRepo.<span class="method">Verify</span>(r => r.<span class="method">GetByIdAsync</span>(1), <span class="type">Times</span>.Once);</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>25. Advanced Middleware</h2>
+        <div class="question">Q50: What is the difference between middleware and filters?</div>
+        <div class="answer">
+            <p><strong>Middleware</strong> runs globally for all requests in the pipeline. <strong>Filters</strong> run at specific stages (before/after action) and can be scoped to controllers or actions.</p>
+            
+            <h3>When to Use:</h3>
+            <ul>
+                <li><strong>Middleware:</strong> Cross-cutting concerns (logging, CORS, auth)</li>
+                <li><strong>Filters:</strong> Controller/action-specific logic (validation, caching)</li>
+                <li><strong>Middleware:</strong> Cannot access MVC context</li>
+                <li><strong>Filters:</strong> Can access MVC context</li>
+            </ul>
+        </div>
+
+        <div class="question">Q51: What is endpoint routing?</div>
+        <div class="answer">
+            <p><strong>Endpoint routing</strong> decouples routing from middleware, allowing middleware to know which endpoint will be executed. It's the default in ASP.NET Core 3.0+.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>app.<span class="method">UseRouting</span>();
+app.<span class="method">UseAuthentication</span>();
+app.<span class="method">UseAuthorization</span>();
+app.<span class="method">UseEndpoints</span>(endpoints =>
+{
+    endpoints.<span class="method">MapControllers</span>();
+    endpoints.<span class="method">MapHealthChecks</span>(<span class="string">"/health"</span>);
+});</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q52: What is the difference between MapControllers and MapGet?</div>
+        <div class="answer">
+            <p><strong>MapControllers</strong> routes to controller-based actions. <strong>MapGet/MapPost</strong> are for minimal APIs with inline lambda handlers.</p>
+            
+            <h3>Routing Approaches:</h3>
+            <ul>
+                <li><strong>MapControllers:</strong> Traditional controller-based APIs</li>
+                <li><strong>MapGet/MapPost:</strong> Minimal APIs with inline handlers</li>
+                <li><strong>Can mix both</strong> in the same application</li>
+            </ul>
+        </div>
+
+        <h2>26. JSON Handling</h2>
+        <div class="question">Q53: What is System.Text.Json?</div>
+        <div class="answer">
+            <p><strong>System.Text.Json</strong> is the built-in JSON library in .NET Core, providing high-performance JSON serialization and deserialization.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Services.<span class="method">Configure</span>&lt;<span class="type">JsonOptions</span>&gt;(options =>
+{
+    options.<span class="property">SerializerOptions</span>.<span class="property">PropertyNamingPolicy</span> = <span class="type">JsonNamingPolicy</span>.CamelCase;
+    options.<span class="property">SerializerOptions</span>.<span class="property">WriteIndented</span> = <span class="keyword">true</span>;
+});</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q54: What is the difference between System.Text.Json and Newtonsoft.Json?</div>
+        <div class="answer">
+            <p><strong>System.Text.Json</strong> is built-in, faster, and has better memory usage. <strong>Newtonsoft.Json</strong> has more features and compatibility with legacy code.</p>
+            
+            <h3>Comparison:</h3>
+            <ul>
+                <li><strong>System.Text.Json:</strong> Built-in, faster, modern</li>
+                <li><strong>Newtonsoft.Json:</strong> More features, legacy support</li>
+                <li><strong>Use System.Text.Json:</strong> New projects, performance critical</li>
+                <li><strong>Use Newtonsoft.Json:</strong> Migrating from .NET Framework</li>
+            </ul>
+        </div>
+
+        <div class="question">Q55: What is JSON serialization options?</div>
+        <div class="answer">
+            <p>Configure JSON serialization with options like naming policy, case handling, null handling, and custom converters.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>options.<span class="property">SerializerOptions</span>.<span class="property">PropertyNamingPolicy</span> = <span class="type">JsonNamingPolicy</span>.CamelCase;
+options.<span class="property">SerializerOptions</span>.<span class="property">IgnoreNullValues</span> = <span class="keyword">true</span>;
+options.<span class="property">SerializerOptions</span>.<span class="property">ReferenceHandler</span> = <span class="type">ReferenceHandler</span>.IgnoreCycles;</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>27. API Gateway and Microservices</h2>
+        <div class="question">Q56: What is an API Gateway?</div>
+        <div class="answer">
+            <p><strong>API Gateway</strong> is a single entry point for multiple microservices, handling routing, authentication, rate limiting, and other cross-cutting concerns.</p>
+            
+            <h3>API Gateway Benefits:</h3>
+            <ul>
+                <li><strong>Single Entry Point:</strong> One URL for clients</li>
+                <li><strong>Cross-cutting Concerns:</strong> Centralized auth, logging</li>
+                <li><strong>Routing:</strong> Route to appropriate service</li>
+                <li><strong>Load Balancing:</strong> Distribute traffic</li>
+            </ul>
+        </div>
+
+        <div class="question">Q57: What is the difference between monolith and microservices?</div>
+        <div class="answer">
+            <p><strong>Monolith</strong> is a single application with all functionality. <strong>Microservices</strong> are small, independent services communicating via APIs.</p>
+            
+            <h3>Comparison:</h3>
+            <ul>
+                <li><strong>Monolith:</strong> Simpler deployment, harder to scale, single point of failure</li>
+                <li><strong>Microservices:</strong> Complex deployment, easier scaling, resilient</li>
+                <li><strong>Use Monolith:</strong> Small teams, simple apps</li>
+                <li><strong>Use Microservices:</strong> Large teams, complex domains</li>
+            </ul>
+        </div>
+
+        <div class="question">Q58: What is service discovery?</div>
+        <div class="answer">
+            <p><strong>Service discovery</strong> allows services to find and communicate with each other dynamically without hardcoded addresses. Used in microservices architectures.</p>
+            
+            <h3>Service Discovery Approaches:</h3>
+            <ul>
+                <li><strong>Client-side:</strong> Client queries registry</li>
+                <li><strong>Server-side:</strong> Load balancer handles discovery</li>
+                <li><strong>Consul:</strong> Popular service discovery tool</li>
+                <li><strong>Kubernetes:</strong> Built-in service discovery</li>
+            </ul>
+        </div>
+
+        <h2>28. Background Services</h2>
+        <div class="question">Q59: What is IHostedService?</div>
+        <div class="answer">
+            <p><strong>IHostedService</strong> allows you to run background tasks in ASP.NET Core, such as periodic jobs, message processing, or cleanup tasks.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Services/BackgroundWorker.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">BackgroundWorker</span> : <span class="type">BackgroundService</span>
+{
+    <span class="keyword">protected override async</span> <span class="type">Task</span> <span class="method">ExecuteAsync</span>(<span class="type">CancellationToken</span> stoppingToken)
+    {
+        <span class="keyword">while</span> (!stoppingToken.IsCancellationRequested)
+        {
+            <span class="comment">// Do work</span>
+            <span class="keyword">await</span> <span class="type">Task</span>.<span class="method">Delay</span>(<span class="type">TimeSpan</span>.<span class="method">FromMinutes</span>(5), stoppingToken);
+        }
+    }
+}
+
+builder.Services.<span class="method">AddHostedService</span>&lt;<span class="type">BackgroundWorker</span>&gt;();</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q60: What is the difference between IHostedService and BackgroundService?</div>
+        <div class="answer">
+            <p><strong>BackgroundService</strong> is a base class that implements IHostedService with a simplified ExecuteAsync method. IHostedService requires implementing StartAsync and StopAsync.</p>
+            
+            <h3>When to Use:</h3>
+            <ul>
+                <li><strong>BackgroundService:</strong> Most cases, simpler API</li>
+                <li><strong>IHostedService:</strong> Need fine-grained control over start/stop</li>
+            </ul>
+        </div>
+
+        <h2>29. Advanced Validation</h2>
+        <div class="question">Q61: What is FluentValidation?</div>
+        <div class="answer">
+            <p><strong>FluentValidation</strong> is a .NET library for building strongly-typed validation rules using a fluent interface, offering more flexibility than data annotations.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Validators/ProductValidator.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">ProductValidator</span> : <span class="type">AbstractValidator</span>&lt;<span class="type">ProductDto</span>&gt;
+{
+    <span class="keyword">public</span> <span class="method">ProductValidator</span>()
+    {
+        <span class="method">RuleFor</span>(x => x.Name).<span class="method">NotEmpty</span>().<span class="method">MaximumLength</span>(100);
+        <span class="method">RuleFor</span>(x => x.Price).<span class="method">GreaterThan</span>(0);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q62: What is custom validation?</div>
+        <div class="answer">
+            <p><strong>Custom validation</strong> allows you to implement validation logic that goes beyond built-in data annotations, using IValidatableObject or custom validation attributes.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Models/ProductDto.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">ProductDto</span> : <span class="type">IValidatableObject</span>
+{
+    <span class="keyword">public</span> <span class="type">IEnumerable</span>&lt;<span class="type">ValidationResult</span>&gt; <span class="method">Validate</span>(<span class="type">ValidationContext</span> validationContext)
+    {
+        <span class="keyword">if</span> (Price < 0)
+            <span class="keyword">yield return new</span> <span class="type">ValidationResult</span>(<span class="string">"Price must be positive"</span>);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>30. OpenAPI Advanced</h2>
+        <div class="question">Q63: What is Swagger UI customization?</div>
+        <div class="answer">
+            <p><strong>Swagger UI</strong> can be customized with custom CSS, JavaScript, and configuration to match your branding and add functionality.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>app.<span class="method">UseSwaggerUI</span>(options =>
+{
+    options.<span class="property">SwaggerEndpoint</span>(<span class="string">"/swagger/v1/swagger.json"</span>, <span class="string">"My API V1"</span>);
+    options.<span class="property">RoutePrefix</span> = <span class="string">"docs"</span>;
+    options.<span class="property">DocumentTitle</span> = <span class="string">"API Documentation"</span>;
+    options.<span class="property">InjectStylesheet</span> = <span class="string">"/swagger-ui/custom.css"</span>;
+});</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q64: What is XML comments for Swagger?</div>
+        <div class="answer">
+            <p><strong>XML comments</strong> in your code can be used to generate Swagger documentation, providing detailed descriptions for parameters and return types.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Services.<span class="method">AddSwaggerGen</span>(c =>
+{
+    <span class="keyword">var</span> xmlFile = <span class="type">Assembly</span>.<span class="method">GetExecutingAssembly</span>()
+        .<span class="method">GetName</span>().Name + <span class="string">".xml"</span>;
+    <span class="keyword">var</span> xmlPath = <span class="type">Path</span>.<span class="method">Combine</span>(<span class="type">AppContext</span>.BaseDirectory, xmlFile);
+    c.<span class="method">IncludeXmlComments</span>(xmlPath);
+});</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>31. Advanced DI</h2>
+        <div class="question">Q65: What is the difference between AddScoped and AddTransient for DbContext?</div>
+        <div class="answer">
+            <p><strong>DbContext</strong> should typically be scoped to ensure proper transaction management and change tracking per HTTP request.</p>
+            
+            <h3>DbContext Lifetime:</h3>
+            <ul>
+                <li><strong>Scoped:</strong> One instance per HTTP request (recommended)</li>
+                <li><strong>Transient:</strong> New instance each time (not recommended for DbContext)</li>
+                <li><strong>Singleton:</strong> Not thread-safe for DbContext</li>
+            </ul>
+        </div>
+
+        <div class="question">Q66: What is the difference between TryAdd and Add?</div>
+        <div class="answer">
+            <p><strong>TryAdd</strong> only adds a service if it hasn't already been registered. <strong>Add</strong> always adds or replaces the service registration.</p>
+            
+            <h3>When to Use:</h3>
+            <ul>
+                <li><strong>TryAdd:</strong> Libraries that shouldn't override user registrations</li>
+                <li><strong>Add:</strong> When you want to ensure your registration is used</li>
+            </ul>
+        </div>
+
+        <div class="question">Q67: What is the difference between AddTransient and AddSingleton for HttpClient?</div>
+        <div class="answer">
+            <p>Use <strong>IHttpClientFactory</strong> instead of injecting HttpClient directly. The factory manages HttpClient lifetimes and connection pooling.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Services.<span class="method">AddHttpClient</span>();
+builder.Services.<span class="method">AddHttpClient</span>&lt;<span class="type">MyService</span>&gt;();</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>32. Advanced Routing</h2>
+        <div class="question">Q68: What are route constraints?</div>
+        <div class="answer">
+            <p><strong>Route constraints</strong> restrict how route parameters match, ensuring they meet specific criteria like type, range, or pattern.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/ProductController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>[<span class="decorator">HttpGet</span>(<span class="string">"products/{id:int}"</span>)]  <span class="comment">// Must be integer</span>
+[<span class="decorator">HttpGet</span>(<span class="string">"products/{id:guid}"</span>)]  <span class="comment">// Must be GUID</span>
+[<span class="decorator">HttpGet</span>(<span class="string">"products/{name:alpha}"</span>)]  <span class="comment">// Must be letters</span>
+[<span class="decorator">HttpGet</span>(<span class="string">"products/{id:min(1)}"</span>)]  <span class="comment">// Must be >= 1</span></code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q69: What is the difference between route tokens and parameters?</div>
+        <div class="answer">
+            <p><strong>Route tokens</strong> like [controller] and [action] are replaced with the actual controller and action names. <strong>Route parameters</strong> are placeholders for values from the URL.</p>
+        </div>
+
+        <h2>33. Advanced Caching</h2>
+        <div class="question">Q70: What is cache invalidation?</div>
+        <div class="answer">
+            <p><strong>Cache invalidation</strong> removes or updates cached data when the underlying data changes, ensuring clients receive fresh data.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/ProductController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>[<span class="decorator">HttpPut</span>(<span class="string">"{id}"</span>)]
+[<span class="decorator">ResponseCache</span>(NoStore = <span class="keyword">true</span>)]
+<span class="keyword">public</span> <span class="type">IActionResult</span> <span class="method">Update</span>(<span class="type">int</span> id, <span class="type">Product</span> product)
+{
+    _cache.<span class="method">Remove</span>($<span class="string">"product_{id}"</span>);
+    <span class="keyword">return</span> <span class="type">NoContent</span>();
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q71: What is cache stampede?</div>
+        <div class="answer">
+            <p><strong>Cache stampede</strong> occurs when multiple requests try to populate the same cache key simultaneously. Use locks or lazy loading to prevent this.</p>
+        </div>
+
+        <h2>34. Advanced Security</h2>
+        <div class="question">Q72: What is the difference between authentication and authorization policies?</div>
+        <div class="answer">
+            <p><strong>Authentication</strong> verifies identity. <strong>Authorization policies</strong> define complex authorization rules based on claims, roles, or custom requirements.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Services.<span class="method">AddAuthorization</span>(options =>
+{
+    options.<span class="method">AddPolicy</span>(<span class="string">"AdminOnly"</span>, policy =>
+        policy.<span class="method">RequireRole</span>(<span class="string">"Admin"</span>));
+    
+    options.<span class="method">AddPolicy</span>(<span class="string">"Over18"</span>, policy =>
+        policy.<span class="method">RequireClaim</span>(<span class="string">"Age"</span>, <span class="string">"18"</span>));
+});</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q73: What is the difference between roles and claims?</div>
+        <div class="answer">
+            <p><strong>Roles</strong> are simple groupings of users (Admin, User). <strong>Claims</strong> are key-value pairs representing user attributes (Age, Email, Permissions).</p>
+            
+            <h3>When to Use:</h3>
+            <ul>
+                <li><strong>Roles:</strong> Simple authorization scenarios</li>
+                <li><strong>Claims:</strong> Fine-grained authorization, custom attributes</li>
+            </ul>
+        </div>
+
+        <div class="question">Q74: What is the difference between RequireClaim and RequireRole?</div>
+        <div class="answer">
+            <p><strong>RequireClaim</strong> checks for specific claim values. <strong>RequireRole</strong> checks if the user is in a specific role. Roles are often implemented as claims internally.</p>
+        </div>
+
+        <h2>35. Advanced EF Core</h2>
+        <div class="question">Q75: What is the difference between AsNoTracking and tracking?</div>
+        <div class="answer">
+            <p><strong>AsNoTracking</strong> disables change tracking for read-only queries, improving performance. <strong>Tracking</strong> (default) tracks changes for updates.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/ProductController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Read-only - better performance</span>
+<span class="keyword">var</span> products = _context.Products
+    .<span class="method">AsNoTracking</span>()
+    .<span class="method">ToList</span>();
+
+<span class="comment">// Read-write - tracks changes</span>
+<span class="keyword">var</span> product = _context.Products.<span class="method">First</span>();</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q76: What is the difference between FromSqlRaw and FromSqlInterpolated?</div>
+        <div class="answer">
+            <p><strong>FromSqlRaw</strong> executes raw SQL with parameterization. <strong>FromSqlInterpolated</strong> uses string interpolation with automatic parameterization.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Data/ProductRepository.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// FromSqlRaw - manual parameters</span>
+<span class="keyword">var</span> products = _context.Products
+    .<span class="method">FromSqlRaw</span>(<span class="string">"SELECT * FROM Products WHERE Name = {0}"</span>, name)
+    .<span class="method">ToList</span>();
+
+<span class="comment">// FromSqlInterpolated - automatic parameters</span>
+<span class="keyword">var</span> products = _context.Products
+    .<span class="method">FromSqlInterpolated</span>($<span class="string">"SELECT * FROM Products WHERE Name = {name}"</span>)
+    .<span class="method">ToList</span>();</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q77: What is the difference between ToListAsync and ToArrayAsync?</div>
+        <div class="answer">
+            <p><strong>ToListAsync</strong> returns a List. <strong>ToArrayAsync</strong> returns an array. Both execute the query asynchronously. Use List for mutable collections, array for fixed-size.</p>
+        </div>
+
+        <h2>36. Advanced SignalR</h2>
+        <div class="question">Q78: What is the difference between SignalR and WebSockets?</div>
+        <div class="answer">
+            <p><strong>SignalR</strong> is an abstraction over WebSockets that automatically falls back to Server-Sent Events or Long Polling when WebSockets aren't available.</p>
+            
+            <h3>SignalR Transport Fallback:</h3>
+            <ul>
+                <li><strong>WebSockets:</strong> Primary, full-duplex</li>
+                <li><strong>Server-Sent Events:</strong> Server to client only</li>
+                <li><strong>Long Polling:</strong> Fallback for older browsers</li>
+            </ul>
+        </div>
+
+        <div class="question">Q79: What is the difference between Groups and Users in SignalR?</div>
+        <div class="answer">
+            <p><strong>Groups</strong> allow broadcasting to a subset of connections. <strong>Users</strong> allow sending to all connections for a specific user ID.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Hubs/ChatHub.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Send to group</span>
+<span class="keyword">await</span> <span class="type">Clients</span>.<span class="method">Group</span>(<span class="string">"admins"</span>).<span class="method">SendAsync</span>(<span class="string">"Message"</span>, msg);
+
+<span class="comment">// Send to specific user</span>
+<span class="keyword">await</span> <span class="type">Clients</span>.<span class="method">User</span>(userId).<span class="method">SendAsync</span>(<span class="string">"Message"</span>, msg);</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>37. Advanced gRPC</h2>
+        <div class="question">Q80: What is the difference between unary and streaming in gRPC?</div>
+        <div class="answer">
+            <p><strong>Unary</strong> is one request, one response. <strong>Streaming</strong> can be client streaming, server streaming, or bidirectional streaming.</p>
+            
+            <h3>gRPC Streaming Types:</h3>
+            <ul>
+                <li><strong>Unary:</strong> Request/Response (like REST)</li>
+                <li><strong>Server Streaming:</strong> One request, multiple responses</li>
+                <li><strong>Client Streaming:</strong> Multiple requests, one response</li>
+                <li><strong>Bidirectional:</strong> Multiple requests, multiple responses</li>
+            </ul>
+        </div>
+
+        <div class="question">Q81: What is the difference between gRPC and REST?</div>
+        <div class="answer">
+            <p><strong>gRPC</strong> uses Protocol Buffers, HTTP/2, and is faster. <strong>REST</strong> uses JSON, HTTP/1.1, and is more widely supported.</p>
+            
+            <h3>When to Use:</h3>
+            <ul>
+                <li><strong>gRPC:</strong> Internal microservices, high performance needed</li>
+                <li><strong>REST:</strong> Public APIs, browser clients, broader compatibility</li>
+            </ul>
+        </div>
+
+        <h2>38. Advanced Minimal APIs</h2>
+        <div class="question">Q82: What is the difference between minimal APIs and controller-based APIs?</div>
+        <div class="answer">
+            <p><strong>Minimal APIs</strong> use lambdas and Program.cs. <strong>Controller-based APIs</strong> use classes with controllers and actions.</p>
+            
+            <h3>Comparison:</h3>
+            <ul>
+                <li><strong>Minimal APIs:</strong> Less code, simpler, modern</li>
+                <li><strong>Controllers:</strong> More structure, filters, better for large APIs</li>
+                <li><strong>Can mix both</strong> in the same application</li>
+            </ul>
+        </div>
+
+        <div class="question">Q83: What are endpoint filters in minimal APIs?</div>
+        <div class="answer">
+            <p><strong>Endpoint filters</strong> in minimal APIs are similar to MVC filters, allowing cross-cutting logic like validation, logging, or authorization for specific endpoints.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>app.<span class="method">MapGet</span>(<span class="string">"/products"</span>, () => <span class="keyword">new</span>[] { <span class="string">"Product1"</span> })
+    .<span class="method">AddEndpointFilter</span>(<span class="keyword">async</span> (context, next) =>
+    {
+        <span class="comment">// Pre-processing</span>
+        <span class="keyword">var</span> result = <span class="keyword">await</span> next(context);
+        <span class="comment">// Post-processing</span>
+        <span class="keyword">return</span> result;
+    });</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>39. Advanced Configuration</h2>
+        <div class="question">Q84: What is the Options pattern?</div>
+        <div class="answer">
+            <p><strong>Options pattern</strong> uses classes to represent related settings, providing type-safe access to configuration with validation and binding.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Models/ApiSettings.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">ApiSettings</span>
+{
+    <span class="keyword">public const string</span> SectionName = <span class="string">"ApiSettings"</span>;
+    <span class="keyword">public string</span> <span class="property">BaseUrl</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public int</span> <span class="property">Timeout</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}
+
+builder.Services.<span class="method">Configure</span>&lt;<span class="type">ApiSettings</span>&gt;(
+    builder.Configuration.<span class="method">GetSection</span>(<span class="type">ApiSettings</span>.SectionName));</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q85: What is the difference between IOptions and IOptionsSnapshot?</div>
+        <div class="answer">
+            <p><strong>IOptions</strong> is singleton and doesn't update. <strong>IOptionsSnapshot</strong> is scoped and updates when configuration changes.</p>
+            
+            <h3>When to Use:</h3>
+            <ul>
+                <li><strong>IOptions:</strong> Configuration that doesn't change</li>
+                <li><strong>IOptionsSnapshot:</strong> Configuration that may change</li>
+            </ul>
+        </div>
+
+        <h2>40. Advanced Health Checks</h2>
+        <div class="question">Q86: What is the difference between liveness and readiness probes?</div>
+        <div class="answer">
+            <p><strong>Liveness probe</strong> checks if the app is running. <strong>Readiness probe</strong> checks if the app is ready to handle requests (dependencies available).</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>app.<span class="method">MapHealthChecks</span>(<span class="string">"/health/live"</span>, <span class="keyword">new</span> <span class="type">HealthCheckOptions</span>
+{
+    <span class="property">Predicate</span> = check => check.Name == <span class="string">"self"</span>
+});
+
+app.<span class="method">MapHealthChecks</span>(<span class="string">"/health/ready"</span>, <span class="keyword">new</span> <span class="type">HealthCheckOptions</span>
+{
+    <span class="property">Predicate</span> = check => check.Name != <span class="string">"self"</span>
+});</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>41. Advanced Rate Limiting</h2>
+        <div class="question">Q87: What is the difference between fixed window and sliding window rate limiting?</div>
+        <div class="answer">
+            <p><strong>Fixed window</strong> resets at fixed intervals. <strong>Sliding window</strong> tracks requests within a rolling time window for smoother rate limiting.</p>
+            
+            <h3>Rate Limiting Algorithms:</h3>
+            <ul>
+                <li><strong>Fixed Window:</strong> Simple, can have bursts at window boundaries</li>
+                <li><strong>Sliding Window:</strong> Smoother, more complex</li>
+                <li><strong>Token Bucket:</strong> Allows bursts, maintains average rate</li>
+            </ul>
+        </div>
+
+        <h2>42. Advanced Logging</h2>
+        <div class="question">Q88: What is structured logging?</div>
+        <div class="answer">
+            <p><strong>Structured logging</strong> logs data as structured objects (JSON) rather than strings, enabling better querying and analysis in log aggregation systems.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/ProductController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>_logger.<span class="method">LogInformation</span>(<span class="string">"Product retrieved: {ProductId}, {ProductName}"</span>, 
+    product.Id, product.Name);</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q89: What is the difference between Serilog and built-in logging?</div>
+        <div class="answer">
+            <p><strong>Serilog</strong> is a third-party structured logging library with rich sinks and configuration. <strong>Built-in logging</strong> is simpler but less feature-rich.</p>
+            
+            <h3>When to Use:</h3>
+            <ul>
+                <li><strong>Serilog:</strong> Structured logging, multiple sinks, filtering</li>
+                <li><strong>Built-in:</strong> Simple logging, no external dependencies</li>
+            </ul>
+        </div>
+
+        <h2>43. Advanced File Operations</h2>
+        <div class="question">Q90: What is the difference between IFormFile and byte array?</div>
+        <div class="answer">
+            <p><strong>IFormFile</strong> represents an uploaded file with metadata. <strong>Byte array</strong> is the raw file data. Use IFormFile for uploads, byte array for processing.</p>
+        </div>
+
+        <div class="question">Q91: What is streaming file uploads?</div>
+        <div class="answer">
+            <p><strong>Streaming uploads</strong> process files as they're uploaded rather than loading the entire file into memory, useful for large files.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/FileController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>[<span class="decorator">HttpPost</span>(<span class="string">"upload"</span>)]
+[<span class="decorator">RequestFormLimits</span>(MultipartBodyLengthLimit = <span class="type">long</span>.MaxValue)]
+<span class="keyword">public async</span> <span class="type">Task</span> <span class="method">Upload</span>(<span class="type">HttpRequest</span> request)
+{
+    <span class="keyword">var</span> reader = <span class="keyword">new</span> <span class="type">MultipartReader</span>(request.Body);
+    <span class="keyword">while</span> (<span class="keyword">await</span> reader.<span class="method">ReadNextSectionAsync</span>() is <span class="type">MultipartSection</span> section)
+    {
+        <span class="comment">// Process section</span>
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>44. Advanced Authentication</h2>
+        <div class="question">Q92: What is the difference between JWT and Cookie authentication?</div>
+        <div class="answer">
+            <p><strong>JWT</strong> is stateless, token-based authentication ideal for APIs. <strong>Cookie</strong> is stateful, session-based authentication ideal for web apps.</p>
+            
+            <h3>When to Use:</h3>
+            <ul>
+                <li><strong>JWT:</strong> APIs, mobile apps, SPA</li>
+                <li><strong>Cookie:</strong> Traditional web apps with server-side rendering</li>
+            </ul>
+        </div>
+
+        <div class="question">Q93: What is the difference between access token and refresh token?</div>
+        <div class="answer">
+            <p><strong>Access token</strong> is short-lived and used for API access. <strong>Refresh token</strong> is long-lived and used to obtain new access tokens.</p>
+            
+            <h3>Token Flow:</h3>
+            <ul>
+                <li><strong>Access Token:</strong> Short-lived (minutes to hours)</li>
+                <li><strong>Refresh Token:</strong> Long-lived (days to weeks)</li>
+                <li><strong>Use Refresh Token:</strong> When access token expires</li>
+            </ul>
+        </div>
+
+        <h2>45. Advanced Authorization</h2>
+        <div class="question">Q94: What is resource-based authorization?</div>
+        <div class="answer">
+            <p><strong>Resource-based authorization</strong> checks if a user can perform an action on a specific resource instance, not just a resource type.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Authorization/ProductAuthorizationHandler.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">ProductAuthorizationHandler</span> : <span class="type">AuthorizationHandler</span>&lt;<span class="type">EditProductRequirement</span>, <span class="type">Product</span>&gt;
+{
+    <span class="keyword">protected override</span> <span class="type">Task</span> <span class="method">HandleRequirementAsync</span>(
+        <span class="type">AuthorizationHandlerContext</span> context,
+        <span class="type">EditProductRequirement</span> requirement,
+        <span class="type">Product</span> resource)
+    {
+        <span class="keyword">if</span> (resource.OwnerId == context.User.<span class="method">FindFirst</span>(<span class="type">ClaimTypes</span>.NameIdentifier)?.Value)
+        {
+            context.<span class="method">Succeed</span>(requirement);
+        }
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q95: What is the difference between imperative and declarative authorization?</div>
+        <div class="answer">
+            <p><strong>Declarative authorization</strong> uses attributes like [Authorize]. <strong>Imperative authorization</strong> uses code to check authorization programmatically.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Controllers/ProductController.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Declarative</span>
+[<span class="decorator">Authorize</span>(Policy = <span class="string">"AdminOnly"</span>)]
+<span class="keyword">public</span> <span class="type">IActionResult</span> <span class="method">Delete</span>(<span class="type">int</span> id) { }
+
+<span class="comment">// Imperative</span>
+<span class="keyword">public async</span> <span class="type">Task</span>&lt;<span class="type">IActionResult</span>&gt; <span class="method">Delete</span>(<span class="type">int</span> id)
+{
+    <span class="keyword">var</span> result = <span class="keyword">await</span> _authorizationService.<span class="method">AuthorizeAsync</span>(User, product, <span class="string">"EditPolicy"</span>);
+    <span class="keyword">if</span> (!result.Succeeded) <span class="keyword">return</span> <span class="type">Forbid</span>();
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>46. Advanced API Design</h2>
+        <div class="question">Q96: What is the difference between PUT and PATCH?</div>
+        <div class="answer">
+            <p><strong>PUT</strong> replaces the entire resource. <strong>PATCH</strong> applies partial updates to a resource.</p>
+            
+            <h3>When to Use:</h3>
+            <ul>
+                <li><strong>PUT:</strong> Full resource replacement</li>
+                <li><strong>PATCH:</strong> Partial updates, more efficient</li>
+            </ul>
+        </div>
+
+        <div class="question">Q97: What is idempotency in REST APIs?</div>
+        <div class="answer">
+            <p><strong>Idempotency</strong> means making the same request multiple times has the same effect as making it once. GET, PUT, DELETE are idempotent. POST is not.</p>
+        </div>
+
+        <div class="question">Q98: What is the difference between 200, 201, and 204 status codes?</div>
+        <div class="answer">
+            <p><strong>200 OK</strong> - Request succeeded, returns data. <strong>201 Created</strong> - Resource created, returns location. <strong>204 No Content</strong> - Request succeeded, no data returned.</p>
+        </div>
+
+        <h2>47. Advanced Performance</h2>
+        <div class="question">Q99: What is connection pooling?</div>
+        <div class="answer">
+            <p><strong>Connection pooling</strong> reuses database connections instead of creating new ones, improving performance by reducing connection overhead.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>builder.Services.<span class="method">AddDbContext</span>&lt;<span class="type">AppDbContext</span>&gt;(options =>
+{
+    options.<span class="method">UseSqlServer</span>(connectionString, sqlOptions =>
+    {
+        sqlOptions.<span class="method">EnableRetryOnFailure</span>();
+        sqlOptions.<span class="property">MaxBatchSize</span> = 100;
+    });
+});</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q100: What is the difference between synchronous and asynchronous database operations?</div>
+        <div class="answer">
+            <p><strong>Asynchronous</strong> database operations don't block threads while waiting for the database, improving scalability. <strong>Synchronous</strong> operations block threads.</p>
+            
+            <h3>Best Practices:</h3>
+            <ul>
+                <li><strong>Always use async</strong> for database operations in Web API</li>
+                <li><strong>Use ToListAsync</strong> instead of ToList</li>
+                <li><strong>Use SaveChangesAsync</strong> instead of SaveChanges</li>
+                <li><strong>Avoid async void</strong> - use async Task</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p><span class="highlight">Good luck with your interview!</span> Practice these concepts and build projects to gain hands-on experience.</p>
+        </div>
+    </div>
+    <script>
+        function copyCode(button) {
+            const codeEditor = button.closest('.code-editor');
+            const codeContent = codeEditor.querySelector('.code-editor-content code');
+            const text = codeContent.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
+

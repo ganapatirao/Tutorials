@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -34,8 +34,40 @@
             padding: 12px 16px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 8px;
             border-bottom: 1px solid #3e3e42;
+        }
+        
+        .code-editor-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .copy-button {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .copy-button:hover {
+            background: #4e4e52;
+            color: #ffffff;
+        }
+        
+        .copy-button.copied {
+            background: #27ca40;
+            color: #ffffff;
         }
         
         .code-editor-dot {
@@ -223,10 +255,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">components.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">components.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Functional component</span>
@@ -252,10 +287,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">props.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">props.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Parent component</span>
@@ -289,10 +327,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">state.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">state.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Using useState hook</span>
@@ -349,10 +390,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">state-props.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">state-props.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// State example</span>
@@ -409,10 +453,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">useeffect.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">useeffect.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Run on every render</span>
@@ -465,10 +512,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">context.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">context.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Create context</span>
@@ -519,10 +569,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">redux.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">redux.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Action</span>
@@ -562,10 +615,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">redux-toolkit.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">redux-toolkit.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Redux Toolkit</span>
@@ -598,10 +654,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">router.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">router.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Basic routing</span>
@@ -673,10 +732,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">forms.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">forms.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Controlled component</span>
@@ -727,10 +789,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">performance.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">performance.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// React.memo</span>
@@ -779,10 +844,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">counter.test.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">counter.test.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Component test</span>
@@ -813,10 +881,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">jsx.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">jsx.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// createElement</span>
@@ -839,10 +910,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">state-refs.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">state-refs.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// State - triggers re-render</span>
@@ -866,10 +940,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">hooks.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">hooks.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// useCallback - memoizes function</span>
@@ -902,10 +979,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">lifecycle.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">lifecycle.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// componentDidMount equivalent</span>
@@ -941,10 +1021,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">events.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">events.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Access native event</span>
@@ -967,10 +1050,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">hooks.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">hooks.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// useState - simple</span>
@@ -993,10 +1079,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">forwardref.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">forwardref.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// forwardRef</span>
@@ -1022,10 +1111,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">lazy.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">lazy.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">const</span> <span class="variable">LazyComponent</span> = <span class="type">React</span>.<span class="method">lazy</span>(() => <span class="method">import</span>(<span class="string">'./LazyComponent'</span>));
@@ -1100,10 +1192,13 @@
         <div class="answer">
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">store.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">store.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="method">configureStore</span>, <span class="method">createSlice</span> } <span class="keyword">from</span> <span class="string">'@reduxjs/toolkit'</span>;
@@ -1157,10 +1252,13 @@
         <div class="answer">
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">react-query.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">react-query.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="method">useQuery</span>, <span class="method">useMutation</span>, <span class="method">useQueryClient</span>, <span class="type">QueryClient</span>, <span class="type">QueryClientProvider</span> } <span class="keyword">from</span> <span class="string">'@tanstack/react-query'</span>;
@@ -1222,10 +1320,13 @@
         <div class="answer">
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">zustand.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">zustand.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> <span class="method">create</span> <span class="keyword">from</span> <span class="string">'zustand'</span>;
@@ -1275,10 +1376,13 @@
             <p><strong>Compound components</strong> are components that work together to form a complete UI. They share state implicitly through context, allowing flexible composition of child components.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">compound-components.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">compound-components.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Compound components pattern</span>
@@ -1341,10 +1445,13 @@
             <p><strong>Render props</strong> is a technique where a component receives a function as a prop that returns a React element. This allows sharing code between components using a prop whose value is a function.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">render-props.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">render-props.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Render props pattern</span>
@@ -1384,10 +1491,13 @@
             <p><strong>Higher-order components (HOCs)</strong> are functions that take a component and return a new component. They're used to reuse component logic like authentication, data fetching, or loading states.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">hoc.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">hoc.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// HOC pattern</span>
@@ -1438,10 +1548,13 @@
             <p><strong>Custom hooks</strong> are JavaScript functions that start with "use" and can call other hooks. They allow you to extract and reuse stateful logic between components without changing hierarchy.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">custom-hooks.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">custom-hooks.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Custom hook for localStorage</span>
@@ -1502,10 +1615,13 @@
             <p><strong>Controlled components</strong> have their form data controlled by React state. <strong>Uncontrolled components</strong> store their own state internally and are accessed using refs.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">controlled-uncontrolled.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">controlled-uncontrolled.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Controlled component</span>
@@ -1555,10 +1671,13 @@
             <p><strong>Server-Side Rendering (SSR)</strong> in Next.js uses getServerSideProps to fetch data on each request. <strong>Static Generation (SSG)</strong> uses getStaticProps to generate pages at build time.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">pages/index.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">pages/index.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// pages/index.js (SSR)</span>
@@ -1609,10 +1728,13 @@
             <p><strong>React 18 SSR</strong> uses renderToPipeableStream for streaming rendering and hydrateRoot for hydration. This enables progressive rendering and better performance.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">server.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">server.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> <span class="variable">express</span> <span class="keyword">from</span> <span class="string">'express'</span>;
@@ -1709,10 +1831,13 @@
             <p><strong>Concurrent features</strong> include useTransition for non-urgent updates and useDeferredValue for expensive UI. These allow React to interrupt rendering for more urgent updates.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">concurrent.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">concurrent.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// useTransition for non-urgent updates</span>
@@ -1762,10 +1887,13 @@
             <p><strong>New root API</strong> uses createRoot instead of ReactDOM.render. This enables concurrent features and provides better control over hydration and unmounting.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">root-api.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">root-api.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Old way (React 17)</span>
@@ -1801,10 +1929,13 @@
             <p><strong>Automatic batching</strong> groups multiple state updates into a single re-render for better performance. In React 18, batching works in async operations, promises, and timeouts, not just in event handlers.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">batching.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">batching.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// React 18 automatically batches state updates</span>
@@ -1862,10 +1993,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">effects.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">effects.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// useEffect (non-blocking)</span>
@@ -1888,10 +2022,13 @@
         <div class="answer">
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">error-boundary.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">error-boundary.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Error boundary</span>
@@ -1967,10 +2104,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">memoization.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">memoization.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// useMemo</span>
@@ -1998,10 +2138,13 @@
             <p><strong>Infinite scroll</strong> loads more content as the user scrolls down. Use IntersectionObserver to detect when the user reaches the bottom and trigger data fetching.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">infinite-scroll.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">infinite-scroll.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="method">useEffect</span>, <span class="method">useState</span>, <span class="method">useRef</span> } <span class="keyword">from</span> <span class="string">'react'</span>;
@@ -2056,10 +2199,13 @@
             <p><strong>Custom API hook</strong> encapsulates data fetching logic with loading and error states. This makes API calls reusable across components with consistent error handling.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">use-api.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">use-api.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">function</span> <span class="method">useApi</span>(<span class="variable">url</span>) {
@@ -2132,10 +2278,13 @@
             <p><strong>Authentication</strong> in React typically uses Context API to manage auth state, protected routes to guard access, and localStorage or cookies to persist tokens.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">auth-context.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">auth-context.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Auth context</span>
@@ -2202,10 +2351,13 @@
             <p><strong>File upload</strong> in React uses FormData to send files to the server. Use XMLHttpRequest for progress tracking or fetch API for simpler uploads.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">file-upload.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">file-upload.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">function</span> <span class="method">FileUpload</span>() {
@@ -2267,10 +2419,13 @@
             <p><strong>Real-time updates</strong> use WebSocket for bidirectional communication or Server-Sent Events (SSE) for server-to-client updates. Use useEffect to manage connection lifecycle.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">realtime.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">realtime.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Using WebSocket</span>
@@ -2331,10 +2486,13 @@
             <p><strong>Internationalization (i18n)</strong> in React uses libraries like react-i18next to manage translations. It provides hooks for translating text and switching languages dynamically.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">i18n.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">i18n.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Using react-i18next</span>
@@ -2389,10 +2547,13 @@
             <p><strong>Dark mode</strong> in React uses Context API to manage theme state and CSS variables for styling. Persist theme preference in localStorage and use system preference as default.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">theme-context.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">theme-context.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Theme context</span>
@@ -2664,10 +2825,13 @@
             <p><strong>Drag and drop</strong> in React uses libraries like react-beautiful-dnd or @dnd-kit. Handle onDragEnd to update state with new item positions after drag operations.</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">drag-drop.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">drag-drop.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Using react-beautiful-dnd</span>
@@ -2764,10 +2928,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">jsx.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">jsx.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// JSX (what you write)</span>
@@ -2787,10 +2954,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">fragments.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">fragments.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Without fragments (adds extra div)</span>
@@ -2861,10 +3031,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">pure-component.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">pure-component.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Pure component</span>
@@ -2886,10 +3059,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">forwardref.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">forwardref.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Child component with forwardRef</span>
@@ -2926,10 +3102,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">events.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">events.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">function</span> <span class="method">Button</span>() {
@@ -3028,10 +3207,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">portal.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">portal.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="method">createPortal</span> } <span class="keyword">from</span> <span class="string">'react-dom'</span>;
@@ -3125,6 +3307,28 @@
             <p><span class="highlight">💡 Tip:</span> Focus on understanding hooks, component lifecycle, state management patterns, and performance optimization. These are the areas where most React interview questions focus. Practice building scalable, maintainable React applications.</p>
         </div>
     </div>
+    <script>
+        function copyCode(button) {
+            const codeEditor = button.closest('.code-editor');
+            const codeContent = codeEditor.querySelector('.code-editor-content code');
+            const text = codeContent.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
 

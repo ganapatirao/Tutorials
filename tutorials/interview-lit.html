@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -34,8 +34,40 @@
             padding: 12px 16px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 8px;
             border-bottom: 1px solid #3e3e42;
+        }
+        
+        .code-editor-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .copy-button {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .copy-button:hover {
+            background: #4e4e52;
+            color: #ffffff;
+        }
+        
+        .copy-button.copied {
+            background: #27ca40;
+            color: #ffffff;
         }
         
         .code-editor-dot {
@@ -234,10 +266,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">my-element.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">my-element.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">LitElement</span>, <span class="variable">html</span>, <span class="variable">css</span> } <span class="keyword">from</span> <span class="string">'lit'</span>;
@@ -313,10 +348,13 @@
 
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">properties.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">properties.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">static</span> <span class="property">properties</span> = {
@@ -343,10 +381,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">reactive.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">reactive.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">static</span> <span class="property">properties</span> = {
@@ -376,10 +417,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">state.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">state.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Property - reactive, public</span>
@@ -407,10 +451,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">template.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">template.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="method">render</span>() {
@@ -436,10 +483,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">directives.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">directives.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="variable">repeat</span> } <span class="keyword">from</span> <span class="string">'lit/directives/repeat.js'</span>;
@@ -471,10 +521,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">styles.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">styles.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="variable">css</span> } <span class="keyword">from</span> <span class="string">'lit'</span>;
@@ -532,10 +585,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">test.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">test.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="variable">fixture</span>, <span class="variable">expect</span> } <span class="keyword">from</span> <span class="string">'@open-wc/testing'</span>;
@@ -624,10 +680,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">events.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">events.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="comment">// Lit's @event</span>
@@ -648,10 +707,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">form.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">form.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">class</span> <span class="type">MyForm</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
@@ -685,10 +747,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">conditional.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">conditional.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="method">render</span>() {
@@ -711,10 +776,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">lists.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">lists.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="method">render</span>() {
@@ -761,10 +829,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">api.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">api.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">class</span> <span class="type">MyElement</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
@@ -821,10 +892,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">lazy.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">lazy.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">class</span> <span class="type">MyElement</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
@@ -865,10 +939,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">slots.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">slots.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">class</span> <span class="type">MyCard</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
@@ -901,10 +978,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">custom-directive.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">custom-directive.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="variable">directive</span>, <span class="variable">Part</span> } <span class="keyword">from</span> <span class="string">'lit/directive.js'</span>;
@@ -929,10 +1009,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">css-vars.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">css-vars.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">class</span> <span class="type">MyElement</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
@@ -976,10 +1059,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">reactive-v3.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">reactive-v3.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="variable">property</span>, <span class="variable">state</span> } <span class="keyword">from</span> <span class="string">'lit/decorators.js'</span>;
@@ -1007,10 +1093,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">performance.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">performance.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="variable">repeat</span> } <span class="keyword">from</span> <span class="string">'lit/directives/repeat.js'</span>;
@@ -1034,10 +1123,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">virtual-scroll.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">virtual-scroll.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">Virtualizer</span> } <span class="keyword">from</span> <span class="string">'@lit-labs/virtualizer/virtualizer.js'</span>;
@@ -1065,10 +1157,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">typescript.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">typescript.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="type">LitElement</span>, <span class="variable">html</span> } <span class="keyword">from</span> <span class="string">'lit'</span>;
@@ -1095,10 +1190,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">a11y.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">a11y.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="method">render</span>() {
@@ -1123,10 +1221,13 @@
             
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">ssr.js</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ssr.js</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">import</span> { <span class="method">render</span> } <span class="keyword">from</span> <span class="string">'@lit-labs/ssr/lib/render-with-global-dom-shim.js'</span>;
@@ -1165,5 +1266,27 @@
             <p><span class="highlight">💡 Tip:</span> Focus on understanding web components, Shadow DOM, reactive properties, and Lit directives. These are the areas where most Lit interview questions focus. Practice building reusable web components.</p>
         </div>
     </div>
+    <script>
+        function copyCode(button) {
+            const codeEditor = button.closest('.code-editor');
+            const codeContent = codeEditor.querySelector('.code-editor-content code');
+            const text = codeContent.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>

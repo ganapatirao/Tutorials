@@ -34,8 +34,40 @@
             padding: 12px 16px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 8px;
             border-bottom: 1px solid #3e3e42;
+        }
+        
+        .code-editor-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .copy-button {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .copy-button:hover {
+            background: #4e4e52;
+            color: #ffffff;
+        }
+        
+        .copy-button.copied {
+            background: #27ca40;
+            color: #ffffff;
         }
         
         .code-editor-dot {
@@ -125,10 +157,13 @@
             <p><strong>Key Features:</strong> Type-safe, garbage-collected, component-oriented, supports multiple programming paradigms (imperative, declarative, functional, generic, object-oriented).</p>
             <div class="code-editor">
                 <div class="code-editor-header">
-                    <div class="code-editor-dot red"></div>
-                    <div class="code-editor-dot yellow"></div>
-                    <div class="code-editor-dot green"></div>
-                    <span class="code-editor-title">Program.cs</span>
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Program.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-editor-content">
                     <code><span class="keyword">using</span> <span class="type">System</span>;
@@ -2841,5 +2876,27 @@ file.<span class="method">Delete</span>();</code>
             <p>Each question includes detailed explanations and <span class="highlight">Visual Studio-styled code examples</span> with syntax highlighting for better understanding.</p>
         </div>
     </div>
+    <script>
+        function copyCode(button) {
+            const codeEditor = button.closest('.code-editor');
+            const codeContent = codeEditor.querySelector('.code-editor-content code');
+            const text = codeContent.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
