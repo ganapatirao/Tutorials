@@ -89,7 +89,30 @@
             color: #ffffff;
         }
         
-        .code-editor-dot {
+        
+        .language-selector {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            margin-left: 8px;
+        }
+        
+        .language-selector:hover {
+            background: #4e4e52;
+            color: #ffffff;
+        }
+        
+        @media (max-width: 768px) {
+            .language-selector {
+                padding: 3px 6px;
+                font-size: 10px;
+            }
+        }.code-editor-dot {
             width: 12px;
             height: 12px;
             border-radius: 50%;
@@ -2858,6 +2881,7 @@ app.<span class="method">MapHealthChecks</span>(<span class="string">"/health/re
             });
         }
     </script>
+    <script src="../code-converter.js"></script>
 </body>
 </html>
 
