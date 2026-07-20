@@ -5,224 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lit Interview Preparation Guide</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #1a1a2e; background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%); background-size: 400% 400%; animation: gradientShift 20s ease infinite; min-height: 100vh; padding: 25px 20px; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .container { max-width: 1100px; margin: 0 auto; padding: 50px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px); border-radius: 32px; box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3); }
+        .back-button { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 30px; font-weight: 700; margin-bottom: 30px; }
+        h1 { color: #1a1a2e; font-size: 52px; font-weight: 800; text-align: center; margin-bottom: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { text-align: center; font-size: 18px; color: #4a4a68; margin-bottom: 40px; }
+        h2 { color: white; font-size: 28px; font-weight: 700; margin-top: 40px; margin-bottom: 25px; padding: 18px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; }
+        .question { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; border-radius: 15px; margin: 25px 0 15px 0; font-weight: 600; font-size: 18px; }
+        .answer { background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%); padding: 30px 35px; border-radius: 15px; margin: 15px 0 25px 0; border-left: 6px solid #764ba2; }
+        .answer p { margin-bottom: 15px; color: #1a1a2e; }
+        .answer strong { color: #667eea; }
+        .answer ul { padding-left: 25px; margin-bottom: 15px; }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: #1a1a2e;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 20s ease infinite;
-            min-height: 100vh;
-            padding: 25px 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
-            animation: particleFloat 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 50px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(30px);
-            border-radius: 32px;
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
+        .code-editor {
+            background: #1e1e1e;
+            border-radius: 12px;
+            margin: 20px 0;
             overflow: hidden;
-            z-index: 1;
-            animation: containerFloat 6s ease-in-out infinite;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3e3e42;
         }
         
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #764ba2 60%, 
-                #667eea 80%, 
-                #764ba2 100%);
-            background-size: 300% 100%;
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-        
-        .back-button {
-            display: inline-flex;
+        .code-editor-header {
+            background: #2d2d2d;
+            padding: 12px 16px;
+            display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 
-                0 8px 25px rgba(102, 126, 234, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 30px;
+            gap: 8px;
+            border-bottom: 1px solid #3e3e42;
         }
         
-        .back-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+        .code-editor-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
         }
         
-        h1 {
-            color: #1a1a2e;
-            font-size: 52px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-        }
+        .code-editor-dot.red { background: #ff5f56; }
+        .code-editor-dot.yellow { background: #ffbd2e; }
+        .code-editor-dot.green { background: #27ca40; }
         
-        .subtitle {
-            text-align: center;
-            font-size: 18px;
-            color: #4a4a68;
-            margin-bottom: 40px;
-        }
-        
-        h2 {
-            color: #1a1a2e;
-            font-size: 32px;
-            font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
-        }
-        
-        h3 {
-            color: #1a1a2e;
-            font-size: 26px;
-            font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-        }
-        
-        .question {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-        }
-        
-        .answer {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 30px 35px;
-            border-radius: 15px;
-            margin: 15px 0 25px 0;
-            border-left: 6px solid #764ba2;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-        }
-        
-        .answer p {
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            line-height: 1.8;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
-            overflow-x: auto;
+        .code-editor-title {
+            color: #9cdcfe;
             font-family: 'Fira Code', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+            font-size: 13px;
+            margin-left: 12px;
         }
         
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
+        .code-editor-content {
+            padding: 20px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #d4d4d4;
+            overflow-x: auto;
+            background: #1e1e1e;
         }
+        
+        .code-editor-content code {
+            display: block;
+            white-space: pre;
+        }
+        
+        .keyword { color: #569cd6; }
+        .type { color: #4ec9b0; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; font-style: italic; }
+        .number { color: #b5cea8; }
+        .method { color: #dcdcaa; }
+        .property { color: #9cdcfe; }
+        .variable { color: #9cdcfe; }
+        .operator { color: #d4d4d4; }
+        .decorator { color: #c586c0; }
+        
+        .footer { text-align: center; margin-top: 50px; padding: 35px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%); border-radius: 20px; }
+        .highlight { color: #667eea; font-weight: 700; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
+        th { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; text-align: left; font-weight: 600; font-size: 15px; }
+        td { padding: 15px; border-bottom: 1px solid #e9ecef; color: #4a4a68; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f8f9fa; }
         
         .toc {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -248,34 +114,6 @@
             line-height: 2;
         }
         
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e9ecef;
-            color: #4a4a68;
-        }
-        
-        tr:last-child td {
-            border-bottom: none;
-        }
-        
         .important {
             background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
             padding: 20px 25px;
@@ -299,26 +137,30 @@
             padding-top: 40px;
         }
         
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 35px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
-            border-radius: 20px;
-            border: 2px solid rgba(102, 126, 234, 0.25);
-            color: #666;
-            font-size: 15px;
-            line-height: 1.7;
-            animation: slideUp 0.6s ease both;
+        @media (max-width: 768px) {
+            body { padding: 15px 10px; }
+            .container { padding: 25px 20px; border-radius: 20px; }
+            h1 { font-size: 32px; }
+            .subtitle { font-size: 16px; }
+            h2 { font-size: 22px; padding: 14px 20px; }
+            .question { font-size: 16px; padding: 16px 20px; }
+            .answer { padding: 20px 20px; }
+            .code-editor-content { padding: 15px; font-size: 12px; }
+            .code-editor-title { font-size: 11px; }
+            .footer { padding: 25px 20px; }
         }
         
-        .footer p {
-            margin-bottom: 12px;
-        }
-        
-        .footer .highlight {
-            color: #667eea;
-            font-weight: 600;
+        @media (max-width: 480px) {
+            body { padding: 10px 5px; }
+            .container { padding: 20px 15px; border-radius: 16px; }
+            h1 { font-size: 26px; }
+            .subtitle { font-size: 14px; }
+            h2 { font-size: 20px; padding: 12px 16px; }
+            .question { font-size: 15px; padding: 14px 16px; }
+            .answer { padding: 18px 16px; }
+            .code-editor-content { padding: 12px; font-size: 11px; }
+            .code-editor-title { font-size: 10px; }
+            .back-button { padding: 12px 20px; font-size: 14px; }
         }
     </style>
 </head>
@@ -339,10 +181,11 @@
                 <li>Lifecycle</li>
                 <li>Testing</li>
                 <li>Comparison with Other Frameworks</li>
+                <li>Common Interview Questions</li>
                 <li>Advanced Lit Patterns</li>
                 <li>Lit 3+ Features</li>
                 <li>Performance Optimization</li>
-                <li>Common Interview Questions</li>
+                <li>Additional Topics</li>
             </ol>
         </div>
 
@@ -353,7 +196,17 @@
         </div>
         <div class="answer">
             <p><strong>Lit</strong> is a lightweight library for building fast, lightweight web components. It provides a simple base class for creating custom elements with reactive state and efficient rendering.</p>
-            <p><strong>Key Features:</strong> Lightweight (small bundle size ~5KB), Fast (efficient rendering with declarative templates), Web Components (built on Web Components standards), Reactive (automatic updates when properties change), TypeScript support (first-class TypeScript support), Framework-agnostic (works with any framework), Declarative templates (HTML template literals).</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Lightweight:</strong> Small bundle size (~5KB)</li>
+                <li><strong>Fast:</strong> Efficient rendering with declarative templates</li>
+                <li><strong>Web Components:</strong> Built on Web Components standards</li>
+                <li><strong>Reactive:</strong> Automatic updates when properties change</li>
+                <li><strong>TypeScript support:</strong> First-class TypeScript support</li>
+                <li><strong>Framework-agnostic:</strong> Works with any framework</li>
+                <li><strong>Declarative templates:</strong> HTML template literals</li>
+            </ul>
         </div>
 
         <div class="question">
@@ -361,7 +214,12 @@
         </div>
         <div class="answer">
             <p><strong>Web Components</strong> are a set of web platform APIs that allow you to create new custom, reusable, encapsulated HTML tags to use in web pages and web apps.</p>
-            <p><strong>Web Components Standards:</strong> Custom Elements (define new HTML elements), Shadow DOM (encapsulate DOM and styles), HTML Templates (define reusable markup), ES Modules (import and export JavaScript).</p>
+            <ul>
+                <li><strong>Custom Elements:</strong> Define new HTML elements</li>
+                <li><strong>Shadow DOM:</strong> Encapsulate DOM and styles</li>
+                <li><strong>HTML Templates:</strong> Define reusable markup</li>
+                <li><strong>ES Modules:</strong> Import and export JavaScript</li>
+            </ul>
         </div>
 
         <div class="page-break"></div>
@@ -372,47 +230,56 @@
             Q3: How do you create a Lit component?
         </div>
         <div class="answer">
-            <div class="code-block"><pre><code>import { LitElement, html, css } from 'lit';
+            <p><strong>Lit components</strong> extend LitElement and define reactive properties, styles, and a render method that returns a template.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">my-element.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="type">LitElement</span>, <span class="variable">html</span>, <span class="variable">css</span> } <span class="keyword">from</span> <span class="string">'lit'</span>;
 
-class MyElement extends LitElement {
-  static styles = css`
-    :host {
-      display: block;
-      padding: 16px;
-    }
-  `;
-  
-  static properties = {
-    name: { type: String },
-    count: { type: Number }
+<span class="keyword">class</span> <span class="type">MyElement</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
+  <span class="keyword">static</span> <span class="property">styles</span> = <span class="variable">css</span><span class="string">`:host { display: block; padding: 16px; }`</span>;
+
+  <span class="keyword">static</span> <span class="property">properties</span> = {
+    <span class="property">name</span>: { <span class="property">type</span>: <span class="type">String</span> },
+    <span class="property">count</span>: { <span class="property">type</span>: <span class="type">Number</span> }
   };
-  
-  constructor() {
-    super();
-    this.name = 'World';
-    this.count = 0;
+
+  <span class="method">constructor</span>() {
+    <span class="keyword">super</span>();
+    <span class="keyword">this</span>.<span class="property">name</span> = <span class="string">'World'</span>;
+    <span class="keyword">this</span>.<span class="property">count</span> = <span class="number">0</span>;
   }
-  
-  render() {
-    return html`
-      <h1>Hello, ${this.name}!</h1>
-      <p>Count: ${this.count}</p>
-      <button @click="${this._increment}">Increment</button>
-    `;
+
+  <span class="method">render</span>() {
+    <span class="keyword">return</span> <span class="variable">html</span><span class="string">`
+      &lt;<span class="type">h1</span>&gt;Hello, ${<span class="keyword">this</span>.<span class="property">name</span>}!&lt;/<span class="type">h1</span>&gt;
+      &lt;<span class="type">p</span>&gt;Count: ${<span class="keyword">this</span>.<span class="property">count</span>}&lt;/<span class="type">p</span>&gt;
+      &lt;<span class="type">button</span> <span class="variable">@click</span>="${<span class="keyword">this</span>.<span class="method">_increment</span>}"&gt;Increment&lt;/<span class="type">button</span>&gt;
+    `</span>;
   }
-  
-  _increment() {
-    this.count++;
+
+  <span class="method">_increment</span>() {
+    <span class="keyword">this</span>.<span class="property">count</span>++;
   }
 }
 
-customElements.define('my-element', MyElement);</code></pre></div>
+<span class="variable">customElements</span>.<span class="method">define</span>(<span class="string">'my-element'</span>, <span class="type">MyElement</span>);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q4: What are the different property types in Lit?
         </div>
         <div class="answer">
+            <p><strong>Property types</strong> in Lit define how properties are converted from attributes and how they trigger updates.</p>
+            
             <table>
                 <tr>
                     <th>Type</th>
@@ -443,15 +310,25 @@ customElements.define('my-element', MyElement);</code></pre></div>
                     <td>Function callbacks</td>
                 </tr>
             </table>
-            
-            <div class="code-block"><pre><code>static properties = {
-  name: { type: String },
-  count: { type: Number },
-  active: { type: Boolean },
-  items: { type: Array },
-  config: { type: Object },
-  onChange: { type: Function }
-};</code></pre></div>
+
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">properties.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">static</span> <span class="property">properties</span> = {
+  <span class="property">name</span>: { <span class="property">type</span>: <span class="type">String</span> },
+  <span class="property">count</span>: { <span class="property">type</span>: <span class="type">Number</span> },
+  <span class="property">active</span>: { <span class="property">type</span>: <span class="type">Boolean</span> },
+  <span class="property">items</span>: { <span class="property">type</span>: <span class="type">Array</span> },
+  <span class="property">config</span>: { <span class="property">type</span>: <span class="type">Object</span> },
+  <span class="property">onChange</span>: { <span class="property">type</span>: <span class="type">Function</span> }
+};</code>
+                </div>
+            </div>
         </div>
 
         <div class="page-break"></div>
@@ -462,24 +339,32 @@ customElements.define('my-element', MyElement);</code></pre></div>
             Q5: How do reactive properties work in Lit?
         </div>
         <div class="answer">
-            <p>Lit's reactive properties automatically trigger a re-render when they change. Lit uses a reactive system that tracks property changes, schedules updates efficiently, batches multiple changes, and updates only changed parts of the DOM.</p>
+            <p><strong>Reactive properties</strong> automatically trigger re-renders when they change. Lit tracks property changes, schedules updates efficiently, batches multiple changes, and updates only changed DOM parts.</p>
             
-            <div class="code-block"><pre><code>static properties = {
-  items: { type: Array },
-  selected: { type: Number }
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">reactive.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">static</span> <span class="property">properties</span> = {
+  <span class="property">items</span>: { <span class="property">type</span>: <span class="type">Array</span> },
+  <span class="property">selected</span>: { <span class="property">type</span>: <span class="type">Number</span> }
 };
 
-render() {
-  return html`
-    <ul>
-      ${this.items.map((item, index) => html`
-        <li class="${index === this.selected ? 'selected' : ''}">
-          ${item.name}
-        </li>
-      `)}
-    </ul>
-  `;
-}</code></pre></div>
+<span class="method">render</span>() {
+  <span class="keyword">return</span> <span class="variable">html</span><span class="string">`
+    &lt;<span class="type">ul</span>&gt;
+      ${<span class="keyword">this</span>.<span class="property">items</span>.<span class="method">map</span>((<span class="variable">item</span>, <span class="variable">index</span>) => <span class="variable">html</span><span class="string">`
+        &lt;<span class="type">li</span> <span class="property">class</span>="${<span class="variable">index</span> === <span class="keyword">this</span>.<span class="property">selected</span> ? <span class="string">'selected'</span> : <span class="string">''</span>}"&gt;${<span class="variable">item</span>.<span class="property">name</span>}&lt;/<span class="type">li</span>&gt;
+      `</span>)}
+    &lt;/<span class="type">ul</span>&gt;
+  `</span>;
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -489,15 +374,25 @@ render() {
             <p><strong>Properties:</strong> Public, reactive, can be set from outside. Triggers re-render when changed.</p>
             <p><strong>Internal state:</strong> Private, not reactive by default. Use for component-internal state that doesn't need to trigger re-render.</p>
             
-            <div class="code-block"><pre><code>// Property - reactive, public
-static properties = {
-  count: { type: Number }
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">state.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Property - reactive, public</span>
+<span class="keyword">static</span> <span class="property">properties</span> = {
+  <span class="property">count</span>: { <span class="property">type</span>: <span class="type">Number</span> }
 };
 
-// Internal state - not reactive
-private _internalState = {
-  data: null
-};</code></pre></div>
+<span class="comment">// Internal state - not reactive</span>
+<span class="keyword">private</span> <span class="variable">_internalState</span> = {
+  <span class="property">data</span>: <span class="keyword">null</span>
+};</code>
+                </div>
+            </div>
         </div>
 
         <div class="page-break"></div>
@@ -508,50 +403,60 @@ private _internalState = {
             Q7: How do you use Lit's template system?
         </div>
         <div class="answer">
-            <p>Lit uses <strong>html</strong> template tag function to create templates. It supports expression interpolation, conditional rendering, looping, event handling, and directives.</p>
+            <p><strong>Lit templates</strong> use the html tag function to create declarative templates with expression interpolation, conditional rendering, looping, and event handling.</p>
             
-            <div class="code-block"><pre><code>render() {
-  return html`
-    <div>
-      <h1>${this.title}</h1>
-      
-      ${this.items.length > 0 ? html`
-        <ul>
-          ${this.items.map(item => html`
-            <li>${item.name}</li>
-          `)}
-        </ul>
-      ` : html`
-        <p>No items</p>
-      `}
-      
-      <button @click="${this.handleClick}">Click</button>
-    </div>
-  `;
-}</code></pre></div>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">template.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="method">render</span>() {
+  <span class="keyword">return</span> <span class="variable">html</span><span class="string">`
+    &lt;<span class="type">div</span>&gt;
+      &lt;<span class="type">h1</span>&gt;${<span class="keyword">this</span>.<span class="property">title</span>}&lt;/<span class="type">h1</span>&gt;
+      ${<span class="keyword">this</span>.<span class="property">items</span>.<span class="property">length</span> > <span class="number">0</span> ? <span class="variable">html</span><span class="string">`
+        &lt;<span class="type">ul</span>&gt;${<span class="keyword">this</span>.<span class="property">items</span>.<span class="method">map</span>(<span class="variable">item</span> => <span class="variable">html</span><span class="string">`&lt;<span class="type">li</span>&gt;${<span class="variable">item</span>.<span class="property">name</span>}&lt;/<span class="type">li</span>&gt;`</span>)}&lt;/<span class="type">ul</span>&gt;
+      `</span> : <span class="variable">html</span><span class="string">`&lt;<span class="type">p</span>&gt;No items&lt;/<span class="type">p</span>&gt;`</span>}
+      &lt;<span class="type">button</span> <span class="variable">@click</span>="${<span class="keyword">this</span>.<span class="method">handleClick</span>}"&gt;Click&lt;/<span class="type">button</span>&gt;
+    &lt;/<span class="type">div</span>&gt;
+  `</span>;
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q8: What are Lit directives?
         </div>
         <div class="answer">
-            <p><strong>Directives</strong> are functions that modify template behavior. Lit provides several built-in directives: repeat (efficient list rendering with keying), map (simple array mapping), classMap (conditional class names), styleMap (conditional styles), ifDefined (render only if value is defined), unsafeHTML (render raw HTML - use with caution).</p>
+            <p><strong>Directives</strong> modify template behavior. Built-in directives include repeat (efficient list rendering), classMap (conditional classes), styleMap (conditional styles), and ifDefined.</p>
             
-            <div class="code-block"><pre><code>import { repeat } from 'lit/directives/repeat.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { styleMap } from 'lit/directives/style-map.js';
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">directives.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="variable">repeat</span> } <span class="keyword">from</span> <span class="string">'lit/directives/repeat.js'</span>;
+<span class="keyword">import</span> { <span class="variable">classMap</span> } <span class="keyword">from</span> <span class="string">'lit/directives/class-map.js'</span>;
+<span class="keyword">import</span> { <span class="variable">styleMap</span> } <span class="keyword">from</span> <span class="string">'lit/directives/style-map.js'</span>;
 
-render() {
-  return html`
-    <div class="${classMap({ active: this.isActive })}">
-      ${repeat(this.items, (item) => item.id, (item, index) => html`
-        <div style="${styleMap({ color: item.color })}">
-          ${item.name}
-        </div>
-      `)}
-    </div>
-  `;
-}</code></pre></div>
+<span class="method">render</span>() {
+  <span class="keyword">return</span> <span class="variable">html</span><span class="string">`
+    &lt;<span class="type">div</span> <span class="property">class</span>="${<span class="method">classMap</span>({ <span class="property">active</span>: <span class="keyword">this</span>.<span class="property">isActive</span> })}"&gt;
+      ${<span class="method">repeat</span>(<span class="keyword">this</span>.<span class="property">items</span>, (<span class="variable">item</span>) => <span class="variable">item</span>.<span class="property">id</span>, (<span class="variable">item</span>) => <span class="variable">html</span><span class="string">`
+        &lt;<span class="type">div</span> <span class="property">style</span>="${<span class="method">styleMap</span>({ <span class="property">color</span>: <span class="variable">item</span>.<span class="property">color</span> })}"&gt;${<span class="variable">item</span>.<span class="property">name</span>}&lt;/<span class="type">div</span>&gt;
+      `</span>)}
+    &lt;/<span class="type">div</span>&gt;
+  `</span>;
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="page-break"></div>
@@ -562,36 +467,28 @@ render() {
             Q9: How do you style Lit components?
         </div>
         <div class="answer">
-            <p>Lit components use <strong>Shadow DOM</strong> by default, which encapsulates styles. Styles are defined in the static styles property.</p>
+            <p><strong>Lit styling</strong> uses Shadow DOM by default for encapsulation. Styles are defined in the static styles property using the css tag function.</p>
             
-            <div class="code-block"><pre><code>import { css } from 'lit';
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">styles.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="variable">css</span> } <span class="keyword">from</span> <span class="string">'lit'</span>;
 
-class MyElement extends LitElement {
-  static styles = css`
-    :host {
-      display: block;
-      padding: 16px;
-      background: #f0f0f0;
-    }
-    
-    h1 {
-      color: #333;
-      font-size: 24px;
-    }
-    
-    button {
-      background: #512bd4;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      cursor: pointer;
-    }
-    
-    button:hover {
-      background: #4230a3;
-    }
-  `;
-}</code></pre></div>
+<span class="keyword">class</span> <span class="type">MyElement</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
+  <span class="keyword">static</span> <span class="property">styles</span> = <span class="variable">css</span><span class="string">`
+    :host { display: block; padding: 16px; background: #f0f0f0; }
+    h1 { color: #333; font-size: 24px; }
+    button { background: #512bd4; color: white; border: none; padding: 8px 16px; cursor: pointer; }
+    button:hover { background: #4230a3; }
+  `</span>;
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -631,29 +528,28 @@ class MyElement extends LitElement {
             Q12: How do you test Lit components?
         </div>
         <div class="answer">
-            <p>Lit components can be tested with standard web component testing tools like Web Test Runner or @web/tester.</p>
+            <p><strong>Lit testing</strong> uses @open-wc/testing for web component testing. Test rendering, property changes, and user interactions with fixture and expect.</p>
             
-            <div class="code-block"><pre><code>import { fixture, expect } from '@open-wc/testing';
-import { MyElement } from './my-element.js';
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">test.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="variable">fixture</span>, <span class="variable">expect</span> } <span class="keyword">from</span> <span class="string">'@open-wc/testing'</span>;
+<span class="keyword">import</span> { <span class="type">MyElement</span> } <span class="keyword">from</span> <span class="string">'./my-element.js'</span>;
 
-describe('MyElement', () => {
-  it('renders a greeting', async () => {
-    const el = await fixture('<my-element name="World"></my-element>');
-    
-    const h1 = el.shadowRoot.querySelector('h1');
-    expect(h1.textContent).to.equal('Hello, World!');
+<span class="method">describe</span>(<span class="string">'MyElement'</span>, () => {
+  <span class="method">it</span>(<span class="string">'renders a greeting'</span>, <span class="keyword">async</span> () => {
+    <span class="keyword">const</span> <span class="variable">el</span> = <span class="keyword">await</span> <span class="method">fixture</span>(<span class="string">'<my-element name="World"></my-element>'</span>);
+    <span class="keyword">const</span> <span class="variable">h1</span> = <span class="variable">el</span>.<span class="property">shadowRoot</span>.<span class="method">querySelector</span>(<span class="string">'h1'</span>);
+    <span class="method">expect</span>(<span class="variable">h1</span>.<span class="property">textContent</span>).<span class="method">to</span>.<span class="method">equal</span>(<span class="string">'Hello, World!'</span>);
   });
-  
-  it('increments count on button click', async () => {
-    const el = await fixture('<my-element></my-element>');
-    const button = el.shadowRoot.querySelector('button');
-    
-    button.click();
-    await el.updateComplete;
-    
-    expect(el.count).to.equal(1);
-  });
-});</code></pre></div>
+});</code>
+                </div>
+            </div>
         </div>
 
         <div class="page-break"></div>
@@ -724,106 +620,114 @@ describe('MyElement', () => {
             Q15: What is the difference between @event and .addEventListener?
         </div>
         <div class="answer">
-            <ul>
-                <li><strong>@event:</strong> Lit's declarative event handling. Cleaner syntax, automatically bound to component instance.</li>
-                <li><strong>.addEventListener:</strong> Standard DOM API. More verbose, manual binding required, but more control.</li>
-            </ul>
+            <p><strong>@event</strong> is Lit's declarative event handling with cleaner syntax and automatic binding. <strong>addEventListener</strong> is the standard DOM API with manual binding but more control.</p>
             
-            <div class="code-block"><pre><code>// Lit's @event
-<button @click="${this.handleClick}">Click</button>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">events.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Lit's @event</span>
+&lt;<span class="type">button</span> <span class="variable">@click</span>="${this.handleClick}"&gt;Click&lt;/<span class="type">button</span>&gt;
 
-// addEventListener
-this.shadowRoot.querySelector('button')
-  .addEventListener('click', this.handleClick.bind(this));</code></pre></div>
+<span class="comment">// addEventListener</span>
+<span class="keyword">this</span>.<span class="property">shadowRoot</span>.<span class="method">querySelector</span>(<span class="string">'button'</span>)
+  .<span class="method">addEventListener</span>(<span class="string">'click'</span>, <span class="keyword">this</span>.<span class="method">handleClick</span>.<span class="method">bind</span>(<span class="keyword">this</span>));</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q16: How do you handle forms in Lit?
         </div>
         <div class="answer">
-            <div class="code-block"><pre><code>class MyForm extends LitElement {
-  static properties = {
-    username: { type: String },
-    email: { type: String }
+            <p><strong>Form handling</strong> in Lit uses two-way binding with .value for controlled inputs and @input to update properties on change.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">form.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">class</span> <span class="type">MyForm</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
+  <span class="keyword">static</span> <span class="property">properties</span> = {
+    <span class="property">username</span>: { <span class="property">type</span>: <span class="type">String</span> },
+    <span class="property">email</span>: { <span class="property">type</span>: <span class="type">String</span> }
   };
-  
-  constructor() {
-    super();
-    this.username = '';
-    this.email = '';
+
+  <span class="method">render</span>() {
+    <span class="keyword">return</span> <span class="variable">html</span><span class="string">`
+      &lt;<span class="type">form</span> <span class="variable">@submit</span>="${<span class="keyword">this</span>.<span class="method">_handleSubmit</span>}"&gt;
+        &lt;<span class="type">input</span> .<span class="property">value</span>="${<span class="keyword">this</span>.<span class="property">username</span>}" <span class="variable">@input</span>="${<span class="keyword">this</span>.<span class="method">_handleInput</span>}" /&gt;
+        &lt;<span class="type">button</span> <span class="property">type</span>=<span class="string">"submit"</span>&gt;Submit&lt;/<span class="type">button</span>&gt;
+      &lt;/<span class="type">form</span>&gt;
+    `</span>;
   }
-  
-  render() {
-    return html`
-      <form @submit="${this._handleSubmit}">
-        <input
-          type="text"
-          name="username"
-          .value="${this.username}"
-          @input="${this._handleInput}"
-        />
-        <input
-          type="email"
-          name="email"
-          .value="${this.email}"
-          @input="${this._handleInput}"
-        />
-        <button type="submit">Submit</button>
-      </form>
-    `;
+
+  <span class="method">_handleInput</span>(<span class="variable">e</span>) {
+    <span class="keyword">this</span>[<span class="variable">e</span>.<span class="property">target</span>.<span class="property">name</span>] = <span class="variable">e</span>.<span class="property">target</span>.<span class="property">value</span>;
   }
-  
-  _handleInput(e) {
-    this[e.target.name] = e.target.value;
-  }
-  
-  _handleSubmit(e) {
-    e.preventDefault();
-    console.log(this.username, this.email);
-  }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q17: What is conditional rendering in Lit?
         </div>
         <div class="answer">
-            <p><strong>Conditional rendering</strong> in Lit allows you to conditionally include or exclude parts of your template based on component state.</p>
+            <p><strong>Conditional rendering</strong> uses ternary operators, logical AND, or function calls to conditionally include template parts based on state.</p>
             
-            <div class="code-block" data-language="code"><pre><code>render() {
-  return html`
-    ${this.showContent 
-      ? html`<div>Content is visible</div>` 
-      : html`<div>Content is hidden</div>`
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">conditional.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="method">render</span>() {
+  <span class="keyword">return</span> <span class="variable">html</span><span class="string">`
+    ${<span class="keyword">this</span>.<span class="property">showContent</span> 
+      ? <span class="variable">html</span><span class="string">`&lt;<span class="type">div</span>&gt;Content is visible&lt;/<span class="type">div</span>&gt;`</span> 
+      : <span class="variable">html</span><span class="string">`&lt;<span class="type">div</span>&gt;Content is hidden&lt;/<span class="type">div</span>&gt;`</span>
     }
-  `;
-}</code></pre></div>
-            
-            <h3>Methods:</h3>
-            <ul>
-                <li><strong>Ternary operator:</strong> Simple if/else</li>
-                <li><strong>Logical AND:</strong> Render when condition is true</li>
-                <li><strong>Function calls:</strong> More complex logic</li>
-            </ul>
+  `</span>;
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q18: How do you work with lists and keys in Lit?
         </div>
         <div class="answer">
-            <p><strong>Lists and keys</strong> in Lit are handled using JavaScript array methods and the map function.</p>
+            <p><strong>Lists and keys</strong> use JavaScript array methods with map. Use the repeat directive for efficient list rendering with unique keys.</p>
             
-            <div class="code-block" data-language="code"><pre><code>render() {
-  return html`
-    <ul>
-      ${this.items.map((item, index) => html`
-        <li key="${item.id}">${item.name}</li>
-      `)}
-    </ul>
-  `;
-}</code></pre></div>
-            
-            <p><strong>Keys:</strong> Unique identifiers (help Lit track items), Performance (efficient updates), Stability (preserve component state).</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">lists.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="method">render</span>() {
+  <span class="keyword">return</span> <span class="variable">html</span><span class="string">`
+    &lt;<span class="type">ul</span>&gt;
+      ${<span class="keyword">this</span>.<span class="property">items</span>.<span class="method">map</span>((<span class="variable">item</span>, <span class="variable">index</span>) => <span class="variable">html</span><span class="string">`
+        &lt;<span class="type">li</span> <span class="property">key</span>="${<span class="variable">item</span>.<span class="property">id</span>}"&gt;${<span class="variable">item</span>.<span class="property">name</span>}&lt;/<span class="type">li</span>&gt;
+      `</span>)}
+    &lt;/<span class="type">ul</span>&gt;
+  `</span>;
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -853,22 +757,32 @@ this.shadowRoot.querySelector('button')
             Q22: How do you handle API calls in Lit?
         </div>
         <div class="answer">
-            <p><strong>API calls</strong> in Lit are typically handled in component lifecycle methods.</p>
+            <p><strong>API calls</strong> are typically handled in connectedCallback lifecycle method to fetch data when the component is added to DOM.</p>
             
-            <div class="code-block" data-language="code"><pre><code>class MyElement extends LitElement {
-  @property()
-  data = [];
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">api.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">class</span> <span class="type">MyElement</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
+  <span class="variable">@property</span>()
+  <span class="property">data</span> = [];
 
-  async connectedCallback() {
-    super.connectedCallback();
-    this.data = await this.fetchData();
+  <span class="keyword">async</span> <span class="method">connectedCallback</span>() {
+    <span class="keyword">super</span>.<span class="method">connectedCallback</span>();
+    <span class="keyword">this</span>.<span class="property">data</span> = <span class="keyword">await</span> <span class="keyword">this</span>.<span class="method">fetchData</span>();
   }
 
-  async fetchData() {
-    const response = await fetch('/api/data');
-    return response.json();
+  <span class="keyword">async</span> <span class="method">fetchData</span>() {
+    <span class="keyword">const</span> <span class="variable">response</span> = <span class="keyword">await</span> <span class="method">fetch</span>(<span class="string">'/api/data'</span>);
+    <span class="keyword">return</span> <span class="variable">response</span>.<span class="method">json</span>();
   }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -903,17 +817,27 @@ this.shadowRoot.querySelector('button')
             Q24: How do you implement lazy loading in Lit?
         </div>
         <div class="answer">
-            <p><strong>Lazy loading</strong> in Lit can be implemented using dynamic imports and conditional rendering.</p>
+            <p><strong>Lazy loading</strong> uses dynamic imports to load components on demand, reducing initial bundle size and improving performance.</p>
             
-            <div class="code-block" data-language="code"><pre><code>class MyElement extends LitElement {
-  @property()
-  lazyComponent = null;
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">lazy.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">class</span> <span class="type">MyElement</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
+  <span class="variable">@property</span>()
+  <span class="property">lazyComponent</span> = <span class="keyword">null</span>;
 
-  async loadComponent() {
-    const module = await import('./heavy-component.js');
-    this.lazyComponent = module.default;
+  <span class="keyword">async</span> <span class="method">loadComponent</span>() {
+    <span class="keyword">const</span> <span class="variable">module</span> = <span class="keyword">await</span> <span class="method">import</span>(<span class="string">'./heavy-component.js'</span>);
+    <span class="keyword">this</span>.<span class="property">lazyComponent</span> = <span class="variable">module</span>.<span class="property">default</span>;
   }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -929,9 +853,315 @@ this.shadowRoot.querySelector('button')
             </ul>
         </div>
 
+        <div class="page-break"></div>
+
+        <h2>9. Advanced Lit Patterns</h2>
+
+        <div class="question">
+            Q26: What are slots in Lit and how do you use them?
+        </div>
+        <div class="answer">
+            <p><strong>Slots</strong> allow you to compose components by projecting content from the light DOM into the shadow DOM. Use the slot element to define insertion points.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">slots.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">class</span> <span class="type">MyCard</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
+  <span class="method">render</span>() {
+    <span class="keyword">return</span> <span class="variable">html</span><span class="string">`
+      &lt;<span class="type">div</span> <span class="property">class</span>=<span class="string">"card"</span>&gt;
+        &lt;<span class="type">slot</span> <span class="property">name</span>=<span class="string">"header"</span>&gt;&lt;/<span class="type">slot</span>&gt;
+        &lt;<span class="type">slot</span>&gt;&lt;/<span class="type">slot</span>&gt;
+        &lt;<span class="type">slot</span> <span class="property">name</span>=<span class="string">"footer"</span>&gt;&lt;/<span class="type">slot</span>&gt;
+      &lt;/<span class="type">div</span>&gt;
+    `</span>;
+  }
+}
+
+<span class="comment">// Usage</span>
+<span class="comment">&lt;my-card&gt;</span>
+  <span class="comment">&lt;h2 slot="header"&gt;Title&lt;/h2&gt;</span>
+  <span class="comment">&lt;p&gt;Content&lt;/p&gt;</span>
+  <span class="comment">&lt;button slot="footer"&gt;Action&lt;/button&gt;</span>
+<span class="comment">&lt;/my-card&gt;</span></code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q27: How do you create custom directives in Lit?
+        </div>
+        <div class="answer">
+            <p><strong>Custom directives</strong> are functions that return a directive result. They allow you to create reusable template behavior for specific use cases.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">custom-directive.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="variable">directive</span>, <span class="variable">Part</span> } <span class="keyword">from</span> <span class="string">'lit/directive.js'</span>;
+
+<span class="keyword">const</span> <span class="variable">myDirective</span> = <span class="method">directive</span>((<span class="variable">value</span>) => (<span class="variable">part</span>: <span class="type">Part</span>) => {
+  <span class="variable">part</span>.<span class="method">setValue</span>(<span class="variable">value</span>.<span class="method">toUpperCase</span>());
+});
+
+<span class="comment">// Usage</span>
+<span class="method">render</span>() {
+  <span class="keyword">return</span> <span class="variable">html</span><span class="string">`&lt;<span class="type">div</span>&gt;${<span class="method">myDirective</span>(<span class="keyword">this</span>.<span class="property">text</span>)}&lt;/<span class="type">div</span>&gt;`</span>;
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q28: How do you use CSS custom properties in Lit?
+        </div>
+        <div class="answer">
+            <p><strong>CSS custom properties</strong> (CSS variables) allow you to create themeable components. Define them in styles and allow consumers to override them.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">css-vars.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">class</span> <span class="type">MyElement</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
+  <span class="keyword">static</span> <span class="property">styles</span> = <span class="variable">css</span><span class="string">`
+    :host {
+      --my-color: #512bd4;
+      --my-padding: 16px;
+    }
+    .box {
+      color: var(--my-color);
+      padding: var(--my-padding);
+    }
+  `</span>;
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>10. Lit 3+ Features</h2>
+
+        <div class="question">
+            Q29: What are the new features in Lit 3?
+        </div>
+        <div class="answer">
+            <p><strong>Lit 3</strong> introduces several improvements: Smaller bundle size, faster rendering, better TypeScript support, improved reactive system, new directives, and enhanced developer experience.</p>
+            <ul>
+                <li><strong>Smaller:</strong> Reduced bundle size by ~40%</li>
+                <li><strong>Faster:</strong> Improved render performance</li>
+                <li><strong>TypeScript:</strong> Better type inference and support</li>
+                <li><strong>Reactive:</strong> Enhanced property change detection</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q30: How do you use the new reactive system in Lit 3?
+        </div>
+        <div class="answer">
+            <p><strong>Lit 3 reactive system</strong> uses the @property and @state decorators with improved change detection and better performance for complex objects.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">reactive-v3.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="variable">property</span>, <span class="variable">state</span> } <span class="keyword">from</span> <span class="string">'lit/decorators.js'</span>;
+
+<span class="keyword">class</span> <span class="type">MyElement</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
+  <span class="variable">@property</span>({ <span class="property">type</span>: <span class="type">String</span> })
+  <span class="property">name</span> = <span class="string">'World'</span>;
+
+  <span class="variable">@state</span>()
+  <span class="property">internalCount</span> = <span class="number">0</span>;
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>11. Performance Optimization</h2>
+
+        <div class="question">
+            Q31: How do you optimize Lit component performance?
+        </div>
+        <div class="answer">
+            <p><strong>Performance optimization</strong> in Lit includes using the repeat directive for lists, avoiding unnecessary re-renders, memoizing expensive computations, and lazy loading components.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">performance.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="variable">repeat</span> } <span class="keyword">from</span> <span class="string">'lit/directives/repeat.js'</span>;
+
+<span class="method">render</span>() {
+  <span class="keyword">return</span> <span class="variable">html</span><span class="string">`
+    ${<span class="method">repeat</span>(<span class="keyword">this</span>.<span class="property">items</span>, (<span class="variable">item</span>) => <span class="variable">item</span>.<span class="property">id</span>, (<span class="variable">item</span>) => <span class="variable">html</span><span class="string">`
+      &lt;<span class="type">div</span>&gt;${<span class="variable">item</span>.<span class="property">name</span>}&lt;/<span class="type">div</span>&gt;
+    `</span>)}
+  `</span>;
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q32: How do you implement virtual scrolling in Lit?
+        </div>
+        <div class="answer">
+            <p><strong>Virtual scrolling</strong> renders only visible items in a list, improving performance for large datasets. Use libraries like @lit-labs/virtualizer or implement custom logic.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">virtual-scroll.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="type">Virtualizer</span> } <span class="keyword">from</span> <span class="string">'@lit-labs/virtualizer/virtualizer.js'</span>;
+
+<span class="method">render</span>() {
+  <span class="keyword">return</span> <span class="variable">html</span><span class="string">`
+    &lt;<span class="type">virtualizer</span> .<span class="property">items</span>="${<span class="keyword">this</span>.<span class="property">items</span>}"&gt;
+      ${(<span class="variable">item</span>) => <span class="variable">html</span><span class="string">`&lt;<span class="type">div</span>&gt;${<span class="variable">item</span>.<span class="property">name</span>}&lt;/<span class="type">div</span>&gt;`</span>}
+    &lt;/<span class="type">virtualizer</span>&gt;
+  `</span>;
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>12. Additional Topics</h2>
+
+        <div class="question">
+            Q33: How do you use TypeScript with Lit?
+        </div>
+        <div class="answer">
+            <p><strong>TypeScript with Lit</strong> provides full type safety for properties, events, and templates. Use decorators and type annotations for better developer experience.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">typescript.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="type">LitElement</span>, <span class="variable">html</span> } <span class="keyword">from</span> <span class="string">'lit'</span>;
+<span class="keyword">import</span> { <span class="variable">property</span> } <span class="keyword">from</span> <span class="string">'lit/decorators.js'</span>;
+
+<span class="keyword">interface</span> <span class="type">Item</span> {
+  <span class="property">id</span>: <span class="type">number</span>;
+  <span class="property">name</span>: <span class="type">string</span>;
+}
+
+<span class="keyword">class</span> <span class="type">MyElement</span> <span class="keyword">extends</span> <span class="type">LitElement</span> {
+  <span class="variable">@property</span>({ <span class="property">type</span>: <span class="type">Array</span> })
+  <span class="property">items</span>: <span class="type">Item</span>[] = [];
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q34: How do you handle accessibility in Lit components?
+        </div>
+        <div class="answer">
+            <p><strong>Accessibility (a11y)</strong> in Lit includes using ARIA attributes, keyboard navigation, semantic HTML, and proper focus management. Test with @web/tester/a11y.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">a11y.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="method">render</span>() {
+  <span class="keyword">return</span> <span class="variable">html</span><span class="string">`
+    &lt;<span class="type">button</span> 
+      <span class="property">aria-label</span>=<span class="string">"Close dialog"</span>
+      <span class="property">role</span>=<span class="string">"button"</span>
+      <span class="variable">@click</span>="${<span class="keyword">this</span>.<span class="method">close</span>}"&gt;
+      &times;
+    &lt;/<span class="type">button</span>&gt;
+  `</span>;
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q35: How do you implement server-side rendering with Lit?
+        </div>
+        <div class="answer">
+            <p><strong>SSR with Lit</strong> uses @lit-labs/ssr to render components on the server. This improves SEO and initial page load performance.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">ssr.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="method">render</span> } <span class="keyword">from</span> <span class="string">'@lit-labs/ssr/lib/render-with-global-dom-shim.js'</span>;
+<span class="keyword">import</span> { <span class="type">MyElement</span> } <span class="keyword">from</span> <span class="string">'./my-element.js'</span>;
+
+<span class="keyword">const</span> <span class="variable">result</span> = <span class="keyword">await</span> <span class="method">render</span>(<span class="variable">html</span><span class="string">`&lt;<span class="type">my-element</span>&gt;&lt;/<span class="type">my-element</span>&gt;`</span>);
+<span class="variable">console</span>.<span class="method">log</span>(<span class="variable">result</span>);</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q36: What is the difference between Lit and other web component libraries?
+        </div>
+        <div class="answer">
+            <p><strong>Lit vs others:</strong> Lit is lightweight (~5KB), has excellent TypeScript support, uses declarative templates, and provides reactive properties. Alternatives include Stencil (compiler-based), Angular Elements (framework-specific), and Polymer (deprecated predecessor).</p>
+        </div>
+
+        <div class="tip">
+            <strong>Interview Tip:</strong> When discussing Lit, emphasize web components standards, Shadow DOM encapsulation, reactive properties, and performance. Be prepared to discuss SSR, TypeScript integration, and comparison with React. For senior positions, demonstrate knowledge of custom directives, reactive controllers, and advanced patterns.
+        </div>
+
+        <div class="important">
+            <strong>Key Takeaways for Interview (Comprehensive Guide):</strong>
+            <ul>
+                <li><strong>All Levels (0-3 years):</strong> Understand Web Components standards, know LitElement basics, understand reactive properties, know html template syntax, understand Shadow DOM, know property types, understand lifecycle methods.</li>
+                <li><strong>All Levels (4-7 years):</strong> Understand directives (repeat, classMap, styleMap), know testing with @open-wc/testing, understand slot API, know CSS custom properties, understand event handling, know form handling, understand performance basics.</li>
+                <li><strong>Advanced (8-10 years):</strong> Implement custom directives, use reactive controllers, implement SSR with @lit-labs/ssr, understand virtual scrolling, implement advanced patterns, know TypeScript integration, optimize performance.</li>
+                <li><strong>All Levels (11-13 years):</strong> Design scalable component architecture, implement complex reactive controllers, use Lit 3+ features, implement advanced testing strategies, optimize bundle size, design component libraries, implement accessibility patterns.</li>
+            </ul>
+        </div>
+
         <div class="footer">
             <p><span class="highlight">🎯 Ready for Your Lit Interview?</span></p>
-            <p>Master these 25 comprehensive Lit interview questions covering web components, reactive properties, templates, and styling. Lit is a lightweight library for building fast web components - understanding Lit deeply will make you a better web component developer.</p>
+            <p>Master these 36 comprehensive Lit interview questions covering web components, reactive properties, templates, styling, and advanced patterns. Lit is a lightweight library for building fast web components - understanding Lit deeply will make you a better web component developer.</p>
             <p><span class="highlight">💡 Tip:</span> Focus on understanding web components, Shadow DOM, reactive properties, and Lit directives. These are the areas where most Lit interview questions focus. Practice building reusable web components.</p>
         </div>
     </div>

@@ -1,465 +1,85 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C Interview Preparation Guide</title>
+    <title>C Interview Guide</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #1a1a2e; background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%); background-size: 400% 400%; animation: gradientShift 20s ease infinite; min-height: 100vh; padding: 25px 20px; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .container { max-width: 1100px; margin: 0 auto; padding: 50px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px); border-radius: 32px; box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3); }
+        .back-button { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 30px; font-weight: 700; margin-bottom: 30px; }
+        h1 { color: #1a1a2e; font-size: 52px; font-weight: 800; text-align: center; margin-bottom: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { text-align: center; font-size: 18px; color: #4a4a68; margin-bottom: 40px; }
+        h2 { color: white; font-size: 28px; font-weight: 700; margin-top: 40px; margin-bottom: 25px; padding: 18px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; }
+        .question { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; border-radius: 15px; margin: 25px 0 15px 0; font-weight: 600; font-size: 18px; }
+        .answer { background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%); padding: 30px 35px; border-radius: 15px; margin: 15px 0 25px 0; border-left: 6px solid #764ba2; }
+        .answer p { margin-bottom: 15px; color: #1a1a2e; }
+        .answer strong { color: #667eea; }
+        .answer ul { padding-left: 25px; margin-bottom: 15px; }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: #1a1a2e;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 20s ease infinite;
-            min-height: 100vh;
-            padding: 25px 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
-            animation: particleFloat 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 50px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(30px);
-            border-radius: 32px;
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
+        .code-editor {
+            background: #1e1e1e;
+            border-radius: 12px;
+            margin: 20px 0;
             overflow: hidden;
-            z-index: 1;
-            animation: containerFloat 6s ease-in-out infinite;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3e3e42;
         }
         
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #764ba2 60%, 
-                #667eea 80%, 
-                #764ba2 100%);
-            background-size: 300% 100%;
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-        
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
-        }
-        
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 
-                0 8px 25px rgba(102, 126, 234, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-button:hover::before {
-            left: 100%;
-        }
-        
-        .back-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
-        }
-        
-        .back-button svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.3s ease;
-        }
-        
-        .back-button:hover svg {
-            transform: translateX(-5px);
-        }
-        
-        h1 {
-            color: #1a1a2e;
-            font-size: 52px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 35px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
-            border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .subtitle {
-            text-align: center;
-            font-size: 18px;
-            color: #4a4a68;
-            margin-bottom: 40px;
-            font-weight: 500;
-            animation: fadeIn 1s ease 0.4s both;
-        }
-        
-        h2 {
-            color: #1a1a2e;
-            font-size: 32px;
-            font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
+        .code-editor-header {
+            background: #2d2d2d;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
+            gap: 8px;
+            border-bottom: 1px solid #3e3e42;
         }
         
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+        .code-editor-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
         }
         
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
+        .code-editor-dot.red { background: #ff5f56; }
+        .code-editor-dot.yellow { background: #ffbd2e; }
+        .code-editor-dot.green { background: #27ca40; }
+        
+        .code-editor-title {
+            color: #9cdcfe;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            margin-left: 12px;
         }
         
-        h3 {
-            color: #1a1a2e;
-            font-size: 26px;
-            font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
-        }
-        
-        .chapter {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
-            border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
-        }
-        
-        .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
+        .code-editor-content {
+            padding: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #d4d4d4;
             overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.5s ease both;
+            background: #1e1e1e;
         }
         
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
+        .code-editor-content code {
+            display: block;
+            white-space: pre;
         }
         
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-x: auto;
-        }
+        .keyword { color: #569cd6; }
+        .type { color: #4ec9b0; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; font-style: italic; }
+        .number { color: #b5cea8; }
+        .function { color: #dcdcaa; }
+        .preprocessor { color: #c586c0; }
         
-        
-        .toc {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 35px 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border-left: 8px solid #667eea;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        .toc h3 {
-            color: #1a1a2e;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .toc ol {
-            padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
-        }
-        
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .question {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
-        }
-        
-        .answer {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 30px 35px;
-            border-radius: 15px;
-            margin: 15px 0 25px 0;
-            border-left: 6px solid #764ba2;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            animation: slideUp 0.5s ease both;
-        }
-        
-        .answer p {
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            line-height: 1.8;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
-        }
-        
-        .answer strong {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .page-break {
-            page-break-after: always;
-            margin: 60px 0;
-            border-top: 2px dashed #e0e0e0;
-            padding-top: 40px;
-        }
-        
-        .important {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
-        }
-        
-        .important strong {
-            color: #856404;
-        }
-        
-        .tip {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
-        }
-        
-        .tip strong {
-            color: #0c5460;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 35px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
-            border-radius: 20px;
-            border: 2px solid rgba(102, 126, 234, 0.25);
-            color: #666;
-            font-size: 15px;
-            line-height: 1.7;
-            animation: slideUp 0.6s ease both;
-        }
-        
-        .footer p {
-            margin-bottom: 12px;
-        }
-        
-        .footer .highlight {
-            color: #667eea;
-            font-weight: 600;
-        }
+        .footer { text-align: center; margin-top: 50px; padding: 35px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%); border-radius: 20px; }
+        .highlight { color: #667eea; font-weight: 700; }
         
         table {
             width: 100%;
@@ -494,229 +114,43 @@
             background: #f8f9fa;
         }
         
-        p {
-            color: #1a1a2e;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        
-        ul, ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        ul li, ol li {
-            margin-bottom: 8px;
-        }
-        
-                
         @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
-            }
+            body { padding: 15px 10px; }
+            .container { padding: 25px 20px; border-radius: 20px; }
+            h1 { font-size: 32px; }
+            .subtitle { font-size: 16px; }
+            h2 { font-size: 22px; padding: 14px 20px; }
+            .question { font-size: 16px; padding: 16px 20px; }
+            .answer { padding: 20px 20px; }
+            .code-editor-content { padding: 15px; font-size: 12px; }
+            .code-editor-title { font-size: 11px; }
+            .footer { padding: 25px 20px; }
+            table { font-size: 14px; }
+            th, td { padding: 10px 8px; font-size: 13px; }
         }
         
         @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
-            }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
-        }</style>
+            body { padding: 10px 5px; }
+            .container { padding: 20px 15px; border-radius: 16px; }
+            h1 { font-size: 26px; }
+            .subtitle { font-size: 14px; }
+            h2 { font-size: 20px; padding: 12px 16px; }
+            .question { font-size: 15px; padding: 14px 16px; }
+            .answer { padding: 18px 16px; }
+            .code-editor-content { padding: 12px; font-size: 11px; }
+            .code-editor-title { font-size: 10px; }
+            .back-button { padding: 12px 20px; font-size: 14px; }
+            table { font-size: 12px; }
+            th, td { padding: 8px 6px; font-size: 11px; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-        </a>
-        <h1>C Interview Preparation Guide</h1>
-        <p class="subtitle">Comprehensive Interview Preparation with In-Depth Concepts, Code Examples, and Best Practices</p>
-
-        <div class="toc">
-            <h3>Table of Contents</h3>
-            <ol>
-                <li>C Fundamentals</li>
-                <li>Data Types and Variables</li>
-                <li>Control Structures</li>
-                <li>Functions</li>
-                <li>Arrays and Strings</li>
-                <li>Pointers</li>
-                <li>Memory Management</li>
-                <li>Structures and Unions</li>
-                <li>File Handling</li>
-                <li>Preprocessor Directives</li>
-            </ol>
-        </div>
-
+        <a href="../index.html" class="back-button">Back to Home</a>
+        <h1>C Interview Guide</h1>
+        <p class="subtitle">Comprehensive guide covering C language features with detailed explanations and code examples</p>
+        
         <h2>1. C Fundamentals</h2>
 
         <div class="question">
@@ -830,13 +264,13 @@
                     <td>float</td>
                     <td>Single-precision floating point</td>
                     <td>4 bytes</td>
-                    <td>Â±3.4E-38 to Â±3.4E+38</td>
+                    <td>±3.4E-38 to ±3.4E+38</td>
                 </tr>
                 <tr>
                     <td>double</td>
                     <td>Double-precision floating point</td>
                     <td>8 bytes</td>
-                    <td>Â±1.7E-308 to Â±1.7E+308</td>
+                    <td>±1.7E-308 to ±1.7E+308</td>
                 </tr>
                 <tr>
                     <td>void</td>
@@ -846,11 +280,11 @@
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>// Data type examples
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>// Data type examples
 char grade = 'A';
 int age = 25;
 float salary = 50000.50f;
-double pi = 3.14159265359;</code></pre></div>
+double pi = 3.14159265359;</code></div></div>
         </div>
 
         <h2>2. Data Types and Variables</h2>
@@ -887,10 +321,10 @@ double pi = 3.14159265359;</code></pre></div>
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>int age;
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int age;
 printf("Enter age: ");
 scanf("%d", &age);  // Needs address
-printf("Age: %d", age);</code></pre></div>
+printf("Age: %d", age);</code></div></div>
         </div>
 
         <div class="question">
@@ -900,10 +334,10 @@ printf("Age: %d", age);</code></pre></div>
             <p>In printf, both %d and %i are identical - they both print integers.</p>
             <p>In scanf, %d expects a decimal integer, while %i can accept decimal, octal (with 0 prefix), or hexadecimal (with 0x prefix).</p>
             
-            <div class="code-block" data-language="code"><pre><code>int num1, num2;
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int num1, num2;
 scanf("%d", &num1);   // Decimal only
 scanf("%i", &num2);   // Decimal, octal, or hex
-printf("num1: %d, num2: %d", num1, num2);</code></pre></div>
+printf("num1: %d, num2: %d", num1, num2);</code></div></div>
         </div>
 
         <div class="question">
@@ -913,10 +347,10 @@ printf("num1: %d, num2: %d", num1, num2);</code></pre></div>
             <p><strong>++i (Pre-increment)</strong>: Increments the value first, then uses it.</p>
             <p><strong>i++ (Post-increment)</strong>: Uses the value first, then increments it.</p>
             
-            <div class="code-block" data-language="code"><pre><code>int i = 5;
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int i = 5;
 int j = ++i;  // i=6, j=6 (pre-increment)
 i = 5;
-j = i++;     // j=5, i=6 (post-increment)</code></pre></div>
+j = i++;     // j=5, i=6 (post-increment)</code></div></div>
         </div>
 
         <h2>3. Control Structures</h2>
@@ -930,7 +364,7 @@ j = i++;     // j=5, i=6 (post-increment)</code></pre></div>
             <p><strong>3. Iteration (Looping)</strong>: for, while, do-while</p>
             <p><strong>4. Jump</strong>: break, continue, goto, return</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Selection
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>// Selection
 if (condition) {
     // code
 } else if (condition) {
@@ -964,7 +398,7 @@ do {
 break;    // Exit loop/switch
 continue; // Skip to next iteration
 goto label; // Jump to label
-return;   // Return from function</code></pre></div>
+return;   // Return from function</code></div></div>
         </div>
 
         <div class="question">
@@ -999,9 +433,9 @@ return;   // Return from function</code></pre></div>
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>int i = 5;
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int i = 5;
 while (i < 5) { }          // Won't execute
-do { } while (i < 5);      // Executes once</code></pre></div>
+do { } while (i < 5);      // Executes once</code></div></div>
         </div>
 
         <h2>4. Functions</h2>
@@ -1038,7 +472,7 @@ do { } while (i < 5);      // Executes once</code></pre></div>
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>// Call by value - copy
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>// Call by value - copy
 void swapByValue(int a, int b) { int temp = a; a = b; b = temp; }
 
 // Call by reference - pointer
@@ -1046,7 +480,7 @@ void swapByReference(int *a, int *b) { int temp = *a; *a = *b; *b = temp; }
 
 int x = 10, y = 20;
 swapByValue(x, y);       // x=10, y=20 (unchanged)
-swapByReference(&x, &y); // x=20, y=10 (changed)</code></pre></div>
+swapByReference(&x, &y); // x=20, y=10 (changed)</code></div></div>
         </div>
 
         <div class="question">
@@ -1055,7 +489,7 @@ swapByReference(&x, &y); // x=20, y=10 (changed)</code></pre></div>
         <div class="answer">
             <p>Recursion is when a function calls itself to solve a problem. Each recursive call works on a smaller instance of the problem.</p>
             
-            <div class="code-block" data-language="code"><pre><code>int factorial(int n) {
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int factorial(int n) {
     if (n <= 1) return 1;
     return n * factorial(n - 1);
 }
@@ -1063,7 +497,7 @@ swapByReference(&x, &y); // x=20, y=10 (changed)</code></pre></div>
 int fibonacci(int n) {
     if (n <= 1) return n;
     return fibonacci(n - 1) + fibonacci(n - 2);
-}</code></pre></div>
+}</code></div></div>
             
             <div class="tip">
                 <strong>Tip:</strong> Always have a base case to prevent infinite recursion. Recursion can lead to stack overflow if not properly handled.
@@ -1104,14 +538,14 @@ int fibonacci(int n) {
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>int arr[5] = {1, 2, 3, 4, 5};
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int arr[5] = {1, 2, 3, 4, 5};
 int *ptr = arr;  // Array decays to pointer
 
 arr[2] = 10;    // OK
 *(ptr + 2) = 10; // OK
 
 // arr = ptr;  // Error - array can't be reassigned
-ptr = &arr[0];  // OK - pointer can be reassigned</code></pre></div>
+ptr = &arr[0];  // OK - pointer can be reassigned</code></div></div>
         </div>
 
         <div class="question">
@@ -1120,11 +554,11 @@ ptr = &arr[0];  // OK - pointer can be reassigned</code></pre></div>
         <div class="answer">
             <p>In C, strings are arrays of characters terminated by a null character ('\0'). The null character marks the end of the string.</p>
             
-            <div class="code-block" data-language="code"><pre><code>char str1[] = "Hello";  // 'H','e','l','l','o','\0'
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>char str1[] = "Hello";  // 'H','e','l','l','o','\0'
 char str2[] = {'H', 'i', '\0'};
 char str3[] = {'H', 'e', 'l', 'l', 'o'}; // Not null-terminated
 
-strlen(str1);  // 5 (doesn't count '\0')</code></pre></div>
+strlen(str1);  // 5 (doesn't count '\0')</code></div></div>
             
             <div class="important">
                 <strong>Important:</strong> Always ensure strings are null-terminated. Functions like strlen, strcpy, etc. rely on the null terminator.
@@ -1146,11 +580,11 @@ strlen(str1);  // 5 (doesn't count '\0')</code></pre></div>
                 <li>Efficient array handling</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>int num = 10;
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int num = 10;
 int *ptr = &num;
 
 *ptr = 20;     // Modify value through pointer
-printf("%d", num);  // 20</code></pre></div>
+printf("%d", num);  // 20</code></div></div>
         </div>
 
         <div class="question">
@@ -1160,13 +594,13 @@ printf("%d", num);  // 20</code></pre></div>
             <p><strong>*ptr</strong> (Dereference operator): Gets the value stored at the address pointed to by ptr.</p>
             <p><strong>&ptr</strong> (Address-of operator): Gets the memory address of the variable ptr.</p>
             
-            <div class="code-block" data-language="code"><pre><code>int num = 10;
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int num = 10;
 int *ptr = &num;
 
 *ptr;  // Value at address (10)
 &num;  // Address of num
 ptr;   // Address stored in ptr
-&ptr;  // Address of ptr variable</code></pre></div>
+&ptr;  // Address of ptr variable</code></div></div>
         </div>
 
         <div class="question">
@@ -1175,13 +609,13 @@ ptr;   // Address stored in ptr
         <div class="answer">
             <p>Pointer arithmetic allows you to perform arithmetic operations on pointers. The operations are scaled by the size of the data type.</p>
             
-            <div class="code-block" data-language="code"><pre><code>int arr[] = {10, 20, 30, 40, 50};
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int arr[] = {10, 20, 30, 40, 50};
 int *ptr = arr;
 
 *ptr;        // 10
 *(ptr + 1);  // 20 (scaled by sizeof(int))
 ptr++;       // Moves to next element
-ptr += 2;    // Moves ahead by 2 elements</code></pre></div>
+ptr += 2;    // Moves ahead by 2 elements</code></div></div>
         </div>
 
         <h2>7. Memory Management</h2>
@@ -1198,10 +632,10 @@ ptr += 2;    // Moves ahead by 2 elements</code></pre></div>
                 <li><strong>free</strong>: Deallocates previously allocated memory</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>int *ptr1 = malloc(5 * sizeof(int));  // Uninitialized
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int *ptr1 = malloc(5 * sizeof(int));  // Uninitialized
 int *ptr2 = calloc(5, sizeof(int));    // Initialized to zero
 ptr1 = realloc(ptr1, 10 * sizeof(int)); // Resize
-free(ptr1);  free(ptr2);  // Deallocate</code></pre></div>
+free(ptr1);  free(ptr2);  // Deallocate</code></div></div>
             
             <div class="important">
                 <strong>Important:</strong> Always check if malloc/calloc returns NULL (allocation failed). Always free allocated memory to prevent memory leaks.
@@ -1240,7 +674,7 @@ free(ptr1);  free(ptr2);  // Deallocate</code></pre></div>
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <stdio.h>
 #include <stdlib.h>
 
 int main() {
@@ -1261,7 +695,7 @@ int main() {
     free(ptr2);
     
     return 0;
-}</code></pre></div>
+}</code></div></div>
         </div>
 
         <h2>8. Structures and Unions</h2>
@@ -1298,12 +732,12 @@ int main() {
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>struct Student { int id; char name[20]; float marks; };
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>struct Student { int id; char name[20]; float marks; };
 union Data { int i; float f; char str[20]; };
 
 struct Student s = {1, "John", 85.5};  // Size: sum of all members
 union Data d;
-d.i = 10;  // Only one member active at a time</code></pre></div>
+d.i = 10;  // Only one member active at a time</code></div></div>
         </div>
 
         <div class="question">
@@ -1312,13 +746,13 @@ d.i = 10;  // Only one member active at a time</code></pre></div>
         <div class="answer">
             <p>typedef is used to create a new name (alias) for an existing data type. It improves code readability and makes it easier to change types later.</p>
             
-            <div class="code-block" data-language="code"><pre><code>typedef unsigned int uint;
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>typedef unsigned int uint;
 typedef int* IntPtr;
 typedef struct { int x; int y; } Point;
 typedef int (*Operation)(int, int);
 
 uint age = 25;
-Point p = {10, 20};</code></pre></div>
+Point p = {10, 20};</code></div></div>
         </div>
 
         <h2>9. File Handling</h2>
@@ -1358,14 +792,14 @@ Point p = {10, 20};</code></pre></div>
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>FILE *file = fopen("test.txt", "w");
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>FILE *file = fopen("test.txt", "w");
 fprintf(file, "Hello, World!\n");
 fclose(file);
 
 file = fopen("test.txt", "r");
 char buffer[100];
 fgets(buffer, sizeof(buffer), file);  // Read line
-fclose(file);</code></pre></div>
+fclose(file);</code></div></div>
         </div>
 
         <h2>10. Preprocessor Directives</h2>
@@ -1407,11 +841,11 @@ fclose(file);</code></pre></div>
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>#define PI 3.14159
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#define PI 3.14159
 const float pi = 3.14159f;
 
 #undef PI  // Can undefine #define
-// pi = 3.0;  // Error - can't modify const</code></pre></div>
+// pi = 3.0;  // Error - can't modify const</code></div></div>
         </div>
 
         <div class="question">
@@ -1421,14 +855,14 @@ const float pi = 3.14159f;
             <p><strong>#include <file></strong>: Searches for the file in standard system directories (compiler's include paths).</p>
             <p><strong>#include "file"</strong>: Searches for the file in the current directory first, then in standard system directories.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Standard library - use <>
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>// Standard library - use <>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 // User-defined headers - use ""
 #include "myheader.h"
-#include "utils.h"</code></pre></div>
+#include "utils.h"</code></div></div>
             
             <div class="tip">
                 <strong>Tip:</strong> Use <> for standard library headers and "" for your own header files.
@@ -1441,14 +875,14 @@ const float pi = 3.14159f;
         <div class="answer">
             <p>Segmentation fault occurs when program attempts to access memory it doesn't have permission to access. Common causes: dereferencing NULL pointer, accessing array out of bounds, writing to read-only memory, using freed memory (dangling pointer), stack overflow.</p>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <stdio.h>
 
 int main() {
     int *ptr = NULL;
     *ptr = 10; // Segmentation fault
     
     return 0;
-}</code></pre></div>
+}</code></div></div>
         </div>
 
         <div class="question">
@@ -1457,7 +891,7 @@ int main() {
         <div class="answer">
             <p>No, sizeof() does not evaluate the expression. It only determines the type at compile-time. Example: sizeof(a++) doesn't increment a - only the type is considered for size calculation.</p>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <stdio.h>
 
 int main() {
     int a = 5;
@@ -1465,7 +899,7 @@ int main() {
     printf("%d", a); // Still 5
     
     return 0;
-}</code></pre></div>
+}</code></div></div>
         </div>
 
         <div class="question">
@@ -1474,9 +908,9 @@ int main() {
         <div class="answer">
             <p><strong>NULL:</strong> Null pointer ((void*)0). <strong>0:</strong> Integer constant (can represent null pointer in pointer context). <strong>'\0':</strong> Null character used to terminate strings (ASCII 0).</p>
             
-            <div class="code-block" data-language="code"><pre><code>int *ptr = NULL;  // Null pointer
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int *ptr = NULL;  // Null pointer
 int num = 0;      // Integer
-char ch = '\0';   // Null character (ASCII 0)</code></pre></div>
+char ch = '\0';   // Null character (ASCII 0)</code></div></div>
         </div>
 
         <div class="question">
@@ -1485,13 +919,13 @@ char ch = '\0';   // Null character (ASCII 0)</code></pre></div>
         <div class="answer">
             <p><strong>UART:</strong> Asynchronous, 2 wires (TX, RX), simple, moderate speed. <strong>SPI:</strong> Synchronous, 4 wires (MOSI, MISO, SCLK, SS), high speed, full-duplex. <strong>I2C:</strong> Synchronous, 2 wires (SDA, SCL), slower, multi-device addressing.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// UART - Simple, 2 wires
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>// UART - Simple, 2 wires
 // SPI - Fast, 4 wires, full-duplex
 // I2C - Slower, 2 wires, multi-device
 
 // UART initialization (pseudocode)
 UART->BAUD = 9600;
-UART->CTRL = UART_ENABLE | UART_TX_ENABLE;</code></pre></div>
+UART->CTRL = UART_ENABLE | UART_TX_ENABLE;</code></div></div>
         </div>
 
         <div class="question">
@@ -1500,13 +934,13 @@ UART->CTRL = UART_ENABLE | UART_TX_ENABLE;</code></pre></div>
         <div class="answer">
             <p>Hardware timer that resets microcontroller if software becomes unresponsive. Program must periodically "kick" watchdog before timeout expires. Used for safety-critical systems to recover from hangs or deadlocks.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Watchdog timer (pseudocode)
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>// Watchdog timer (pseudocode)
 WDT->CTRL = WDT_ENABLE | WDT_TIMEOUT_2S;
 
 while (1) {
     do_work();
     WDT->REFRESH = 0xAA55; // Kick watchdog
-}</code></pre></div>
+}</code></div></div>
         </div>
 
         <div class="question">
@@ -1515,11 +949,11 @@ while (1) {
         <div class="answer">
             <p>Hardware registers assigned fixed memory addresses, accessed like variables. Use volatile keyword to prevent compiler optimization. Example: #define PORTB (*(volatile unsigned char*)0x25).</p>
             
-            <div class="code-block" data-language="code"><pre><code>#define PORTB (*(volatile unsigned char*)0x25)
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#define PORTB (*(volatile unsigned char*)0x25)
 
 // Access hardware register
 PORTB = 0xFF; // Write to register
-unsigned char value = PORTB; // Read from register</code></pre></div>
+unsigned char value = PORTB; // Read from register</code></div></div>
         </div>
 
         <div class="question">
@@ -1528,7 +962,7 @@ unsigned char value = PORTB; // Read from register</code></pre></div>
         <div class="answer">
             <p><strong>Shallow copy:</strong> Copies pointer addresses, not data. Both pointers point to same memory. <strong>Deep copy:</strong> Copies actual data, allocates new memory. Changes don't affect original.</p>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <stdio.h>
 #include <string.h>
 
 // Shallow copy (problematic)
@@ -1538,7 +972,7 @@ char *ptr2 = ptr1; // Same memory
 
 // Deep copy (correct)
 char *ptr3 = malloc(10);
-strcpy(ptr3, ptr1); // New memory</code></pre></div>
+strcpy(ptr3, ptr1); // New memory</code></div></div>
         </div>
 
         <div class="question">
@@ -1547,14 +981,14 @@ strcpy(ptr3, ptr1); // New memory</code></pre></div>
         <div class="answer">
             <p>Writing data beyond allocated memory boundaries. Can crash program, corrupt memory, or enable security exploits. Prevented by bounds checking, using safe functions (fgets, strncpy).</p>
             
-            <div class="code-block" data-language="code"><pre><code>#include <stdio.h>
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <stdio.h>
 
 // Unsafe - buffer overflow
 char buffer[5];
 strcpy(buffer, "HelloWorld"); // Overflow!
 
 // Safe - use fgets
-fgets(buffer, sizeof(buffer), stdin);</code></pre></div>
+fgets(buffer, sizeof(buffer), stdin);</code></div></div>
         </div>
 
         <div class="question">
@@ -1563,10 +997,10 @@ fgets(buffer, sizeof(buffer), stdin);</code></pre></div>
         <div class="answer">
             <p>Code with no specified behavior in C standard. Results unpredictable: may crash, work incorrectly, or appear to work. Examples: dereferencing NULL, signed integer overflow, using uninitialized variables.</p>
             
-            <div class="code-block" data-language="code"><pre><code>int *ptr = NULL;     // Undefined: dereferencing NULL
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int *ptr = NULL;     // Undefined: dereferencing NULL
 int arr[5];
 arr[10] = 5;         // Undefined: out of bounds
-int x;               // Undefined: uninitialized</code></pre></div>
+int x;               // Undefined: uninitialized</code></div></div>
         </div>
 
         <div class="question">
@@ -1575,11 +1009,11 @@ int x;               // Undefined: uninitialized</code></pre></div>
         <div class="answer">
             <p><strong>char *s:</strong> Pointer to string (modifiable address, may point to read-only memory). <strong>char s[]:</strong> Array of characters (modifiable content, allocated on stack).</p>
             
-            <div class="code-block" data-language="code"><pre><code>char *p = "Hello";  // May be read-only
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>char *p = "Hello";  // May be read-only
 char a[] = "Hello"; // Modifiable
 
 p[0] = 'h'; // Undefined behavior
-a[0] = 'h'; // OK</code></pre></div>
+a[0] = 'h'; // OK</code></div></div>
         </div>
 
         <div class="question">
@@ -1588,12 +1022,12 @@ a[0] = 'h'; // OK</code></pre></div>
         <div class="answer">
             <p>Tells compiler that pointer is only way to access object. Enables compiler optimizations. Used in function parameters to promise no aliasing.</p>
             
-            <div class="code-block" data-language="code"><pre><code>void copy(int *restrict dest, int *restrict src, int n) {
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>void copy(int *restrict dest, int *restrict src, int n) {
     // Compiler knows dest and src don't overlap
     for (int i = 0; i < n; i++) {
         dest[i] = src[i];
     }
-}</code></pre></div>
+}</code></div></div>
         </div>
 
         <div class="question">
@@ -1602,12 +1036,12 @@ a[0] = 'h'; // OK</code></pre></div>
         <div class="answer">
             <p><strong>struct:</strong> Default public members, C-compatible. <strong>class:</strong> Default private members, C++ features (inheritance, methods). In C, only structs exist.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// C - only structs
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>// C - only structs
 struct Point { int x; int y; };
 
 // C++ - struct (public) vs class (private)
 struct PointStruct { int x; };  // public
-class PointClass { int x; };    // private</code></pre></div>
+class PointClass { int x; };    // private</code></div></div>
         </div>
 
         <div class="question">
@@ -1616,7 +1050,7 @@ class PointClass { int x; };    // private</code></pre></div>
         <div class="answer">
             <p><strong>struct:</strong> Each member has separate memory. Size = sum of all members. <strong>union:</strong> All members share same memory. Size = size of largest member. Only one member active at a time.</p>
             
-            <div class="code-block" data-language="code"><pre><code>struct S {
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>struct S {
     int a;
     char b;
 }; // Size: 8 (with padding)
@@ -1624,7 +1058,7 @@ class PointClass { int x; };    // private</code></pre></div>
 union U {
     int a;
     char b;
-}; // Size: 4 (largest member)</code></pre></div>
+}; // Size: 4 (largest member)</code></div></div>
         </div>
 
         <div class="question">
@@ -1633,11 +1067,11 @@ union U {
         <div class="answer">
             <p><strong>typedef:</strong> Creates type alias, type-checked, processed by compiler. <strong>#define:</strong> Text substitution, no type checking, processed by preprocessor.</p>
             
-            <div class="code-block" data-language="code"><pre><code>typedef unsigned int uint; // Type alias
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>typedef unsigned int uint; // Type alias
 #define uint unsigned int   // Text substitution
 
 uint x = 10; // Type-checked
-#define y 20  // No type checking</code></pre></div>
+#define y 20  // No type checking</code></div></div>
         </div>
 
         <div class="question">
@@ -1646,13 +1080,13 @@ uint x = 10; // Type-checked
         <div class="answer">
             <p><strong>const:</strong> Variable with fixed value, type-checked, scoped. <strong>#define:</strong> Macro, text substitution, no type, global scope. Use const for type safety.</p>
             
-            <div class="code-block" data-language="code"><pre><code>#define MAX 100   // Global, no type
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#define MAX 100   // Global, no type
 const int max = 100; // Scoped, type-checked
 
 void func() {
     const int local = 50; // Local const
     // MAX is also available here
-}</code></pre></div>
+}</code></div></div>
         </div>
 
         <div class="question">
@@ -1661,14 +1095,14 @@ void func() {
         <div class="answer">
             <p><strong>array:</strong> Fixed size, contiguous memory, sizeof returns total size. <strong>pointer:</strong> Stores address, can be reassigned, sizeof returns pointer size. Array decays to pointer.</p>
             
-            <div class="code-block" data-language="code"><pre><code>int arr[5] = {1, 2, 3, 4, 5};
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int arr[5] = {1, 2, 3, 4, 5};
 int *ptr = arr;
 
 sizeof(arr); // 20 (5 * 4)
 sizeof(ptr); // 8 (pointer size)
 
 arr = ptr; // Error
-ptr = &arr[0]; // OK</code></pre></div>
+ptr = &arr[0]; // OK</code></div></div>
         </div>
 
         <div class="question">
@@ -1677,12 +1111,12 @@ ptr = &arr[0]; // OK</code></pre></div>
         <div class="answer">
             <p><strong>++i:</strong> Pre-increment, returns incremented value. <strong>i++:</strong> Post-increment, returns original value. In complex expressions, order matters for side effects.</p>
             
-            <div class="code-block" data-language="code"><pre><code>int i = 5, j;
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int i = 5, j;
 j = ++i; // i=6, j=6
 j = i++; // j=6, i=7
 
 int arr[] = {1, 2, 3};
-int x = arr[i++] + arr[++i]; // Undefined!</code></pre></div>
+int x = arr[i++] + arr[++i]; // Undefined!</code></div></div>
         </div>
 
         <div class="question">
@@ -1691,12 +1125,12 @@ int x = arr[i++] + arr[++i]; // Undefined!</code></pre></div>
         <div class="answer">
             <p><strong>=:</strong> Assignment operator, assigns value. <strong>==:</strong> Equality operator, compares values. Common mistake: using = in condition instead of ==.</p>
             
-            <div class="code-block" data-language="code"><pre><code>int x = 10; // Assignment
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int x = 10; // Assignment
 if (x == 10) // Comparison
     printf("Equal");
 
 if (x = 5) // Wrong! Always true
-    printf("This runs");</code></pre></div>
+    printf("This runs");</code></div></div>
         </div>
 
         <div class="question">
@@ -1705,7 +1139,7 @@ if (x = 5) // Wrong! Always true
         <div class="answer">
             <p><strong>&&:</strong> Logical AND, short-circuits (stops if first false). <strong>&:</strong> Bitwise AND, evaluates both operands, operates on bits.</p>
             
-            <div class="code-block" data-language="code"><pre><code>int a = 5, b = 0;
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int a = 5, b = 0;
 
 if (a && b) // Logical AND (false)
     printf("Won't print");
@@ -1714,7 +1148,7 @@ if (a & b) // Bitwise AND (0)
     printf("Won't print");
 
 if (a && (a = 0)) // Short-circuit, a unchanged
-    printf("Won't print");</code></pre></div>
+    printf("Won't print");</code></div></div>
         </div>
 
         <div class="question">
@@ -1723,7 +1157,7 @@ if (a && (a = 0)) // Short-circuit, a unchanged
         <div class="answer">
             <p><strong>||:</strong> Logical OR, short-circuits (stops if first true). <strong>|:</strong> Bitwise OR, evaluates both operands, operates on bits.</p>
             
-            <div class="code-block" data-language="code"><pre><code>int a = 5, b = 0;
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int a = 5, b = 0;
 
 if (a || b) // Logical OR (true)
     printf("Will print");
@@ -1732,12 +1166,784 @@ if (a | b) // Bitwise OR (5)
     printf("Will print");
 
 if (a || (a = 0)) // Short-circuit, a unchanged
-    printf("Will print");</code></pre></div>
+    printf("Will print");</code></div></div>
+        </div>
+
+        <h2>11. Advanced Pointers</h2>
+        
+        <div class="question">
+            Q43: What is a double pointer (pointer to pointer)?
+        </div>
+        <div class="answer">
+            <p><strong>Double pointer</strong> is a pointer that stores the address of another pointer. Used for modifying pointer values in functions, creating dynamic 2D arrays, and implementing data structures like linked lists.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int a = 10;
+int *ptr = &a;
+int **ptr2 = &ptr;
+
+printf("%d", **ptr2); // 10</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q44: What is the difference between near, far, and huge pointers?
+        </div>
+        <div class="answer">
+            <p><strong>near pointer:</strong> 16-bit pointer for small memory models (64KB segment). <strong>far pointer:</strong> 32-bit pointer with segment and offset (can access 1MB). <strong>huge pointer:</strong> 32-bit pointer with normalized segment (can access >1MB). These are specific to DOS/16-bit systems.</p>
+        </div>
+        
+        <div class="question">
+            Q45: What is pointer to function?
+        </div>
+        <div class="answer">
+            <p><strong>Function pointer</strong> stores the address of a function. Used for callbacks, implementing polymorphism, and passing functions as arguments.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int add(int a, int b) { return a + b; }
+int (*func_ptr)(int, int) = add;
+int result = func_ptr(5, 3); // 8</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q46: What is an array of function pointers?
+        </div>
+        <div class="answer">
+            <p><strong>Array of function pointers</strong> stores multiple function addresses. Used for implementing state machines, command dispatchers, and switch-like behavior.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int (*operations[])(int, int) = {add, sub, mul, div};
+int result = operations[0](5, 3); // Calls add</code></div></div>
+        </div>
+        
+        <h2>12. Bit Manipulation</h2>
+        
+        <div class="question">
+            Q47: What are bitwise operators in C?
+        </div>
+        <div class="answer">
+            <p><strong>Bitwise operators:</strong> & (AND), | (OR), ^ (XOR), ~ (NOT), << (left shift), >> (right shift). Used for low-level programming, embedded systems, and optimization.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int a = 5;  // 0101
+int b = 3;  // 0011
+
+a & b;  // 0001 (1) - AND
+a | b;  // 0111 (7) - OR
+a ^ b;  // 0110 (6) - XOR
+~a;     // 1010 (-6) - NOT
+a << 1; // 1010 (10) - Left shift
+a >> 1; // 0010 (2) - Right shift</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q48: How to set, clear, and toggle a bit?
+        </div>
+        <div class="answer">
+            <p><strong>Set bit:</strong> num |= (1 << position). <strong>Clear bit:</strong> num &= ~(1 << position). <strong>Toggle bit:</strong> num ^= (1 << position). <strong>Check bit:</strong> (num >> position) & 1.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int num = 5; // 0101
+
+num |= (1 << 1);  // Set bit 1: 0111 (7)
+num &= ~(1 << 2); // Clear bit 2: 0011 (3)
+num ^= (1 << 0);  // Toggle bit 0: 0010 (2)</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q49: What is the difference between logical and bitwise shift?
+        </div>
+        <div class="answer">
+            <p><strong>Logical shift:</strong> Fills with zeros (unsigned). <strong>Arithmetic shift:</strong> Fills with sign bit (signed). In C, >> is arithmetic for signed, logical for unsigned.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>signed int x = -8;  // 11111000
+unsigned int y = 8; // 00001000
+
+x >> 2; // Arithmetic: fills with 1s
+y >> 2; // Logical: fills with 0s</code></div></div>
+        </div>
+        
+        <h2>13. Preprocessor Advanced</h2>
+        
+        <div class="question">
+            Q50: What is the difference between #if and #ifdef?
+        </div>
+        <div class="answer">
+            <p><strong>#if</strong> evaluates constant expressions. <strong>#ifdef</strong> checks if macro is defined. #if is more flexible, #ifdef is simpler for existence checks.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#ifdef DEBUG
+    printf("Debug mode");
+#endif
+
+#if DEBUG == 1
+    printf("Debug level 1");
+#endif</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q51: What is #pragma once?
+        </div>
+        <div class="answer">
+            <p><strong>#pragma once</strong> ensures header file is included only once. Alternative to include guards (#ifndef HEADER_H #define HEADER_H). Non-standard but widely supported.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#pragma once
+
+// Header content</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q52: What are macro operators # and ##?
+        </div>
+        <div class="answer">
+            <p><strong>#</strong> (stringizing) converts macro argument to string. <strong>##</strong> (token pasting) concatenates tokens.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#define STR(x) #x
+#define CONCAT(a, b) a##b
+
+STR(hello);  // "hello"
+CONCAT(var, 1); // var1</code></div></div>
+        </div>
+        
+        <h2>14. Standard Library</h2>
+        
+        <div class="question">
+            Q53: What is the difference between strcpy and strncpy?
+        </div>
+        <div class="answer">
+            <p><strong>strcpy</strong> copies string without length check (unsafe). <strong>strncpy</strong> copies with length limit (safer but may not null-terminate).</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>char dest[10];
+strcpy(dest, "hello");  // Unsafe
+strncpy(dest, "hello", 9);  // Safer
+dest[9] = '\0';  // Ensure null-termination</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q54: What is the difference between strcmp and strncmp?
+        </div>
+        <div class="answer">
+            <p><strong>strcmp</strong> compares entire strings. <strong>strncmp</strong> compares up to n characters.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>strcmp("hello", "world");  // Compare full strings
+strncmp("hello", "help", 3);  // Compare first 3 chars</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q55: What is the difference between sprintf and snprintf?
+        </div>
+        <div class="answer">
+            <p><strong>sprintf</strong> writes to buffer without size check (unsafe). <strong>snprintf</strong> writes with size limit (safer).</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>char buffer[10];
+sprintf(buffer, "%d", 12345);  // Unsafe
+snprintf(buffer, sizeof(buffer), "%d", 12345);  // Safer</code></div></div>
+        </div>
+        
+        <h2>15. File Operations</h2>
+        
+        <div class="question">
+            Q56: What is the difference between text and binary mode?
+        </div>
+        <div class="answer">
+            <p><strong>Text mode:</strong> Handles line endings (\r\n conversion), may modify data. <strong>Binary mode:</strong> Raw data, no conversion. Use binary for images, executables.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>FILE *text = fopen("file.txt", "r");  // Text mode
+FILE *binary = fopen("file.bin", "rb");  // Binary mode</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q57: What is the difference between fseek and rewind?
+        </div>
+        <div class="answer">
+            <p><strong>fseek</strong> moves file position to specific offset. <strong>rewind</strong> moves to beginning (equivalent to fseek(fp, 0, SEEK_SET)).</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>fseek(fp, 100, SEEK_SET);  // Move to byte 100
+rewind(fp);  // Move to beginning</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q58: What is the difference between fgets and gets?
+        </div>
+        <div class="answer">
+            <p><strong>gets</strong> reads line without size limit (removed in C11, dangerous). <strong>fgets</strong> reads with size limit (safe).</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>char buffer[100];
+fgets(buffer, sizeof(buffer), stdin);  // Safe
+// gets(buffer);  // Dangerous - removed in C11</code></div></div>
+        </div>
+        
+        <h2>16. Memory Management Advanced</h2>
+        
+        <div class="question">
+            Q59: What is memory leak in C?
+        </div>
+        <div class="answer">
+            <p><strong>Memory leak</strong> occurs when allocated memory is not freed. Causes: forgetting free(), losing pointer, overwriting pointer. Detected with tools like Valgrind.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int *ptr = malloc(sizeof(int));
+ptr = malloc(sizeof(int));  // Leak - lost first allocation
+// free(ptr);  // Missing free causes leak</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q60: What is the difference between stack and heap?
+        </div>
+        <div class="answer">
+            <p><strong>Stack:</strong> Automatic allocation, LIFO, fast, limited size, local variables. <strong>Heap:</strong> Manual allocation, random access, slower, larger, dynamic memory.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int stack_var;  // Stack
+int *heap_ptr = malloc(sizeof(int));  // Heap
+free(heap_ptr);  // Must free</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q61: What is the difference between alloca and malloc?
+        </div>
+        <div class="answer">
+            <p><strong>alloca</strong> allocates on stack (automatically freed, non-standard). <strong>malloc</strong> allocates on heap (must free manually, standard).</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>void *stack_mem = alloca(100);  // Auto-freed
+void *heap_mem = malloc(100);  // Must free
+free(heap_mem);</code></div></div>
+        </div>
+        
+        <h2>17. Structures Advanced</h2>
+        
+        <div class="question">
+            Q62: What is structure padding?
+        </div>
+        <div class="answer">
+            <p><strong>Padding</strong> adds bytes to align members for efficient memory access. Can be controlled with #pragma pack. Affects sizeof(struct).</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>struct Data {
+    char a;  // 1 byte + 3 padding
+    int b;   // 4 bytes
+};  // Total: 8 bytes</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q63: What is a bit field?
+        </div>
+        <div class="answer">
+            <p><strong>Bit field</strong> specifies exact number of bits for a member. Used for memory optimization, flags, hardware registers.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>struct Flags {
+    unsigned int flag1 : 1;
+    unsigned int flag2 : 1;
+    unsigned int value : 6;
+};  // Total: 1 byte</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q64: What is the difference between struct and class in C++?
+        </div>
+        <div class="answer">
+            <p><strong>struct:</strong> Default public members, C-compatible. <strong>class:</strong> Default private members, C++ features. In C, only structs exist.</p>
+        </div>
+        
+        <h2>18. Compiler Directives</h2>
+        
+        <div class="question">
+            Q65: What is static_assert?
+        </div>
+        <div class="answer">
+            <p><strong>static_assert</strong> (C11) checks condition at compile-time. Used for compile-time assertions, type checking.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>static_assert(sizeof(int) == 4, "int must be 4 bytes");
+static_assert(sizeof(long) >= 8, "long must be at least 8 bytes");</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q66: What is _Generic (C11)?
+        </div>
+        <div class="answer">
+            <p><strong>_Generic</strong> selects expression based on type. Used for type-generic programming, overloading-like behavior.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#define TYPE_NAME(x) _Generic((x), \
+    int: "int", \
+    float: "float", \
+    default: "other")
+
+printf("%s", TYPE_NAME(10));  // "int"</code></div></div>
+        </div>
+        
+        <h2>19. Security</h2>
+        
+        <div class="question">
+            Q67: What is buffer overflow?
+        </div>
+        <div class="answer">
+            <p><strong>Buffer overflow</strong> writes beyond allocated memory. Can crash program, corrupt data, enable exploits. Prevented by bounds checking, safe functions.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>char buffer[5];
+strcpy(buffer, "hello world");  // Overflow!</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q68: What is format string vulnerability?
+        </div>
+        <div class="answer">
+            <p><strong>Format string vulnerability</strong> occurs when user input is used as format string. Can read/write memory. Always use format specifiers.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>printf(user_input);  // Vulnerable!
+printf("%s", user_input);  // Safe</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q69: What is integer overflow?
+        </div>
+        <div class="answer">
+            <p><strong>Integer overflow</strong> occurs when value exceeds type range. Signed overflow is undefined behavior. Use larger types or checks.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int x = INT_MAX;
+x++;  // Undefined behavior (signed overflow)
+
+unsigned int y = UINT_MAX;
+y++;  // Defined (wraps to 0)</code></div></div>
+        </div>
+        
+        <h2>20. Optimization</h2>
+        
+        <div class="question">
+            Q70: What is inline function?
+        </div>
+        <div class="answer">
+            <p><strong>inline</strong> suggests compiler to insert function code at call site. Reduces overhead, may increase code size. Hint only, not guaranteed.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>inline int add(int a, int b) {
+    return a + b;
+}</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q71: What is the difference between const and volatile?
+        </div>
+        <div class="answer">
+            <p><strong>const</strong> value cannot change. <strong>volatile</strong> value can change externally (hardware, interrupt). Can be both.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>const int x = 10;  // Cannot modify
+volatile int y = 10;  // May change externally
+const volatile int z = 10;  // Both</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q72: What is restrict keyword?
+        </div>
+        <div class="answer">
+            <p><strong>restrict</strong> tells compiler pointer is only way to access object. Enables optimizations. Promise of no aliasing.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>void copy(int *restrict dest, int *restrict src, int n) {
+    // Compiler knows no overlap
+    for (int i = 0; i < n; i++)
+        dest[i] = src[i];
+}</code></div></div>
+        </div>
+        
+        <h2>21. Data Structures</h2>
+        
+        <div class="question">
+            Q73: What is a linked list in C?
+        </div>
+        <div class="answer">
+            <p><strong>Linked list</strong> is linear data structure with nodes containing data and pointer to next node. Dynamic size, efficient insertion/deletion.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>struct Node {
+    int data;
+    struct Node *next;
+};</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q74: What is the difference between array and linked list?
+        </div>
+        <div class="answer">
+            <p><strong>Array:</strong> Contiguous memory, O(1) access, fixed size. <strong>Linked list:</strong> Scattered memory, O(n) access, dynamic size.</p>
+        </div>
+        
+        <div class="question">
+            Q75: What is a binary tree in C?
+        </div>
+        <div class="answer">
+            <p><strong>Binary tree</strong> is hierarchical data structure with nodes having at most two children. Used for searching, sorting.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>struct TreeNode {
+    int data;
+    struct TreeNode *left;
+    struct TreeNode *right;
+};</code></div></div>
+        </div>
+        
+        <h2>22. Concurrency</h2>
+        
+        <div class="question">
+            Q76: What is the difference between process and thread?
+        </div>
+        <div class="answer">
+            <p><strong>Process:</strong> Separate memory space, heavier. <strong>Thread:</strong> Shared memory, lighter. C uses pthreads for threading.</p>
+        </div>
+        
+        <div class="question">
+            Q77: What is a race condition?
+        </div>
+        <div class="answer">
+            <p><strong>Race condition</strong> occurs when output depends on timing of concurrent operations. Prevented with mutexes, locks.</p>
+        </div>
+        
+        <div class="question">
+            Q78: What is a mutex?
+        </div>
+        <div class="answer">
+            <p><strong>Mutex</strong> (mutual exclusion) ensures only one thread accesses shared resource. Used with pthread_mutex_t.</p>
+        </div>
+        
+        <h2>23. Embedded Systems</h2>
+        
+        <div class="question">
+            Q79: What is volatile keyword in embedded C?
+        </div>
+        <div class="answer">
+            <p><strong>volatile</strong> prevents compiler optimization for variables that can change externally (hardware registers, ISR variables). Ensures each access reads memory.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>volatile int *status_reg = (int*)0x4000;
+while (*status_reg);  // Won't be optimized away</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q80: What is memory-mapped I/O?
+        </div>
+        <div class="answer">
+            <p><strong>Memory-mapped I/O</strong> maps hardware registers to memory addresses. Accessed like variables. Use volatile for registers.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#define PORTA (*(volatile unsigned int*)0x25)
+PORTA = 0xFF;  // Write to hardware register</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q81: What is an interrupt service routine (ISR)?
+        </div>
+        <div class="answer">
+            <p><strong>ISR</strong> is function called when interrupt occurs. Must be short, not block, use volatile for shared data. Interrupts can be nested.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>volatile int flag = 0;
+
+void ISR_Handler(void) {
+    flag = 1;  // Set flag in ISR
+}
+
+int main() {
+    while (!flag);  // Wait for interrupt
+    return 0;
+}</code></div></div>
+        </div>
+        
+        <h2>24. Debugging</h2>
+        
+        <div class="question">
+            Q82: What is assert macro?
+        </div>
+        <div class="answer">
+            <p><strong>assert</strong> checks condition at runtime. Aborts if false. Disabled with NDEBUG. Used for debugging.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <assert.h>
+assert(ptr != NULL);  // Aborts if NULL</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q83: What is the difference between debugger and profiler?
+        </div>
+        <div class="answer">
+            <p><strong>Debugger:</strong> Finds bugs, sets breakpoints, inspects state. <strong>Profiler:</strong> Measures performance, finds bottlenecks.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>// Debugger (gdb)
+gdb ./program
+break main
+run
+print variable
+
+// Profiler (gprof)
+gcc -pg program.c -o program
+./program
+gprof program gmon.out > analysis.txt</code></div></div>
+        </div>
+        
+        <h2>25. Build System</h2>
+        
+        <div class="question">
+            Q84: What is the difference between static and dynamic linking?
+        </div>
+        <div class="answer">
+            <p><strong>Static linking:</strong> Libraries included in executable (larger, self-contained). <strong>Dynamic linking:</strong> Libraries loaded at runtime (smaller, shared).</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>// Static linking
+gcc program.c -o program -lm -static
+
+// Dynamic linking
+gcc program.c -o program -lm</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q85: What is a makefile?
+        </div>
+        <div class="answer">
+            <p><strong>Makefile</strong> defines build rules, dependencies. Automates compilation. Only rebuilds changed files.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>CC = gcc
+CFLAGS = -Wall -g
+
+program: main.o utils.o
+    $(CC) $(CFLAGS) -o program main.o utils.o
+
+main.o: main.c
+    $(CC) $(CFLAGS) -c main.c
+
+utils.o: utils.c
+    $(CC) $(CFLAGS) -c utils.c</code></div></div>
+        </div>
+        
+        <h2>26. Miscellaneous</h2>
+        
+        <div class="question">
+            Q86: What is the difference between exit and return?
+        </div>
+        <div class="answer">
+            <p><strong>return</strong> exits function. <strong>exit</strong> terminates program. exit calls cleanup functions.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int func() {
+    return 0;  // Exits function only
+}
+
+int main() {
+    exit(0);  // Terminates program
+    return 0;  // Never reached
+}</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q87: What is the difference between abort and exit?
+        </div>
+        <div class="answer">
+            <p><strong>exit</strong> calls cleanup functions, normal termination. <strong>abort</strong> immediate termination, core dump, no cleanup.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <stdlib.h>
+
+exit(0);    // Normal termination, calls atexit functions
+abort();    // Abnormal termination, no cleanup, core dump</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q88: What is the difference between atexit and on_exit?
+        </div>
+        <div class="answer">
+            <p><strong>atexit</strong> registers function to call on normal exit. <strong>on_exit</strong> passes exit status and argument (non-standard).</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <stdlib.h>
+
+void cleanup(void) {
+    printf("Cleanup called\n");
+}
+
+atexit(cleanup);  // Called on normal exit</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q89: What is the difference between setjmp and longjmp?
+        </div>
+        <div class="answer">
+            <p><strong>setjmp</strong> saves execution state. <strong>longjmp</strong> restores state (non-local goto). Used for error handling, coroutines.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <setjmp.h>
+
+jmp_buf env;
+
+void error_handler() {
+    longjmp(env, 1);  // Jump back
+}
+
+int main() {
+    if (setjmp(env) == 0) {
+        error_handler();  // Will jump back
+    } else {
+        printf("Error recovered\n");
+    }
+    return 0;
+}</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q90: What is the difference between signal and exception?
+        </div>
+        <div class="answer">
+            <p><strong>Signal:</strong> Asynchronous notification from OS. <strong>Exception:</strong> Synchronous error (C++). C uses signals for errors.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <signal.h>
+
+void sig_handler(int signo) {
+    printf("Received signal %d\n", signo);
+}
+
+signal(SIGINT, sig_handler);  // Handle Ctrl+C</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q91: What is the difference between fork and exec?
+        </div>
+        <div class="answer">
+            <p><strong>fork</strong> creates child process (duplicate). <strong>exec</strong> replaces process image (new program). Used together for process creation.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <unistd.h>
+#include <sys/wait.h>
+
+pid_t pid = fork();
+if (pid == 0) {
+    // Child process
+    execl("/bin/ls", "ls", NULL);
+} else {
+    // Parent process
+    wait(NULL);
+}</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q92: What is the difference between pipe and socket?
+        </div>
+        <div class="answer">
+            <p><strong>pipe:</strong> Inter-process communication (local). <strong>socket:</strong> Network communication (remote). Both use file descriptors.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <unistd.h>
+
+int pipefd[2];
+pipe(pipefd);  // Create pipe (local IPC)
+
+// vs socket for network
+int sockfd = socket(AF_INET, SOCK_STREAM, 0);</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q93: What is the difference between pipe and shared memory?
+        </div>
+        <div class="answer">
+            <p><strong>pipe:</strong> Stream of bytes, unidirectional. <strong>shared memory:</strong> Shared memory region, bidirectional, faster.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <sys/shm.h>
+
+int shmid = shmget(IPC_PRIVATE, 1024, IPC_CREAT | 0666);
+char *shared_mem = shmat(shmid, NULL, 0);  // Attach shared memory</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q94: What is the difference between thread and process?
+        </div>
+        <div class="answer">
+            <p><strong>Thread:</strong> Shared address space, lightweight. <strong>Process:</strong> Separate address space, heavyweight. Threads within process share memory.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <pthread.h>
+
+void *thread_func(void *arg) {
+    return NULL;
+}
+
+pthread_t tid;
+pthread_create(&tid, NULL, thread_func, NULL);  // Create thread
+pthread_join(tid, NULL);  // Wait for thread</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q95: What is the difference between mutex and semaphore?
+        </div>
+        <div class="answer">
+            <p><strong>mutex:</strong> Locking mechanism (binary). <strong>semaphore:</strong> Counting mechanism (can be >1). Semaphore can signal, mutex cannot.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#include <pthread.h>
+#include <semaphore.h>
+
+pthread_mutex_t mutex;
+pthread_mutex_init(&mutex, NULL);
+pthread_mutex_lock(&mutex);
+// Critical section
+pthread_mutex_unlock(&mutex);
+
+sem_t sem;
+sem_init(&sem, 0, 1);
+sem_wait(&sem);
+// Critical section
+sem_post(&sem);</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q96: What is the difference between deadlock and starvation?
+        </div>
+        <div class="answer">
+            <p><strong>deadlock:</strong> Processes waiting for each other (circular wait). <strong>starvation:</strong> Process never gets resource (priority inversion).</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>// Deadlock example
+pthread_mutex_t lock1, lock2;
+
+// Thread 1
+pthread_mutex_lock(&lock1);
+pthread_mutex_lock(&lock2);  // May deadlock
+
+// Thread 2
+pthread_mutex_lock(&lock2);
+pthread_mutex_lock(&lock1);  // May deadlock</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q97: What is the difference between little-endian and big-endian?
+        </div>
+        <div class="answer">
+            <p><strong>little-endian:</strong> Least significant byte first (x86). <strong>big-endian:</strong> Most significant byte first (network). Affects byte order in memory.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>int x = 0x12345678;
+// Little-endian: 78 56 34 12
+// Big-endian: 12 34 56 78</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q98: What is the difference between struct padding and packing?
+        </div>
+        <div class="answer">
+            <p><strong>padding:</strong> Adds bytes for alignment (default). <strong>packing:</strong> Removes padding (pragma pack). Packing saves space, may slow access.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>#pragma pack(push, 1)  // Pack to 1-byte alignment
+struct Packed {
+    char a;
+    int b;
+};  // Size: 5 bytes (no padding)
+#pragma pack(pop)  // Restore default alignment</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q99: What is the difference between const char* and char* const?
+        </div>
+        <div class="answer">
+            <p><strong>const char*:</strong> Data is const, pointer can change. <strong>char* const:</strong> Pointer is const, data can change.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>const char *p1 = "hello";  // Data const
+char *const p2 = str;  // Pointer const
+
+p1 = "world";  // OK - pointer can change
+// p1[0] = 'w';  // Error - data is const
+
+// p2 = "world";  // Error - pointer is const
+p2[0] = 'w';  // OK - data can change</code></div></div>
+        </div>
+        
+        <div class="question">
+            Q100: What is the future of C?
+        </div>
+        <div class="answer">
+            <p>C continues to evolve with C23 standard, improved security, better support for modern hardware. Remains essential for systems programming, embedded systems, and as foundation for other languages.</p>
+            
+            <div class="code-editor"><div class="code-editor-header"><div class="code-editor-dot red"></div><div class="code-editor-dot yellow"></div><div class="code-editor-dot green"></div><span class="code-editor-title">code.c</span></div><div class="code-editor-content" data-language="code"><code>// C23 features
+#include <stdatomic.h>
+#include <threads.h>
+
+// Improved safety
+int x[10] = {0};  // Zero initialization
+_Static_assert(sizeof(int) == 4, "int size");
+
+// Better bit handling
+std::uint32_t value = 0x1234;
+std::countl_zero(value);  // Count leading zeros</code></div></div>
         </div>
 
         <div class="footer">
             <p><span class="highlight">🎯 Ready for Your C Interview?</span></p>
-            <p>Master these 42 comprehensive C interview questions covering fundamentals, memory management, pointers, and advanced concepts. C is the foundation of modern programming - understanding C deeply will make you a better programmer in any language.</p>
+            <p>Master these 100 comprehensive C interview questions covering fundamentals, pointers, memory management, structures, file handling, preprocessor, bit manipulation, standard library, security, optimization, data structures, concurrency, embedded systems, and advanced concepts. C is the foundation of modern programming - understanding C deeply will make you a better programmer in any language.</p>
             <p><span class="highlight">💡 Tip:</span> Focus on understanding memory management, pointers, and the difference between stack and heap. These are the areas where most C interview questions focus. Practice writing C code without relying on higher-level abstractions.</p>
         </div>
     </div>

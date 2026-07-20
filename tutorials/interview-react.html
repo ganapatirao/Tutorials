@@ -5,387 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React Interview Preparation Guide</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #1a1a2e; background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%); background-size: 400% 400%; animation: gradientShift 20s ease infinite; min-height: 100vh; padding: 25px 20px; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .container { max-width: 1100px; margin: 0 auto; padding: 50px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px); border-radius: 32px; box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3); }
+        .back-button { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 30px; font-weight: 700; margin-bottom: 30px; }
+        h1 { color: #1a1a2e; font-size: 52px; font-weight: 800; text-align: center; margin-bottom: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { text-align: center; font-size: 18px; color: #4a4a68; margin-bottom: 40px; }
+        h2 { color: white; font-size: 28px; font-weight: 700; margin-top: 40px; margin-bottom: 25px; padding: 18px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; }
+        .question { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; border-radius: 15px; margin: 25px 0 15px 0; font-weight: 600; font-size: 18px; }
+        .answer { background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%); padding: 30px 35px; border-radius: 15px; margin: 15px 0 25px 0; border-left: 6px solid #764ba2; }
+        .answer p { margin-bottom: 15px; color: #1a1a2e; }
+        .answer strong { color: #667eea; }
+        .answer ul { padding-left: 25px; margin-bottom: 15px; }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: #1a1a2e;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 20s ease infinite;
-            min-height: 100vh;
-            padding: 25px 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
-            animation: particleFloat 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 50px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(30px);
-            border-radius: 32px;
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            animation: containerFloat 6s ease-in-out infinite;
-        }
-        
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #764ba2 60%, 
-                #667eea 80%, 
-                #764ba2 100%);
-            background-size: 300% 100%;
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-        
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
-        }
-        
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 
-                0 8px 25px rgba(102, 126, 234, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-button:hover::before {
-            left: 100%;
-        }
-        
-        .back-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
-        }
-        
-        h1 {
-            color: #1a1a2e;
-            font-size: 52px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 35px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
-            border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .subtitle {
-            text-align: center;
-            font-size: 18px;
-            color: #4a4a68;
-            margin-bottom: 40px;
-            font-weight: 500;
-            animation: fadeIn 1s ease 0.4s both;
-        }
-        
-        h2 {
-            color: white;
-            font-size: 28px;
-            font-weight: 700;
-            margin-top: 40px;
-            margin-bottom: 25px;
-            padding: 18px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .code-editor {
+            background: #1e1e1e;
             border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
+            margin: 20px 0;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3e3e42;
         }
         
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+        .code-editor-header {
+            background: #2d2d2d;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #3e3e42;
         }
         
-        .question {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
+        .code-editor-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
         }
         
-        .question-centered {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
-            text-align: center;
-        }
+        .code-editor-dot.red { background: #ff5f56; }
+        .code-editor-dot.yellow { background: #ffbd2e; }
+        .code-editor-dot.green { background: #27ca40; }
         
-        .answer {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 30px 35px;
-            border-radius: 15px;
-            margin: 15px 0 25px 0;
-            border-left: 6px solid #764ba2;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            animation: slideUp 0.5s ease both;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .answer p {
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            line-height: 1.8;
-        }
-        
-        .answer strong {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 12px;
-            border-radius: 10px;
-            overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+        .code-editor-title {
+            color: #9cdcfe;
+            font-family: 'Fira Code', monospace;
             font-size: 13px;
-            margin: 15px 0;
+            margin-left: 12px;
+        }
+        
+        .code-editor-content {
+            padding: 20px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
             line-height: 1.6;
-            border-left: 4px solid #dd0031;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.4s ease both;
-        }
-        
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+            color: #d4d4d4;
             overflow-x: auto;
+            background: #1e1e1e;
         }
         
-        .code-block code {
-            white-space: pre-wrap;
-            word-wrap: break-word;
+        .code-editor-content code {
+            display: block;
+            white-space: pre;
         }
         
-        .toc {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 35px 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border-left: 8px solid #667eea;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
-        }
+        .keyword { color: #569cd6; }
+        .type { color: #4ec9b0; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; font-style: italic; }
+        .number { color: #b5cea8; }
+        .method { color: #dcdcaa; }
+        .property { color: #9cdcfe; }
+        .variable { color: #9cdcfe; }
+        .operator { color: #d4d4d4; }
+        .decorator { color: #c586c0; }
         
-        .toc h3 {
-            color: #1a1a2e;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
+        .footer { text-align: center; margin-top: 50px; padding: 35px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%); border-radius: 20px; }
+        .highlight { color: #667eea; font-weight: 700; }
         
-        .toc ol {
-            padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
-        }
-        
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 35px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
-            border-radius: 20px;
-            border: 2px solid rgba(102, 126, 234, 0.25);
-            color: #666;
-            font-size: 15px;
-            line-height: 1.7;
-            animation: slideUp 0.6s ease both;
-        }
-        
-        .footer p {
-            margin-bottom: 12px;
-        }
-        
-        .footer .highlight {
-            color: #667eea;
-            font-weight: 600;
-        }
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
+        th { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; text-align: left; font-weight: 600; font-size: 15px; }
+        td { padding: 15px; border-bottom: 1px solid #e9ecef; color: #4a4a68; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f8f9fa; }
         
         @media (max-width: 768px) {
-            body { padding: 12px 8px; }
+            body { padding: 15px 10px; }
             .container { padding: 25px 20px; border-radius: 20px; }
-            h1 { font-size: 36px; }
-            .subtitle { font-size: 15px; margin-bottom: 25px; }
-            h2 { font-size: 22px; padding: 14px 20px; margin-top: 30px; }
-            .question, .question-centered { padding: 15px 20px; font-size: 16px; margin: 20px 0 12px 0; }
-            .answer { padding: 20px 25px; margin: 12px 0 20px 0; }
-            .code-block { padding: 15px; font-size: 13px; margin: 15px 0; }
-            .toc { padding: 25px 30px; margin: 30px 0; }
-            .toc ol { padding-left: 20px; line-height: 1.8; }
-            .back-button { padding: 12px 24px; font-size: 14px; margin-bottom: 20px; }
-            .footer { padding: 25px; margin-top: 35px; font-size: 14px; }
+            h1 { font-size: 32px; }
+            .subtitle { font-size: 16px; }
+            h2 { font-size: 22px; padding: 14px 20px; }
+            .question { font-size: 16px; padding: 16px 20px; }
+            .answer { padding: 20px 20px; }
+            .code-editor-content { padding: 15px; font-size: 12px; }
+            .code-editor-title { font-size: 11px; }
+            .footer { padding: 25px 20px; }
+        }
+        
+        @media (max-width: 480px) {
+            body { padding: 10px 5px; }
+            .container { padding: 20px 15px; border-radius: 16px; }
+            h1 { font-size: 26px; }
+            .subtitle { font-size: 14px; }
+            h2 { font-size: 20px; padding: 12px 16px; }
+            .question { font-size: 15px; padding: 14px 16px; }
+            .answer { padding: 18px 16px; }
+            .code-editor-content { padding: 12px; font-size: 11px; }
+            .code-editor-title { font-size: 10px; }
+            .back-button { padding: 12px 20px; font-size: 14px; }
         }
     </style></head>
 <body>
@@ -493,17 +221,27 @@
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>// Functional component
-function Welcome({ name }) {
-  return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">components.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Functional component</span>
+<span class="keyword">function</span> <span class="method">Welcome</span>({ <span class="variable">name</span> }) {
+  <span class="keyword">return</span> &lt;<span class="type">h1</span>&gt;Hello, {<span class="variable">name</span>}!&lt;/<span class="type">h1</span>&gt;;
 }
 
-// Class component
-class Welcome extends React.Component {
-  render() {
-    return &lt;h1&gt;Hello, {this.props.name}!&lt;/h1&gt;;
+<span class="comment">// Class component</span>
+<span class="keyword">class</span> <span class="type">Welcome</span> <span class="keyword">extends</span> <span class="type">React</span>.<span class="property">Component</span> {
+  <span class="method">render</span>() {
+    <span class="keyword">return</span> &lt;<span class="type">h1</span>&gt;Hello, {<span class="variable">this</span>.<span class="property">props</span>.<span class="property">name</span>}!&lt;/<span class="type">h1</span>&gt;;
   }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -512,21 +250,31 @@ class Welcome extends React.Component {
         <div class="answer">
             <p><strong>Props</strong> (properties) are read-only data passed from parent to child components. They enable component composition and data flow.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Parent component
-function App() {
-  return &lt;ProductCard name="Laptop" price={999.99} inStock={true} /&gt;;
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">props.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Parent component</span>
+<span class="keyword">function</span> <span class="method">App</span>() {
+  <span class="keyword">return</span> &lt;<span class="type">ProductCard</span> <span class="property">name</span>=<span class="string">"Laptop"</span> <span class="property">price</span>={<span class="number">999.99</span>} <span class="property">inStock</span>={<span class="keyword">true</span>} /&gt;;
 }
 
-// Child component
-function ProductCard({ name, price, inStock }) {
-  return (
-    &lt;div&gt;
-      &lt;h2&gt;{name}&lt;/h2&gt;
-      &lt;p&gt;Price: ${price}&lt;/p&gt;
-      {inStock ? &lt;p&gt;In Stock&lt;/p&gt; : &lt;p&gt;Out of Stock&lt;/p&gt;}
-    &lt;/div&gt;
+<span class="comment">// Child component</span>
+<span class="keyword">function</span> <span class="method">ProductCard</span>({ <span class="variable">name</span>, <span class="variable">price</span>, <span class="variable">inStock</span> }) {
+  <span class="keyword">return</span> (
+    &lt;<span class="type">div</span>&gt;
+      &lt;<span class="type">h2</span>&gt;{<span class="variable">name</span>}&lt;/<span class="type">h2</span>&gt;
+      &lt;<span class="type">p</span>&gt;Price: ${<span class="variable">price</span>}&lt;/<span class="type">p</span>&gt;
+      {<span class="variable">inStock</span> ? &lt;<span class="type">p</span>&gt;In Stock&lt;/<span class="type">p</span>&gt; : &lt;<span class="type">p</span>&gt;Out of Stock&lt;/<span class="type">p</span>&gt;}
+    &lt;/<span class="type">div</span>&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="page-break"></div>
@@ -539,17 +287,27 @@ function ProductCard({ name, price, inStock }) {
         <div class="answer">
             <p><strong>State</strong> is an object that holds component-specific data that can change over time. When state changes, React re-renders the component.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Using useState hook
-function Counter() {
-  const [count, setCount] = useState(0);
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">state.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Using useState hook</span>
+<span class="keyword">function</span> <span class="method">Counter</span>() {
+  <span class="keyword">const</span> [<span class="variable">count</span>, <span class="method">setCount</span>] = <span class="method">useState</span>(<span class="number">0</span>);
   
-  return (
-    &lt;div&gt;
-      &lt;p&gt;Count: {count}&lt;/p&gt;
-      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Increment&lt;/button&gt;
-    &lt;/div&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">div</span>&gt;
+      &lt;<span class="type">p</span>&gt;Count: {<span class="variable">count</span>}&lt;/<span class="type">p</span>&gt;
+      &lt;<span class="type">button</span> <span class="property">onClick</span>={() => <span class="method">setCount</span>(<span class="variable">count</span> + <span class="number">1</span>)}&gt;Increment&lt;/<span class="type">button</span>&gt;
+    &lt;/<span class="type">div</span>&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -589,19 +347,29 @@ function Counter() {
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>// State example
-function Counter() {
-  const [count, setCount] = useState(0);
-  return &lt;button onClick={() =&gt; setCount(count + 1)}&gt;{count}&lt;/button&gt;;
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">state-props.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// State example</span>
+<span class="keyword">function</span> <span class="method">Counter</span>() {
+  <span class="keyword">const</span> [<span class="variable">count</span>, <span class="method">setCount</span>] = <span class="method">useState</span>(<span class="number">0</span>);
+  <span class="keyword">return</span> &lt;<span class="type">button</span> <span class="property">onClick</span>={() => <span class="method">setCount</span>(<span class="variable">count</span> + <span class="number">1</span>)}&gt;{<span class="variable">count</span>}&lt;/<span class="type">button</span>&gt;;
 }
 
-// Props example
-function Greeting({ name }) {
-  return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;
+<span class="comment">// Props example</span>
+<span class="keyword">function</span> <span class="method">Greeting</span>({ <span class="variable">name</span> }) {
+  <span class="keyword">return</span> &lt;<span class="type">h1</span>&gt;Hello, {<span class="variable">name</span>}!&lt;/<span class="type">h1</span>&gt;;
 }
 
-// Usage
-&lt;Greeting name="John" /&gt;</code></pre></div>
+<span class="comment">// Usage</span>
+&lt;<span class="type">Greeting</span> <span class="property">name</span>=<span class="string">"John"</span> /&gt;</code>
+                </div>
+            </div>
         </div>
 
         <div class="page-break"></div>
@@ -639,26 +407,36 @@ function Greeting({ name }) {
         <div class="answer">
             <p><strong>useEffect</strong> handles side effects in functional components. It runs after every render by default, but can be configured with dependencies.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Run on every render
-useEffect(() =&gt; {
-  console.log('Component rendered');
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">useeffect.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Run on every render</span>
+<span class="method">useEffect</span>(() => {
+  <span class="variable">console</span>.<span class="method">log</span>(<span class="string">'Component rendered'</span>);
 });
 
-// Run only on mount
-useEffect(() =&gt; {
-  console.log('Component mounted');
+<span class="comment">// Run only on mount</span>
+<span class="method">useEffect</span>(() => {
+  <span class="variable">console</span>.<span class="method">log</span>(<span class="string">'Component mounted'</span>);
 }, []);
 
-// Run when count changes
-useEffect(() =&gt; {
-  console.log('Count changed:', count);
-}, [count]);
+<span class="comment">// Run when count changes</span>
+<span class="method">useEffect</span>(() => {
+  <span class="variable">console</span>.<span class="method">log</span>(<span class="string">'Count changed:'</span>, <span class="variable">count</span>);
+}, [<span class="variable">count</span>]);
 
-// Cleanup on unmount
-useEffect(() =&gt; {
-  const timer = setInterval(() =&gt; console.log('Tick'), 1000);
-  return () =&gt; clearInterval(timer);
-}, []);</code></pre></div>
+<span class="comment">// Cleanup on unmount</span>
+<span class="method">useEffect</span>(() => {
+  <span class="keyword">const</span> <span class="variable">timer</span> = <span class="method">setInterval</span>(() => <span class="variable">console</span>.<span class="method">log</span>(<span class="string">'Tick'</span>), <span class="number">1000</span>);
+  <span class="keyword">return</span> () => <span class="method">clearInterval</span>(<span class="variable">timer</span>);
+}, []);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -685,23 +463,33 @@ useEffect(() =&gt; {
         <div class="answer">
             <p>The <strong>Context API</strong> provides a way to pass data through the component tree without having to pass props manually at every level. It's designed for sharing data that can be considered "global" for a tree of components.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Create context
-const ThemeContext = createContext('light');
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">context.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Create context</span>
+<span class="keyword">const</span> <span class="variable">ThemeContext</span> = <span class="method">createContext</span>(<span class="string">'light'</span>);
 
-// Provider
-function App() {
-  return (
-    &lt;ThemeContext.Provider value="dark"&gt;
-      &lt;Toolbar /&gt;
-    &lt;/ThemeContext.Provider&gt;
+<span class="comment">// Provider</span>
+<span class="keyword">function</span> <span class="method">App</span>() {
+  <span class="keyword">return</span> (
+    &lt;<span class="type">ThemeContext.Provider</span> <span class="property">value</span>=<span class="string">"dark"</span>&gt;
+      &lt;<span class="type">Toolbar</span> /&gt;
+    &lt;/<span class="type">ThemeContext.Provider</span>&gt;
   );
 }
 
-// Consumer
-function ThemedButton() {
-  const theme = useContext(ThemeContext);
-  return &lt;button className={theme}&gt;Click me&lt;/button&gt;;
-}</code></pre></div>
+<span class="comment">// Consumer</span>
+<span class="keyword">function</span> <span class="method">ThemedButton</span>() {
+  <span class="keyword">const</span> <span class="variable">theme</span> = <span class="method">useContext</span>(<span class="variable">ThemeContext</span>);
+  <span class="keyword">return</span> &lt;<span class="type">button</span> <span class="property">className</span>={<span class="variable">theme</span>}&gt;Click me&lt;/<span class="type">button</span>&gt;;
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -729,24 +517,34 @@ function ThemedButton() {
                 <li><strong>Changes are made with pure functions:</strong> Reducers specify how state changes</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// Action
-const increment = () =&gt; ({ type: 'INCREMENT' });
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">redux.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Action</span>
+<span class="keyword">const</span> <span class="method">increment</span> = () => ({ <span class="property">type</span>: <span class="string">'INCREMENT'</span> });
 
-// Reducer
-function counter(state = 0, action) {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    default:
-      return state;
+<span class="comment">// Reducer</span>
+<span class="keyword">function</span> <span class="method">counter</span>(<span class="variable">state</span> = <span class="number">0</span>, <span class="variable">action</span>) {
+  <span class="keyword">switch</span> (<span class="variable">action</span>.<span class="property">type</span>) {
+    <span class="keyword">case</span> <span class="string">'INCREMENT'</span>:
+      <span class="keyword">return</span> <span class="variable">state</span> + <span class="number">1</span>;
+    <span class="keyword">default</span>:
+      <span class="keyword">return</span> <span class="variable">state</span>;
   }
 }
 
-// Store
-const store = createStore(counter);
+<span class="comment">// Store</span>
+<span class="keyword">const</span> <span class="variable">store</span> = <span class="method">createStore</span>(<span class="variable">counter</span>);
 
-// Dispatch
-store.dispatch(increment());</code></pre></div>
+<span class="comment">// Dispatch</span>
+<span class="variable">store</span>.<span class="method">dispatch</span>(<span class="method">increment</span>());</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -762,20 +560,30 @@ store.dispatch(increment());</code></pre></div>
                 <li>Better TypeScript support</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// Redux Toolkit
-import { createSlice } from '@reduxjs/toolkit';
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">redux-toolkit.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Redux Toolkit</span>
+<span class="keyword">import</span> { <span class="method">createSlice</span> } <span class="keyword">from</span> <span class="string">'@reduxjs/toolkit'</span>;
 
-const counterSlice = createSlice({
-  name: 'counter',
-  initialState: 0,
-  reducers: {
-    increment: (state) =&gt; state + 1,
-    decrement: (state) =&gt; state - 1
+<span class="keyword">const</span> <span class="variable">counterSlice</span> = <span class="method">createSlice</span>({
+  <span class="property">name</span>: <span class="string">'counter'</span>,
+  <span class="property">initialState</span>: <span class="number">0</span>,
+  <span class="property">reducers</span>: {
+    <span class="method">increment</span>: (<span class="variable">state</span>) => <span class="variable">state</span> + <span class="number">1</span>,
+    <span class="method">decrement</span>: (<span class="variable">state</span>) => <span class="variable">state</span> - <span class="number">1</span>
   }
 });
 
-export const { increment, decrement } = counterSlice.actions;
-export default counterSlice.reducer;</code></pre></div>
+<span class="keyword">export const</span> { <span class="method">increment</span>, <span class="method">decrement</span> } = <span class="variable">counterSlice</span>.<span class="property">actions</span>;
+<span class="keyword">export default</span> <span class="variable">counterSlice</span>.<span class="property">reducer</span>;</code>
+                </div>
+            </div>
         </div>
 
         <div class="page-break"></div>
@@ -788,23 +596,33 @@ export default counterSlice.reducer;</code></pre></div>
         <div class="answer">
             <p><strong>React Router</strong> enables client-side routing in React applications. It uses the HTML5 History API to keep the UI in sync with the URL.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Basic routing
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">router.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Basic routing</span>
+<span class="keyword">import</span> { <span class="type">BrowserRouter</span>, <span class="type">Routes</span>, <span class="type">Route</span>, <span class="type">Link</span> } <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;
 
-function App() {
-  return (
-    &lt;BrowserRouter&gt;
-      &lt;nav&gt;
-        &lt;Link to="/"&gt;Home&lt;/Link&gt;
-        &lt;Link to="/about"&gt;About&lt;/Link&gt;
-      &lt;/nav&gt;
-      &lt;Routes&gt;
-        &lt;Route path="/" element=&lt;Home /&gt; /&gt;
-        &lt;Route path="/about" element=&lt;About /&gt; /&gt;
-      &lt;/Routes&gt;
-    &lt;/BrowserRouter&gt;
+<span class="keyword">function</span> <span class="method">App</span>() {
+  <span class="keyword">return</span> (
+    &lt;<span class="type">BrowserRouter</span>&gt;
+      &lt;<span class="type">nav</span>&gt;
+        &lt;<span class="type">Link</span> <span class="property">to</span>=<span class="string">"/"</span>&gt;Home&lt;/<span class="type">Link</span>&gt;
+        &lt;<span class="type">Link</span> <span class="property">to</span>=<span class="string">"/about"</span>&gt;About&lt;/<span class="type">Link</span>&gt;
+      &lt;/<span class="type">nav</span>&gt;
+      &lt;<span class="type">Routes</span>&gt;
+        &lt;<span class="type">Route</span> <span class="property">path</span>=<span class="string">"/"</span> <span class="property">element</span>=&lt;<span class="type">Home</span> /&gt; /&gt;
+        &lt;<span class="type">Route</span> <span class="property">path</span>=<span class="string">"/about"</span> <span class="property">element</span>=&lt;<span class="type">About</span> /&gt; /&gt;
+      &lt;/<span class="type">Routes</span>&gt;
+    &lt;/<span class="type">BrowserRouter</span>&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -853,30 +671,40 @@ function App() {
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>// Controlled component
-function ControlledForm() {
-  const [value, setValue] = useState('');
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">forms.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Controlled component</span>
+<span class="keyword">function</span> <span class="method">ControlledForm</span>() {
+  <span class="keyword">const</span> [<span class="variable">value</span>, <span class="method">setValue</span>] = <span class="method">useState</span>(<span class="string">''</span>);
   
-  return (
-    &lt;input
-      value={value}
-      onChange={(e) =&gt; setValue(e.target.value)}
+  <span class="keyword">return</span> (
+    &lt;<span class="type">input</span>
+      <span class="property">value</span>={<span class="variable">value</span>}
+      <span class="property">onChange</span>={(<span class="variable">e</span>) => <span class="method">setValue</span>(<span class="variable">e</span>.<span class="property">target</span>.<span class="property">value</span>)}
     /&gt;
   );
 }
 
-// Uncontrolled component
-function UncontrolledForm() {
-  const inputRef = useRef();
+<span class="comment">// Uncontrolled component</span>
+<span class="keyword">function</span> <span class="method">UncontrolledForm</span>() {
+  <span class="keyword">const</span> <span class="variable">inputRef</span> = <span class="method">useRef</span>();
   
-  const handleSubmit = () =&gt; {
-    console.log(inputRef.current.value);
+  <span class="keyword">const</span> <span class="method">handleSubmit</span> = () => {
+    <span class="variable">console</span>.<span class="method">log</span>(<span class="variable">inputRef</span>.<span class="property">current</span>.<span class="property">value</span>);
   };
   
-  return (
-    &lt;input ref={inputRef} /&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">input</span> <span class="property">ref</span>={<span class="variable">inputRef</span>} /&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="page-break"></div>
@@ -897,20 +725,30 @@ function UncontrolledForm() {
                 <li><strong>Key prop:</strong> Provide stable keys for lists</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// React.memo
-const ExpensiveComponent = React.memo(({ data }) => <div>{data}</div>);
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">performance.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// React.memo</span>
+<span class="keyword">const</span> <span class="variable">ExpensiveComponent</span> = <span class="type">React</span>.<span class="method">memo</span>(({ <span class="variable">data</span> }) => &lt;<span class="type">div</span>&gt;{<span class="variable">data</span>}&lt;/<span class="type">div</span>&gt;);
 
-// useMemo
-const expensiveValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+<span class="comment">// useMemo</span>
+<span class="keyword">const</span> <span class="variable">expensiveValue</span> = <span class="method">useMemo</span>(() => <span class="method">computeExpensiveValue</span>(<span class="variable">a</span>, <span class="variable">b</span>), [<span class="variable">a</span>, <span class="variable">b</span>]);
 
-// useCallback
-const handleClick = useCallback(() => doSomething(dependency), [dependency]);
+<span class="comment">// useCallback</span>
+<span class="keyword">const</span> <span class="variable">handleClick</span> = <span class="method">useCallback</span>(() => <span class="method">doSomething</span>(<span class="variable">dependency</span>), [<span class="variable">dependency</span>]);
 
-// Code splitting
-const LazyComponent = React.lazy(() => import('./LazyComponent'));
+<span class="comment">// Code splitting</span>
+<span class="keyword">const</span> <span class="variable">LazyComponent</span> = <span class="type">React</span>.<span class="method">lazy</span>(() => <span class="method">import</span>(<span class="string">'./LazyComponent'</span>));
 
-// Keys
-{items.map(item => <Item key={item.id} item={item} />)}</code></pre></div>
+<span class="comment">// Keys</span>
+{<span class="variable">items</span>.<span class="method">map</span>(<span class="variable">item</span> => &lt;<span class="type">Item</span> <span class="property">key</span>={<span class="variable">item</span>.<span class="property">id</span>} <span class="property">item</span>={<span class="variable">item</span>} /&gt;)}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -939,15 +777,25 @@ const LazyComponent = React.lazy(() => import('./LazyComponent'));
         <div class="answer">
             <p>React components are typically tested with Jest and React Testing Library.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Component test
-import { render, screen, fireEvent } from '@testing-library/react';
-import Counter from './Counter';
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">counter.test.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Component test</span>
+<span class="keyword">import</span> { <span class="method">render</span>, <span class="variable">screen</span>, <span class="method">fireEvent</span> } <span class="keyword">from</span> <span class="string">'@testing-library/react'</span>;
+<span class="keyword">import</span> <span class="type">Counter</span> <span class="keyword">from</span> <span class="string">'./Counter'</span>;
 
-test('increments counter when button is clicked', () => {
-  render(&lt;Counter /&gt;);
-  fireEvent.click(screen.getByText('Increment'));
-  expect(screen.getByText('Count: 1')).toBeInTheDocument();
-});</code></pre></div>
+<span class="method">test</span>(<span class="string">'increments counter when button is clicked'</span>, () => {
+  <span class="method">render</span>(&lt;<span class="type">Counter</span> /&gt;);
+  <span class="method">fireEvent</span>.<span class="method">click</span>(<span class="variable">screen</span>.<span class="method">getByText</span>(<span class="string">'Increment'</span>));
+  <span class="method">expect</span>(<span class="variable">screen</span>.<span class="method">getByText</span>(<span class="string">'Count: 1'</span>)).<span class="method">toBeInTheDocument</span>();
+});</code>
+                </div>
+            </div>
         </div>
 
         <div class="page-break"></div>
@@ -963,11 +811,21 @@ test('increments counter when button is clicked', () => {
                 <li><strong>JSX:</strong> Syntax extension that looks like HTML. Transpiled to createElement by Babel. More readable and maintainable.</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// createElement
-React.createElement('h1', null, 'Hello World');
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">jsx.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// createElement</span>
+<span class="type">React</span>.<span class="method">createElement</span>(<span class="string">'h1'</span>, <span class="keyword">null</span>, <span class="string">'Hello World'</span>);
 
-// JSX
-&lt;h1&gt;Hello World&lt;/h1&gt;</code></pre></div>
+<span class="comment">// JSX</span>
+&lt;<span class="type">h1</span>&gt;Hello World&lt;/<span class="type">h1</span>&gt;</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -979,12 +837,22 @@ React.createElement('h1', null, 'Hello World');
                 <li><strong>Refs:</strong> Does not trigger re-render. Use for DOM access, focus management, or storing values that don't affect rendering.</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// State - triggers re-render
-const [count, setCount] = useState(0);
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">state-refs.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// State - triggers re-render</span>
+<span class="keyword">const</span> [<span class="variable">count</span>, <span class="method">setCount</span>] = <span class="method">useState</span>(<span class="number">0</span>);
 
-// Ref - doesn't trigger re-render
-const inputRef = useRef(null);
-inputRef.current.focus();</code></pre></div>
+<span class="comment">// Ref - doesn't trigger re-render</span>
+<span class="keyword">const</span> <span class="variable">inputRef</span> = <span class="method">useRef</span>(<span class="keyword">null</span>);
+<span class="variable">inputRef</span>.<span class="property">current</span>.<span class="method">focus</span>();</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -996,11 +864,21 @@ inputRef.current.focus();</code></pre></div>
                 <li><strong>useMemo:</strong> Memoizes a value. Returns the cached value unless dependencies change.</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// useCallback - memoizes function
-const memoizedCallback = useCallback(() => doSomething(a, b), [a, b]);
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">hooks.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// useCallback - memoizes function</span>
+<span class="keyword">const</span> <span class="variable">memoizedCallback</span> = <span class="method">useCallback</span>(() => <span class="method">doSomething</span>(<span class="variable">a</span>, <span class="variable">b</span>), [<span class="variable">a</span>, <span class="variable">b</span>]);
 
-// useMemo - memoizes value
-const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);</code></pre></div>
+<span class="comment">// useMemo - memoizes value</span>
+<span class="keyword">const</span> <span class="variable">memoizedValue</span> = <span class="method">useMemo</span>(() => <span class="method">computeExpensiveValue</span>(<span class="variable">a</span>, <span class="variable">b</span>), [<span class="variable">a</span>, <span class="variable">b</span>]);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1022,10 +900,20 @@ const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);</code>
                 <li><strong>useEffect:</strong> Hook. Can run on mount, update, or unmount depending on dependencies. More flexible.</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// componentDidMount equivalent
-useEffect(() =&gt; {
-  // Runs on mount
-}, []);</code></pre></div>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">lifecycle.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// componentDidMount equivalent</span>
+<span class="method">useEffect</span>(() => {
+  <span class="comment">// Runs on mount</span>
+}, []);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1051,11 +939,21 @@ useEffect(() =&gt; {
                 <li><strong>Native events:</strong> Browser's native event objects. Browser-specific APIs.</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// Access native event
-function handleClick(event) {
-  const nativeEvent = event.nativeEvent;
-  console.log(nativeEvent);
-}</code></pre></div>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">events.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Access native event</span>
+<span class="keyword">function</span> <span class="method">handleClick</span>(<span class="variable">event</span>) {
+  <span class="keyword">const</span> <span class="variable">nativeEvent</span> = <span class="variable">event</span>.<span class="property">nativeEvent</span>;
+  <span class="variable">console</span>.<span class="method">log</span>(<span class="variable">nativeEvent</span>);
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1067,11 +965,21 @@ function handleClick(event) {
                 <li><strong>useReducer:</strong> Complex state management with reducer pattern. Good for related state pieces or complex state logic.</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// useState - simple
-const [count, setCount] = useState(0);
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">hooks.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// useState - simple</span>
+<span class="keyword">const</span> [<span class="variable">count</span>, <span class="method">setCount</span>] = <span class="method">useState</span>(<span class="number">0</span>);
 
-// useReducer - complex
-const [state, dispatch] = useReducer(reducer, initialState);</code></pre></div>
+<span class="comment">// useReducer - complex</span>
+<span class="keyword">const</span> [<span class="variable">state</span>, <span class="method">dispatch</span>] = <span class="method">useReducer</span>(<span class="variable">reducer</span>, <span class="variable">initialState</span>);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1083,14 +991,24 @@ const [state, dispatch] = useReducer(reducer, initialState);</code></pre></div>
                 <li><strong>forwardRef:</strong> Forward a ref from parent to child component. Used when parent needs to access child's DOM element.</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// forwardRef
-const FancyButton = forwardRef((props, ref) => (
-  &lt;button ref={ref}&gt;{props.children}&lt;/button&gt;
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">forwardref.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// forwardRef</span>
+<span class="keyword">const</span> <span class="variable">FancyButton</span> = <span class="method">forwardRef</span>((<span class="variable">props</span>, <span class="variable">ref</span>) => (
+  &lt;<span class="type">button</span> <span class="property">ref</span>={<span class="variable">ref</span>}&gt;{<span class="variable">props</span>.<span class="property">children</span>}&lt;/<span class="type">button</span>&gt;
 ));
 
-// Usage
-const buttonRef = useRef();
-&lt;FancyButton ref={buttonRef}&gt;Click me&lt;/FancyButton&gt;;</code></pre></div>
+<span class="comment">// Usage</span>
+<span class="keyword">const</span> <span class="variable">buttonRef</span> = <span class="method">useRef</span>();
+&lt;<span class="type">FancyButton</span> <span class="property">ref</span>={<span class="variable">buttonRef</span>}&gt;Click me&lt;/<span class="type">FancyButton</span>&gt;;</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1102,15 +1020,25 @@ const buttonRef = useRef();
                 <li><strong>Suspense:</strong> Displays a fallback while waiting for lazy-loaded components or data fetching.</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>const LazyComponent = React.lazy(() => import('./LazyComponent'));
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">lazy.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">const</span> <span class="variable">LazyComponent</span> = <span class="type">React</span>.<span class="method">lazy</span>(() => <span class="method">import</span>(<span class="string">'./LazyComponent'</span>));
 
-function App() {
-  return (
-    &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
-      &lt;LazyComponent /&gt;
-    &lt;/Suspense&gt;
+<span class="keyword">function</span> <span class="method">App</span>() {
+  <span class="keyword">return</span> (
+    &lt;<span class="type">Suspense</span> <span class="property">fallback</span>={&lt;<span class="type">div</span>&gt;Loading...&lt;/<span class="type">div</span>&gt;}&gt;
+      &lt;<span class="type">LazyComponent</span> /&gt;
+    &lt;/<span class="type">Suspense</span>&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1148,7 +1076,7 @@ function App() {
 
         <div class="page-break"></div>
 
-        <h2>11. State Management Patterns (All Levels Level)</h2>
+        <h2>11. State Management Patterns</h2>
 
         <div class="question">
             Q31: What are the different state management approaches in React?
@@ -1170,451 +1098,556 @@ function App() {
             Q32: How do you implement Redux Toolkit?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> store.js
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">store.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="method">configureStore</span>, <span class="method">createSlice</span> } <span class="keyword">from</span> <span class="string">'@reduxjs/toolkit'</span>;
 
-const counterSlice = createSlice({
-  name: 'counter',
-  initialState: { value: 0 },
-  reducers: {
-    increment: (state) =&gt; {
-      state.value += 1;
+<span class="keyword">const</span> <span class="variable">counterSlice</span> = <span class="method">createSlice</span>({
+  <span class="property">name</span>: <span class="string">'counter'</span>,
+  <span class="property">initialState</span>: { <span class="property">value</span>: <span class="number">0</span> },
+  <span class="property">reducers</span>: {
+    <span class="method">increment</span>: (<span class="variable">state</span>) => {
+      <span class="variable">state</span>.<span class="property">value</span> += <span class="number">1</span>;
     },
-    decrement: (state) =&gt; {
-      state.value -= 1;
+    <span class="method">decrement</span>: (<span class="variable">state</span>) => {
+      <span class="variable">state</span>.<span class="property">value</span> -= <span class="number">1</span>;
     },
-    incrementByAmount: (state, action) =&gt; {
-      state.value += action.payload;
+    <span class="method">incrementByAmount</span>: (<span class="variable">state</span>, <span class="variable">action</span>) => {
+      <span class="variable">state</span>.<span class="property">value</span> += <span class="variable">action</span>.<span class="property">payload</span>;
     }
   }
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
-export const store = configureStore({
-  reducer: {
-    counter: counterSlice.reducer
+<span class="keyword">export const</span> { <span class="method">increment</span>, <span class="method">decrement</span>, <span class="method">incrementByAmount</span> } = <span class="variable">counterSlice</span>.<span class="property">actions</span>;
+<span class="keyword">export const</span> <span class="variable">store</span> = <span class="method">configureStore</span>({
+  <span class="property">reducer</span>: {
+    <span class="property">counter</span>: <span class="variable">counterSlice</span>.<span class="property">reducer</span>
   }
 });
 
-// Component
-import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement } from './store';
+<span class="comment">// Component</span>
+<span class="keyword">import</span> { <span class="method">useSelector</span>, <span class="method">useDispatch</span> } <span class="keyword">from</span> <span class="string">'react-redux'</span>;
+<span class="keyword">import</span> { <span class="method">increment</span>, <span class="method">decrement</span> } <span class="keyword">from</span> <span class="string">'./store'</span>;
 
-function Counter() {
-  const count = useSelector((state) =&gt; state.counter.value);
-  const dispatch = useDispatch();
+<span class="keyword">function</span> <span class="method">Counter</span>() {
+  <span class="keyword">const</span> <span class="variable">count</span> = <span class="method">useSelector</span>((<span class="variable">state</span>) => <span class="variable">state</span>.<span class="property">counter</span>.<span class="property">value</span>);
+  <span class="keyword">const</span> <span class="variable">dispatch</span> = <span class="method">useDispatch</span>();
 
-  return (
-    &lt;div&gt;
-      &lt;button onClick={() =&gt; dispatch(decrement())}&gt;-&lt;/button&gt;
-      &lt;span&gt;{count}&lt;/span&gt;
-      &lt;button onClick={() =&gt; dispatch(increment())}&gt;+&lt;/button&gt;
-    &lt;/div&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">div</span>&gt;
+      &lt;<span class="type">button</span> <span class="property">onClick</span>={() => <span class="method">dispatch</span>(<span class="method">decrement</span>())}&gt;-&lt;/<span class="type">button</span>&gt;
+      &lt;<span class="type">span</span>&gt;{<span class="variable">count</span>}&lt;/<span class="type">span</span>&gt;
+      &lt;<span class="type">button</span> <span class="property">onClick</span>={() => <span class="method">dispatch</span>(<span class="method">increment</span>())}&gt;+&lt;/<span class="type">button</span>&gt;
+    &lt;/<span class="type">div</span>&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q33: How do you use React Query for server state?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>import { useQuery, useMutation, useQueryClient, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">react-query.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="method">useQuery</span>, <span class="method">useMutation</span>, <span class="method">useQueryClient</span>, <span class="type">QueryClient</span>, <span class="type">QueryClientProvider</span> } <span class="keyword">from</span> <span class="string">'@tanstack/react-query'</span>;
 
-const queryClient = new QueryClient();
+<span class="keyword">const</span> <span class="variable">queryClient</span> = <span class="keyword">new</span> <span class="type">QueryClient</span>();
 
-function App() {
-  return (
-    &lt;QueryClientProvider client={queryClient}&gt;
-      &lt;Posts /&gt;
-    &lt;/QueryClientProvider&gt;
+<span class="keyword">function</span> <span class="method">App</span>() {
+  <span class="keyword">return</span> (
+    &lt;<span class="type">QueryClientProvider</span> <span class="property">client</span>={<span class="variable">queryClient</span>}&gt;
+      &lt;<span class="type">Posts</span> /&gt;
+    &lt;/<span class="type">QueryClientProvider</span>&gt;
   );
 }
 
-function Posts() {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['posts'],
-    queryFn: () =&gt; fetch('https://api.example.com/posts').then(res =&gt; res.json())
+<span class="keyword">function</span> <span class="method">Posts</span>() {
+  <span class="keyword">const</span> { <span class="variable">data</span>, <span class="variable">isLoading</span>, <span class="variable">error</span> } = <span class="method">useQuery</span>({
+    <span class="property">queryKey</span>: [<span class="string">'posts'</span>],
+    <span class="property">queryFn</span>: () => <span class="method">fetch</span>(<span class="string">'https://api.example.com/posts'</span>).<span class="method">then</span>(<span class="variable">res</span> => <span class="variable">res</span>.<span class="method">json</span>())
   });
 
-  if (isLoading) return &lt;div&gt;Loading...&lt;/div&gt;;
-  if (error) return &lt;div&gt;Error: {error.message}&lt;/div&gt;;
+  <span class="keyword">if</span> (<span class="variable">isLoading</span>) <span class="keyword">return</span> &lt;<span class="type">div</span>&gt;Loading...&lt;/<span class="type">div</span>&gt;;
+  <span class="keyword">if</span> (<span class="variable">error</span>) <span class="keyword">return</span> &lt;<span class="type">div</span>&gt;Error: {<span class="variable">error</span>.<span class="property">message</span>}&lt;/<span class="type">div</span>&gt;;
 
-  return (
-    &lt;ul&gt;
-      {data.map(post =&gt; (
-        &lt;li key={post.id}&gt;{post.title}&lt;/li&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">ul</span>&gt;
+      {<span class="variable">data</span>.<span class="method">map</span>(<span class="variable">post</span> => (
+        &lt;<span class="type">li</span> <span class="property">key</span>={<span class="variable">post</span>.<span class="property">id</span>}&gt;{<span class="variable">post</span>.<span class="property">title</span>}&lt;/<span class="type">li</span>&gt;
       ))}
-    &lt;/ul&gt;
+    &lt;/<span class="type">ul</span>&gt;
   );
 }
 
-function CreatePost() {
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: (newPost) =&gt; fetch('https://api.example.com/posts', {
-      method: 'POST',
-      body: JSON.stringify(newPost)
-    }).then(res =&gt; res.json()),
-    onSuccess: () =&gt; {
-      queryClient.invalidateQueries({ queryKey: ['posts'] });
+<span class="keyword">function</span> <span class="method">CreatePost</span>() {
+  <span class="keyword">const</span> <span class="variable">queryClient</span> = <span class="method">useQueryClient</span>();
+  <span class="keyword">const</span> <span class="variable">mutation</span> = <span class="method">useMutation</span>({
+    <span class="property">mutationFn</span>: (<span class="variable">newPost</span>) => <span class="method">fetch</span>(<span class="string">'https://api.example.com/posts'</span>, {
+      <span class="property">method</span>: <span class="string">'POST'</span>,
+      <span class="property">body</span>: <span class="variable">JSON</span>.<span class="method">stringify</span>(<span class="variable">newPost</span>)
+    }).<span class="method">then</span>(<span class="variable">res</span> => <span class="variable">res</span>.<span class="method">json</span>()),
+    <span class="property">onSuccess</span>: () => {
+      <span class="variable">queryClient</span>.<span class="method">invalidateQueries</span>({ <span class="property">queryKey</span>: [<span class="string">'posts'</span>] });
     }
   });
 
-  const handleSubmit = (e) =&gt; {
-    e.preventDefault();
-    mutation.mutate({ title: 'New Post' });
+  <span class="keyword">const</span> <span class="method">handleSubmit</span> = (<span class="variable">e</span>) => {
+    <span class="variable">e</span>.<span class="method">preventDefault</span>();
+    <span class="variable">mutation</span>.<span class="method">mutate</span>({ <span class="property">title</span>: <span class="string">'New Post'</span> });
   };
 
-  return &lt;form onSubmit={handleSubmit}&gt;&lt;button type="submit"&gt;Create&lt;/button&gt;&lt;/form&gt;;
-}</code></pre></div>
+  <span class="keyword">return</span> &lt;<span class="type">form</span> <span class="property">onSubmit</span>={<span class="variable">handleSubmit</span>}&gt;&lt;<span class="type">button</span> <span class="property">type</span>=<span class="string">"submit"</span>&gt;Create&lt;/<span class="type">button</span>&gt;&lt;/<span class="type">form</span>&gt;;
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q34: How do you implement Zustand for state management?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>import create from 'zustand';
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">zustand.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> <span class="method">create</span> <span class="keyword">from</span> <span class="string">'zustand'</span>;
 
-const useStore = create((set) =&gt; ({
-  count: 0,
-  increment: () =&gt; set((state) =&gt; ({ count: state.count + 1 })),
-  decrement: () =&gt; set((state) =&gt; ({ count: state.count - 1 })),
-  reset: () =&gt; set({ count: 0 })
+<span class="keyword">const</span> <span class="variable">useStore</span> = <span class="method">create</span>((<span class="variable">set</span>) => ({
+  <span class="property">count</span>: <span class="number">0</span>,
+  <span class="method">increment</span>: () => <span class="method">set</span>((<span class="variable">state</span>) => ({ <span class="property">count</span>: <span class="variable">state</span>.<span class="property">count</span> + <span class="number">1</span> })),
+  <span class="method">decrement</span>: () => <span class="method">set</span>((<span class="variable">state</span>) => ({ <span class="property">count</span>: <span class="variable">state</span>.<span class="property">count</span> - <span class="number">1</span> })),
+  <span class="method">reset</span>: () => <span class="method">set</span>({ <span class="property">count</span>: <span class="number">0</span> })
 }));
 
-function Counter() {
-  const { count, increment, decrement, reset } = useStore();
-  return (
-    &lt;div&gt;
-      &lt;span&gt;{count}&lt;/span&gt;
-      &lt;button onClick={increment}&gt;+&lt;/button&gt;
-      &lt;button onClick={decrement}&gt;-&lt;/button&gt;
-      &lt;button onClick={reset}&gt;Reset&lt;/button&gt;
-    &lt;/div&gt;
+<span class="keyword">function</span> <span class="method">Counter</span>() {
+  <span class="keyword">const</span> { <span class="variable">count</span>, <span class="method">increment</span>, <span class="method">decrement</span>, <span class="method">reset</span> } = <span class="method">useStore</span>();
+  <span class="keyword">return</span> (
+    &lt;<span class="type">div</span>&gt;
+      &lt;<span class="type">span</span>&gt;{<span class="variable">count</span>}&lt;/<span class="type">span</span>&gt;
+      &lt;<span class="type">button</span> <span class="property">onClick</span>={<span class="method">increment</span>}&gt;+&lt;/<span class="type">button</span>&gt;
+      &lt;<span class="type">button</span> <span class="property">onClick</span>={<span class="method">decrement</span>}&gt;-&lt;/<span class="type">button</span>&gt;
+      &lt;<span class="type">button</span> <span class="property">onClick</span>={<span class="method">reset</span>}&gt;Reset&lt;/<span class="type">button</span>&gt;
+    &lt;/<span class="type">div</span>&gt;
   );
 }
 
-// Async actions
-const usePostsStore = create((set) =&gt; ({
-  posts: [],
-  loading: false,
-  fetchPosts: async () =&gt; {
-    set({ loading: true });
-    const response = await fetch('https://api.example.com/posts');
-    const posts = await response.json();
-    set({ posts, loading: false });
+<span class="comment">// Async actions</span>
+<span class="keyword">const</span> <span class="variable">usePostsStore</span> = <span class="method">create</span>((<span class="variable">set</span>) => ({
+  <span class="property">posts</span>: [],
+  <span class="property">loading</span>: <span class="keyword">false</span>,
+  <span class="method">fetchPosts</span>: <span class="keyword">async</span> () => {
+    <span class="method">set</span>({ <span class="property">loading</span>: <span class="keyword">true</span> });
+    <span class="keyword">const</span> <span class="variable">response</span> = <span class="keyword">await</span> <span class="method">fetch</span>(<span class="string">'https://api.example.com/posts'</span>);
+    <span class="keyword">const</span> <span class="variable">posts</span> = <span class="keyword">await</span> <span class="variable">response</span>.<span class="method">json</span>();
+    <span class="method">set</span>({ <span class="property">posts</span>, <span class="property">loading</span>: <span class="keyword">false</span> });
   }
-}));</code></pre></div>
+}));</code>
+                </div>
+            </div>
         </div>
 
         <div class="page-break"></div>
 
-        <h2>12. Advanced React Patterns (All Levels Level)</h2>
+        <h2>12. Advanced React Patterns</h2>
 
         <div class="question">
             Q35: What are compound components?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Compound components pattern
-const Tabs = ({ children }) =&gt; {
-  const [activeTab, setActiveTab] = useState(0);
+            <p><strong>Compound components</strong> are components that work together to form a complete UI. They share state implicitly through context, allowing flexible composition of child components.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">compound-components.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Compound components pattern</span>
+<span class="keyword">const</span> <span class="variable">Tabs</span> = ({ <span class="variable">children</span> }) => {
+  <span class="keyword">const</span> [<span class="variable">activeTab</span>, <span class="method">setActiveTab</span>] = <span class="method">useState</span>(<span class="number">0</span>);
   
-  return (
-    &lt;TabsContext.Provider value={{ activeTab, setActiveTab }}&gt;
-      {children}
-    &lt;/TabsContext.Provider&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">TabsContext.Provider</span> <span class="property">value</span>={{ <span class="variable">activeTab</span>, <span class="method">setActiveTab</span> }}&gt;
+      {<span class="variable">children</span>}
+    &lt;/<span class="type">TabsContext.Provider</span>&gt;
   );
 };
 
-const TabList = ({ children }) =&gt; {
-  return &lt;div className="tab-list"&gt;{children}&lt;/div&gt;;
+<span class="keyword">const</span> <span class="variable">TabList</span> = ({ <span class="variable">children</span> }) => {
+  <span class="keyword">return</span> &lt;<span class="type">div</span> <span class="property">className</span>=<span class="string">"tab-list"</span>&gt;{<span class="variable">children</span>}&lt;/<span class="type">div</span>&gt;;
 };
 
-const Tab = ({ children, index }) =&gt; {
-  const { activeTab, setActiveTab } = useContext(TabsContext);
+<span class="keyword">const</span> <span class="variable">Tab</span> = ({ <span class="variable">children</span>, <span class="variable">index</span> }) => {
+  <span class="keyword">const</span> { <span class="variable">activeTab</span>, <span class="method">setActiveTab</span> } = <span class="method">useContext</span>(<span class="variable">TabsContext</span>);
   
-  return (
-    &lt;button
-      className={activeTab === index ? 'active' : ''}
-      onClick={() =&gt; setActiveTab(index)}
+  <span class="keyword">return</span> (
+    &lt;<span class="type">button</span>
+      <span class="property">className</span>={<span class="variable">activeTab</span> === <span class="variable">index</span> ? <span class="string">'active'</span> : <span class="string">''</span>}
+      <span class="property">onClick</span>={() => <span class="method">setActiveTab</span>(<span class="variable">index</span>)}
     &gt;
-      {children}
-    &lt;/button&gt;
+      {<span class="variable">children</span>}
+    &lt;/<span class="type">button</span>&gt;
   );
 };
 
-const TabPanels = ({ children }) =&gt; {
-  return &lt;div className="tab-panels"&gt;{children}&lt;/div&gt;;
+<span class="keyword">const</span> <span class="variable">TabPanels</span> = ({ <span class="variable">children</span> }) => {
+  <span class="keyword">return</span> &lt;<span class="type">div</span> <span class="property">className</span>=<span class="string">"tab-panels"</span>&gt;{<span class="variable">children</span>}&lt;/<span class="type">div</span>&gt;;
 };
 
-const TabPanel = ({ children, index }) =&gt; {
-  const { activeTab } = useContext(TabsContext);
+<span class="keyword">const</span> <span class="variable">TabPanel</span> = ({ <span class="variable">children</span>, <span class="variable">index</span> }) => {
+  <span class="keyword">const</span> { <span class="variable">activeTab</span> } = <span class="method">useContext</span>(<span class="variable">TabsContext</span>);
   
-  return activeTab === index ? &lt;div&gt;{children}&lt;/div&gt; : null;
+  <span class="keyword">return</span> <span class="variable">activeTab</span> === <span class="variable">index</span> ? &lt;<span class="type">div</span>&gt;{<span class="variable">children</span>}&lt;/<span class="type">div</span>&gt; : <span class="keyword">null</span>;
 };
 
-// Usage
-&lt;Tabs&gt;
-  &lt;TabList&gt;
-    &lt;Tab index={0}&gt;Tab 1&lt;/Tab&gt;
-    &lt;Tab index={1}&gt;Tab 2&lt;/Tab&gt;
-  &lt;/TabList&gt;
-  &lt;TabPanels&gt;
-    &lt;TabPanel index={0}&gt;Content 1&lt;/TabPanel&gt;
-    &lt;TabPanel index={1}&gt;Content 2&lt;/TabPanel&gt;
-  &lt;/TabPanels&gt;
-&lt;/Tabs&gt;</code></pre></div>
+<span class="comment">// Usage</span>
+&lt;<span class="type">Tabs</span>&gt;
+  &lt;<span class="type">TabList</span>&gt;
+    &lt;<span class="type">Tab</span> <span class="property">index</span>={<span class="number">0</span>}&gt;Tab 1&lt;/<span class="type">Tab</span>&gt;
+    &lt;<span class="type">Tab</span> <span class="property">index</span>={<span class="number">1</span>}&gt;Tab 2&lt;/<span class="type">Tab</span>&gt;
+  &lt;/<span class="type">TabList</span>&gt;
+  &lt;<span class="type">TabPanels</span>&gt;
+    &lt;<span class="type">TabPanel</span> <span class="property">index</span>={<span class="number">0</span>}&gt;Content 1&lt;/<span class="type">TabPanel</span>&gt;
+    &lt;<span class="type">TabPanel</span> <span class="property">index</span>={<span class="number">1</span>}&gt;Content 2&lt;/<span class="type">TabPanel</span>&gt;
+  &lt;/<span class="type">TabPanels</span>&gt;
+&lt;/<span class="type">Tabs</span>&gt;</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q36: What are render props?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Render props pattern
-const MouseTracker = ({ render }) =&gt; {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+            <p><strong>Render props</strong> is a technique where a component receives a function as a prop that returns a React element. This allows sharing code between components using a prop whose value is a function.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">render-props.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Render props pattern</span>
+<span class="keyword">const</span> <span class="variable">MouseTracker</span> = ({ <span class="variable">render</span> }) => {
+  <span class="keyword">const</span> [<span class="variable">position</span>, <span class="method">setPosition</span>] = <span class="method">useState</span>({ <span class="property">x</span>: <span class="number">0</span>, <span class="property">y</span>: <span class="number">0</span> });
 
-  const handleMouseMove = (e) =&gt; {
-    setPosition({ x: e.clientX, y: e.clientY });
+  <span class="keyword">const</span> <span class="method">handleMouseMove</span> = (<span class="variable">e</span>) => {
+    <span class="method">setPosition</span>({ <span class="property">x</span>: <span class="variable">e</span>.<span class="property">clientX</span>, <span class="property">y</span>: <span class="variable">e</span>.<span class="property">clientY</span> });
   };
 
-  return (
-    &lt;div onMouseMove={handleMouseMove}&gt;
-      {render(position)}
-    &lt;/div&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">div</span> <span class="property">onMouseMove</span>={<span class="method">handleMouseMove</span>}&gt;
+      {<span class="method">render</span>(<span class="variable">position</span>)}
+    &lt;/<span class="type">div</span>&gt;
   );
 };
 
-// Usage
-&lt;MouseTracker
-  render={({ x, y }) =&gt; (
-    &lt;p&gt;Mouse position: {x}, {y}&lt;/p&gt;
+<span class="comment">// Usage</span>
+&lt;<span class="type">MouseTracker</span>
+  <span class="property">render</span>={({ <span class="variable">x</span>, <span class="variable">y</span> }) => (
+    &lt;<span class="type">p</span>&gt;Mouse position: {<span class="variable">x</span>}, {<span class="variable">y</span>}&lt;/<span class="type">p</span>&gt;
   )}
 /&gt;
 
-// Using children as render prop
-&lt;MouseTracker&gt;
-  {({ x, y }) =&gt; &lt;p&gt;Mouse: {x}, {y}&lt;/p&gt;}
-&lt;/MouseTracker&gt;</code></pre></div>
+<span class="comment">// Using children as render prop</span>
+&lt;<span class="type">MouseTracker</span>&gt;
+  {({ <span class="variable">x</span>, <span class="variable">y</span> }) => &lt;<span class="type">p</span>&gt;Mouse: {<span class="variable">x</span>}, {<span class="variable">y</span>}&lt;/<span class="type">p</span>&gt;}
+&lt;/<span class="type">MouseTracker</span>&gt;</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q37: What are higher-order components (HOCs)?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> HOC pattern
-const withLoading = (WrappedComponent) =&gt; {
-  return (props) =&gt; {
-    const [loading, setLoading] = useState(true);
-    const [data, setData] = useState(null);
+            <p><strong>Higher-order components (HOCs)</strong> are functions that take a component and return a new component. They're used to reuse component logic like authentication, data fetching, or loading states.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">hoc.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// HOC pattern</span>
+<span class="keyword">const</span> <span class="method">withLoading</span> = (<span class="variable">WrappedComponent</span>) => {
+  <span class="keyword">return</span> (<span class="variable">props</span>) => {
+    <span class="keyword">const</span> [<span class="variable">loading</span>, <span class="method">setLoading</span>] = <span class="method">useState</span>(<span class="keyword">true</span>);
+    <span class="keyword">const</span> [<span class="variable">data</span>, <span class="method">setData</span>] = <span class="method">useState</span>(<span class="keyword">null</span>);
 
-    useEffect(() =&gt; {
-      fetchData().then(result =&gt; {
-        setData(result);
-        setLoading(false);
+    <span class="method">useEffect</span>(() => {
+      <span class="method">fetchData</span>().<span class="method">then</span>(<span class="variable">result</span> => {
+        <span class="method">setData</span>(<span class="variable">result</span>);
+        <span class="method">setLoading</span>(<span class="keyword">false</span>);
       });
     }, []);
 
-    if (loading) return &lt;div&gt;Loading...&lt;/div&gt;;
-    return &lt;WrappedComponent data={data} {...props} /&gt;;
+    <span class="keyword">if</span> (<span class="variable">loading</span>) <span class="keyword">return</span> &lt;<span class="type">div</span>&gt;Loading...&lt;/<span class="type">div</span>&gt;;
+    <span class="keyword">return</span> &lt;<span class="type">WrappedComponent</span> <span class="property">data</span>={<span class="variable">data</span>} {...<span class="variable">props</span>} /&gt;;
   };
 };
 
-// Usage
-const UserProfile = ({ data }) =&gt; {
-  return &lt;div&gt;{data.name}&lt;/div&gt;;
+<span class="comment">// Usage</span>
+<span class="keyword">const</span> <span class="variable">UserProfile</span> = ({ <span class="variable">data</span> }) => {
+  <span class="keyword">return</span> &lt;<span class="type">div</span>&gt;{<span class="variable">data</span>.<span class="property">name</span>}&lt;/<span class="type">div</span>&gt;;
 };
 
-const UserProfileWithLoading = withLoading(UserProfile);
+<span class="keyword">const</span> <span class="variable">UserProfileWithLoading</span> = <span class="method">withLoading</span>(<span class="variable">UserProfile</span>);
 
-// HOC with authentication
-const withAuth = (WrappedComponent) =&gt; {
-  return (props) =&gt; {
-    const isAuthenticated = useAuth();
+<span class="comment">// HOC with authentication</span>
+<span class="keyword">const</span> <span class="method">withAuth</span> = (<span class="variable">WrappedComponent</span>) => {
+  <span class="keyword">return</span> (<span class="variable">props</span>) => {
+    <span class="keyword">const</span> <span class="variable">isAuthenticated</span> = <span class="method">useAuth</span>();
     
-    if (!isAuthenticated) {
-      return &lt;Navigate to="/login" /&gt;;
+    <span class="keyword">if</span> (!<span class="variable">isAuthenticated</span>) {
+      <span class="keyword">return</span> &lt;<span class="type">Navigate</span> <span class="property">to</span>=<span class="string">"/login"</span> /&gt;;
     }
     
-    return &lt;WrappedComponent {...props} /&gt;;
+    <span class="keyword">return</span> &lt;<span class="type">WrappedComponent</span> {...<span class="variable">props</span>} /&gt;;
   };
-};</code></pre></div>
+};</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q38: What are custom hooks?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Custom hook for localStorage
-function useLocalStorage(key, initialValue) {
-  const [storedValue, setStoredValue] = useState(() =&gt; {
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      return initialValue;
+            <p><strong>Custom hooks</strong> are JavaScript functions that start with "use" and can call other hooks. They allow you to extract and reuse stateful logic between components without changing hierarchy.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">custom-hooks.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Custom hook for localStorage</span>
+<span class="keyword">function</span> <span class="method">useLocalStorage</span>(<span class="variable">key</span>, <span class="variable">initialValue</span>) {
+  <span class="keyword">const</span> [<span class="variable">storedValue</span>, <span class="method">setStoredValue</span>] = <span class="method">useState</span>(() => {
+    <span class="keyword">try</span> {
+      <span class="keyword">const</span> <span class="variable">item</span> = <span class="variable">window</span>.<span class="property">localStorage</span>.<span class="method">getItem</span>(<span class="variable">key</span>);
+      <span class="keyword">return</span> <span class="variable">item</span> ? <span class="variable">JSON</span>.<span class="method">parse</span>(<span class="variable">item</span>) : <span class="variable">initialValue</span>;
+    } <span class="keyword">catch</span> (<span class="variable">error</span>) {
+      <span class="keyword">return</span> <span class="variable">initialValue</span>;
     }
   });
 
-  const setValue = (value) =&gt; {
-    try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.error(error);
+  <span class="keyword">const</span> <span class="method">setValue</span> = (<span class="variable">value</span>) => {
+    <span class="keyword">try</span> {
+      <span class="keyword">const</span> <span class="variable">valueToStore</span> = <span class="variable">value</span> <span class="keyword">instanceof</span> <span class="type">Function</span> ? <span class="variable">value</span>(<span class="variable">storedValue</span>) : <span class="variable">value</span>;
+      <span class="method">setStoredValue</span>(<span class="variable">valueToStore</span>);
+      <span class="variable">window</span>.<span class="property">localStorage</span>.<span class="method">setItem</span>(<span class="variable">key</span>, <span class="variable">JSON</span>.<span class="method">stringify</span>(<span class="variable">valueToStore</span>));
+    } <span class="keyword">catch</span> (<span class="variable">error</span>) {
+      <span class="variable">console</span>.<span class="method">error</span>(<span class="variable">error</span>);
     }
   };
 
-  return [storedValue, setValue];
+  <span class="keyword">return</span> [<span class="variable">storedValue</span>, <span class="method">setValue</span>];
 }
 
-// Usage
-const [name, setName] = useLocalStorage('name', 'John');
+<span class="comment">// Usage</span>
+<span class="keyword">const</span> [<span class="variable">name</span>, <span class="method">setName</span>] = <span class="method">useLocalStorage</span>(<span class="string">'name'</span>, <span class="string">'John'</span>);
 
-// Custom hook for debouncing
-function useDebounce(value, delay) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
+<span class="comment">// Custom hook for debouncing</span>
+<span class="keyword">function</span> <span class="method">useDebounce</span>(<span class="variable">value</span>, <span class="variable">delay</span>) {
+  <span class="keyword">const</span> [<span class="variable">debouncedValue</span>, <span class="method">setDebouncedValue</span>] = <span class="method">useState</span>(<span class="variable">value</span>);
 
-  useEffect(() =&gt; {
-    const handler = setTimeout(() =&gt; {
-      setDebouncedValue(value);
-    }, delay);
+  <span class="method">useEffect</span>(() => {
+    <span class="keyword">const</span> <span class="variable">handler</span> = <span class="method">setTimeout</span>(() => {
+      <span class="method">setDebouncedValue</span>(<span class="variable">value</span>);
+    }, <span class="variable">delay</span>);
 
-    return () =&gt; {
-      clearTimeout(handler);
+    <span class="keyword">return</span> () => {
+      <span class="method">clearTimeout</span>(<span class="variable">handler</span>);
     };
-  }, [value, delay]);
+  }, [<span class="variable">value</span>, <span class="variable">delay</span>]);
 
-  return debouncedValue;
+  <span class="keyword">return</span> <span class="variable">debouncedValue</span>;
 }
 
-// Usage
-const [searchTerm, setSearchTerm] = useState('');
-const debouncedSearchTerm = useDebounce(searchTerm, 500);</code></pre></div>
+<span class="comment">// Usage</span>
+<span class="keyword">const</span> [<span class="variable">searchTerm</span>, <span class="method">setSearchTerm</span>] = <span class="method">useState</span>(<span class="string">''</span>);
+<span class="keyword">const</span> <span class="variable">debouncedSearchTerm</span> = <span class="method">useDebounce</span>(<span class="variable">searchTerm</span>, <span class="number">500</span>);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q39: What is the difference between controlled and uncontrolled components?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Controlled component
-function ControlledForm() {
-  const [value, setValue] = useState('');
+            <p><strong>Controlled components</strong> have their form data controlled by React state. <strong>Uncontrolled components</strong> store their own state internally and are accessed using refs.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">controlled-uncontrolled.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Controlled component</span>
+<span class="keyword">function</span> <span class="method">ControlledForm</span>() {
+  <span class="keyword">const</span> [<span class="variable">value</span>, <span class="method">setValue</span>] = <span class="method">useState</span>(<span class="string">''</span>);
 
-  return (
-    &lt;input
-      value={value}
-      onChange={(e) =&gt; setValue(e.target.value)}
+  <span class="keyword">return</span> (
+    &lt;<span class="type">input</span>
+      <span class="property">value</span>={<span class="variable">value</span>}
+      <span class="property">onChange</span>={(<span class="variable">e</span>) => <span class="method">setValue</span>(<span class="variable">e</span>.<span class="property">target</span>.<span class="property">value</span>)}
     /&gt;
   );
 }
 
-// Uncontrolled component
-function UncontrolledForm() {
-  const inputRef = useRef();
+<span class="comment">// Uncontrolled component</span>
+<span class="keyword">function</span> <span class="method">UncontrolledForm</span>() {
+  <span class="keyword">const</span> <span class="variable">inputRef</span> = <span class="method">useRef</span>();
 
-  const handleSubmit = (e) =&gt; {
-    e.preventDefault();
-    console.log(inputRef.current.value);
+  <span class="keyword">const</span> <span class="method">handleSubmit</span> = (<span class="variable">e</span>) => {
+    <span class="variable">e</span>.<span class="method">preventDefault</span>();
+    <span class="variable">console</span>.<span class="method">log</span>(<span class="variable">inputRef</span>.<span class="property">current</span>.<span class="property">value</span>);
   };
 
-  return (
-    &lt;form onSubmit={handleSubmit}&gt;
-      &lt;input ref={inputRef} defaultValue="initial" /&gt;
-      &lt;button type="submit"&gt;Submit&lt;/button&gt;
-    &lt;/form&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">form</span> <span class="property">onSubmit</span>={<span class="method">handleSubmit</span>}&gt;
+      &lt;<span class="type">input</span> <span class="property">ref</span>={<span class="variable">inputRef</span>} <span class="property">defaultValue</span>=<span class="string">"initial"</span> /&gt;
+      &lt;<span class="type">button</span> <span class="property">type</span>=<span class="string">"submit"</span>&gt;Submit&lt;/<span class="type">button</span>&gt;
+    &lt;/<span class="type">form</span>&gt;
   );
 }
 
-// When to use each:
-// Controlled: Form validation, dynamic inputs, real-time formatting
-// Uncontrolled: Simple forms, integrating with non-React code, performance</code></pre></div>
+<span class="comment">// When to use each:</span>
+<span class="comment">// Controlled: Form validation, dynamic inputs, real-time formatting</span>
+<span class="comment">// Uncontrolled: Simple forms, integrating with non-React code, performance</span></code>
+                </div>
+            </div>
         </div>
 
         <div class="page-break"></div>
 
-        <h2>13. Server-Side Rendering (All Levels Level)</h2>
+        <h2>13. Server-Side Rendering</h2>
 
         <div class="question">
             Q40: How do you implement SSR with Next.js?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> pages/index.js (SSR)
-export async function getServerSideProps(context) {
-  const res = await fetch('https://api.example.com/data');
-  const data = await res.json();
+            <p><strong>Server-Side Rendering (SSR)</strong> in Next.js uses getServerSideProps to fetch data on each request. <strong>Static Generation (SSG)</strong> uses getStaticProps to generate pages at build time.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">pages/index.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// pages/index.js (SSR)</span>
+<span class="keyword">export async function</span> <span class="method">getServerSideProps</span>(<span class="variable">context</span>) {
+  <span class="keyword">const</span> <span class="variable">res</span> = <span class="keyword">await</span> <span class="method">fetch</span>(<span class="string">'https://api.example.com/data'</span>);
+  <span class="keyword">const</span> <span class="variable">data</span> = <span class="keyword">await</span> <span class="variable">res</span>.<span class="method">json</span>();
 
-  return {
-    props: { data }
+  <span class="keyword">return</span> {
+    <span class="property">props</span>: { <span class="variable">data</span> }
   };
 }
 
-function HomePage({ data }) {
-  return &lt;div&gt;{data.title}&lt;/div&gt;;
+<span class="keyword">function</span> <span class="method">HomePage</span>({ <span class="variable">data</span> }) {
+  <span class="keyword">return</span> &lt;<span class="type">div</span>&gt;{<span class="variable">data</span>.<span class="property">title</span>}&lt;/<span class="type">div</span>&gt;;
 }
 
-export default HomePage;
+<span class="keyword">export default</span> <span class="variable">HomePage</span>;
 
-// Static generation (SSG)
-export async function getStaticProps() {
-  const res = await fetch('https://api.example.com/data');
-  const data = await res.json();
+<span class="comment">// Static generation (SSG)</span>
+<span class="keyword">export async function</span> <span class="method">getStaticProps</span>() {
+  <span class="keyword">const</span> <span class="variable">res</span> = <span class="keyword">await</span> <span class="method">fetch</span>(<span class="string">'https://api.example.com/data'</span>);
+  <span class="keyword">const</span> <span class="variable">data</span> = <span class="keyword">await</span> <span class="variable">res</span>.<span class="method">json</span>();
 
-  return {
-    props: { data },
-    revalidate: 60 // Revalidate every 60 seconds
+  <span class="keyword">return</span> {
+    <span class="property">props</span>: { <span class="variable">data</span> },
+    <span class="property">revalidate</span>: <span class="number">60</span> <span class="comment">// Revalidate every 60 seconds</span>
   };
 }
 
-// Incremental Static Regeneration (ISR)
-export async function getStaticPaths() {
-  const res = await fetch('https://api.example.com/posts');
-  const posts = await res.json();
+<span class="comment">// Incremental Static Regeneration (ISR)</span>
+<span class="keyword">export async function</span> <span class="method">getStaticPaths</span>() {
+  <span class="keyword">const</span> <span class="variable">res</span> = <span class="keyword">await</span> <span class="method">fetch</span>(<span class="string">'https://api.example.com/posts'</span>);
+  <span class="keyword">const</span> <span class="variable">posts</span> = <span class="keyword">await</span> <span class="variable">res</span>.<span class="method">json</span>();
 
-  return {
-    paths: posts.map(post =&gt; ({ params: { id: post.id } })),
-    fallback: 'blocking'
+  <span class="keyword">return</span> {
+    <span class="property">paths</span>: <span class="variable">posts</span>.<span class="method">map</span>(<span class="variable">post</span> => ({ <span class="property">params</span>: { <span class="property">id</span>: <span class="variable">post</span>.<span class="property">id</span> } })),
+    <span class="property">fallback</span>: <span class="string">'blocking'</span>
   };
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q41: How do you implement SSR with React 18?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> server.js
-import express from 'express';
-import { renderToPipeableStream } from 'react-dom/server';
-import App from './App';
+            <p><strong>React 18 SSR</strong> uses renderToPipeableStream for streaming rendering and hydrateRoot for hydration. This enables progressive rendering and better performance.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">server.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> <span class="variable">express</span> <span class="keyword">from</span> <span class="string">'express'</span>;
+<span class="keyword">import</span> { <span class="method">renderToPipeableStream</span> } <span class="keyword">from</span> <span class="string">'react-dom/server'</span>;
+<span class="keyword">import</span> <span class="type">App</span> <span class="keyword">from</span> <span class="string">'./App'</span>;
 
-const app = express();
+<span class="keyword">const</span> <span class="variable">app</span> = <span class="method">express</span>();
 
-app.get('/', (req, res) =&gt; {
-  const { pipe } = renderToPipeableStream(
-    &lt;App /&gt;,
+<span class="variable">app</span>.<span class="method">get</span>(<span class="string">'/'</span>, (<span class="variable">req</span>, <span class="variable">res</span>) => {
+  <span class="keyword">const</span> { <span class="variable">pipe</span> } = <span class="method">renderToPipeableStream</span>(
+    &lt;<span class="type">App</span> /&gt;,
     {
-      bootstrapScripts: ['/client.js'],
-      onShellReady() {
-        res.statusCode = 200;
-        res.setHeader('Content-type', 'text/html');
-        pipe(res);
+      <span class="property">bootstrapScripts</span>: [<span class="string">'/client.js'</span>],
+      <span class="method">onShellReady</span>() {
+        <span class="variable">res</span>.<span class="property">statusCode</span> = <span class="number">200</span>;
+        <span class="variable">res</span>.<span class="method">setHeader</span>(<span class="string">'Content-type'</span>, <span class="string">'text/html'</span>);
+        <span class="method">pipe</span>(<span class="variable">res</span>);
       },
-      onShellError(error) {
-        res.statusCode = 500;
-        res.send('Error!');
+      <span class="method">onShellError</span>(<span class="variable">error</span>) {
+        <span class="variable">res</span>.<span class="property">statusCode</span> = <span class="number">500</span>;
+        <span class="variable">res</span>.<span class="method">send</span>(<span class="string">'Error!'</span>);
       }
     }
   );
 });
 
-app.listen(3000);
+<span class="variable">app</span>.<span class="method">listen</span>(<span class="number">3000</span>);
 
-// client.js
-import { hydrateRoot } from 'react-dom/client';
-import App from './App';
+<span class="comment">// client.js</span>
+<span class="keyword">import</span> { <span class="method">hydrateRoot</span> } <span class="keyword">from</span> <span class="string">'react-dom/client'</span>;
+<span class="keyword">import</span> <span class="type">App</span> <span class="keyword">from</span> <span class="string">'./App'</span>;
 
-hydrateRoot(document.getElementById('root'), &lt;App /&gt;);</code></pre></div>
+<span class="method">hydrateRoot</span>(<span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'root'</span>), &lt;<span class="type">App</span> /&gt;);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1652,7 +1685,7 @@ hydrateRoot(document.getElementById('root'), &lt;App /&gt;);</code></pre></div>
 
         <div class="page-break"></div>
 
-        <h2>14. React 18+ Features (All Levels Level)</h2>
+        <h2>14. React 18+ Features</h2>
 
         <div class="question">
             Q43: What are the new features in React 18?
@@ -1673,117 +1706,150 @@ hydrateRoot(document.getElementById('root'), &lt;App /&gt;);</code></pre></div>
             Q44: How do you use concurrent features in React 18?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> useTransition for non-urgent updates
-function SearchResults() {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
-  const [isPending, startTransition] = useTransition();
+            <p><strong>Concurrent features</strong> include useTransition for non-urgent updates and useDeferredValue for expensive UI. These allow React to interrupt rendering for more urgent updates.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">concurrent.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// useTransition for non-urgent updates</span>
+<span class="keyword">function</span> <span class="method">SearchResults</span>() {
+  <span class="keyword">const</span> [<span class="variable">query</span>, <span class="method">setQuery</span>] = <span class="method">useState</span>(<span class="string">''</span>);
+  <span class="keyword">const</span> [<span class="variable">results</span>, <span class="method">setResults</span>] = <span class="method">useState</span>([]);
+  <span class="keyword">const</span> [<span class="variable">isPending</span>, <span class="method">startTransition</span>] = <span class="method">useTransition</span>();
 
-  const handleChange = (e) =&gt; {
-    // Urgent update
-    setQuery(e.target.value);
+  <span class="keyword">const</span> <span class="method">handleChange</span> = (<span class="variable">e</span>) => {
+    <span class="comment">// Urgent update</span>
+    <span class="method">setQuery</span>(<span class="variable">e</span>.<span class="property">target</span>.<span class="property">value</span>);
     
-    // Non-urgent update
-    startTransition(() =&gt; {
-      setResults(search(e.target.value));
+    <span class="comment">// Non-urgent update</span>
+    <span class="method">startTransition</span>(() => {
+      <span class="method">setResults</span>(<span class="method">search</span>(<span class="variable">e</span>.<span class="property">target</span>.<span class="property">value</span>));
     });
   };
 
-  return (
-    &lt;div&gt;
-      &lt;input value={query} onChange={handleChange} /&gt;
-      {isPending ? &lt;Spinner /&gt; : &lt;ResultsList results={results} /&gt;}
-    &lt;/div&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">div</span>&gt;
+      &lt;<span class="type">input</span> <span class="property">value</span>={<span class="variable">query</span>} <span class="property">onChange</span>={<span class="method">handleChange</span>} /&gt;
+      {<span class="variable">isPending</span> ? &lt;<span class="type">Spinner</span> /&gt; : &lt;<span class="type">ResultsList</span> <span class="property">results</span>={<span class="variable">results</span>} /&gt;}
+    &lt;/<span class="type">div</span>&gt;
   );
 }
 
-// useDeferredValue for expensive UI
-function ProductList({ products }) {
-  const deferredProducts = useDeferredValue(products);
+<span class="comment">// useDeferredValue for expensive UI</span>
+<span class="keyword">function</span> <span class="method">ProductList</span>({ <span class="variable">products</span> }) {
+  <span class="keyword">const</span> <span class="variable">deferredProducts</span> = <span class="method">useDeferredValue</span>(<span class="variable">products</span>);
   
-  return (
-    &lt;div&gt;
-      {deferredProducts.map(product =&gt; (
-        &lt;ProductCard key={product.id} product={product} /&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">div</span>&gt;
+      {<span class="variable">deferredProducts</span>.<span class="method">map</span>(<span class="variable">product</span> => (
+        &lt;<span class="type">ProductCard</span> <span class="property">key</span>={<span class="variable">product</span>.<span class="property">id</span>} <span class="property">product</span>={<span class="variable">product</span>} /&gt;
       ))}
-    &lt;/div&gt;
+    &lt;/<span class="type">div</span>&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q45: How do you use the new root API?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Old way (React 17)
-import ReactDOM from 'react-dom';
-import App from './App';
+            <p><strong>New root API</strong> uses createRoot instead of ReactDOM.render. This enables concurrent features and provides better control over hydration and unmounting.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">root-api.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Old way (React 17)</span>
+<span class="keyword">import</span> <span class="type">ReactDOM</span> <span class="keyword">from</span> <span class="string">'react-dom'</span>;
+<span class="keyword">import</span> <span class="type">App</span> <span class="keyword">from</span> <span class="string">'./App'</span>;
 
-ReactDOM.render(&lt;App /&gt;, document.getElementById('root'));
+<span class="type">ReactDOM</span>.<span class="method">render</span>(&lt;<span class="type">App</span> /&gt;, <span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'root'</span>));
 
-// New way (React 18+)
-import { createRoot } from 'react-dom/client';
-import App from './App';
+<span class="comment">// New way (React 18+)</span>
+<span class="keyword">import</span> { <span class="method">createRoot</span> } <span class="keyword">from</span> <span class="string">'react-dom/client'</span>;
+<span class="keyword">import</span> <span class="type">App</span> <span class="keyword">from</span> <span class="string">'./App'</span>;
 
-const root = createRoot(document.getElementById('root'));
-root.render(&lt;App /&gt;);
+<span class="keyword">const</span> <span class="variable">root</span> = <span class="method">createRoot</span>(<span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'root'</span>));
+<span class="variable">root</span>.<span class="method">render</span>(&lt;<span class="type">App</span> /&gt;);
 
-// Unmounting
-root.unmount();
+<span class="comment">// Unmounting</span>
+<span class="variable">root</span>.<span class="method">unmount</span>();
 
-// Concurrent features enabled by default
-root.render(
-  &lt;StrictMode&gt;
-    &lt;App /&gt;
-  &lt;/StrictMode&gt;
-);</code></pre></div>
+<span class="comment">// Concurrent features enabled by default</span>
+<span class="variable">root</span>.<span class="method">render</span>(
+  &lt;<span class="type">StrictMode</span>&gt;
+    &lt;<span class="type">App</span> /&gt;
+  &lt;/<span class="type">StrictMode</span>&gt;
+);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q46: What is automatic batching in React 18?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> React 18 automatically batches state updates
-// even in async operations, promises, timeouts
+            <p><strong>Automatic batching</strong> groups multiple state updates into a single re-render for better performance. In React 18, batching works in async operations, promises, and timeouts, not just in event handlers.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">batching.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// React 18 automatically batches state updates</span>
+<span class="comment">// even in async operations, promises, timeouts</span>
 
-function handleClick() {
-  setCount(c =&gt; c + 1);
-  setFlag(f =&gt; !f);
-  // Both updates are batched - only one re-render
+<span class="keyword">function</span> <span class="method">handleClick</span>() {
+  <span class="method">setCount</span>(<span class="variable">c</span> => <span class="variable">c</span> + <span class="number">1</span>);
+  <span class="method">setFlag</span>(<span class="variable">f</span> => !<span class="variable">f</span>);
+  <span class="comment">// Both updates are batched - only one re-render</span>
 }
 
-// In async operations
-async function fetchData() {
-  const data = await fetch('/api/data');
-  setLoading(false);
-  setData(data);
-  setError(null);
-  // All three updates are batched
+<span class="comment">// In async operations</span>
+<span class="keyword">async function</span> <span class="method">fetchData</span>() {
+  <span class="keyword">const</span> <span class="variable">data</span> = <span class="keyword">await</span> <span class="method">fetch</span>(<span class="string">'/api/data'</span>);
+  <span class="method">setLoading</span>(<span class="keyword">false</span>);
+  <span class="method">setData</span>(<span class="variable">data</span>);
+  <span class="method">setError</span>(<span class="keyword">null</span>);
+  <span class="comment">// All three updates are batched</span>
 }
 
-// In event handlers
-setTimeout(() =&gt; {
-  setCount(c =&gt; c + 1);
-  setFlag(f =&gt; !f);
-  // Batched in React 18, not in React 17
-}, 1000);
+<span class="comment">// In event handlers</span>
+<span class="method">setTimeout</span>(() => {
+  <span class="method">setCount</span>(<span class="variable">c</span> => <span class="variable">c</span> + <span class="number">1</span>);
+  <span class="method">setFlag</span>(<span class="variable">f</span> => !<span class="variable">f</span>);
+  <span class="comment">// Batched in React 18, not in React 17</span>
+}, <span class="number">1000</span>);
 
-// To opt out of batching
-import { flushSync } from 'react-dom';
+<span class="comment">// To opt out of batching</span>
+<span class="keyword">import</span> { <span class="method">flushSync</span> } <span class="keyword">from</span> <span class="string">'react-dom'</span>;
 
-function handleClick() {
-  flushSync(() =&gt; {
-    setCount(c =&gt; c + 1);
+<span class="keyword">function</span> <span class="method">handleClick</span>() {
+  <span class="method">flushSync</span>(() => {
+    <span class="method">setCount</span>(<span class="variable">c</span> => <span class="variable">c</span> + <span class="number">1</span>);
   });
-  // Re-renders immediately
-  setFlag(f =&gt; !f);
-  // Re-renders again
-}</code></pre></div>
+  <span class="comment">// Re-renders immediately</span>
+  <span class="method">setFlag</span>(<span class="variable">f</span> => !<span class="variable">f</span>);
+  <span class="comment">// Re-renders again</span>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="page-break"></div>
 
-        <h2>15. Common Interview Questions (All Levels)</h2>
+        <h2>15. Common Interview Questions</h2>
 
         <div class="question">
             Q47: What is the difference between useEffect and useLayoutEffect?
@@ -1794,62 +1860,82 @@ function handleClick() {
                 <li><strong>useLayoutEffect:</strong> Runs before paint. Blocking. Use for DOM measurements.</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code> useEffect (non-blocking)
-useEffect(() =&gt; {
-  document.title = `Count: ${count}`;
-}, [count]);
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">effects.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// useEffect (non-blocking)</span>
+<span class="method">useEffect</span>(() => {
+  <span class="variable">document</span>.<span class="property">title</span> = <span class="string">`Count: ${count}`</span>;
+}, [<span class="variable">count</span>]);
 
-// useLayoutEffect (blocking, for DOM measurements)
-useLayoutEffect(() =&gt; {
-  const rect = ref.current.getBoundingClientRect();
-  setPosition(rect.top);
-}, []);</code></pre></div>
+<span class="comment">// useLayoutEffect (blocking, for DOM measurements)</span>
+<span class="method">useLayoutEffect</span>(() => {
+  <span class="keyword">const</span> <span class="variable">rect</span> = <span class="variable">ref</span>.<span class="property">current</span>.<span class="method">getBoundingClientRect</span>();
+  <span class="method">setPosition</span>(<span class="variable">rect</span>.<span class="property">top</span>);
+}, []);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q48: How do you handle errors in React?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Error boundary
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">error-boundary.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Error boundary</span>
+<span class="keyword">class</span> <span class="type">ErrorBoundary</span> <span class="keyword">extends</span> <span class="type">React</span>.<span class="property">Component</span> {
+  <span class="method">constructor</span>(<span class="variable">props</span>) {
+    <span class="keyword">super</span>(<span class="variable">props</span>);
+    <span class="variable">this</span>.<span class="property">state</span> = { <span class="property">hasError</span>: <span class="keyword">false</span> };
   }
 
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
+  <span class="keyword">static</span> <span class="method">getDerivedStateFromError</span>(<span class="variable">error</span>) {
+    <span class="keyword">return</span> { <span class="property">hasError</span>: <span class="keyword">true</span> };
   }
 
-  componentDidCatch(error, errorInfo) {
-    console.error('Error:', error, errorInfo);
+  <span class="method">componentDidCatch</span>(<span class="variable">error</span>, <span class="variable">errorInfo</span>) {
+    <span class="variable">console</span>.<span class="method">error</span>(<span class="string">'Error:'</span>, <span class="variable">error</span>, <span class="variable">errorInfo</span>);
   }
 
-  render() {
-    if (this.state.hasError) {
-      return &lt;h1&gt;Something went wrong.&lt;/h1&gt;;
+  <span class="method">render</span>() {
+    <span class="keyword">if</span> (<span class="variable">this</span>.<span class="property">state</span>.<span class="property">hasError</span>) {
+      <span class="keyword">return</span> &lt;<span class="type">h1</span>&gt;Something went wrong.&lt;/<span class="type">h1</span>&gt;;
     }
-    return this.props.children;
+    <span class="keyword">return</span> <span class="variable">this</span>.<span class="property">props</span>.<span class="property">children</span>;
   }
 }
 
-// Usage
-&lt;ErrorBoundary&gt;
-  &lt;MyComponent /&gt;
-&lt;/ErrorBoundary&gt;
+<span class="comment">// Usage</span>
+&lt;<span class="type">ErrorBoundary</span>&gt;
+  &lt;<span class="type">MyComponent</span> /&gt;
+&lt;/<span class="type">ErrorBoundary</span>&gt;
 
-// Error handling in async operations
-useEffect(() =&gt; {
-  const fetchData = async () =&gt; {
-    try {
-      const data = await fetch('/api/data');
-      setData(data);
-    } catch (error) {
-      setError(error.message);
+<span class="comment">// Error handling in async operations</span>
+<span class="method">useEffect</span>(() => {
+  <span class="keyword">const</span> <span class="method">fetchData</span> = <span class="keyword">async</span> () => {
+    <span class="keyword">try</span> {
+      <span class="keyword">const</span> <span class="variable">data</span> = <span class="keyword">await</span> <span class="method">fetch</span>(<span class="string">'/api/data'</span>);
+      <span class="method">setData</span>(<span class="variable">data</span>);
+    } <span class="keyword">catch</span> (<span class="variable">error</span>) {
+      <span class="method">setError</span>(<span class="variable">error</span>.<span class="property">message</span>);
     }
   };
-  fetchData();
-}, []);</code></pre></div>
+  <span class="method">fetchData</span>();
+}, []);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1879,112 +1965,144 @@ useEffect(() =&gt; {
                 <li><strong>useCallback:</strong> Memoizes a function. Returns the memoized function.</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code> useMemo
-const expensiveValue = useMemo(() =&gt; {
-  return computeExpensiveValue(a, b);
-}, [a, b]);
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">memoization.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// useMemo</span>
+<span class="keyword">const</span> <span class="variable">expensiveValue</span> = <span class="method">useMemo</span>(() => {
+  <span class="keyword">return</span> <span class="method">computeExpensiveValue</span>(<span class="variable">a</span>, <span class="variable">b</span>);
+}, [<span class="variable">a</span>, <span class="variable">b</span>]);
 
-// useCallback
-const handleClick = useCallback(() =&gt; {
-  doSomething(a, b);
-}, [a, b]);
+<span class="comment">// useCallback</span>
+<span class="keyword">const</span> <span class="variable">handleClick</span> = <span class="method">useCallback</span>(() => {
+  <span class="method">doSomething</span>(<span class="variable">a</span>, <span class="variable">b</span>);
+}, [<span class="variable">a</span>, <span class="variable">b</span>]);
 
-// useCallback is essentially useMemo with a function
-const handleClick = useMemo(() =&gt; () =&gt; {
-  doSomething(a, b);
-}, [a, b]);</code></pre></div>
+<span class="comment">// useCallback is essentially useMemo with a function</span>
+<span class="keyword">const</span> <span class="variable">handleClick</span> = <span class="method">useMemo</span>(() => () => {
+  <span class="method">doSomething</span>(<span class="variable">a</span>, <span class="variable">b</span>);
+}, [<span class="variable">a</span>, <span class="variable">b</span>]);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q51: How do you implement infinite scroll?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>import { useEffect, useState, useRef } from 'react';
+            <p><strong>Infinite scroll</strong> loads more content as the user scrolls down. Use IntersectionObserver to detect when the user reaches the bottom and trigger data fetching.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">infinite-scroll.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="method">useEffect</span>, <span class="method">useState</span>, <span class="method">useRef</span> } <span class="keyword">from</span> <span class="string">'react'</span>;
 
-function InfiniteScroll() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const observerRef = useRef();
+<span class="keyword">function</span> <span class="method">InfiniteScroll</span>() {
+  <span class="keyword">const</span> [<span class="variable">items</span>, <span class="method">setItems</span>] = <span class="method">useState</span>([]);
+  <span class="keyword">const</span> [<span class="variable">loading</span>, <span class="method">setLoading</span>] = <span class="method">useState</span>(<span class="keyword">false</span>);
+  <span class="keyword">const</span> [<span class="variable">page</span>, <span class="method">setPage</span>] = <span class="method">useState</span>(<span class="number">1</span>);
+  <span class="keyword">const</span> <span class="variable">observerRef</span> = <span class="method">useRef</span>();
 
-  const loadMore = async () =&gt; {
-    setLoading(true);
-    const newItems = await fetchItems(page);
-    setItems(prev =&gt; [...prev, ...newItems]);
-    setPage(prev =&gt; prev + 1);
-    setLoading(false);
+  <span class="keyword">const</span> <span class="method">loadMore</span> = <span class="keyword">async</span> () => {
+    <span class="method">setLoading</span>(<span class="keyword">true</span>);
+    <span class="keyword">const</span> <span class="variable">newItems</span> = <span class="keyword">await</span> <span class="method">fetchItems</span>(<span class="variable">page</span>);
+    <span class="method">setItems</span>(<span class="variable">prev</span> => [...<span class="variable">prev</span>, ...<span class="variable">newItems</span>]);
+    <span class="method">setPage</span>(<span class="variable">prev</span> => <span class="variable">prev</span> + <span class="number">1</span>);
+    <span class="method">setLoading</span>(<span class="keyword">false</span>);
   };
 
-  useEffect(() =&gt; {
-    const observer = new IntersectionObserver(
-      (entries) =&gt; {
-        if (entries[0].isIntersecting &amp;&amp; !loading) {
-          loadMore();
+  <span class="method">useEffect</span>(() => {
+    <span class="keyword">const</span> <span class="variable">observer</span> = <span class="keyword">new</span> <span class="type">IntersectionObserver</span>(
+      (<span class="variable">entries</span>) => {
+        <span class="keyword">if</span> (<span class="variable">entries</span>[<span class="number">0</span>].<span class="property">isIntersecting</span> && !<span class="variable">loading</span>) {
+          <span class="method">loadMore</span>();
         }
       },
-      { threshold: 1 }
+      { <span class="property">threshold</span>: <span class="number">1</span> }
     );
 
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
+    <span class="keyword">if</span> (<span class="variable">observerRef</span>.<span class="property">current</span>) {
+      <span class="variable">observer</span>.<span class="method">observe</span>(<span class="variable">observerRef</span>.<span class="property">current</span>);
     }
 
-    return () =&gt; observer.disconnect();
-  }, [loading, page]);
+    <span class="keyword">return</span> () => <span class="variable">observer</span>.<span class="method">disconnect</span>();
+  }, [<span class="variable">loading</span>, <span class="variable">page</span>]);
 
-  return (
-    &lt;div&gt;
-      {items.map(item =&gt; &lt;Item key={item.id} item={item} /&gt;)}
-      {loading &amp;&amp; &lt;div&gt;Loading...&lt;/div&gt;}
-      &lt;div ref={observerRef} /&gt;
-    &lt;/div&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">div</span>&gt;
+      {<span class="variable">items</span>.<span class="method">map</span>(<span class="variable">item</span> => &lt;<span class="type">Item</span> <span class="property">key</span>={<span class="variable">item</span>.<span class="property">id</span>} <span class="property">item</span>={<span class="variable">item</span>} /&gt;)}
+      {<span class="variable">loading</span> && &lt;<span class="type">div</span>&gt;Loading...&lt;/<span class="type">div</span>&gt;}
+      &lt;<span class="type">div</span> <span class="property">ref</span>={<span class="variable">observerRef</span>} /&gt;
+    &lt;/<span class="type">div</span>&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q52: How do you implement a custom hook for API calls?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>function useApi(url) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+            <p><strong>Custom API hook</strong> encapsulates data fetching logic with loading and error states. This makes API calls reusable across components with consistent error handling.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">use-api.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">function</span> <span class="method">useApi</span>(<span class="variable">url</span>) {
+  <span class="keyword">const</span> [<span class="variable">data</span>, <span class="method">setData</span>] = <span class="method">useState</span>(<span class="keyword">null</span>);
+  <span class="keyword">const</span> [<span class="variable">loading</span>, <span class="method">setLoading</span>] = <span class="method">useState</span>(<span class="keyword">true</span>);
+  <span class="keyword">const</span> [<span class="variable">error</span>, <span class="method">setError</span>] = <span class="method">useState</span>(<span class="keyword">null</span>);
 
-  useEffect(() =&gt; {
-    const fetchData = async () =&gt; {
-      try {
-        setLoading(true);
-        const response = await fetch(url);
-        const json = await response.json();
-        setData(json);
-        setError(null);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+  <span class="method">useEffect</span>(() => {
+    <span class="keyword">const</span> <span class="method">fetchData</span> = <span class="keyword">async</span> () => {
+      <span class="keyword">try</span> {
+        <span class="method">setLoading</span>(<span class="keyword">true</span>);
+        <span class="keyword">const</span> <span class="variable">response</span> = <span class="keyword">await</span> <span class="method">fetch</span>(<span class="variable">url</span>);
+        <span class="keyword">const</span> <span class="variable">json</span> = <span class="keyword">await</span> <span class="variable">response</span>.<span class="method">json</span>();
+        <span class="method">setData</span>(<span class="variable">json</span>);
+        <span class="method">setError</span>(<span class="keyword">null</span>);
+      } <span class="keyword">catch</span> (<span class="variable">err</span>) {
+        <span class="method">setError</span>(<span class="variable">err</span>.<span class="property">message</span>);
+      } <span class="keyword">finally</span> {
+        <span class="method">setLoading</span>(<span class="keyword">false</span>);
       }
     };
 
-    fetchData();
-  }, [url]);
+    <span class="method">fetchData</span>();
+  }, [<span class="variable">url</span>]);
 
-  return { data, loading, error };
+  <span class="keyword">return</span> { <span class="variable">data</span>, <span class="variable">loading</span>, <span class="variable">error</span> };
 }
 
-// Usage
-function Users() {
-  const { data: users, loading, error } = useApi('/api/users');
+<span class="comment">// Usage</span>
+<span class="keyword">function</span> <span class="method">Users</span>() {
+  <span class="keyword">const</span> { <span class="variable">data</span>: <span class="variable">users</span>, <span class="variable">loading</span>, <span class="variable">error</span> } = <span class="method">useApi</span>(<span class="string">'/api/users'</span>);
 
-  if (loading) return &lt;div&gt;Loading...&lt;/div&gt;;
-  if (error) return &lt;div&gt;Error: {error}&lt;/div&gt;;
+  <span class="keyword">if</span> (<span class="variable">loading</span>) <span class="keyword">return</span> &lt;<span class="type">div</span>&gt;Loading...&lt;/<span class="type">div</span>&gt;;
+  <span class="keyword">if</span> (<span class="variable">error</span>) <span class="keyword">return</span> &lt;<span class="type">div</span>&gt;Error: {<span class="variable">error</span>}&lt;/<span class="type">div</span>&gt;;
 
-  return (
-    &lt;ul&gt;
-      {users.map(user =&gt; &lt;li key={user.id}&gt;{user.name}&lt;/li&gt;)}
-    &lt;/ul&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">ul</span>&gt;
+      {<span class="variable">users</span>.<span class="method">map</span>(<span class="variable">user</span> => &lt;<span class="type">li</span> <span class="property">key</span>={<span class="variable">user</span>.<span class="property">id</span>}&gt;{<span class="variable">user</span>.<span class="property">name</span>}&lt;/<span class="type">li</span>&gt;)}
+    &lt;/<span class="type">ul</span>&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -2011,251 +2129,308 @@ function Users() {
             Q54: How do you implement authentication in React?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Auth context
-const AuthContext = createContext();
+            <p><strong>Authentication</strong> in React typically uses Context API to manage auth state, protected routes to guard access, and localStorage or cookies to persist tokens.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">auth-context.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Auth context</span>
+<span class="keyword">const</span> <span class="variable">AuthContext</span> = <span class="method">createContext</span>();
 
-function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+<span class="keyword">function</span> <span class="method">AuthProvider</span>({ <span class="variable">children</span> }) {
+  <span class="keyword">const</span> [<span class="variable">user</span>, <span class="method">setUser</span>] = <span class="method">useState</span>(<span class="keyword">null</span>);
 
-  const login = async (credentials) =&gt; {
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      body: JSON.stringify(credentials)
+  <span class="keyword">const</span> <span class="method">login</span> = <span class="keyword">async</span> (<span class="variable">credentials</span>) => {
+    <span class="keyword">const</span> <span class="variable">response</span> = <span class="keyword">await</span> <span class="method">fetch</span>(<span class="string">'/api/login'</span>, {
+      <span class="property">method</span>: <span class="string">'POST'</span>,
+      <span class="property">body</span>: <span class="variable">JSON</span>.<span class="method">stringify</span>(<span class="variable">credentials</span>)
     });
-    const user = await response.json();
-    setUser(user);
-    localStorage.setItem('token', user.token);
+    <span class="keyword">const</span> <span class="variable">user</span> = <span class="keyword">await</span> <span class="variable">response</span>.<span class="method">json</span>();
+    <span class="method">setUser</span>(<span class="variable">user</span>);
+    <span class="variable">localStorage</span>.<span class="method">setItem</span>(<span class="string">'token'</span>, <span class="variable">user</span>.<span class="property">token</span>);
   };
 
-  const logout = () =&gt; {
-    setUser(null);
-    localStorage.removeItem('token');
+  <span class="keyword">const</span> <span class="method">logout</span> = () => {
+    <span class="method">setUser</span>(<span class="keyword">null</span>);
+    <span class="variable">localStorage</span>.<span class="method">removeItem</span>(<span class="string">'token'</span>);
   };
 
-  return (
-    &lt;AuthContext.Provider value={{ user, login, logout }}&gt;
-      {children}
-    &lt;/AuthContext.Provider&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">AuthContext.Provider</span> <span class="property">value</span>={{ <span class="variable">user</span>, <span class="method">login</span>, <span class="method">logout</span> }}&gt;
+      {<span class="variable">children</span>}
+    &lt;/<span class="type">AuthContext.Provider</span>&gt;
   );
 }
 
-// Protected route
-function ProtectedRoute({ children }) {
-  const { user } = useAuth();
+<span class="comment">// Protected route</span>
+<span class="keyword">function</span> <span class="method">ProtectedRoute</span>({ <span class="variable">children</span> }) {
+  <span class="keyword">const</span> { <span class="variable">user</span> } = <span class="method">useAuth</span>();
   
-  if (!user) {
-    return &lt;Navigate to="/login" /&gt;;
+  <span class="keyword">if</span> (!<span class="variable">user</span>) {
+    <span class="keyword">return</span> &lt;<span class="type">Navigate</span> <span class="property">to</span>=<span class="string">"/login"</span> /&gt;;
   }
   
-  return children;
+  <span class="keyword">return</span> <span class="variable">children</span>;
 }
 
-// Usage
-&lt;AuthProvider&gt;
-  &lt;Routes&gt;
-    &lt;Route path="/login" element=&lt;Login /&gt; /&gt;
-    &lt;Route
-      path="/dashboard"
-      element={
-        &lt;ProtectedRoute&gt;
-          &lt;Dashboard /&gt;
-        &lt;/ProtectedRoute&gt;
+<span class="comment">// Usage</span>
+&lt;<span class="type">AuthProvider</span>&gt;
+  &lt;<span class="type">Routes</span>&gt;
+    &lt;<span class="type">Route</span> <span class="property">path</span>=<span class="string">"/login"</span> <span class="property">element</span>=&lt;<span class="type">Login</span> /&gt; /&gt;
+    &lt;<span class="type">Route</span>
+      <span class="property">path</span>=<span class="string">"/dashboard"</span>
+      <span class="property">element</span>={
+        &lt;<span class="type">ProtectedRoute</span>&gt;
+          &lt;<span class="type">Dashboard</span> /&gt;
+        &lt;/<span class="type">ProtectedRoute</span>&gt;
       }
     /&gt;
-  &lt;/Routes&gt;
-&lt;/AuthProvider&gt;</code></pre></div>
+  &lt;/<span class="type">Routes</span>&gt;
+&lt;/<span class="type">AuthProvider</span>&gt;</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q55: How do you implement file upload in React?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>function FileUpload() {
-  const [file, setFile] = useState(null);
-  const [uploading, setUploading] = useState(false);
-  const [progress, setProgress] = useState(0);
+            <p><strong>File upload</strong> in React uses FormData to send files to the server. Use XMLHttpRequest for progress tracking or fetch API for simpler uploads.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">file-upload.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">function</span> <span class="method">FileUpload</span>() {
+  <span class="keyword">const</span> [<span class="variable">file</span>, <span class="method">setFile</span>] = <span class="method">useState</span>(<span class="keyword">null</span>);
+  <span class="keyword">const</span> [<span class="variable">uploading</span>, <span class="method">setUploading</span>] = <span class="method">useState</span>(<span class="keyword">false</span>);
+  <span class="keyword">const</span> [<span class="variable">progress</span>, <span class="method">setProgress</span>] = <span class="method">useState</span>(<span class="number">0</span>);
 
-  const handleFileChange = (e) =&gt; {
-    setFile(e.target.files[0]);
+  <span class="keyword">const</span> <span class="method">handleFileChange</span> = (<span class="variable">e</span>) => {
+    <span class="method">setFile</span>(<span class="variable">e</span>.<span class="property">target</span>.<span class="property">files</span>[<span class="number">0</span>]);
   };
 
-  const handleUpload = async () =&gt; {
-    if (!file) return;
+  <span class="keyword">const</span> <span class="method">handleUpload</span> = <span class="keyword">async</span> () => {
+    <span class="keyword">if</span> (!<span class="variable">file</span>) <span class="keyword">return</span>;
 
-    setUploading(true);
-    const formData = new FormData();
-    formData.append('file', file);
+    <span class="method">setUploading</span>(<span class="keyword">true</span>);
+    <span class="keyword">const</span> <span class="variable">formData</span> = <span class="keyword">new</span> <span class="type">FormData</span>();
+    <span class="variable">formData</span>.<span class="method">append</span>(<span class="string">'file'</span>, <span class="variable">file</span>);
 
-    try {
-      const xhr = new XMLHttpRequest();
+    <span class="keyword">try</span> {
+      <span class="keyword">const</span> <span class="variable">xhr</span> = <span class="keyword">new</span> <span class="type">XMLHttpRequest</span>();
       
-      xhr.upload.onprogress = (e) =&gt; {
-        if (e.lengthComputable) {
-          setProgress((e.loaded / e.total) * 100);
+      <span class="variable">xhr</span>.<span class="property">upload</span>.<span class="property">onprogress</span> = (<span class="variable">e</span>) => {
+        <span class="keyword">if</span> (<span class="variable">e</span>.<span class="property">lengthComputable</span>) {
+          <span class="method">setProgress</span>((<span class="variable">e</span>.<span class="property">loaded</span> / <span class="variable">e</span>.<span class="property">total</span>) * <span class="number">100</span>);
         }
       };
 
-      xhr.onload = () =&gt; {
-        setUploading(false);
-        setProgress(0);
+      <span class="variable">xhr</span>.<span class="property">onload</span> = () => {
+        <span class="method">setUploading</span>(<span class="keyword">false</span>);
+        <span class="method">setProgress</span>(<span class="number">0</span>);
       };
 
-      xhr.open('POST', '/api/upload');
-      xhr.send(formData);
-    } catch (error) {
-      console.error('Upload failed:', error);
-      setUploading(false);
+      <span class="variable">xhr</span>.<span class="method">open</span>(<span class="string">'POST'</span>, <span class="string">'/api/upload'</span>);
+      <span class="variable">xhr</span>.<span class="method">send</span>(<span class="variable">formData</span>);
+    } <span class="keyword">catch</span> (<span class="variable">error</span>) {
+      <span class="variable">console</span>.<span class="method">error</span>(<span class="string">'Upload failed:'</span>, <span class="variable">error</span>);
+      <span class="method">setUploading</span>(<span class="keyword">false</span>);
     }
   };
 
-  return (
-    &lt;div&gt;
-      &lt;input type="file" onChange={handleFileChange} /&gt;
-      &lt;button onClick={handleUpload} disabled={uploading}&gt;
-        {uploading ? 'Uploading...' : 'Upload'}
-      &lt;/button&gt;
-      {uploading &amp;&amp; &lt;progress value={progress} max={100} /&gt;}
-    &lt;/div&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">div</span>&gt;
+      &lt;<span class="type">input</span> <span class="property">type</span>=<span class="string">"file"</span> <span class="property">onChange</span>={<span class="method">handleFileChange</span>} /&gt;
+      &lt;<span class="type">button</span> <span class="property">onClick</span>={<span class="method">handleUpload</span>} <span class="property">disabled</span>={<span class="variable">uploading</span>}&gt;
+        {<span class="variable">uploading</span> ? <span class="string">'Uploading...'</span> : <span class="string">'Upload'</span>}
+      &lt;/<span class="type">button</span>&gt;
+      {<span class="variable">uploading</span> && &lt;<span class="type">progress</span> <span class="property">value</span>={<span class="variable">progress</span>} <span class="property">max</span>={<span class="number">100</span>} /&gt;}
+    &lt;/<span class="type">div</span>&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q56: How do you implement real-time updates in React?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Using WebSocket
-function RealTimeChat() {
-  const [messages, setMessages] = useState([]);
-  const wsRef = useRef(null);
+            <p><strong>Real-time updates</strong> use WebSocket for bidirectional communication or Server-Sent Events (SSE) for server-to-client updates. Use useEffect to manage connection lifecycle.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">realtime.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Using WebSocket</span>
+<span class="keyword">function</span> <span class="method">RealTimeChat</span>() {
+  <span class="keyword">const</span> [<span class="variable">messages</span>, <span class="method">setMessages</span>] = <span class="method">useState</span>([]);
+  <span class="keyword">const</span> <span class="variable">wsRef</span> = <span class="method">useRef</span>(<span class="keyword">null</span>);
 
-  useEffect(() =&gt; {
-    wsRef.current = new WebSocket('ws://localhost:8080');
+  <span class="method">useEffect</span>(() => {
+    <span class="variable">wsRef</span>.<span class="property">current</span> = <span class="keyword">new</span> <span class="type">WebSocket</span>(<span class="string">'ws://localhost:8080'</span>);
 
-    wsRef.current.onmessage = (event) =&gt; {
-      const message = JSON.parse(event.data);
-      setMessages(prev =&gt; [...prev, message]);
+    <span class="variable">wsRef</span>.<span class="property">current</span>.<span class="property">onmessage</span> = (<span class="variable">event</span>) => {
+      <span class="keyword">const</span> <span class="variable">message</span> = <span class="variable">JSON</span>.<span class="method">parse</span>(<span class="variable">event</span>.<span class="property">data</span>);
+      <span class="method">setMessages</span>(<span class="variable">prev</span> => [...<span class="variable">prev</span>, <span class="variable">message</span>]);
     };
 
-    return () =&gt; {
-      wsRef.current.close();
+    <span class="keyword">return</span> () => {
+      <span class="variable">wsRef</span>.<span class="property">current</span>.<span class="method">close</span>();
     };
   }, []);
 
-  const sendMessage = (message) =&gt; {
-    wsRef.current.send(JSON.stringify(message));
+  <span class="keyword">const</span> <span class="method">sendMessage</span> = (<span class="variable">message</span>) => {
+    <span class="variable">wsRef</span>.<span class="property">current</span>.<span class="method">send</span>(<span class="variable">JSON</span>.<span class="method">stringify</span>(<span class="variable">message</span>));
   };
 
-  return (
-    &lt;div&gt;
-      {messages.map(msg =&gt; (
-        &lt;div key={msg.id}&gt;{msg.text}&lt;/div&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">div</span>&gt;
+      {<span class="variable">messages</span>.<span class="method">map</span>(<span class="variable">msg</span> => (
+        &lt;<span class="type">div</span> <span class="property">key</span>={<span class="variable">msg</span>.<span class="property">id</span>}&gt;{<span class="variable">msg</span>.<span class="property">text</span>}&lt;/<span class="type">div</span>&gt;
       ))}
-    &lt;/div&gt;
+    &lt;/<span class="type">div</span>&gt;
   );
 }
 
-// Using Server-Sent Events
-function SseComponent() {
-  const [events, setEvents] = useState([]);
+<span class="comment">// Using Server-Sent Events</span>
+<span class="keyword">function</span> <span class="method">SseComponent</span>() {
+  <span class="keyword">const</span> [<span class="variable">events</span>, <span class="method">setEvents</span>] = <span class="method">useState</span>([]);
 
-  useEffect(() =&gt; {
-    const eventSource = new EventSource('/api/events');
+  <span class="method">useEffect</span>(() => {
+    <span class="keyword">const</span> <span class="variable">eventSource</span> = <span class="keyword">new</span> <span class="type">EventSource</span>(<span class="string">'/api/events'</span>);
 
-    eventSource.onmessage = (event) =&gt; {
-      setEvents(prev =&gt; [...prev, JSON.parse(event.data)]);
+    <span class="variable">eventSource</span>.<span class="property">onmessage</span> = (<span class="variable">event</span>) => {
+      <span class="method">setEvents</span>(<span class="variable">prev</span> => [...<span class="variable">prev</span>, <span class="variable">JSON</span>.<span class="method">parse</span>(<span class="variable">event</span>.<span class="property">data</span>)]);
     };
 
-    return () =&gt; eventSource.close();
+    <span class="keyword">return</span> () => <span class="variable">eventSource</span>.<span class="method">close</span>();
   }, []);
 
-  return &lt;div&gt;{events.length} events&lt;/div&gt;;
-}</code></pre></div>
+  <span class="keyword">return</span> &lt;<span class="type">div</span>&gt;{<span class="variable">events</span>.<span class="property">length</span>} events&lt;/<span class="type">div</span>&gt;;
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q57: How do you implement internationalization (i18n) in React?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Using react-i18next
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import { useTranslation } from 'react-i18next';
+            <p><strong>Internationalization (i18n)</strong> in React uses libraries like react-i18next to manage translations. It provides hooks for translating text and switching languages dynamically.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">i18n.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Using react-i18next</span>
+<span class="keyword">import</span> <span class="variable">i18n</span> <span class="keyword">from</span> <span class="string">'i18next'</span>;
+<span class="keyword">import</span> { <span class="method">initReactI18next</span> } <span class="keyword">from</span> <span class="string">'react-i18next'</span>;
+<span class="keyword">import</span> { <span class="method">useTranslation</span> } <span class="keyword">from</span> <span class="string">'react-i18next'</span>;
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources: {
-      en: {
-        translation: {
-          welcome: 'Welcome',
-          greeting: 'Hello {{name}}'
+<span class="variable">i18n</span>
+  .<span class="method">use</span>(<span class="method">initReactI18next</span>)
+  .<span class="method">init</span>({
+    <span class="property">resources</span>: {
+      <span class="property">en</span>: {
+        <span class="property">translation</span>: {
+          <span class="property">welcome</span>: <span class="string">'Welcome'</span>,
+          <span class="property">greeting</span>: <span class="string">'Hello {{name}}'</span>
         }
       },
-      fr: {
-        translation: {
-          welcome: 'Bienvenue',
-          greeting: 'Bonjour {{name}}'
+      <span class="property">fr</span>: {
+        <span class="property">translation</span>: {
+          <span class="property">welcome</span>: <span class="string">'Bienvenue'</span>,
+          <span class="property">greeting</span>: <span class="string">'Bonjour {{name}}'</span>
         }
       }
     },
-    lng: 'en'
+    <span class="property">lng</span>: <span class="string">'en'</span>
   });
 
-function MyComponent() {
-  const { t, i18n } = useTranslation();
+<span class="keyword">function</span> <span class="method">MyComponent</span>() {
+  <span class="keyword">const</span> { <span class="variable">t</span>, <span class="variable">i18n</span> } = <span class="method">useTranslation</span>();
 
-  const changeLanguage = (lng) =&gt; {
-    i18n.changeLanguage(lng);
+  <span class="keyword">const</span> <span class="method">changeLanguage</span> = (<span class="variable">lng</span>) => {
+    <span class="variable">i18n</span>.<span class="method">changeLanguage</span>(<span class="variable">lng</span>);
   };
 
-  return (
-    &lt;div&gt;
-      &lt;h1&gt;{t('welcome')}&lt;/h1&gt;
-      &lt;p&gt;{t('greeting', { name: 'John' })}&lt;/p&gt;
-      &lt;button onClick={() =&gt; changeLanguage('fr')}&gt;Français&lt;/button&gt;
-      &lt;button onClick={() =&gt; changeLanguage('en')}&gt;English&lt;/button&gt;
-    &lt;/div&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">div</span>&gt;
+      &lt;<span class="type">h1</span>&gt;{<span class="method">t</span>(<span class="string">'welcome'</span>)}&lt;/<span class="type">h1</span>&gt;
+      &lt;<span class="type">p</span>&gt;{<span class="method">t</span>(<span class="string">'greeting'</span>, { <span class="property">name</span>: <span class="string">'John'</span> })}&lt;/<span class="type">p</span>&gt;
+      &lt;<span class="type">button</span> <span class="property">onClick</span>={() => <span class="method">changeLanguage</span>(<span class="string">'fr'</span>)}&gt;Français&lt;/<span class="type">button</span>&gt;
+      &lt;<span class="type">button</span> <span class="property">onClick</span>={() => <span class="method">changeLanguage</span>(<span class="string">'en'</span>)}&gt;English&lt;/<span class="type">button</span>&gt;
+    &lt;/<span class="type">div</span>&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
             Q58: How do you implement dark mode in React?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Theme context
-const ThemeContext = createContext();
+            <p><strong>Dark mode</strong> in React uses Context API to manage theme state and CSS variables for styling. Persist theme preference in localStorage and use system preference as default.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">theme-context.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Theme context</span>
+<span class="keyword">const</span> <span class="variable">ThemeContext</span> = <span class="method">createContext</span>();
 
-function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('light');
+<span class="keyword">function</span> <span class="method">ThemeProvider</span>({ <span class="variable">children</span> }) {
+  <span class="keyword">const</span> [<span class="variable">theme</span>, <span class="method">setTheme</span>] = <span class="method">useState</span>(<span class="string">'light'</span>);
 
-  useEffect(() =&gt; {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
+  <span class="method">useEffect</span>(() => {
+    <span class="variable">document</span>.<span class="property">documentElement</span>.<span class="method">setAttribute</span>(<span class="string">'data-theme'</span>, <span class="variable">theme</span>);
+  }, [<span class="variable">theme</span>]);
 
-  const toggleTheme = () =&gt; {
-    setTheme(prev =&gt; prev === 'light' ? 'dark' : 'light');
+  <span class="keyword">const</span> <span class="method">toggleTheme</span> = () => {
+    <span class="method">setTheme</span>(<span class="variable">prev</span> => <span class="variable">prev</span> === <span class="string">'light'</span> ? <span class="string">'dark'</span> : <span class="string">'light'</span>);
   };
 
-  return (
-    &lt;ThemeContext.Provider value={{ theme, toggleTheme }}&gt;
-      {children}
-    &lt;/ThemeContext.Provider&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">ThemeContext.Provider</span> <span class="property">value</span>={{ <span class="variable">theme</span>, <span class="method">toggleTheme</span> }}&gt;
+      {<span class="variable">children</span>}
+    &lt;/<span class="type">ThemeContext.Provider</span>&gt;
   );
 }
 
-// CSS variables
-:root {
-  --bg-color: white;
-  --text-color: black;
+<span class="comment">// CSS variables</span>
+<span class="property">:root</span> {
+  <span class="property">--bg-color</span>: <span class="keyword">white</span>;
+  <span class="property">--text-color</span>: <span class="keyword">black</span>;
 }
 
-[data-theme='dark'] {
-  --bg-color: #1a1a1a;
-  --text-color: white;
-}
+[<span class="property">data-theme</span>=<span class="string">'dark'</span>] {
+  <span class="property">--bg-color</span>: <span class="string">#1a1a1a</span>;
+  <span class="property">--text-color</span>: <span class="keyword">white</span>;
+}</code>
+                </div>
+            </div>
+        </div>
 
+        <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -2480,100 +2655,98 @@ function ThemeProvider({ children }) {
             .answer { padding: 20px; }
             .code-block { padding: 20px; font-size: 13px; }
         }
-
-// Usage
-function App() {
-  const { theme, toggleTheme } = useTheme();
-
-  return (
-    &lt;div&gt;
-      &lt;button onClick={toggleTheme}&gt;
-        {theme === 'light' ? 'Dark' : 'Light'} Mode
-      &lt;/button&gt;
-    &lt;/div&gt;
-  );
-}</code></pre></div>
-        </div>
+        </style>
 
         <div class="question">
             Q59: How do you implement drag and drop in React?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code> Using react-beautiful-dnd
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+            <p><strong>Drag and drop</strong> in React uses libraries like react-beautiful-dnd or @dnd-kit. Handle onDragEnd to update state with new item positions after drag operations.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">drag-drop.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Using react-beautiful-dnd</span>
+<span class="keyword">import</span> { <span class="type">DragDropContext</span>, <span class="type">Droppable</span>, <span class="type">Draggable</span> } <span class="keyword">from</span> <span class="string">'react-beautiful-dnd'</span>;
 
-function KanbanBoard() {
-  const [columns, setColumns] = useState(initialData);
+<span class="keyword">function</span> <span class="method">KanbanBoard</span>() {
+  <span class="keyword">const</span> [<span class="variable">columns</span>, <span class="method">setColumns</span>] = <span class="method">useState</span>(<span class="variable">initialData</span>);
 
-  const onDragEnd = (result) =&gt; {
-    const { source, destination } = result;
+  <span class="keyword">const</span> <span class="method">onDragEnd</span> = (<span class="variable">result</span>) => {
+    <span class="keyword">const</span> { <span class="variable">source</span>, <span class="variable">destination</span> } = <span class="variable">result</span>;
 
-    if (!destination) return;
+    <span class="keyword">if</span> (!<span class="variable">destination</span>) <span class="keyword">return</span>;
 
-    const sourceCol = columns[source.droppableId];
-    const destCol = columns[destination.droppableId];
+    <span class="keyword">const</span> <span class="variable">sourceCol</span> = <span class="variable">columns</span>[<span class="variable">source</span>.<span class="property">droppableId</span>];
+    <span class="keyword">const</span> <span class="variable">destCol</span> = <span class="variable">columns</span>[<span class="variable">destination</span>.<span class="property">droppableId</span>];
 
-    if (source.droppableId === destination.droppableId) {
-      // Reorder within same column
-      const newItems = Array.from(sourceCol.items);
-      const [removed] = newItems.splice(source.index, 1);
-      newItems.splice(destination.index, 0, removed);
+    <span class="keyword">if</span> (<span class="variable">source</span>.<span class="property">droppableId</span> === <span class="variable">destination</span>.<span class="property">droppableId</span>) {
+      <span class="comment">// Reorder within same column</span>
+      <span class="keyword">const</span> <span class="variable">newItems</span> = <span class="type">Array</span>.<span class="method">from</span>(<span class="variable">sourceCol</span>.<span class="property">items</span>);
+      <span class="keyword">const</span> [<span class="variable">removed</span>] = <span class="variable">newItems</span>.<span class="method">splice</span>(<span class="variable">source</span>.<span class="property">index</span>, <span class="number">1</span>);
+      <span class="variable">newItems</span>.<span class="method">splice</span>(<span class="variable">destination</span>.<span class="property">index</span>, <span class="number">0</span>, <span class="variable">removed</span>);
 
-      setColumns({
-        ...columns,
-        [source.droppableId]: {
-          ...sourceCol,
-          items: newItems
+      <span class="method">setColumns</span>({
+        ...<span class="variable">columns</span>,
+        [<span class="variable">source</span>.<span class="property">droppableId</span>]: {
+          ...<span class="variable">sourceCol</span>,
+          <span class="property">items</span>: <span class="variable">newItems</span>
         }
       });
-    } else {
-      // Move between columns
-      const sourceItems = [...sourceCol.items];
-      const destItems = [...destCol.items];
-      const [removed] = sourceItems.splice(source.index, 1);
-      destItems.splice(destination.index, 0, removed);
+    } <span class="keyword">else</span> {
+      <span class="comment">// Move between columns</span>
+      <span class="keyword">const</span> <span class="variable">sourceItems</span> = [...<span class="variable">sourceCol</span>.<span class="property">items</span>];
+      <span class="keyword">const</span> <span class="variable">destItems</span> = [...<span class="variable">destCol</span>.<span class="property">items</span>];
+      <span class="keyword">const</span> [<span class="variable">removed</span>] = <span class="variable">sourceItems</span>.<span class="method">splice</span>(<span class="variable">source</span>.<span class="property">index</span>, <span class="number">1</span>);
+      <span class="variable">destItems</span>.<span class="method">splice</span>(<span class="variable">destination</span>.<span class="property">index</span>, <span class="number">0</span>, <span class="variable">removed</span>);
 
-      setColumns({
-        ...columns,
-        [source.droppableId]: {
-          ...sourceCol,
-          items: sourceItems
+      <span class="method">setColumns</span>({
+        ...<span class="variable">columns</span>,
+        [<span class="variable">source</span>.<span class="property">droppableId</span>]: {
+          ...<span class="variable">sourceCol</span>,
+          <span class="property">items</span>: <span class="variable">sourceItems</span>
         },
-        [destination.droppableId]: {
-          ...destCol,
-          items: destItems
+        [<span class="variable">destination</span>.<span class="property">droppableId</span>]: {
+          ...<span class="variable">destCol</span>,
+          <span class="property">items</span>: <span class="variable">destItems</span>
         }
       });
     }
   };
 
-  return (
-    &lt;DragDropContext onDragEnd={onDragEnd}&gt;
-      {Object.entries(columns).map(([colId, col]) =&gt; (
-        &lt;Droppable key={colId} droppableId={colId}&gt;
-          {(provided) =&gt; (
-            &lt;div ref={provided.innerRef} {...provided.droppableProps}&gt;
-              {col.items.map((item, index) =&gt; (
-                &lt;Draggable key={item.id} draggableId={item.id} index={index}&gt;
-                  {(provided) =&gt; (
-                    &lt;div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
+  <span class="keyword">return</span> (
+    &lt;<span class="type">DragDropContext</span> <span class="property">onDragEnd</span>={<span class="method">onDragEnd</span>}&gt;
+      {<span class="type">Object</span>.<span class="method">entries</span>(<span class="variable">columns</span>).<span class="method">map</span>(([<span class="variable">colId</span>, <span class="variable">col</span>]) => (
+        &lt;<span class="type">Droppable</span> <span class="property">key</span>={<span class="variable">colId</span>} <span class="property">droppableId</span>={<span class="variable">colId</span>}&gt;
+          {(<span class="variable">provided</span>) => (
+            &lt;<span class="type">div</span> <span class="property">ref</span>={<span class="variable">provided</span>.<span class="property">innerRef</span>} {...<span class="variable">provided</span>.<span class="property">droppableProps</span>}&gt;
+              {<span class="variable">col</span>.<span class="property">items</span>.<span class="method">map</span>((<span class="variable">item</span>, <span class="variable">index</span>) => (
+                &lt;<span class="type">Draggable</span> <span class="property">key</span>={<span class="variable">item</span>.<span class="property">id</span>} <span class="property">draggableId</span>={<span class="variable">item</span>.<span class="property">id</span>} <span class="property">index</span>={<span class="variable">index</span>}&gt;
+                  {(<span class="variable">provided</span>) => (
+                    &lt;<span class="type">div</span>
+                      <span class="property">ref</span>={<span class="variable">provided</span>.<span class="property">innerRef</span>}
+                      {...<span class="variable">provided</span>.<span class="property">draggableProps</span>}
+                      {...<span class="variable">provided</span>.<span class="property">dragHandleProps</span>}
                     &gt;
-                      {item.content}
-                    &lt;/div&gt;
+                      {<span class="variable">item</span>.<span class="property">content</span>}
+                    &lt;/<span class="type">div</span>&gt;
                   )}
-                &lt;/Draggable&gt;
+                &lt;/<span class="type">Draggable</span>&gt;
               ))}
-              {provided.placeholder}
-            &lt;/div&gt;
+              {<span class="variable">provided</span>.<span class="property">placeholder</span>}
+            &lt;/<span class="type">div</span>&gt;
           )}
-        &lt;/Droppable&gt;
+        &lt;/<span class="type">Droppable</span>&gt;
       ))}
-    &lt;/DragDropContext&gt;
+    &lt;/<span class="type">DragDropContext</span>&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -2589,11 +2762,21 @@ function KanbanBoard() {
                 <li>The transpilation process converts JSX to React.createElement() calls</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// JSX (what you write)
-const element = &lt;h1&gt;Hello, World!&lt;/h1&gt;;
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">jsx.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// JSX (what you write)</span>
+<span class="keyword">const</span> <span class="variable">element</span> = &lt;<span class="type">h1</span>&gt;Hello, World!&lt;/<span class="type">h1</span>&gt;;
 
-// Transpiled to JavaScript (what browsers execute)
-const element = React.createElement('h1', null, 'Hello, World!');</code></pre></div>
+<span class="comment">// Transpiled to JavaScript (what browsers execute)</span>
+<span class="keyword">const</span> <span class="variable">element</span> = <span class="type">React</span>.<span class="method">createElement</span>(<span class="string">'h1'</span>, <span class="keyword">null</span>, <span class="string">'Hello, World!'</span>);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -2602,23 +2785,33 @@ const element = React.createElement('h1', null, 'Hello, World!');</code></pre></
         <div class="answer">
             <p><strong>React Fragments</strong> let you group a list of children without adding extra nodes to the DOM. They're useful when you need to return multiple elements from a component but don't want to wrap them in a parent div.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Without fragments (adds extra div)
-return (
-  &lt;div&gt;
-    &lt;Header /&gt;
-    &lt;Main /&gt;
-    &lt;Footer /&gt;
-  &lt;/div&gt;
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">fragments.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Without fragments (adds extra div)</span>
+<span class="keyword">return</span> (
+  &lt;<span class="type">div</span>&gt;
+    &lt;<span class="type">Header</span> /&gt;
+    &lt;<span class="type">Main</span> /&gt;
+    &lt;<span class="type">Footer</span> /&gt;
+  &lt;/<span class="type">div</span>&gt;
 );
 
-// With fragments (no extra DOM node)
-return (
+<span class="comment">// With fragments (no extra DOM node)</span>
+<span class="keyword">return</span> (
   &lt;&gt;
-    &lt;Header /&gt;
-    &lt;Main /&gt;
-    &lt;Footer /&gt;
+    &lt;<span class="type">Header</span> /&gt;
+    &lt;<span class="type">Main</span> /&gt;
+    &lt;<span class="type">Footer</span> /&gt;
   &lt;/&gt;
-);</code></pre></div>
+);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -2666,13 +2859,23 @@ return (
                 <li>Can be optimized with React.memo</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// Pure component
-function PureComponent({ name }) {
-  return &lt;div&gt;Hello, {name}!&lt;/div&gt;;
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">pure-component.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Pure component</span>
+<span class="keyword">function</span> <span class="method">PureComponent</span>({ <span class="variable">name</span> }) {
+  <span class="keyword">return</span> &lt;<span class="type">div</span>&gt;Hello, {<span class="variable">name</span>}!&lt;/<span class="type">div</span>&gt;;
 }
 
-// Optimized with React.memo
-const MemoizedComponent = React.memo(PureComponent);</code></pre></div>
+<span class="comment">// Optimized with React.memo</span>
+<span class="keyword">const</span> <span class="variable">MemoizedComponent</span> = <span class="type">React</span>.<span class="method">memo</span>(<span class="variable">PureComponent</span>);</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -2681,28 +2884,38 @@ const MemoizedComponent = React.memo(PureComponent);</code></pre></div>
         <div class="answer">
             <p><strong>React.forwardRef</strong> is a higher-order component that allows you to pass a ref through a component to one of its children. It's useful when you need to expose a DOM node from a child component to a parent.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Child component with forwardRef
-const FancyButton = React.forwardRef((props, ref) =&gt; (
-  &lt;button ref={ref} className="fancy-button"&gt;
-    {props.children}
-  &lt;/button&gt;
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">forwardref.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Child component with forwardRef</span>
+<span class="keyword">const</span> <span class="variable">FancyButton</span> = <span class="type">React</span>.<span class="method">forwardRef</span>((<span class="variable">props</span>, <span class="variable">ref</span>) => (
+  &lt;<span class="type">button</span> <span class="property">ref</span>={<span class="variable">ref</span>} <span class="property">className</span>=<span class="string">"fancy-button"</span>&gt;
+    {<span class="variable">props</span>.<span class="property">children</span>}
+  &lt;/<span class="type">button</span>&gt;
 ));
 
-// Parent component
-const App = () =&gt; {
-  const buttonRef = useRef(null);
+<span class="comment">// Parent component</span>
+<span class="keyword">const</span> <span class="method">App</span> = () => {
+  <span class="keyword">const</span> <span class="variable">buttonRef</span> = <span class="method">useRef</span>(<span class="keyword">null</span>);
   
-  const handleClick = () =&gt; {
-    buttonRef.current.focus();
+  <span class="keyword">const</span> <span class="method">handleClick</span> = () => {
+    <span class="variable">buttonRef</span>.<span class="property">current</span>.<span class="method">focus</span>();
   };
   
-  return (
-    &lt;div&gt;
-      &lt;FancyButton ref={buttonRef}&gt;Click me&lt;/FancyButton&gt;
-      &lt;button onClick={handleClick}&gt;Focus button&lt;/button&gt;
-    &lt;/div&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">div</span>&gt;
+      &lt;<span class="type">FancyButton</span> <span class="property">ref</span>={<span class="variable">buttonRef</span>}&gt;Click me&lt;/<span class="type">FancyButton</span>&gt;
+      &lt;<span class="type">button</span> <span class="property">onClick</span>={<span class="method">handleClick</span>}&gt;Focus button&lt;/<span class="type">button</span>&gt;
+    &lt;/<span class="type">div</span>&gt;
   );
-};</code></pre></div>
+};</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -2711,18 +2924,28 @@ const App = () =&gt; {
         <div class="answer">
             <p>React uses <strong>synthetic events</strong> that wrap native browser events. Event handlers are passed as props and follow naming conventions (camelCase, on + event name).</p>
             
-            <div class="code-block" data-language="code"><pre><code>function Button() {
-  const handleClick = (event) =&gt; {
-    event.preventDefault();
-    console.log('Button clicked');
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">events.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">function</span> <span class="method">Button</span>() {
+  <span class="keyword">const</span> <span class="method">handleClick</span> = (<span class="variable">event</span>) => {
+    <span class="variable">event</span>.<span class="method">preventDefault</span>();
+    <span class="variable">console</span>.<span class="method">log</span>(<span class="string">'Button clicked'</span>);
   };
   
-  return (
-    &lt;button onClick={handleClick}&gt;
+  <span class="keyword">return</span> (
+    &lt;<span class="type">button</span> <span class="property">onClick</span>={<span class="method">handleClick</span>}&gt;
       Click me
-    &lt;/button&gt;
+    &lt;/<span class="type">button</span>&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
             
             <h3>Key differences from native events:</h3>
             <ul>
@@ -2803,25 +3026,35 @@ const App = () =&gt; {
         <div class="answer">
             <p><strong>React Portals</strong> provide a way to render children into a DOM node outside the parent component's hierarchy. They're useful for modals, tooltips, and dropdowns.</p>
             
-            <div class="code-block" data-language="code"><pre><code>import { createPortal } from 'react-dom';
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-dot red"></div>
+                    <div class="code-editor-dot yellow"></div>
+                    <div class="code-editor-dot green"></div>
+                    <span class="code-editor-title">portal.js</span>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">import</span> { <span class="method">createPortal</span> } <span class="keyword">from</span> <span class="string">'react-dom'</span>;
 
-function Modal({ children }) {
-  return createPortal(
-    children,
-    document.getElementById('modal-root')
+<span class="keyword">function</span> <span class="method">Modal</span>({ <span class="variable">children</span> }) {
+  <span class="keyword">return</span> <span class="method">createPortal</span>(
+    <span class="variable">children</span>,
+    <span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'modal-root'</span>)
   );
 }
 
-// Usage
-function App() {
-  return (
-    &lt;div&gt;
-      &lt;Modal&gt;
-        &lt;div className="modal"&gt;Modal content&lt;/div&gt;
-      &lt;/Modal&gt;
-    &lt;/div&gt;
+<span class="comment">// Usage</span>
+<span class="keyword">function</span> <span class="method">App</span>() {
+  <span class="keyword">return</span> (
+    &lt;<span class="type">div</span>&gt;
+      &lt;<span class="type">Modal</span>&gt;
+        &lt;<span class="type">div</span> <span class="property">className</span>=<span class="string">"modal"</span>&gt;Modal content&lt;/<span class="type">div</span>&gt;
+      &lt;/<span class="type">Modal</span>&gt;
+    &lt;/<span class="type">div</span>&gt;
   );
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
