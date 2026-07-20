@@ -348,6 +348,28 @@
             line-height: 2;
         }
         
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(102, 126, 234, 0.25);
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            animation: slideUp 0.6s ease both;
+        }
+        
+        .footer p {
+            margin-bottom: 12px;
+        }
+        
+        .footer .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
         .toc ol li {
             margin-bottom: 8px;
             font-weight: 500;
@@ -738,7 +760,7 @@
                 <li>Can be null</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// Value type example
+            <div class="code-block"><pre><code>// Value type example
 int x = 10;
 int y = x; // Creates a copy
 y = 20;
@@ -799,7 +821,7 @@ Console.WriteLine(obj1.Value); // Output: 20 (changed)</code></pre></div>
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>// Class example
+            <div class="code-block"><pre><code>// Class example
 class Person {
     public string Name { get; set; }
 }
@@ -826,7 +848,7 @@ Point pt2 = pt1; // Value copy</code></pre></div>
         <div class="answer">
             <p>Nullable value types allow value types to represent null values. They are useful when you need to represent the absence of a value.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Nullable syntax using ?
+            <div class="code-block"><pre><code>// Nullable syntax using ?
 int? nullableInt = null;
 bool? nullableBool = null;
 DateTime? nullableDate = null;
@@ -887,7 +909,7 @@ int? result = nullableInt?.GetValueOrDefault();</code></pre></div>
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>class Constants {
+            <div class="code-block"><pre><code>class Constants {
     // const - compile-time constant
     public const int MaxUsers = 100;
     
@@ -913,7 +935,7 @@ int? result = nullableInt?.GetValueOrDefault();</code></pre></div>
         <div class="answer">
             <p><strong>var</strong> is type inference where the compiler determines the type from the initializer:</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Using var - type inferred
+            <div class="code-block"><pre><code>// Using var - type inferred
 var name = "John"; // Compiler infers string
 var age = 25; // Compiler infers int
 var list = new List<string>(); // Compiler infers List<string>
@@ -945,7 +967,7 @@ class MyClass {
         <div class="answer">
             <p><strong>1. Encapsulation</strong>: Bundling data and methods that operate on the data within a single unit (class), and restricting access to the internal state.</p>
             
-            <div class="code-block" data-language="code"><pre><code>public class BankAccount {
+            <div class="code-block"><pre><code>public class BankAccount {
     private decimal balance; // Private field (encapsulated)
     
     public void Deposit(decimal amount) {
@@ -960,7 +982,7 @@ class MyClass {
             
             <p><strong>2. Inheritance</strong>: Creating new classes based on existing classes, inheriting their properties and methods.</p>
             
-            <div class="code-block" data-language="code"><pre><code>public class Animal {
+            <div class="code-block"><pre><code>public class Animal {
     public void Eat() {
         Console.WriteLine("Animal is eating");
     }
@@ -976,7 +998,7 @@ public class Dog : Animal {
             
             <p><strong>3. Polymorphism</strong>: Objects can take many forms. Method overloading (compile-time) and method overriding (runtime).</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Method Overloading (compile-time polymorphism)
+            <div class="code-block"><pre><code>// Method Overloading (compile-time polymorphism)
 public class Calculator {
     public int Add(int a, int b) => a + b;
     public double Add(double a, double b) => a + b;
@@ -997,7 +1019,7 @@ public class Circle : Shape {
             
             <p><strong>4. Abstraction</strong>: Hiding implementation details and showing only functionality to the user.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Abstract class
+            <div class="code-block"><pre><code>// Abstract class
 public abstract class Vehicle {
     public abstract void Start(); // Abstract method
     public void Stop() {
@@ -1054,7 +1076,7 @@ public interface IShape {
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>// Abstract Class
+            <div class="code-block"><pre><code>// Abstract Class
 public abstract class Animal {
     protected string name;
     
@@ -1095,7 +1117,7 @@ public class Dog : Animal, IPlayable {
             <p><strong>override</strong>: Provides a new implementation for a virtual method in a derived class.</p>
             <p><strong>new</strong>: Hides a base class method (method hiding, not overriding).</p>
             
-            <div class="code-block" data-language="code"><pre><code>public class Base {
+            <div class="code-block"><pre><code>public class Base {
     public virtual void Method1() {
         Console.WriteLine("Base Method1");
     }
@@ -1137,7 +1159,7 @@ obj2.Method2(); // Output: Derived Method2</code></pre></div>
         <div class="answer">
             <p>Generics allow you to define type-safe data structures without committing to specific data types. They provide type safety, performance, and code reusability.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Generic class
+            <div class="code-block"><pre><code>// Generic class
 public class Repository<T> {
     private List<T> items = new List<T>();
     
@@ -1206,7 +1228,7 @@ stringRepo.Add("Hello");</code></pre></div>
                 </tr>
             </table>
             
-            <div class="code-block" data-language="code"><pre><code>// IEnumerable - loads all data first, then filters
+            <div class="code-block"><pre><code>// IEnumerable - loads all data first, then filters
 var users = dbContext.Users
     .ToList() // Executes query, loads all data
     .Where(u => u.Age > 18); // Filters in-memory
@@ -1223,7 +1245,7 @@ var users = dbContext.Users
         <div class="answer">
             <p>Extension methods allow you to add new methods to existing types without modifying the original type or creating a derived type.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Extension method for string
+            <div class="code-block"><pre><code>// Extension method for string
 public static class StringExtensions {
     public static bool IsNullOrEmpty(this string value) {
         return string.IsNullOrEmpty(value);
@@ -1259,7 +1281,7 @@ var shuffled = numbers.Shuffle();</code></pre></div>
             Q13: What are the different ways to handle exceptions in C#?
         </div>
         <div class="answer">
-            <div class="code-block" data-language="code"><pre><code>// 1. try-catch-finally
+            <div class="code-block"><pre><code>// 1. try-catch-finally
 try {
     int result = 10 / 0;
 }
@@ -1311,7 +1333,7 @@ catch (Exception ex) when (ex is InvalidOperationException) {
             <p><strong>throw</strong>: Preserves the original stack trace.</p>
             <p><strong>throw ex</strong>: Resets the stack trace to the current location.</p>
             
-            <div class="code-block" data-language="code"><pre><code>try {
+            <div class="code-block"><pre><code>try {
     MethodThatThrows();
 }
 catch (Exception ex) {
@@ -1338,7 +1360,7 @@ catch (Exception ex) {
         <div class="answer">
             <p>async/await is a pattern for writing asynchronous code that looks and behaves like synchronous code. It prevents blocking the UI thread and improves application responsiveness.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Synchronous (blocking)
+            <div class="code-block"><pre><code>// Synchronous (blocking)
 public string GetData() {
     Thread.Sleep(1000); // Blocks thread
     return "Data";
@@ -1376,7 +1398,7 @@ public async Task ProcessMultipleAsync() {
             <p><strong>Task</strong>: Reference type, always allocates memory on the heap.</p>
             <p><strong>ValueTask</strong>: Value type, can avoid heap allocation for synchronous results or already-completed tasks.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Task - always allocates
+            <div class="code-block"><pre><code>// Task - always allocates
 public async Task<int> GetValueAsync() {
     await Task.Delay(100);
     return 42;
@@ -1408,25 +1430,25 @@ public async ValueTask<int> GetValueOptimizedAsync() {
         <div class="answer">
             <p><strong>1. LINQ to Objects</strong>: Query in-memory collections.</p>
             
-            <div class="code-block" data-language="code"><pre><code>var numbers = new[] { 1, 2, 3, 4, 5 };
+            <div class="code-block"><pre><code>var numbers = new[] { 1, 2, 3, 4, 5 };
 var evenNumbers = numbers.Where(n => n % 2 == 0);</code></pre></div>
             
             <p><strong>2. LINQ to XML</strong>: Query XML documents.</p>
             
-            <div class="code-block" data-language="code"><pre><code>XDocument doc = XDocument.Load("data.xml");
+            <div class="code-block"><pre><code>XDocument doc = XDocument.Load("data.xml");
 var elements = doc.Descendants("Item")
     .Where(e => (int)e.Element("Value") > 10);</code></pre></div>
             
             <p><strong>3. LINQ to SQL</strong>: Query SQL databases (Entity Framework).</p>
             
-            <div class="code-block" data-language="code"><pre><code>var users = dbContext.Users
+            <div class="code-block"><pre><code>var users = dbContext.Users
     .Where(u => u.Age > 18)
     .OrderBy(u => u.Name)
     .ToList();</code></pre></div>
             
             <p><strong>4. LINQ to Entities</strong>: Query Entity Framework models.</p>
             
-            <div class="code-block" data-language="code"><pre><code>var orders = context.Orders
+            <div class="code-block"><pre><code>var orders = context.Orders
     .Include(o => o.Customer)
     .Where(o => o.Total > 1000);</code></pre></div>
         </div>
@@ -1437,13 +1459,13 @@ var elements = doc.Descendants("Item")
         <div class="answer">
             <p><strong>Deferred Execution</strong>: Query is executed when enumerated (ToList, foreach, etc.).</p>
             
-            <div class="code-block" data-language="code"><pre><code>var query = numbers.Where(n => n > 5); // Not executed yet
+            <div class="code-block"><pre><code>var query = numbers.Where(n => n > 5); // Not executed yet
 numbers.Add(10); // Adding after query definition
 var result = query.ToList(); // Executes now, includes 10</code></pre></div>
             
             <p><strong>Immediate Execution</strong>: Query is executed immediately.</p>
             
-            <div class="code-block" data-language="code"><pre><code>var result = numbers.Count(n => n > 5); // Executes immediately
+            <div class="code-block"><pre><code>var result = numbers.Count(n => n > 5); // Executes immediately
 numbers.Add(10); // Adding after execution
 // result doesn't include 10</code></pre></div>
             
@@ -1466,7 +1488,7 @@ numbers.Add(10); // Adding after execution
                 <li><strong>Generation 2</strong>: Long-lived objects (survived Gen 1 collection)</li>
             </ul>
             
-            <div class="code-block" data-language="code"><pre><code>// GC methods
+            <div class="code-block"><pre><code>// GC methods
 GC.Collect(); // Force garbage collection (usually not needed)
 GC.WaitForPendingFinalizers(); // Wait for finalizers
 GC.GetTotalMemory(false); // Get memory usage
@@ -1504,7 +1526,7 @@ public class ResourceHolder : IDisposable {
         <div class="answer">
             <p>The using statement ensures that IDisposable objects are properly disposed, even if an exception occurs.</p>
             
-            <div class="code-block" data-language="code"><pre><code>// Traditional way
+            <div class="code-block"><pre><code>// Traditional way
 FileStream file = null;
 try {
     file = new FileStream("test.txt", FileMode.Open);
@@ -1529,6 +1551,894 @@ using var file2 = new FileStream("file2.txt", FileMode.Open);
             </div>
         </div>
 
+        <h2>Advanced C# Concepts</h2>
+
+        <div class="question">
+            Q21: What are delegates and events in C#?
+        </div>
+        <div class="answer">
+            <p><strong>Delegates</strong> are type-safe function pointers that reference methods with a specific signature. <strong>Events</strong> are a way for a class to provide notifications to clients when something happens.</p>
+            
+            <div class="code-block"><pre><code>// Delegates
+public delegate void NotifyDelegate(string message);
+NotifyDelegate del = ShowMessage;
+del("Hello");
+
+// Event
+public class Publisher {
+    public event NotifyDelegate OnNotify;
+    public void Notify(string message) => OnNotify?.Invoke(message);
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q22: What is Dependency Injection (DI) in C#?
+        </div>
+        <div class="answer">
+            <p><strong>Dependency Injection</strong> is a design pattern that implements Inversion of Control (IoC). It allows creating dependent objects outside of a class and provides those objects to a class through constructor injection.</p>
+            
+            <div class="code-block"><pre><code>// Constructor Injection
+public class UserService {
+    private readonly IRepository _repository;
+    public UserService(IRepository repository) => _repository = repository;
+}
+
+// Using DI Container
+builder.Services.AddScoped<IRepository, UserRepository>();</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q23: What is Reflection in C#?
+        </div>
+        <div class="answer">
+            <p><strong>Reflection</strong> allows inspecting metadata of types at runtime and dynamically invoking members. Use it for serialization, ORM frameworks, plugin systems.</p>
+            
+            <div class="code-block"><pre><code>
+Type type = typeof(Person);
+PropertyInfo prop = type.GetProperty("Name");
+string name = (string)prop.GetValue(obj);
+
+MethodInfo method = type.GetMethod("SayHello");
+method.Invoke(obj, null);</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q24: What are Attributes in C#?
+        </div>
+        <div class="answer">
+            <p><strong>Attributes</strong> provide declarative information about code elements. Used for serialization, validation, ORM mapping, security, and more.</p>
+            
+            <div class="code-block"><pre><code>[Required]
+[StringLength(50)]
+public string Name { get; set; }
+
+[Obsolete("Use NewMethod instead")]
+public void OldMethod() { }</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q25: What is the difference between String and StringBuilder?
+        </div>
+        <div class="answer">
+            <p><strong>String:</strong> Immutable, creates new object on each modification. <strong>StringBuilder:</strong> Mutable, modifies in-place, efficient for multiple string operations.</p>
+            
+            <div class="code-block"><pre><code>// String - creates new objects
+string str = "Hello";
+str += " World"; // New object created
+
+// StringBuilder - modifies in-place
+StringBuilder sb = new StringBuilder("Hello");
+sb.Append(" World"); // Same object modified</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q26: What are LINQ deferred and immediate execution?
+        </div>
+        <div class="answer">
+            <p><strong>Deferred execution:</strong> Query is executed when the result is iterated. <strong>Immediate execution:</strong> Query is executed immediately with methods like Count, First, ToList.</p>
+            
+            <div class="code-block"><pre><code>// Deferred
+var query = numbers.Where(n => n % 2 == 0);
+foreach (int n in query) { } // Executed here
+
+// Immediate
+int count = numbers.Where(n => n % 2 == 0).Count(); // Executed now</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q27: What is the difference between IComparable and IComparer?
+        </div>
+        <div class="answer">
+            <p><strong>IComparable:</strong> Implemented by class to define default sorting logic. <strong>IComparer:</strong> Separate class that provides custom sorting logic.</p>
+            
+            <div class="code-block"><pre><code>// IComparable
+public class Person : IComparable<Person> {
+    public int CompareTo(Person other) => Age.CompareTo(other.Age);
+}
+
+// IComparer
+public class NameComparer : IComparer<Person> {
+    public int Compare(Person x, Person y) => string.Compare(x.Name, y.Name);
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q28: What are C# 8-12 new features?
+        </div>
+        <div class="answer">
+            <p><strong>C# 8:</strong> Nullable reference types, async streams, ranges. <strong>C# 9:</strong> Records, init-only properties. <strong>C# 10:</strong> Record structs, global using. <strong>C# 11:</strong> Raw string literals. <strong>C# 12:</strong> Primary constructors, collection expressions.</p>
+            
+            <div class="code-block"><pre><code>// C# 9 - Records
+public record Person(string Name, int Age);
+
+// C# 10 - Global using
+global using System;
+
+// C# 11 - Raw string literals
+string xml = """<root>value</root>""";
+
+// C# 12 - Collection expressions
+int[] numbers = [1, 2, 3];</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q29: What is the difference between Task.Run and async/await?
+        </div>
+        <div class="answer">
+            <p><strong>Task.Run:</strong> Queues work to thread pool, useful for CPU-bound work. <strong>async/await:</strong> Non-blocking pattern for I/O-bound work.</p>
+            
+            <div class="code-block"><pre><code>// Task.Run - CPU-bound
+await Task.Run(() => Calculate());
+
+// async/await - I/O-bound
+string result = await httpClient.GetStringAsync(url);</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q30: What are SOLID principles in C#?
+        </div>
+        <div class="answer">
+            <p><strong>S</strong>ingle Responsibility, <strong>O</strong>pen/Closed, <strong>L</strong>iskov Substitution, <strong>I</strong>nterface Segregation, <strong>D</strong>ependency Inversion.</p>
+            
+            <div class="code-block"><pre><code>// Single Responsibility
+public class UserService { public void AddUser(User u) { } }
+
+// Open/Closed
+public abstract class Shape { public abstract double Area(); }
+
+// Dependency Inversion
+public class OrderProcessor(IPaymentProcessor processor) { }</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q31: What is Entity Framework Core?
+        </div>
+        <div class="answer">
+            <p><strong>Entity Framework Core</strong> is an ORM for .NET. Maps C# classes to database tables, provides LINQ queries, change tracking, migrations.</p>
+            
+            <div class="code-block"><pre><code>public class AppDbContext : DbContext {
+    public DbSet<User> Users { get; set; }
+}
+
+var users = context.Users.Where(u => u.Age > 18).ToList();
+context.Users.Add(new User { Name = "John" });
+await context.SaveChangesAsync();</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q32: What is the difference between ref and out keywords?
+        </div>
+        <div class="answer">
+            <p><strong>ref:</strong> Parameter must be initialized before passing. <strong>out:</strong> Parameter doesn't need initialization, must be assigned in method before return.</p>
+            
+            <div class="code-block"><pre><code>int x = 10;
+ModifyRef(ref x); // x must be initialized
+
+int y;
+Calculate(out y); // y doesn't need initialization</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q33: What are the different types of collections in C#?
+        </div>
+        <div class="answer">
+            <p><strong>List&lt;T&gt;:</strong> Dynamic array. <strong>Dictionary&lt;K,V&gt;:</strong> Key-value pairs. <strong>HashSet&lt;T&gt;:</strong> Unique elements. <strong>Queue&lt;T&gt;:</strong> FIFO. <strong>Stack&lt;T&gt;:</strong> LIFO. <strong>LinkedList&lt;T&gt;:</strong> Doubly-linked list.</p>
+            
+            <div class="code-block"><pre><code>List<int> list = [1, 2, 3];
+Dictionary<string, int> dict = new() { ["key"] = 1 };
+HashSet<int> set = [1, 2, 3];
+Queue<string> queue = new();
+queue.Enqueue("item");</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q34: What is serialization in C#?
+        </div>
+        <div class="answer">
+            <p><strong>Serialization</strong> converts object to byte/stream format. JSON serialization using System.Text.Json, XML serialization using XmlSerializer.</p>
+            
+            <div class="code-block"><pre><code>string json = JsonSerializer.Serialize(person);
+Person deserialized = JsonSerializer.Deserialize<Person>(json);</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q35: What is the difference between == and Equals() in C#?
+        </div>
+        <div class="answer">
+            <p><strong>==:</strong> Operator overload, compares values for value types, reference equality for reference types. <strong>Equals():</strong> Virtual method, can be overridden for custom comparison.</p>
+            
+            <div class="code-block"><pre><code>int a = 5, b = 5;
+a == b; // True
+a.Equals(b); // True
+
+string s1 = "hello", s2 = "hello";
+s1 == s2; // True (compares content)</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q36: What are memory management best practices in C#?
+        </div>
+        <div class="answer">
+            <p>Dispose IDisposable objects with using statements. Avoid unnecessary object allocations. Use struct for small types. Avoid boxing/unboxing.</p>
+            
+            <div class="code-block"><pre><code>using var file = new FileStream("test.txt", FileMode.Open);
+// Automatically disposed
+
+// Avoid boxing
+List<int> numbers = [1, 2, 3]; // No boxing</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q37: What is the difference between HttpClient and HttpClientFactory?
+        </div>
+        <div class="answer">
+            <p><strong>HttpClient:</strong> Creating new instances can cause socket exhaustion. <strong>HttpClientFactory:</strong> Manages HttpClient lifecycle, handles DNS updates.</p>
+            
+            <div class="code-block"><pre><code>// Bad - socket exhaustion
+using var client = new HttpClient();
+
+// Good - HttpClientFactory
+builder.Services.AddHttpClient();</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q38: What is the difference between CancellationTokenSource and CancellationToken?
+        </div>
+        <div class="answer">
+            <p><strong>CancellationTokenSource:</strong> Controls cancellation, creates tokens. <strong>CancellationToken:</strong> Struct that signals cancellation request.</p>
+            
+            <div class="code-block"><pre><code>var cts = new CancellationTokenSource();
+CancellationToken token = cts.Token;
+
+cts.Cancel(); // Initiates cancellation</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q39: What are Indexers in C#?
+        </div>
+        <div class="answer">
+            <p><strong>Indexers</strong> allow class or struct instances to be indexed like arrays using this[] syntax. Can be overloaded with different parameter types.</p>
+            
+            <div class="code-block"><pre><code>public class StringCollection {
+    public string this[int index] => _items[index];
+}
+
+var collection = new StringCollection();
+string item = collection[0];</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q40: What is the difference between IEnumerable and IQueryable?
+        </div>
+        <div class="answer">
+            <p><strong>IEnumerable:</strong> In-memory collection, LINQ to Objects. <strong>IQueryable:</strong> Queryable data source, LINQ to SQL/Entities, translates to SQL.</p>
+            
+            <div class="code-block"><pre><code>// IEnumerable - in-memory
+List<User> users = GetUsers();
+var filtered = users.Where(u => u.Age > 18).ToList();
+
+// IQueryable - database
+var filtered = context.Users.Where(u => u.Age > 18).ToList();
+// SQL: SELECT * FROM Users WHERE Age > 18</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q41: What is the difference between abstract class and interface?
+        </div>
+        <div class="answer">
+            <p><strong>Abstract class:</strong> Can have implementation, constructors, fields. Can have access modifiers. Single inheritance. <strong>Interface:</strong> Only signatures, no implementation. No access modifiers (public by default). Multiple inheritance.</p>
+            
+            <div class="code-block"><pre><code>abstract class Animal {
+    public abstract void Sound();
+    public void Sleep() { } // Can have implementation
+}
+
+interface IFlyable {
+    void Fly(); // Only signature, no implementation
+}
+
+class Bird : Animal, IFlyable { }</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q42: What is the difference between virtual, override, and new keywords?
+        </div>
+        <div class="answer">
+            <p><strong>virtual:</strong> Method can be overridden in derived class. <strong>override:</strong> Provides new implementation of virtual method. <strong>new:</strong> Hides base method without overriding.</p>
+            
+            <div class="code-block"><pre><code>class Base {
+    public virtual void Method() => Console.WriteLine("Base");
+}
+
+class Derived : Base {
+    public override void Method() => Console.WriteLine("Derived");
+    public new void NewMethod() => Console.WriteLine("New");
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q43: What are extension methods in C#?
+        </div>
+        <div class="answer">
+            <p>Extension methods allow adding methods to existing types without modifying them. Defined as static methods in static classes with 'this' parameter.</p>
+            
+            <div class="code-block"><pre><code>public static class StringExtensions {
+    public static bool IsNullOrEmpty(this string str) => string.IsNullOrEmpty(str);
+}
+
+// Usage
+string name = "John";
+bool empty = name.IsNullOrEmpty();</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q44: What is the difference between throw and throw ex?
+        </div>
+        <div class="answer">
+            <p><strong>throw:</strong> Preserves original stack trace. <strong>throw ex:</strong> Resets stack trace to current location, losing original error information.</p>
+            
+            <div class="code-block"><pre><code>try {
+    // Some code
+} catch (Exception ex) {
+    throw; // Preserves stack trace
+}
+
+try {
+    // Some code
+} catch (Exception ex) {
+    throw ex; // Resets stack trace
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q45: What is the difference between Task and ValueTask?
+        </div>
+        <div class="answer">
+            <p><strong>Task:</strong> Reference type, always allocated on heap. <strong>ValueTask:</strong> Value type, avoids allocation for already completed operations. Use ValueTask for hot paths where operation often completes synchronously.</p>
+            
+            <div class="code-block"><pre><code>Task<int> GetDataAsync() => Task.FromResult(42);
+
+ValueTask<int> GetValueAsync() => new ValueTask<int>(42);
+// Avoids allocation when result is ready</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q46: What is the difference between lock and Monitor?
+        </div>
+        <div class="answer">
+            <p><strong>lock:</strong> Syntactic sugar for Monitor.Enter/Exit. Automatically releases lock even if exception occurs. <strong>Monitor:</strong> More control with TryEnter, Wait, Pulse methods.</p>
+            
+            <div class="code-block"><pre><code>private readonly object _lock = new();
+
+// lock (syntactic sugar)
+lock (_lock) {
+    // Critical section
+}
+
+// Monitor (more control)
+Monitor.Enter(_lock);
+try {
+    // Critical section
+} finally {
+    Monitor.Exit(_lock);
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q47: What is the difference between async void and async Task?
+        </div>
+        <div class="answer">
+            <p><strong>async void:</strong> Cannot be awaited, exceptions crash the process. Only use for event handlers. <strong>async Task:</strong> Can be awaited, exceptions can be caught, recommended for async methods.</p>
+            
+            <div class="code-block"><pre><code>// Bad - async void
+public async void BadMethod() { }
+
+// Good - async Task
+public async Task GoodMethod() { }</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q48: What is the difference between static class and regular class?
+        </div>
+        <div class="answer">
+            <p><strong>Static class:</strong> Cannot be instantiated, all members static, cannot inherit or be inherited. <strong>Regular class:</strong> Can be instantiated, can have instance and static members, supports inheritance.</p>
+            
+            <div class="code-block"><pre><code>static class MathHelper {
+    public static int Add(int a, int b) => a + b;
+}
+
+// Usage
+int result = MathHelper.Add(1, 2); // No instantiation</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q49: What is the difference between is and as operators?
+        </div>
+        <div class="answer">
+            <p><strong>is:</strong> Checks if object is of specific type, returns bool. <strong>as:</strong> Attempts to cast, returns null if fails instead of exception.</p>
+            
+            <div class="code-block"><pre><code>object obj = "Hello";
+
+if (obj is string) { } // Returns true
+
+string str = obj as string; // Returns "Hello" or null
+string num = obj as int; // Returns null (no exception)</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q50: What is the difference between property and field?
+        </div>
+        <div class="answer">
+            <p><strong>Field:</strong> Variable in class, can be public/private. <strong>Property:</strong> Encapsulated field with get/set accessors, can add logic, supports data binding.</p>
+            
+            <div class="code-block"><pre><code>public class Person {
+    private string _name; // Field
+    
+    public string Name { // Property
+        get => _name;
+        set => _name = value;
+    }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q51: What is the difference between partial class and regular class?
+        </div>
+        <div class="answer">
+            <p><strong>Partial class:</strong> Class definition split across multiple files. Useful for auto-generated code. <strong>Regular class:</strong> Single file definition.</p>
+            
+            <div class="code-block"><pre><code>// File1.cs
+public partial class Person {
+    public string Name { get; set; }
+}
+
+// File2.cs
+public partial class Person {
+    public int Age { get; set; }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q52: What is the difference between params and arrays?
+        </div>
+        <div class="answer">
+            <p><strong>params:</strong> Allows variable number of arguments, compiler creates array automatically. <strong>Array:</strong> Must pass array explicitly.</p>
+            
+            <div class="code-block"><pre><code>void PrintNumbers(params int[] numbers) { }
+
+PrintNumbers(1, 2, 3); // Works with individual arguments
+PrintNumbers(new int[] { 1, 2, 3 }); // Works with array</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q53: What is the difference between Dispose and Finalize?
+        </div>
+        <div class="answer">
+            <p><strong>Dispose:</strong> Called explicitly by user, deterministically releases resources. <strong>Finalize:</strong> Called by GC, non-deterministic, for unmanaged resources.</p>
+            
+            <div class="code-block"><pre><code>public class Resource : IDisposable {
+    public void Dispose() {
+        // Release managed and unmanaged resources
+    }
+    
+    ~Resource() {
+        // Finalizer - called by GC
+        Dispose(false);
+    }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q54: What is the difference between struct and record?
+        </div>
+        <div class="answer">
+            <p><strong>struct:</strong> Value type, mutable by default, no built-in equality comparison. <strong>record:</strong> Reference type (or record struct), immutable, built-in equality comparison, with expressions.</p>
+            
+            <div class="code-block"><pre><code>struct Point {
+    public int X { get; set; }
+}
+
+record Person(string Name, int Age);
+
+var person1 = new Person("John", 30);
+var person2 = new Person("John", 30);
+Console.WriteLine(person1 == person2); // True</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q55: What is the difference between nameof and typeof?
+        </div>
+        <div class="answer">
+            <p><strong>nameof:</strong> Returns string name of variable/type/property. <strong>typeof:</strong> Returns Type object for type.</p>
+            
+            <div class="code-block"><pre><code>string name = "John";
+Console.WriteLine(nameof(name)); // "name"
+Console.WriteLine(typeof(string)); // System.String</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q56: What is the difference between null-coalescing (??) and null-conditional (?.)?
+        </div>
+        <div class="answer">
+            <p><strong>??:</strong> Returns left operand if not null, else right operand. <strong>?.</strong> Returns null if left operand is null, otherwise access member.</p>
+            
+            <div class="code-block"><pre><code>string name = null;
+string result = name ?? "Default"; // "Default"
+
+string? text = null;
+int? length = text?.Length; // null</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q57: What is the difference between Tuple and ValueTuple?
+        </div>
+        <div class="answer">
+            <p><strong>Tuple:</strong> Reference type, immutable, Item1, Item2 naming. <strong>ValueTuple:</strong> Value type, mutable, named elements, better performance.</p>
+            
+            <div class="code-block"><pre><code>// Tuple (old)
+Tuple<int, string> tuple = Tuple.Create(1, "John");
+var item1 = tuple.Item1;
+
+// ValueTuple (new)
+(int Id, string Name) person = (1, "John");
+var name = person.Name;</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q58: What is the difference between when and pattern matching?
+        </div>
+        <div class="answer">
+            <p><strong>when:</strong> Adds condition to catch block or case statement. <strong>Pattern matching:</strong> Checks type and value patterns in switch expressions.</p>
+            
+            <div class="code-block"><pre><code>try { } catch (Exception ex) when (ex is IOException) { }
+
+object obj = 5;
+string result = obj switch {
+    int i when i > 0 => "Positive",
+    int i => "Zero or negative",
+    _ => "Not a number"
+};</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q59: What is the difference between yield return and return?
+        </div>
+        <div class="answer">
+            <p><strong>yield return:</strong> Returns items one at a time, lazy evaluation, generates sequence. <strong>return:</strong> Returns entire collection at once.</p>
+            
+            <div class="code-block"><pre><code>// yield return - lazy, memory efficient
+IEnumerable<int> GetNumbers() {
+    for (int i = 0; i < 10; i++) yield return i;
+}
+
+// return - eager, loads all at once
+List<int> GetAllNumbers() {
+    return Enumerable.Range(0, 10).ToList();
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q60: What is the difference between Span and Memory?
+        </div>
+        <div class="answer">
+            <p><strong>Span&lt;T&gt;:</strong> Stack-only, cannot be stored in class fields, better performance. <strong>Memory&lt;T&gt;:</strong> Can be stored anywhere, can be converted to Span.</p>
+            
+            <div class="code-block"><pre><code>string text = "Hello";
+Span<char> span = text.AsSpan(); // Stack-allocated
+
+Memory<char> memory = text.AsMemory(); // Can be stored in fields
+Span<char> spanFromMemory = memory.Span;</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q61: What are pattern matching expressions in C#?
+        </div>
+        <div class="answer">
+            <p>Pattern matching allows checking data types and values in switch expressions. Includes type patterns, property patterns, list patterns, and relational patterns.</p>
+            
+            <div class="code-block"><pre><code>object obj = 5;
+string result = obj switch {
+    int i when i > 0 => "Positive",
+    int i => "Non-positive",
+    string s => $"String: {s}",
+    _ => "Unknown"
+};</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q62: What is the difference between Action and Func delegates?
+        </div>
+        <div class="answer">
+            <p><strong>Action:</strong> Encapsulates method with no return value. <strong>Func:</strong> Encapsulates method with return value. Both have overloads for 0-16 parameters.</p>
+            
+            <div class="code-block"><pre><code>Action<string> print = msg => Console.WriteLine(msg);
+Func<int, int, int> add = (a, b) => a + b;
+
+print("Hello");
+int sum = add(1, 2); // 3</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q63: What is the dynamic keyword in C#?
+        </div>
+        <div class="answer">
+            <p><strong>dynamic</strong> bypasses compile-time type checking, resolved at runtime. Useful for COM interop, dynamic languages, or when type is unknown at compile time.</p>
+            
+            <div class="code-block"><pre><code>dynamic obj = GetDynamicObject();
+obj.SomeMethod(); // No compile-time check
+obj.UnknownProperty = 10; // Works if property exists at runtime</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q64: What is the difference between anonymous types and tuples?
+        </div>
+        <div class="answer">
+            <p><strong>Anonymous types:</strong> Read-only, immutable, cannot be returned from methods. <strong>Tuples:</strong> Can be mutable, can be returned, have named elements.</p>
+            
+            <div class="code-block"><pre><code>// Anonymous type
+var person = new { Name = "John", Age = 30 };
+
+// Tuple
+var person2 = (Name: "John", Age: 30);
+person2.Age = 31; // Mutable</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q65: What are generic constraints in C#?
+        </div>
+        <div class="answer">
+            <p>Generic constraints restrict type parameters to specific types using where clause. Constraints include class, struct, new(), base class, interface.</p>
+            
+            <div class="code-block"><pre><code>void Process<T>(T item) where T : class, new() {
+    T obj = new T(); // Must have parameterless constructor
+}
+
+void Add<T>(T item) where T : struct {
+    // T must be value type
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q66: What is the difference between covariance and contravariance?
+        </div>
+        <div class="answer">
+            <p><strong>Covariance:</strong> Allows more derived type (IEnumerable<out T>). <strong>Contravariance:</strong> Allows less derived type (Action<in T>). Only works with reference types.</p>
+        </div>
+
+        <div class="question">
+            Q67: What is the difference between Lazy<T> and direct instantiation?
+        </div>
+        <div class="answer">
+            <p><strong>Lazy<T>:</strong> Defers object creation until first access, thread-safe by default. Useful for expensive initialization or optional resources.</p>
+            
+            <div class="code-block"><pre><code>Lazy<ExpensiveObject> lazy = new();
+// Object not created yet
+
+ExpensiveObject obj = lazy.Value;
+// Object created now when accessed</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q68: What is the difference between Parallel.ForEach and regular foreach?
+        </div>
+        <div class="answer">
+            <p><strong>Parallel.ForEach:</strong> Uses multiple threads, faster for CPU-bound operations on collections. <strong>foreach:</strong> Sequential, single-threaded.</p>
+            
+            <div class="code-block"><pre><code>// Sequential
+foreach (var item in items) {
+    Process(item);
+}
+
+// Parallel
+Parallel.ForEach(items, item => {
+    Process(item); // Runs on multiple threads
+});</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q69: What is the difference between Interlocked and lock?
+        </div>
+        <div class="answer">
+            <p><strong>Interlocked:</strong> Atomic operations on simple types, no lock overhead. <strong>lock:</strong> Protects code blocks, can cause contention.</p>
+            
+            <div class="code-block"><pre><code>int counter = 0;
+
+// Interlocked - atomic increment
+Interlocked.Increment(ref counter);
+
+// lock - protects code block
+lock (_lock) {
+    counter++;
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q70: What is the difference between Volatile and normal fields?
+        </div>
+        <div class="answer">
+            <p><strong>volatile:</strong> Prevents compiler optimizations, ensures latest value read from memory. Used for flags accessed by multiple threads without locks.</p>
+            
+            <div class="code-block"><pre><code>private volatile bool _shouldStop;
+
+// Thread 1
+_shouldStop = true;
+
+// Thread 2
+if (_shouldStop) {
+    // Always reads latest value from memory
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q71: What is the difference between ThreadLocal and ThreadStatic?
+        </div>
+        <div class="answer">
+            <p><strong>ThreadLocal&lt;T&gt;:</strong> Type-safe, lazy initialization, disposable. <strong>ThreadStatic:</strong> Attribute-based, not type-safe, requires initialization.</p>
+            
+            <div class="code-block"><pre><code>// ThreadLocal
+ThreadLocal<int> local = new(() => Thread.CurrentThread.ManagedThreadId);
+
+// ThreadStatic
+[ThreadStatic]
+private static int _threadId;</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q72: What are ranges and indices in C#?
+        </div>
+        <div class="answer">
+            <p><strong>Ranges:</strong> Subset of sequence using .. operator. <strong>Indices:</strong> Index from end using ^ operator. Simplify array slicing.</p>
+            
+            <div class="code-block"><pre><code>int[] numbers = { 0, 1, 2, 3, 4, 5 };
+
+// Range
+var subset = numbers[1..4]; // { 1, 2, 3 }
+
+// Index
+var last = numbers[^1]; // 5
+var secondLast = numbers[^2]; // 4</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q73: What is the difference between stackalloc and heap allocation?
+        </div>
+        <div class="answer">
+            <p><strong>stackalloc:</strong> Allocates on stack, faster, automatically freed. Must be in unsafe context. Limited size. <strong>Heap:</strong> GC managed, larger capacity.</p>
+            
+            <div class="code-block"><pre><code>unsafe {
+    Span<int> numbers = stackalloc int[100];
+    // Stack-allocated, automatically freed
+}
+
+// Heap allocation
+int[] numbers = new int[100];
+// GC managed</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q74: What is the difference between Expression<Func<T>> and Func<T>?
+        </div>
+        <div class="answer">
+            <p><strong>Expression<Func<T>>:</strong> Represents expression tree, can be inspected/modified, used in LINQ to SQL. <strong>Func<T>:</strong> Compiled delegate, faster execution.</p>
+            
+            <div class="code-block"><pre><code>// Expression - can be inspected
+Expression<Func<int, bool>> expr = x => x > 5;
+
+// Func - compiled delegate
+Func<int, bool> func = x => x > 5;</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q75: What is the difference between IAsyncEnumerable and IEnumerable?
+        </div>
+        <div class="answer">
+            <p><strong>IAsyncEnumerable:</strong> Async streaming, await foreach, non-blocking. <strong>IEnumerable:</strong> Synchronous, blocks thread during iteration.</p>
+            
+            <div class="code-block"><pre><code>// Async enumerable
+async IAsyncEnumerable<int> GetNumbersAsync() {
+    for (int i = 0; i < 10; i++) {
+        await Task.Delay(100);
+        yield return i;
+    }
+}
+
+await foreach (int num in GetNumbersAsync()) { }</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q76: What is the difference between required properties and regular properties?
+        </div>
+        <div class="answer">
+            <p><strong>required:</strong> Property must be set during object initialization (C# 11). Compiler enforces initialization. Useful for DTOs and records.</p>
+            
+            <div class="code-block"><pre><code>public class Person {
+    public required string Name { get; init; }
+    public int Age { get; init; }
+}
+
+var person = new Person { Name = "John" }; // Error: Name required
+var person = new Person { Name = "John", Age = 30 }; // OK</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q77: What is the difference between file-scoped namespace and regular namespace?
+        </div>
+        <div class="answer">
+            <p><strong>File-scoped:</strong> Single namespace per file, no braces (C# 10). <strong>Regular:</strong> Can have nested namespaces with braces.</p>
+            
+            <div class="code-block"><pre><code>// File-scoped
+namespace MyApp;
+
+class MyClass { }
+
+// Regular
+namespace MyApp {
+    namespace Inner {
+        class MyClass { }
+    }
+}</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q78: What is the difference between global using and regular using?
+        </div>
+        <div class="answer">
+            <p><strong>global using:</strong> Applies to all files in project, defined once. <strong>using:</strong> File-specific, must be added to each file.</p>
+            
+            <div class="code-block"><pre><code>// GlobalUsings.cs
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+
+// No need to add using in other files</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q79: What is the difference between ArrayPool<T> and new T[]?
+        </div>
+        <div class="answer">
+            <p><strong>ArrayPool<T>:</strong> Rent/return arrays to pool, reduces allocations. <strong>new T[]:</strong> Always allocates new array, more GC pressure.</p>
+            
+            <div class="code-block"><pre><code>// ArrayPool - rent and return
+var pool = ArrayPool<int>.Shared;
+int[] array = pool.Rent(100);
+// Use array
+pool.Return(array);</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q80: What is the difference between unsafe code and safe code?
+        </div>
+        <div class="answer">
+            <p><strong>unsafe:</strong> Pointer operations, direct memory access, stackalloc. <strong>safe:</strong> Managed code, GC handles memory. Unsafe code requires unsafe context.</p>
+            
+            <div class="code-block"><pre><code>unsafe {
+    int* ptr = &value;
+    *ptr = 10;
+    
+    int[] array = stackalloc int[100];
+}</code></pre></div>
+        </div>
     </div>
 </body>
 </html>
