@@ -3,327 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOLID Principles Interview Questions</title>
+    <title>SOLID Principles Interview Guide</title>
     <style>
-
-
-        @import url('https://fonts.googleapis.com/css2family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #1a1a2e; background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%); background-size: 400% 400%; animation: gradientShift 20s ease infinite; min-height: 100vh; padding: 25px 20px; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .container { max-width: 1100px; margin: 0 auto; padding: 50px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px); border-radius: 32px; box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3); }
+        .back-button { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 30px; font-weight: 700; margin-bottom: 30px; }
+        h1 { color: #1a1a2e; font-size: 52px; font-weight: 800; text-align: center; margin-bottom: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { text-align: center; font-size: 18px; color: #4a4a68; margin-bottom: 40px; }
+        h2 { color: white; font-size: 28px; font-weight: 700; margin-top: 40px; margin-bottom: 25px; padding: 18px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; }
+        .question { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; border-radius: 15px; margin: 25px 0 15px 0; font-weight: 600; font-size: 18px; }
+        .answer { background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%); padding: 30px 35px; border-radius: 15px; margin: 15px 0 25px 0; border-left: 6px solid #764ba2; }
+        .answer p { margin-bottom: 15px; color: #1a1a2e; }
+        .answer strong { color: #667eea; }
+        .answer ul { padding-left: 25px; margin-bottom: 15px; }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: #1a1a2e;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 20s ease infinite;
-            min-height: 100vh;
-            padding: 25px 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
-            animation: particleFloat 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 50px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(30px);
-            border-radius: 32px;
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
+        .code-editor {
+            background: #1e1e1e;
+            border-radius: 12px;
+            margin: 20px 0;
             overflow: hidden;
-            z-index: 1;
-            animation: containerFloat 6s ease-in-out infinite;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3e3e42;
         }
         
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #764ba2 60%, 
-                #667eea 80%, 
-                #764ba2 100%);
-            background-size: 300% 100%;
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-        
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
-        }
-        
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 
-                0 8px 25px rgba(102, 126, 234, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-button:hover::before {
-            left: 100%;
-        }
-        
-        .back-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
-        }
-        
-        .back-button svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.3s ease;
-        }
-        
-        .back-button:hover svg {
-            transform: translateX(-5px);
-        }
-        
-        h1 {
-            color: #1a1a2e;
-            font-size: 52px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 35px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
-            border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .subtitle {
-            text-align: center;
-            font-size: 18px;
-            color: #4a4a68;
-            margin-bottom: 40px;
-            font-weight: 500;
-            animation: fadeIn 1s ease 0.4s both;
-        }
-        
-        h2 {
-            color: #1a1a2e;
-            font-size: 32px;
-            font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
+        .code-editor-header {
+            background: #2d2d2d;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
+            justify-content: space-between;
+            gap: 8px;
+            border-bottom: 1px solid #3e3e42;
         }
         
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+        .code-editor-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
+        .copy-button {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        h3 {
-            color: #1a1a2e;
-            font-size: 26px;
-            font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
+        .copy-button:hover {
+            background: #4e4e52;
+            color: #ffffff;
         }
         
-        .chapter {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
-            border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
+        .copy-button.copied {
+            background: #27ca40;
+            color: #ffffff;
         }
         
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .language-selector {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            margin-left: 8px;
         }
         
-        .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+        .language-selector:hover {
+            background: #4e4e52;
+            color: #ffffff;
         }
         
-        .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
+        @media (max-width: 768px) {
+            .language-selector {
+                padding: 3px 6px;
+                font-size: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .language-selector {
+                padding: 2px 4px;
+                font-size: 9px;
+                margin-left: 4px;
+                min-width: 60px;
+            }
+        }
+        
+        .code-editor-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .code-editor-dot.red { background: #ff5f56; }
+        .code-editor-dot.yellow { background: #ffbd2e; }
+        .code-editor-dot.green { background: #27ca40; }
+        
+        .code-editor-title {
+            color: #9cdcfe;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            margin-left: 12px;
+        }
+        
+        .code-editor-content {
+            padding: 20px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #d4d4d4;
             overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.5s ease both;
+            background: #1e1e1e;
         }
         
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
+        .code-editor-content code {
+            display: block;
+            white-space: pre;
         }
         
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-x: auto;
-        }
+        .keyword { color: #569cd6; }
+        .type { color: #4ec9b0; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; font-style: italic; }
+        .number { color: #b5cea8; }
+        .method { color: #dcdcaa; }
+        .property { color: #9cdcfe; }
+        .variable { color: #9cdcfe; }
+        .operator { color: #d4d4d4; }
+        .decorator { color: #c586c0; }
         
+        .footer { text-align: center; margin-top: 50px; padding: 35px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%); border-radius: 20px; }
+        .highlight { color: #667eea; font-weight: 700; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
+        .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 25px 0; border-radius: 12px; }
+        th { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; text-align: left; font-weight: 600; font-size: 15px; white-space: nowrap; }
+        td { padding: 15px; border-bottom: 1px solid #e9ecef; color: #4a4a68; white-space: nowrap; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f8f9fa; }
         
         .toc {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -332,7 +163,6 @@
             margin: 40px 0;
             border-left: 8px solid #667eea;
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
         }
         
         .toc h3 {
@@ -350,82 +180,12 @@
             line-height: 2;
         }
         
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .question {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
-        }
-        
-        .answer {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 30px 35px;
-            border-radius: 15px;
-            margin: 15px 0 25px 0;
-            border-left: 6px solid #764ba2;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            animation: slideUp 0.5s ease both;
-        }
-        
-        .answer p {
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            line-height: 1.8;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
-        }
-        
-        .answer strong {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .page-break {
-            page-break-after: always;
-            margin: 60px 0;
-            border-top: 2px dashed #e0e0e0;
-            padding-top: 40px;
-        }
-        
         .important {
             background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
             padding: 20px 25px;
             border-radius: 12px;
             margin: 20px 0;
             border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
-        }
-        
-        .important strong {
-            color: #856404;
         }
         
         .tip {
@@ -434,407 +194,2163 @@
             border-radius: 12px;
             margin: 20px 0;
             border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
         }
         
-        .tip strong {
-            color: #0c5460;
-        }
+        .answer h3 { color: #667eea; margin: 20px 0 10px 0; font-size: 20px; }
+        .answer ol { padding-left: 25px; margin-bottom: 15px; }
+        .answer li { margin-bottom: 8px; color: #1a1a2e; }
         
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 15px;
-        }
-        
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e9ecef;
-            color: #4a4a68;
-        }
-        
-        tr:last-child td {
-            border-bottom: none;
-        }
-        
-        tr:hover td {
-            background: #f8f9fa;
-        }
-        
-        p {
-            color: #1a1a2e;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        
-        ul, ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        ul li, ol li {
-            margin-bottom: 8px;
-        }
-        
-                
         @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
-            }
+            body { padding: 15px 10px; }
+            .container { padding: 25px 20px; border-radius: 20px; }
+            h1 { font-size: 32px; }
+            .subtitle { font-size: 16px; }
+            h2 { font-size: 22px; padding: 14px 20px; }
+            .question { font-size: 16px; padding: 16px 20px; }
+            .answer { padding: 20px 20px; }
+            .code-editor-content { padding: 15px; font-size: 12px; }
+            .code-editor-title { font-size: 11px; }
+            .footer { padding: 25px 20px; }
+            table { font-size: 13px; }
+            th { padding: 12px 10px; font-size: 13px; }
+            td { padding: 12px 10px; font-size: 13px; }
+            .table-wrapper { margin: 20px 0; }
         }
         
         @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
-            }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
+            body { padding: 10px 5px; }
+            .container { padding: 20px 15px; border-radius: 16px; }
+            h1 { font-size: 26px; }
+            .subtitle { font-size: 14px; }
+            h2 { font-size: 20px; padding: 12px 16px; }
+            .question { font-size: 15px; padding: 14px 16px; }
+            .answer { padding: 18px 16px; }
+            .code-editor-content { padding: 12px; font-size: 11px; }
+            .code-editor-title { font-size: 10px; }
+            .back-button { padding: 12px 20px; font-size: 14px; }
+            table { font-size: 11px; }
+            th { padding: 10px 8px; font-size: 11px; }
+            td { padding: 10px 8px; font-size: 11px; }
+            .table-wrapper { margin: 15px 0; }
         }
-</style>
+    </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-        </a>
-        <h1>SOLID Principles Interview Questions</h1>
-                <p class="subtitle">Comprehensive guide covering SOLID interview questions covering principles, examples, anti-patterns, best practices with detailed explanations and code examples</p>
-        
-        <h2>Table of Contents</h2>
+        <a href="../index.html" class="back-button">Back to Home</a>
+        <h1>SOLID Principles Interview Guide</h1>
+        <p class="subtitle">Comprehensive guide covering SOLID principles interview questions with C# code examples</p>
+
         <div class="toc">
             <h3>Table of Contents</h3>
             <ol>
-                <li>Fundamentals</li>
-                <li>Core Concepts</li>
-                <li>Implementation</li>
-                <li>Best Practices</li>
-                <li>Advanced Topics</li>
+                <li>SOLID Principles Overview</li>
+                <li>Single Responsibility Principle (SRP)</li>
+                <li>Open/Closed Principle (OCP)</li>
+                <li>Liskov Substitution Principle (LSP)</li>
+                <li>Interface Segregation Principle (ISP)</li>
+                <li>Dependency Inversion Principle (DIP)</li>
+                <li>SOLID in Practice</li>
+                <li>Benefits and Trade-offs</li>
             </ol>
         </div>
 
-        <h2>1. Fundamentals</h2>
+        <h2>1. SOLID Principles Overview</h2>
 
         <div class="question">
-            Q1: What are the fundamental concepts in this subject</div>
+            Q1: What are the SOLID principles?
+        </div>
         <div class="answer">
-            <p>The fundamental concepts form the foundation for understanding this subject. These include core terminology, basic principles, and essential knowledge required for advanced topics.</p>
-            <h3>Key Concepts:</h3>
+            <p><strong>SOLID</strong> is an acronym for five design principles intended to make software designs more understandable, flexible, and maintainable.</p>
+            
+            <h3>The Five Principles:</h3>
+            <ol>
+                <li><strong>S - Single Responsibility Principle (SRP):</strong> A class should have one reason to change</li>
+                <li><strong>O - Open/Closed Principle (OCP):</strong> Open for extension, closed for modification</li>
+                <li><strong>L - Liskov Substitution Principle (LSP):</strong> Subtypes must be substitutable for base types</li>
+                <li><strong>I - Interface Segregation Principle (ISP):</strong> Clients shouldn't depend on unused interfaces</li>
+                <li><strong>D - Dependency Inversion Principle (DIP):</strong> Depend on abstractions, not concretions</li>
+            </ol>
+        </div>
+
+        <div class="question">
+            Q2: Who introduced the SOLID principles?
+        </div>
+        <div class="answer">
+            <p>The SOLID principles were introduced by <strong>Robert C. Martin (Uncle Bob)</strong> in the early 2000s. These principles are part of object-oriented design and help developers create more maintainable and scalable software systems.</p>
+        </div>
+
+        <div class="question">
+            Q3: Why are SOLID principles important?
+        </div>
+        <div class="answer">
+            <h3>Importance of SOLID Principles:</h3>
             <ul>
-                <li>Concept 1: Description of first fundamental concept</li>
-                <li>Concept 2: Description of second fundamental concept</li>
-                <li>Concept 3: Description of third fundamental concept</li>
+                <li><strong>Maintainability:</strong> Easier to maintain and modify code</li>
+                <li><strong>Scalability:</strong> Systems can grow without becoming unmanageable</li>
+                <li><strong>Testability:</strong> Easier to write unit tests</li>
+                <li><strong>Flexibility:</strong> Code is more flexible to changes</li>
+                <li><strong>Reusability:</strong> Components can be reused in different contexts</li>
+                <li><strong>Readability:</strong> Code is more organized and easier to understand</li>
             </ul>
         </div>
 
-        <h2>2. Core Concepts</h2>
-
         <div class="question">
-            Q2: What are the core principles and patterns</div>
+            Q4: What is the relationship between SOLID and design patterns?
+        </div>
         <div class="answer">
-            <p>Understanding the core principles is essential for mastering this subject. This section explores the most important concepts and their applications in real-world scenarios.</p>
-            <h3>Key Principles:</h3>
-            <ul>
-                <li>Principle 1: Description of the first key principle</li>
-                <li>Principle 2: Description of the second key principle</li>
-                <li>Principle 3: Description of the third key principle</li>
-            </ul>
+            <p>SOLID principles are the foundation for many design patterns. Design patterns are specific solutions to common problems, while SOLID principles are guidelines for creating good object-oriented designs. Many design patterns (like Strategy, Factory, Observer) naturally follow SOLID principles.</p>
         </div>
 
-        <h2>3. Implementation</h2>
+        <h2>2. Single Responsibility Principle (SRP)</h2>
 
         <div class="question">
-            Q3: How do you implement these concepts in practice</div>
+            Q5: What is the Single Responsibility Principle?
+        </div>
         <div class="answer">
-            <p>This chapter provides practical implementation examples with code snippets and real-world scenarios to help you apply the concepts learned.</p>
-            <div class="code-block"><pre><code># SOLID Principles interview example
-# Dependency Inversion Principle
-from abc import ABC, abstractmethod
-
-class Database(ABC):
-    @abstractmethod
-    def connect(self):
-        pass
-
-class MySQLDatabase(Database):
-    def connect(self):
-        print("Connecting to MySQL")
-
-class PostgreSQLDatabase(Database):
-    def connect(self):
-        print("Connecting to PostgreSQL")
-
-class Application:
-    def __init__(self, database: Database):
-        self.database = database
+            <p><strong>Single Responsibility Principle (SRP)</strong> states that a class should have only one reason to change, meaning it should have only one job or responsibility.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">SRP.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Violating SRP</span>
+<span class="keyword">public class</span> <span class="class">User</span>
+{
+    <span class="keyword">public</span> <span class="type">string</span> <span class="property">Name</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public</span> <span class="type">string</span> <span class="property">Email</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
     
-    def run(self):
-        self.database.connect()
+    <span class="keyword">public void</span> <span class="function">SaveToDatabase</span>() { }
+    <span class="keyword">public void</span> <span class="function">SendEmail</span>() { }
+    <span class="keyword">public void</span> <span class="function">Validate</span>() { }
+}
 
-# Interface Segregation Principle
-class IReadable:
-    def read(self):
-        pass
+<span class="comment">// Following SRP</span>
+<span class="keyword">public class</span> <span class="class">User</span>
+{
+    <span class="keyword">public</span> <span class="type">string</span> <span class="property">Name</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public</span> <span class="type">string</span> <span class="property">Email</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}
 
-class IWritable:
-    def write(self, data):
-        pass
+<span class="keyword">public class</span> <span class="class">UserRepository</span>
+{
+    <span class="keyword">public void</span> <span class="function">Save</span>(<span class="type">User</span> user) { }
+}
 
-class FileReader(IReadable):
-    def read(self):
-        with open('file.txt', 'r') as f:
-            return f.read()
+<span class="keyword">public class</span> <span class="class">EmailService</span>
+{
+    <span class="keyword">public void</span> <span class="function">SendEmail</span>(<span class="type">User</span> user) { }
+}
 
-class FileWriter(IWritable):
-    def write(self, data):
-        with open('file.txt', 'w') as f:
-            f.write(data)</code></pre></div>
-
-        <h2>4. Best Practices</h2>
+<span class="keyword">public class</span> <span class="class">UserValidator</span>
+{
+    <span class="keyword">public bool</span> <span class="function">Validate</span>(<span class="type">User</span> user) { <span class="keyword">return true</span>; }
+}</code>
+                </div>
+            </div>
+        </div>
 
         <div class="question">
-            Q4: What are the industry best practices and standards</div>
+            Q6: How do you identify if a class violates SRP?
+        </div>
         <div class="answer">
-            <p>Learn industry best practices and standards for professional development and production environments. These guidelines ensure code quality, maintainability, and scalability.</p>
-            <h3>Best Practices:</h3>
+            <h3>Signs of SRP Violation:</h3>
             <ul>
-                <li>Use clear and descriptive naming conventions</li>
-                <li>Follow established coding standards</li>
-                <li>Write comprehensive documentation</li>
-                <li>Implement proper error handling</li>
-                <li>Optimize for performance and readability</li>
+                <li>Class has too many methods (more than 10-15)</li>
+                <li>Class handles multiple concerns (UI, database, validation)</li>
+                <li>Class has multiple reasons to change</li>
+                <li>Class name includes "and" or "or" (e.g., UserAndOrderManager)</li>
+                <li>Difficult to test due to multiple responsibilities</li>
             </ul>
         </div>
+
+        <div class="question">
+            Q7: Can you give another example of SRP violation and its fix?
+        </div>
+        <div class="answer">
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">OrderService.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Violating SRP</span>
+<span class="keyword">public class</span> <span class="class">OrderService</span>
+{
+    <span class="keyword">public void</span> <span class="function">ProcessOrder</span>(<span class="type">Order</span> order)
+    {
+        <span class="comment">// Validate order</span>
+        <span class="keyword">if</span> (order.Items.Count == 0) <span class="keyword">throw new</span> <span class="type">Exception</span>();
         
-        <h2>5. Advanced Topics</h2>
+        <span class="comment">// Calculate total</span>
+        <span class="type">decimal</span> total = order.Items.<span class="function">Sum</span>(i =&gt; i.Price);
+        
+        <span class="comment">// Save to database</span>
+        _context.Orders.<span class="function">Add</span>(order);
+        _context.<span class="function">SaveChanges</span>();
+        
+        <span class="comment">// Send email</span>
+        _emailService.<span class="function">Send</span>(order.CustomerEmail);
+        
+        <span class="comment">// Update inventory</span>
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> item <span class="keyword">in</span> order.Items)
+        {
+            _inventoryService.<span class="function">UpdateStock</span>(item.Id, -1);
+        }
+    }
+}
+
+<span class="comment">// Following SRP</span>
+<span class="keyword">public class</span> <span class="class">OrderService</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">IOrderValidator</span> _validator;
+    <span class="keyword">private readonly</span> <span class="type">IOrderCalculator</span> _calculator;
+    <span class="keyword">private readonly</span> <span class="type">IOrderRepository</span> _repository;
+    <span class="keyword">private readonly</span> <span class="type">IEmailService</span> _emailService;
+    <span class="keyword">private readonly</span> <span class="type">IInventoryService</span> _inventory;
+    
+    <span class="keyword">public void</span> <span class="function">ProcessOrder</span>(<span class="type">Order</span> order)
+    {
+        _validator.<span class="function">Validate</span>(order);
+        order.Total = _calculator.<span class="function">CalculateTotal</span>(order);
+        _repository.<span class="function">Save</span>(order);
+        _emailService.<span class="function">SendConfirmation</span>(order);
+        _inventory.<span class="function">UpdateStock</span>(order);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
 
         <div class="question">
-            Q5: What are the advanced techniques and optimizations</div>
+            Q8: Does SRP apply to methods as well?
+        </div>
         <div class="answer">
-            <p>Explore advanced techniques, optimizations, and cutting-edge approaches in this field. These topics are essential for senior-level understanding and expert-level implementation.</p>
-            <div class="code-block"><pre><code># SOLID Principles interview example
-# Dependency Inversion Principle
-from abc import ABC, abstractmethod
-
-class Database(ABC):
-    @abstractmethod
-    def connect(self):
-        pass
-
-class MySQLDatabase(Database):
-    def connect(self):
-        print("Connecting to MySQL")
-
-class PostgreSQLDatabase(Database):
-    def connect(self):
-        print("Connecting to PostgreSQL")
-
-class Application:
-    def __init__(self, database: Database):
-        self.database = database
+            <p>Yes, SRP also applies to methods. A method should do one thing and do it well. If a method is doing multiple things, it should be split into smaller methods.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">UserService.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Method violating SRP</span>
+<span class="keyword">public void</span> <span class="function">ProcessUser</span>(<span class="type">User</span> user)
+{
+    <span class="keyword">if</span> (user == <span class="keyword">null</span>) <span class="keyword">return</span>;
+    <span class="keyword">if</span> (<span class="type">string</span>.<span class="function">IsNullOrEmpty</span>(user.Name)) <span class="keyword">return</span>;
     
-    def run(self):
-        self.database.connect()
+    user.Name = user.Name.<span class="function">Trim</span>();
+    user.Email = user.Email.<span class="function">ToLower</span>();
+    
+    _repository.<span class="function">Save</span>(user);
+    _emailService.<span class="function">SendWelcome</span>(user);
+}
 
-# Interface Segregation Principle
-class IReadable:
-    def read(self):
-        pass
+<span class="comment">// Following SRP</span>
+<span class="keyword">public void</span> <span class="function">ProcessUser</span>(<span class="type">User</span> user)
+{
+    <span class="function">ValidateUser</span>(user);
+    <span class="function">NormalizeUser</span>(user);
+    <span class="function">SaveUser</span>(user);
+    <span class="function">SendWelcomeEmail</span>(user);
+}</code>
+                </div>
+            </div>
+        </div>
 
-class IWritable:
-    def write(self, data):
-        pass
+        <div class="question">
+            Q9: What is the difference between SRP and separation of concerns?
+        </div>
+        <div class="answer">
+            <p><strong>SRP</strong> is about a class having one reason to change, while <strong>Separation of Concerns (SoC)</strong> is a broader concept about separating different aspects of a system. SoC is the principle, and SRP is one way to achieve it at the class level.</p>
+        </div>
 
-class FileReader(IReadable):
-    def read(self):
-        with open('file.txt', 'r') as f:
-            return f.read()
+        <h2>3. Open/Closed Principle (OCP)</h2>
 
-class FileWriter(IWritable):
-    def write(self, data):
-        with open('file.txt', 'w') as f:
-            f.write(data)</code></pre></div>
+        <div class="question">
+            Q10: What is the Open/Closed Principle?
+        </div>
+        <div class="answer">
+            <p><strong>Open/Closed Principle (OCP)</strong> states that software entities should be open for extension but closed for modification. You should be able to extend behavior without modifying existing code.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">OCP.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Violating OCP</span>
+<span class="keyword">public class</span> <span class="class">AreaCalculator</span>
+{
+    <span class="keyword">public double</span> <span class="function">CalculateArea</span>(<span class="type">object</span> shape)
+    {
+        <span class="keyword">if</span> (shape <span class="keyword">is</span> <span class="type">Rectangle</span> r)
+            <span class="keyword">return</span> r.Width * r.Height;
+        <span class="keyword">if</span> (shape <span class="keyword">is</span> <span class="type">Circle</span> c)
+            <span class="keyword">return</span> <span class="type">Math</span>.PI * c.Radius * c.Radius;
+        <span class="keyword">throw new</span> <span class="type">ArgumentException</span>(<span class="string">"Unknown shape"</span>);
+    }
+}
+
+<span class="comment">// Following OCP</span>
+<span class="keyword">public abstract class</span> <span class="class">Shape</span>
+{
+    <span class="keyword">public abstract double</span> <span class="function">Area</span>();
+}
+
+<span class="keyword">public class</span> <span class="class">Rectangle</span> : <span class="type">Shape</span>
+{
+    <span class="keyword">public double</span> <span class="property">Width</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public double</span> <span class="property">Height</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public override double</span> <span class="function">Area</span>() =&gt; Width * Height;
+}
+
+<span class="keyword">public class</span> <span class="class">Circle</span> : <span class="type">Shape</span>
+{
+    <span class="keyword">public double</span> <span class="property">Radius</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public override double</span> <span class="function">Area</span>() =&gt; <span class="type">Math</span>.PI * Radius * Radius;
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q11: How can you achieve OCP in practice?
+        </div>
+        <div class="answer">
+            <h3>Ways to Achieve OCP:</h3>
+            <ul>
+                <li><strong>Abstraction:</strong> Use abstract classes or interfaces</li>
+                <li><strong>Inheritance:</strong> Extend classes instead of modifying them</li>
+                <li><strong>Composition:</strong> Use composition over inheritance</li>
+                <li><strong>Strategy Pattern:</strong> Encapsulate algorithms in separate classes</li>
+                <li><strong>Dependency Injection:</strong> Inject dependencies instead of hardcoding</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q12: Give an example of OCP with discount calculation.
+        </div>
+        <div class="answer">
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Discount.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Following OCP with Strategy Pattern</span>
+<span class="keyword">public interface</span> <span class="type">IDiscount</span>
+{
+    <span class="type">double</span> <span class="function">Calculate</span>(<span class="type">double</span> price);
+}
+
+<span class="keyword">public class</span> <span class="class">NoDiscount</span> : <span class="type">IDiscount</span>
+{
+    <span class="keyword">public double</span> <span class="function">Calculate</span>(<span class="type">double</span> price) =&gt; price;
+}
+
+<span class="keyword">public class</span> <span class="class">RegularDiscount</span> : <span class="type">IDiscount</span>
+{
+    <span class="keyword">public double</span> <span class="function">Calculate</span>(<span class="type">double</span> price) =&gt; price * 0.9;
+}
+
+<span class="keyword">public class</span> <span class="class">PremiumDiscount</span> : <span class="type">IDiscount</span>
+{
+    <span class="keyword">public double</span> <span class="function">Calculate</span>(<span class="type">double</span> price) =&gt; price * 0.8;
+}
+
+<span class="keyword">public class</span> <span class="class">DiscountCalculator</span>
+{
+    <span class="keyword">public double</span> <span class="function">CalculatePrice</span>(<span class="type">double</span> price, <span class="type">IDiscount</span> discount)
+    {
+        <span class="keyword">return</span> discount.<span class="function">Calculate</span>(price);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q13: How does OCP relate to the Strategy pattern?
+        </div>
+        <div class="answer">
+            <p>The Strategy pattern is a direct application of OCP. It defines a family of algorithms, encapsulates each one, and makes them interchangeable. This allows you to add new strategies without modifying existing code.</p>
+        </div>
+
+        <div class="question">
+            Q14: Can you show OCP with filter example?
+        </div>
+        <div class="answer">
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Specification.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Following OCP with Specification Pattern</span>
+<span class="keyword">public interface</span> <span class="type">ISpecification</span>&lt;<span class="type">T</span>&gt;
+{
+    <span class="type">bool</span> <span class="function">IsSatisfied</span>(<span class="type">T</span> item);
+}
+
+<span class="keyword">public class</span> <span class="class">Product</span>
+{
+    <span class="keyword">public</span> <span class="type">string</span> <span class="property">Color</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public</span> <span class="type">string</span> <span class="property">Size</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}
+
+<span class="keyword">public class</span> <span class="class">ColorSpecification</span> : <span class="type">ISpecification</span>&lt;<span class="type">Product</span>&gt;
+{
+    <span class="keyword">private readonly</span> <span class="type">string</span> _color;
+    <span class="keyword">public</span> <span class="function">ColorSpecification</span>(<span class="type">string</span> color) =&gt; _color = color;
+    <span class="keyword">public bool</span> <span class="function">IsSatisfied</span>(<span class="type">Product</span> p) =&gt; p.Color == _color;
+}
+
+<span class="keyword">public class</span> <span class="class">SizeSpecification</span> : <span class="type">ISpecification</span>&lt;<span class="type">Product</span>&gt;
+{
+    <span class="keyword">private readonly</span> <span class="type">string</span> _size;
+    <span class="keyword">public</span> <span class="function">SizeSpecification</span>(<span class="type">string</span> size) =&gt; _size = size;
+    <span class="keyword">public bool</span> <span class="function">IsSatisfied</span>(<span class="type">Product</span> p) =&gt; p.Size == _size;
+}
+
+<span class="keyword">public class</span> <span class="class">ProductFilter</span>
+{
+    <span class="keyword">public</span> <span class="type">IEnumerable</span>&lt;<span class="type">Product</span>&gt; <span class="function">Filter</span>(<span class="type">IEnumerable</span>&lt;<span class="type">Product</span>&gt; products, <span class="type">ISpecification</span>&lt;<span class="type">Product</span>&gt; spec)
+    {
+        <span class="keyword">return</span> products.<span class="function">Where</span>(p =&gt; spec.<span class="function">IsSatisfied</span>(p));
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>4. Liskov Substitution Principle (LSP)</h2>
+
+        <div class="question">
+            Q15: What is the Liskov Substitution Principle?
+        </div>
+        <div class="answer">
+            <p><strong>Liskov Substitution Principle (LSP)</strong> states that objects of a superclass should be replaceable with objects of a subclass without breaking the application. Subtypes must be substitutable for their base types.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">LSP.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Violating LSP</span>
+<span class="keyword">public class</span> <span class="class">Rectangle</span>
+{
+    <span class="keyword">public virtual int</span> <span class="property">Width</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public virtual int</span> <span class="property">Height</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public int</span> <span class="function">Area</span>() =&gt; Width * Height;
+}
+
+<span class="keyword">public class</span> <span class="class">Square</span> : <span class="type">Rectangle</span>
+{
+    <span class="keyword">public override int</span> <span class="property">Width</span>
+    {
+        <span class="keyword">set</span> { <span class="keyword">base</span>.Width = <span class="keyword">base</span>.Height = value; }
+    }
+    <span class="keyword">public override int</span> <span class="property">Height</span>
+    {
+        <span class="keyword">set</span> { <span class="keyword">base</span>.Width = <span class="keyword">base</span>.Height = value; }
+    }
+}
+
+<span class="comment">// Problem: Square breaks Rectangle behavior</span>
+<span class="type">Rectangle</span> r = <span class="keyword">new</span> <span class="class">Square</span>();
+r.Width = 5;
+r.Height = 10;
+<span class="type">Console</span>.<span class="function">WriteLine</span>(r.<span class="function">Area</span>()); <span class="comment">// Expected 50, but returns 100</span></code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q16: How do you fix the LSP violation in the Rectangle/Square example?
+        </div>
+        <div class="answer">
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">LSP.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Following LSP</span>
+<span class="keyword">public abstract class</span> <span class="class">Shape</span>
+{
+    <span class="keyword">public abstract int</span> <span class="function">Area</span>();
+}
+
+<span class="keyword">public class</span> <span class="class">Rectangle</span> : <span class="type">Shape</span>
+{
+    <span class="keyword">public int</span> <span class="property">Width</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public int</span> <span class="property">Height</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public override int</span> <span class="function">Area</span>() =&gt; Width * Height;
+}
+
+<span class="keyword">public class</span> <span class="class">Square</span> : <span class="type">Shape</span>
+{
+    <span class="keyword">public int</span> <span class="property">Side</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public override int</span> <span class="function">Area</span>() =&gt; Side * Side;
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q17: What are common signs of LSP violation?
+        </div>
+        <div class="answer">
+            <h3>Signs of LSP Violation:</h3>
+            <ul>
+                <li>Subclass throws exceptions that base class doesn't throw</li>
+                <li>Subclass returns null when base class returns object</li>
+                <li>Subclass modifies base class invariants</li>
+                <li>Subclass has weaker preconditions than base class</li>
+                <li>Subclass has stronger postconditions than base class</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q18: Give an example of LSP with birds and flying.
+        </div>
+        <div class="answer">
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Bird.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Violating LSP</span>
+<span class="keyword">public class</span> <span class="class">Bird</span>
+{
+    <span class="keyword">public virtual void</span> <span class="function">Fly</span>() { }
+}
+
+<span class="keyword">public class</span> <span class="class">Penguin</span> : <span class="type">Bird</span>
+{
+    <span class="keyword">public override void</span> <span class="function">Fly</span>()
+    {
+        <span class="keyword">throw new</span> <span class="type">InvalidOperationException</span>(<span class="string">"Penguins can't fly"</span>);
+    }
+}
+
+<span class="comment">// Following LSP</span>
+<span class="keyword">public abstract class</span> <span class="class">Bird</span>
+{
+    <span class="keyword">public abstract void</span> <span class="function">Move</span>();
+}
+
+<span class="keyword">public class</span> <span class="class">FlyingBird</span> : <span class="type">Bird</span>
+{
+    <span class="keyword">public override void</span> <span class="function">Move</span>() =&gt; <span class="function">Fly</span>();
+    <span class="keyword">public virtual void</span> <span class="function">Fly</span>() { }
+}
+
+<span class="keyword">public class</span> <span class="class">Penguin</span> : <span class="type">Bird</span>
+{
+    <span class="keyword">public override void</span> <span class="function">Move</span>() =&gt; <span class="function">Swim</span>();
+    <span class="keyword">public void</span> <span class="function">Swim</span>() { }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q19: How does LSP relate to inheritance?
+        </div>
+        <div class="answer">
+            <p>LSP is a principle that guides proper use of inheritance. It ensures that inheritance is used correctly - the "is-a" relationship must hold true. If a subclass cannot be substituted for its parent, then the inheritance hierarchy is flawed.</p>
+        </div>
+
+        <h2>5. Interface Segregation Principle (ISP)</h2>
+
+        <div class="question">
+            Q20: What is the Interface Segregation Principle?
+        </div>
+        <div class="answer">
+            <p><strong>Interface Segregation Principle (ISP)</strong> states that clients should not be forced to depend on interfaces they don't use. Split large interfaces into smaller, more specific ones.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ISP.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Violating ISP</span>
+<span class="keyword">public interface</span> <span class="type">IWorker</span>
+{
+    <span class="keyword">void</span> <span class="function">Work</span>();
+    <span class="keyword">void</span> <span class="function">Eat</span>();
+}
+
+<span class="keyword">public class</span> <span class="class">Robot</span> : <span class="type">IWorker</span>
+{
+    <span class="keyword">public void</span> <span class="function">Work</span>() { }
+    <span class="keyword">public void</span> <span class="function">Eat</span>() { } <span class="comment">// Robot doesn't need to eat</span>
+}
+
+<span class="comment">// Following ISP</span>
+<span class="keyword">public interface</span> <span class="type">IWorkable</span>
+{
+    <span class="keyword">void</span> <span class="function">Work</span>();
+}
+
+<span class="keyword">public interface</span> <span class="type">IEatable</span>
+{
+    <span class="keyword">void</span> <span class="function">Eat</span>();
+}
+
+<span class="keyword">public class</span> <span class="class">Human</span> : <span class="type">IWorkable</span>, <span class="type">IEatable</span>
+{
+    <span class="keyword">public void</span> <span class="function">Work</span>() { }
+    <span class="keyword">public void</span> <span class="function">Eat</span>() { }
+}
+
+<span class="keyword">public class</span> <span class="class">Robot</span> : <span class="type">IWorkable</span>
+{
+    <span class="keyword">public void</span> <span class="function">Work</span>() { }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q21: Why is ISP important?
+        </div>
+        <div class="answer">
+            <h3>Benefits of ISP:</h3>
+            <ul>
+                <li><strong>Loose Coupling:</strong> Clients only depend on what they need</li>
+                <li><strong>Flexibility:</strong> Easier to implement interfaces</li>
+                <li><strong>Maintainability:</strong> Changes to one interface don't affect others</li>
+                <li><strong>Clarity:</strong> Smaller interfaces are more focused and clear</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q22: Give an example of ISP with printer interfaces.
+        </div>
+        <div class="answer">
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Printer.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Following ISP</span>
+<span class="keyword">public interface</span> <span class="type">IPrinter</span>
+{
+    <span class="keyword">void</span> <span class="function">Print</span>(<span class="type">Document</span> doc);
+}
+
+<span class="keyword">public interface</span> <span class="type">IScanner</span>
+{
+    <span class="keyword">void</span> <span class="function">Scan</span>(<span class="type">Document</span> doc);
+}
+
+<span class="keyword">public interface</span> <span class="type">IFax</span>
+{
+    <span class="keyword">void</span> <span class="function">Fax</span>(<span class="type">Document</span> doc);
+}
+
+<span class="keyword">public class</span> <span class="class">MultiFunctionPrinter</span> : <span class="type">IPrinter</span>, <span class="type">IScanner</span>, <span class="type">IFax</span>
+{
+    <span class="keyword">public void</span> <span class="function">Print</span>(<span class="type">Document</span> doc) { }
+    <span class="keyword">public void</span> <span class="function">Scan</span>(<span class="type">Document</span> doc) { }
+    <span class="keyword">public void</span> <span class="function">Fax</span>(<span class="type">Document</span> doc) { }
+}
+
+<span class="keyword">public class</span> <span class="class">SimplePrinter</span> : <span class="type">IPrinter</span>
+{
+    <span class="keyword">public void</span> <span class="function">Print</span>(<span class="type">Document</span> doc) { }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q23: How does ISP relate to SRP?
+        </div>
+        <div class="answer">
+            <p>ISP is similar to SRP but at the interface level. Just as a class should have one responsibility, an interface should represent one cohesive set of behaviors. Both principles aim to reduce coupling and increase cohesion.</p>
+        </div>
+
+        <div class="question">
+            Q24: What is the difference between ISP and OCP?
+        </div>
+        <div class="answer">
+            <p><strong>ISP</strong> focuses on creating small, focused interfaces that clients can implement without being forced to depend on unused methods. <strong>OCP</strong> focuses on being able to extend behavior without modifying existing code. ISP helps achieve OCP by making it easier to add new implementations without affecting existing ones.</p>
+        </div>
+
+        <h2>6. Dependency Inversion Principle (DIP)</h2>
+
+        <div class="question">
+            Q25: What is the Dependency Inversion Principle?
+        </div>
+        <div class="answer">
+            <p><strong>Dependency Inversion Principle (DIP)</strong> states that high-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">DIP.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Violating DIP</span>
+<span class="keyword">public class</span> <span class="class">LightSwitch</span>
+{
+    <span class="keyword">private</span> <span class="type">LightBulb</span> _bulb;
+    
+    <span class="keyword">public</span> <span class="function">LightSwitch</span>()
+    {
+        _bulb = <span class="keyword">new</span> <span class="class">LightBulb</span>();
+    }
+    
+    <span class="keyword">public void</span> <span class="function">Toggle</span>()
+    {
+        _bulb.<span class="function">Toggle</span>();
+    }
+}
+
+<span class="comment">// Following DIP</span>
+<span class="keyword">public interface</span> <span class="type">ISwitchable</span>
+{
+    <span class="keyword">void</span> <span class="function">Toggle</span>();
+}
+
+<span class="keyword">public class</span> <span class="class">LightBulb</span> : <span class="type">ISwitchable</span>
+{
+    <span class="keyword">public void</span> <span class="function">Toggle</span>() { }
+}
+
+<span class="keyword">public class</span> <span class="class">Fan</span> : <span class="type">ISwitchable</span>
+{
+    <span class="keyword">public void</span> <span class="function">Toggle</span>() { }
+}
+
+<span class="keyword">public class</span> <span class="class">LightSwitch</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">ISwitchable</span> _device;
+    
+    <span class="keyword">public</span> <span class="function">LightSwitch</span>(<span class="type">ISwitchable</span> device)
+    {
+        _device = device;
+    }
+    
+    <span class="keyword">public void</span> <span class="function">Toggle</span>()
+    {
+        _device.<span class="function">Toggle</span>();
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q26: What is Dependency Injection?
+        </div>
+        <div class="answer">
+            <p><strong>Dependency Injection (DI)</strong> is a technique to implement DIP. It involves providing dependencies to a class rather than the class creating them. This can be done through constructor injection, property injection, or method injection.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">OrderService.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Constructor Injection</span>
+<span class="keyword">public class</span> <span class="class">OrderService</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">IOrderRepository</span> _repository;
+    <span class="keyword">private readonly</span> <span class="type">IEmailService</span> _emailService;
+    
+    <span class="keyword">public</span> <span class="function">OrderService</span>(<span class="type">IOrderRepository</span> repository, <span class="type">IEmailService</span> emailService)
+    {
+        _repository = repository;
+        _emailService = emailService;
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q27: What are the types of Dependency Injection?
+        </div>
+        <div class="answer">
+            <h3>Types of Dependency Injection:</h3>
+            <ul>
+                <li><strong>Constructor Injection:</strong> Dependencies provided through constructor</li>
+                <li><strong>Property Injection:</strong> Dependencies set through public properties</li>
+                <li><strong>Method Injection:</strong> Dependencies passed to methods</li>
+                <li><strong>Service Locator:</strong> Dependencies requested from a central registry (anti-pattern)</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q28: Give an example of DIP with logging.
+        </div>
+        <div class="answer">
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Logger.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Following DIP</span>
+<span class="keyword">public interface</span> <span class="type">ILogger</span>
+{
+    <span class="keyword">void</span> <span class="function">Log</span>(<span class="type">string</span> message);
+}
+
+<span class="keyword">public class</span> <span class="class">ConsoleLogger</span> : <span class="type">ILogger</span>
+{
+    <span class="keyword">public void</span> <span class="function">Log</span>(<span class="type">string</span> message) =&gt; <span class="type">Console</span>.<span class="function">WriteLine</span>(message);
+}
+
+<span class="keyword">public class</span> <span class="class">FileLogger</span> : <span class="type">ILogger</span>
+{
+    <span class="keyword">public void</span> <span class="function">Log</span>(<span class="type">string</span> message) =&gt; <span class="type">File</span>.<span class="function">AppendAllText</span>(<span class="string">"log.txt"</span>, message);
+}
+
+<span class="keyword">public class</span> <span class="class">UserService</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">ILogger</span> _logger;
+    
+    <span class="keyword">public</span> <span class="function">UserService</span>(<span class="type">ILogger</span> logger)
+    {
+        _logger = logger;
+    }
+    
+    <span class="keyword">public void</span> <span class="function">CreateUser</span>(<span class="type">User</span> user)
+    {
+        _logger.<span class="function">Log</span>($<span class="string">"Creating user: {user.Name}"</span>);
+        <span class="comment">// Create user logic</span>
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q29: What is Inversion of Control (IoC)?
+        </div>
+        <div class="answer">
+            <p><strong>Inversion of Control (IoC)</strong> is a broader principle where the control of object creation and lifecycle is transferred from the application to a framework or container. DI is a pattern that implements IoC. IoC containers like ASP.NET Core's built-in DI container manage object creation and dependency resolution.</p>
+        </div>
+
+        <div class="question">
+            Q30: How does DIP relate to the other SOLID principles?
+        </div>
+        <div class="answer">
+            <p>DIP is closely related to all other SOLID principles. It enables OCP by allowing you to extend behavior through new implementations. It supports ISP by depending on small, focused interfaces. It works with LSP by ensuring you depend on abstractions that can be substituted. It also supports SRP by separating concerns through dependency injection.</p>
+        </div>
+
+        <h2>7. SOLID in Practice</h2>
+
+        <div class="question">
+            Q31: How do you apply SOLID principles in a real project?
+        </div>
+        <div class="answer">
+            <h3>Applying SOLID in Practice:</h3>
+            <ul>
+                <li><strong>Start with SRP:</strong> Break down large classes into smaller, focused ones</li>
+                <li><strong>Use interfaces:</strong> Define contracts for dependencies</li>
+                <li><strong>Apply DI:</strong> Use dependency injection throughout the application</li>
+                <li><strong>Refactor regularly:</strong> Continuously improve code to follow SOLID</li>
+                <li><strong>Code reviews:</strong> Use code reviews to ensure SOLID compliance</li>
+                <li><strong>Testing:</strong> Write tests to verify SOLID principles</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q32: Can you show a complete example applying all SOLID principles?
+        </div>
+        <div class="answer">
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">OrderProcessing.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Complete SOLID example: Order Processing</span>
+
+<span class="comment">// Interfaces (ISP, DIP)</span>
+<span class="keyword">public interface</span> <span class="type">IOrderValidator</span>
+{
+    <span class="type">bool</span> <span class="function">Validate</span>(<span class="type">Order</span> order);
+}
+
+<span class="keyword">public interface</span> <span class="type">IOrderRepository</span>
+{
+    <span class="keyword">void</span> <span class="function">Save</span>(<span class="type">Order</span> order);
+}
+
+<span class="keyword">public interface</span> <span class="type">INotificationService</span>
+{
+    <span class="keyword">void</span> <span class="function">Send</span>(<span class="type">Order</span> order);
+}
+
+<span class="keyword">public interface</span> <span class="type">IPaymentProcessor</span>
+{
+    <span class="type">bool</span> <span class="function">Process</span>(<span class="type">Order</span> order);
+}
+
+<span class="comment">// Implementations (SRP)</span>
+<span class="keyword">public class</span> <span class="class">OrderValidator</span> : <span class="type">IOrderValidator</span>
+{
+    <span class="keyword">public bool</span> <span class="function">Validate</span>(<span class="type">Order</span> order)
+    {
+        <span class="keyword">return</span> order.Items.Count &gt; 0 &amp;&amp; order.Customer != <span class="keyword">null</span>;
+    }
+}
+
+<span class="keyword">public class</span> <span class="class">OrderRepository</span> : <span class="type">IOrderRepository</span>
+{
+    <span class="keyword">public void</span> <span class="function">Save</span>(<span class="type">Order</span> order)
+    {
+        <span class="comment">// Database logic</span>
+    }
+}
+
+<span class="keyword">public class</span> <span class="class">EmailNotificationService</span> : <span class="type">INotificationService</span>
+{
+    <span class="keyword">public void</span> <span class="function">Send</span>(<span class="type">Order</span> order)
+    {
+        <span class="comment">// Email logic</span>
+    }
+}
+
+<span class="keyword">public class</span> <span class="class">CreditCardProcessor</span> : <span class="type">IPaymentProcessor</span>
+{
+    <span class="keyword">public bool</span> <span class="function">Process</span>(<span class="type">Order</span> order)
+    {
+        <span class="comment">// Payment logic</span>
+        <span class="keyword">return true</span>;
+    }
+}
+
+<span class="comment">// Service (OCP, DIP)</span>
+<span class="keyword">public class</span> <span class="class">OrderService</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">IOrderValidator</span> _validator;
+    <span class="keyword">private readonly</span> <span class="type">IOrderRepository</span> _repository;
+    <span class="keyword">private readonly</span> <span class="type">INotificationService</span> _notification;
+    <span class="keyword">private readonly</span> <span class="type">IPaymentProcessor</span> _payment;
+    
+    <span class="keyword">public</span> <span class="function">OrderService</span>(
+        <span class="type">IOrderValidator</span> validator,
+        <span class="type">IOrderRepository</span> repository,
+        <span class="type">INotificationService</span> notification,
+        <span class="type">IPaymentProcessor</span> payment)
+    {
+        _validator = validator;
+        _repository = repository;
+        _notification = notification;
+        _payment = payment;
+    }
+    
+    <span class="keyword">public void</span> <span class="function">ProcessOrder</span>(<span class="type">Order</span> order)
+    {
+        <span class="keyword">if</span> (!_validator.<span class="function">Validate</span>(order))
+            <span class="keyword">throw new</span> <span class="type">ValidationException</span>();
+        
+        <span class="keyword">if</span> (!_payment.<span class="function">Process</span>(order))
+            <span class="keyword">throw new</span> <span class="type">PaymentException</span>();
+        
+        _repository.<span class="function">Save</span>(order);
+        _notification.<span class="function">Send</span>(order);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q33: How do SOLID principles help with testing?
+        </div>
+        <div class="answer">
+            <h3>SOLID and Testing:</h3>
+            <ul>
+                <li><strong>SRP:</strong> Small classes are easier to unit test</li>
+                <li><strong>OCP:</strong> New functionality can be tested independently</li>
+                <li><strong>LSP:</strong> Mocks can substitute real implementations</li>
+                <li><strong>ISP:</strong> Smaller interfaces are easier to mock</li>
+                <li><strong>DIP:</strong> Dependencies can be injected with test doubles</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q34: What are the trade-offs of following SOLID principles?
+        </div>
+        <div class="answer">
+            <h3>Trade-offs:</h3>
+            <ul>
+                <li><strong>Initial Complexity:</strong> More classes and interfaces initially</li>
+                <li><strong>Development Time:</strong> May take longer to implement initially</li>
+                <li><strong>Over-engineering:</strong> Risk of over-applying principles in simple projects</li>
+                <li><strong>Learning Curve:</strong> Requires understanding of principles</li>
+            </ul>
+            
+            <h3>Benefits Outweigh Trade-offs:</h3>
+            <ul>
+                <li>Easier maintenance in long run</li>
+                <li>Better testability</li>
+                <li>More flexible to changes</li>
+                <li>Higher code quality</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q35: When should you NOT follow SOLID principles?
+        </div>
+        <div class="answer">
+            <h3>When to Avoid SOLID:</h3>
+            <ul>
+                <li><strong>Simple Scripts:</strong> One-off scripts don't need SOLID</li>
+                <li><strong>Prototypes:</strong> Quick prototypes may skip SOLID</li>
+                <li><strong>Performance Critical:</strong> May need to optimize over design</li>
+                <li><strong>Small Projects:</strong> Overhead may not be justified</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q36: How do you refactor code to follow SOLID?
+        </div>
+        <div class="answer">
+            <h3>Refactoring Steps:</h3>
+            <ol>
+                <li>Identify violations (large classes, tight coupling)</li>
+                <li>Extract methods and classes (SRP)</li>
+                <li>Introduce interfaces for dependencies (DIP)</li>
+                <li>Replace conditionals with polymorphism (OCP)</li>
+                <li>Split large interfaces (ISP)</li>
+                <li>Ensure proper inheritance hierarchies (LSP)</li>
+                <li>Add tests to verify refactoring</li>
+            </ol>
+        </div>
+
+        <div class="question">
+            Q37: What tools help with SOLID compliance?
+        </div>
+        <div class="answer">
+            <h3>Tools for SOLID:</h3>
+            <ul>
+                <li><strong>Static Analysis:</strong> SonarQube, ReSharper, CodeAnalysis</li>
+                <li><strong>Code Metrics:</strong> Cyclomatic complexity, coupling metrics</li>
+                <li><strong>Design Pattern Libraries:</strong> Help implement patterns correctly</li>
+                <li><strong>DI Containers:</strong> Autofac, Unity, ASP.NET Core DI</li>
+                <li><strong>Testing Frameworks:</strong> xUnit, NUnit for verifying design</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q38: How does SOLID relate to microservices architecture?
+        </div>
+        <div class="answer">
+            <p>SOLID principles are essential in microservices. Each microservice should follow SRP (single responsibility). Services communicate through interfaces (ISP, DIP). Services can be extended without modification (OCP). Services can be substituted (LSP). This makes microservices more maintainable and scalable.</p>
+        </div>
+
+        <div class="question">
+            Q39: Can you show SOLID with a payment system example?
+        </div>
+        <div class="answer">
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">PaymentSystem.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// SOLID Payment System</span>
+<span class="keyword">public interface</span> <span class="type">IPaymentMethod</span>
+{
+    <span class="type">bool</span> <span class="function">Process</span>(<span class="type">decimal</span> amount);
+}
+
+<span class="keyword">public class</span> <span class="class">CreditCardPayment</span> : <span class="type">IPaymentMethod</span>
+{
+    <span class="keyword">public bool</span> <span class="function">Process</span>(<span class="type">decimal</span> amount)
+    {
+        <span class="comment">// Credit card logic</span>
+        <span class="keyword">return true</span>;
+    }
+}
+
+<span class="keyword">public class</span> <span class="class">PayPalPayment</span> : <span class="type">IPaymentMethod</span>
+{
+    <span class="keyword">public bool</span> <span class="function">Process</span>(<span class="type">decimal</span> amount)
+    {
+        <span class="comment">// PayPal logic</span>
+        <span class="keyword">return true</span>;
+    }
+}
+
+<span class="keyword">public class</span> <span class="class">PaymentService</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">IPaymentMethod</span> _paymentMethod;
+    
+    <span class="keyword">public</span> <span class="function">PaymentService</span>(<span class="type">IPaymentMethod</span> paymentMethod)
+    {
+        _paymentMethod = paymentMethod;
+    }
+    
+    <span class="keyword">public bool</span> <span class="function">MakePayment</span>(<span class="type">decimal</span> amount)
+    {
+        <span class="keyword">return</span> _paymentMethod.<span class="function">Process</span>(amount);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q40: How do you teach SOLID to junior developers?
+        </div>
+        <div class="answer">
+            <h3>Teaching SOLID:</h3>
+            <ul>
+                <li>Start with simple examples and real-world analogies</li>
+                <li>Show before/after code comparisons</li>
+                <li>Use code reviews to reinforce principles</li>
+                <li>Encourage refactoring existing code</li>
+                <li>Pair programming to demonstrate application</li>
+                <li>Provide reading materials and resources</li>
+            </ul>
+        </div>
+
+        <h2>8. Benefits and Trade-offs</h2>
+
+        <div class="question">
+            Q41: What are the long-term benefits of SOLID?
+        </div>
+        <div class="answer">
+            <h3>Long-term Benefits:</h3>
+            <ul>
+                <li><strong>Reduced Technical Debt:</strong> Code stays maintainable over time</li>
+                <li><strong>Faster Development:</strong> Easier to add new features</li>
+                <li><strong>Better Team Collaboration:</strong> Clear structure helps teams work together</li>
+                <li><strong>Easier Onboarding:</strong> New developers understand code faster</li>
+                <li><strong>Higher Quality:</strong> Fewer bugs and issues</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q42: How does SOLID improve code maintainability?
+        </div>
+        <div class="answer">
+            <p>SOLID improves maintainability by ensuring that changes are localized. SRP means changes affect only one class. OCP means new features don't require modifying existing code. LSP ensures inheritance is correct. ISP prevents unnecessary dependencies. DIP reduces coupling between components.</p>
+        </div>
+
+        <div class="question">
+            Q43: What is the relationship between SOLID and Clean Code?
+        </div>
+        <div class="answer">
+            <p>SOLID principles are a subset of Clean Code practices. Clean Code encompasses SOLID plus other practices like meaningful names, small functions, proper comments, and good formatting. SOLID provides the structural foundation for writing clean, maintainable code.</p>
+        </div>
+
+        <div class="question">
+            Q44: How do you measure SOLID compliance?
+        </div>
+        <div class="answer">
+            <h3>Measuring SOLID Compliance:</h3>
+            <ul>
+                <li><strong>Code Metrics:</strong> Class size, method complexity, coupling</li>
+                <li><strong>Static Analysis:</strong> Tools that detect violations</li>
+                <li><strong>Code Reviews:</strong> Manual review by team members</li>
+                <li><strong>Test Coverage:</strong> High coverage often indicates good design</li>
+                <li><strong>Refactoring Frequency:</strong> Less refactoring needed over time</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q45: Can SOLID principles be applied to functional programming?
+        </div>
+        <div class="answer">
+            <p>While SOLID is an object-oriented principle, the concepts can be adapted to functional programming. SRP applies to functions (one responsibility). OCP applies through composition and higher-order functions. LSP is less relevant but substitutability still matters. ISP applies to module interfaces. DIP applies through dependency injection of functions.</p>
+        </div>
+
+        <div class="question">
+            Q46: How does SOLID relate to Domain-Driven Design (DDD)?
+        </div>
+        <div class="answer">
+            <p>SOLID and DDD complement each other. DDD focuses on domain modeling and bounded contexts, while SOLID provides principles for implementing those models. DDD's aggregates, entities, and value objects naturally follow SRP. DDD's repositories and services follow DIP. Both aim to create maintainable, domain-focused software.</p>
+        </div>
+
+        <div class="question">
+            Q47: What are common mistakes when applying SOLID?
+        </div>
+        <div class="answer">
+            <h3>Common Mistakes:</h3>
+            <ul>
+                <li><strong>Over-abstraction:</strong> Creating too many interfaces</li>
+                <li><strong>Premature Optimization:</strong> Applying SOLID too early</li>
+                <li><strong>Ignoring Context:</strong> Applying principles without considering project needs</li>
+                <li><strong>Rigid Adherence:</strong> Following principles blindly</li>
+                <li><strong>Naming Confusion:</strong> Poor names for classes and interfaces</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q48: How do you balance SOLID with YAGNI (You Aren't Gonna Need It)?
+        </div>
+        <div class="answer">
+            <p>Balance SOLID with YAGNI by applying principles pragmatically. Don't create abstractions for features you don't need yet. Apply SOLID when you see actual complexity or anticipate clear future needs. Refactor to SOLID when code becomes difficult to maintain, not preemptively.</p>
+        </div>
+
+        <div class="question">
+            Q49: What is the role of SOLID in Agile development?
+        </div>
+        <div class="answer">
+            <p>SOLID principles support Agile development by enabling iterative development. Agile requires frequent changes, and SOLID makes changes easier. Small, focused classes (SRP) can be modified quickly. Open for extension (OCP) allows adding features without breaking existing code. This aligns with Agile's emphasis on responding to change.</p>
+        </div>
+
+        <div class="question">
+            Q50: How do you stay updated on SOLID best practices?
+        </div>
+        <div class="answer">
+            <h3>Staying Updated:</h3>
+            <ul>
+                <li>Read books by Robert C. Martin and other experts</li>
+                <li>Follow blogs and articles on software design</li>
+                <li>Attend conferences and meetups</li>
+                <li>Participate in code reviews and discussions</li>
+                <li>Experiment with different approaches</li>
+                <li>Learn from open-source projects</li>
+                <li>Stay connected with the developer community</li>
+            </ul>
+        </div>
+
+        <h2>6. Advanced SOLID Concepts</h2>
+
+        <div class="question">
+            Q51: What is the Interface Segregation Principle (ISP) in detail?
+        </div>
+        <div class="answer">
+            <p><strong>Interface Segregation Principle (ISP)</strong> states that clients should not be forced to depend on interfaces they don't use. Instead of one large interface, create smaller, more specific interfaces.</p>
+            
+            <h3>ISP Benefits:</h3>
+            <ul>
+                <li>Reduces coupling between components</li>
+                <li>Makes interfaces more focused</li>
+                <li>Prevents implementing unnecessary methods</li>
+                <li>Improves code maintainability</li>
+            </ul>
+
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ISPExample.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Bad: Fat interface</span>
+<span class="keyword">public interface</span> <span class="interface">IMultiFunctionDevice</span>
+{
+    <span class="keyword">void</span> <span class="function">Print</span>();
+    <span class="keyword">void</span> <span class="function">Scan</span>();
+    <span class="keyword">void</span> <span class="function">Fax</span>();
+}
+
+<span class="comment">// Good: Segregated interfaces</span>
+<span class="keyword">public interface</span> <span class="interface">IPrinter</span>
+{
+    <span class="keyword">void</span> <span class="function">Print</span>();
+}
+
+<span class="keyword">public interface</span> <span class="interface">IScanner</span>
+{
+    <span class="keyword">void</span> <span class="function">Scan</span>();
+}
+
+<span class="keyword">public interface</span> <span class="interface">IFax</span>
+{
+    <span class="keyword">void</span> <span class="function">Fax</span>();
+}
+
+<span class="comment">// Client depends only on what it needs</span>
+<span class="keyword">public class</span> <span class="class">SimplePrinter</span> : <span class="interface">IPrinter</span>
+{
+    <span class="keyword">public void</span> <span class="function">Print</span>() { <span class="comment">/* Print implementation */</span> }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q52: What is the Dependency Inversion Principle (DIP) in detail?
+        </div>
+        <div class="answer">
+            <p><strong>Dependency Inversion Principle (DIP)</strong> states that high-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.</p>
+            
+            <h3>DIP Benefits:</h3>
+            <ul>
+                <li>Reduces coupling between modules</li>
+                <li>Makes code more testable</li>
+                <li>Enables easier changes to implementations</li>
+                <li>Supports dependency injection</li>
+            </ul>
+
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">DIPExample.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Bad: High-level depends on low-level</span>
+<span class="keyword">public class</span> <span class="class">LightSwitch</span>
+{
+    <span class="keyword">private</span> <span class="class">LightBulb</span> _bulb;
+    
+    <span class="keyword">public</span> <span class="function">LightSwitch</span>()
+    {
+        _bulb = <span class="keyword">new</span> <span class="class">LightBulb</span>();
+    }
+}
+
+<span class="comment">// Good: Both depend on abstraction</span>
+<span class="keyword">public interface</span> <span class="interface">ISwitchable</span>
+{
+    <span class="keyword">void</span> <span class="function">TurnOn</span>();
+    <span class="keyword">void</span> <span class="function">TurnOff</span>();
+}
+
+<span class="keyword">public class</span> <span class="class">LightSwitch</span>
+{
+    <span class="keyword">private</span> <span class="interface">ISwitchable</span> _device;
+    
+    <span class="keyword">public</span> <span class="function">LightSwitch</span>(<span class="interface">ISwitchable</span> device)
+    {
+        _device = device;
+    }
+    
+    <span class="keyword">public void</span> <span class="function">Toggle</span>()
+    {
+        _device.<span class="function">TurnOn</span>();
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q53: What is the difference between abstraction and implementation?
+        </div>
+        <div class="answer">
+            <p><strong>Abstraction</strong> defines what something does without specifying how it's done. <strong>Implementation</strong> provides the actual code that performs the operations defined by the abstraction.</p>
+            
+            <h3>Key Differences:</h3>
+            <ul>
+                <li><strong>Abstraction:</strong> Interface, abstract class, contract</li>
+                <li><strong>Implementation:</strong> Concrete class, actual code</li>
+                <li><strong>Abstraction:</strong> Stable, changes rarely</li>
+                <li><strong>Implementation:</strong> Can change frequently</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q54: What is dependency injection?
+        </div>
+        <div class="answer">
+            <p><strong>Dependency Injection (DI)</strong> is a design pattern where dependencies are provided to a class rather than created internally. It implements the Dependency Inversion Principle.</p>
+            
+            <h3>DI Types:</h3>
+            <ul>
+                <li><strong>Constructor Injection:</strong> Dependencies via constructor</li>
+                <li><strong>Property Injection:</strong> Dependencies via properties</li>
+                <li><strong>Method Injection:</strong> Dependencies via method parameters</li>
+            </ul>
+
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">DIExample.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Constructor Injection</span>
+<span class="keyword">public class</span> <span class="class">UserService</span>
+{
+    <span class="keyword">private readonly</span> <span class="interface">IUserRepository</span> _repository;
+    
+    <span class="keyword">public</span> <span class="function">UserService</span>(<span class="interface">IUserRepository</span> repository)
+    {
+        _repository = repository;
+    }
+}
+
+<span class="comment">// Property Injection</span>
+<span class="keyword">public class</span> <span class="class">UserService</span>
+{
+    <span class="keyword">public</span> <span class="interface">IUserRepository</span> Repository { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}
+
+<span class="comment">// Method Injection</span>
+<span class="keyword">public class</span> <span class="class">UserService</span>
+{
+    <span class="keyword">public void</span> <span class="function">ProcessUser</span>(<span class="type">int</span> userId, <span class="interface">IUserRepository</span> repository)
+    {
+        <span class="keyword">var</span> user = repository.<span class="function">GetById</span>(userId);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q55: What is an Inversion of Control (IoC) container?
+        </div>
+        <div class="answer">
+            <p><strong>Inversion of Control (IoC) Container</strong> is a framework that automates dependency injection. It manages object creation and lifecycle, resolving dependencies automatically.</p>
+            
+            <h3>Popular IoC Containers:</h3>
+            <ul>
+                <li><strong>.NET:</strong> ASP.NET Core DI, Autofac, StructureMap</li>
+                <li><strong>Java:</strong> Spring, Guice</li>
+                <li><strong>JavaScript:</strong> InversifyJS, Awilix</li>
+            </ul>
+
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ServiceCollection.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// ASP.NET Core DI Container</span>
+<span class="keyword">public void</span> <span class="function">ConfigureServices</span>(<span class="class">IServiceCollection</span> services)
+{
+    <span class="comment">// Register services</span>
+    services.<span class="function">AddSingleton</span>&lt;<span class="interface">IUserRepository</span>, <span class="class">UserRepository</span>&gt;();
+    services.<span class="function">AddScoped</span>&lt;<span class="interface">IUserService</span>, <span class="class">UserService</span>&gt;();
+    services.<span class="function">AddTransient</span>&lt;<span class="interface">IEmailService</span>, <span class="class">EmailService</span>&gt;();
+}
+
+<span class="comment">// Lifetimes:</span>
+<span class="comment">// Singleton: One instance for app lifetime</span>
+<span class="comment">// Scoped: One instance per HTTP request</span>
+<span class="comment">// Transient: New instance each time requested</span></code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q56: What is the difference between composition and inheritance?
+        </div>
+        <div class="answer">
+            <p><strong>Composition</strong> combines objects to achieve complex behavior. <strong>Inheritance</strong> creates new classes from existing ones. Composition is generally preferred over inheritance (Composition over Inheritance).</p>
+            
+            <h3>Composition vs Inheritance:</h3>
+            <ul>
+                <li><strong>Composition:</strong> Has-a relationship, flexible, runtime</li>
+                <li><strong>Inheritance:</strong> Is-a relationship, rigid, compile-time</li>
+                <li><strong>Composition:</strong> Easier to change behavior</li>
+                <li><strong>Inheritance:</strong> Tight coupling, fragile base class</li>
+            </ul>
+
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">CompositionExample.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Composition (Preferred)</span>
+<span class="keyword">public class</span> <span class="class">Car</span>
+{
+    <span class="keyword">private readonly</span> <span class="interface">IEngine</span> _engine;
+    <span class="keyword">private readonly</span> <span class="interface">IWheel</span> _wheel;
+    
+    <span class="keyword">public</span> <span class="function">Car</span>(<span class="interface">IEngine</span> engine, <span class="interface">IWheel</span> wheel)
+    {
+        _engine = engine;
+        _wheel = wheel;
+    }
+}
+
+<span class="comment">// Inheritance (Use sparingly)</span>
+<span class="keyword">public class</span> <span class="class">SportsCar</span> : <span class="class">Car</span>
+{
+    <span class="comment">// Inherits all Car behavior</span>
+    <span class="comment">// Tight coupling to base class</span>
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q57: What is the Strategy pattern and how does it relate to OCP?
+        </div>
+        <div class="answer">
+            <p><strong>Strategy Pattern</strong> defines a family of algorithms, encapsulates each one, and makes them interchangeable. It implements the Open/Closed Principle by allowing new strategies without modifying existing code.</p>
+            
+            <h3>Strategy Pattern Benefits:</h3>
+            <ul>
+                <li>Open for extension (new strategies)</li>
+                <li>Closed for modification (existing code unchanged)</li>
+                <li>Runtime algorithm selection</li>
+                <li>Eliminates conditional statements</li>
+            </ul>
+
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">StrategyPattern.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="interface">ISortStrategy</span>
+{
+    <span class="type">void</span>[] <span class="function">Sort</span>(<span class="type">int</span>[] array);
+}
+
+<span class="keyword">public class</span> <span class="class">BubbleSort</span> : <span class="interface">ISortStrategy</span>
+{
+    <span class="keyword">public</span> <span class="type">int</span>[] <span class="function">Sort</span>(<span class="type">int</span>[] array) { <span class="comment">/* Bubble sort */</span> }
+}
+
+<span class="keyword">public class</span> <span class="class">QuickSort</span> : <span class="interface">ISortStrategy</span>
+{
+    <span class="keyword">public</span> <span class="type">int</span>[] <span class="function">Sort</span>(<span class="type">int</span>[] array) { <span class="comment">/* Quick sort */</span> }
+}
+
+<span class="keyword">public class</span> <span class="class">Sorter</span>
+{
+    <span class="keyword">private</span> <span class="interface">ISortStrategy</span> _strategy;
+    
+    <span class="keyword">public</span> <span class="function">Sorter</span>(<span class="interface">ISortStrategy</span> strategy)
+    {
+        _strategy = strategy;
+    }
+    
+    <span class="keyword">public</span> <span class="type">int</span>[] <span class="function">Sort</span>(<span class="type">int</span>[] array)
+    {
+        <span class="keyword">return</span> _strategy.<span class="function">Sort</span>(array);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q58: What is the Template Method pattern and how does it relate to OCP?
+        </div>
+        <div class="answer">
+            <p><strong>Template Method Pattern</strong> defines the skeleton of an algorithm in a base class, allowing subclasses to override specific steps without changing the algorithm's structure. It supports OCP by enabling extension through inheritance.</p>
+            
+            <h3>Template Method Benefits:</h3>
+            <ul>
+                <li>Code reuse in base class</li>
+                <li>Consistent algorithm structure</li>
+                <li>Subclasses customize specific steps</li>
+                <li>Follows Hollywood Principle</li>
+            </ul>
+
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">TemplateMethod.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public abstract class</span> <span class="class">DataProcessor</span>
+{
+    <span class="comment">// Template method</span>
+    <span class="keyword">public void</span> <span class="function">Process</span>()
+    {
+        <span class="function">LoadData</span>();
+        <span class="function">ValidateData</span>();
+        <span class="function">TransformData</span>();
+        <span class="function">SaveData</span>();
+    }
+    
+    <span class="keyword">protected abstract void</span> <span class="function">LoadData</span>();
+    <span class="keyword">protected abstract void</span> <span class="function">TransformData</span>();
+    
+    <span class="keyword">protected virtual void</span> <span class="function">ValidateData</span>() { }
+    <span class="keyword">protected virtual void</span> <span class="function">SaveData</span>() { }
+}
+
+<span class="keyword">public class</span> <span class="class">CsvProcessor</span> : <span class="class">DataProcessor</span>
+{
+    <span class="keyword">protected override void</span> <span class="function">LoadData</span>() { <span class="comment">/* Load CSV */</span> }
+    <span class="keyword">protected override void</span> <span class="function">TransformData</span>() { <span class="comment">/* Transform CSV */</span> }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q59: What is the Adapter pattern and how does it relate to ISP?
+        </div>
+        <div class="answer">
+            <p><strong>Adapter Pattern</strong> allows incompatible interfaces to work together. It relates to ISP by creating focused interfaces that clients can depend on, rather than forcing clients to use large, incompatible interfaces.</p>
+            
+            <h3>Adapter Pattern Benefits:</h3>
+            <ul>
+                <li>Enables integration of incompatible systems</li>
+                <li>Follows ISP by creating client-specific interfaces</li>
+                <li>Reuses existing functionality</li>
+                <li>Decouples client from implementation</li>
+            </ul>
+
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">AdapterPattern.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Client interface</span>
+<span class="keyword">public interface</span> <span class="interface">ITarget</span>
+{
+    <span class="keyword">void</span> <span class="function">Request</span>();
+}
+
+<span class="comment">// Incompatible interface</span>
+<span class="keyword">public class</span> <span class="class">Adaptee</span>
+{
+    <span class="keyword">public void</span> <span class="function">SpecificRequest</span>() { }
+}
+
+<span class="comment">// Adapter</span>
+<span class="keyword">public class</span> <span class="class">Adapter</span> : <span class="interface">ITarget</span>
+{
+    <span class="keyword">private readonly</span> <span class="class">Adaptee</span> _adaptee;
+    
+    <span class="keyword">public</span> <span class="function">Adapter</span>(<span class="class">Adaptee</span> adaptee)
+    {
+        _adaptee = adaptee;
+    }
+    
+    <span class="keyword">public void</span> <span class="function">Request</span>()
+    {
+        _adaptee.<span class="function">SpecificRequest</span>();
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q60: What is the Decorator pattern and how does it relate to OCP?
+        </div>
+        <div class="answer">
+            <p><strong>Decorator Pattern</strong> adds behavior to objects dynamically without modifying their classes. It implements OCP by extending functionality through composition rather than inheritance.</p>
+            
+            <h3>Decorator Pattern Benefits:</h3>
+            <ul>
+                <li>Adds behavior without modifying classes</li>
+                <li>Open for extension (new decorators)</li>
+                <li>Closed for modification (original class unchanged)</li>
+                <li>Flexible alternative to inheritance</li>
+            </ul>
+
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">DecoratorPattern.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="interface">ICoffee</span>
+{
+    <span class="type">string</span> <span class="function">GetDescription</span>();
+    <span class="type">decimal</span> <span class="function">GetCost</span>();
+}
+
+<span class="keyword">public class</span> <span class="class">SimpleCoffee</span> : <span class="interface">ICoffee</span>
+{
+    <span class="keyword">public string</span> <span class="function">GetDescription</span>() => <span class="string">"Simple Coffee"</span>;
+    <span class="keyword">public decimal</span> <span class="function">GetCost</span>() => 2.00m;
+}
+
+<span class="keyword">public class</span> <span class="class">MilkDecorator</span> : <span class="interface">ICoffee</span>
+{
+    <span class="keyword">private readonly</span> <span class="interface">ICoffee</span> _coffee;
+    
+    <span class="keyword">public</span> <span class="function">MilkDecorator</span>(<span class="interface">ICoffee</span> coffee)
+    {
+        _coffee = coffee;
+    }
+    
+    <span class="keyword">public string</span> <span class="function">GetDescription</span>() => _coffee.<span class="function">GetDescription</span>() + <span class="string">", Milk"</span>;
+    <span class="keyword">public decimal</span> <span class="function">GetCost</span>() => _coffee.<span class="function">GetCost</span>() + 0.50m;
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q61: What is the Facade pattern and how does it relate to SRP?
+        </div>
+        <div class="answer">
+            <p><strong>Facade Pattern</strong> provides a simplified interface to a complex subsystem. It relates to SRP by giving each subsystem a single responsibility while providing a unified interface to clients.</p>
+            
+            <h3>Facade Pattern Benefits:</h3>
+            <ul>
+                <li>Simplifies complex subsystems</li>
+                <li>Reduces coupling between client and subsystem</li>
+                <li>Each subsystem maintains SRP</li>
+                <li>Provides a clean API for clients</li>
+            </ul>
+
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">FacadePattern.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Complex subsystem</span>
+<span class="keyword">public class</span> <span class="class">OrderSystem</span>
+{
+    <span class="keyword">public void</span> <span class="function">CreateOrder</span>() { }
+}
+
+<span class="keyword">public class</span> <span class="class">PaymentSystem</span>
+{
+    <span class="keyword">public void</span> <span class="function">ProcessPayment</span>() { }
+}
+
+<span class="keyword">public class</span> <span class="class">InventorySystem</span>
+{
+    <span class="keyword">public void</span> <span class="function">UpdateInventory</span>() { }
+}
+
+<span class="comment">// Facade</span>
+<span class="keyword">public class</span> <span class="class">OrderFacade</span>
+{
+    <span class="keyword">private readonly</span> <span class="class">OrderSystem</span> _order;
+    <span class="keyword">private readonly</span> <span class="class">PaymentSystem</span> _payment;
+    <span class="keyword">private readonly</span> <span class="class">InventorySystem</span> _inventory;
+    
+    <span class="keyword">public void</span> <span class="function">PlaceOrder</span>()
+    {
+        _order.<span class="function">CreateOrder</span>();
+        _payment.<span class="function">ProcessPayment</span>();
+        _inventory.<span class="function">UpdateInventory</span>();
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q62: What is the difference between SRP and separation of concerns?
+        </div>
+        <div class="answer">
+            <p><strong>SRP</strong> focuses on a single class having one reason to change. <strong>Separation of Concerns (SoC)</strong> is a broader principle about separating different aspects of a system. SRP is a specific application of SoC at the class level.</p>
+            
+            <h3>Key Differences:</h3>
+            <ul>
+                <li><strong>SRP:</strong> Class-level, one responsibility per class</li>
+                <li><strong>SoC:</strong> System-level, separate different concerns</li>
+                <li><strong>SRP:</strong> About change reasons</li>
+                <li><strong>SoC:</strong> About architectural boundaries</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q63: What is the Law of Demeter and how does it relate to SOLID?
+        </div>
+        <div class="answer">
+            <p><strong>Law of Demeter (LoD)</strong> states that an object should only talk to its immediate friends. It reduces coupling and supports SRP by keeping interactions focused and simple.</p>
+            
+            <h3>Law of Demeter:</h3>
+            <ul>
+                <li>Don't talk to strangers</li>
+                <li>Only call methods on immediate dependencies</li>
+                <li>Reduces coupling between objects</li>
+                <li>Makes code more maintainable</li>
+            </ul>
+
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">LawOfDemeter.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Bad: Violates Law of Demeter</span>
+<span class="keyword">public class</span> <span class="class">OrderProcessor</span>
+{
+    <span class="keyword">public void</span> <span class="function">Process</span>(<span class="class">Order</span> order)
+    {
+        <span class="comment">// Too many dots</span>
+        <span class="keyword">var</span> address = order.Customer.Address.Street;
+    }
+}
+
+<span class="comment">// Good: Follows Law of Demeter</span>
+<span class="keyword">public class</span> <span class="class">OrderProcessor</span>
+{
+    <span class="keyword">public void</span> <span class="function">Process</span>(<span class="class">Order</span> order)
+    {
+        <span class="comment">// Ask Order for the address</span>
+        <span class="keyword">var</span> address = order.<span class="function">GetShippingAddress</span>();
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q64: What is the difference between coupling and cohesion?
+        </div>
+        <div class="answer">
+            <p><strong>Coupling</strong> measures how closely connected classes are. <strong>Cohesion</strong> measures how related the responsibilities within a class are. SOLID aims for low coupling and high cohesion.</p>
+            
+            <h3>Goals:</h3>
+            <ul>
+                <li><strong>Low Coupling:</strong> Classes are independent</li>
+                <li><strong>High Cohesion:</strong> Class has focused responsibility</li>
+                <li><strong>SRP:</strong> Increases cohesion</li>
+                <li><strong>DIP:</strong> Reduces coupling</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q65: What is the difference between association, aggregation, and composition?
+        </div>
+        <div class="answer">
+            <p><strong>Association</strong> is a general relationship between objects. <strong>Aggregation</strong> is a weak "has-a" relationship. <strong>Composition</strong> is a strong "has-a" relationship where the child cannot exist without the parent.</p>
+            
+            <h3>Relationship Types:</h3>
+            <ul>
+                <li><strong>Association:</strong> Objects know about each other</li>
+                <li><strong>Aggregation:</strong> Can exist independently</li>
+                <li><strong>Composition:</strong> Dependent lifecycle</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q66: What is the difference between abstract class and interface?
+        </div>
+        <div class="answer">
+            <p><strong>Abstract Class</strong> can have implementation and state. <strong>Interface</strong> defines a contract without implementation. Both support polymorphism but serve different purposes.</p>
+            
+            <h3>Key Differences:</h3>
+            <ul>
+                <li><strong>Abstract Class:</strong> Can have fields, methods, constructors</li>
+                <li><strong>Interface:</strong> Only method signatures (mostly)</li>
+                <li><strong>Abstract Class:</strong> Single inheritance</li>
+                <li><strong>Interface:</strong> Multiple implementation</li>
+            </ul>
+
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">AbstractVsInterface.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Abstract Class</span>
+<span class="keyword">public abstract class</span> <span class="class">Animal</span>
+{
+    <span class="keyword">protected string</span> _name;
+    
+    <span class="keyword">public</span> <span class="function">Animal</span>(<span class="type">string</span> name)
+    {
+        _name = name;
+    }
+    
+    <span class="keyword">public abstract void</span> <span class="function">MakeSound</span>();
+    
+    <span class="keyword">public void</span> <span class="function">Sleep</span>() { }
+}
+
+<span class="comment">// Interface</span>
+<span class="keyword">public interface</span> <span class="interface">IFlyable</span>
+{
+    <span class="keyword">void</span> <span class="function">Fly</span>();
+}
+
+<span class="comment">// Class can implement multiple interfaces</span>
+<span class="keyword">public class</span> <span class="class">Bird</span> : <span class="class">Animal</span>, <span class="interface">IFlyable</span>
+{
+    <span class="keyword">public</span> <span class="function">Bird</span>(<span class="type">string</span> name) : <span class="keyword">base</span>(name) { }
+    
+    <span class="keyword">public override void</span> <span class="function">MakeSound</span>() { }
+    <span class="keyword">public void</span> <span class="function">Fly</span>() { }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q67: What is the difference between tight coupling and loose coupling?
+        </div>
+        <div class="answer">
+            <p><strong>Tight Coupling</strong> means classes are highly dependent on each other. <strong>Loose Coupling</strong> means classes are independent and interact through abstractions. SOLID promotes loose coupling.</p>
+            
+            <h3>Benefits of Loose Coupling:</h3>
+            <ul>
+                <li>Easier to test</li>
+                <li>Easier to maintain</li>
+                <li>Easier to replace components</li>
+                <li>More flexible architecture</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q68: What is the difference between high cohesion and low cohesion?
+        </div>
+        <div class="answer">
+            <p><strong>High Cohesion</strong> means a class has related responsibilities. <strong>Low Cohesion</strong> means a class has unrelated responsibilities. SRP promotes high cohesion.</p>
+            
+            <h3>Benefits of High Cohesion:</h3>
+            <ul>
+                <li>Easier to understand</li>
+                <li>Easier to maintain</li>
+                <li>Easier to reuse</li>
+                <li>Follows SRP</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q69: What is the difference between composition and aggregation?
+        </div>
+        <div class="answer">
+            <p><strong>Composition</strong> is a strong relationship where the child cannot exist without the parent. <strong>Aggregation</strong> is a weak relationship where the child can exist independently.</p>
+            
+            <h3>Key Differences:</h3>
+            <ul>
+                <li><strong>Composition:</strong> Same lifecycle, strong ownership</li>
+                <li><strong>Aggregation:</strong> Independent lifecycle, weak ownership</li>
+                <li><strong>Composition:</strong> "part-of" relationship</li>
+                <li><strong>Aggregation:</strong> "has-a" relationship</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q70: What is the difference between inheritance and polymorphism?
+        </div>
+        <div class="answer">
+            <p><strong>Inheritance</strong> creates new classes from existing ones. <strong>Polymorphism</strong> allows objects of different types to be treated as objects of a common type. Inheritance enables polymorphism.</p>
+            
+            <h3>Key Differences:</h3>
+            <ul>
+                <li><strong>Inheritance:</strong> Code reuse, is-a relationship</li>
+                <li><strong>Polymorphism:</strong> Flexibility, runtime behavior</li>
+                <li><strong>Inheritance:</strong> Compile-time relationship</li>
+                <li><strong>Polymorphism:</strong> Runtime behavior</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q71: What is the difference between overloading and overriding?
+        </div>
+        <div class="answer">
+            <p><strong>Overloading</strong> creates multiple methods with the same name but different parameters. <strong>Overriding</strong> provides a new implementation for a method in a derived class.</p>
+            
+            <h3>Key Differences:</h3>
+            <ul>
+                <li><strong>Overloading:</strong> Same name, different parameters</li>
+                <li><strong>Overriding:</strong> Same name, same parameters</li>
+                <li><strong>Overloading:</strong> Compile-time polymorphism</li>
+                <li><strong>Overriding:</strong> Runtime polymorphism</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q72: What is the difference between static and dynamic binding?
+        </div>
+        <div class="answer">
+            <p><strong>Static Binding</strong> happens at compile time. <strong>Dynamic Binding</strong> happens at runtime. Overloading uses static binding, overriding uses dynamic binding.</p>
+            
+            <h3>Key Differences:</h3>
+            <ul>
+                <li><strong>Static Binding:</strong> Compile-time, faster</li>
+                <li><strong>Dynamic Binding:</strong> Runtime, flexible</li>
+                <li><strong>Static Binding:</strong> Methods, properties</li>
+                <li><strong>Dynamic Binding:</strong> Virtual methods, interfaces</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q73: What is the difference between early binding and late binding?
+        </div>
+        <div class="answer">
+            <p><strong>Early Binding</strong> resolves method calls at compile time. <strong>Late Binding</strong> resolves method calls at runtime. Early binding is faster, late binding is more flexible.</p>
+            
+            <h3>Key Differences:</h3>
+            <ul>
+                <li><strong>Early Binding:</strong> Compile-time, type-safe</li>
+                <li><strong>Late Binding:</strong> Runtime, flexible</li>
+                <li><strong>Early Binding:</strong> Better performance</li>
+                <li><strong>Late Binding:</strong> Dynamic features</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q74: What is the difference between abstraction and encapsulation?
+        </div>
+        <div class="answer">
+            <p><strong>Abstraction</strong> hides implementation details and shows only functionality. <strong>Encapsulation</strong> hides data and provides access through methods. Both are OOP principles that work together.</p>
+            
+            <h3>Key Differences:</h3>
+            <ul>
+                <li><strong>Abstraction:</strong> Hides complexity, shows what</li>
+                <li><strong>Encapsulation:</strong> Hides data, protects state</li>
+                <li><strong>Abstraction:</strong> Design focus</li>
+                <li><strong>Encapsulation:</strong> Implementation focus</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q75: What is the future of SOLID principles?
+        </div>
+        <div class="answer">
+            <p><strong>Future of SOLID</strong> involves adapting to new paradigms like functional programming, microservices, and cloud-native development. The principles remain relevant but are applied differently in modern contexts.</p>
+            
+            <h3>Modern Applications:</h3>
+            <ul>
+                <li><strong>Microservices:</strong> SRP at service level</li>
+                <li><strong>Functional Programming:</strong> Adapted principles</li>
+                <li><strong>Cloud-Native:</strong> DIP with cloud services</li>
+                <li><strong>Event-Driven:</strong> Loose coupling through events</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p><span class="highlight">🎯 Ready for Your SOLID Principles Interview?</span></p>
+            <p>Master these 75 comprehensive SOLID principles interview questions covering all five principles, their applications, benefits, trade-offs, design patterns, dependency injection, and advanced concepts. SOLID principles are fundamental to writing clean, maintainable, and scalable software - understanding these concepts deeply will make you a better software engineer.</p>
+            <p><span class="highlight">💡 Tip:</span> Focus on understanding each principle with practical examples. Be prepared to identify violations and suggest fixes. Practice refactoring code to follow SOLID principles. Remember that SOLID is about pragmatism, not dogma - apply it wisely based on project context.</p>
         </div>
     </div>
 </body>
