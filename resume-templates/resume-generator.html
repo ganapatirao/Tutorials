@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/docx@8.2.2/build/index.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="templates.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 30px;
+        }
+        
+        .sidebar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(30px);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+        
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            border-radius: 24px;
+            z-index: -1;
+            opacity: 0.2;
+            filter: blur(10px);
+        }
+        
+        .sidebar {
+            position: relative;
+        }
+        
+        .preview-area {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+            overflow: auto;
+        }
+        
+        .sidebar h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 10px 16px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1a1a2e;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .entry-list {
+            margin-bottom: 20px;
+        }
+        
+        .entry-item {
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+            position: relative;
+        }
+        
+        .entry-item .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .add-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .save-load-btns {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .save-load-btns button {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #667eea;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .save-load-btns button:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .download-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .download-btn {
+            flex: 1;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-btn.word {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .download-btn.pdf {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d2d 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(26, 26, 46, 0.4);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        }
+        
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .download-btn:hover::before {
+            left: 100%;
+        }
+        
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid #e0e0e0;
+        }
+        
+        .preview-header h2 {
+            font-size: 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        
+        .layout-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .layout-btn {
+            padding: 10px 18px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .layout-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .layout-btn:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        #resume-preview {
+            transform: scale(0.85);
+            transform-origin: top left;
+            transition: transform 0.3s ease;
+        }
+        
+        .quick-select {
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .quick-select h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .quick-select .form-group {
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>🎨 Resume Generator</h2>
+            
+            <div class="save-load-btns">
+                <button onclick="saveResume()">💾 Save Draft</button>
+                <button onclick="loadResume()">📂 Load Draft</button>
+            </div>
+            
+            <div class="quick-select">
+                <h3>⚡ Quick Start</h3>
+                <div class="form-group">
+                    <label for="role-select">Select Role</label>
+                    <select id="role-select" onchange="loadTemplateData()">
+                        <option value="">Choose your role...</option>
+                        <option value="softwareEngineer">Software Engineer</option>
+                        <option value="devOpsEngineer">DevOps Engineer</option>
+                        <option value="dataScientist">Data Scientist</option>
+                        <option value="cybersecurityAnalyst">Cybersecurity Analyst</option>
+                        <option value="projectManager">Project Manager</option>
+                        <option value="businessAnalyst">Business Analyst</option>
+                        <option value="hrManager">HR Manager</option>
+                        <option value="financialAnalyst">Financial Analyst</option>
+                        <option value="salesManager">Sales Manager</option>
+                        <option value="marketingManager">Marketing Manager</option>
+                        <option value="healthcareAdministrator">Healthcare Administrator</option>
+                        <option value="educationAdministrator">Education Administrator</option>
+                        <option value="operationsManager">Operations Manager</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="experience-select">Experience Level</label>
+                    <select id="experience-select" onchange="loadTemplateData()">
+                        <option value="">Choose experience level...</option>
+                        <option value="fresher">Fresher (0-2 years)</option>
+                        <option value="junior">Junior (2-4 years)</option>
+                        <option value="midLevel">Mid-Level (4-7 years)</option>
+                        <option value="senior">Senior (7-10 years)</option>
+                        <option value="lead">Lead (10-12 years)</option>
+                        <option value="manager">Manager (12-15 years)</option>
+                        <option value="director">Director (15+ years)</option>
+                        <option value="executive">Executive (20+ years)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('personal')">👤 Personal</button>
+                <button class="tab-btn" onclick="switchTab('experience')">💼 Experience</button>
+                <button class="tab-btn" onclick="switchTab('education')">🎓 Education</button>
+                <button class="tab-btn" onclick="switchTab('skills')">⚡ Skills</button>
+                <button class="tab-btn" onclick="switchTab('projects')">🚀 Projects</button>
+                <button class="tab-btn" onclick="switchTab('certifications')">🏆 Certs</button>
+                <button class="tab-btn" onclick="switchTab('achievements')">⭐ Achieve</button>
+            </div>
+            
+            <div id="personal-tab" class="tab-content active">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="full-name" placeholder="John Doe" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>Job Title</label>
+                    <input type="text" id="job-title" placeholder="Software Engineer" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="john.doe@email.com" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" id="phone" placeholder="(555) 123-4567" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="location" placeholder="San Francisco, CA" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>LinkedIn</label>
+                    <input type="text" id="linkedin" placeholder="linkedin.com/in/johndoe" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>Professional Summary</label>
+                    <textarea id="summary" placeholder="Your professional summary..." oninput="updateResume()"></textarea>
+                </div>
+            </div>
+            
+            <div id="experience-tab" class="tab-content">
+                <div class="entry-list" id="experience-list"></div>
+                <button class="add-btn" onclick="addExperience()">+ Add Experience</button>
+            </div>
+            
+            <div id="education-tab" class="tab-content">
+                <div class="entry-list" id="education-list"></div>
+                <button class="add-btn" onclick="addEducation()">+ Add Education</button>
+            </div>
+            
+            <div id="skills-tab" class="tab-content">
+                <div class="form-group">
+                    <label>Skills (comma separated)</label>
+                    <textarea id="skills-input" placeholder="JavaScript, Python, React, Node.js, AWS" oninput="updateSkills()"></textarea>
+                </div>
+            </div>
+            
+            <div id="projects-tab" class="tab-content">
+                <div class="entry-list" id="projects-list"></div>
+                <button class="add-btn" onclick="addProject()">+ Add Project</button>
+            </div>
+            
+            <div id="certifications-tab" class="tab-content">
+                <div class="form-group">
+                    <label>Certifications (comma separated)</label>
+                    <textarea id="certifications-input" placeholder="AWS Solutions Architect, Google Cloud Developer, CKA" oninput="updateCertifications()"></textarea>
+                </div>
+            </div>
+            
+            <div id="achievements-tab" class="tab-content">
+                <div class="form-group">
+                    <label>Achievements (one per line)</label>
+                    <textarea id="achievements-input" placeholder="Employee of the Year 2023&#10;Published 3 technical articles&#10;Speaker at tech conferences" oninput="updateAchievements()"></textarea>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="layout-select">Layout Style</label>
+                <select id="layout-select" onchange="setLayout(this.value)">
+                    <option value="modern">Modern Professional</option>
+                    <option value="ats">ATS-Friendly</option>
+                    <option value="executive">Executive</option>
+                    <option value="twoColumn">Two-Column</option>
+                    <option value="creative">Creative</option>
+                    <option value="minimal">Minimal</option>
+                    <option value="classic">Classic Professional</option>
+                    <option value="elegant">Elegant Serif</option>
+                    <option value="bold">Bold Modern</option>
+                    <option value="clean">Clean Contemporary</option>
+                    <option value="dark">Sophisticated Dark</option>
+                    <option value="neon">Neon Gradient</option>
+                    <option value="glassmorphism">Glassmorphism</option>
+                    <option value="geometric">Geometric</option>
+                    <option value="vibrant">Vibrant</option>
+                    <option value="techMinimal">Tech Minimal</option>
+                    <option value="pastel">Pastel</option>
+                    <option value="gradientBorder">Gradient Border</option>
+                    <option value="cardBased">Card Based</option>
+                    <option value="cyberpunk">Cyberpunk</option>
+                </select>
+            </div>
+            
+            <div class="download-buttons">
+                <button class="download-btn word" onclick="downloadWord()">📄 Word</button>
+                <button class="download-btn pdf" onclick="downloadPDF()">📑 PDF</button>
+            </div>
+        </div>
+        
+        <div class="preview-area">
+            <div class="preview-header">
+                <h2>📄 Live Preview</h2>
+                <div class="layout-selector">
+                    <button class="layout-btn active" onclick="setLayout('modern')">Modern</button>
+                    <button class="layout-btn" onclick="setLayout('ats')">ATS</button>
+                    <button class="layout-btn" onclick="setLayout('executive')">Exec</button>
+                    <button class="layout-btn" onclick="setLayout('twoColumn')">2-Col</button>
+                    <button class="layout-btn" onclick="setLayout('creative')">Creative</button>
+                    <button class="layout-btn" onclick="setLayout('minimal')">Minimal</button>
+                    <button class="layout-btn" onclick="setLayout('classic')">Classic</button>
+                    <button class="layout-btn" onclick="setLayout('elegant')">Elegant</button>
+                    <button class="layout-btn" onclick="setLayout('bold')">Bold</button>
+                    <button class="layout-btn" onclick="setLayout('clean')">Clean</button>
+                    <button class="layout-btn" onclick="setLayout('dark')">Dark</button>
+                    <button class="layout-btn" onclick="setLayout('neon')">Neon</button>
+                    <button class="layout-btn" onclick="setLayout('glassmorphism')">Glass</button>
+                    <button class="layout-btn" onclick="setLayout('geometric')">Geo</button>
+                    <button class="layout-btn" onclick="setLayout('vibrant')">Vibrant</button>
+                    <button class="layout-btn" onclick="setLayout('techMinimal')">Tech</button>
+                    <button class="layout-btn" onclick="setLayout('pastel')">Pastel</button>
+                    <button class="layout-btn" onclick="setLayout('gradientBorder')">Grad</button>
+                    <button class="layout-btn" onclick="setLayout('cardBased')">Card</button>
+                    <button class="layout-btn" onclick="setLayout('cyberpunk')">Cyber</button>
+                </div>
+            </div>
+            <div id="resume-preview"></div>
+        </div>
+    </div>
+    
+    <script>
+        let resumeData = {
+            name: '',
+            title: '',
+            email: '',
+            phone: '',
+            location: '',
+            linkedin: '',
+            summary: '',
+            skills: [],
+            experience: [],
+            education: [],
+            projects: [],
+            certifications: [],
+            achievements: []
+        };
+        
+        let currentLayout = 'modern';
+        let currentRole = '';
+        let currentExperience = '';
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for URL parameters for auto-selection
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('role')) {
+                document.getElementById('role-select').value = urlParams.get('role');
+                currentRole = urlParams.get('role');
+            }
+            if (urlParams.get('experience')) {
+                document.getElementById('experience-select').value = urlParams.get('experience');
+                currentExperience = urlParams.get('experience');
+            }
+            if (urlParams.get('layout')) {
+                currentLayout = urlParams.get('layout');
+                document.getElementById('layout-select').value = currentLayout;
+                updateLayoutButtons(currentLayout);
+            }
+            
+            // Load template data if role/experience selected
+            if (currentRole && currentExperience) {
+                loadTemplateData();
+            }
+            
+            // Generate initial resume
+            updateResume();
+        });
+        
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+        
+        function loadTemplateData() {
+            currentRole = document.getElementById('role-select').value;
+            currentExperience = document.getElementById('experience-select').value;
+            
+            if (currentRole && resumeTemplates[currentRole]) {
+                const roleData = resumeTemplates[currentRole];
+                let templateData;
+                
+                if (currentExperience && roleData[currentExperience]) {
+                    templateData = roleData[currentExperience];
+                } else if (roleData.senior) {
+                    templateData = roleData.senior;
+                } else if (Object.keys(roleData)[0]) {
+                    templateData = roleData[Object.keys(roleData)[0]];
+                }
+                
+                if (templateData) {
+                    // Populate form fields with template data
+                    document.getElementById('full-name').value = templateData.name || '';
+                    document.getElementById('job-title').value = templateData.title || '';
+                    document.getElementById('summary').value = templateData.summary || '';
+                    document.getElementById('skills-input').value = templateData.skills ? templateData.skills.join(', ') : '';
+                    document.getElementById('certifications-input').value = templateData.certifications ? templateData.certifications.join(', ') : '';
+                    document.getElementById('achievements-input').value = templateData.achievements ? templateData.achievements.join('\n') : '';
+                    
+                    // Clear and populate experience
+                    document.getElementById('experience-list').innerHTML = '';
+                    if (templateData.experience) {
+                        templateData.experience.forEach(exp => {
+                            addExperience(exp);
+                        });
+                    }
+                    
+                    // Clear and populate education
+                    document.getElementById('education-list').innerHTML = '';
+                    if (templateData.education && templateData.education.degree) {
+                        addEducation({
+                            degree: templateData.education.degree,
+                            school: templateData.education.school,
+                            location: templateData.education.location,
+                            date: templateData.education.date
+                        });
+                    }
+                    
+                    // Clear and populate projects
+                    document.getElementById('projects-list').innerHTML = '';
+                    if (templateData.projects) {
+                        templateData.projects.forEach(proj => {
+                            addProject(proj);
+                        });
+                    }
+                    
+                    updateResume();
+                }
+            }
+        }
+        
+        function updateResume() {
+            console.log('updateResume called, currentLayout:', currentLayout);
+            // Collect data from form
+            resumeData.name = document.getElementById('full-name').value || 'Your Name';
+            resumeData.title = document.getElementById('job-title').value || 'Your Title';
+            resumeData.email = document.getElementById('email').value || 'email@example.com';
+            resumeData.phone = document.getElementById('phone').value || '(555) 123-4567';
+            resumeData.location = document.getElementById('location').value || 'Your Location';
+            resumeData.linkedin = document.getElementById('linkedin').value || 'linkedin.com/in/yourname';
+            resumeData.summary = document.getElementById('summary').value || 'Your professional summary will appear here.';
+            
+            // Collect experience
+            resumeData.experience = [];
+            document.querySelectorAll('.experience-entry').forEach(entry => {
+                resumeData.experience.push({
+                    title: entry.querySelector('.exp-title').value,
+                    company: entry.querySelector('.exp-company').value,
+                    location: entry.querySelector('.exp-location').value,
+                    date: entry.querySelector('.exp-date').value,
+                    description: entry.querySelector('.exp-description').value.split('\n')
+                });
+            });
+            
+            // Collect education
+            resumeData.education = [];
+            document.querySelectorAll('.education-entry').forEach(entry => {
+                resumeData.education.push({
+                    degree: entry.querySelector('.edu-degree').value,
+                    school: entry.querySelector('.edu-school').value,
+                    location: entry.querySelector('.edu-location').value,
+                    date: entry.querySelector('.edu-date').value
+                });
+            });
+            
+            // Collect projects
+            resumeData.projects = [];
+            document.querySelectorAll('.project-entry').forEach(entry => {
+                resumeData.projects.push({
+                    title: entry.querySelector('.proj-title').value,
+                    description: entry.querySelector('.proj-description').value
+                });
+            });
+            
+            // Generate preview
+            const preview = document.getElementById('resume-preview');
+            const html = generateResumeHTML(resumeData, currentLayout);
+            console.log('Generated HTML, length:', html.length);
+            preview.innerHTML = html;
+            console.log('Preview updated');
+        }
+        
+        function updateSkills() {
+            const skillsInput = document.getElementById('skills-input').value;
+            resumeData.skills = skillsInput.split(',').map(s => s.trim()).filter(s => s);
+            updateResume();
+        }
+        
+        function updateCertifications() {
+            const certsInput = document.getElementById('certifications-input').value;
+            resumeData.certifications = certsInput.split(',').map(c => c.trim()).filter(c => c);
+            updateResume();
+        }
+        
+        function updateAchievements() {
+            const achievementsInput = document.getElementById('achievements-input').value;
+            resumeData.achievements = achievementsInput.split('\n').map(a => a.trim()).filter(a => a);
+            updateResume();
+        }
+        
+        function addExperience(existingData = null) {
+            const experienceList = document.getElementById('experience-list');
+            const entryDiv = document.createElement('div');
+            entryDiv.className = 'entry-item experience-entry';
+            entryDiv.innerHTML = `
+                <button class="remove-btn" onclick="this.parentElement.remove(); updateResume()">✕</button>
+                <div class="form-group">
+                    <label>Job Title</label>
+                    <input type="text" class="exp-title" placeholder="Software Engineer" value="${existingData ? existingData.title : ''}" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>Company</label>
+                    <input type="text" class="exp-company" placeholder="Company Name" value="${existingData ? existingData.company : ''}" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" class="exp-location" placeholder="City, State" value="${existingData ? existingData.location : ''}" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>Date Range</label>
+                    <input type="text" class="exp-date" placeholder="January 2020 - Present" value="${existingData ? existingData.date : ''}" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>Description (one per line)</label>
+                    <textarea class="exp-description" placeholder="• Led development of microservices&#10;• Reduced load time by 40%&#10;• Mentored team of 5 developers" oninput="updateResume()">${existingData ? existingData.description.join('\n') : ''}</textarea>
+                </div>
+            `;
+            experienceList.appendChild(entryDiv);
+            if (!existingData) updateResume();
+        }
+        
+        function addEducation(existingData = null) {
+            const educationList = document.getElementById('education-list');
+            const entryDiv = document.createElement('div');
+            entryDiv.className = 'entry-item education-entry';
+            entryDiv.innerHTML = `
+                <button class="remove-btn" onclick="this.parentElement.remove(); updateResume()">✕</button>
+                <div class="form-group">
+                    <label>Degree</label>
+                    <input type="text" class="edu-degree" placeholder="Bachelor of Science in Computer Science" value="${existingData ? existingData.degree : ''}" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>Institution</label>
+                    <input type="text" class="edu-school" placeholder="University Name" value="${existingData ? existingData.school : ''}" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" class="edu-location" placeholder="City, State" value="${existingData ? existingData.location : ''}" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="text" class="edu-date" placeholder="Graduated May 2020" value="${existingData ? existingData.date : ''}" oninput="updateResume()">
+                </div>
+            `;
+            educationList.appendChild(entryDiv);
+            if (!existingData) updateResume();
+        }
+        
+        function addProject(existingData = null) {
+            const projectsList = document.getElementById('projects-list');
+            const entryDiv = document.createElement('div');
+            entryDiv.className = 'entry-item project-entry';
+            entryDiv.innerHTML = `
+                <button class="remove-btn" onclick="this.parentElement.remove(); updateResume()">✕</button>
+                <div class="form-group">
+                    <label>Project Name</label>
+                    <input type="text" class="proj-title" placeholder="E-commerce Platform" value="${existingData ? existingData.title : ''}" oninput="updateResume()">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="proj-description" placeholder="Full-stack e-commerce platform built with MERN stack..." oninput="updateResume()">${existingData ? existingData.description : ''}</textarea>
+                </div>
+            `;
+            projectsList.appendChild(entryDiv);
+            if (!existingData) updateResume();
+        }
+        
+        function setLayout(layout) {
+            currentLayout = layout;
+            const select = document.getElementById('layout-select');
+            if (select) {
+                select.value = layout;
+            }
+            updateLayoutButtons(layout);
+            updateResume();
+        }
+        
+        function updateLayoutButtons(layout) {
+            document.querySelectorAll('.layout-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.layout-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(layout.replace('column', '-col'))) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        
+        function generateResumeHTML(data, layout) {
+            const layouts = {
+                modern: generateModernLayout,
+                ats: generateATSLayout,
+                executive: generateExecutiveLayout,
+                twoColumn: generateTwoColumnLayout,
+                creative: generateCreativeLayout,
+                minimal: generateMinimalLayout,
+                classic: generateClassicLayout,
+                elegant: generateElegantLayout,
+                bold: generateBoldLayout,
+                clean: generateCleanLayout,
+                dark: generateDarkLayout,
+                neon: generateNeonLayout,
+                glassmorphism: generateGlassmorphismLayout,
+                geometric: generateGeometricLayout,
+                vibrant: generateVibrantLayout,
+                techMinimal: generateTechMinimalLayout,
+                pastel: generatePastelLayout,
+                gradientBorder: generateGradientBorderLayout,
+                cardBased: generateCardBasedLayout,
+                cyberpunk: generateCyberpunkLayout
+            };
+            
+            return layouts[layout] ? layouts[layout](data) : generateModernLayout(data);
+        }
+        
+        function saveResume() {
+            localStorage.setItem('resumeDraft', JSON.stringify(resumeData));
+            localStorage.setItem('resumeLayout', currentLayout);
+            alert('Resume draft saved successfully!');
+        }
+        
+        function loadResume() {
+            const savedData = localStorage.getItem('resumeDraft');
+            const savedLayout = localStorage.getItem('resumeLayout');
+            
+            if (savedData) {
+                resumeData = JSON.parse(savedData);
+                
+                // Populate form fields
+                document.getElementById('full-name').value = resumeData.name || '';
+                document.getElementById('job-title').value = resumeData.title || '';
+                document.getElementById('email').value = resumeData.email || '';
+                document.getElementById('phone').value = resumeData.phone || '';
+                document.getElementById('location').value = resumeData.location || '';
+                document.getElementById('linkedin').value = resumeData.linkedin || '';
+                document.getElementById('summary').value = resumeData.summary || '';
+                document.getElementById('skills-input').value = resumeData.skills ? resumeData.skills.join(', ') : '';
+                document.getElementById('certifications-input').value = resumeData.certifications ? resumeData.certifications.join(', ') : '';
+                document.getElementById('achievements-input').value = resumeData.achievements ? resumeData.achievements.join('\n') : '';
+                
+                // Clear and populate experience
+                document.getElementById('experience-list').innerHTML = '';
+                if (resumeData.experience) {
+                    resumeData.experience.forEach(exp => {
+                        addExperience(exp);
+                    });
+                }
+                
+                // Clear and populate education
+                document.getElementById('education-list').innerHTML = '';
+                if (resumeData.education) {
+                    resumeData.education.forEach(edu => {
+                        addEducation(edu);
+                    });
+                }
+                
+                // Clear and populate projects
+                document.getElementById('projects-list').innerHTML = '';
+                if (resumeData.projects) {
+                    resumeData.projects.forEach(proj => {
+                        addProject(proj);
+                    });
+                }
+                
+                if (savedLayout) {
+                    currentLayout = savedLayout;
+                    document.getElementById('layout-select').value = currentLayout;
+                    updateLayoutButtons(currentLayout);
+                }
+                
+                updateResume();
+                alert('Resume draft loaded successfully!');
+            } else {
+                alert('No saved draft found.');
+            }
+        }
+        
+        function generateModernLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            const projArray = Array.isArray(data.projects) ? data.projects : [];
+            const eduArray = Array.isArray(data.education) ? data.education : (data.education && data.education.degree ? [data.education] : []);
+            const certArray = Array.isArray(data.certifications) ? data.certifications : (data.certifications ? data.certifications.split(', ') : []);
+            const achieveArray = Array.isArray(data.achievements) ? data.achievements : (data.achievements ? data.achievements.split('\n') : []);
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #1f2937; max-width: 850px; margin: 0 auto; padding: 50px; background: #ffffff; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+                    <div style="margin-bottom: 40px; padding-bottom: 30px; border-bottom: 2px solid #e5e7eb;">
+                        <div style="font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #111827; letter-spacing: -0.025em;">${data.name}</div>
+                        <div style="font-size: 18px; color: #6366f1; margin-bottom: 20px; font-weight: 500;">${data.title}</div>
+                        <div style="font-size: 14px; color: #6b7280; display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+                            <span style="display: flex; align-items: center; gap: 6px;">📧 ${data.email}</span>
+                            <span style="display: flex; align-items: center; gap: 6px;">📱 ${data.phone}</span>
+                            <span style="display: flex; align-items: center; gap: 6px;">📍 ${data.location}</span>
+                            <span style="display: flex; align-items: center; gap: 6px;">🔗 ${data.linkedin}</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 15px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em;">Professional Summary</div>
+                        <div style="font-size: 15px; line-height: 1.7; color: #4b5563;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 15px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em;">Skills</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            ${skillsArray.map(skill => `<div style="font-size: 13px; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; padding: 8px 16px; border-radius: 8px; font-weight: 500;">${skill}</div>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 15px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em;">Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #6366f1;">
+                                <div style="font-weight: 600; font-size: 16px; color: #111827; margin-bottom: 4px;">${exp.title}</div>
+                                <div style="font-weight: 500; color: #6366f1; margin-bottom: 6px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 13px; color: #9ca3af; margin-bottom: 12px; font-weight: 500;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">
+                                    <ul style="margin-left: 20px; margin-top: 8px;">
+                                        ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<li style="margin-bottom: 6px;">${desc}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    ${projArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 15px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em;">Projects</div>
+                        ${projArray.map(proj => `
+                            <div style="margin-bottom: 20px; padding-left: 20px; border-left: 3px solid #6366f1;">
+                                <div style="font-weight: 600; font-size: 16px; color: #111827; margin-bottom: 4px;">${proj.title}</div>
+                                <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">${proj.description}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    ${eduArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 15px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em;">Education</div>
+                        ${eduArray.map(edu => `
+                            <div style="margin-bottom: 20px; padding-left: 20px; border-left: 3px solid #6366f1;">
+                                <div style="font-weight: 600; font-size: 16px; color: #111827; margin-bottom: 4px;">${edu.degree}</div>
+                                <div style="font-weight: 500; color: #6366f1; margin-bottom: 6px; font-size: 14px;">${edu.school} | ${edu.location}</div>
+                                <div style="font-size: 13px; color: #9ca3af; font-weight: 500;">${edu.date}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    ${certArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 15px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em;">Certifications</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            ${certArray.map(cert => `<div style="font-size: 13px; background: #f3f4f6; color: #374151; padding: 8px 16px; border-radius: 8px; font-weight: 500; border: 1px solid #e5e7eb;">${cert}</div>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${achieveArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 15px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em;">Achievements</div>
+                        <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">
+                            <ul style="margin-left: 20px;">
+                                ${achieveArray.map(ach => `<li style="margin-bottom: 6px;">${ach}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateATSLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.5; color: #1a1a1a; max-width: 800px; margin: 0 auto; padding: 40px; background: white;">
+                    <div style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 2px solid #333;">
+                        <div style="font-size: 26px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">${data.name}</div>
+                        <div style="font-size: 16px; margin-bottom: 12px; color: #555;">${data.title}</div>
+                        <div style="font-size: 13px; color: #666;">${data.email} | ${data.phone} | ${data.location} | ${data.linkedin}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #333;">Professional Summary</div>
+                        <div style="font-size: 13px; line-height: 1.6; color: #444;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 25px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #333;">Skills</div>
+                        <div style="font-size: 13px; color: #444;">${skillsArray.join(', ')}</div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 25px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #333;">Professional Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: 700; font-size: 14px; color: #333;">${exp.title}</div>
+                                <div style="font-size: 13px; color: #555; margin-bottom: 5px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 12px; color: #888; margin-bottom: 8px;">${exp.date}</div>
+                                <div style="font-size: 13px; line-height: 1.5; color: #444;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 4px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    ${data.education && data.education.length > 0 ? `
+                    <div style="margin-bottom: 25px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #333;">Education</div>
+                        ${data.education.map(edu => `
+                            <div style="margin-bottom: 15px;">
+                                <div style="font-weight: 700; font-size: 14px; color: #333;">${edu.degree}</div>
+                                <div style="font-size: 13px; color: #555;">${edu.school} | ${edu.location}</div>
+                                <div style="font-size: 12px; color: #888;">${edu.date}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateExecutiveLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Playfair Display', Georgia, serif; line-height: 1.7; color: #1f2937; max-width: 900px; margin: 0 auto; padding: 60px; background: #ffffff; box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
+                    <div style="margin-bottom: 45px; padding-bottom: 35px; border-bottom: 3px solid #1e3a5f; text-align: center;">
+                        <div style="font-size: 40px; font-weight: 600; margin-bottom: 12px; color: #1e3a5f; letter-spacing: 0.5px;">${data.name}</div>
+                        <div style="font-size: 18px; color: #4a5568; margin-bottom: 20px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;">${data.title}</div>
+                        <div style="font-size: 14px; color: #6b7280; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap;">
+                            <span>${data.email}</span>
+                            <span>${data.phone}</span>
+                            <span>${data.location}</span>
+                            <span>${data.linkedin}</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 40px;">
+                        <div style="font-size: 16px; font-weight: 600; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #1e3a5f; color: #1e3a5f; letter-spacing: 1px; text-transform: uppercase;">Executive Summary</div>
+                        <div style="font-size: 15px; line-height: 1.8; color: #4b5563;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 40px;">
+                        <div style="font-size: 16px; font-weight: 600; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #1e3a5f; color: #1e3a5f; letter-spacing: 1px; text-transform: uppercase;">Core Competencies</div>
+                        <div style="font-size: 14px; line-height: 2; color: #4b5563;">${skillsArray.join(' • ')}</div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 40px;">
+                        <div style="font-size: 16px; font-weight: 600; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #1e3a5f; color: #1e3a5f; letter-spacing: 1px; text-transform: uppercase;">Executive Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 28px;">
+                                <div style="font-weight: 600; font-size: 17px; color: #1e3a5f; margin-bottom: 6px;">${exp.title}</div>
+                                <div style="font-weight: 500; color: #4a5568; margin-bottom: 8px; font-size: 15px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 13px; color: #9ca3af; margin-bottom: 12px; font-weight: 500;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.8; color: #4b5563;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateTwoColumnLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            const eduArray = Array.isArray(data.education) ? data.education : (data.education && data.education.degree ? [data.education] : []);
+            const certArray = Array.isArray(data.certifications) ? data.certifications : (data.certifications ? data.certifications.split(', ') : []);
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #1f2937; max-width: 900px; margin: 0 auto; background: white; display: grid; grid-template-columns: 300px 1fr; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); min-height: 1000px;">
+                    <div style="background: linear-gradient(180deg, #6366f1 0%, #8b5cf6 100%); color: white; padding: 45px 35px;">
+                        <div style="font-size: 26px; font-weight: 700; margin-bottom: 8px; line-height: 1.2;">${data.name}</div>
+                        <div style="font-size: 15px; margin-bottom: 35px; opacity: 0.95; font-weight: 500;">${data.title}</div>
+                        
+                        <div style="margin-bottom: 35px;">
+                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 18px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 10px;">Contact</div>
+                            <div style="font-size: 13px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">${data.email}</div>
+                            <div style="font-size: 13px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">${data.phone}</div>
+                            <div style="font-size: 13px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">${data.location}</div>
+                            <div style="font-size: 13px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">${data.linkedin}</div>
+                        </div>
+                        
+                        ${skillsArray.length > 0 ? `
+                        <div style="margin-bottom: 35px;">
+                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 18px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 10px;">Skills</div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                ${skillsArray.map(skill => `<div style="background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;">${skill}</div>`).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${certArray.length > 0 ? `
+                        <div style="margin-bottom: 35px;">
+                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 18px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 10px;">Certifications</div>
+                            ${certArray.map(cert => `<div style="font-size: 12px; margin-bottom: 10px; padding-left: 15px; border-left: 2px solid rgba(255,255,255,0.5); line-height: 1.5;">${cert}</div>`).join('')}
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div style="padding: 45px;">
+                        <div style="margin-bottom: 35px;">
+                            <div style="font-size: 14px; font-weight: 600; margin-bottom: 18px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid #6366f1; padding-bottom: 10px;">Professional Summary</div>
+                            <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">${data.summary}</div>
+                        </div>
+                        
+                        ${expArray.length > 0 ? `
+                        <div style="margin-bottom: 35px;">
+                            <div style="font-size: 14px; font-weight: 600; margin-bottom: 18px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid #6366f1; padding-bottom: 10px;">Experience</div>
+                            ${expArray.map(exp => `
+                                <div style="margin-bottom: 25px; padding-left: 15px; border-left: 3px solid #6366f1;">
+                                    <div style="font-weight: 600; font-size: 15px; color: #111827; margin-bottom: 4px;">${exp.title}</div>
+                                    <div style="font-weight: 500; color: #6366f1; margin-bottom: 6px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                    <div style="font-size: 12px; color: #9ca3af; margin-bottom: 10px; font-weight: 500;">${exp.date}</div>
+                                    <div style="font-size: 13px; line-height: 1.7; color: #4b5563;">
+                                        ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 5px;">• ${desc}</div>`).join('')}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        ` : ''}
+                        
+                        ${eduArray.length > 0 ? `
+                        <div style="margin-bottom: 35px;">
+                            <div style="font-size: 14px; font-weight: 600; margin-bottom: 18px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid #6366f1; padding-bottom: 10px;">Education</div>
+                            ${eduArray.map(edu => `
+                                <div style="margin-bottom: 20px; padding-left: 15px; border-left: 3px solid #6366f1;">
+                                    <div style="font-weight: 600; font-size: 15px; color: #111827; margin-bottom: 4px;">${edu.degree}</div>
+                                    <div style="font-weight: 500; color: #6366f1; margin-bottom: 6px; font-size: 14px;">${edu.school} | ${edu.location}</div>
+                                    <div style="font-size: 12px; color: #9ca3af; font-weight: 500;">${edu.date}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function generateCreativeLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.7; color: #1f2937; max-width: 900px; margin: 0 auto; background: white; padding: 0; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 16px; overflow: hidden;">
+                    <div style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%); color: white; padding: 50px; position: relative; overflow: hidden;">
+                        <div style="font-size: 38px; font-weight: 700; margin-bottom: 8px; position: relative; z-index: 1; letter-spacing: -0.5px;">${data.name}</div>
+                        <div style="font-size: 18px; margin-bottom: 25px; font-weight: 500; position: relative; z-index: 1; opacity: 0.95;">${data.title}</div>
+                        <div style="font-size: 14px; display: flex; gap: 15px; flex-wrap: wrap; position: relative; z-index: 1;">
+                            <span style="background: rgba(255,255,255,0.25); padding: 8px 16px; border-radius: 20px; backdrop-filter: blur(10px); font-weight: 500;">${data.email}</span>
+                            <span style="background: rgba(255,255,255,0.25); padding: 8px 16px; border-radius: 20px; backdrop-filter: blur(10px); font-weight: 500;">${data.phone}</span>
+                            <span style="background: rgba(255,255,255,0.25); padding: 8px 16px; border-radius: 20px; backdrop-filter: blur(10px); font-weight: 500;">${data.location}</span>
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 45px;">
+                        <div style="margin-bottom: 35px;">
+                            <div style="font-size: 16px; font-weight: 600; margin-bottom: 18px; color: #6366f1; text-transform: uppercase; letter-spacing: 0.05em;">Professional Summary</div>
+                            <div style="font-size: 15px; line-height: 1.8; color: #4b5563; background: linear-gradient(135deg, #f5f3ff 0%, #faf5ff 100%); padding: 20px; border-radius: 12px; border-left: 4px solid #6366f1;">${data.summary}</div>
+                        </div>
+                        
+                        ${skillsArray.length > 0 ? `
+                        <div style="margin-bottom: 35px;">
+                            <div style="font-size: 16px; font-weight: 600; margin-bottom: 18px; color: #6366f1; text-transform: uppercase; letter-spacing: 0.05em;">Technical Skills</div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                                ${skillsArray.map(skill => `<div style="font-size: 13px; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; padding: 10px 18px; border-radius: 20px; font-weight: 500;">${skill}</div>`).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${expArray.length > 0 ? `
+                        <div style="margin-bottom: 35px;">
+                            <div style="font-size: 16px; font-weight: 600; margin-bottom: 18px; color: #6366f1; text-transform: uppercase; letter-spacing: 0.05em;">Professional Experience</div>
+                            ${expArray.map(exp => `
+                                <div style="margin-bottom: 25px; padding: 25px; background: #f9fafb; border-radius: 12px; border-left: 4px solid #6366f1;">
+                                    <div style="font-weight: 600; font-size: 16px; color: #111827; margin-bottom: 4px;">${exp.title}</div>
+                                    <div style="font-weight: 500; color: #6366f1; margin-bottom: 8px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                    <div style="font-size: 12px; color: #9ca3af; margin-bottom: 12px; font-weight: 500; background: #e5e7eb; padding: 4px 12px; border-radius: 12px; display: inline-block;">${exp.date}</div>
+                                    <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">
+                                        ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function generateMinimalLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.7; color: #1f2937; max-width: 800px; margin: 0 auto; padding: 50px; background: white;">
+                    <div style="margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid #e5e7eb;">
+                        <div style="font-size: 30px; font-weight: 600; margin-bottom: 8px; color: #111827; letter-spacing: -0.5px;">${data.name}</div>
+                        <div style="font-size: 16px; color: #6b7280; margin-bottom: 20px; font-weight: 400;">${data.title}</div>
+                        <div style="font-size: 14px; color: #6b7280; display: flex; gap: 25px; flex-wrap: wrap;">
+                            <span>${data.email}</span>
+                            <span>${data.phone}</span>
+                            <span>${data.location}</span>
+                            <span>${data.linkedin}</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 18px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em; padding-bottom: 8px; border-bottom: 1px solid #e5e7eb;">Summary</div>
+                        <div style="font-size: 15px; line-height: 1.8; color: #4b5563;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 18px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em; padding-bottom: 8px; border-bottom: 1px solid #e5e7eb;">Skills</div>
+                        <div style="font-size: 14px; line-height: 2; color: #4b5563;">${skillsArray.join(', ')}</div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 18px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em; padding-bottom: 8px; border-bottom: 1px solid #e5e7eb;">Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 25px;">
+                                <div style="font-weight: 600; font-size: 16px; color: #111827; margin-bottom: 4px;">${exp.title}</div>
+                                <div style="font-weight: 400; color: #6b7280; margin-bottom: 6px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 13px; color: #9ca3af; margin-bottom: 12px; font-weight: 400;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.8; color: #4b5563;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateClassicLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Georgia', 'Times New Roman', serif; line-height: 1.6; color: #1f2937; max-width: 800px; margin: 0 auto; padding: 50px; background: white; border: 2px solid #374151;">
+                    <div style="text-align: center; margin-bottom: 35px; padding-bottom: 25px; border-bottom: 3px solid #374151;">
+                        <div style="font-size: 32px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">${data.name}</div>
+                        <div style="font-size: 18px; margin-bottom: 18px; font-style: italic; color: #4b5563;">${data.title}</div>
+                        <div style="font-size: 13px; color: #6b7280;">${data.email} | ${data.phone} | ${data.location} | ${data.linkedin}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <div style="font-size: 15px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #374151; padding-bottom: 8px;">Professional Summary</div>
+                        <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 30px;">
+                        <div style="font-size: 15px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #374151; padding-bottom: 8px;">Skills</div>
+                        <div style="font-size: 14px; line-height: 1.8; color: #4b5563;">${skillsArray.join(' • ')}</div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 30px;">
+                        <div style="font-size: 15px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #374151; padding-bottom: 8px;">Professional Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 22px;">
+                                <div style="font-weight: 700; font-size: 15px; color: #1f2937;">${exp.title}</div>
+                                <div style="font-style: italic; color: #4b5563; margin-bottom: 6px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 12px; color: #9ca3af; margin-bottom: 10px;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.6; color: #4b5563;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 5px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateElegantLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Playfair Display', Georgia, serif; line-height: 1.8; color: #2d3748; max-width: 850px; margin: 0 auto; padding: 60px; background: #faf7f2; border: 1px solid #d4a574;">
+                    <div style="text-align: center; margin-bottom: 40px; padding-bottom: 30px; border-bottom: 3px solid #8b6914;">
+                        <div style="font-size: 36px; font-weight: 600; margin-bottom: 12px; color: #2d3748; letter-spacing: 1px;">${data.name}</div>
+                        <div style="font-size: 18px; color: #8b6914; margin-bottom: 20px; font-style: italic; letter-spacing: 0.5px;">${data.title}</div>
+                        <div style="font-size: 13px; color: #718096; font-style: italic;">${data.email} • ${data.phone} • ${data.location}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 15px; font-weight: 600; margin-bottom: 15px; color: #8b6914; letter-spacing: 0.5px; border-bottom: 1px solid #d4a574; padding-bottom: 10px;">Professional Summary</div>
+                        <div style="font-size: 14px; line-height: 1.8; color: #4a5568; font-style: italic;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 15px; font-weight: 600; margin-bottom: 15px; color: #8b6914; letter-spacing: 0.5px; border-bottom: 1px solid #d4a574; padding-bottom: 10px;">Core Competencies</div>
+                        <div style="font-size: 14px; line-height: 2; color: #4a5568;">${skillsArray.join(' • ')}</div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 15px; font-weight: 600; margin-bottom: 15px; color: #8b6914; letter-spacing: 0.5px; border-bottom: 1px solid #d4a574; padding-bottom: 10px;">Professional Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 25px;">
+                                <div style="font-weight: 600; font-size: 16px; color: #2d3748; margin-bottom: 6px;">${exp.title}</div>
+                                <div style="font-style: italic; color: #8b6914; margin-bottom: 8px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 12px; color: #a0aec0; margin-bottom: 12px; font-style: italic;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.8; color: #4a5568;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateBoldLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.5; color: #1f2937; max-width: 800px; margin: 0 auto; padding: 45px; background: white; border: 3px solid #1f2937;">
+                    <div style="margin-bottom: 35px; padding-bottom: 25px; border-bottom: 3px solid #1f2937;">
+                        <div style="font-size: 34px; font-weight: 800; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">${data.name}</div>
+                        <div style="font-size: 18px; font-weight: 700; color: #dc2626; margin-bottom: 18px; text-transform: uppercase; letter-spacing: 0.5px;">${data.title}</div>
+                        <div style="font-size: 13px; font-weight: 600; text-transform: uppercase; color: #6b7280;">${data.email} | ${data.phone} | ${data.location}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; background: #1f2937; color: white; padding: 10px 15px;">Summary</div>
+                        <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 30px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; background: #1f2937; color: white; padding: 10px 15px;">Skills</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            ${skillsArray.map(skill => `<div style="background: #dc2626; color: white; padding: 8px 16px; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">${skill}</div>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 30px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; background: #1f2937; color: white; padding: 10px 15px;">Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 22px; padding-left: 20px; border-left: 4px solid #dc2626;">
+                                <div style="font-weight: 700; font-size: 16px; color: #1f2937;">${exp.title}</div>
+                                <div style="font-weight: 600; color: #dc2626; margin-bottom: 8px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 12px; font-weight: 600; color: #9ca3af; margin-bottom: 10px;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateCleanLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #1f2937; max-width: 800px; margin: 0 auto; padding: 50px; background: white;">
+                    <div style="margin-bottom: 40px; padding-bottom: 25px; border-bottom: 2px solid #e5e7eb;">
+                        <div style="font-size: 30px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.5px;">${data.name}</div>
+                        <div style="font-size: 16px; color: #6b7280; margin-bottom: 20px; font-weight: 400; letter-spacing: 0.5px;">${data.title}</div>
+                        <div style="font-size: 13px; color: #9ca3af; display: flex; gap: 20px;">${data.email} | ${data.phone} | ${data.location}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 15px; color: #374151; letter-spacing: 0.05em; text-transform: uppercase;">Summary</div>
+                        <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 30px;">
+                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 15px; color: #374151; letter-spacing: 0.05em; text-transform: uppercase;">Skills</div>
+                        <div style="font-size: 14px; line-height: 1.8; color: #4b5563;">${skillsArray.join(', ')}</div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 30px;">
+                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 15px; color: #374151; letter-spacing: 0.05em; text-transform: uppercase;">Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 25px;">
+                                <div style="font-weight: 600; font-size: 15px; color: #111827; margin-bottom: 4px;">${exp.title}</div>
+                                <div style="font-weight: 400; color: #6b7280; margin-bottom: 6px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 12px; color: #9ca3af; margin-bottom: 12px;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateDarkLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #e5e7eb; max-width: 800px; margin: 0 auto; padding: 50px; background: #111827; border-radius: 16px;">
+                    <div style="margin-bottom: 40px; padding-bottom: 25px; border-bottom: 2px solid #6366f1;">
+                        <div style="font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #f9fafb; letter-spacing: -0.5px;">${data.name}</div>
+                        <div style="font-size: 18px; color: #8b5cf6; margin-bottom: 20px; font-weight: 500;">${data.title}</div>
+                        <div style="font-size: 13px; color: #9ca3af; display: flex; gap: 20px;">${data.email} | ${data.phone} | ${data.location}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 15px; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em;">Summary</div>
+                        <div style="font-size: 14px; line-height: 1.7; color: #d1d5db;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 30px;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 15px; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em;">Skills</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            ${skillsArray.map(skill => `<div style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 500;">${skill}</div>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 30px;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 15px; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em;">Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 25px; padding-left: 20px; border-left: 3px solid #8b5cf6;">
+                                <div style="font-weight: 600; font-size: 16px; color: #f9fafb; margin-bottom: 4px;">${exp.title}</div>
+                                <div style="font-weight: 500; color: #8b5cf6; margin-bottom: 8px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 12px; color: #6b7280; margin-bottom: 10px;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.7; color: #d1d5db;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateNeonLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #fff; max-width: 900px; margin: 0 auto; padding: 50px; background: #0a0a0a; border-radius: 20px; box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);">
+                    <div style="margin-bottom: 40px; padding-bottom: 30px; border-bottom: 2px solid #00ffff; background: linear-gradient(90deg, rgba(0,255,255,0.1) 0%, transparent 100%); padding: 20px; border-radius: 10px;">
+                        <div style="font-size: 36px; font-weight: 800; margin-bottom: 10px; background: linear-gradient(90deg, #00ffff, #ff00ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${data.name}</div>
+                        <div style="font-size: 18px; color: #00ffff; margin-bottom: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">${data.title}</div>
+                        <div style="font-size: 13px; color: #888; display: flex; gap: 20px;">${data.email} | ${data.phone} | ${data.location}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #00ffff; text-transform: uppercase; letter-spacing: 0.05em; text-shadow: 0 0 10px rgba(0,255,255,0.5);">Summary</div>
+                        <div style="font-size: 14px; line-height: 1.7; color: #ccc; background: rgba(0,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(0,255,255,0.2);">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #ff00ff; text-transform: uppercase; letter-spacing: 0.05em; text-shadow: 0 0 10px rgba(255,0,255,0.5);">Skills</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            ${skillsArray.map(skill => `<div style="background: linear-gradient(135deg, #00ffff 0%, #ff00ff 100%); color: #000; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 12px; box-shadow: 0 0 15px rgba(0,255,255,0.5);">${skill}</div>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #00ffff; text-transform: uppercase; letter-spacing: 0.05em; text-shadow: 0 0 10px rgba(0,255,255,0.5);">Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 25px; padding: 20px; background: rgba(255,0,255,0.05); border-radius: 10px; border: 1px solid rgba(255,0,255,0.2); border-left: 3px solid #ff00ff;">
+                                <div style="font-weight: 700; font-size: 16px; color: #fff; margin-bottom: 4px;">${exp.title}</div>
+                                <div style="font-weight: 500; color: #ff00ff; margin-bottom: 8px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 12px; color: #666; margin-bottom: 10px;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.7; color: #ccc;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateGlassmorphismLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #1f2937; max-width: 900px; margin: 0 auto; padding: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px;">
+                    <div style="margin-bottom: 40px; padding: 30px; background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); border-radius: 15px; border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 32px; font-weight: 700; margin-bottom: 10px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">${data.name}</div>
+                        <div style="font-size: 18px; color: rgba(255,255,255,0.9); margin-bottom: 20px; font-weight: 500;">${data.title}</div>
+                        <div style="font-size: 13px; color: rgba(255,255,255,0.8); display: flex; gap: 20px;">${data.email} | ${data.phone} | ${data.location}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #fff; text-transform: uppercase; letter-spacing: 0.05em;">Summary</div>
+                        <div style="font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2);">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #fff; text-transform: uppercase; letter-spacing: 0.05em;">Skills</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            ${skillsArray.map(skill => `<div style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); color: #fff; padding: 8px 16px; border-radius: 20px; font-weight: 500; font-size: 12px; border: 1px solid rgba(255,255,255,0.3);">${skill}</div>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #fff; text-transform: uppercase; letter-spacing: 0.05em;">Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 25px; padding: 20px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255,255,255,0.2);">
+                                <div style="font-weight: 700; font-size: 16px; color: #fff; margin-bottom: 4px;">${exp.title}</div>
+                                <div style="font-weight: 500; color: rgba(255,255,255,0.9); margin-bottom: 8px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 10px;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.9);">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateGeometricLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #1f2937; max-width: 900px; margin: 0 auto; padding: 50px; background: #fff; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); border-radius: 50%; opacity: 0.1;"></div>
+                    <div style="position: absolute; bottom: -50px; left: -50px; width: 150px; height: 150px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); border-radius: 50%; opacity: 0.1;"></div>
+                    
+                    <div style="margin-bottom: 40px; padding: 30px; background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%); padding-left: 40px;">
+                        <div style="font-size: 32px; font-weight: 800; margin-bottom: 10px; color: #fff;">${data.name}</div>
+                        <div style="font-size: 18px; color: rgba(255,255,255,0.9); margin-bottom: 20px; font-weight: 600;">${data.title}</div>
+                        <div style="font-size: 13px; color: rgba(255,255,255,0.8);">${data.email} | ${data.phone} | ${data.location}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 30px; height: 3px; background: #f59e0b;"></div>
+                            Summary
+                        </div>
+                        <div style="font-size: 14px; line-height: 1.7; color: #4b5563; padding-left: 40px;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #3b82f6; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 30px; height: 3px; background: #3b82f6;"></div>
+                            Skills
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; padding-left: 40px;">
+                            ${skillsArray.map(skill => `<div style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: #fff; padding: 8px 16px; border-radius: 5px; font-weight: 600; font-size: 12px; clip-path: polygon(0 0, 95% 0, 100% 50%, 95% 100%, 0% 100%);">${skill}</div>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #ef4444; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 30px; height: 3px; background: #ef4444;"></div>
+                            Experience
+                        </div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 25px; padding: 20px; background: #f9fafb; border-radius: 10px; border-left: 4px solid #ef4444; margin-left: 40px;">
+                                <div style="font-weight: 700; font-size: 16px; color: #1f2937; margin-bottom: 4px;">${exp.title}</div>
+                                <div style="font-weight: 500; color: #ef4444; margin-bottom: 8px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 12px; color: #9ca3af; margin-bottom: 10px;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateVibrantLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #1f2937; max-width: 900px; margin: 0 auto; padding: 50px; background: #fff; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.1);">
+                    <div style="margin-bottom: 40px; padding: 35px; background: linear-gradient(135deg, #f97316 0%, #ec4899 50%, #8b5cf6 100%); border-radius: 15px; color: #fff;">
+                        <div style="font-size: 36px; font-weight: 800; margin-bottom: 10px;">${data.name}</div>
+                        <div style="font-size: 20px; margin-bottom: 20px; font-weight: 600; opacity: 0.95;">${data.title}</div>
+                        <div style="font-size: 14px; opacity: 0.9; display: flex; gap: 20px;">${data.email} | ${data.phone} | ${data.location}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 16px; font-weight: 700; margin-bottom: 15px; color: #f97316; text-transform: uppercase; letter-spacing: 0.05em;">Summary</div>
+                        <div style="font-size: 15px; line-height: 1.7; color: #4b5563; background: linear-gradient(135deg, #fff7ed 0%, #fdf4ff 100%); padding: 20px; border-radius: 10px; border-left: 4px solid #f97316;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 16px; font-weight: 700; margin-bottom: 15px; color: #ec4899; text-transform: uppercase; letter-spacing: 0.05em;">Skills</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                            ${skillsArray.map(skill => `<div style="background: linear-gradient(135deg, #f97316 0%, #ec4899 100%); color: #fff; padding: 10px 20px; border-radius: 25px; font-weight: 600; font-size: 13px;">${skill}</div>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 16px; font-weight: 700; margin-bottom: 15px; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em;">Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 25px; padding: 25px; background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 100%); border-radius: 15px; border-left: 4px solid #8b5cf6;">
+                                <div style="font-weight: 700; font-size: 17px; color: #1f2937; margin-bottom: 4px;">${exp.title}</div>
+                                <div style="font-weight: 600; color: #8b5cf6; margin-bottom: 8px; font-size: 15px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 13px; color: #9ca3af; margin-bottom: 12px;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateTechMinimalLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'JetBrains Mono', 'Fira Code', monospace; line-height: 1.6; color: #e5e7eb; max-width: 900px; margin: 0 auto; padding: 50px; background: #0d1117; border: 1px solid #30363d; border-radius: 8px;">
+                    <div style="margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid #30363d;">
+                        <div style="font-size: 28px; font-weight: 600; margin-bottom: 10px; color: #58a6ff;">${data.name}</div>
+                        <div style="font-size: 16px; color: #8b949e; margin-bottom: 20px;">${data.title}</div>
+                        <div style="font-size: 13px; color: #8b949e; display: flex; gap: 20px;">
+                            <span style="color: #58a6ff;">${data.email}</span>
+                            <span style="color: #58a6ff;">${data.phone}</span>
+                            <span style="color: #58a6ff;">${data.location}</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 15px; color: #58a6ff; text-transform: uppercase; letter-spacing: 0.05em;">// Summary</div>
+                        <div style="font-size: 14px; line-height: 1.7; color: #c9d1d9; padding-left: 20px; border-left: 2px solid #30363d;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 15px; color: #58a6ff; text-transform: uppercase; letter-spacing: 0.05em;">// Skills</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            ${skillsArray.map(skill => `<div style="background: #21262d; color: #58a6ff; padding: 6px 12px; border-radius: 4px; font-size: 12px; border: 1px solid #30363d;">${skill}</div>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 15px; color: #58a6ff; text-transform: uppercase; letter-spacing: 0.05em;">// Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 25px; padding: 20px; background: #161b22; border-radius: 6px; border: 1px solid #30363d;">
+                                <div style="font-weight: 600; font-size: 15px; color: #e5e7eb; margin-bottom: 4px;">${exp.title}</div>
+                                <div style="color: #8b949e; margin-bottom: 8px; font-size: 13px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 12px; color: #6e7681; margin-bottom: 10px;">${exp.date}</div>
+                                <div style="font-size: 13px; line-height: 1.7; color: #c9d1d9;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generatePastelLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #374151; max-width: 900px; margin: 0 auto; padding: 50px; background: #fef3c7; border-radius: 20px;">
+                    <div style="margin-bottom: 40px; padding: 35px; background: #fce7f3; border-radius: 15px; border: 2px solid #fbcfe8;">
+                        <div style="font-size: 34px; font-weight: 700; margin-bottom: 10px; color: #be185d;">${data.name}</div>
+                        <div style="font-size: 18px; color: #9d174d; margin-bottom: 20px; font-weight: 600;">${data.title}</div>
+                        <div style="font-size: 14px; color: #831843; display: flex; gap: 20px;">${data.email} | ${data.phone} | ${data.location}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 15px; font-weight: 700; margin-bottom: 15px; color: #be185d; text-transform: uppercase; letter-spacing: 0.05em;">Summary</div>
+                        <div style="font-size: 15px; line-height: 1.7; color: #4b5563; background: #fef3c7; padding: 20px; border-radius: 10px; border: 2px solid #fde68a;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 15px; font-weight: 700; margin-bottom: 15px; color: #7c3aed; text-transform: uppercase; letter-spacing: 0.05em;">Skills</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                            ${skillsArray.map(skill => `<div style="background: #ddd6fe; color: #5b21b6; padding: 10px 20px; border-radius: 25px; font-weight: 600; font-size: 13px; border: 2px solid #c4b5fd;">${skill}</div>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 15px; font-weight: 700; margin-bottom: 15px; color: #059669; text-transform: uppercase; letter-spacing: 0.05em;">Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 25px; padding: 25px; background: #d1fae5; border-radius: 15px; border: 2px solid #6ee7b7;">
+                                <div style="font-weight: 700; font-size: 17px; color: #065f46; margin-bottom: 4px;">${exp.title}</div>
+                                <div style="font-weight: 600; color: #047857; margin-bottom: 8px; font-size: 15px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 13px; color: #064e3b; margin-bottom: 12px;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.7; color: #065f46;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateGradientBorderLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #1f2937; max-width: 900px; margin: 0 auto; padding: 50px; background: #fff; border-radius: 20px; position: relative; overflow: hidden;">
+                    <div style="position: absolute; inset: 0; padding: 4px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); border-radius: 20px; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></div>
+                    
+                    <div style="position: relative; z-index: 1;">
+                        <div style="margin-bottom: 40px; padding-bottom: 30px; border-bottom: 2px solid #e5e7eb;">
+                            <div style="font-size: 32px; font-weight: 700; margin-bottom: 10px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">${data.name}</div>
+                            <div style="font-size: 18px; color: #6b7280; margin-bottom: 20px; font-weight: 500;">${data.title}</div>
+                            <div style="font-size: 13px; color: #9ca3af; display: flex; gap: 20px;">${data.email} | ${data.phone} | ${data.location}</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 35px;">
+                            <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #667eea; text-transform: uppercase; letter-spacing: 0.05em;">Summary</div>
+                            <div style="font-size: 14px; line-height: 1.7; color: #4b5563; background: linear-gradient(135deg, #f5f3ff 0%, #faf5ff 100%); padding: 20px; border-radius: 10px;">${data.summary}</div>
+                        </div>
+                        
+                        ${skillsArray.length > 0 ? `
+                        <div style="margin-bottom: 35px;">
+                            <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #764ba2; text-transform: uppercase; letter-spacing: 0.05em;">Skills</div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                ${skillsArray.map(skill => `<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 8px 16px; border-radius: 20px; font-weight: 500; font-size: 12px;">${skill}</div>`).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${expArray.length > 0 ? `
+                        <div style="margin-bottom: 35px;">
+                            <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #f093fb; text-transform: uppercase; letter-spacing: 0.05em;">Experience</div>
+                            ${expArray.map(exp => `
+                                <div style="margin-bottom: 25px; padding: 20px; background: #f9fafb; border-radius: 10px; border-left: 3px solid #f093fb;">
+                                    <div style="font-weight: 700; font-size: 16px; color: #1f2937; margin-bottom: 4px;">${exp.title}</div>
+                                    <div style="font-weight: 500; color: #764ba2; margin-bottom: 8px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                    <div style="font-size: 12px; color: #9ca3af; margin-bottom: 10px;">${exp.date}</div>
+                                    <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">
+                                        ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function generateCardBasedLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #1f2937; max-width: 900px; margin: 0 auto; padding: 50px; background: #f3f4f6;">
+                    <div style="margin-bottom: 40px; padding: 35px; background: #fff; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                        <div style="font-size: 32px; font-weight: 700; margin-bottom: 10px; color: #1f2937;">${data.name}</div>
+                        <div style="font-size: 18px; color: #6366f1; margin-bottom: 20px; font-weight: 600;">${data.title}</div>
+                        <div style="font-size: 13px; color: #6b7280; display: flex; gap: 20px;">${data.email} | ${data.phone} | ${data.location}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em;">Summary</div>
+                        <div style="font-size: 14px; line-height: 1.7; color: #4b5563; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em;">Skills</div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px;">
+                            ${skillsArray.map(skill => `<div style="background: #fff; color: #6366f1; padding: 12px 16px; border-radius: 10px; font-weight: 600; font-size: 13px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">${skill}</div>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #374151; text-transform: uppercase; letter-spacing: 0.05em;">Experience</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 25px; padding: 25px; background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div style="font-weight: 700; font-size: 16px; color: #1f2937; margin-bottom: 4px;">${exp.title}</div>
+                                <div style="font-weight: 500; color: #6366f1; margin-bottom: 8px; font-size: 14px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 12px; color: #9ca3af; margin-bottom: 12px;">${exp.date}</div>
+                                <div style="font-size: 14px; line-height: 1.7; color: #4b5563;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">• ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function generateCyberpunkLayout(data) {
+            const skillsArray = Array.isArray(data.skills) ? data.skills : (data.skills ? data.skills.split(', ') : []);
+            const expArray = Array.isArray(data.experience) ? data.experience : [];
+            
+            return `
+                <div style="font-family: 'Orbitron', 'Courier New', monospace; line-height: 1.6; color: #00ff00; max-width: 900px; margin: 0 auto; padding: 50px; background: #000; border: 2px solid #00ff00; border-radius: 0; box-shadow: 0 0 20px rgba(0,255,0,0.3);">
+                    <div style="margin-bottom: 40px; padding-bottom: 30px; border-bottom: 2px solid #00ff00; position: relative;">
+                        <div style="position: absolute; top: 0; right: 0; font-size: 10px; color: #ff00ff;">[SYSTEM_READY]</div>
+                        <div style="font-size: 28px; font-weight: 700; margin-bottom: 10px; text-shadow: 0 0 10px #00ff00;">${data.name}</div>
+                        <div style="font-size: 16px; color: #ff00ff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">${data.title}</div>
+                        <div style="font-size: 12px; color: #00ffff; display: flex; gap: 20px;">${data.email} | ${data.phone} | ${data.location}</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 12px; font-weight: 700; margin-bottom: 15px; color: #ff00ff; text-transform: uppercase; letter-spacing: 2px;">// DATA_STREAM: SUMMARY</div>
+                        <div style="font-size: 13px; line-height: 1.7; color: #00ff00; background: rgba(0,255,0,0.05); padding: 20px; border: 1px solid #00ff00; font-family: 'Courier New', monospace;">${data.summary}</div>
+                    </div>
+                    
+                    ${skillsArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 12px; font-weight: 700; margin-bottom: 15px; color: #ff00ff; text-transform: uppercase; letter-spacing: 2px;">// SKILL_MATRIX</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            ${skillsArray.map(skill => `<div style="background: rgba(0,255,0,0.1); color: #00ff00; padding: 8px 16px; border: 1px solid #00ff00; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">[${skill}]</div>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${expArray.length > 0 ? `
+                    <div style="margin-bottom: 35px;">
+                        <div style="font-size: 12px; font-weight: 700; margin-bottom: 15px; color: #ff00ff; text-transform: uppercase; letter-spacing: 2px;">// EXPERIENCE_LOG</div>
+                        ${expArray.map(exp => `
+                            <div style="margin-bottom: 25px; padding: 20px; background: rgba(255,0,255,0.05); border: 1px solid #ff00ff; position: relative;">
+                                <div style="position: absolute; top: 10px; right: 10px; font-size: 10px; color: #00ffff;">[ENTRY_${exp.date.replace(/[^0-9]/g, '')}]</div>
+                                <div style="font-weight: 700; font-size: 14px; color: #00ff00; margin-bottom: 4px;">${exp.title}</div>
+                                <div style="color: #ff00ff; margin-bottom: 8px; font-size: 12px;">${exp.company} | ${exp.location}</div>
+                                <div style="font-size: 11px; color: #00ffff; margin-bottom: 10px;">${exp.date}</div>
+                                <div style="font-size: 12px; line-height: 1.7; color: #00ff00; font-family: 'Courier New', monospace;">
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<div style="margin-bottom: 6px;">> ${desc}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function downloadWord() {
+            try {
+                console.log('Starting Word download...');
+                console.log('resumeData:', resumeData);
+                
+                // Ensure resumeData has content
+                if (!resumeData.name) {
+                    alert('Please fill in at least your name before downloading.');
+                    return;
+                }
+                
+                // Create HTML content for Word document
+                const skillsArray = Array.isArray(resumeData.skills) ? resumeData.skills : (resumeData.skills ? resumeData.skills.split(', ') : []);
+                const expArray = Array.isArray(resumeData.experience) ? resumeData.experience : [];
+                const eduArray = Array.isArray(resumeData.education) ? resumeData.education : (resumeData.education && resumeData.education.degree ? [resumeData.education] : []);
+                const certArray = Array.isArray(resumeData.certifications) ? resumeData.certifications : (resumeData.certifications ? resumeData.certifications.split(', ') : []);
+                const achieveArray = Array.isArray(resumeData.achievements) ? resumeData.achievements : (resumeData.achievements ? resumeData.achievements.split('\n') : []);
+                
+                const htmlContent = `
+                    <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'>
+                    <head>
+                        <meta charset="utf-8">
+                        <title>Resume - ${resumeData.name}</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; line-height: 1.5; color: #000; }
+                            h1 { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
+                            h2 { font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+                            h3 { font-size: 14px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
+                            .contact { font-size: 12px; margin-bottom: 20px; }
+                            .section { margin-bottom: 20px; }
+                            .item { margin-bottom: 15px; }
+                            .item-title { font-weight: bold; }
+                            .item-subtitle { font-style: italic; }
+                            .item-date { font-size: 11px; color: #666; }
+                            ul { margin-left: 20px; margin-top: 5px; }
+                            li { margin-bottom: 3px; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>${resumeData.name}</h1>
+                        <h2>${resumeData.title}</h2>
+                        <div class="contact">Email: ${resumeData.email} | Phone: ${resumeData.phone} | Location: ${resumeData.location} | LinkedIn: ${resumeData.linkedin}</div>
+                        
+                        <h3>PROFESSIONAL SUMMARY</h3>
+                        <div class="section">${resumeData.summary}</div>
+                        
+                        ${skillsArray.length > 0 ? `
+                        <h3>SKILLS</h3>
+                        <div class="section">${skillsArray.join(', ')}</div>
+                        ` : ''}
+                        
+                        ${expArray.length > 0 ? `
+                        <h3>EXPERIENCE</h3>
+                        ${expArray.map(exp => `
+                            <div class="item">
+                                <div class="item-title">${exp.title}</div>
+                                <div class="item-subtitle">${exp.company} | ${exp.location}</div>
+                                <div class="item-date">${exp.date}</div>
+                                <ul>
+                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<li>${desc}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `).join('')}
+                        ` : ''}
+                        
+                        ${eduArray.length > 0 ? `
+                        <h3>EDUCATION</h3>
+                        ${eduArray.map(edu => `
+                            <div class="item">
+                                <div class="item-title">${edu.degree}</div>
+                                <div class="item-subtitle">${edu.school} | ${edu.location}</div>
+                                <div class="item-date">${edu.date}</div>
+                            </div>
+                        `).join('')}
+                        ` : ''}
+                        
+                        ${resumeData.projects && resumeData.projects.length > 0 ? `
+                        <h3>PROJECTS</h3>
+                        ${resumeData.projects.map(proj => `
+                            <div class="item">
+                                <div class="item-title">${proj.title}</div>
+                                <div>${proj.description}</div>
+                            </div>
+                        `).join('')}
+                        ` : ''}
+                        
+                        ${certArray.length > 0 ? `
+                        <h3>CERTIFICATIONS</h3>
+                        <div class="section">
+                            ${certArray.map(cert => `<div>• ${cert}</div>`).join('')}
+                        </div>
+                        ` : ''}
+                        
+                        ${achieveArray.length > 0 ? `
+                        <h3>ACHIEVEMENTS</h3>
+                        <div class="section">
+                            <ul>
+                                ${achieveArray.map(ach => `<li>${ach}</li>`).join('')}
+                            </ul>
+                        </div>
+                        ` : ''}
+                    </body>
+                    </html>
+                `;
+                
+                // Create blob with Word MIME type
+                const blob = new Blob(['\ufeff', htmlContent], {
+                    type: 'application/msword'
+                });
+                
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `resume-${resumeData.name.replace(/\s+/g, '-').toLowerCase() || 'custom'}.doc`;
+                link.click();
+                URL.revokeObjectURL(url);
+                
+                console.log('Word download completed');
+            } catch (error) {
+                console.error('Word download error:', error);
+                alert('Error: ' + error.message + '. Please refresh the page and try again.');
+            }
+        }
+        
+        function downloadPDF() {
+            const element = document.getElementById('resume-preview');
+            const opt = {
+                margin: 10,
+                filename: `resume-${resumeData.name.replace(/\s+/g, '-').toLowerCase() || 'custom'}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save().catch(error => {
+                console.error('Error generating PDF:', error);
+                alert('Error generating PDF. Please try again.');
+            });
+        }
+    </script>
+</body>
+</html>
