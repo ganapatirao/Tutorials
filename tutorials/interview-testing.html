@@ -2468,5 +2468,28 @@ mockRepository.<span class="function">Verify</span>(x => x.<span class="function
             <p><span class="highlight">💡 Tip:</span> Focus on understanding the testing pyramid, unit testing with mocking, integration testing, E2E testing with Selenium/Playwright, API testing, CI/CD integration, TDD/BDD, contract testing, and continuous testing. These are the areas where most testing interview questions focus. Practice implementing tests in C# with xUnit, Moq, Selenium, and Playwright.</p>
         </div>
     </div>
+    <script>
+        function copyCode(button) {
+            const codeEditor = button.closest('.code-editor');
+            const codeContent = codeEditor.querySelector('.code-editor-content code');
+            const text = codeContent.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
+    <script src="../code-converter.js"></script>
 </body>
 </html>

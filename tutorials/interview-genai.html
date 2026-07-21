@@ -747,18 +747,31 @@
         <div class="answer">
             <p><strong>Quantization</strong> reduces model size and memory usage by using lower precision (e.g., 8-bit instead of 32-bit) for weights and activations. It enables running large models on consumer hardware.</p>
             
-            <div class="code-block"><pre><code># Quantization with bitsandbytes
-from transformers import BitsAndBytesConfig
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">quantization.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Quantization with bitsandbytes</span>
+<span class="keyword">from</span> <span class="module">transformers</span> <span class="keyword">import</span> <span class="class">BitsAndBytesConfig</span>
 
-quantization_config = BitsAndBytesConfig(
-    load_in_8bit=True,
-    bnb_8bit_compute_dtype=torch.float16
+<span class="variable">quantization_config</span> = <span class="class">BitsAndBytesConfig</span>(
+    <span class="property">load_in_8bit</span>=<span class="boolean">True</span>,
+    <span class="property">bnb_8bit_compute_dtype</span>=<span class="module">torch</span>.<span class="property">float16</span>
 )
 
-model = AutoModelForCausalLM.from_pretrained(
-    "model_name",
-    quantization_config=quantization_config
-)</code></pre></div>
+<span class="variable">model</span> = <span class="class">AutoModelForCausalLM</span>.<span class="method">from_pretrained</span>(
+    <span class="string">"model_name"</span>,
+    <span class="property">quantization_config</span>=<span class="variable">quantization_config</span>
+)</code>
+                </div>
+            </div>
         </div>
 
         <h2>4. Prompt Engineering</h2>
@@ -776,9 +789,22 @@ model = AutoModelForCausalLM.from_pretrained(
         <div class="answer">
             <p><strong>Zero-shot Learning</strong> prompts the model to perform a task without providing any examples in the prompt. The model relies on its pre-training knowledge.</p>
             
-            <div class="code-block"><pre><code># Zero-shot example
-prompt = "Classify the sentiment: 'I love this product!'"
-response = model.generate(prompt)</code></pre></div>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">zero_shot.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Zero-shot example</span>
+<span class="variable">prompt</span> = <span class="string">"Classify the sentiment: 'I love this product!'"</span>
+<span class="variable">response</span> = <span class="variable">model</span>.<span class="method">generate</span>(<span class="variable">prompt</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -787,14 +813,27 @@ response = model.generate(prompt)</code></pre></div>
         <div class="answer">
             <p><strong>Few-shot Learning</strong> provides a few examples in the prompt to guide the model's behavior. It's more effective than zero-shot for complex tasks.</p>
             
-            <div class="code-block"><pre><code># Few-shot example
-prompt = """
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">few_shot.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Few-shot example</span>
+<span class="variable">prompt</span> = <span class="string">"""
 Classify sentiment:
 "I hate this" -> Negative
 "I love this" -> Positive
 "This is okay" -> Neutral
 "This product is amazing" -> 
-"""</code></pre></div>
+"""</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -803,15 +842,28 @@ Classify sentiment:
         <div class="answer">
             <p><strong>Chain-of-Thought (CoT)</strong> prompting encourages the model to show its reasoning process step-by-step, improving performance on complex reasoning tasks.</p>
             
-            <div class="code-block"><pre><code># Chain-of-thought example
-prompt = """
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">cot_prompting.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Chain-of-thought example</span>
+<span class="variable">prompt</span> = <span class="string">"""
 Solve: 23 * 17
 Let's think step by step:
 23 * 17 = 23 * (10 + 7)
 = 23 * 10 + 23 * 7
 = 230 + 161
 = 391
-"""</code></pre></div>
+"""</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -827,12 +879,25 @@ Let's think step by step:
         <div class="answer">
             <p><strong>Temperature</strong> controls the randomness of generation. Lower temperature (0.1-0.3) produces more deterministic outputs, while higher temperature (0.7-1.0) produces more diverse and creative outputs.</p>
             
-            <div class="code-block"><pre><code># Temperature control
-response = model.generate(
-    prompt,
-    temperature=0.7,
-    max_tokens=100
-)</code></pre></div>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">temperature.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Temperature control</span>
+<span class="variable">response</span> = <span class="variable">model</span>.<span class="method">generate</span>(
+    <span class="variable">prompt</span>,
+    <span class="property">temperature</span>=<span class="number">0.7</span>,
+    <span class="property">max_tokens</span>=<span class="number">100</span>
+)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -841,12 +906,25 @@ response = model.generate(
         <div class="answer">
             <p><strong>Top-p (Nucleus) Sampling</strong> samples from the smallest set of tokens whose cumulative probability exceeds a threshold p. It balances quality and diversity better than pure sampling.</p>
             
-            <div class="code-block"><pre><code># Top-p sampling
-response = model.generate(
-    prompt,
-    top_p=0.9,
-    do_sample=True
-)</code></pre></div>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">top_p_sampling.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Top-p sampling</span>
+<span class="variable">response</span> = <span class="variable">model</span>.<span class="method">generate</span>(
+    <span class="variable">prompt</span>,
+    <span class="property">top_p</span>=<span class="number">0.9</span>,
+    <span class="property">do_sample</span>=<span class="boolean">True</span>
+)</code>
+                </div>
+            </div>
         </div>
 
         <h2>5. RAG and Retrieval</h2>
@@ -872,12 +950,25 @@ response = model.generate(
         <div class="answer">
             <p><strong>Vector Embedding</strong> represents text, images, or other data as dense vectors in a high-dimensional space. Similar items have similar embeddings, enabling semantic search.</p>
             
-            <div class="code-block"><pre><code># Text embedding with sentence-transformers
-from sentence_transformers import SentenceTransformer
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">embedding.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Text embedding with sentence-transformers</span>
+<span class="keyword">from</span> <span class="module">sentence_transformers</span> <span class="keyword">import</span> <span class="class">SentenceTransformer</span>
 
-model = SentenceTransformer('all-MiniLM-L6-v2')
-embeddings = model.encode(["Hello world", "Hi there"])
-similarity = model.similarity(embeddings[0], embeddings[1])</code></pre></div>
+<span class="variable">model</span> = <span class="class">SentenceTransformer</span>(<span class="string">'all-MiniLM-L6-v2'</span>)
+<span class="variable">embeddings</span> = <span class="variable">model</span>.<span class="method">encode</span>([<span class="string">"Hello world"</span>, <span class="string">"Hi there"</span>])
+<span class="variable">similarity</span> = <span class="variable">model</span>.<span class="method">similarity</span>(<span class="variable">embeddings</span>[<span class="number">0</span>], <span class="variable">embeddings</span>[<span class="number">1</span>])</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -886,22 +977,35 @@ similarity = model.similarity(embeddings[0], embeddings[1])</code></pre></div>
         <div class="answer">
             <p><strong>Vector Database</strong> stores and indexes vector embeddings for efficient similarity search. Examples include Pinecone, Weaviate, Chroma, and FAISS.</p>
             
-            <div class="code-block"><pre><code># Chroma vector database
-import chromadb
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">chroma_db.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Chroma vector database</span>
+<span class="keyword">import</span> <span class="module">chromadb</span>
 
-client = chromadb.Client()
-collection = client.create_collection("documents")
+<span class="variable">client</span> = <span class="module">chromadb</span>.<span class="class">Client</span>()
+<span class="variable">collection</span> = <span class="variable">client</span>.<span class="method">create_collection</span>(<span class="string">"documents"</span>)
 
-collection.add(
-    documents=["Hello world", "Hi there"],
-    embeddings=[[0.1, 0.2], [0.3, 0.4]],
-    ids=["doc1", "doc2"]
+<span class="variable">collection</span>.<span class="method">add</span>(
+    <span class="property">documents</span>=[<span class="string">"Hello world"</span>, <span class="string">"Hi there"</span>],
+    <span class="property">embeddings</span>=[[<span class="number">0.1</span>, <span class="number">0.2</span>], [<span class="number">0.3</span>, <span class="number">0.4</span>]],
+    <span class="property">ids</span>=[<span class="string">"doc1"</span>, <span class="string">"doc2"</span>]
 )
 
-results = collection.query(
-    query_embeddings=[[0.15, 0.25]],
-    n_results=1
-)</code></pre></div>
+<span class="variable">results</span> = <span class="variable">collection</span>.<span class="method">query</span>(
+    <span class="property">query_embeddings</span>=[[<span class="number">0.15</span>, <span class="number">0.25</span>]],
+    <span class="property">n_results</span>=<span class="number">1</span>
+)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -945,13 +1049,26 @@ results = collection.query(
         <div class="answer">
             <p><strong>Chunking</strong> splits large documents into smaller pieces for embedding and retrieval. Good chunking balances context preservation with retrieval precision.</p>
             
-            <div class="code-block"><pre><code># Text chunking
-def chunk_text(text, chunk_size=500, overlap=50):
-    chunks = []
-    for i in range(0, len(text), chunk_size - overlap):
-        chunk = text[i:i + chunk_size]
-        chunks.append(chunk)
-    return chunks</code></pre></div>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">chunking.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Text chunking</span>
+<span class="keyword">def</span> <span class="function">chunk_text</span>(<span class="variable">text</span>, <span class="variable">chunk_size</span>=<span class="number">500</span>, <span class="variable">overlap</span>=<span class="number">50</span>):
+    <span class="variable">chunks</span> = []
+    <span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="number">0</span>, <span class="function">len</span>(<span class="variable">text</span>), <span class="variable">chunk_size</span> - <span class="variable">overlap</span>):
+        <span class="variable">chunk</span> = <span class="variable">text</span>[<span class="variable">i</span>:<span class="variable">i</span> + <span class="variable">chunk_size</span>]
+        <span class="variable">chunks</span>.<span class="method">append</span>(<span class="variable">chunk</span>)
+    <span class="keyword">return</span> <span class="variable">chunks</span></code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -983,11 +1100,24 @@ def chunk_text(text, chunk_size=500, overlap=50):
         <div class="answer">
             <p><strong>Text Generation</strong> creates coherent text based on a prompt. Applications include article writing, story generation, code generation, and summarization.</p>
             
-            <div class="code-block"><pre><code># Text generation with Hugging Face
-from transformers import pipeline
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">text_generation.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Text generation with Hugging Face</span>
+<span class="keyword">from</span> <span class="module">transformers</span> <span class="keyword">import</span> <span class="class">pipeline</span>
 
-generator = pipeline("text-generation", model="gpt2")
-output = generator("Once upon a time", max_length=100)</code></pre></div>
+<span class="variable">generator</span> = <span class="class">pipeline</span>(<span class="string">"text-generation"</span>, <span class="property">model</span>=<span class="string">"gpt2"</span>)
+<span class="variable">output</span> = <span class="variable">generator</span>(<span class="string">"Once upon a time"</span>, <span class="property">max_length</span>=<span class="number">100</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -996,13 +1126,26 @@ output = generator("Once upon a time", max_length=100)</code></pre></div>
         <div class="answer">
             <p><strong>Image Generation</strong> creates images from text descriptions using diffusion models like Stable Diffusion or DALL-E.</p>
             
-            <div class="code-block"><pre><code># Image generation with Stable Diffusion
-from diffusers import StableDiffusionPipeline
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">image_generation.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Image generation with Stable Diffusion</span>
+<span class="keyword">from</span> <span class="module">diffusers</span> <span class="keyword">import</span> <span class="class">StableDiffusionPipeline</span>
 
-pipe = StableDiffusionPipeline.from_pretrained(
-    "runwayml/stable-diffusion-v1-5"
+<span class="variable">pipe</span> = <span class="class">StableDiffusionPipeline</span>.<span class="method">from_pretrained</span>(
+    <span class="string">"runwayml/stable-diffusion-v1-5"</span>
 )
-image = pipe("A beautiful sunset over mountains").images[0]</code></pre></div>
+<span class="variable">image</span> = <span class="variable">pipe</span>(<span class="string">"A beautiful sunset over mountains"</span>).<span class="property">images</span>[<span class="number">0</span>]</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1011,12 +1154,25 @@ image = pipe("A beautiful sunset over mountains").images[0]</code></pre></div>
         <div class="answer">
             <p><strong>Code Generation</strong> creates code from natural language descriptions. Models like GitHub Copilot and CodeLlama are trained on vast code repositories.</p>
             
-            <div class="code-block"><pre><code># Code generation
-from transformers import AutoModelForCausalLM, AutoTokenizer
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">code_generation.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Code generation</span>
+<span class="keyword">from</span> <span class="module">transformers</span> <span class="keyword">import</span> <span class="class">AutoModelForCausalLM</span>, <span class="class">AutoTokenizer</span>
 
-model = AutoModelForCausalLM.from_pretrained("bigcode/santacoder")
-prompt = "def fibonacci(n):"
-output = model.generate(prompt, max_tokens=100)</code></pre></div>
+<span class="variable">model</span> = <span class="class">AutoModelForCausalLM</span>.<span class="method">from_pretrained</span>(<span class="string">"bigcode/santacoder"</span>)
+<span class="variable">prompt</span> = <span class="string">"def fibonacci(n):"</span>
+<span class="variable">output</span> = <span class="variable">model</span>.<span class="method">generate</span>(<span class="variable">prompt</span>, <span class="property">max_tokens</span>=<span class="number">100</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1025,9 +1181,22 @@ output = model.generate(prompt, max_tokens=100)</code></pre></div>
         <div class="answer">
             <p><strong>Summarization</strong> condenses long documents into concise summaries while preserving key information. It can be extractive (selecting sentences) or abstractive (generating new text).</p>
             
-            <div class="code-block"><pre><code># Summarization
-summarizer = pipeline("summarization")
-summary = summarizer(long_text, max_length=100)</code></pre></div>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">summarization.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Summarization</span>
+<span class="variable">summarizer</span> = <span class="class">pipeline</span>(<span class="string">"summarization"</span>)
+<span class="variable">summary</span> = <span class="variable">summarizer</span>(<span class="variable">long_text</span>, <span class="property">max_length</span>=<span class="number">100</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1036,9 +1205,22 @@ summary = summarizer(long_text, max_length=100)</code></pre></div>
         <div class="answer">
             <p><strong>Translation</strong> converts text from one language to another. Modern translation uses sequence-to-sequence models like T5 or mBART.</p>
             
-            <div class="code-block"><pre><code># Translation
-translator = pipeline("translation", model="Helsinki-NLP/opus-mt-en-fr")
-result = translator("Hello world", src_lang="en", tgt_lang="fr")</code></pre></div>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">translation.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Translation</span>
+<span class="variable">translator</span> = <span class="class">pipeline</span>(<span class="string">"translation"</span>, <span class="property">model</span>=<span class="string">"Helsinki-NLP/opus-mt-en-fr"</span>)
+<span class="variable">result</span> = <span class="variable">translator</span>(<span class="string">"Hello world"</span>, <span class="property">src_lang</span>=<span class="string">"en"</span>, <span class="property">tgt_lang</span>=<span class="string">"fr"</span>)</code>
+                </div>
+            </div>
         </div>
 
         <h2>7. GenAI Ethics and Safety</h2>
@@ -1071,13 +1253,26 @@ result = translator("Hello world", src_lang="en", tgt_lang="fr")</code></pre></d
         <div class="answer">
             <p><strong>Content Moderation</strong> filters harmful content from AI outputs. It involves detecting and blocking hate speech, violence, self-harm, and other inappropriate content.</p>
             
-            <div class="code-block"><pre><code># Content moderation with OpenAI
-from openai import Moderation
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">content_moderation.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Content moderation with OpenAI</span>
+<span class="keyword">from</span> <span class="module">openai</span> <span class="keyword">import</span> <span class="class">Moderation</span>
 
-moderation = Moderation()
-result = moderation.create(input="Your text here")
-if result.results[0].flagged:
-    print("Content flagged as inappropriate")</code></pre></div>
+<span class="variable">moderation</span> = <span class="class">Moderation</span>()
+<span class="variable">result</span> = <span class="variable">moderation</span>.<span class="method">create</span>(<span class="property">input</span>=<span class="string">"Your text here"</span>)
+<span class="keyword">if</span> <span class="variable">result</span>.<span class="property">results</span>[<span class="number">0</span>].<span class="property">flagged</span>:
+    <span class="function">print</span>(<span class="string">"Content flagged as inappropriate"</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1160,5 +1355,28 @@ if result.results[0].flagged:
             <p><span class="highlight">💡 Tip:</span> Focus on understanding transformer architecture, attention mechanisms, and practical techniques like RAG, fine-tuning, and prompt engineering. Be prepared to discuss current models (GPT, Claude, LLaMA) and their differences. Hands-on experience with Hugging Face and building RAG applications is highly valuable.</p>
         </div>
     </div>
+    <script>
+        function copyCode(button) {
+            const codeEditor = button.closest('.code-editor');
+            const codeContent = codeEditor.querySelector('.code-editor-content code');
+            const text = codeContent.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
+    <script src="../code-converter.js"></script>
 </body>
 </html>

@@ -5,328 +5,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Machine Learning Interview Guide</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #1a1a2e; background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%); background-size: 400% 400%; animation: gradientShift 20s ease infinite; min-height: 100vh; padding: 25px 20px; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .container { max-width: 1100px; margin: 0 auto; padding: 50px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px); border-radius: 32px; box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3); }
+        .back-button { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 30px; font-weight: 700; margin-bottom: 30px; }
+        h1 { color: #1a1a2e; font-size: 52px; font-weight: 800; text-align: center; margin-bottom: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { text-align: center; font-size: 18px; color: #4a4a68; margin-bottom: 40px; }
+        h2 { color: white; font-size: 28px; font-weight: 700; margin-top: 40px; margin-bottom: 25px; padding: 18px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; }
+        .question { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; border-radius: 15px; margin: 25px 0 15px 0; font-weight: 600; font-size: 18px; }
+        .answer { background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%); padding: 30px 35px; border-radius: 15px; margin: 15px 0 25px 0; border-left: 6px solid #764ba2; }
+        .answer p { margin-bottom: 15px; color: #1a1a2e; }
+        .answer strong { color: #667eea; }
+        .answer ul { padding-left: 25px; margin-bottom: 15px; }
+        .answer h3 { color: #667eea; font-size: 20px; margin-top: 20px; margin-bottom: 12px; }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: #1a1a2e;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 20s ease infinite;
-            min-height: 100vh;
-            padding: 25px 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
-            animation: particleFloat 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 50px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(30px);
-            border-radius: 32px;
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            animation: containerFloat 6s ease-in-out infinite;
-        }
-        
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #764ba2 60%, 
-                #667eea 80%, 
-                #764ba2 100%);
-            background-size: 300% 100%;
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-        
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
-        }
-        
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 
-                0 8px 25px rgba(102, 126, 234, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-button:hover::before {
-            left: 100%;
-        }
-        
-        .back-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
-        }
-        
-        h1 {
-            color: #1a1a2e;
-            font-size: 52px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 35px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
-            border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .subtitle {
-            text-align: center;
-            font-size: 18px;
-            color: #4a4a68;
-            margin-bottom: 40px;
-            font-weight: 500;
-            animation: fadeIn 1s ease 0.4s both;
-        }
-        
-        h2 {
-            color: white;
-            font-size: 28px;
-            font-weight: 700;
-            margin-top: 40px;
-            margin-bottom: 25px;
-            padding: 18px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .code-editor {
+            background: #1e1e1e;
             border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
+            margin: 20px 0;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3e3e42;
         }
         
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+        .code-editor-header {
+            background: #2d2d2d;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            border-bottom: 1px solid #3e3e42;
         }
         
-        .question {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
+        .code-editor-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .answer {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 30px 35px;
-            border-radius: 15px;
-            margin: 15px 0 25px 0;
-            border-left: 6px solid #764ba2;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            animation: slideUp 0.5s ease both;
+        .code-editor-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
         }
         
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .code-editor-dot.red { background: #ff5f56; }
+        .code-editor-dot.yellow { background: #ffbd2e; }
+        .code-editor-dot.green { background: #27ca40; }
         
-        .answer p {
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            line-height: 1.8;
-        }
-        
-        .answer strong {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
-        }
-        
-        .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 12px;
-            border-radius: 10px;
-            overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+        .code-editor-title {
+            color: #9cdcfe;
+            font-family: 'Fira Code', monospace;
             font-size: 13px;
-            margin: 15px 0;
+            margin-left: 12px;
+        }
+        
+        .copy-button {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .copy-button:hover {
+            background: #4e4e52;
+            color: #ffffff;
+        }
+        
+        .copy-button.copied {
+            background: #27ca40;
+            color: #ffffff;
+        }
+        
+        .language-selector {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            margin-left: 8px;
+        }
+        
+        .language-selector:hover {
+            background: #4e4e52;
+            color: #ffffff;
+        }
+        
+        @media (max-width: 768px) {
+            .language-selector {
+                padding: 3px 6px;
+                font-size: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .language-selector {
+                padding: 2px 4px;
+                font-size: 9px;
+                margin-left: 4px;
+                min-width: 60px;
+            }
+        }
+        
+        .code-editor-content {
+            padding: 20px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
             line-height: 1.6;
-            border-left: 4px solid #FF6B6B;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.4s ease both;
-        }
-        
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+            color: #d4d4d4;
             overflow-x: auto;
+            background: #1e1e1e;
         }
         
-        .code-block code {
-            white-space: pre-wrap;
-            word-wrap: break-word;
+        .code-editor-content code {
+            display: block;
+            white-space: pre;
         }
+        
+        .keyword { color: #569cd6; }
+        .type { color: #4ec9b0; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; font-style: italic; }
+        .number { color: #b5cea8; }
+        .method { color: #dcdcaa; }
+        .property { color: #9cdcfe; }
+        .variable { color: #9cdcfe; }
+        .operator { color: #d4d4d4; }
+        .decorator { color: #c586c0; }
+        
+        .footer { text-align: center; margin-top: 50px; padding: 35px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%); border-radius: 20px; }
+        .highlight { color: #667eea; font-weight: 700; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
+        th { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; text-align: left; font-weight: 600; font-size: 15px; }
+        td { padding: 15px; border-bottom: 1px solid #e9ecef; color: #4a4a68; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f8f9fa; }
         
         .toc {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -335,95 +163,36 @@
             margin: 40px 0;
             border-left: 8px solid #667eea;
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
         }
-        
-        .toc h3 {
-            color: #1a1a2e;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .toc ol {
-            padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
-        }
-        
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 15px;
-        }
-        
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e9ecef;
-            color: #4a4a68;
-        }
-        
-        tr:last-child td {
-            border-bottom: none;
-        }
-        
-        tr:hover td {
-            background: #f8f9fa;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 35px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
-            border-radius: 20px;
-            border: 2px solid rgba(102, 126, 234, 0.25);
-            color: #666;
-            font-size: 15px;
-            line-height: 1.7;
-            animation: slideUp 0.6s ease both;
-        }
-        
-        .footer p {
-            margin-bottom: 12px;
-        }
-        
-        .footer .highlight {
-            color: #667eea;
-            font-weight: 600;
-        }
+        .toc h3 { color: #1a1a2e; font-size: 24px; font-weight: 700; margin-bottom: 20px; }
+        .toc ol { padding-left: 25px; color: #4a4a68; line-height: 2; }
+        .toc ol li { margin-bottom: 8px; font-weight: 500; }
         
         @media (max-width: 768px) {
-            body { padding: 12px 8px; }
+            body { padding: 15px 10px; }
             .container { padding: 25px 20px; border-radius: 20px; }
-            h1 { font-size: 36px; }
-            .subtitle { font-size: 15px; margin-bottom: 25px; }
-            h2 { font-size: 22px; padding: 14px 20px; margin-top: 30px; }
-            .question { padding: 15px 20px; font-size: 16px; margin: 20px 0 12px 0; }
-            .answer { padding: 20px 25px; margin: 12px 0 20px 0; }
-            .code-block { padding: 15px; font-size: 13px; margin: 15px 0; }
-            .toc { padding: 25px 30px; margin: 30px 0; }
-            .toc ol { padding-left: 20px; line-height: 1.8; }
-            .back-button { padding: 12px 24px; font-size: 14px; margin-bottom: 20px; }
-            .footer { padding: 25px; margin-top: 35px; font-size: 14px; }
+            h1 { font-size: 32px; }
+            .subtitle { font-size: 16px; }
+            h2 { font-size: 22px; padding: 14px 20px; }
+            .question { font-size: 16px; padding: 16px 20px; }
+            .answer { padding: 20px 20px; }
+            .code-editor-content { padding: 15px; font-size: 12px; }
+            .code-editor-title { font-size: 11px; }
+            .footer { padding: 25px 20px; }
+            .toc { padding: 25px 30px; }
+        }
+        
+        @media (max-width: 480px) {
+            body { padding: 10px 5px; }
+            .container { padding: 20px 15px; border-radius: 16px; }
+            h1 { font-size: 26px; }
+            .subtitle { font-size: 14px; }
+            h2 { font-size: 20px; padding: 12px 16px; }
+            .question { font-size: 15px; padding: 14px 16px; }
+            .answer { padding: 18px 16px; }
+            .code-editor-content { padding: 12px; font-size: 11px; }
+            .code-editor-title { font-size: 10px; }
+            .back-button { padding: 12px 20px; font-size: 14px; }
         }
     </style>
 </head>
@@ -571,14 +340,27 @@
         <div class="answer">
             <p><strong>Linear Regression</strong> is a supervised learning algorithm used for predicting continuous values. It models the relationship between input features and output as a linear equation.</p>
             
-            <div class="code-block"><pre><code># Linear regression with scikit-learn
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">linear_regression.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Linear regression with scikit-learn</span>
+<span class="keyword">from</span> <span class="variable">sklearn.linear_model</span> <span class="keyword">import</span> <span class="type">LinearRegression</span>
+<span class="keyword">from</span> <span class="variable">sklearn.model_selection</span> <span class="keyword">import</span> <span class="type">train_test_split</span>
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-model = LinearRegression()
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)</code></pre></div>
+<span class="variable">X_train</span>, <span class="variable">X_test</span>, <span class="variable">y_train</span>, <span class="variable">y_test</span> = <span class="method">train_test_split</span>(<span class="variable">X</span>, <span class="variable">y</span>, <span class="variable">test_size</span>=<span class="number">0.2</span>)
+<span class="variable">model</span> = <span class="type">LinearRegression</span>()
+<span class="variable">model</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>)
+<span class="variable">predictions</span> = <span class="variable">model</span>.<span class="method">predict</span>(<span class="variable">X_test</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -587,13 +369,26 @@ predictions = model.predict(X_test)</code></pre></div>
         <div class="answer">
             <p><strong>Logistic Regression</strong> is a classification algorithm that uses the sigmoid function to predict probabilities. It's used for binary classification problems.</p>
             
-            <div class="code-block"><pre><code># Logistic regression
-from sklearn.linear_model import LogisticRegression
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">logistic_regression.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Logistic regression</span>
+<span class="keyword">from</span> <span class="variable">sklearn.linear_model</span> <span class="keyword">import</span> <span class="type">LogisticRegression</span>
 
-model = LogisticRegression()
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)
-probabilities = model.predict_proba(X_test)</code></pre></div>
+<span class="variable">model</span> = <span class="type">LogisticRegression</span>()
+<span class="variable">model</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>)
+<span class="variable">predictions</span> = <span class="variable">model</span>.<span class="method">predict</span>(<span class="variable">X_test</span>)
+<span class="variable">probabilities</span> = <span class="variable">model</span>.<span class="method">predict_proba</span>(<span class="variable">X_test</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -630,12 +425,25 @@ probabilities = model.predict_proba(X_test)</code></pre></div>
         <div class="answer">
             <p><strong>Decision Tree</strong> is a supervised learning algorithm that uses a tree-like model of decisions. It splits data based on features to make predictions.</p>
             
-            <div class="code-block"><pre><code># Decision tree classifier
-from sklearn.tree import DecisionTreeClassifier
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">decision_tree.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Decision tree classifier</span>
+<span class="keyword">from</span> <span class="variable">sklearn.tree</span> <span class="keyword">import</span> <span class="type">DecisionTreeClassifier</span>
 
-model = DecisionTreeClassifier(max_depth=3)
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)</code></pre></div>
+<span class="variable">model</span> = <span class="type">DecisionTreeClassifier</span>(<span class="variable">max_depth</span>=<span class="number">3</span>)
+<span class="variable">model</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>)
+<span class="variable">predictions</span> = <span class="variable">model</span>.<span class="method">predict</span>(<span class="variable">X_test</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -644,12 +452,25 @@ predictions = model.predict(X_test)</code></pre></div>
         <div class="answer">
             <p><strong>Random Forest</strong> is an ensemble method that combines multiple decision trees. It reduces overfitting by averaging predictions from many trees.</p>
             
-            <div class="code-block"><pre><code># Random forest
-from sklearn.ensemble import RandomForestClassifier
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">random_forest.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Random forest</span>
+<span class="keyword">from</span> <span class="variable">sklearn.ensemble</span> <span class="keyword">import</span> <span class="type">RandomForestClassifier</span>
 
-model = RandomForestClassifier(n_estimators=100, random_state=42)
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)</code></pre></div>
+<span class="variable">model</span> = <span class="type">RandomForestClassifier</span>(<span class="variable">n_estimators</span>=<span class="number">100</span>, <span class="variable">random_state</span>=<span class="number">42</span>)
+<span class="variable">model</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>)
+<span class="variable">predictions</span> = <span class="variable">model</span>.<span class="method">predict</span>(<span class="variable">X_test</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -658,12 +479,25 @@ predictions = model.predict(X_test)</code></pre></div>
         <div class="answer">
             <p><strong>Gradient Boosting</strong> is an ensemble technique that builds models sequentially, each correcting errors of the previous one. It's powerful for tabular data.</p>
             
-            <div class="code-block"><pre><code># Gradient boosting
-from sklearn.ensemble import GradientBoostingClassifier
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">gradient_boosting.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Gradient boosting</span>
+<span class="keyword">from</span> <span class="variable">sklearn.ensemble</span> <span class="keyword">import</span> <span class="type">GradientBoostingClassifier</span>
 
-model = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1)
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)</code></pre></div>
+<span class="variable">model</span> = <span class="type">GradientBoostingClassifier</span>(<span class="variable">n_estimators</span>=<span class="number">100</span>, <span class="variable">learning_rate</span>=<span class="number">0.1</span>)
+<span class="variable">model</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>)
+<span class="variable">predictions</span> = <span class="variable">model</span>.<span class="method">predict</span>(<span class="variable">X_test</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -672,12 +506,25 @@ predictions = model.predict(X_test)</code></pre></div>
         <div class="answer">
             <p><strong>XGBoost</strong> is an optimized gradient boosting library known for its performance and speed. It includes regularization and handles missing values.</p>
             
-            <div class="code-block"><pre><code># XGBoost
-import xgboost as xgb
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">xgboost.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># XGBoost</span>
+<span class="keyword">import</span> <span class="variable">xgboost</span> <span class="keyword">as</span> <span class="variable">xgb</span>
 
-model = xgb.XGBClassifier(n_estimators=100, learning_rate=0.1)
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)</code></pre></div>
+<span class="variable">model</span> = <span class="variable">xgb</span>.<span class="type">XGBClassifier</span>(<span class="variable">n_estimators</span>=<span class="number">100</span>, <span class="variable">learning_rate</span>=<span class="number">0.1</span>)
+<span class="variable">model</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>)
+<span class="variable">predictions</span> = <span class="variable">model</span>.<span class="method">predict</span>(<span class="variable">X_test</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -686,12 +533,25 @@ predictions = model.predict(X_test)</code></pre></div>
         <div class="answer">
             <p><strong>Support Vector Machine (SVM)</strong> is a supervised learning algorithm that finds the optimal hyperplane to separate classes. It works well for high-dimensional data.</p>
             
-            <div class="code-block"><pre><code># SVM classifier
-from sklearn.svm import SVC
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">svm.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># SVM classifier</span>
+<span class="keyword">from</span> <span class="variable">sklearn.svm</span> <span class="keyword">import</span> <span class="type">SVC</span>
 
-model = SVC(kernel='rbf', C=1.0)
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)</code></pre></div>
+<span class="variable">model</span> = <span class="type">SVC</span>(<span class="variable">kernel</span>=<span class="string">'rbf'</span>, <span class="variable">C</span>=<span class="number">1.0</span>)
+<span class="variable">model</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>)
+<span class="variable">predictions</span> = <span class="variable">model</span>.<span class="method">predict</span>(<span class="variable">X_test</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -700,12 +560,25 @@ predictions = model.predict(X_test)</code></pre></div>
         <div class="answer">
             <p><strong>K-Nearest Neighbors (KNN)</strong> is a simple algorithm that classifies data points based on the majority class of their k nearest neighbors.</p>
             
-            <div class="code-block"><pre><code># KNN classifier
-from sklearn.neighbors import KNeighborsClassifier
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">knn.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># KNN classifier</span>
+<span class="keyword">from</span> <span class="variable">sklearn.neighbors</span> <span class="keyword">import</span> <span class="type">KNeighborsClassifier</span>
 
-model = KNeighborsClassifier(n_neighbors=5)
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)</code></pre></div>
+<span class="variable">model</span> = <span class="type">KNeighborsClassifier</span>(<span class="variable">n_neighbors</span>=<span class="number">5</span>)
+<span class="variable">model</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>)
+<span class="variable">predictions</span> = <span class="variable">model</span>.<span class="method">predict</span>(<span class="variable">X_test</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -714,12 +587,25 @@ predictions = model.predict(X_test)</code></pre></div>
         <div class="answer">
             <p><strong>Naive Bayes</strong> is a probabilistic classifier based on Bayes' theorem with the assumption of feature independence. It's fast and works well with text data.</p>
             
-            <div class="code-block"><pre><code># Naive Bayes
-from sklearn.naive_bayes import GaussianNB
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">naive_bayes.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Naive Bayes</span>
+<span class="keyword">from</span> <span class="variable">sklearn.naive_bayes</span> <span class="keyword">import</span> <span class="type">GaussianNB</span>
 
-model = GaussianNB()
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)</code></pre></div>
+<span class="variable">model</span> = <span class="type">GaussianNB</span>()
+<span class="variable">model</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>)
+<span class="variable">predictions</span> = <span class="variable">model</span>.<span class="method">predict</span>(<span class="variable">X_test</span>)</code>
+                </div>
+            </div>
         </div>
 
         <h2>3. Unsupervised Learning</h2>
@@ -737,13 +623,26 @@ predictions = model.predict(X_test)</code></pre></div>
         <div class="answer">
             <p><strong>K-means</strong> is an iterative algorithm that partitions data into K clusters by minimizing the within-cluster sum of squares.</p>
             
-            <div class="code-block"><pre><code># K-means clustering
-from sklearn.cluster import KMeans
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">kmeans.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># K-means clustering</span>
+<span class="keyword">from</span> <span class="variable">sklearn.cluster</span> <span class="keyword">import</span> <span class="type">KMeans</span>
 
-kmeans = KMeans(n_clusters=3, random_state=42)
-kmeans.fit(X)
-labels = kmeans.labels_
-centroids = kmeans.cluster_centers_</code></pre></div>
+<span class="variable">kmeans</span> = <span class="type">KMeans</span>(<span class="variable">n_clusters</span>=<span class="number">3</span>, <span class="variable">random_state</span>=<span class="number">42</span>)
+<span class="variable">kmeans</span>.<span class="method">fit</span>(<span class="variable">X</span>)
+<span class="variable">labels</span> = <span class="variable">kmeans</span>.<span class="property">labels_</span>
+<span class="variable">centroids</span> = <span class="variable">kmeans</span>.<span class="property">cluster_centers_</span></code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -752,11 +651,24 @@ centroids = kmeans.cluster_centers_</code></pre></div>
         <div class="answer">
             <p><strong>Hierarchical Clustering</strong> builds a hierarchy of clusters either in a bottom-up (agglomerative) or top-down (divisive) manner.</p>
             
-            <div class="code-block"><pre><code># Hierarchical clustering
-from sklearn.cluster import AgglomerativeClustering
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">hierarchical_clustering.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Hierarchical clustering</span>
+<span class="keyword">from</span> <span class="variable">sklearn.cluster</span> <span class="keyword">import</span> <span class="type">AgglomerativeClustering</span>
 
-model = AgglomerativeClustering(n_clusters=3)
-labels = model.fit_predict(X)</code></pre></div>
+<span class="variable">model</span> = <span class="type">AgglomerativeClustering</span>(<span class="variable">n_clusters</span>=<span class="number">3</span>)
+<span class="variable">labels</span> = <span class="variable">model</span>.<span class="method">fit_predict</span>(<span class="variable">X</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -765,11 +677,24 @@ labels = model.fit_predict(X)</code></pre></div>
         <div class="answer">
             <p><strong>DBSCAN</strong> is a density-based clustering algorithm that groups points based on density. It can find clusters of arbitrary shapes and identify outliers.</p>
             
-            <div class="code-block"><pre><code># DBSCAN clustering
-from sklearn.cluster import DBSCAN
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">dbscan.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># DBSCAN clustering</span>
+<span class="keyword">from</span> <span class="variable">sklearn.cluster</span> <span class="keyword">import</span> <span class="type">DBSCAN</span>
 
-dbscan = DBSCAN(eps=0.5, min_samples=5)
-labels = dbscan.fit_predict(X)</code></pre></div>
+<span class="variable">dbscan</span> = <span class="type">DBSCAN</span>(<span class="variable">eps</span>=<span class="number">0.5</span>, <span class="variable">min_samples</span>=<span class="number">5</span>)
+<span class="variable">labels</span> = <span class="variable">dbscan</span>.<span class="method">fit_predict</span>(<span class="variable">X</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -778,12 +703,25 @@ labels = dbscan.fit_predict(X)</code></pre></div>
         <div class="answer">
             <p><strong>Principal Component Analysis (PCA)</strong> is a dimensionality reduction technique that transforms data into orthogonal components that capture maximum variance.</p>
             
-            <div class="code-block"><pre><code># PCA
-from sklearn.decomposition import PCA
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">pca.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># PCA</span>
+<span class="keyword">from</span> <span class="variable">sklearn.decomposition</span> <span class="keyword">import</span> <span class="type">PCA</span>
 
-pca = PCA(n_components=2)
-X_pca = pca.fit_transform(X)
-print(f"Explained variance: {pca.explained_variance_ratio_}")</code></pre></div>
+<span class="variable">pca</span> = <span class="type">PCA</span>(<span class="variable">n_components</span>=<span class="number">2</span>)
+<span class="variable">X_pca</span> = <span class="variable">pca</span>.<span class="method">fit_transform</span>(<span class="variable">X</span>)
+<span class="method">print</span>(<span class="string">f"Explained variance: {pca.explained_variance_ratio_}"</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -792,11 +730,24 @@ print(f"Explained variance: {pca.explained_variance_ratio_}")</code></pre></div>
         <div class="answer">
             <p><strong>t-SNE</strong> is a nonlinear dimensionality reduction technique used for visualizing high-dimensional data in 2D or 3D space.</p>
             
-            <div class="code-block"><pre><code># t-SNE
-from sklearn.manifold import TSNE
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">tsne.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># t-SNE</span>
+<span class="keyword">from</span> <span class="variable">sklearn.manifold</span> <span class="keyword">import</span> <span class="type">TSNE</span>
 
-tsne = TSNE(n_components=2, random_state=42)
-X_tsne = tsne.fit_transform(X)</code></pre></div>
+<span class="variable">tsne</span> = <span class="type">TSNE</span>(<span class="variable">n_components</span>=<span class="number">2</span>, <span class="variable">random_state</span>=<span class="number">42</span>)
+<span class="variable">X_tsne</span> = <span class="variable">tsne</span>.<span class="method">fit_transform</span>(<span class="variable">X</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -835,11 +786,24 @@ X_tsne = tsne.fit_transform(X)</code></pre></div>
         <div class="answer">
             <p><strong>Accuracy</strong> is the ratio of correct predictions to total predictions. It's not suitable for imbalanced datasets.</p>
             
-            <div class="code-block"><pre><code># Accuracy
-from sklearn.metrics import accuracy_score
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">accuracy.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Accuracy</span>
+<span class="keyword">from</span> <span class="variable">sklearn.metrics</span> <span class="keyword">import</span> <span class="type">accuracy_score</span>
 
-accuracy = accuracy_score(y_test, predictions)
-print(f"Accuracy: {accuracy:.2f}")</code></pre></div>
+<span class="variable">accuracy</span> = <span class="method">accuracy_score</span>(<span class="variable">y_test</span>, <span class="variable">predictions</span>)
+<span class="method">print</span>(<span class="string">f"Accuracy: {accuracy:.2f}"</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -848,11 +812,24 @@ print(f"Accuracy: {accuracy:.2f}")</code></pre></div>
         <div class="answer">
             <p><strong>Precision</strong> is the ratio of true positives to total predicted positives. <strong>Recall</strong> is the ratio of true positives to total actual positives.</p>
             
-            <div class="code-block"><pre><code># Precision and recall
-from sklearn.metrics import precision_score, recall_score
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">precision_recall.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Precision and recall</span>
+<span class="keyword">from</span> <span class="variable">sklearn.metrics</span> <span class="keyword">import</span> <span class="type">precision_score</span>, <span class="type">recall_score</span>
 
-precision = precision_score(y_test, predictions)
-recall = recall_score(y_test, predictions)</code></pre></div>
+<span class="variable">precision</span> = <span class="method">precision_score</span>(<span class="variable">y_test</span>, <span class="variable">predictions</span>)
+<span class="variable">recall</span> = <span class="method">recall_score</span>(<span class="variable">y_test</span>, <span class="variable">predictions</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -861,10 +838,23 @@ recall = recall_score(y_test, predictions)</code></pre></div>
         <div class="answer">
             <p><strong>F1 Score</strong> is the harmonic mean of precision and recall. It provides a balanced measure for classification performance.</p>
             
-            <div class="code-block"><pre><code># F1 score
-from sklearn.metrics import f1_score
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">f1_score.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># F1 score</span>
+<span class="keyword">from</span> <span class="variable">sklearn.metrics</span> <span class="keyword">import</span> <span class="type">f1_score</span>
 
-f1 = f1_score(y_test, predictions)</code></pre></div>
+<span class="variable">f1</span> = <span class="method">f1_score</span>(<span class="variable">y_test</span>, <span class="variable">predictions</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -873,11 +863,24 @@ f1 = f1_score(y_test, predictions)</code></pre></div>
         <div class="answer">
             <p><strong>ROC Curve</strong> plots true positive rate vs false positive rate at various thresholds. <strong>AUC</strong> is the area under the ROC curve, measuring model performance.</p>
             
-            <div class="code-block"><pre><code># ROC AUC
-from sklearn.metrics import roc_auc_score, roc_curve
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">roc_auc.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># ROC AUC</span>
+<span class="keyword">from</span> <span class="variable">sklearn.metrics</span> <span class="keyword">import</span> <span class="type">roc_auc_score</span>, <span class="type">roc_curve</span>
 
-auc = roc_auc_score(y_test, probabilities[:, 1])
-fpr, tpr, thresholds = roc_curve(y_test, probabilities[:, 1])</code></pre></div>
+<span class="variable">auc</span> = <span class="method">roc_auc_score</span>(<span class="variable">y_test</span>, <span class="variable">probabilities</span>[:, <span class="number">1</span>])
+<span class="variable">fpr</span>, <span class="variable">tpr</span>, <span class="variable">thresholds</span> = <span class="method">roc_curve</span>(<span class="variable">y_test</span>, <span class="variable">probabilities</span>[:, <span class="number">1</span>])</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -886,11 +889,24 @@ fpr, tpr, thresholds = roc_curve(y_test, probabilities[:, 1])</code></pre></div>
         <div class="answer">
             <p><strong>Confusion Matrix</strong> is a table showing true positives, true negatives, false positives, and false negatives.</p>
             
-            <div class="code-block"><pre><code># Confusion matrix
-from sklearn.metrics import confusion_matrix
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">confusion_matrix.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Confusion matrix</span>
+<span class="keyword">from</span> <span class="variable">sklearn.metrics</span> <span class="keyword">import</span> <span class="type">confusion_matrix</span>
 
-cm = confusion_matrix(y_test, predictions)
-print(cm)</code></pre></div>
+<span class="variable">cm</span> = <span class="method">confusion_matrix</span>(<span class="variable">y_test</span>, <span class="variable">predictions</span>)
+<span class="method">print</span>(<span class="variable">cm</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -899,10 +915,23 @@ print(cm)</code></pre></div>
         <div class="answer">
             <p><strong>Mean Squared Error (MSE)</strong> measures the average squared difference between predicted and actual values. It's used for regression evaluation.</p>
             
-            <div class="code-block"><pre><code># MSE
-from sklearn.metrics import mean_squared_error
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">mse.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># MSE</span>
+<span class="keyword">from</span> <span class="variable">sklearn.metrics</span> <span class="keyword">import</span> <span class="type">mean_squared_error</span>
 
-mse = mean_squared_error(y_test, predictions)</code></pre></div>
+<span class="variable">mse</span> = <span class="method">mean_squared_error</span>(<span class="variable">y_test</span>, <span class="variable">predictions</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -911,10 +940,23 @@ mse = mean_squared_error(y_test, predictions)</code></pre></div>
         <div class="answer">
             <p><strong>R-squared</strong> measures the proportion of variance in the dependent variable explained by the model. Values range from 0 to 1.</p>
             
-            <div class="code-block"><pre><code># R-squared
-from sklearn.metrics import r2_score
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">r_squared.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># R-squared</span>
+<span class="keyword">from</span> <span class="variable">sklearn.metrics</span> <span class="keyword">import</span> <span class="type">r2_score</span>
 
-r2 = r2_score(y_test, predictions)</code></pre></div>
+<span class="variable">r2</span> = <span class="method">r2_score</span>(<span class="variable">y_test</span>, <span class="variable">predictions</span>)</code>
+                </div>
+            </div>
         </div>
 
         <h2>5. Feature Engineering</h2>
@@ -925,11 +967,24 @@ r2 = r2_score(y_test, predictions)</code></pre></div>
         <div class="answer">
             <p><strong>One-Hot Encoding</strong> converts categorical variables into binary vectors, where each category becomes a separate column.</p>
             
-            <div class="code-block"><pre><code># One-hot encoding
-from sklearn.preprocessing import OneHotEncoder
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">one_hot_encoding.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># One-hot encoding</span>
+<span class="keyword">from</span> <span class="variable">sklearn.preprocessing</span> <span class="keyword">import</span> <span class="type">OneHotEncoder</span>
 
-encoder = OneHotEncoder(sparse=False)
-encoded = encoder.fit_transform(df[['category']])</code></pre></div>
+<span class="variable">encoder</span> = <span class="type">OneHotEncoder</span>(<span class="variable">sparse</span>=<span class="keyword">False</span>)
+<span class="variable">encoded</span> = <span class="variable">encoder</span>.<span class="method">fit_transform</span>(<span class="variable">df</span>[[<span class="string">'category'</span>]])</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -938,11 +993,24 @@ encoded = encoder.fit_transform(df[['category']])</code></pre></div>
         <div class="answer">
             <p><strong>Label Encoding</strong> converts categorical variables into numerical labels. It's suitable for ordinal data but can introduce unintended ordinal relationships.</p>
             
-            <div class="code-block"><pre><code># Label encoding
-from sklearn.preprocessing import LabelEncoder
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">label_encoding.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Label encoding</span>
+<span class="keyword">from</span> <span class="variable">sklearn.preprocessing</span> <span class="keyword">import</span> <span class="type">LabelEncoder</span>
 
-encoder = LabelEncoder()
-encoded = encoder.fit_transform(df['category'])</code></pre></div>
+<span class="variable">encoder</span> = <span class="type">LabelEncoder</span>()
+<span class="variable">encoded</span> = <span class="variable">encoder</span>.<span class="method">fit_transform</span>(<span class="variable">df</span>[<span class="string">'category'</span>])</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -951,11 +1019,24 @@ encoded = encoder.fit_transform(df['category'])</code></pre></div>
         <div class="answer">
             <p><strong>Standardization</strong> scales features to have zero mean and unit variance. It's important for algorithms sensitive to feature scales.</p>
             
-            <div class="code-block"><pre><code># Standardization
-from sklearn.preprocessing import StandardScaler
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">standardization.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Standardization</span>
+<span class="keyword">from</span> <span class="variable">sklearn.preprocessing</span> <span class="keyword">import</span> <span class="type">StandardScaler</span>
 
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)</code></pre></div>
+<span class="variable">scaler</span> = <span class="type">StandardScaler</span>()
+<span class="variable">X_scaled</span> = <span class="variable">scaler</span>.<span class="method">fit_transform</span>(<span class="variable">X</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -964,11 +1045,24 @@ X_scaled = scaler.fit_transform(X)</code></pre></div>
         <div class="answer">
             <p><strong>Normalization</strong> scales features to a range, typically [0, 1]. It's useful when features have different scales.</p>
             
-            <div class="code-block"><pre><code># Normalization
-from sklearn.preprocessing import MinMaxScaler
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">normalization.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Normalization</span>
+<span class="keyword">from</span> <span class="variable">sklearn.preprocessing</span> <span class="keyword">import</span> <span class="type">MinMaxScaler</span>
 
-scaler = MinMaxScaler()
-X_normalized = scaler.fit_transform(X)</code></pre></div>
+<span class="variable">scaler</span> = <span class="type">MinMaxScaler</span>()
+<span class="variable">X_normalized</span> = <span class="variable">scaler</span>.<span class="method">fit_transform</span>(<span class="variable">X</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1007,12 +1101,25 @@ X_normalized = scaler.fit_transform(X)</code></pre></div>
         <div class="answer">
             <p><strong>Hyperparameter Tuning</strong> is the process of finding the optimal hyperparameters for a model to improve performance.</p>
             
-            <div class="code-block"><pre><code># Grid search
-from sklearn.model_selection import GridSearchCV
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">grid_search.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Grid search</span>
+<span class="keyword">from</span> <span class="variable">sklearn.model_selection</span> <span class="keyword">import</span> <span class="type">GridSearchCV</span>
 
-param_grid = {'n_estimators': [50, 100, 200], 'max_depth': [3, 5, 7]}
-grid_search = GridSearchCV(RandomForestClassifier(), param_grid, cv=5)
-grid_search.fit(X_train, y_train)</code></pre></div>
+<span class="variable">param_grid</span> = {<span class="string">'n_estimators'</span>: [<span class="number">50</span>, <span class="number">100</span>, <span class="number">200</span>], <span class="string">'max_depth'</span>: [<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>]}
+<span class="variable">grid_search</span> = <span class="type">GridSearchCV</span>(<span class="type">RandomForestClassifier</span>(), <span class="variable">param_grid</span>, <span class="variable">cv</span>=<span class="number">5</span>)
+<span class="variable">grid_search</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1121,11 +1228,24 @@ grid_search.fit(X_train, y_train)</code></pre></div>
         <div class="answer">
             <p><strong>AdaBoost</strong> is an ensemble method that combines weak learners into a strong learner by focusing on difficult examples. It adjusts weights based on prediction errors.</p>
             
-            <div class="code-block"><pre><code># AdaBoost
-from sklearn.ensemble import AdaBoostClassifier
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">adaboost.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># AdaBoost</span>
+<span class="keyword">from</span> <span class="variable">sklearn.ensemble</span> <span class="keyword">import</span> <span class="type">AdaBoostClassifier</span>
 
-model = AdaBoostClassifier(n_estimators=50)
-model.fit(X_train, y_train)</code></pre></div>
+<span class="variable">model</span> = <span class="type">AdaBoostClassifier</span>(<span class="variable">n_estimators</span>=<span class="number">50</span>)
+<span class="variable">model</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1134,11 +1254,24 @@ model.fit(X_train, y_train)</code></pre></div>
         <div class="answer">
             <p><strong>LightGBM</strong> is a gradient boosting framework that uses tree-based learning algorithms. It's known for its speed and efficiency with large datasets.</p>
             
-            <div class="code-block"><pre><code># LightGBM
-import lightgbm as lgb
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">lightgbm.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># LightGBM</span>
+<span class="keyword">import</span> <span class="variable">lightgbm</span> <span class="keyword">as</span> <span class="variable">lgb</span>
 
-model = lgb.LGBMClassifier(n_estimators=100)
-model.fit(X_train, y_train)</code></pre></div>
+<span class="variable">model</span> = <span class="variable">lgb</span>.<span class="type">LGBMClassifier</span>(<span class="variable">n_estimators</span>=<span class="number">100</span>)
+<span class="variable">model</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1147,11 +1280,24 @@ model.fit(X_train, y_train)</code></pre></div>
         <div class="answer">
             <p><strong>CatBoost</strong> is a gradient boosting algorithm that handles categorical features natively without extensive preprocessing. It's robust and provides good performance.</p>
             
-            <div class="code-block"><pre><code># CatBoost
-from catboost import CatBoostClassifier
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">catboost.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># CatBoost</span>
+<span class="keyword">from</span> <span class="variable">catboost</span> <span class="keyword">import</span> <span class="type">CatBoostClassifier</span>
 
-model = CatBoostClassifier(iterations=100)
-model.fit(X_train, y_train, cat_features=categorical_features)</code></pre></div>
+<span class="variable">model</span> = <span class="type">CatBoostClassifier</span>(<span class="variable">iterations</span>=<span class="number">100</span>)
+<span class="variable">model</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>, <span class="variable">cat_features</span>=<span class="variable">categorical_features</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1194,17 +1340,30 @@ model.fit(X_train, y_train, cat_features=categorical_features)</code></pre></div
         <div class="answer">
             <p><strong>ML Pipeline</strong> is a sequence of data processing steps including data collection, preprocessing, feature engineering, model training, evaluation, and deployment.</p>
             
-            <div class="code-block"><pre><code># ML pipeline with scikit-learn
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import RandomForestClassifier
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ml_pipeline.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># ML pipeline with scikit-learn</span>
+<span class="keyword">from</span> <span class="variable">sklearn.pipeline</span> <span class="keyword">import</span> <span class="type">Pipeline</span>
+<span class="keyword">from</span> <span class="variable">sklearn.preprocessing</span> <span class="keyword">import</span> <span class="type">StandardScaler</span>
+<span class="keyword">from</span> <span class="variable">sklearn.ensemble</span> <span class="keyword">import</span> <span class="type">RandomForestClassifier</span>
 
-pipeline = Pipeline([
-    ('scaler', StandardScaler()),
-    ('classifier', RandomForestClassifier())
+<span class="variable">pipeline</span> = <span class="type">Pipeline</span>([
+    (<span class="string">'scaler'</span>, <span class="type">StandardScaler</span>()),
+    (<span class="string">'classifier'</span>, <span class="type">RandomForestClassifier</span>())
 ])
 
-pipeline.fit(X_train, y_train)</code></pre></div>
+<span class="variable">pipeline</span>.<span class="method">fit</span>(<span class="variable">X_train</span>, <span class="variable">y_train</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1213,13 +1372,26 @@ pipeline.fit(X_train, y_train)</code></pre></div>
         <div class="answer">
             <p><strong>Model Deployment</strong> is the process of making a trained model available for use in production. It involves serialization, API creation, and monitoring.</p>
             
-            <div class="code-block"><pre><code># Save model with joblib
-import joblib
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">save_model.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Save model with joblib</span>
+<span class="keyword">import</span> <span class="variable">joblib</span>
 
-joblib.dump(model, 'model.pkl')
+<span class="variable">joblib</span>.<span class="method">dump</span>(<span class="variable">model</span>, <span class="string">'model.pkl'</span>)
 
-# Load model
-loaded_model = joblib.load('model.pkl')</code></pre></div>
+<span class="comment"># Load model</span>
+<span class="variable">loaded_model</span> = <span class="variable">joblib</span>.<span class="method">load</span>(<span class="string">'model.pkl'</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1263,5 +1435,28 @@ loaded_model = joblib.load('model.pkl')</code></pre></div>
             <p><span class="highlight">💡 Tip:</span> Focus on understanding the core algorithms (linear regression, decision trees, random forests, gradient boosting) and evaluation metrics. Be prepared to explain the intuition behind algorithms and implement them with scikit-learn. Practice feature engineering and model tuning, as these are crucial for real-world ML projects.</p>
         </div>
     </div>
+    <script>
+        function copyCode(button) {
+            const codeEditor = button.closest('.code-editor');
+            const codeContent = codeEditor.querySelector('.code-editor-content code');
+            const text = codeContent.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
+    <script src="../code-converter.js"></script>
 </body>
 </html>

@@ -5,328 +5,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microservices Interview Guide</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #1a1a2e; background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%); background-size: 400% 400%; animation: gradientShift 20s ease infinite; min-height: 100vh; padding: 25px 20px; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .container { max-width: 1100px; margin: 0 auto; padding: 50px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px); border-radius: 32px; box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3); }
+        .back-button { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 30px; font-weight: 700; margin-bottom: 30px; }
+        h1 { color: #1a1a2e; font-size: 52px; font-weight: 800; text-align: center; margin-bottom: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { text-align: center; font-size: 18px; color: #4a4a68; margin-bottom: 40px; }
+        h2 { color: white; font-size: 28px; font-weight: 700; margin-top: 40px; margin-bottom: 25px; padding: 18px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; }
+        .question { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; border-radius: 15px; margin: 25px 0 15px 0; font-weight: 600; font-size: 18px; }
+        .answer { background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%); padding: 30px 35px; border-radius: 15px; margin: 15px 0 25px 0; border-left: 6px solid #764ba2; }
+        .answer p { margin-bottom: 15px; color: #1a1a2e; }
+        .answer strong { color: #667eea; }
+        .answer ul { padding-left: 25px; margin-bottom: 15px; }
+        .answer h3 { color: #667eea; font-size: 20px; margin-top: 20px; margin-bottom: 12px; }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: #1a1a2e;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 20s ease infinite;
-            min-height: 100vh;
-            padding: 25px 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
-            animation: particleFloat 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 50px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(30px);
-            border-radius: 32px;
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            animation: containerFloat 6s ease-in-out infinite;
-        }
-        
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #764ba2 60%, 
-                #667eea 80%, 
-                #764ba2 100%);
-            background-size: 300% 100%;
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-        
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
-        }
-        
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 
-                0 8px 25px rgba(102, 126, 234, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-button:hover::before {
-            left: 100%;
-        }
-        
-        .back-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
-        }
-        
-        h1 {
-            color: #1a1a2e;
-            font-size: 52px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 35px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
-            border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .subtitle {
-            text-align: center;
-            font-size: 18px;
-            color: #4a4a68;
-            margin-bottom: 40px;
-            font-weight: 500;
-            animation: fadeIn 1s ease 0.4s both;
-        }
-        
-        h2 {
-            color: white;
-            font-size: 28px;
-            font-weight: 700;
-            margin-top: 40px;
-            margin-bottom: 25px;
-            padding: 18px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .code-editor {
+            background: #1e1e1e;
             border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
+            margin: 20px 0;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3e3e42;
         }
         
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+        .code-editor-header {
+            background: #2d2d2d;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            border-bottom: 1px solid #3e3e42;
         }
         
-        .question {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
+        .code-editor-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .answer {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 30px 35px;
-            border-radius: 15px;
-            margin: 15px 0 25px 0;
-            border-left: 6px solid #764ba2;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            animation: slideUp 0.5s ease both;
+        .code-editor-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
         }
         
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .code-editor-dot.red { background: #ff5f56; }
+        .code-editor-dot.yellow { background: #ffbd2e; }
+        .code-editor-dot.green { background: #27ca40; }
         
-        .answer p {
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            line-height: 1.8;
-        }
-        
-        .answer strong {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
-        }
-        
-        .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 12px;
-            border-radius: 10px;
-            overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+        .code-editor-title {
+            color: #9cdcfe;
+            font-family: 'Fira Code', monospace;
             font-size: 13px;
-            margin: 15px 0;
+            margin-left: 12px;
+        }
+        
+        .copy-button {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .copy-button:hover {
+            background: #4e4e52;
+            color: #ffffff;
+        }
+        
+        .copy-button.copied {
+            background: #27ca40;
+            color: #ffffff;
+        }
+        
+        .language-selector {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            margin-left: 8px;
+        }
+        
+        .language-selector:hover {
+            background: #4e4e52;
+            color: #ffffff;
+        }
+        
+        @media (max-width: 768px) {
+            .language-selector {
+                padding: 3px 6px;
+                font-size: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .language-selector {
+                padding: 2px 4px;
+                font-size: 9px;
+                margin-left: 4px;
+                min-width: 60px;
+            }
+        }
+        
+        .code-editor-content {
+            padding: 20px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
             line-height: 1.6;
-            border-left: 4px solid #68217A;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.4s ease both;
-        }
-        
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+            color: #d4d4d4;
             overflow-x: auto;
+            background: #1e1e1e;
         }
         
-        .code-block code {
-            white-space: pre-wrap;
-            word-wrap: break-word;
+        .code-editor-content code {
+            display: block;
+            white-space: pre;
         }
+        
+        .keyword { color: #569cd6; }
+        .type { color: #4ec9b0; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; font-style: italic; }
+        .number { color: #b5cea8; }
+        .method { color: #dcdcaa; }
+        .property { color: #9cdcfe; }
+        .variable { color: #9cdcfe; }
+        .operator { color: #d4d4d4; }
+        .decorator { color: #c586c0; }
+        
+        .footer { text-align: center; margin-top: 50px; padding: 35px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%); border-radius: 20px; }
+        .highlight { color: #667eea; font-weight: 700; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
+        th { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; text-align: left; font-weight: 600; font-size: 15px; }
+        td { padding: 15px; border-bottom: 1px solid #e9ecef; color: #4a4a68; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f8f9fa; }
         
         .toc {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -335,95 +163,36 @@
             margin: 40px 0;
             border-left: 8px solid #667eea;
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
         }
-        
-        .toc h3 {
-            color: #1a1a2e;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .toc ol {
-            padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
-        }
-        
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 15px;
-        }
-        
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e9ecef;
-            color: #4a4a68;
-        }
-        
-        tr:last-child td {
-            border-bottom: none;
-        }
-        
-        tr:hover td {
-            background: #f8f9fa;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 35px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
-            border-radius: 20px;
-            border: 2px solid rgba(102, 126, 234, 0.25);
-            color: #666;
-            font-size: 15px;
-            line-height: 1.7;
-            animation: slideUp 0.6s ease both;
-        }
-        
-        .footer p {
-            margin-bottom: 12px;
-        }
-        
-        .footer .highlight {
-            color: #667eea;
-            font-weight: 600;
-        }
+        .toc h3 { color: #1a1a2e; font-size: 24px; font-weight: 700; margin-bottom: 20px; }
+        .toc ol { padding-left: 25px; color: #4a4a68; line-height: 2; }
+        .toc ol li { margin-bottom: 8px; font-weight: 500; }
         
         @media (max-width: 768px) {
-            body { padding: 12px 8px; }
+            body { padding: 15px 10px; }
             .container { padding: 25px 20px; border-radius: 20px; }
-            h1 { font-size: 36px; }
-            .subtitle { font-size: 15px; margin-bottom: 25px; }
-            h2 { font-size: 22px; padding: 14px 20px; margin-top: 30px; }
-            .question { padding: 15px 20px; font-size: 16px; margin: 20px 0 12px 0; }
-            .answer { padding: 20px 25px; margin: 12px 0 20px 0; }
-            .code-block { padding: 15px; font-size: 13px; margin: 15px 0; }
-            .toc { padding: 25px 30px; margin: 30px 0; }
-            .toc ol { padding-left: 20px; line-height: 1.8; }
-            .back-button { padding: 12px 24px; font-size: 14px; margin-bottom: 20px; }
-            .footer { padding: 25px; margin-top: 35px; font-size: 14px; }
+            h1 { font-size: 32px; }
+            .subtitle { font-size: 16px; }
+            h2 { font-size: 22px; padding: 14px 20px; }
+            .question { font-size: 16px; padding: 16px 20px; }
+            .answer { padding: 20px 20px; }
+            .code-editor-content { padding: 15px; font-size: 12px; }
+            .code-editor-title { font-size: 11px; }
+            .footer { padding: 25px 20px; }
+            .toc { padding: 25px 30px; }
+        }
+        
+        @media (max-width: 480px) {
+            body { padding: 10px 5px; }
+            .container { padding: 20px 15px; border-radius: 16px; }
+            h1 { font-size: 26px; }
+            .subtitle { font-size: 14px; }
+            h2 { font-size: 20px; padding: 12px 16px; }
+            .question { font-size: 15px; padding: 14px 16px; }
+            .answer { padding: 18px 16px; }
+            .code-editor-content { padding: 12px; font-size: 11px; }
+            .code-editor-title { font-size: 10px; }
+            .back-button { padding: 12px 20px; font-size: 14px; }
         }
     </style>
 </head>
@@ -431,6 +200,43 @@
     <div class="container">
         <a href="../index.html" class="back-button">Back to Home</a>
         <h1>Microservices Interview Guide</h1>
+        <p class="subtitle">Comprehensive guide covering microservices interview questions with C# code examples</p>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li>Microservices Fundamentals</li>
+                <li>Architecture Patterns</li>
+                <li>Service Communication</li>
+                <li>Data Management</li>
+                <li>API Gateway</li>
+                <li>Service Discovery</li>
+                <li>Configuration Management</li>
+                <li>Resilience Patterns</li>
+                <li>Security</li>
+                <li>Monitoring & Observability</li>
+                <li>Deployment & Orchestration</li>
+                <li>Testing Strategies</li>
+            </ol>
+        </div>
+
+        <h2>1. Microservices Fundamentals</h2>
+
+        <div class="question">
+            Q1: What are microservices and how do they differ from monolithic architecture?
+        </div>
+        <div class="answer">
+            <p><strong>Microservices</strong> is an architectural style that structures an application as a collection of small, autonomous services modeled around a business domain.</p>
+            
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Monolithic</th>
+                    <th>Microservices</th>
+                </tr>
+                <tr>
+                    <td><strong>Structure</strong></td>
+                    <td>Single codebase</td>
         <p class="subtitle">Comprehensive guide covering microservices interview questions with C# code examples</p>
 
         <div class="toc">
@@ -554,26 +360,39 @@
                 <li>Caching</li>
             </ul>
             
-            <div class="code-block"><pre><code>// API Gateway using Ocelot in .NET
-public class Startup
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">api_gateway.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// API Gateway using Ocelot in .NET</span>
+<span class="keyword">public class</span> <span class="type">Startup</span>
 {
-    public void ConfigureServices(IServiceCollection services)
+    <span class="keyword">public void</span> <span class="method">ConfigureServices</span>(<span class="type">IServiceCollection</span> <span class="variable">services</span>)
     {
-        services.AddOcelot();
+        <span class="variable">services</span>.<span class="method">AddOcelot</span>();
     }
 }
 
-// ocelot.json
+<span class="comment">// ocelot.json</span>
 {
-  "Routes": [
+  <span class="string">"Routes"</span>: [
     {
-      "DownstreamPathTemplate": "/api/products",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [{ "Host": "localhost", "Port": 5001 }],
-      "UpstreamPathTemplate": "/products"
+      <span class="string">"DownstreamPathTemplate"</span>: <span class="string">"/api/products"</span>,
+      <span class="string">"DownstreamScheme"</span>: <span class="string">"http"</span>,
+      <span class="string">"DownstreamHostAndPorts"</span>: [{ <span class="string">"Host"</span>: <span class="string">"localhost"</span>, <span class="string">"Port"</span>: <span class="number">5001</span> }],
+      <span class="string">"UpstreamPathTemplate"</span>: <span class="string">"/products"</span>
     }
   ]
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -598,27 +417,40 @@ public class Startup
         <div class="answer">
             <p><strong>Saga Pattern</strong> is a design pattern for managing distributed transactions. It breaks a transaction into a sequence of local transactions, each updating data within a single service.</p>
             
-            <div class="code-block"><pre><code>// Orchestration-based Saga in C#
-public class OrderSaga
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">saga_pattern.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Orchestration-based Saga in C#</span>
+<span class="keyword">public class</span> <span class="type">OrderSaga</span>
 {
-    public async Task ProcessOrder(Order order)
+    <span class="keyword">public async</span> <span class="type">Task</span> <span class="method">ProcessOrder</span>(<span class="type">Order</span> <span class="variable">order</span>)
     {
-        try
+        <span class="keyword">try</span>
         {
-            await _orderService.CreateOrder(order);
-            await _paymentService.ProcessPayment(order);
-            await _inventoryService.ReserveItems(order.Items);
+            <span class="keyword">await</span> <span class="variable">_orderService</span>.<span class="method">CreateOrder</span>(<span class="variable">order</span>);
+            <span class="keyword">await</span> <span class="variable">_paymentService</span>.<span class="method">ProcessPayment</span>(<span class="variable">order</span>);
+            <span class="keyword">await</span> <span class="variable">_inventoryService</span>.<span class="method">ReserveItems</span>(<span class="variable">order</span>.<span class="property">Items</span>);
         }
-        catch (Exception ex)
+        <span class="keyword">catch</span> (<span class="type">Exception</span> <span class="variable">ex</span>)
         {
-            // Compensating transactions
-            await _inventoryService.ReleaseItems(order.Items);
-            await _paymentService.RefundPayment(order);
-            await _orderService.CancelOrder(order.Id);
-            throw;
+            <span class="comment">// Compensating transactions</span>
+            <span class="keyword">await</span> <span class="variable">_inventoryService</span>.<span class="method">ReleaseItems</span>(<span class="variable">order</span>.<span class="property">Items</span>);
+            <span class="keyword">await</span> <span class="variable">_paymentService</span>.<span class="method">RefundPayment</span>(<span class="variable">order</span>);
+            <span class="keyword">await</span> <span class="variable">_orderService</span>.<span class="method">CancelOrder</span>(<span class="variable">order</span>.<span class="property">Id</span>);
+            <span class="keyword">throw</span>;
         }
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -627,34 +459,47 @@ public class OrderSaga
         <div class="answer">
             <p><strong>CQRS (Command Query Responsibility Segregation)</strong> separates read and write operations into different models. This can improve performance, scalability, and maintainability.</p>
             
-            <div class="code-block"><pre><code>// CQRS pattern in C#
-public interface ICommandHandler<TCommand>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">cqrs_pattern.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// CQRS pattern in C#</span>
+<span class="keyword">public interface</span> <span class="type">ICommandHandler</span>&lt;<span class="type">TCommand</span>&gt;
 {
-    Task Handle(TCommand command);
+    <span class="type">Task</span> <span class="method">Handle</span>(<span class="type">TCommand</span> <span class="variable">command</span>);
 }
 
-public interface IQueryHandler<TQuery, TResult>
+<span class="keyword">public interface</span> <span class="type">IQueryHandler</span>&lt;<span class="type">TQuery</span>, <span class="type">TResult</span>&gt;
 {
-    Task<TResult> Handle(TQuery query);
+    <span class="type">Task</span>&lt;<span class="type">TResult</span>&gt; <span class="method">Handle</span>(<span class="type">TQuery</span> <span class="variable">query</span>);
 }
 
-// Command side
-public class CreateOrderCommandHandler : ICommandHandler<CreateOrderCommand>
+<span class="comment">// Command side</span>
+<span class="keyword">public class</span> <span class="type">CreateOrderCommandHandler</span> : <span class="type">ICommandHandler</span>&lt;<span class="type">CreateOrderCommand</span>&gt;
 {
-    public async Task Handle(CreateOrderCommand command)
+    <span class="keyword">public async</span> <span class="type">Task</span> <span class="method">Handle</span>(<span class="type">CreateOrderCommand</span> <span class="variable">command</span>)
     {
-        await _orderRepository.Create(command);
+        <span class="keyword">await</span> <span class="variable">_orderRepository</span>.<span class="method">Create</span>(<span class="variable">command</span>);
     }
 }
 
-// Query side
-public class GetOrderQueryHandler : IQueryHandler<GetOrderQuery, OrderDto>
+<span class="comment">// Query side</span>
+<span class="keyword">public class</span> <span class="type">GetOrderQueryHandler</span> : <span class="type">IQueryHandler</span>&lt;<span class="type">GetOrderQuery</span>, <span class="type">OrderDto</span>&gt;
 {
-    public async Task<OrderDto> Handle(GetOrderQuery query)
+    <span class="keyword">public async</span> <span class="type">Task</span>&lt;<span class="type">OrderDto</span>&gt; <span class="method">Handle</span>(<span class="type">GetOrderQuery</span> <span class="variable">query</span>)
     {
-        return await _orderReadRepository.GetById(query.OrderId);
+        <span class="keyword">return await</span> <span class="variable">_orderReadRepository</span>.<span class="method">GetById</span>(<span class="variable">query</span>.<span class="property">OrderId</span>);
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <h2>3. Service Communication</h2>
@@ -723,16 +568,29 @@ public class GetOrderQueryHandler : IQueryHandler<GetOrderQuery, OrderDto>
         <div class="answer">
             <p><strong>Message Queuing</strong> enables asynchronous communication between services through a message broker. Services produce messages to a queue, and consumers consume them at their own pace.</p>
             
-            <div class="code-block"><pre><code>// Message queue using RabbitMQ in C#
-public class OrderProducer
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">message_queue.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Message queue using RabbitMQ in C#</span>
+<span class="keyword">public class</span> <span class="type">OrderProducer</span>
 {
-    public void PublishOrder(Order order)
+    <span class="keyword">public void</span> <span class="method">PublishOrder</span>(<span class="type">Order</span> <span class="variable">order</span>)
     {
-        var message = JsonSerializer.Serialize(order);
-        var body = Encoding.UTF8.GetBytes(message);
-        _channel.BasicPublish("", "orders", null, body);
+        <span class="keyword">var</span> <span class="variable">message</span> = <span class="type">JsonSerializer</span>.<span class="method">Serialize</span>(<span class="variable">order</span>);
+        <span class="keyword">var</span> <span class="variable">body</span> = <span class="type">Encoding</span>.<span class="method">UTF8</span>.<span class="method">GetBytes</span>(<span class="variable">message</span>);
+        <span class="variable">_channel</span>.<span class="method">BasicPublish</span>(<span class="string">""</span>, <span class="string">"orders"</span>, <span class="keyword">null</span>, <span class="variable">body</span>);
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <h2>4. Data Management</h2>
@@ -758,21 +616,34 @@ public class OrderProducer
         <div class="answer">
             <p><strong>Event Sourcing</strong> is a pattern where state changes are stored as a sequence of events. Instead of storing the current state, you store the history of all changes.</p>
             
-            <div class="code-block"><pre><code>// Event Sourcing in C#
-public class Order
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">event_sourcing.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Event Sourcing in C#</span>
+<span class="keyword">public class</span> <span class="type">Order</span>
 {
-    private readonly List<IDomainEvent> _events = new List<IDomainEvent>();
+    <span class="keyword">private readonly</span> <span class="type">List</span>&lt;<span class="type">IDomainEvent</span>&gt; <span class="variable">_events</span> = <span class="keyword">new</span> <span class="type">List</span>&lt;<span class="type">IDomainEvent</span>&gt;();
     
-    public void CreateOrder(List<OrderItem> items)
+    <span class="keyword">public void</span> <span class="method">CreateOrder</span>(<span class="type">List</span>&lt;<span class="type">OrderItem</span>&gt; <span class="variable">items</span>)
     {
-        _events.Add(new OrderCreatedEvent
+        <span class="variable">_events</span>.<span class="method">Add</span>(<span class="keyword">new</span> <span class="type">OrderCreatedEvent</span>
         {
-            OrderId = Guid.NewGuid(),
-            Items = items,
-            CreatedAt = DateTime.UtcNow
+            <span class="property">OrderId</span> = <span class="type">Guid</span>.<span class="method">NewGuid</span>(),
+            <span class="property">Items</span> = <span class="variable">items</span>,
+            <span class="property">CreatedAt</span> = <span class="type">DateTime</span>.<span class="property">UtcNow</span>
         });
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <h2>5. API Gateway</h2>
@@ -799,22 +670,35 @@ public class Order
         <div class="answer">
             <p><strong>Service Discovery</strong> is the process of automatically detecting devices and services on a computer network. In microservices, it allows services to find and communicate with each other without hardcoding hostnames and ports.</p>
             
-            <div class="code-block"><pre><code>// Service discovery using Consul in C#
-public class ConsulServiceDiscovery
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">service_discovery.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Service discovery using Consul in C#</span>
+<span class="keyword">public class</span> <span class="type">ConsulServiceDiscovery</span>
 {
-    public async Task RegisterService(string serviceName, string serviceUrl, int port)
+    <span class="keyword">public async</span> <span class="type">Task</span> <span class="method">RegisterService</span>(<span class="type">string</span> <span class="variable">serviceName</span>, <span class="type">string</span> <span class="variable">serviceUrl</span>, <span class="type">int</span> <span class="variable">port</span>)
     {
-        var registration = new AgentServiceRegistration
+        <span class="keyword">var</span> <span class="variable">registration</span> = <span class="keyword">new</span> <span class="type">AgentServiceRegistration</span>
         {
-            ID = $"{serviceName}-{Guid.NewGuid()}",
-            Name = serviceName,
-            Address = serviceUrl,
-            Port = port
+            <span class="property">ID</span> = <span class="string">$"{serviceName}-{Guid.NewGuid()}"</span>,
+            <span class="property">Name</span> = <span class="variable">serviceName</span>,
+            <span class="property">Address</span> = <span class="variable">serviceUrl</span>,
+            <span class="property">Port</span> = <span class="variable">port</span>
         };
         
-        await _consulClient.Agent.ServiceRegister(registration);
+        <span class="keyword">await</span> <span class="variable">_consulClient</span>.<span class="property">Agent</span>.<span class="method">ServiceRegister</span>(<span class="variable">registration</span>);
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -848,20 +732,33 @@ public class ConsulServiceDiscovery
         <div class="answer">
             <p><strong>Externalized Configuration</strong> is the practice of storing configuration outside the application code. This allows configuration to be changed without redeploying the application.</p>
             
-            <div class="code-block"><pre><code>// Configuration using Azure App Configuration
-public class Startup
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">azure_config.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Configuration using Azure App Configuration</span>
+<span class="keyword">public class</span> <span class="type">Startup</span>
 {
-    public void ConfigureServices(IServiceCollection services)
+    <span class="keyword">public void</span> <span class="method">ConfigureServices</span>(<span class="type">IServiceCollection</span> <span class="variable">services</span>)
     {
-        var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
-            .AddAzureAppConfiguration(options =>
+        <span class="keyword">var</span> <span class="variable">configuration</span> = <span class="keyword">new</span> <span class="type">ConfigurationBuilder</span>()
+            .<span class="method">AddJsonFile</span>(<span class="string">"appsettings.json"</span>)
+            .<span class="method">AddAzureAppConfiguration</span>(<span class="variable">options</span> =>
             {
-                options.Connect(Environment.GetEnvironmentVariable("AppConfigConnectionString"));
+                <span class="variable">options</span>.<span class="method">Connect</span>(<span class="type">Environment</span>.<span class="method">GetEnvironmentVariable</span>(<span class="string">"AppConfigConnectionString"</span>));
             })
-            .Build();
+            .<span class="method">Build</span>();
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -879,21 +776,34 @@ public class Startup
         <div class="answer">
             <p><strong>Circuit Breaker</strong> prevents cascading failures by stopping requests to a failing service after a threshold is reached, allowing the service time to recover.</p>
             
-            <div class="code-block"><pre><code>// Circuit Breaker using Polly in C#
-public class OrderService
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">circuit_breaker.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Circuit Breaker using Polly in C#</span>
+<span class="keyword">public class</span> <span class="type">OrderService</span>
 {
-    private readonly IAsyncPolicy<HttpResponseMessage> _circuitBreakerPolicy;
+    <span class="keyword">private readonly</span> <span class="type">IAsyncPolicy</span>&lt;<span class="type">HttpResponseMessage</span>&gt; <span class="variable">_circuitBreakerPolicy</span>;
     
-    public OrderService()
+    <span class="keyword">public</span> <span class="type">OrderService</span>()
     {
-        _circuitBreakerPolicy = Policy
-            .Handle<HttpRequestException>()
-            .CircuitBreakerAsync(
-                exceptionsAllowedBeforeBreaking: 3,
-                durationOfBreak: TimeSpan.FromSeconds(30)
+        <span class="variable">_circuitBreakerPolicy</span> = <span class="type">Policy</span>
+            .<span class="method">Handle</span>&lt;<span class="type">HttpRequestException</span>&gt;()
+            .<span class="method">CircuitBreakerAsync</span>(
+                <span class="variable">exceptionsAllowedBeforeBreaking</span>: <span class="number">3</span>,
+                <span class="variable">durationOfBreak</span>: <span class="type">TimeSpan</span>.<span class="method">FromSeconds</span>(<span class="number">30</span>)
             );
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -902,21 +812,34 @@ public class OrderService
         <div class="answer">
             <p><strong>Retry Pattern</strong> automatically retries failed operations with configurable delays and retry counts to handle transient failures.</p>
             
-            <div class="code-block"><pre><code>// Retry pattern using Polly in C#
-public class DatabaseService
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">retry_pattern.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Retry pattern using Polly in C#</span>
+<span class="keyword">public class</span> <span class="type">DatabaseService</span>
 {
-    private readonly IAsyncPolicy _retryPolicy;
+    <span class="keyword">private readonly</span> <span class="type">IAsyncPolicy</span> <span class="variable">_retryPolicy</span>;
     
-    public DatabaseService()
+    <span class="keyword">public</span> <span class="type">DatabaseService</span>()
     {
-        _retryPolicy = Policy
-            .Handle<SqlException>()
-            .WaitAndRetryAsync(
-                retryCount: 3,
-                sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))
+        <span class="variable">_retryPolicy</span> = <span class="type">Policy</span>
+            .<span class="method">Handle</span>&lt;<span class="type">SqlException</span>&gt;()
+            .<span class="method">WaitAndRetryAsync</span>(
+                <span class="variable">retryCount</span>: <span class="number">3</span>,
+                <span class="variable">sleepDurationProvider</span>: <span class="variable">retryAttempt</span> => <span class="type">TimeSpan</span>.<span class="method">FromSeconds</span>(<span class="type">Math</span>.<span class="method">Pow</span>(<span class="number">2</span>, <span class="variable">retryAttempt</span>))
             );
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -925,19 +848,32 @@ public class DatabaseService
         <div class="answer">
             <p><strong>Bulkhead Pattern</strong> limits the number of concurrent calls to a resource to prevent resource exhaustion and cascading failures.</p>
             
-            <div class="code-block"><pre><code>// Bulkhead pattern using Polly in C#
-public class ExternalApiService
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">bulkhead_pattern.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Bulkhead pattern using Polly in C#</span>
+<span class="keyword">public class</span> <span class="type">ExternalApiService</span>
 {
-    private readonly IAsyncPolicy _bulkheadPolicy;
+    <span class="keyword">private readonly</span> <span class="type">IAsyncPolicy</span> <span class="variable">_bulkheadPolicy</span>;
     
-    public ExternalApiService()
+    <span class="keyword">public</span> <span class="type">ExternalApiService</span>()
     {
-        _bulkheadPolicy = Policy.BulkheadAsync(
-            maxParallelization: 10,
-            maxQueuedActions: 5
+        <span class="variable">_bulkheadPolicy</span> = <span class="type">Policy</span>.<span class="method">BulkheadAsync</span>(
+            <span class="variable">maxParallelization</span>: <span class="number">10</span>,
+            <span class="variable">maxQueuedActions</span>: <span class="number">5</span>
         );
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -946,19 +882,32 @@ public class ExternalApiService
         <div class="answer">
             <p><strong>Timeout Pattern</strong> prevents operations from blocking indefinitely by setting a maximum time for an operation to complete.</p>
             
-            <div class="code-block"><pre><code>// Timeout pattern in C#
-public class ApiService
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">timeout_pattern.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Timeout pattern in C#</span>
+<span class="keyword">public class</span> <span class="type">ApiService</span>
 {
-    private readonly HttpClient _httpClient;
+    <span class="keyword">private readonly</span> <span class="type">HttpClient</span> <span class="variable">_httpClient</span>;
     
-    public ApiService()
+    <span class="keyword">public</span> <span class="type">ApiService</span>()
     {
-        _httpClient = new HttpClient
+        <span class="variable">_httpClient</span> = <span class="keyword">new</span> <span class="type">HttpClient</span>
         {
-            Timeout = TimeSpan.FromSeconds(30)
+            <span class="property">Timeout</span> = <span class="type">TimeSpan</span>.<span class="method">FromSeconds</span>(<span class="number">30</span>)
         };
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <h2>9. Security</h2>
@@ -976,28 +925,41 @@ public class ApiService
                 <li><strong>Secrets Management:</strong> HashiCorp Vault, Azure Key Vault</li>
             </ul>
             
-            <div class="code-block"><pre><code>// JWT Authentication in ASP.NET Core
-public class JwtAuthenticationService
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">jwt_auth.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// JWT Authentication in ASP.NET Core</span>
+<span class="keyword">public class</span> <span class="type">JwtAuthenticationService</span>
 {
-    public string GenerateToken(User user)
+    <span class="keyword">public</span> <span class="type">string</span> <span class="method">GenerateToken</span>(<span class="type">User</span> <span class="variable">user</span>)
     {
-        var claims = new[]
+        <span class="keyword">var</span> <span class="variable">claims</span> = <span class="keyword">new</span>[]
         {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Role, user.Role)
+            <span class="keyword">new</span> <span class="type">Claim</span>(<span class="type">ClaimTypes</span>.<span class="property">NameIdentifier</span>, <span class="variable">user</span>.<span class="property">Id</span>.<span class="method">ToString</span>()),
+            <span class="keyword">new</span> <span class="type">Claim</span>(<span class="type">ClaimTypes</span>.<span class="property">Email</span>, <span class="variable">user</span>.<span class="property">Email</span>),
+            <span class="keyword">new</span> <span class="type">Claim</span>(<span class="type">ClaimTypes</span>.<span class="property">Role</span>, <span class="variable">user</span>.<span class="property">Role</span>)
         };
         
-        var token = new JwtSecurityToken(
-            issuer: _configuration["Jwt:Issuer"],
-            audience: _configuration["Jwt:Audience"],
-            claims: claims,
-            expires: DateTime.Now.AddHours(1),
-            signingCredentials: credentials);
+        <span class="keyword">var</span> <span class="variable">token</span> = <span class="keyword">new</span> <span class="type">JwtSecurityToken</span>(
+            <span class="variable">issuer</span>: <span class="variable">_configuration</span>[<span class="string">"Jwt:Issuer"</span>],
+            <span class="variable">audience</span>: <span class="variable">_configuration</span>[<span class="string">"Jwt:Audience"</span>],
+            <span class="variable">claims</span>: <span class="variable">claims</span>,
+            <span class="variable">expires</span>: <span class="type">DateTime</span>.<span class="property">Now</span>.<span class="method">AddHours</span>(<span class="number">1</span>),
+            <span class="variable">signingCredentials</span>: <span class="variable">credentials</span>);
         
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">JwtSecurityTokenHandler</span>().<span class="method">WriteToken</span>(<span class="variable">token</span>);
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1006,24 +968,37 @@ public class JwtAuthenticationService
         <div class="answer">
             <p><strong>OAuth 2.0</strong> is an authorization framework that enables applications to obtain limited access to user accounts. In microservices, it's commonly used for service-to-service authentication.</p>
             
-            <div class="code-block"><pre><code>// OAuth 2.0 Client Credentials Flow
-public class TokenService
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">oauth2.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// OAuth 2.0 Client Credentials Flow</span>
+<span class="keyword">public class</span> <span class="type">TokenService</span>
 {
-    public async Task<string> GetAccessTokenAsync()
+    <span class="keyword">public async</span> <span class="type">Task</span>&lt;<span class="type">string</span>&gt; <span class="method">GetAccessTokenAsync</span>()
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "https://auth-server/oauth/token");
-        request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
+        <span class="keyword">var</span> <span class="variable">request</span> = <span class="keyword">new</span> <span class="type">HttpRequestMessage</span>(<span class="type">HttpMethod</span>.<span class="property">Post</span>, <span class="string">"https://auth-server/oauth/token"</span>);
+        <span class="variable">request</span>.<span class="property">Content</span> = <span class="keyword">new</span> <span class="type">FormUrlEncodedContent</span>(<span class="keyword">new</span> <span class="type">Dictionary</span>&lt;<span class="type">string</span>, <span class="type">string</span>&gt;
         {
-            { "grant_type", "client_credentials" },
-            { "client_id", "service-client-id" },
-            { "client_secret", "service-client-secret" }
+            { <span class="string">"grant_type"</span>, <span class="string">"client_credentials"</span> },
+            { <span class="string">"client_id"</span>, <span class="string">"service-client-id"</span> },
+            { <span class="string">"client_secret"</span>, <span class="string">"service-client-secret"</span> }
         });
         
-        var response = await client.SendAsync(request);
-        var tokenResponse = await response.Content.ReadFromJsonAsync<TokenResponse>();
-        return tokenResponse.AccessToken;
+        <span class="keyword">var</span> <span class="variable">response</span> = <span class="keyword">await</span> <span class="variable">client</span>.<span class="method">SendAsync</span>(<span class="variable">request</span>);
+        <span class="keyword">var</span> <span class="variable">tokenResponse</span> = <span class="keyword">await</span> <span class="variable">response</span>.<span class="property">Content</span>.<span class="method">ReadFromJsonAsync</span>&lt;<span class="type">TokenResponse</span>&gt;();
+        <span class="keyword">return</span> <span class="variable">tokenResponse</span>.<span class="property">AccessToken</span>;
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <h2>10. Monitoring & Observability</h2>
@@ -1048,17 +1023,30 @@ public class TokenService
         <div class="answer">
             <p><strong>Distributed Tracing</strong> tracks a request as it travels through multiple microservices, providing visibility into the entire request lifecycle and identifying performance bottlenecks.</p>
             
-            <div class="code-block"><pre><code>// Distributed tracing using OpenTelemetry
-services.AddOpenTelemetry()
-    .ConfigureResource(resource => resource.AddService("order-service"))
-    .WithTracing(builder => builder
-        .AddAspNetCoreInstrumentation()
-        .AddHttpClientInstrumentation()
-        .AddJaegerExporter(o =>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">opentelemetry.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Distributed tracing using OpenTelemetry</span>
+<span class="variable">services</span>.<span class="method">AddOpenTelemetry</span>()
+    .<span class="method">ConfigureResource</span>(<span class="variable">resource</span> => <span class="variable">resource</span>.<span class="method">AddService</span>(<span class="string">"order-service"</span>))
+    .<span class="method">WithTracing</span>(<span class="variable">builder</span> => <span class="variable">builder</span>
+        .<span class="method">AddAspNetCoreInstrumentation</span>()
+        .<span class="method">AddHttpClientInstrumentation</span>()
+        .<span class="method">AddJaegerExporter</span>(<span class="variable">o</span> =>
         {
-            o.AgentHost = "localhost";
-            o.AgentPort = 6831;
-        }));</code></pre></div>
+            <span class="variable">o</span>.<span class="property">AgentHost</span> = <span class="string">"localhost"</span>;
+            <span class="variable">o</span>.<span class="property">AgentPort</span> = <span class="number">6831</span>;
+        }));</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1095,25 +1083,38 @@ services.AddOpenTelemetry()
         <div class="answer">
             <p><strong>Containerization</strong> packages applications with their dependencies into lightweight, portable containers. It's essential for microservices because it provides consistent deployment environments.</p>
             
-            <div class="code-block"><pre><code>// Dockerfile for .NET microservice
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-WORKDIR /app
-EXPOSE 80
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Dockerfile</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Dockerfile for .NET microservice</span>
+<span class="keyword">FROM</span> mcr.microsoft.com/dotnet/aspnet:7.0 <span class="keyword">AS</span> base
+<span class="keyword">WORKDIR</span> /app
+<span class="keyword">EXPOSE</span> 80
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-COPY ["OrderService.csproj", "./"]
-RUN dotnet restore "OrderService.csproj"
-COPY . .
-RUN dotnet build "OrderService.csproj" -c Release -o /app/build
+<span class="keyword">FROM</span> mcr.microsoft.com/dotnet/sdk:7.0 <span class="keyword">AS</span> build
+<span class="keyword">WORKDIR</span> /src
+<span class="keyword">COPY</span> [<span class="string">"OrderService.csproj"</span>, <span class="string">"./"</span>]
+<span class="keyword">RUN</span> dotnet restore <span class="string">"OrderService.csproj"</span>
+<span class="keyword">COPY</span> . .
+<span class="keyword">RUN</span> dotnet build <span class="string">"OrderService.csproj"</span> -c Release -o /app/build
 
-FROM build AS publish
-RUN dotnet publish "OrderService.csproj" -c Release -o /app/publish
+<span class="keyword">FROM</span> build <span class="keyword">AS</span> publish
+<span class="keyword">RUN</span> dotnet publish <span class="string">"OrderService.csproj"</span> -c Release -o /app/publish
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "OrderService.dll"]</code></pre></div>
+<span class="keyword">FROM</span> base <span class="keyword">AS</span> final
+<span class="keyword">WORKDIR</span> /app
+<span class="keyword">COPY</span> --from=publish /app/publish .
+<span class="keyword">ENTRYPOINT</span> [<span class="string">"dotnet"</span>, <span class="string">"OrderService.dll"</span>]</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1177,22 +1178,35 @@ ENTRYPOINT ["dotnet", "OrderService.dll"]</code></pre></div>
                 <li><strong>Chaos Engineering:</strong> Test system resilience</li>
             </ul>
             
-            <div class="code-block"><pre><code>// Unit test using xUnit in C#
-public class OrderServiceTests
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">unit_test.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Unit test using xUnit in C#</span>
+<span class="keyword">public class</span> <span class="type">OrderServiceTests</span>
 {
-    [Fact]
-    public async Task CreateOrder_WithValidItems_ReturnsOrderId()
+    [<span class="decorator">Fact</span>]
+    <span class="keyword">public async</span> <span class="type">Task</span> <span class="method">CreateOrder_WithValidItems_ReturnsOrderId</span>()
     {
-        var mockRepository = new Mock<IOrderRepository>();
-        var service = new OrderService(mockRepository.Object);
-        var order = new Order { Items = new List<OrderItem>() };
+        <span class="keyword">var</span> <span class="variable">mockRepository</span> = <span class="keyword">new</span> <span class="type">Mock</span>&lt;<span class="type">IOrderRepository</span>&gt;();
+        <span class="keyword">var</span> <span class="variable">service</span> = <span class="keyword">new</span> <span class="type">OrderService</span>(<span class="variable">mockRepository</span>.<span class="property">Object</span>);
+        <span class="keyword">var</span> <span class="variable">order</span> = <span class="keyword">new</span> <span class="type">Order</span> { <span class="property">Items</span> = <span class="keyword">new</span> <span class="type">List</span>&lt;<span class="type">OrderItem</span>&gt;() };
         
-        var result = await service.CreateOrderAsync(order);
+        <span class="keyword">var</span> <span class="variable">result</span> = <span class="keyword">await</span> <span class="variable">service</span>.<span class="method">CreateOrderAsync</span>(<span class="variable">order</span>);
         
-        Assert.NotNull(result);
-        Assert.NotEqual(Guid.Empty, result.Id);
+        <span class="type">Assert</span>.<span class="method">NotNull</span>(<span class="variable">result</span>);
+        <span class="type">Assert</span>.<span class="method">NotEqual</span>(<span class="type">Guid</span>.<span class="property">Empty</span>, <span class="variable">result</span>.<span class="property">Id</span>);
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1316,23 +1330,36 @@ public class OrderServiceTests
         <div class="answer">
             <p><strong>Feature Toggle</strong> is a technique that allows you to enable or disable features without deploying new code. This is useful for A/B testing, canary releases, and rapid rollback.</p>
             
-            <div class="code-block"><pre><code>// Feature toggle using LaunchDarkly in C#
-public class OrderService
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">feature_toggle.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Feature toggle using LaunchDarkly in C#</span>
+<span class="keyword">public class</span> <span class="type">OrderService</span>
 {
-    private readonly IFeatureFlag _featureFlag;
+    <span class="keyword">private readonly</span> <span class="type">IFeatureFlag</span> <span class="variable">_featureFlag</span>;
     
-    public async Task<Order> GetOrderAsync(Guid orderId)
+    <span class="keyword">public async</span> <span class="type">Task</span>&lt;<span class="type">Order</span>&gt; <span class="method">GetOrderAsync</span>(<span class="type">Guid</span> <span class="variable">orderId</span>)
     {
-        if (await _featureFlag.IsEnabledAsync("new-order-api", User.Current))
+        <span class="keyword">if</span> (<span class="keyword">await</span> <span class="variable">_featureFlag</span>.<span class="method">IsEnabledAsync</span>(<span class="string">"new-order-api"</span>, <span class="type">User</span>.<span class="property">Current</span>))
         {
-            return await _newOrderRepository.GetByIdAsync(orderId);
+            <span class="keyword">return await</span> <span class="variable">_newOrderRepository</span>.<span class="method">GetByIdAsync</span>(<span class="variable">orderId</span>);
         }
-        else
+        <span class="keyword">else</span>
         {
-            return await _legacyOrderRepository.GetByIdAsync(orderId);
+            <span class="keyword">return await</span> <span class="variable">_legacyOrderRepository</span>.<span class="method">GetByIdAsync</span>(<span class="variable">orderId</span>);
         }
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1341,21 +1368,34 @@ public class OrderService
         <div class="answer">
             <p><strong>Idempotency</strong> is the property of an operation where applying it multiple times has the same effect as applying it once. This is crucial in distributed systems to handle duplicate requests.</p>
             
-            <div class="code-block"><pre><code>// Idempotency in C#
-public class OrderService
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">idempotency.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Idempotency in C#</span>
+<span class="keyword">public class</span> <span class="type">OrderService</span>
 {
-    public async Task<Order> CreateOrderAsync(Order order)
+    <span class="keyword">public async</span> <span class="type">Task</span>&lt;<span class="type">Order</span>&gt; <span class="method">CreateOrderAsync</span>(<span class="type">Order</span> <span class="variable">order</span>)
     {
-        // Check if order already exists
-        var existingOrder = await _orderRepository.GetByIdAsync(order.Id);
-        if (existingOrder != null)
+        <span class="comment">// Check if order already exists</span>
+        <span class="keyword">var</span> <span class="variable">existingOrder</span> = <span class="keyword">await</span> <span class="variable">_orderRepository</span>.<span class="method">GetByIdAsync</span>(<span class="variable">order</span>.<span class="property">Id</span>);
+        <span class="keyword">if</span> (<span class="variable">existingOrder</span> != <span class="keyword">null</span>)
         {
-            return existingOrder; // Return existing order (idempotent)
+            <span class="keyword">return</span> <span class="variable">existingOrder</span>; <span class="comment">// Return existing order (idempotent)</span>
         }
         
-        return await _orderRepository.CreateAsync(order);
+        <span class="keyword">return await</span> <span class="variable">_orderRepository</span>.<span class="method">CreateAsync</span>(<span class="variable">order</span>);
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1371,18 +1411,31 @@ public class OrderService
         <div class="answer">
             <p><strong>Event-Driven Architecture</strong> is a pattern where services communicate through events. This provides loose coupling and enables asynchronous processing.</p>
             
-            <div class="code-block"><pre><code>// Event-driven architecture using MassTransit in C#
-public class OrderCreatedEventConsumer : IConsumer<OrderCreatedEvent>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">event_driven.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Event-driven architecture using MassTransit in C#</span>
+<span class="keyword">public class</span> <span class="type">OrderCreatedEventConsumer</span> : <span class="type">IConsumer</span>&lt;<span class="type">OrderCreatedEvent</span>&gt;
 {
-    public async Task Consume(ConsumeContext<OrderCreatedEvent> context)
+    <span class="keyword">public async</span> <span class="type">Task</span> <span class="method">Consume</span>(<span class="type">ConsumeContext</span>&lt;<span class="type">OrderCreatedEvent</span>&gt; <span class="variable">context</span>)
     {
-        var @event = context.Message;
+        <span class="keyword">var</span> <span class="variable">@event</span> = <span class="variable">context</span>.<span class="property">Message</span>;
         
-        // Process order
-        await _inventoryService.ReserveItems(@event.Items);
-        await _notificationService.SendOrderConfirmation(@event.OrderId);
+        <span class="comment">// Process order</span>
+        <span class="keyword">await</span> <span class="variable">_inventoryService</span>.<span class="method">ReserveItems</span>(<span class="variable">@event</span>.<span class="property">Items</span>);
+        <span class="keyword">await</span> <span class="variable">_notificationService</span>.<span class="method">SendOrderConfirmation</span>(<span class="variable">@event</span>.<span class="property">OrderId</span>);
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
@@ -1391,25 +1444,38 @@ public class OrderCreatedEventConsumer : IConsumer<OrderCreatedEvent>
         <div class="answer">
             <p><strong>CQRS with Event Sourcing</strong> combines both patterns to create a powerful architecture where commands generate events, and queries use read models built from those events. This provides excellent scalability and auditability.</p>
             
-            <div class="code-block"><pre><code>// CQRS with Event Sourcing
-public class OrderCommandHandler : ICommandHandler<CreateOrderCommand>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">cqrs_event_sourcing.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// CQRS with Event Sourcing</span>
+<span class="keyword">public class</span> <span class="type">OrderCommandHandler</span> : <span class="type">ICommandHandler</span>&lt;<span class="type">CreateOrderCommand</span>&gt;
 {
-    private readonly IEventStore _eventStore;
-    private readonly IEventBus _eventBus;
+    <span class="keyword">private readonly</span> <span class="type">IEventStore</span> <span class="variable">_eventStore</span>;
+    <span class="keyword">private readonly</span> <span class="type">IEventBus</span> <span class="variable">_eventBus</span>;
     
-    public async Task Handle(CreateOrderCommand command)
+    <span class="keyword">public async</span> <span class="type">Task</span> <span class="method">Handle</span>(<span class="type">CreateOrderCommand</span> <span class="variable">command</span>)
     {
-        var order = new Order();
-        order.CreateOrder(command.Items);
+        <span class="keyword">var</span> <span class="variable">order</span> = <span class="keyword">new</span> <span class="type">Order</span>();
+        <span class="variable">order</span>.<span class="method">CreateOrder</span>(<span class="variable">command</span>.<span class="property">Items</span>);
         
-        await _eventStore.SaveEvents(order.Id, order.GetUncommittedEvents());
+        <span class="keyword">await</span> <span class="variable">_eventStore</span>.<span class="method">SaveEvents</span>(<span class="variable">order</span>.<span class="property">Id</span>, <span class="variable">order</span>.<span class="method">GetUncommittedEvents</span>());
         
-        foreach (var @event in order.GetUncommittedEvents())
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> <span class="variable">@event</span> <span class="keyword">in</span> <span class="variable">order</span>.<span class="method">GetUncommittedEvents</span>())
         {
-            await _eventBus.Publish(@event);
+            <span class="keyword">await</span> <span class="variable">_eventBus</span>.<span class="method">Publish</span>(<span class="variable">@event</span>);
         }
     }
-}</code></pre></div>
+}</code>
+                </div>
+            </div>
         </div>
 
         <div class="footer">
@@ -1418,5 +1484,28 @@ public class OrderCommandHandler : ICommandHandler<CreateOrderCommand>
             <p><span class="highlight">💡 Tip:</span> Focus on understanding the core patterns (API Gateway, Service Mesh, Saga, CQRS, Event Sourcing), resilience patterns (Circuit Breaker, Retry, Bulkhead), and container orchestration with Kubernetes. These are the areas where most microservices interview questions focus. Practice implementing these patterns in C# with .NET Core.</p>
         </div>
     </div>
+    <script>
+        function copyCode(button) {
+            const codeEditor = button.closest('.code-editor');
+            const codeContent = codeEditor.querySelector('.code-editor-content code');
+            const text = codeContent.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
+    <script src="../code-converter.js"></script>
 </body>
 </html>
