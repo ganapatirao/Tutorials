@@ -33,18 +33,71 @@
         }
         
         .container {
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 400px 1fr;
-            gap: 30px;
+            grid-template-columns: 400px 1fr 320px;
+            gap: 20px;
+            position: relative;
+        }
+        
+        .sidebar-toggle {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            font-size: 24px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sidebar-toggle:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+        }
+        
+        .layout-toggle {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
+            font-size: 24px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .layout-toggle:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 12px 35px rgba(240, 147, 251, 0.5);
         }
         
         .sidebar {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(30px);
             border-radius: 24px;
-            padding: 35px;
+            padding: 25px;
             box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
             height: fit-content;
             position: sticky;
@@ -52,6 +105,299 @@
             border: 2px solid rgba(255, 255, 255, 0.6);
             max-height: calc(100vh - 40px);
             overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar.collapsed {
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .sidebar.expanded {
+            width: 400px;
+            padding: 25px;
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .right-sidebar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(30px);
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .right-sidebar.collapsed {
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .right-sidebar.expanded {
+            width: 320px;
+            padding: 25px;
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .right-sidebar h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .layout-grid .layout-btn {
+            padding: 12px 8px;
+            font-size: 11px;
+            text-align: center;
+        }
+        
+        .save-load-btns {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .save-load-btns button {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .save-load-btns button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .quick-select {
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+            padding: 18px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .quick-select h3 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .quick-select .form-group {
+            margin-bottom: 12px;
+        }
+        
+        .quick-select .form-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .accordion-section {
+            margin-bottom: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-section.active {
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        }
+        
+        .accordion-header {
+            padding: 14px 16px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .accordion-header:hover {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f8f9ff 100%);
+        }
+        
+        .accordion-header .icon {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        
+        .accordion-header .arrow {
+            transition: transform 0.3s ease;
+            font-size: 12px;
+        }
+        
+        .accordion-section.active .accordion-header .arrow {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+        
+        .accordion-section.active .accordion-content {
+            max-height: 2000px;
+        }
+        
+        .accordion-content-inner {
+            padding: 16px;
+        }
+        
+        .add-btn {
+            width: 100%;
+            padding: 12px;
+            border: 2px dashed #667eea;
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .add-btn:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .entry-list {
+            margin-bottom: 15px;
+        }
+        
+        .entry-item {
+            background: #f8f9ff;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .entry-item .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .entry-item .remove-btn:hover {
+            background: #ff6b81;
+            transform: scale(1.1);
+        }
+        
+        .entry-item input,
+        .entry-item textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 10px;
+            font-family: inherit;
+        }
+        
+        .entry-item input:last-child,
+        .entry-item textarea:last-child {
+            margin-bottom: 0;
+        }
+        
+        .entry-item input:focus,
+        .entry-item textarea:focus {
+            outline: none;
+            border-color: #667eea;
         }
         
         .sidebar::before {
@@ -82,47 +428,15 @@
         }
         
         .sidebar h2 {
-            font-size: 28px;
-            margin-bottom: 30px;
+            font-size: 18px;
+            margin-bottom: 15px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 800;
-        }
-        
-        .tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-        
-        .tab-btn {
-            padding: 10px 16px;
-            border: 2px solid #e0e0e0;
-            background: white;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            flex: 1;
-            text-align: center;
-        }
-        
-        .tab-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: #667eea;
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
         }
         
         .form-group {
@@ -293,26 +607,42 @@
         
         .preview-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            margin-bottom: 35px;
-            padding-bottom: 25px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
             border-bottom: 3px solid #e0e0e0;
         }
         
         .preview-header h2 {
-            font-size: 28px;
+            font-size: 24px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 800;
+            margin: 0;
         }
         
         .layout-selector {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
+            max-height: 100px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f8f9ff;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .layout-selector::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .layout-selector::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 3px;
         }
         
         .layout-btn {
@@ -341,9 +671,9 @@
         }
         
         #resume-preview {
-            transform: scale(0.85);
-            transform-origin: top left;
-            transition: transform 0.3s ease;
+            width: 100%;
+            max-width: 210mm;
+            margin: 0 auto;
         }
         
         .quick-select {
@@ -367,32 +697,44 @@
             margin-bottom: 15px;
         }
         
-        @media (max-width: 1024px) {
+        @media (max-width: 1400px) {
+            .container {
+                grid-template-columns: 350px 1fr 280px;
+            }
+        }
+        
+        @media (max-width: 1200px) {
             .container {
                 grid-template-columns: 1fr;
             }
             .sidebar {
                 position: static;
             }
+            .right-sidebar {
+                position: static;
+            }
         }
     </style>
 </head>
 <body>
+    <button class="sidebar-toggle" onclick="toggleSidebar()" id="sidebarToggle">☰</button>
+    <button class="layout-toggle" onclick="toggleLayoutSidebar()" id="layoutToggle">🎨</button>
+    
     <div class="container">
-        <div class="sidebar">
-            <h2>🎨 Resume Generator</h2>
+        <div class="sidebar expanded" id="sidebar">
+            <h2>🎨 Resume Builder</h2>
             
             <div class="save-load-btns">
-                <button onclick="saveResume()">💾 Save Draft</button>
-                <button onclick="loadResume()">📂 Load Draft</button>
+                <button onclick="saveResume()">💾 Save</button>
+                <button onclick="loadResume()">📂 Load</button>
             </div>
             
             <div class="quick-select">
                 <h3>⚡ Quick Start</h3>
                 <div class="form-group">
-                    <label for="role-select">Select Role</label>
+                    <label for="role-select">Role</label>
                     <select id="role-select" onchange="loadTemplateData()">
-                        <option value="">Choose your role...</option>
+                        <option value="">Choose role...</option>
                         <option value="softwareEngineer">Software Engineer</option>
                         <option value="devOpsEngineer">DevOps Engineer</option>
                         <option value="dataScientist">Data Scientist</option>
@@ -409,9 +751,9 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="experience-select">Experience Level</label>
+                    <label for="experience-select">Experience</label>
                     <select id="experience-select" onchange="loadTemplateData()">
-                        <option value="">Choose experience level...</option>
+                        <option value="">Choose level...</option>
                         <option value="fresher">Fresher (0-2 years)</option>
                         <option value="junior">Junior (2-4 years)</option>
                         <option value="midLevel">Mid-Level (4-7 years)</option>
@@ -424,107 +766,127 @@
                 </div>
             </div>
             
-            <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab('personal')">👤 Personal</button>
-                <button class="tab-btn" onclick="switchTab('experience')">💼 Experience</button>
-                <button class="tab-btn" onclick="switchTab('education')">🎓 Education</button>
-                <button class="tab-btn" onclick="switchTab('skills')">⚡ Skills</button>
-                <button class="tab-btn" onclick="switchTab('projects')">🚀 Projects</button>
-                <button class="tab-btn" onclick="switchTab('certifications')">🏆 Certs</button>
-                <button class="tab-btn" onclick="switchTab('achievements')">⭐ Achieve</button>
-            </div>
-            
-            <div id="personal-tab" class="tab-content active">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" id="full-name" placeholder="John Doe" oninput="updateResume()">
+            <div class="accordion-section active" id="personal-section">
+                <div class="accordion-header" onclick="toggleAccordion('personal-section')">
+                    <span><span class="icon">👤</span> Personal</span>
+                    <span class="arrow">▼</span>
                 </div>
-                <div class="form-group">
-                    <label>Job Title</label>
-                    <input type="text" id="job-title" placeholder="Software Engineer" oninput="updateResume()">
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="email" placeholder="john.doe@email.com" oninput="updateResume()">
-                </div>
-                <div class="form-group">
-                    <label>Phone</label>
-                    <input type="tel" id="phone" placeholder="(555) 123-4567" oninput="updateResume()">
-                </div>
-                <div class="form-group">
-                    <label>Location</label>
-                    <input type="text" id="location" placeholder="San Francisco, CA" oninput="updateResume()">
-                </div>
-                <div class="form-group">
-                    <label>LinkedIn</label>
-                    <input type="text" id="linkedin" placeholder="linkedin.com/in/johndoe" oninput="updateResume()">
-                </div>
-                <div class="form-group">
-                    <label>Professional Summary</label>
-                    <textarea id="summary" placeholder="Your professional summary..." oninput="updateResume()"></textarea>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="full-name" placeholder="John Doe" oninput="updateResume()">
+                        </div>
+                        <div class="form-group">
+                            <label>Job Title</label>
+                            <input type="text" id="job-title" placeholder="Software Engineer" oninput="updateResume()">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email" placeholder="john@email.com" oninput="updateResume()">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" id="phone" placeholder="(555) 123-4567" oninput="updateResume()">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="location" placeholder="San Francisco, CA" oninput="updateResume()">
+                        </div>
+                        <div class="form-group">
+                            <label>LinkedIn</label>
+                            <input type="text" id="linkedin" placeholder="linkedin.com/in/johndoe" oninput="updateResume()">
+                        </div>
+                        <div class="form-group">
+                            <label>Summary</label>
+                            <textarea id="summary" placeholder="Professional summary..." oninput="updateResume()"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div id="experience-tab" class="tab-content">
-                <div class="entry-list" id="experience-list"></div>
-                <button class="add-btn" onclick="addExperience()">+ Add Experience</button>
-            </div>
-            
-            <div id="education-tab" class="tab-content">
-                <div class="entry-list" id="education-list"></div>
-                <button class="add-btn" onclick="addEducation()">+ Add Education</button>
-            </div>
-            
-            <div id="skills-tab" class="tab-content">
-                <div class="form-group">
-                    <label>Skills (comma separated)</label>
-                    <textarea id="skills-input" placeholder="JavaScript, Python, React, Node.js, AWS" oninput="updateSkills()"></textarea>
+            <div class="accordion-section" id="experience-section">
+                <div class="accordion-header" onclick="toggleAccordion('experience-section')">
+                    <span><span class="icon">💼</span> Experience</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="entry-list" id="experience-list"></div>
+                        <button class="add-btn" onclick="addExperience()">+ Add</button>
+                    </div>
                 </div>
             </div>
             
-            <div id="projects-tab" class="tab-content">
-                <div class="entry-list" id="projects-list"></div>
-                <button class="add-btn" onclick="addProject()">+ Add Project</button>
-            </div>
-            
-            <div id="certifications-tab" class="tab-content">
-                <div class="form-group">
-                    <label>Certifications (comma separated)</label>
-                    <textarea id="certifications-input" placeholder="AWS Solutions Architect, Google Cloud Developer, CKA" oninput="updateCertifications()"></textarea>
+            <div class="accordion-section" id="education-section">
+                <div class="accordion-header" onclick="toggleAccordion('education-section')">
+                    <span><span class="icon">🎓</span> Education</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="entry-list" id="education-list"></div>
+                        <button class="add-btn" onclick="addEducation()">+ Add</button>
+                    </div>
                 </div>
             </div>
             
-            <div id="achievements-tab" class="tab-content">
-                <div class="form-group">
-                    <label>Achievements (one per line)</label>
-                    <textarea id="achievements-input" placeholder="Employee of the Year 2023&#10;Published 3 technical articles&#10;Speaker at tech conferences" oninput="updateAchievements()"></textarea>
+            <div class="accordion-section" id="skills-section">
+                <div class="accordion-header" onclick="toggleAccordion('skills-section')">
+                    <span><span class="icon">⚡</span> Skills</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="form-group">
+                            <label>Skills (comma separated)</label>
+                            <textarea id="skills-input" placeholder="JavaScript, Python, React..." oninput="updateSkills()"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="form-group">
-                <label for="layout-select">Layout Style</label>
-                <select id="layout-select" onchange="setLayout(this.value)">
-                    <option value="modern">Modern Professional</option>
-                    <option value="ats">ATS-Friendly</option>
-                    <option value="executive">Executive</option>
-                    <option value="twoColumn">Two-Column</option>
-                    <option value="creative">Creative</option>
-                    <option value="minimal">Minimal</option>
-                    <option value="classic">Classic Professional</option>
-                    <option value="elegant">Elegant Serif</option>
-                    <option value="bold">Bold Modern</option>
-                    <option value="clean">Clean Contemporary</option>
-                    <option value="dark">Sophisticated Dark</option>
-                    <option value="neon">Neon Gradient</option>
-                    <option value="glassmorphism">Glassmorphism</option>
-                    <option value="geometric">Geometric</option>
-                    <option value="vibrant">Vibrant</option>
-                    <option value="techMinimal">Tech Minimal</option>
-                    <option value="pastel">Pastel</option>
-                    <option value="gradientBorder">Gradient Border</option>
-                    <option value="cardBased">Card Based</option>
-                    <option value="cyberpunk">Cyberpunk</option>
-                </select>
+            <div class="accordion-section" id="projects-section">
+                <div class="accordion-header" onclick="toggleAccordion('projects-section')">
+                    <span><span class="icon">🚀</span> Projects</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="entry-list" id="projects-list"></div>
+                        <button class="add-btn" onclick="addProject()">+ Add</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-section" id="certifications-section">
+                <div class="accordion-header" onclick="toggleAccordion('certifications-section')">
+                    <span><span class="icon">🏆</span> Certifications</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="form-group">
+                            <label>Certifications (comma separated)</label>
+                            <textarea id="certifications-input" placeholder="AWS Solutions Architect, Google Cloud Developer, CKA" oninput="updateCertifications()"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-section" id="achievements-section">
+                <div class="accordion-header" onclick="toggleAccordion('achievements-section')">
+                    <span><span class="icon">⭐</span> Achievements</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="form-group">
+                            <label>Achievements (one per line)</label>
+                            <textarea id="achievements-input" placeholder="Employee of the Year 2023&#10;Published 3 technical articles&#10;Speaker at tech conferences" oninput="updateAchievements()"></textarea>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="download-buttons">
@@ -536,34 +898,83 @@
         <div class="preview-area">
             <div class="preview-header">
                 <h2>📄 Live Preview</h2>
-                <div class="layout-selector">
-                    <button class="layout-btn active" onclick="setLayout('modern')">Modern</button>
-                    <button class="layout-btn" onclick="setLayout('ats')">ATS</button>
-                    <button class="layout-btn" onclick="setLayout('executive')">Exec</button>
-                    <button class="layout-btn" onclick="setLayout('twoColumn')">2-Col</button>
-                    <button class="layout-btn" onclick="setLayout('creative')">Creative</button>
-                    <button class="layout-btn" onclick="setLayout('minimal')">Minimal</button>
-                    <button class="layout-btn" onclick="setLayout('classic')">Classic</button>
-                    <button class="layout-btn" onclick="setLayout('elegant')">Elegant</button>
-                    <button class="layout-btn" onclick="setLayout('bold')">Bold</button>
-                    <button class="layout-btn" onclick="setLayout('clean')">Clean</button>
-                    <button class="layout-btn" onclick="setLayout('dark')">Dark</button>
-                    <button class="layout-btn" onclick="setLayout('neon')">Neon</button>
-                    <button class="layout-btn" onclick="setLayout('glassmorphism')">Glass</button>
-                    <button class="layout-btn" onclick="setLayout('geometric')">Geo</button>
-                    <button class="layout-btn" onclick="setLayout('vibrant')">Vibrant</button>
-                    <button class="layout-btn" onclick="setLayout('techMinimal')">Tech</button>
-                    <button class="layout-btn" onclick="setLayout('pastel')">Pastel</button>
-                    <button class="layout-btn" onclick="setLayout('gradientBorder')">Grad</button>
-                    <button class="layout-btn" onclick="setLayout('cardBased')">Card</button>
-                    <button class="layout-btn" onclick="setLayout('cyberpunk')">Cyber</button>
-                </div>
             </div>
             <div id="resume-preview"></div>
+        </div>
+        
+        <div class="right-sidebar expanded" id="rightSidebar">
+            <h3>🎨 Layouts</h3>
+            <div class="layout-grid">
+                <button class="layout-btn active" onclick="setLayout('modern')">Modern</button>
+                <button class="layout-btn" onclick="setLayout('ats')">ATS</button>
+                <button class="layout-btn" onclick="setLayout('executive')">Exec</button>
+                <button class="layout-btn" onclick="setLayout('twoColumn')">2-Col</button>
+                <button class="layout-btn" onclick="setLayout('creative')">Creative</button>
+                <button class="layout-btn" onclick="setLayout('minimal')">Minimal</button>
+                <button class="layout-btn" onclick="setLayout('classic')">Classic</button>
+                <button class="layout-btn" onclick="setLayout('elegant')">Elegant</button>
+                <button class="layout-btn" onclick="setLayout('bold')">Bold</button>
+                <button class="layout-btn" onclick="setLayout('clean')">Clean</button>
+                <button class="layout-btn" onclick="setLayout('dark')">Dark</button>
+                <button class="layout-btn" onclick="setLayout('neon')">Neon</button>
+                <button class="layout-btn" onclick="setLayout('glassmorphism')">Glass</button>
+                <button class="layout-btn" onclick="setLayout('geometric')">Geo</button>
+                <button class="layout-btn" onclick="setLayout('vibrant')">Vibrant</button>
+                <button class="layout-btn" onclick="setLayout('techMinimal')">Tech</button>
+                <button class="layout-btn" onclick="setLayout('pastel')">Pastel</button>
+                <button class="layout-btn" onclick="setLayout('gradientBorder')">Grad</button>
+                <button class="layout-btn" onclick="setLayout('cardBased')">Card</button>
+                <button class="layout-btn" onclick="setLayout('cyberpunk')">Cyber</button>
+            </div>
         </div>
     </div>
     
     <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.getElementById('sidebarToggle');
+            
+            if (sidebar.classList.contains('expanded')) {
+                sidebar.classList.remove('expanded');
+                sidebar.classList.add('collapsed');
+                toggle.textContent = '☰';
+            } else {
+                sidebar.classList.remove('collapsed');
+                sidebar.classList.add('expanded');
+                toggle.textContent = '✕';
+            }
+        }
+        
+        function toggleLayoutSidebar() {
+            const rightSidebar = document.getElementById('rightSidebar');
+            const toggle = document.getElementById('layoutToggle');
+            
+            if (rightSidebar.classList.contains('expanded')) {
+                rightSidebar.classList.remove('expanded');
+                rightSidebar.classList.add('collapsed');
+                toggle.textContent = '🎨';
+            } else {
+                rightSidebar.classList.remove('collapsed');
+                rightSidebar.classList.add('expanded');
+                toggle.textContent = '✕';
+            }
+        }
+        
+        function toggleAccordion(sectionId) {
+            const section = document.getElementById(sectionId);
+            const allSections = document.querySelectorAll('.accordion-section');
+            
+            // Close all other sections
+            allSections.forEach(s => {
+                if (s.id !== sectionId) {
+                    s.classList.remove('active');
+                }
+            });
+            
+            // Toggle current section
+            section.classList.toggle('active');
+        }
+        
         let resumeData = {
             name: '',
             title: '',
@@ -598,7 +1009,6 @@
             }
             if (urlParams.get('layout')) {
                 currentLayout = urlParams.get('layout');
-                document.getElementById('layout-select').value = currentLayout;
                 updateLayoutButtons(currentLayout);
             }
             
@@ -610,21 +1020,6 @@
             // Generate initial resume
             updateResume();
         });
-        
-        function switchTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            // Remove active class from all buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            // Show selected tab
-            document.getElementById(tabName + '-tab').classList.add('active');
-            // Add active class to clicked button
-            event.target.classList.add('active');
-        }
         
         function loadTemplateData() {
             currentRole = document.getElementById('role-select').value;
@@ -646,6 +1041,10 @@
                     // Populate form fields with template data
                     document.getElementById('full-name').value = templateData.name || '';
                     document.getElementById('job-title').value = templateData.title || '';
+                    document.getElementById('email').value = templateData.email || 'alex.johnson@email.com';
+                    document.getElementById('phone').value = templateData.phone || '(555) 123-4567';
+                    document.getElementById('location').value = templateData.location || 'San Francisco, CA';
+                    document.getElementById('linkedin').value = templateData.linkedin || 'linkedin.com/in/alexjohnson';
                     document.getElementById('summary').value = templateData.summary || '';
                     document.getElementById('skills-input').value = templateData.skills ? templateData.skills.join(', ') : '';
                     document.getElementById('certifications-input').value = templateData.certifications ? templateData.certifications.join(', ') : '';
@@ -653,7 +1052,7 @@
                     
                     // Clear and populate experience
                     document.getElementById('experience-list').innerHTML = '';
-                    if (templateData.experience) {
+                    if (templateData.experience && templateData.experience.length > 0) {
                         templateData.experience.forEach(exp => {
                             addExperience(exp);
                         });
@@ -661,18 +1060,24 @@
                     
                     // Clear and populate education
                     document.getElementById('education-list').innerHTML = '';
-                    if (templateData.education && templateData.education.degree) {
-                        addEducation({
-                            degree: templateData.education.degree,
-                            school: templateData.education.school,
-                            location: templateData.education.location,
-                            date: templateData.education.date
-                        });
+                    if (templateData.education) {
+                        if (Array.isArray(templateData.education)) {
+                            templateData.education.forEach(edu => {
+                                addEducation(edu);
+                            });
+                        } else if (templateData.education.degree) {
+                            addEducation({
+                                degree: templateData.education.degree,
+                                school: templateData.education.school || '',
+                                location: templateData.education.location || '',
+                                date: templateData.education.date || ''
+                            });
+                        }
                     }
                     
                     // Clear and populate projects
                     document.getElementById('projects-list').innerHTML = '';
-                    if (templateData.projects) {
+                    if (templateData.projects && templateData.projects.length > 0) {
                         templateData.projects.forEach(proj => {
                             addProject(proj);
                         });
@@ -725,6 +1130,18 @@
                     description: entry.querySelector('.proj-description').value
                 });
             });
+            
+            // Collect skills
+            const skillsInput = document.getElementById('skills-input').value;
+            resumeData.skills = skillsInput ? skillsInput.split(',').map(s => s.trim()) : [];
+            
+            // Collect certifications
+            const certsInput = document.getElementById('certifications-input').value;
+            resumeData.certifications = certsInput ? certsInput.split(',').map(c => c.trim()) : [];
+            
+            // Collect achievements
+            const achieveInput = document.getElementById('achievements-input').value;
+            resumeData.achievements = achieveInput ? achieveInput.split('\n').map(a => a.trim()).filter(a => a) : [];
             
             // Generate preview
             const preview = document.getElementById('resume-preview');
@@ -831,10 +1248,6 @@
         
         function setLayout(layout) {
             currentLayout = layout;
-            const select = document.getElementById('layout-select');
-            if (select) {
-                select.value = layout;
-            }
             updateLayoutButtons(layout);
             updateResume();
         }
@@ -928,7 +1341,6 @@
                 
                 if (savedLayout) {
                     currentLayout = savedLayout;
-                    document.getElementById('layout-select').value = currentLayout;
                     updateLayoutButtons(currentLayout);
                 }
                 
@@ -1976,102 +2388,37 @@
                     return;
                 }
                 
-                // Create HTML content for Word document
-                const skillsArray = Array.isArray(resumeData.skills) ? resumeData.skills : (resumeData.skills ? resumeData.skills.split(', ') : []);
-                const expArray = Array.isArray(resumeData.experience) ? resumeData.experience : [];
-                const eduArray = Array.isArray(resumeData.education) ? resumeData.education : (resumeData.education && resumeData.education.degree ? [resumeData.education] : []);
-                const certArray = Array.isArray(resumeData.certifications) ? resumeData.certifications : (resumeData.certifications ? resumeData.certifications.split(', ') : []);
-                const achieveArray = Array.isArray(resumeData.achievements) ? resumeData.achievements : (resumeData.achievements ? resumeData.achievements.split('\n') : []);
+                // Get the preview HTML content which already has the layout styling
+                const previewElement = document.getElementById('resume-preview');
+                const htmlContent = previewElement.innerHTML;
                 
-                const htmlContent = `
+                // Create HTML content for Word document with the same styling as preview
+                const wordContent = `
                     <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'>
                     <head>
                         <meta charset="utf-8">
                         <title>Resume - ${resumeData.name}</title>
                         <style>
-                            body { font-family: Arial, sans-serif; line-height: 1.5; color: #000; }
-                            h1 { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
-                            h2 { font-size: 18px; font-weight: bold; margin-bottom: 10px; }
-                            h3 { font-size: 14px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
-                            .contact { font-size: 12px; margin-bottom: 20px; }
-                            .section { margin-bottom: 20px; }
-                            .item { margin-bottom: 15px; }
-                            .item-title { font-weight: bold; }
-                            .item-subtitle { font-style: italic; }
-                            .item-date { font-size: 11px; color: #666; }
-                            ul { margin-left: 20px; margin-top: 5px; }
-                            li { margin-bottom: 3px; }
+                            body { 
+                                font-family: Arial, sans-serif; 
+                                line-height: 1.5; 
+                                color: #000; 
+                                margin: 0;
+                                padding: 20px;
+                            }
+                            * {
+                                box-sizing: border-box;
+                            }
                         </style>
                     </head>
                     <body>
-                        <h1>${resumeData.name}</h1>
-                        <h2>${resumeData.title}</h2>
-                        <div class="contact">Email: ${resumeData.email} | Phone: ${resumeData.phone} | Location: ${resumeData.location} | LinkedIn: ${resumeData.linkedin}</div>
-                        
-                        <h3>PROFESSIONAL SUMMARY</h3>
-                        <div class="section">${resumeData.summary}</div>
-                        
-                        ${skillsArray.length > 0 ? `
-                        <h3>SKILLS</h3>
-                        <div class="section">${skillsArray.join(', ')}</div>
-                        ` : ''}
-                        
-                        ${expArray.length > 0 ? `
-                        <h3>EXPERIENCE</h3>
-                        ${expArray.map(exp => `
-                            <div class="item">
-                                <div class="item-title">${exp.title}</div>
-                                <div class="item-subtitle">${exp.company} | ${exp.location}</div>
-                                <div class="item-date">${exp.date}</div>
-                                <ul>
-                                    ${(Array.isArray(exp.description) ? exp.description : []).map(desc => `<li>${desc}</li>`).join('')}
-                                </ul>
-                            </div>
-                        `).join('')}
-                        ` : ''}
-                        
-                        ${eduArray.length > 0 ? `
-                        <h3>EDUCATION</h3>
-                        ${eduArray.map(edu => `
-                            <div class="item">
-                                <div class="item-title">${edu.degree}</div>
-                                <div class="item-subtitle">${edu.school} | ${edu.location}</div>
-                                <div class="item-date">${edu.date}</div>
-                            </div>
-                        `).join('')}
-                        ` : ''}
-                        
-                        ${resumeData.projects && resumeData.projects.length > 0 ? `
-                        <h3>PROJECTS</h3>
-                        ${resumeData.projects.map(proj => `
-                            <div class="item">
-                                <div class="item-title">${proj.title}</div>
-                                <div>${proj.description}</div>
-                            </div>
-                        `).join('')}
-                        ` : ''}
-                        
-                        ${certArray.length > 0 ? `
-                        <h3>CERTIFICATIONS</h3>
-                        <div class="section">
-                            ${certArray.map(cert => `<div>• ${cert}</div>`).join('')}
-                        </div>
-                        ` : ''}
-                        
-                        ${achieveArray.length > 0 ? `
-                        <h3>ACHIEVEMENTS</h3>
-                        <div class="section">
-                            <ul>
-                                ${achieveArray.map(ach => `<li>${ach}</li>`).join('')}
-                            </ul>
-                        </div>
-                        ` : ''}
+                        ${htmlContent}
                     </body>
                     </html>
                 `;
                 
                 // Create blob with Word MIME type
-                const blob = new Blob(['\ufeff', htmlContent], {
+                const blob = new Blob(['\ufeff', wordContent], {
                     type: 'application/msword'
                 });
                 
@@ -2092,11 +2439,21 @@
         function downloadPDF() {
             const element = document.getElementById('resume-preview');
             const opt = {
-                margin: 10,
+                margin: 0,
                 filename: `resume-${resumeData.name.replace(/\s+/g, '-').toLowerCase() || 'custom'}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    letterRendering: true,
+                    logging: false,
+                    allowTaint: true
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait'
+                }
             };
             
             html2pdf().set(opt).from(element).save().catch(error => {
