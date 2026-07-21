@@ -3,1823 +3,1138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cybersecurity Interview Preparation Guide</title>
-                <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: #1a1a2e;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 20s ease infinite;
-            min-height: 100vh;
-            padding: 25px 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
-            animation: particleFloat 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 50px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(30px);
-            border-radius: 32px;
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
+    <title>Cybersecurity Interview Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #1a1a2e; background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%); background-size: 400% 400%; animation: gradientShift 20s ease infinite; min-height: 100vh; padding: 15px 15px; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .container { max-width: 1100px; margin: 0 auto; padding: 35px 40px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px); border-radius: 24px; box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3); }
+        .back-button { display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 30px; font-weight: 700; margin-bottom: 20px; }
+        h1 { color: #1a1a2e; font-size: 48px; font-weight: 800; text-align: center; margin-bottom: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { text-align: center; font-size: 17px; color: #4a4a68; margin-bottom: 30px; }
+        h2 { color: white; font-size: 24px; font-weight: 700; margin-top: 25px; margin-bottom: 15px; padding: 12px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; }
+        .question { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 20px; border-radius: 10px; margin: 14px 0 8px 0; font-weight: 600; font-size: 16px; }
+        .answer { background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%); padding: 18px 24px; border-radius: 10px; margin: 8px 0 14px 0; border-left: 5px solid #764ba2; }
+        .answer p { margin-bottom: 10px; color: #1a1a2e; }
+        .answer strong { color: #667eea; }
+        .answer ul { padding-left: 20px; margin-bottom: 10px; }
+        .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 25px 0; border-radius: 12px; }
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); }
+        th { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; text-align: left; font-weight: 600; font-size: 15px; white-space: nowrap; }
+        td { padding: 15px; border-bottom: 1px solid #e9ecef; color: #4a4a68; white-space: nowrap; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f8f9fa; }
+
+        .code-editor {
+            background: #1e1e1e;
+            border-radius: 12px;
+            margin: 15px 0;
             overflow: hidden;
-            z-index: 1;
-            animation: containerFloat 6s ease-in-out infinite;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3e3e42;
         }
         
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #764ba2 60%, 
-                #667eea 80%, 
-                #764ba2 100%);
-            background-size: 300% 100%;
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-        
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
-        }
-        
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 
-                0 8px 25px rgba(102, 126, 234, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-button:hover::before {
-            left: 100%;
-        }
-        
-        .back-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
-        }
-        
-        .back-button svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.3s ease;
-        }
-        
-        .back-button:hover svg {
-            transform: translateX(-5px);
-        }
-        
-        h1 {
-            color: #1a1a2e;
-            font-size: 52px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 35px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
-            border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .subtitle {
-            text-align: center;
-            font-size: 18px;
-            color: #4a4a68;
-            margin-bottom: 40px;
-            font-weight: 500;
-            animation: fadeIn 1s ease 0.4s both;
-        }
-        
-        h2 {
-            color: #1a1a2e;
-            font-size: 32px;
-            font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
+        .code-editor-header {
+            background: #2d2d2d;
+            padding: 10px 14px;
             display: flex;
             align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
+            justify-content: space-between;
+            gap: 8px;
+            border-bottom: 1px solid #3e3e42;
         }
+        .code-editor-left { display: flex; align-items: center; gap: 8px; }
+        .code-editor-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .code-editor-dot.red { background: #ff5f56; } .code-editor-dot.yellow { background: #ffbd2e; } .code-editor-dot.green { background: #27ca40; }
+        .code-editor-title { color: #9cdcfe; font-family: 'Fira Code', monospace; font-size: 13px; margin-left: 12px; }
+        .copy-button { background: #3e3e42; color: #d4d4d4; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: 'Fira Code', monospace; transition: all 0.2s ease; display: flex; align-items: center; gap: 6px; }
+        .copy-button:hover { background: #4e4e52; color: #ffffff; }
+        .copy-button.copied { background: #27ca40; color: #ffffff; }
+        .language-selector { background: #3e3e42; color: #d4d4d4; border: none; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; font-family: 'Fira Code', monospace; margin-left: 8px; }
+        .language-selector:hover { background: #4e4e52; color: #ffffff; }
         
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
-        }
-        
-        h3 {
-            color: #1a1a2e;
-            font-size: 26px;
-            font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
-        }
-        
-        .chapter {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
-            border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
-        }
-        
-        .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
-            overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.5s ease both;
-        }
-        
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-x: auto;
-        }
-        
-        
-        .toc {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 35px 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border-left: 8px solid #667eea;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
-        }
-        
-        .toc h3 {
-            color: #1a1a2e;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .toc ol {
-            padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
-        }
-        
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .question {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
-        }
-        
-        .answer {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 30px 35px;
-            border-radius: 15px;
-            margin: 15px 0 25px 0;
-            border-left: 6px solid #764ba2;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            animation: slideUp 0.5s ease both;
-        }
-        
-        .answer p {
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            line-height: 1.8;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
-        }
-        
-        .answer strong {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .page-break {
-            page-break-after: always;
-            margin: 60px 0;
-            border-top: 2px dashed #e0e0e0;
-            padding-top: 40px;
-        }
-        
-        .important {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
-        }
-        
-        .important strong {
-            color: #856404;
-        }
-        
-        .tip {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
-        }
-        
-        .tip strong {
-            color: #0c5460;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 15px;
-        }
-        
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e9ecef;
-            color: #4a4a68;
-        }
-        
-        tr:last-child td {
-            border-bottom: none;
-        }
-        
-        tr:hover td {
-            background: #f8f9fa;
-        }
-        
-        p {
-            color: #1a1a2e;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        
-        ul, ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        ul li, ol li {
-            margin-bottom: 8px;
-        }
-        
-                
         @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
+            .language-selector {
+                padding: 3px 6px;
+                font-size: 10px;
             }
         }
         
         @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
+            .language-selector {
+                padding: 2px 4px;
+                font-size: 9px;
+                margin-left: 4px;
+                min-width: 60px;
             }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
-        }</style>
+        }
+        
+        .footer { text-align: center; margin-top: 35px; padding: 25px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%); border-radius: 16px; }
+        .highlight { color: #667eea; font-weight: 700; }
+        
+        .toc {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+            border-left: 6px solid #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+        .toc h3 { color: #1a1a2e; font-size: 22px; font-weight: 700; margin-bottom: 15px; padding-left: 0; border-left: none; }
+        .toc ol { padding-left: 22px; color: #4a4a68; line-height: 1.8; }
+        
+        .important { background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%); padding: 16px 20px; border-radius: 12px; margin: 16px 0; border-left: 5px solid #ffc107; }
+        .tip { background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%); padding: 16px 20px; border-radius: 12px; margin: 16px 0; border-left: 5px solid #17a2b8; }
+        
+        .tag { color: #569cd6; }
+        .attribute { color: #9cdcfe; }
+        
+        .code-editor-content { padding: 16px; font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 14px; line-height: 1.5; color: #d4d4d4; overflow-x: auto; background: #1e1e1e; }
+        .code-editor-content code { display: block; white-space: pre; }
+        .keyword { color: #569cd6; } .type { color: #4ec9b0; } .string { color: #ce9178; } .comment { color: #6a9955; font-style: italic; } .number { color: #b5cea8; } .method { color: #dcdcaa; } .property { color: #9cdcfe; } .variable { color: #9cdcfe; } .operator { color: #d4d4d4; } .decorator { color: #c586c0; }
+
+        @media (max-width: 768px) {
+            body { padding: 12px 8px; }
+            .container { padding: 20px 18px; border-radius: 18px; }
+            h1 { font-size: 30px; }
+            .subtitle { font-size: 15px; margin-bottom: 20px; }
+            h2 { font-size: 18px; padding: 10px 16px; margin-top: 20px; margin-bottom: 12px; }
+            .question { font-size: 15px; padding: 14px 18px; margin: 12px 0 6px 0; }
+            .answer { padding: 16px 18px; margin: 6px 0 12px 0; }
+            .code-editor-content { padding: 12px; font-size: 12px; overflow-x: auto; }
+            .code-editor-title { font-size: 11px; }
+            .footer { padding: 20px 18px; margin-top: 25px; }
+            table { font-size: 13px; margin: 15px 0; }
+            th, td { padding: 10px 8px; font-size: 13px; }
+            .table-wrapper { margin: 15px 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .toc { padding: 20px 18px; margin: 25px 0; }
+            .toc h3 { font-size: 18px; margin-bottom: 12px; }
+            .toc ol { font-size: 14px; padding-left: 18px; }
+            .important, .tip { padding: 14px 16px; margin: 14px 0; }
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 26px; }
+            .subtitle { font-size: 14px; }
+            h2 { font-size: 16px; padding: 8px 14px; margin-top: 18px; margin-bottom: 10px; }
+            .question { font-size: 14px; padding: 12px 14px; margin: 10px 0 5px 0; }
+            .answer { padding: 14px 14px; margin: 5px 0 10px 0; }
+            .code-editor-content { padding: 10px; font-size: 11px; }
+            .code-editor-header { padding: 8px 10px; }
+            .copy-button { padding: 4px 8px; font-size: 10px; }
+            table { font-size: 12px; margin: 12px 0; }
+            th, td { padding: 8px 6px; font-size: 12px; }
+            .table-wrapper { margin: 12px 0; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 8px 4px; }
+            .container { padding: 16px 12px; border-radius: 14px; }
+            h1 { font-size: 22px; }
+            .subtitle { font-size: 13px; margin-bottom: 16px; }
+            h2 { font-size: 14px; padding: 8px 12px; margin-top: 16px; margin-bottom: 8px; }
+            .question { font-size: 13px; padding: 12px 12px; margin: 10px 0 5px 0; }
+            .answer { padding: 12px 12px; margin: 5px 0 10px 0; }
+            .code-editor-content { padding: 10px; font-size: 10px; line-height: 1.4; }
+            .code-editor-title { font-size: 9px; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .back-button { padding: 10px 16px; font-size: 13px; width: 100%; justify-content: center; }
+            table { font-size: 11px; margin: 10px 0; }
+            th, td { padding: 8px 5px; font-size: 11px; }
+            .table-wrapper { margin: 10px 0; }
+            .toc { padding: 16px 12px; margin: 20px 0; }
+            .toc h3 { font-size: 16px; margin-bottom: 10px; }
+            .toc ol { font-size: 12px; padding-left: 16px; }
+            .important, .tip { padding: 12px 14px; margin: 12px 0; font-size: 13px; }
+        }
+
+        @media (max-width: 360px) {
+            h1 { font-size: 20px; }
+            h2 { font-size: 13px; padding: 6px 10px; margin-top: 14px; margin-bottom: 6px; }
+            .question { font-size: 12px; padding: 10px 10px; margin: 8px 0 4px 0; }
+            .answer { padding: 10px 10px; margin: 4px 0 8px 0; }
+            .code-editor-content { padding: 8px; font-size: 9px; }
+            .copy-button { padding: 3px 5px; font-size: 9px; }
+            table { font-size: 10px; margin: 8px 0; }
+            th, td { padding: 6px 4px; font-size: 10px; }
+            .table-wrapper { margin: 8px 0; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-        </a>
-        <h1>Cybersecurity Interview Preparation Guide</h1>
+        <a href="../index.html" class="back-button">Back to Home</a>
+        <h1>Cybersecurity Interview Guide</h1>
         <p class="subtitle">Comprehensive Interview Preparation with In-Depth Concepts, Code Examples, and Best Practices</p>
 
         <div class="toc">
             <h3>Table of Contents</h3>
             <ol>
-                <li>Cybersecurity Fundamentals</li>
-                <li>Network Security</li>
-                <li>Web Application Security</li>
+                <li>Network Security Fundamentals</li>
                 <li>Cryptography</li>
-                <li>Identity and Access Management</li>
-                <li>Security Operations</li>
-                <li>Cloud Security</li>
-                <li>Compliance and Governance</li>
-                <li>Threat Intelligence</li>
-                <li>Security Architecture</li>
-                <li>Penetration Testing</li>
-                <li>Advanced Topics</li>
-                <li>Common Interview Questions</li>
+                <li>Web Security</li>
+                <li>Application Security</li>
+                <li>Identity and Access Management (IAM)</li>
+                <li>API Security</li>
+                <li>Secure SDLC &amp; DevSecOps</li>
+                <li>Logging, Monitoring &amp; SIEM</li>
+                <li>Vulnerability Management &amp; Threat Modeling</li>
+                <li>Incident Response</li>
             </ol>
         </div>
 
-        <h2>1. Cybersecurity Fundamentals</h2>
+        <h2>1. Network Security Fundamentals</h2>
 
-        <div class="question">
-            Q1: What is the CIA Triad?
-        </div>
+        <div class="question">Q1: What is the CIA Triad in cybersecurity?</div>
         <div class="answer">
-            <p><strong>CIA Triad</strong> is a model for information security consisting of three core principles:</p>
-            
+            <p><strong>CIA Triad</strong> stands for Confidentiality, Integrity, and Availability, the three core principles that guide information security.</p>
             <ul>
-                <li><strong>Confidentiality:</strong> Ensuring information is only accessible to authorized users</li>
-                <li><strong>Integrity:</strong> Ensuring information is accurate and unaltered</li>
-                <li><strong>Availability:</strong> Ensuring information and systems are available when needed</li>
+                <li><strong>Confidentiality:</strong> Prevent unauthorized disclosure (encryption, access controls)</li>
+                <li><strong>Integrity:</strong> Prevent unauthorized modification (hashing, digital signatures)</li>
+                <li><strong>Availability:</strong> Ensure reliable access (redundancy, failover, DDoS protection)</li>
             </ul>
         </div>
 
-        <div class="question">
-            Q2: What is the difference between authentication and authorization?
-        </div>
+        <div class="question">Q2: Difference between symmetric and asymmetric encryption?</div>
         <div class="answer">
+            <p><strong>Symmetric</strong> uses a single shared key. <strong>Asymmetric</strong> uses public/private key pairs.</p>
+            <div class="table-wrapper">
             <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Authentication</th>
-                    <th>Authorization</th>
-                </tr>
-                <tr>
-                    <td>Purpose</td>
-                    <td>Verify identity</td>
-                    <td>Grant permissions</td>
-                </tr>
-                <tr>
-                    <td>Question</td>
-                    <td>Who are you?</td>
-                    <td>What can you do?</td>
-                </tr>
-                <tr>
-                    <td>First Step</td>
-                    <td>Yes</td>
-                    <td>No (after auth)</td>
-                </tr>
-                <tr>
-                    <td>Example</td>
-                    <td>Login with password</td>
-                    <td>Access control list</td>
-                </tr>
+                <tr><th>Aspect</th><th>Symmetric</th><th>Asymmetric</th></tr>
+                <tr><td>Keys</td><td>One shared</td><td>Public/Private pair</td></tr>
+                <tr><td>Speed</td><td>Fast</td><td>Slower</td></tr>
+                <tr><td>Use</td><td>Bulk encryption</td><td>Key exchange, signatures</td></tr>
+                <tr><td>Examples</td><td>AES, ChaCha20</td><td>RSA, ECC</td></tr>
             </table>
+            </div>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Encryption.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">C#</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">using</span> <span class="type">System</span>;
+<span class="keyword">using</span> <span class="type">System.Security.Cryptography</span>;
+<span class="keyword">using</span> <span class="type">System.Text</span>;
+
+<span class="comment">// Symmetric encryption with AES</span>
+<span class="keyword">public class</span> <span class="type">AesEncryption</span>
+{
+    <span class="keyword">public static byte</span>[] <span class="method">Encrypt</span>(<span class="keyword">string</span> <span class="variable">plainText</span>, <span class="keyword">byte</span>[] <span class="variable">key</span>, <span class="keyword">byte</span>[] <span class="variable">iv</span>)
+    {
+        <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">aes</span> = <span class="type">Aes</span>.<span class="method">Create</span>())
+        {
+            <span class="variable">aes</span>.<span class="property">Key</span> = <span class="variable">key</span>;
+            <span class="variable">aes</span>.<span class="property">IV</span> = <span class="variable">iv</span>;
+            <span class="keyword">var</span> <span class="variable">encryptor</span> = <span class="variable">aes</span>.<span class="method">CreateEncryptor</span>();
+            <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">msEncrypt</span> = <span class="keyword">new</span> <span class="type">MemoryStream</span>())
+            {
+                <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">csEncrypt</span> = <span class="keyword">new</span> <span class="type">CryptoStream</span>(<span class="variable">msEncrypt</span>, <span class="variable">encryptor</span>, <span class="type">CryptoStreamMode</span>.<span class="variable">Write</span>))
+                {
+                    <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">swEncrypt</span> = <span class="keyword">new</span> <span class="type">StreamWriter</span>(<span class="variable">csEncrypt</span>))
+                    {
+                        <span class="variable">swEncrypt</span>.<span class="method">Write</span>(<span class="variable">plainText</span>);
+                    }
+                    <span class="keyword">return</span> <span class="variable">msEncrypt</span>.<span class="method">ToArray</span>();
+                }
+            }
+        }
+    }
+}</code>
+                </div>
+            </div>
         </div>
 
-        <div class="question">
-            Q3: What is the difference between vulnerability, threat, and risk?
-        </div>
+        <div class="question">Q3: What is a firewall and how does it work?</div>
         <div class="answer">
-            <ul>
-                <li><strong>Vulnerability:</strong> Weakness in a system that can be exploited. Example: Unpatched software.</li>
-                <li><strong>Threat:</strong> Potential danger to an asset. Example: Hacker, malware.</li>
-                <li><strong>Risk:</strong> Likelihood of threat exploiting vulnerability. Risk = Threat × Vulnerability × Impact.</li>
-            </ul>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>2. Network Security</h2>
-
-        <div class="question">
-            Q4: What is a firewall?
-        </div>
-        <div class="answer">
-            <p><strong>Firewall</strong> is a network security device that monitors and filters incoming and outgoing network traffic based on predetermined security rules.</p>
-            
+            <p><strong>Firewall</strong> monitors and filters network traffic based on ordered security rules and connection state.</p>
             <h3>Types:</h3>
             <ul>
-                <li><strong>Packet Filtering Firewall:</strong> Filters based on packet headers</li>
-                <li><strong>Stateful Inspection Firewall:</strong> Tracks connection state</li>
-                <li><strong>Proxy Firewall:</strong> Acts as intermediary</li>
-                <li><strong>Next-Generation Firewall:</strong> Includes application awareness</li>
+                <li><strong>Packet filtering:</strong> IP/port/protocol checks (L3/L4)</li>
+                <li><strong>Stateful inspection:</strong> Tracks connection tables to allow related packets</li>
+                <li><strong>Proxy (application):</strong> Terminates connections, app-aware policies</li>
+                <li><strong>NGFW:</strong> App-ID, IPS, URL filtering, TLS decryption</li>
             </ul>
+            <h3>Example rules:</h3>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">firewall_rules.sh</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">Shell</button>
+                </div>
+                <div class="code-editor-content">
+                    <code># Allow HTTPS inbound and established connections; drop rest
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -j DROP</code>
+                </div>
+            </div>
         </div>
 
-        <div class="question">
-            Q5: What is a VPN?
-        </div>
+        <div class="question">Q4: What is a VPN and why is it important?</div>
         <div class="answer">
-            <p><strong>VPN (Virtual Private Network)</strong> creates a secure, encrypted connection over a public network, allowing users to access private networks remotely.</p>
-            
+            <p><strong>VPN</strong> creates an encrypted, authenticated tunnel over untrusted networks to protect data-in-transit and enable secure remote access.</p>
             <h3>Benefits:</h3>
             <ul>
-                <li><strong>Encryption:</strong> Encrypts data in transit</li>
-                <li><strong>Anonymity:</strong> Hides IP address</li>
-                <li><strong>Access:</strong> Access resources remotely</li>
-                <li><strong>Security:</strong> Protects on public networks</li>
+                <li>Confidentiality (strong encryption)</li>
+                <li>Integrity (message authentication)</li>
+                <li>Access control (least-privilege remote access)</li>
             </ul>
+            <h3>Common protocols:</h3>
+            <ul>
+                <li><strong>WireGuard:</strong> Modern, simple, high performance</li>
+                <li><strong>IPsec/IKEv2:</strong> Enterprise standard</li>
+                <li><strong>OpenVPN:</strong> Mature and flexible</li>
+            </ul>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">client.ovpn</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">Config</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>client
+dev tun
+proto udp
+remote vpn.example.com 1194
+cipher AES-256-GCM
+auth SHA256
+key-direction 1</code>
+                </div>
+            </div>
         </div>
 
-        <div class="question">
-            Q6: What is the difference between TCP and UDP?
-        </div>
+        <div class="question">Q5: TCP vs UDP from a security perspective?</div>
         <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>TCP</th>
-                    <th>UDP</th>
-                </tr>
-                <tr>
-                    <td>Connection</td>
-                    <td>Connection-oriented</td>
-                    <td>Connectionless</td>
-                </tr>
-                <tr>
-                    <td>Reliability</td>
-                    <td>Reliable</td>
-                    <td>Unreliable</td>
-                </tr>
-                <tr>
-                    <td>Ordering</td>
-                    <td>Ordered</td>
-                    <td>Unordered</td>
-                </tr>
-                <tr>
-                    <td>Speed</td>
-                    <td>Slower</td>
-                    <td>Faster</td>
-                </tr>
-                <tr>
-                    <td>Use Case</td>
-                    <td>Web, email</td>
-                    <td>Streaming, gaming</td>
-                </tr>
-            </table>
+            <div class="table-wrapper"><table>
+                <tr><th>Aspect</th><th>TCP</th><th>UDP</th></tr>
+                <tr><td>Handshake</td><td>3-way (spoof-resistant)</td><td>None (spoofable)</td></tr>
+                <tr><td>Reliability</td><td>Reliable</td><td>Best-effort</td></tr>
+                <tr><td>Attacks</td><td>SYN flood</td><td>Amplification (DNS/NTP)</td></tr>
+            </table></div>
         </div>
 
-        <div class="page-break"></div>
+        <div class="question">Q6: What is a DDoS attack and how to mitigate?</div>
+        <div class="answer"><ul>
+            <li>Types: volumetric, protocol, application-layer</li>
+            <li>Mitigation: CDN/WAF, rate limiting, anycast, scrubbing centers, autoscaling</li>
+        </ul></div>
 
-        <h2>3. Web Application Security</h2>
+        <div class="question">Q7: IDS vs IPS?</div>
+        <div class="answer"><div class="table-wrapper"><table>
+            <tr><th>Aspect</th><th>IDS</th><th>IPS</th></tr>
+            <tr><td>Action</td><td>Detect/alert</td><td>Detect/block</td></tr>
+            <tr><td>Placement</td><td>Out-of-band</td><td>Inline</td></tr>
+        </table></div></div>
 
-        <div class="question">
-            Q7: What is OWASP Top 10?
-        </div>
+        <div class="question">Q8: What is a Man-in-the-Middle (MitM) attack?</div>
         <div class="answer">
-            <p><strong>OWASP Top 10</strong> is a standard awareness document for developers and web application security. It represents a broad consensus about the most critical security risks to web applications.</p>
-            
-            <h3>Current OWASP Top 10:</h3>
+            <p>Interception/alteration of communications (e.g., ARP spoofing, SSL stripping). Prevent via TLS, HSTS, certificate pinning, VPN.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">TlsSocket.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">C#</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">using</span> <span class="type">System</span>;
+<span class="keyword">using</span> <span class="type">System.Net.Security</span>;
+<span class="keyword">using</span> <span class="type">System.Security.Cryptography.X509Certificates</span>;
+<span class="keyword">using</span> <span class="type">System.Net.Sockets</span>;
+
+<span class="keyword">public class</span> <span class="type">SecureTcpClient</span>
+{
+    <span class="keyword">public static async Task</span>&lt;<span class="type">SslStream</span>&gt; <span class="method">ConnectWithTls</span>(<span class="keyword">string</span> <span class="variable">host</span>, <span class="keyword">int</span> <span class="variable">port</span>)
+    {
+        <span class="keyword">var</span> <span class="variable">tcpClient</span> = <span class="keyword">new</span> <span class="type">TcpClient</span>();
+        <span class="keyword">await</span> <span class="variable">tcpClient</span>.<span class="method">ConnectAsync</span>(<span class="variable">host</span>, <span class="variable">port</span>);
+        
+        <span class="keyword">var</span> <span class="variable">sslStream</span> = <span class="keyword">new</span> <span class="type">SslStream</span>(
+            <span class="variable">tcpClient</span>.<span class="method">GetStream</span>(),
+            <span class="keyword">false</span>,
+            <span class="keyword">new</span> <span class="type">RemoteCertificateValidationCallback</span>((<span class="variable">sender</span>, <span class="variable">certificate</span>, <span class="variable">chain</span>, <span class="variable">sslPolicyErrors</span>) =>
+            {
+                <span class="keyword">return</span> <span class="variable">sslPolicyErrors</span> == <span class="type">SslPolicyErrors</span>.<span class="variable">None</span>;
+            });
+        
+        <span class="keyword">await</span> <span class="variable">sslStream</span>.<span class="method">AuthenticateAsClientAsync</span>(<span class="variable">host</span>);
+        <span class="keyword">return</span> <span class="variable">sslStream</span>;
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q9: What is network segmentation and why is it important?</div>
+        <div class="answer"><p>Divides networks into isolated segments (VLANs, subnets, micro-segmentation) to reduce blast radius and enforce least privilege.</p></div>
+
+        <div class="question">Q10: What is a Zero-Trust security model?</div>
+        <div class="answer"><ul>
+            <li>Never trust, always verify</li>
+            <li>Least privilege access</li>
+            <li>Continuous monitoring and micro-segmentation</li>
+        </ul></div>
+
+        <h2>2. Cryptography</h2>
+
+        <div class="question">Q11: Hashing vs Encryption?</div>
+        <div class="answer">
+            <div class="table-wrapper"><table>
+                <tr><th>Aspect</th><th>Hashing</th><th>Encryption</th></tr>
+                <tr><td>Reversible</td><td>No</td><td>Yes</td></tr>
+                <tr><td>Use</td><td>Integrity, passwords</td><td>Confidentiality</td></tr>
+                <tr><td>Examples</td><td>SHA-256, bcrypt</td><td>AES, RSA</td></tr>
+            </table></div>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Hashing.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">C#</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">using</span> <span class="type">System</span>;
+<span class="keyword">using</span> <span class="type">System.Security.Cryptography</span>;
+<span class="keyword">using</span> <span class="type">System.Text</span>;
+
+<span class="keyword">public class</span> <span class="type">PasswordHasher</span>
+{
+    <span class="keyword">public static string</span> <span class="method">HashPassword</span>(<span class="keyword">string</span> <span class="variable">password</span>)
+    {
+        <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">sha256</span> = <span class="type">SHA256</span>.<span class="method">Create</span>())
+        {
+            <span class="keyword">byte</span>[] <span class="variable">bytes</span> = <span class="type">Encoding</span>.<span class="type">UTF8</span>.<span class="method">GetBytes</span>(<span class="variable">password</span>);
+            <span class="keyword">byte</span>[] <span class="variable">hash</span> = <span class="variable">sha256</span>.<span class="method">ComputeHash</span>(<span class="variable">bytes</span>);
+            <span class="keyword">return</span> <span class="type">Convert</span>.<span class="method">ToBase64String</span>(<span class="variable">hash</span>);
+        }
+    }
+    
+    <span class="comment">// Better: Use PBKDF2, bcrypt, or Argon2 for passwords</span>
+    <span class="keyword">public static string</span> <span class="method">HashPasswordSecure</span>(<span class="keyword">string</span> <span class="variable">password</span>, <span class="keyword">string</span> <span class="variable">salt</span>)
+    {
+        <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">pbkdf2</span> = <span class="keyword">new</span> <span class="type">Rfc2898DeriveBytes</span>(<span class="variable">password</span>, <span class="type">Encoding</span>.<span class="type">UTF8</span>.<span class="method">GetBytes</span>(<span class="variable">salt</span>), <span class="number">10000</span>, <span class="type">HashAlgorithmName</span>.<span class="variable">SHA256</span>, <span class="number">32</span>))
+        {
+            <span class="keyword">byte</span>[] <span class="variable">hash</span> = <span class="variable">pbkdf2</span>.<span class="method">GetBytes</span>(<span class="number">32</span>);
+            <span class="keyword">return</span> <span class="type">Convert</span>.<span class="method">ToBase64String</span>(<span class="variable">hash</span>);
+        }
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q12: Common cryptographic attacks and mitigations?</div>
+        <div class="answer"><ul>
+            <li>Brute-force/dictionary → strong keys, rate limiting</li>
+            <li>Rainbow tables → salted hashes</li>
+            <li>Side-channel → constant-time ops, shielding</li>
+            <li>MITM → TLS, cert pinning</li>
+        </ul></div>
+
+        <div class="question">Q13: What is PKI and its components?</div>
+        <div class="answer"><p>CA, RA, certificate repository, CRL/OCSP; enables key management, TLS, code signing, email signing.</p></div>
+
+        <div class="question">Q14: What is a digital signature and how does it work?</div>
+        <div class="answer">
             <ol>
-                <li>Broken Access Control</li>
-                <li>Cryptographic Failures</li>
-                <li>Injection</li>
-                <li>Insecure Design</li>
-                <li>Security Misconfiguration</li>
-                <li>Vulnerable and Outdated Components</li>
-                <li>Identification and Authentication Failures</li>
-                <li>Software and Data Integrity Failures</li>
-                <li>Security Logging and Monitoring Failures</li>
-                <li>Server-Side Request Forgery (SSRF)</li>
+                <li>Hash the message</li>
+                <li>Sign hash with private key</li>
+                <li>Verify with public key</li>
             </ol>
         </div>
 
-        <div class="question">
-            Q8: What is SQL Injection?
-        </div>
+        <div class="question">Q15: SSL vs TLS?</div>
+        <div class="answer"><p>SSL deprecated; use TLS 1.2/1.3, modern ciphers, forward secrecy.</p></div>
+
+        <h2>3. Web Security</h2>
+
+        <div class="question">Q16: What is XSS and how to prevent it?</div>
         <div class="answer">
-            <p><strong>SQL Injection (SQLi)</strong> is a vulnerability where malicious SQL code is inserted into a query, allowing attackers to view, modify, or delete data.</p>
-            
-            <div class="code-block" data-language="code"><pre><code># Vulnerable code
-query = "SELECT * FROM users WHERE username = '" + username + "'"
-
-# Malicious input
-username = "admin' OR '1'='1"
-
-# Resulting query
-SELECT * FROM users WHERE username = 'admin' OR '1'='1'</code></pre></div>
-            
-            <h3>Prevention:</h3>
             <ul>
-                <li>Use parameterized queries</li>
-                <li>Use prepared statements</li>
-                <li>Input validation</li>
-                <li>Use ORM frameworks</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q9: What is XSS (Cross-Site Scripting)?
-        </div>
-        <div class="answer">
-            <p><strong>XSS (Cross-Site Scripting)</strong> is a vulnerability where attackers inject malicious scripts into web pages viewed by other users.</p>
-            
-            <h3>Types:</h3>
-            <ul>
-                <li><strong>Stored XSS:</strong> Malicious script stored on server</li>
-                <li><strong>Reflected XSS:</strong> Malicious script reflected in response</li>
-                <li><strong>DOM-based XSS:</strong> Vulnerability in client-side code</li>
-            </ul>
-            
-            <h3>Prevention:</h3>
-            <ul>
+                <li>Validate and sanitize input</li>
                 <li>Output encoding</li>
-                <li>Input validation</li>
                 <li>Content Security Policy (CSP)</li>
-                <li>HTTP-only cookies</li>
             </ul>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">XssSanitize.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">C#</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">using</span> <span class="type">System</span>;
+<span class="keyword">using</span> <span class="type">System.Web</span>;
+
+<span class="keyword">public class</span> <span class="type">InputSanitizer</span>
+{
+    <span class="keyword">public static string</span> <span class="method">SanitizeHtml</span>(<span class="keyword">string</span> <span class="variable">input</span>)
+    {
+        <span class="comment">// HTML encode to prevent XSS</span>
+        <span class="keyword">return</span> <span class="type">System</span>.<span class="type">Web</span>.<span class="type">HttpUtility</span>.<span class="method">HtmlEncode</span>(<span class="variable">input</span>);
+    }
+    
+    <span class="keyword">public static string</span> <span class="method">SanitizeJavaScript</span>(<span class="keyword">string</span> <span class="variable">input</span>)
+    {
+        <span class="comment">// JavaScript encode to prevent XSS</span>
+        <span class="keyword">return</span> <span class="type">System</span>.<span class="type">Web</span>.<span class="type">HttpUtility</span>.<span class="method">JavaScriptEncode</span>(<span class="variable">input</span>);
+    }
+    
+    <span class="comment">// In ASP.NET Core, use HtmlEncoder</span>
+    <span class="keyword">using</span> <span class="type">Microsoft.AspNetCore.Html</span>;
+    <span class="keyword">using</span> <span class="type">Microsoft.AspNetCore.Mvc.Rendering</span>;
+    
+    <span class="keyword">public static</span> <span class="type">IHtmlContent</span> <span class="method">SafeEncode</span>(<span class="keyword">string</span> <span class="variable">input</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">HtmlString</span>(<span class="type">System</span>.<span class="type">Web</span>.<span class="type">HttpUtility</span>.<span class="method">HtmlEncode</span>(<span class="variable">input</span>));
+    }
+}</code>
+                </div>
+            </div>
         </div>
 
-        <div class="question">
-            Q10: What is CSRF (Cross-Site Request Forgery)?
-        </div>
+        <div class="question">Q17: What is CSRF and how to prevent it?</div>
+        <div class="answer"><ul>
+            <li>Synchronizer tokens, SameSite cookies</li>
+            <li>Check Origin/Referer, re-auth for sensitive actions</li>
+        </ul></div>
+
+        <div class="question">Q18: What is SQL Injection and how to prevent it?</div>
         <div class="answer">
-            <p><strong>CSRF (Cross-Site Request Forgery)</strong> is an attack where unauthorized commands are transmitted from a user that the website trusts.</p>
+            <ul>
+                <li>Parameterized queries, stored procedures</li>
+                <li>Least-privilege DB accounts, input validation</li>
+            </ul>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">SqlSafe.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">C#</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">using</span> <span class="type">System</span>;
+<span class="keyword">using</span> <span class="type">System.Data.SqlClient</span>;
+
+<span class="keyword">public class</span> <span class="type">SafeDatabaseAccess</span>
+{
+    <span class="keyword">private readonly</span> <span class="keyword">string</span> <span class="variable">_connectionString</span>;
+    
+    <span class="keyword">public</span> <span class="type">SafeDatabaseAccess</span>(<span class="keyword">string</span> <span class="variable">connectionString</span>)
+    {
+        <span class="variable">_connectionString</span> = <span class="variable">connectionString</span>;
+    }
+    
+    <span class="comment">// Good: Parameterized query (prevents SQL injection)</span>
+    <span class="keyword">public</span> <span class="type">User</span> <span class="method">GetUserByUsername</span>(<span class="keyword">string</span> <span class="variable">username</span>)
+    {
+        <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">connection</span> = <span class="keyword">new</span> <span class="type">SqlConnection</span>(<span class="variable">_connectionString</span>))
+        {
+            <span class="keyword">string</span> <span class="variable">query</span> = <span class="string">"SELECT * FROM users WHERE username = @Username"</span>;
+            <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">command</span> = <span class="keyword">new</span> <span class="type">SqlCommand</span>(<span class="variable">query</span>, <span class="variable">connection</span>))
+            {
+                <span class="variable">command</span>.<span class="method">Parameters</span>.<span class="method">AddWithValue</span>(<span class="string">"@Username"</span>, <span class="variable">username</span>);
+                <span class="variable">connection</span>.<span class="method">Open</span>();
+                <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">reader</span> = <span class="variable">command</span>.<span class="method">ExecuteReader</span>())
+                {
+                    <span class="keyword">if</span> (<span class="variable">reader</span>.<span class="method">Read</span>())
+                    {
+                        <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">User</span> { <span class="variable">Username</span> = <span class="variable">reader</span>[<span class="string">"username"</span>].<span class="method">ToString</span>() };
+                    }
+                }
+            }
+        }
+        <span class="keyword">return</span> <span class="keyword">null</span>;
+    }
+    
+    <span class="comment">// Entity Framework example</span>
+    <span class="keyword">using</span> <span class="type">Microsoft.EntityFrameworkCore</span>;
+    
+    <span class="keyword">public class</span> <span class="type">UserRepository</span>
+    {
+        <span class="keyword">private readonly</span> <span class="type">AppDbContext</span> <span class="variable">_context</span>;
+        
+        <span class="keyword">public</span> <span class="type">UserRepository</span>(<span class="type">AppDbContext</span> <span class="variable">context</span>)
+        {
+            <span class="variable">_context</span> = <span class="variable">context</span>;
+        }
+        
+        <span class="comment">// LINQ prevents SQL injection</span>
+        <span class="keyword">public</span> <span class="type">User</span> <span class="method">GetUser</span>(<span class="keyword">string</span> <span class="variable">username</span>)
+        {
+            <span class="keyword">return</span> <span class="variable">_context</span>.<span class="variable">Users</span>.<span class="method">FirstOrDefault</span>(<span class="variable">u</span> => <span class="variable">u</span>.<span class="property">Username</span> == <span class="variable">username</span>);
+        }
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q19: What is Content Security Policy (CSP)?</div>
+        <div class="answer">
+            <p>Whitelist sources for content to reduce XSS risk.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">csp_meta.html</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">HTML</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">&lt;!-- Example CSP meta tag --&gt;</span>
+<span class="tag">&lt;meta</span> <span class="attribute">http-equiv</span>=<span class="string">"Content-Security-Policy"</span> <span class="attribute">content</span>=<span class="string">"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"</span><span class="tag">&gt;</span></code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q20: What is HSTS?</div>
+        <div class="answer">
+            <p>Forces HTTPS for a domain to prevent downgrade and cookie hijacking.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">HstsMiddleware.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">C#</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">using</span> <span class="type">Microsoft.AspNetCore.Builder</span>;
+<span class="keyword">using</span> <span class="type">Microsoft.AspNetCore.Http</span>;
+
+<span class="keyword">public class</span> <span class="type">HstsMiddleware</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">RequestDelegate</span> <span class="variable">_next</span>;
+    
+    <span class="keyword">public</span> <span class="type">HstsMiddleware</span>(<span class="type">RequestDelegate</span> <span class="variable">next</span>)
+    {
+        <span class="variable">_next</span> = <span class="variable">next</span>;
+    }
+    
+    <span class="keyword">public async Task</span> <span class="method">InvokeAsync</span>(<span class="type">HttpContext</span> <span class="variable">context</span>)
+    {
+        <span class="comment">// Force HTTPS with HSTS header</span>
+        <span class="keyword">if</span> (<span class="variable">context</span>.<span class="property">Request</span>.<span class="property">IsHttps</span>)
+        {
+            <span class="variable">context</span>.<span class="property">Response</span>.<span class="property">Headers</span>.<span class="method">Add</span>(<span class="string">"Strict-Transport-Security"</span>, <span class="string">"max-age=31536000; includeSubDomains; preload"</span>);
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="comment">// Redirect to HTTPS</span>
+            <span class="keyword">var</span> <span class="variable">httpsUrl</span> = <span class="keyword">new</span> <span class="type">UriBuilder</span>(<span class="variable">context</span>.<span class="property">Request</span>.<span class="property">Url</span>)
+            {
+                <span class="property">Scheme</span> = <span class="string">"https"</span>,
+                <span class="property">Port</span> = <span class="number">443</span>
+            }.<span class="property">Uri</span>;
             
-            <h3>Prevention:</h3>
+            <span class="variable">context</span>.<span class="property">Response</span>.<span class="method">Redirect</span>(<span class="variable">httpsUrl</span>.<span class="method">ToString</span>());
+            <span class="keyword">return</span>;
+        }
+        
+        <span class="keyword">await</span> <span class="variable">_next</span>(<span class="variable">context</span>);
+    }
+}
+
+<span class="comment">// In Startup.cs or Program.cs for ASP.NET Core</span>
+<span class="keyword">public class</span> <span class="type">Startup</span>
+{
+    <span class="keyword">public void</span> <span class="method">Configure</span>(<span class="type">IApplicationBuilder</span> <span class="variable">app</span>, <span class="type">IWebHostEnvironment</span> <span class="variable">env</span>)
+    {
+        <span class="keyword">if</span> (<span class="variable">env</span>.<span class="property">IsProduction</span>())
+        {
+            <span class="variable">app</span>.<span class="method">UseHsts</span>();
+        }
+        <span class="variable">app</span>.<span class="method">UseHttpsRedirection</span>();
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>4. Application Security</h2>
+
+        <div class="question">Q21: What is input validation and why is it important?</div>
+        <div class="answer">
             <ul>
-                <li>CSRF tokens</li>
-                <li>SameSite cookie attribute</li>
-                <li>Verify origin headers</li>
-                <li>Custom headers</li>
+                <li>Type, length, range, format checks</li>
+                <li>Whitelist preferred over blacklist</li>
+            </ul>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">InputValidation.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">C#</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">using</span> <span class="type">System</span>;
+<span class="keyword">using</span> <span class="type">System.Text.RegularExpressions</span>;
+<span class="keyword">using</span> <span class="type">System.ComponentModel.DataAnnotations</span>;
+
+<span class="keyword">public class</span> <span class="type">InputValidator</span>
+{
+    <span class="comment">// Email validation with regex</span>
+    <span class="keyword">public static bool</span> <span class="method">IsValidEmail</span>(<span class="keyword">string</span> <span class="variable">email</span>)
+    {
+        <span class="keyword">if</span> (<span class="keyword">string</span>.<span class="method">IsNullOrWhiteSpace</span>(<span class="variable">email</span>))
+            <span class="keyword">return</span> <span class="keyword">false</span>;
+        
+        <span class="keyword">string</span> <span class="variable">pattern</span> = <span class="string">@"^[^@\s]+@[^@\s]+\.[^@\s]+$"</span>;
+        <span class="keyword">return</span> <span class="type">Regex</span>.<span class="method">IsMatch</span>(<span class="variable">email</span>, <span class="variable">pattern</span>);
+    }
+    
+    <span class="comment">// Using Data Annotations for validation</span>
+    <span class="keyword">public class</span> <span class="type">UserRegistration</span>
+    {
+        [<span class="type">Required</span>(<span class="variable">ErrorMessage</span> = <span class="string">"Username is required"</span>)]
+        [<span class="type">StringLength</span>(<span class="number">50</span>, <span class="variable">MinimumLength</span> = <span class="number">3</span>, <span class="variable">ErrorMessage</span> = <span class="string">"Username must be 3-50 characters"</span>)]
+        <span class="keyword">public string</span> <span class="variable">Username</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+        
+        [<span class="type">Required</span>]
+        [<span class="type">EmailAddress</span>]
+        <span class="keyword">public string</span> <span class="variable">Email</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+        
+        [<span class="type">Required</span>]
+        [<span class="type">StringLength</span>(<span class="number">100</span>, <span class="variable">MinimumLength</span> = <span class="number">8</span>)]
+        [<span class="type">RegularExpression</span>(<span class="string">@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$"</span>, <span class="variable">ErrorMessage</span> = <span class="string">"Password must contain uppercase, lowercase, and numbers"</span>)]
+        <span class="keyword">public string</span> <span class="variable">Password</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">Q22: What is output encoding?</div>
+        <div class="answer"><p>Encode untrusted data before rendering to the browser (HTML/JS/URL/CSS encoders).</p></div>
+
+        <div class="question">Q23: Best practices for authentication and authorization?</div>
+        <div class="answer"><ul>
+            <li>MFA, password policies, credential rotation</li>
+            <li>Use OIDC/OAuth2, short-lived tokens, refresh tokens</li>
+            <li>Least privilege, RBAC/ABAC</li>
+        </ul></div>
+
+        <div class="question">Q24: How to store passwords securely?</div>
+        <div class="answer"><ul>
+            <li>Use strong, adaptive hash (bcrypt/argon2/scrypt) with per-user salt</li>
+            <li>Never store plaintext or reversible encryption</li>
+        </ul></div>
+
+        <div class="question">Q25: Secure session management guidelines?</div>
+        <div class="answer"><ul>
+            <li>HttpOnly, Secure, SameSite cookies; rotate session IDs</li>
+            <li>Short timeouts, server-side invalidation on logout</li>
+        </ul></div>
+
+        <h2>5. Identity and Access Management (IAM)</h2>
+
+        <div class="question">Q26: What is AAA and how do Authentication, Authorization, and Accounting differ?</div>
+        <div class="answer">
+            <p><strong>AAA</strong> refers to <strong>Authentication</strong> (verify identity), <strong>Authorization</strong> (grant least-privilege access), and <strong>Accounting</strong> (audit usage and changes).</p>
+            <ul>
+                <li><strong>Authentication:</strong> Passwords, MFA, certificates, biometrics</li>
+                <li><strong>Authorization:</strong> RBAC/ABAC policies, scopes, entitlements</li>
+                <li><strong>Accounting:</strong> Logs, audit trails, tamper-evident storage</li>
             </ul>
         </div>
 
-        <div class="page-break"></div>
-
-        <h2>4. Cryptography</h2>
-
-        <div class="question">
-            Q11: What is the difference between symmetric and asymmetric encryption?
-        </div>
+        <div class="question">Q27: OAuth 2.0 vs OpenID Connect (OIDC)?</div>
         <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Symmetric</th>
-                    <th>Asymmetric</th>
-                </tr>
-                <tr>
-                    <td>Keys</td>
-                    <td>Single key</td>
-                    <td>Public/private key pair</td>
-                </tr>
-                <tr>
-                    <td>Speed</td>
-                    <td>Faster</td>
-                    <td>Slower</td>
-                </tr>
-                <tr>
-                    <td>Use Case</td>
-                    <td>Data encryption</td>
-                    <td>Key exchange, digital signatures</td>
-                </tr>
-                <tr>
-                    <td>Examples</td>
-                    <td>AES, DES</td>
-                    <td>RSA, ECC</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q12: What is hashing?
-        </div>
-        <div class="answer">
-            <p><strong>Hashing</strong> is a one-way function that converts data of arbitrary size to a fixed-size string. It's used for data integrity and password storage.</p>
-            
-            <h3>Properties:</h3>
+            <p><strong>OAuth 2.0</strong> delegates authorization (access to resources). <strong>OIDC</strong> is an identity layer on top of OAuth 2.0 that adds authentication with ID Tokens (JWT).</p>
             <ul>
-                <li><strong>One-way:</strong> Cannot reverse hash to original</li>
-                <li><strong>Deterministic:</strong> Same input always produces same output</li>
-                <li><strong>Fast to compute:</strong> Efficient to generate hash</li>
-                <li><strong>Collision-resistant:</strong> Hard to find two inputs with same hash</li>
-            </ul>
-            
-            <h3>Common Hash Algorithms:</h3>
-            <ul>
-                <li>SHA-256, SHA-512</li>
-                <li>MD5 (deprecated)</li>
-                <li>bcrypt, Argon2 (for passwords)</li>
+                <li><strong>OAuth:</strong> Access Token for APIs; scopes define permissions</li>
+                <li><strong>OIDC:</strong> Adds <em>ID Token</em> with user identity claims</li>
             </ul>
         </div>
 
-        <div class="question">
-            Q13: What is a digital signature?
-        </div>
+        <div class="question">Q28: SAML vs JWT (OIDC) for SSO?</div>
         <div class="answer">
-            <p><strong>Digital Signature</strong> is a cryptographic technique used to verify the authenticity and integrity of digital messages or documents.</p>
-            
-            <h3>How it works:</h3>
-            <ol>
-                <li>Sender creates hash of message</li>
-                <li>Hash is encrypted with sender's private key</li>
-                <li>Receiver decrypts with sender's public key</li>
-                <li>Receiver verifies hash matches message</li>
-            </ol>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>5. Identity and Access Management</h2>
-
-        <div class="question">
-            Q14: What is MFA (Multi-Factor Authentication)?
-        </div>
-        <div class="answer">
-            <p><strong>MFA (Multi-Factor Authentication)</strong> requires users to provide multiple forms of authentication to verify identity.</p>
-            
-            <h3>Factors:</h3>
             <ul>
-                <li><strong>Knowledge:</strong> Something you know (password, PIN)</li>
-                <li><strong>Possession:</strong> Something you have (token, phone)</li>
-                <li><strong>Inherence:</strong> Something you are (biometrics)</li>
+                <li><strong>SAML:</strong> XML-based, enterprise SSO, browser redirects, older</li>
+                <li><strong>JWT (OIDC):</strong> JSON-based, mobile/web friendly, modern</li>
+                <li>Choose based on ecosystem, tooling, and partner requirements</li>
             </ul>
         </div>
 
-        <div class="question">
-            Q15: What is OAuth 2.0?
-        </div>
+        <div class="question">Q29: What are MFA factors and good MFA practices?</div>
         <div class="answer">
-            <p><strong>OAuth 2.0</strong> is an authorization framework that enables applications to obtain limited access to user accounts on an HTTP service.</p>
-            
-            <h3>Roles:</h3>
             <ul>
-                <li><strong>Resource Owner:</strong> User who owns the data</li>
-                <li><strong>Client:</strong> Application requesting access</li>
-                <li><strong>Authorization Server:</strong> Issues access tokens</li>
-                <li><strong>Resource Server:</strong> Hosts protected resources</li>
+                <li><strong>Factors:</strong> Something you know (password), have (token), are (biometric)</li>
+                <li>Prefer TOTP/app-based or FIDO2 over SMS; implement step-up MFA for risky actions</li>
             </ul>
         </div>
 
-        <div class="question">
-            Q16: What is SAML?
-        </div>
+        <div class="question">Q30: RBAC vs ABAC vs ReBAC?</div>
+        <div class="answer"><ul>
+            <li><strong>RBAC:</strong> Role-based; easy but coarse</li>
+            <li><strong>ABAC:</strong> Attribute-based (user/resource/context) for fine-grained control</li>
+            <li><strong>ReBAC:</strong> Relationship-based (e.g., Google Zanzibar)</li>
+        </ul></div>
+
+        <div class="question">Q31: What is PAM and Just-In-Time (JIT) access?</div>
+        <div class="answer"><p><strong>PAM</strong> manages privileged accounts; <strong>JIT</strong> grants short-lived elevated access via approval and audit to reduce standing privileges.</p></div>
+
+        <div class="question">Q32: Passwordless and WebAuthn?</div>
+        <div class="answer"><p><strong>WebAuthn</strong> uses public-key cryptography (FIDO2) for phishing-resistant authentication via platform or roaming authenticators.</p></div>
+
+        <h2>6. API Security</h2>
+
+        <div class="question">Q33: What is the OWASP API Security Top 10?</div>
         <div class="answer">
-            <p><strong>SAML (Security Assertion Markup Language)</strong> is an XML-based standard for exchanging authentication and authorization data between parties.</p>
-            
-            <h3>Use Cases:</h3>
-            <ul>
-                <li>Single Sign-On (SSO)</li>
-                <li>Federation</li>
-                <li>Identity management</li>
-            </ul>
+            <p>Common API risks include broken object authorization, broken authentication, excessive data exposure, lack of rate limiting, mass assignment, injection, SSRF, and insufficient logging.</p>
         </div>
 
-        <div class="page-break"></div>
-
-        <h2>6. Security Operations</h2>
-
-        <div class="question">
-            Q17: What is SIEM?
-        </div>
+        <div class="question">Q34: How to implement API rate limiting?</div>
         <div class="answer">
-            <p><strong>SIEM (Security Information and Event Management)</strong> is a solution that provides real-time analysis of security alerts generated by applications and network hardware.</p>
-            
-            <h3>Components:</h3>
-            <ul>
-                <li><strong>SIM:</strong> Security Information Management (log management)</li>
-                <li><strong>SEM:</strong> Security Event Management (real-time monitoring)</li>
-            </ul>
-            
-            <h3>Benefits:</h3>
-            <ul>
-                <li>Centralized log collection</li>
-                <li>Real-time threat detection</li>
-                <li>Compliance reporting</li>
-                <li>Incident response</li>
-            </ul>
+            <p>Use gateway or reverse proxy limits to prevent abuse and DDoS at the edge.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">nginx_rate_limit.conf</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">Nginx</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>http {
+    limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
+    server {
+        location /api/ {
+            limit_req zone=api burst=20 nodelay;
+        }
+    }
+}</code>
+                </div>
+            </div>
         </div>
 
-        <div class="question">
-            Q18: What is IDS/IPS?
-        </div>
-        <div class="answer">
-            <p><strong>IDS/IPS (Intrusion Detection/Prevention System)</strong> monitors network traffic for suspicious activity and takes action.</p>
-            
-            <h3>Types:</h3>
-            <ul>
-                <li><strong>Network-based (NIDS/NIPS):</strong> Monitors network traffic</li>
-                <li><strong>Host-based (HIDS/HIPS):</strong> Monitors individual hosts</li>
-            </ul>
-            
-            <h3>Detection Methods:</h3>
-            <ul>
-                <li><strong>Signature-based:</strong> Matches known patterns</li>
-                <li><strong>Anomaly-based:</strong> Detects deviations from baseline</li>
-            </ul>
-        </div>
+        <div class="question">Q35: API gateway vs service mesh?</div>
+        <div class="answer"><ul>
+            <li><strong>Gateway:</strong> North-south traffic, authn/z, rate limiting, WAF</li>
+            <li><strong>Mesh:</strong> East-west traffic, mTLS, retries, policies (e.g., Istio)</li>
+        </ul></div>
 
-        <div class="question">
-            Q19: What is incident response?
-        </div>
-        <div class="answer">
-            <p><strong>Incident Response</strong> is the process of handling security incidents systematically to minimize damage and recover quickly.</p>
-            
-            <h3>NIST Incident Response Phases:</h3>
-            <ol>
-                <li><strong>Preparation:</strong> Prepare for incidents</li>
-                <li><strong>Detection and Analysis:</strong> Identify and analyze incidents</li>
-                <li><strong>Containment:</strong> Limit damage</li>
-                <li><strong>Eradication:</strong> Remove threat</li>
-                <li><strong>Recovery:</strong> Restore systems</li>
-                <li><strong>Lessons Learned:</strong> Post-incident review</li>
-            </ol>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>7. Cloud Security</h2>
-
-        <div class="question">
-            Q20: What is the Shared Responsibility Model?
-        </div>
-        <div class="answer">
-            <p><strong>Shared Responsibility Model</strong> defines security responsibilities between cloud provider and customer based on the service model.</p>
-            
-            <table>
-                <tr>
-                    <th>Service Model</th>
-                    <th>Provider Responsibility</th>
-                    <th>Customer Responsibility</th>
-                </tr>
-                <tr>
-                    <td>IaaS</td>
-                    <td>Physical, network, virtualization</td>
-                    <td>OS, applications, data</td>
-                </tr>
-                <tr>
-                    <td>PaaS</td>
-                    <td>Physical, network, virtualization, OS</td>
-                    <td>Applications, data</td>
-                </tr>
-                <tr>
-                    <td>SaaS</td>
-                    <td>Everything except data</td>
-                    <td>Data, user access</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q21: What is Zero Trust Architecture?
-        </div>
-        <div class="answer">
-            <p><strong>Zero Trust Architecture</strong> is a security model based on the principle "never trust, always verify." It assumes no user or device is trusted by default.</p>
-            
-            <h3>Principles:</h3>
-            <ul>
-                <li>Verify explicitly</li>
-                <li>Use least privilege access</li>
-                <li>Assume breach</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q22: What is DevSecOps?
-        </div>
-        <div class="answer">
-            <p><strong>DevSecOps</strong> integrates security practices into the DevOps process, ensuring security is considered throughout the software development lifecycle.</p>
-            
-            <h3>Key Practices:</h3>
-            <ul>
-                <li>Security as code</li>
-                <li>Automated security testing</li>
-                <li>Shift left security</li>
-                <li>Continuous security monitoring</li>
-            </ul>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>8. Compliance and Governance</h2>
-
-        <div class="question">
-            Q23: What is GDPR?
-        </div>
-        <div class="answer">
-            <p><strong>GDPR (General Data Protection Regulation)</strong> is a European Union regulation on data protection and privacy.</p>
-            
-            <h3>Key Principles:</h3>
-            <ul>
-                <li>Lawfulness, fairness, transparency</li>
-                <li>Purpose limitation</li>
-                <li>Data minimization</li>
-                <li>Accuracy</li>
-                <li>Storage limitation</li>
-                <li>Integrity and confidentiality</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q24: What is HIPAA?
-        </div>
-        <div class="answer">
-            <p><strong>HIPAA (Health Insurance Portability and Accountability Act)</strong> is a US law that requires the creation of national standards to protect sensitive patient health information.</p>
-            
-            <h3>Key Rules:</h3>
-            <ul>
-                <li><strong>Privacy Rule:</strong> Protects PHI</li>
-                <li><strong>Security Rule:</strong> Protects ePHI</li>
-                <li><strong>Breach Notification Rule:</strong> Requires breach notification</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q25: What is PCI DSS?
-        </div>
-        <div class="answer">
-            <p><strong>PCI DSS (Payment Card Industry Data Security Standard)</strong> is a set of security standards designed to ensure that all companies that accept, process, store, or transmit credit card information maintain a secure environment.</p>
-            
-            <h3>Requirements:</h3>
-            <ul>
-                <li>Build and maintain secure network</li>
-                <li>Protect cardholder data</li>
-                <li>Maintain vulnerability management program</li>
-                <li>Implement strong access control</li>
-                <li>Regularly monitor and test networks</li>
-                <li>Maintain information security policy</li>
-            </ul>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>9. Threat Intelligence</h2>
-
-        <div class="question">
-            Q26: What is threat intelligence?
-        </div>
-        <div class="answer">
-            <p><strong>Threat Intelligence</strong> is evidence-based knowledge about existing or emerging threats to assets, including context, mechanisms, indicators, implications, and actionable advice.</p>
-            
-            <h3>Types:</h3>
-            <ul>
-                <li><strong>Strategic:</strong> High-level trends for executives</li>
-                <li><strong>Tactical:</strong> TTPs (Tactics, Techniques, Procedures)</li>
-                <li><strong>Operational:</strong> Specific campaigns and actors</li>
-                <li><strong>Technical:</strong> IOCs (Indicators of Compromise)</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q27: What is MITRE ATT&CK?
-        </div>
-        <div class="answer">
-            <p><strong>MITRE ATT&CK</strong> is a globally-accessible knowledge base of adversary tactics and techniques based on real-world observations.</p>
-            
-            <h3>Components:</h3>
-            <ul>
-                <li><strong>Tactics:</strong> Technical objectives (e.g., Initial Access)</li>
-                <li><strong>Techniques:</strong> How adversaries achieve tactics</li>
-                <li><strong>Procedures:</strong> Specific implementations</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q28: What is CVE?
-        </div>
-        <div class="answer">
-            <p><strong>CVE (Common Vulnerabilities and Exposures)</strong> is a list of entries for publicly known cybersecurity vulnerabilities.</p>
-            
-            <h3>Format:</h3>
-            <ul>
-                <li>CVE-Year-ID (e.g., CVE-2024-1234)</li>
-                <li>Provides unique identifier</li>
-                <li>Standardized description</li>
-                <li>Links to references and fixes</li>
-            </ul>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>10. Security Architecture</h2>
-
-        <div class="question">
-            Q29: What is Defense in Depth?
-        </div>
-        <div class="answer">
-            <p><strong>Defense in Depth</strong> is a layered security approach where multiple security controls are implemented at different levels to protect against threats.</p>
-            
-            <h3>Layers:</h3>
-            <ul>
-                <li><strong>Physical:</strong> Physical access controls</li>
-                <li><strong>Network:</strong> Firewalls, IDS/IPS</li>
-                <li><strong>Endpoint:</strong> Antivirus, EDR</li>
-                <li><strong>Application:</strong> WAF, secure coding</li>
-                <li><strong>Data:</strong> Encryption, DLP</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q30: What is the principle of least privilege?
-        </div>
-        <div class="answer">
-            <p><strong>Principle of Least Privilege (PoLP)</strong> states that users and programs should only have the minimum permissions necessary to perform their functions.</p>
-            
-            <h3>Benefits:</h3>
-            <ul>
-                <li>Reduces attack surface</li>
-                <li>Limits damage from compromised accounts</li>
-                <li>Improves auditability</li>
-                <li>Reduces insider threat risk</li>
-            </ul>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>11. Penetration Testing</h2>
-
-        <div class="question">
-            Q31: What is penetration testing?
-        </div>
-        <div class="answer">
-            <p><strong>Penetration Testing (Pen Testing)</strong> is a simulated cyberattack against a computer system to check for exploitable vulnerabilities.</p>
-            
-            <h3>Phases:</h3>
-            <ol>
-                <li><strong>Reconnaissance:</strong> Gather information</li>
-                <li><strong>Scanning:</strong> Identify vulnerabilities</li>
-                <li><strong>Exploitation:</strong> Attempt to exploit</li>
-                <li><strong>Post-Exploitation:</strong> Maintain access</li>
-                <li><strong>Reporting:</strong> Document findings</li>
-            </ol>
-        </div>
-
-        <div class="question">
-            Q32: What is the difference between black box, white box, and gray box testing?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Type</th>
-                    <th>Knowledge</th>
-                    <th>Use Case</th>
-                </tr>
-                <tr>
-                    <td>Black Box</td>
-                    <td>No prior knowledge</td>
-                    <td>External attacker simulation</td>
-                </tr>
-                <tr>
-                    <td>White Box</td>
-                    <td>Full knowledge</td>
-                    <td>Internal audit</td>
-                </tr>
-                <tr>
-                    <td>Gray Box</td>
-                    <td>Partial knowledge</td>
-                    <td>Realistic scenario</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>12. Advanced Topics</h2>
-
-        <div class="question">
-            Q33: What is Social Engineering?
-        </div>
-        <div class="answer">
-            <p><strong>Social Engineering</strong> is the use of deception to manipulate individuals into divulging confidential or personal information.</p>
-            
-            <h3>Types:</h3>
-            <ul>
-                <li><strong>Phishing:</strong> Email-based deception</li>
-                <li><strong>Vishing:</strong> Voice-based deception</li>
-                <li><strong>Smishing:</strong> SMS-based deception</li>
-                <li><strong>Pretexting:</strong> Creating a scenario</li>
-                <li><strong>Baiting:</strong> Offering something enticing</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q34: What is Ransomware?
-        </div>
-        <div class="answer">
-            <p><strong>Ransomware</strong> is a type of malware that encrypts a victim's files and demands payment to restore access.</p>
-            
-            <h3>Prevention:</h3>
-            <ul>
-                <li>Regular backups</li>
-                <li>User education</li>
-                <li>Email filtering</li>
-                <li>Endpoint protection</li>
-                <li>Network segmentation</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q35: What is Supply Chain Attack?
-        </div>
-        <div class="answer">
-            <p><strong>Supply Chain Attack</strong> targets the supply chain of an organization by compromising a third-party vendor or software component.</p>
-            
-            <h3>Examples:</h3>
-            <ul>
-                <li>SolarWinds attack</li>
-                <li>Log4j vulnerability</li>
-                <li>Code repository compromise</li>
-            </ul>
-        </div>
-
-        <div class="page-break"></div>
-
-        <h2>13. Common Interview Questions</h2>
-
-        <div class="question">
-            Q36: What is the difference between HTTP and HTTPS?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>HTTP</th>
-                    <th>HTTPS</th>
-                </tr>
-                <tr>
-                    <td>Encryption</td>
-                    <td>No encryption</td>
-                    <td>TLS/SSL encryption</td>
-                </tr>
-                <tr>
-                    <td>Port</td>
-                    <td>80</td>
-                    <td>443</td>
-                </tr>
-                <tr>
-                    <td>Security</td>
-                    <td>Not secure</td>
-                    <td>Secure</td>
-                </tr>
-                <tr>
-                    <td>Performance</td>
-                    <td>Faster</td>
-                    <td>Slightly slower</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q37: What is the difference between encryption and hashing?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Encryption</th>
-                    <th>Hashing</th>
-                </tr>
-                <tr>
-                    <td>Reversible</td>
-                    <td>Yes (with key)</td>
-                    <td>No</td>
-                </tr>
-                <tr>
-                    <td>Purpose</td>
-                    <td>Confidentiality</td>
-                    <td>Integrity</td>
-                </tr>
-                <tr>
-                    <td>Output</td>
-                    <td>Ciphertext</td>
-                    <td>Hash</td>
-                </tr>
-                <tr>
-                    <td>Use Case</td>
-                    <td>Data protection</td>
-                    <td>Password storage, verification</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q38: What is the difference between vulnerability scanning and penetration testing?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Vulnerability Scanning</th>
-                    <th>Penetration Testing</th>
-                </tr>
-                <tr>
-                    <td>Purpose</td>
-                    <td>Identify vulnerabilities</td>
-                    <td>Exploit vulnerabilities</td>
-                </tr>
-                <tr>
-                    <td>Depth</td>
-                    <td>Automated, surface-level</td>
-                    <td>Manual, in-depth</td>
-                </tr>
-                <tr>
-                    <td>Frequency</td>
-                    <td>Regular, automated</td>
-                    <td>Periodic, manual</td>
-                </tr>
-                <tr>
-                    <td>Cost</td>
-                    <td>Lower</td>
-                    <td>Higher</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q39: What is the difference between black hat and white hat hackers?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Black Hat</th>
-                    <th>White Hat</th>
-                </tr>
-                <tr>
-                    <td>Motivation</td>
-                    <td>Malicious, personal gain</td>
-                    <td>Ethical, security improvement</td>
-                </tr>
-                <tr>
-                    <td>Permission</td>
-                    <td>No permission</td>
-                    <td>With permission</td>
-                </tr>
-                <tr>
-                    <td>Intent</td>
-                    <td>Exploit vulnerabilities</td>
-                    <td>Find and fix vulnerabilities</td>
-                </tr>
-                <tr>
-                    <td>Legal</td>
-                    <td>Illegal</td>
-                    <td>Legal</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q40: What is the difference between symmetric and asymmetric encryption?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Symmetric</th>
-                    <th>Asymmetric</th>
-                </tr>
-                <tr>
-                    <td>Keys</td>
-                    <td>Single key</td>
-                    <td>Public/private key pair</td>
-                </tr>
-                <tr>
-                    <td>Speed</td>
-                    <td>Faster</td>
-                    <td>Slower</td>
-                </tr>
-                <tr>
-                    <td>Key Distribution</td>
-                    <td>Challenge</td>
-                    <td>Easier</td>
-                </tr>
-                <tr>
-                    <td>Use Case</td>
-                    <td>Bulk data encryption</td>
-                    <td>Key exchange, signatures</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q41: What is the difference between vulnerability and exploit?
-        </div>
+        <div class="question">Q36: JWT best practices?</div>
         <div class="answer">
             <ul>
-                <li><strong>Vulnerability:</strong> Weakness or flaw in a system that could be exploited. It's a potential security issue.</li>
-                <li><strong>Exploit:</strong> Code or technique that takes advantage of a vulnerability. It's the actual attack method.</li>
+                <li>Short-lived access tokens, refresh tokens, audience/issuer checks</li>
+                <li>Rotate signing keys; validate <code>exp</code>, <code>iat</code>, <code>nbf</code></li>
             </ul>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">JwtVerification.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">C#</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">using</span> <span class="type">System</span>;
+<span class="keyword">using</span> <span class="type">System.IdentityModel.Tokens.Jwt</span>;
+<span class="keyword">using</span> <span class="type">Microsoft.IdentityModel.Tokens</span>;
+
+<span class="keyword">public class</span> <span class="type">JwtValidator</span>
+{
+    <span class="keyword">public static</span> <span class="type">ClaimsPrincipal</span> <span class="method">ValidateToken</span>(<span class="keyword">string</span> <span class="variable">token</span>, <span class="keyword">string</span> <span class="variable">publicKey</span>)
+    {
+        <span class="keyword">var</span> <span class="variable">tokenHandler</span> = <span class="keyword">new</span> <span class="type">JwtSecurityTokenHandler</span>();
+        <span class="keyword">var</span> <span class="variable">key</span> = <span class="type">Encoding</span>.<span class="type">ASCII</span>.<span class="method">GetBytes</span>(<span class="variable">publicKey</span>);
+        
+        <span class="keyword">var</span> <span class="variable">validationParameters</span> = <span class="keyword">new</span> <span class="type">TokenValidationParameters</span>
+        {
+            <span class="variable">ValidateIssuerSigningKey</span> = <span class="keyword">true</span>,
+            <span class="variable">IssuerSigningKey</span> = <span class="keyword">new</span> <span class="type">SymmetricSecurityKey</span>(<span class="variable">key</span>),
+            <span class="variable">ValidateIssuer</span> = <span class="keyword">true</span>,
+            <span class="variable">ValidIssuer</span> = <span class="string">"https://issuer.example.com/"</span>,
+            <span class="variable">ValidateAudience</span> = <span class="keyword">true</span>,
+            <span class="variable">ValidAudience</span> = <span class="string">"api://default"</span>,
+            <span class="variable">ValidateLifetime</span> = <span class="keyword">true</span>,
+            <span class="variable">ClockSkew</span> = <span class="type">TimeSpan</span>.<span class="variable">Zero</span>
+        };
+        
+        <span class="keyword">return</span> <span class="variable">tokenHandler</span>.<span class="method">ValidateToken</span>(<span class="variable">token</span>, <span class="variable">validationParameters</span>, <span class="keyword">out</span> <span class="type">SecurityToken</span> <span class="variable">validatedToken</span>);
+    }
+}</code>
+                </div>
+            </div>
         </div>
 
-        <div class="question">
-            Q42: What is the difference between DLP and DRM?
-        </div>
+        <div class="question">Q37: HMAC request signing for APIs?</div>
         <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>DLP</th>
-                    <th>DRM</th>
-                </tr>
-                <tr>
-                    <td>Full Name</td>
-                    <td>Data Loss Prevention</td>
-                    <td>Digital Rights Management</td>
-                </tr>
-                <tr>
-                    <td>Purpose</td>
-                    <td>Prevent data leakage</td>
-                    <td>Control content usage</td>
-                </tr>
-                <tr>
-                    <td>Focus</td>
-                    <td>Outbound data</td>
-                    <td>Content protection</td>
-                </tr>
-                <tr>
-                    <td>Use Case</td>
-                    <td>Enterprise security</td>
-                    <td>Copyright protection</td>
-                </tr>
-            </table>
+            <p>Compute a signature over canonical request bytes with a shared secret.</p>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">HmacSigner.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">C#</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">using</span> <span class="type">System</span>;
+<span class="keyword">using</span> <span class="type">System.Security.Cryptography</span>;
+<span class="keyword">using</span> <span class="type">System.Text</span>;
+
+<span class="keyword">public class</span> <span class="type">HmacSigner</span>
+{
+    <span class="keyword">public static string</span> <span class="method">ComputeSignature</span>(<span class="keyword">string</span> <span class="variable">secret</span>, <span class="keyword">string</span> <span class="variable">message</span>)
+    {
+        <span class="keyword">using</span> (<span class="keyword">var</span> <span class="variable">hmac</span> = <span class="keyword">new</span> <span class="type">HMACSHA256</span>(<span class="type">Encoding</span>.<span class="type">UTF8</span>.<span class="method">GetBytes</span>(<span class="variable">secret</span>)))
+        {
+            <span class="keyword">byte</span>[] <span class="variable">hashBytes</span> = <span class="variable">hmac</span>.<span class="method">ComputeHash</span>(<span class="type">Encoding</span>.<span class="type">UTF8</span>.<span class="method">GetBytes</span>(<span class="variable">message</span>));
+            <span class="keyword">return</span> <span class="type">Convert</span>.<span class="method">ToBase64String</span>(<span class="variable">hashBytes</span>);
+        }
+    }
+    
+    <span class="keyword">public static bool</span> <span class="method">VerifySignature</span>(<span class="keyword">string</span> <span class="variable">secret</span>, <span class="keyword">string</span> <span class="variable">message</span>, <span class="keyword">string</span> <span class="variable">signature</span>)
+    {
+        <span class="keyword">var</span> <span class="variable">computedSignature</span> = <span class="method">ComputeSignature</span>(<span class="variable">secret</span>, <span class="variable">message</span>);
+        <span class="keyword">return</span> <span class="variable">computedSignature</span> == <span class="variable">signature</span>;
+    }
+}</code>
+                </div>
+            </div>
         </div>
 
-        <div class="question">
-            Q43: What is the difference between IDS and IPS?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>IDS</th>
-                    <th>IPS</th>
-                </tr>
-                <tr>
-                    <td>Action</td>
-                    <td>Detect only</td>
-                    <td>Detect and prevent</td>
-                </tr>
-                <tr>
-                    <td>Response</td>
-                    <td>Alert</td>
-                    <td>Block traffic</td>
-                </tr>
-                <tr>
-                    <td>Placement</td>
-                    <td>Outside network</td>
-                    <td>Inline</td>
-                </tr>
-                <tr>
-                    <td>Performance</td>
-                    <td>Lower impact</td>
-                    <td>Higher impact</td>
-                </tr>
-            </table>
-        </div>
+        <h2>7. Secure SDLC &amp; DevSecOps</h2>
 
-        <div class="question">
-            Q44: What is the difference between IaaS, PaaS, and SaaS?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>IaaS</th>
-                    <th>PaaS</th>
-                    <th>SaaS</th>
-                </tr>
-                <tr>
-                    <td>Managed</td>
-                    <td>Infrastructure</td>
-                    <td>Platform</td>
-                    <td>Software</td>
-                </tr>
-                <tr>
-                    <td>User Manages</td>
-                    <td>OS, apps, data</td>
-                    <td>Apps, data</td>
-                    <td>Data, users</td>
-                </tr>
-                <tr>
-                    <td>Flexibility</td>
-                    <td>High</td>
-                    <td>Medium</td>
-                    <td>Low</td>
-                </tr>
-                <tr>
-                    <td>Example</td>
-                    <td>AWS EC2</td>
-                    <td>Heroku</td>
-                    <td>Gmail</td>
-                </tr>
-            </table>
-        </div>
+        <div class="question">Q38: SAST vs DAST vs SCA vs IAST?</div>
+        <div class="answer"><ul>
+            <li><strong>SAST:</strong> Static code analysis (early, build time)</li>
+            <li><strong>DAST:</strong> Black-box testing of running app</li>
+            <li><strong>SCA:</strong> Dependency scanning for known CVEs</li>
+            <li><strong>IAST:</strong> Hybrid (instrumented runtime)</li>
+        </ul></div>
 
-        <div class="question">
-            Q45: What is the difference between OAuth and OpenID Connect?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>OAuth 2.0</th>
-                    <th>OpenID Connect</th>
-                </tr>
-                <tr>
-                    <td>Purpose</td>
-                    <td>Authorization</td>
-                    <td>Authentication</td>
-                </tr>
-                <tr>
-                    <td>Extension</td>
-                    <td>Standalone</td>
-                    <td>Layer on OAuth 2.0</td>
-                </tr>
-                <tr>
-                    <td>Output</td>
-                    <td>Access token</td>
-                    <td>ID token</td>
-                </tr>
-                <tr>
-                    <td>Use Case</td>
-                    <td>API access</td>
-                    <td>User login</td>
-                </tr>
-            </table>
-        </div>
+        <div class="question">Q39: What is shift-left security and why?</div>
+        <div class="answer"><p>Embed security earlier to reduce rework and cost; run checks in CI, enforce policy as code, provide developer guardrails.</p></div>
 
-        <div class="question">
-            Q46: What are the best practices for password security?
-        </div>
+        <div class="question">Q40: How should secrets be managed?</div>
         <div class="answer">
             <ul>
-                <li><strong>Strong Passwords:</strong> Minimum length, complexity</li>
-                <li><strong>Password Hashing:</strong> Use bcrypt, Argon2</li>
-                <li><strong>Salt:</strong> Use unique salt for each password</li>
-                <li><strong>Multi-Factor:</strong> Enable MFA</li>
-                <li><strong>Password Policy:</strong> Enforce password policies</li>
-                <li><strong>Password Managers:</strong> Encourage password managers</li>
-                <li><strong>Regular Changes:</strong> Periodic password rotation</li>
-                <li><strong>Breach Checking:</strong> Check against breached passwords</li>
+                <li>Use secret stores (Vault, cloud KMS/SM), not .env in source control</li>
+                <li>Rotate regularly; use workload identity (OIDC) over static keys</li>
             </ul>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">SecretManagement.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">C#</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">using</span> <span class="type">System</span>;
+<span class="keyword">using</span> <span class="type">Azure</span>.<span class="type">Security</span>.<span class="type">KeyVault</span>;
+<span class="keyword">using</span> <span class="type">Azure</span>.<span class="type">Identity</span>;
+
+<span class="keyword">public class</span> <span class="type">SecretManager</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">SecretClient</span> <span class="variable">_secretClient</span>;
+    
+    <span class="keyword">public</span> <span class="type">SecretManager</span>(<span class="keyword">string</span> <span class="variable">keyVaultUrl</span>)
+    {
+        <span class="keyword">var</span> <span class="variable">credential</span> = <span class="keyword">new</span> <span class="type">DefaultAzureCredential</span>();
+        <span class="variable">_secretClient</span> = <span class="keyword">new</span> <span class="type">SecretClient</span>(<span class="keyword">new</span> <span class="type">Uri</span>(<span class="variable">keyVaultUrl</span>), <span class="variable">credential</span>);
+    }
+    
+    <span class="keyword">public async Task</span>&lt;<span class="keyword">string</span>&gt; <span class="method">GetSecretAsync</span>(<span class="keyword">string</span> <span class="variable">secretName</span>)
+    {
+        <span class="keyword">try</span>
+        {
+            <span class="keyword">var</span> <span class="variable">secret</span> = <span class="keyword">await</span> <span class="variable">_secretClient</span>.<span class="method">GetSecretAsync</span>(<span class="variable">secretName</span>);
+            <span class="keyword">return</span> <span class="variable">secret</span>.<span class="property">Value</span>.<span class="property">Value</span>;
+        }
+        <span class="keyword">catch</span> (<span class="type">Azure</span>.<span class="type">RequestFailedException</span> <span class="variable">ex</span>)
+        {
+            <span class="keyword">throw new</span> <span class="type">InvalidOperationException</span>(<span class="string">"Failed to retrieve secret"</span>, <span class="variable">ex</span>);
+        }
+    }
+    
+    <span class="comment">// Using environment variables for local development</span>
+    <span class="keyword">public static string</span> <span class="method">GetSecretFromEnvironment</span>(<span class="keyword">string</span> <span class="variable">variableName</span>)
+    {
+        <span class="keyword">var</span> <span class="variable">secret</span> = <span class="type">Environment</span>.<span class="method">GetEnvironmentVariable</span>(<span class="variable">variableName</span>);
+        <span class="keyword">if</span> (<span class="keyword">string</span>.<span class="method">IsNullOrEmpty</span>(<span class="variable">secret</span>))
+        {
+            <span class="keyword">throw new</span> <span class="type">InvalidOperationException</span>(<span class="string">$"Secret missing: {variableName}"</span>);
+        }
+        <span class="keyword">return</span> <span class="variable">secret</span>;
+    }
+}</code>
+                </div>
+            </div>
         </div>
 
-        <div class="question">
-            Q47: What are the best practices for secure coding?
-        </div>
+        <div class="question">Q41: What is an SBOM and why does it matter?</div>
+        <div class="answer"><p><strong>SBOM</strong> (Software Bill of Materials) inventories components to manage supply-chain risk, enable CVE impact analysis, and meet compliance (e.g., Executive Order 14028).</p></div>
+
+        <h2>8. Logging, Monitoring &amp; SIEM</h2>
+
+        <div class="question">Q42: What should be logged, and how long to retain logs?</div>
+        <div class="answer"><ul>
+            <li>Auth events, admin actions, access denials, data exports, errors</li>
+            <li>Minimize sensitive data, use structured logs, retain per policy/regulation</li>
+        </ul></div>
+
+        <div class="question">Q43: Centralized logging architecture?</div>
+        <div class="answer"><p>Ship logs to centralized lake (e.g., ELK/OpenSearch, Loki) via agents; enrich with metadata; index for search and analytics.</p></div>
+
+        <div class="question">Q44: Example SIEM correlation rule?</div>
         <div class="answer">
-            <ul>
-                <li><strong>Input Validation:</strong> Validate all inputs</li>
-                <li><strong>Output Encoding:</strong> Encode all outputs</li>
-                <li><strong>Parameterized Queries:</strong> Prevent SQL injection</li>
-                <li><strong>Error Handling:</strong> Don't expose sensitive info</li>
-                <li><strong>Authentication:</strong> Implement strong auth</li>
-                <li><strong>Authorization:</strong> Implement proper authorization</li>
-                <li><strong>Logging:</strong> Log security events</li>
-                <li><strong>Dependencies:</strong> Keep dependencies updated</li>
-            </ul>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">sigma_rule.yml</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">YAML</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>title: Multiple failed logins followed by success
+logsource: { product: windows, service: security }
+detection:
+  selection_fail: { EventID: 4625 }
+  selection_ok:   { EventID: 4624 }
+  timeframe: 10m
+  condition: selection_fail | count(&gt;=5) by user then selection_ok by same user
+level: medium</code>
+                </div>
+            </div>
         </div>
 
-        <div class="question">
-            Q48: What are the best practices for network security?
-        </div>
+        <h2>9. Vulnerability Management &amp; Threat Modeling</h2>
+
+        <div class="question">Q45: What is CVSS and how is risk prioritized?</div>
+        <div class="answer"><p><strong>CVSS</strong> scores severity; combine with exploitability, exposure, and business impact to prioritize remediation SLAs.</p></div>
+
+        <div class="question">Q46: Patch and exception management?</div>
+        <div class="answer"><p>Track assets, apply risk-based patching; document time-bound exceptions with compensating controls and approvals.</p></div>
+
+        <div class="question">Q47: What is STRIDE threat modeling?</div>
+        <div class="answer"><ul>
+            <li><strong>STRIDE:</strong> Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege</li>
+            <li>Use data-flow diagrams to enumerate threats and mitigations</li>
+        </ul></div>
+
+        <h2>10. Incident Response</h2>
+
+        <div class="question">Q48: Phases of incident response?</div>
+        <div class="answer"><ul>
+            <li>Preparation, Detection &amp; Analysis, Containment, Eradication, Recovery, Post-incident</li>
+        </ul></div>
+
+        <div class="question">Q49: What is forensic readiness and chain of custody?</div>
+        <div class="answer"><p>Design logging and evidence handling to support investigations; maintain chain-of-custody records for admissibility.</p></div>
+
+        <div class="question">Q50: Example runbook snippet for ransomware?</div>
         <div class="answer">
-            <ul>
-                <li><strong>Network Segmentation:</strong> Segment networks</li>
-                <li><strong>Firewalls:</strong> Implement firewalls</li>
-                <li><strong>VPN:</strong> Use VPN for remote access</li>
-                <li><strong>IDS/IPS:</strong> Deploy IDS/IPS</li>
-                <li><strong>Encryption:</strong> Encrypt network traffic</li>
-                <li><strong>Monitoring:</strong> Monitor network traffic</li>
-                <li><strong>Access Control:</strong> Implement network ACLs</li>
-                <li><strong>Regular Updates:</strong> Keep network devices updated</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q49: What are the best practices for cloud security?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Identity Management:</strong> Implement IAM</li>
-                <li><strong>Encryption:</strong> Encrypt data at rest and in transit</li>
-                <li><strong>Network Security:</strong> Use VPC, security groups</li>
-                <li><strong>Monitoring:</strong> Enable cloud monitoring</li>
-                <li><strong>Compliance:</strong> Ensure compliance with regulations</li>
-                <li><strong>Backup:</strong> Regular backups</li>
-                <li><strong>Least Privilege:</strong> Apply least privilege</li>
-                <li><strong>Security Configuration:</strong> Secure cloud configurations</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q50: What are the common cybersecurity challenges?
-        </div>
-        <div class="answer">
-            <ul>
-                <li><strong>Skill Shortage:</strong> Lack of skilled professionals</li>
-                <li><strong>Rapidly Evolving Threats:</strong> New threats emerge constantly</li>
-                <li><strong>Complexity:</strong> Increasing system complexity</li>
-                <li><strong>Cloud Security:</strong> Securing cloud environments</li>
-                <li><strong>Insider Threats:</strong> Malicious or negligent employees</li>
-                <li><strong>Phishing:</strong> Sophisticated phishing attacks</li>
-                <li><strong>Ransomware:</strong> Increasing ransomware attacks</li>
-                <li><strong>Supply Chain:</strong> Supply chain vulnerabilities</li>
-                <li><strong>Compliance:</strong> Meeting regulatory requirements</li>
-                <li><strong>Budget:</strong> Limited security budgets</li>
-            </ul>
-        </div>
-
-        <div class="tip">
-            <strong>Interview Tip:</strong> When discussing Cybersecurity, emphasize understanding of core concepts (CIA triad, authentication, encryption), practical experience with security tools (SIEM, IDS/IPS), and knowledge of compliance frameworks (GDPR, HIPAA, PCI DSS). Be prepared to discuss real-world scenarios like incident response, penetration testing, and security architecture.
-        </div>
-
-        <div class="important">
-            <strong>Key Takeaways for Interview:</strong>
-            <ul>
-                <li>Understand cybersecurity fundamentals and CIA triad</li>
-                <li>Know network security concepts and tools</li>
-                <li>Understand web application security (OWASP Top 10)</li>
-                <li>Know cryptography basics (encryption, hashing, digital signatures)</li>
-                <li>Understand IAM and access control</li>
-                <li>Know security operations (SIEM, IDS/IPS, incident response)</li>
-                <li>Understand cloud security and shared responsibility</li>
-                <li>Know compliance frameworks (GDPR, HIPAA, PCI DSS)</li>
-                <li>Understand threat intelligence and MITRE ATT&CK</li>
-                <li>Know security architecture and best practices</li>
-            </ul>
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ir_runbook.yml</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <button class="language-selector">YAML</button>
+                </div>
+                <div class="code-editor-content">
+                    <code>playbook: ransomware
+steps:
+  - isolate_hosts: ["host1", "host2"]
+  - disable_accounts: criteria: { suspicious: true }
+  - collect_artifacts: ["logs", "memory", "disk"]
+  - restore_from_backup: { verify_integrity: true }
+  - notify: ["legal", "leadership", "regulators"]</code>
+                </div>
+            </div>
         </div>
 
         <div class="footer">
-            <p><span class="highlight">🎯 Ready for Your Cybersecurity Interview?</span></p>
-            <p>Master these 50 comprehensive Cybersecurity interview questions covering fundamentals, network security, application security, and compliance. Cybersecurity is essential for modern organizations - understanding security principles deeply will make you a better security professional.</p>
-            <p><span class="highlight">💡 Tip:</span> Focus on understanding the CIA Triad, OWASP Top 10, encryption, authentication/authorization, and compliance frameworks. These are the areas where most cybersecurity interview questions focus. Practice implementing security best practices.</p>
+            <p><span class="highlight">Complete!</span> This guide now contains 50 comprehensive questions covering cybersecurity fundamentals, network security, cryptography, web security, application security, IAM, API security, DevSecOps, logging & monitoring, vulnerability management, and incident response with C# code examples.</p>
         </div>
     </div>
+
+    <script>
+        function copyCode(button) {
+            const codeEditor = button.closest('.code-editor');
+            const codeContent = codeEditor.querySelector('.code-editor-content code');
+            const text = codeContent.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Failed';
+                setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+            });
+        }
+    </script>
+    <script src="../code-converter.js"></script>
 </body>
 </html>
-
-
-
-

@@ -3,448 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generative AI Interview Questions</title>
+    <title>Generative AI Interview Guide</title>
     <style>
-
-
-        @import url('https://fonts.googleapis.com/css2family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #1a1a2e; background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%); background-size: 400% 400%; animation: gradientShift 20s ease infinite; min-height: 100vh; padding: 15px 15px; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .container { max-width: 1100px; margin: 0 auto; padding: 35px 40px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px); border-radius: 24px; box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3); }
+        .back-button { display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 30px; font-weight: 700; margin-bottom: 20px; }
+        h1 { color: #1a1a2e; font-size: 48px; font-weight: 800; text-align: center; margin-bottom: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { text-align: center; font-size: 17px; color: #4a4a68; margin-bottom: 30px; }
+        h2 { color: white; font-size: 24px; font-weight: 700; margin-top: 25px; margin-bottom: 15px; padding: 12px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; }
+        .question { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 20px; border-radius: 10px; margin: 14px 0 8px 0; font-weight: 600; font-size: 16px; }
+        .answer { background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%); padding: 18px 24px; border-radius: 10px; margin: 8px 0 14px 0; border-left: 5px solid #764ba2; }
+        .answer p { margin-bottom: 10px; color: #1a1a2e; }
+        .answer strong { color: #667eea; }
+        .answer ul { padding-left: 20px; margin-bottom: 10px; }
+        .answer h3 { color: #667eea; font-size: 18px; margin-top: 15px; margin-bottom: 10px; }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: #1a1a2e;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 20s ease infinite;
-            min-height: 100vh;
-            padding: 25px 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
-            animation: particleFloat 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 50px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(30px);
-            border-radius: 32px;
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
+        .code-editor {
+            background: #1e1e1e;
+            border-radius: 12px;
+            margin: 15px 0;
             overflow: hidden;
-            z-index: 1;
-            animation: containerFloat 6s ease-in-out infinite;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3e3e42;
         }
         
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #764ba2 60%, 
-                #667eea 80%, 
-                #764ba2 100%);
-            background-size: 300% 100%;
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-        
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
-        }
-        
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 
-                0 8px 25px rgba(102, 126, 234, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-button:hover::before {
-            left: 100%;
-        }
-        
-        .back-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
-        }
-        
-        .back-button svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.3s ease;
-        }
-        
-        .back-button:hover svg {
-            transform: translateX(-5px);
-        }
-        
-        h1 {
-            color: #1a1a2e;
-            font-size: 52px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 35px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
-            border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .subtitle {
-            text-align: center;
-            font-size: 18px;
-            color: #4a4a68;
-            margin-bottom: 40px;
-            font-weight: 500;
-            animation: fadeIn 1s ease 0.4s both;
-        }
-        
-        h2 {
-            color: #1a1a2e;
-            font-size: 32px;
-            font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
+        .code-editor-header {
+            background: #2d2d2d;
+            padding: 10px 14px;
             display: flex;
             align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
+            justify-content: space-between;
+            gap: 8px;
+            border-bottom: 1px solid #3e3e42;
         }
         
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+        .code-editor-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
+        .code-editor-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
         }
         
-        h3 {
-            color: #1a1a2e;
-            font-size: 26px;
-            font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
+        .code-editor-dot.red { background: #ff5f56; }
+        .code-editor-dot.yellow { background: #ffbd2e; }
+        .code-editor-dot.green { background: #27ca40; }
+        
+        .code-editor-title {
+            color: #9cdcfe;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            margin-left: 12px;
         }
         
-        .chapter {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
-            border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
+        .copy-button {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .copy-button:hover {
+            background: #4e4e52;
+            color: #ffffff;
         }
         
-        .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+        .copy-button.copied {
+            background: #27ca40;
+            color: #ffffff;
         }
         
-        .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
+        .language-selector {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            margin-left: 8px;
+        }
+        
+        .language-selector:hover {
+            background: #4e4e52;
+            color: #ffffff;
+        }
+        
+        .code-editor-content {
+            padding: 16px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #d4d4d4;
             overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.5s ease both;
+            background: #1e1e1e;
         }
         
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
+        .code-editor-content code {
+            display: block;
+            white-space: pre;
         }
         
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-x: auto;
-        }
-        
+        .keyword { color: #569cd6; }
+        .type { color: #4ec9b0; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; font-style: italic; }
+        .number { color: #b5cea8; }
+        .method { color: #dcdcaa; }
+        .property { color: #9cdcfe; }
+        .variable { color: #9cdcfe; }
+        .operator { color: #d4d4d4; }
+        .decorator { color: #c586c0; }
         
         .toc {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 35px 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border-left: 8px solid #667eea;
+            padding: 25px 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+            border-left: 6px solid #667eea;
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
         }
-        
-        .toc h3 {
-            color: #1a1a2e;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .toc ol {
-            padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
-        }
-        
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .question {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
-        }
-        
-        .answer {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 30px 35px;
-            border-radius: 15px;
-            margin: 15px 0 25px 0;
-            border-left: 6px solid #764ba2;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            animation: slideUp 0.5s ease both;
-        }
-        
-        .answer p {
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            line-height: 1.8;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
-        }
-        
-        .answer strong {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .page-break {
-            page-break-after: always;
-            margin: 60px 0;
-            border-top: 2px dashed #e0e0e0;
-            padding-top: 40px;
-        }
-        
-        .important {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
-        }
-        
-        .important strong {
-            color: #856404;
-        }
-        
-        .tip {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
-        }
-        
-        .tip strong {
-            color: #0c5460;
-        }
+        .toc h3 { color: #1a1a2e; font-size: 22px; font-weight: 700; margin-bottom: 15px; }
+        .toc ol { padding-left: 22px; color: #4a4a68; line-height: 1.8; }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
+            margin: 18px 0;
             background: white;
             border-radius: 12px;
             overflow: hidden;
@@ -454,14 +155,14 @@
         th {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 15px;
+            padding: 12px;
             text-align: left;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14px;
         }
         
         td {
-            padding: 15px;
+            padding: 12px;
             border-bottom: 1px solid #e9ecef;
             color: #4a4a68;
         }
@@ -474,611 +175,279 @@
             background: #f8f9fa;
         }
         
-        p {
-            color: #1a1a2e;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        
-        ul, ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        ul li, ol li {
-            margin-bottom: 8px;
-        }
-        
-                
-        @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
-            }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
-        }
-        
         .footer {
             text-align: center;
-            margin-top: 50px;
-            padding: 35px;
+            margin-top: 35px;
+            padding: 25px;
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
-            border-radius: 20px;
-            border: 2px solid rgba(102, 126, 234, 0.25);
-            color: #666;
-            font-size: 15px;
-            line-height: 1.7;
-            animation: slideUp 0.6s ease both;
+            border-radius: 16px;
         }
         
         .footer p {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            color: #4a4a68;
         }
         
         .footer .highlight {
             color: #667eea;
             font-weight: 600;
         }
-</style>
+        
+        @media (max-width: 768px) {
+            body { padding: 12px 8px; }
+            .container { padding: 20px 18px; border-radius: 18px; }
+            h1 { font-size: 30px; }
+            .subtitle { font-size: 15px; margin-bottom: 20px; }
+            h2 { font-size: 18px; padding: 10px 16px; margin-top: 20px; margin-bottom: 12px; }
+            .question { font-size: 15px; padding: 14px 18px; margin: 12px 0 6px 0; }
+            .answer { padding: 16px 18px; margin: 6px 0 12px 0; }
+            .code-editor-content { padding: 12px; font-size: 12px; overflow-x: auto; }
+            .code-editor-title { font-size: 11px; }
+            .toc { padding: 20px 18px; margin: 25px 0; }
+            .toc h3 { font-size: 18px; margin-bottom: 12px; }
+            .toc ol { font-size: 14px; padding-left: 18px; }
+            .footer { padding: 20px 18px; margin-top: 25px; font-size: 14px; }
+            table { font-size: 13px; margin: 15px 0; }
+            th, td { padding: 10px 8px; font-size: 13px; }
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 26px; }
+            .subtitle { font-size: 14px; }
+            h2 { font-size: 16px; padding: 8px 14px; margin-top: 18px; margin-bottom: 10px; }
+            .question { font-size: 14px; padding: 12px 14px; margin: 10px 0 5px 0; }
+            .answer { padding: 14px 14px; margin: 5px 0 10px 0; }
+            .code-editor-content { padding: 10px; font-size: 11px; }
+            .code-editor-header { padding: 8px 10px; }
+            .copy-button { padding: 4px 8px; font-size: 10px; }
+            table { font-size: 12px; margin: 12px 0; }
+            th, td { padding: 8px 6px; font-size: 12px; }
+        }
+        
+        @media (max-width: 480px) {
+            body { padding: 8px 4px; }
+            .container { padding: 16px 12px; border-radius: 14px; }
+            h1 { font-size: 22px; }
+            .subtitle { font-size: 13px; margin-bottom: 16px; }
+            h2 { font-size: 14px; padding: 8px 12px; margin-top: 16px; margin-bottom: 8px; }
+            .question { font-size: 13px; padding: 12px 12px; margin: 10px 0 5px 0; }
+            .answer { padding: 12px 12px; margin: 5px 0 10px 0; }
+            .code-editor-content { padding: 10px; font-size: 10px; line-height: 1.4; }
+            .code-editor-title { font-size: 9px; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .back-button { padding: 10px 16px; font-size: 13px; width: 100%; justify-content: center; }
+            table { font-size: 11px; margin: 10px 0; }
+            th, td { padding: 8px 5px; font-size: 11px; }
+            .toc { padding: 16px 12px; margin: 20px 0; }
+            .toc h3 { font-size: 16px; margin-bottom: 10px; }
+            .toc ol { font-size: 12px; padding-left: 16px; }
+        }
+        
+        @media (max-width: 360px) {
+            h1 { font-size: 20px; }
+            h2 { font-size: 13px; padding: 6px 10px; margin-top: 14px; margin-bottom: 6px; }
+            .question { font-size: 12px; padding: 10px 10px; margin: 8px 0 4px 0; }
+            .answer { padding: 10px 10px; margin: 4px 0 8px 0; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">← Back to Tutorials</a>
-        <h1>Generative AI Interview Questions</h1>
-        <p class="subtitle">Comprehensive guide covering 60+ GENAI interview questions on LLMs, transformers, RAG, prompt engineering, fine-tuning, and AI safety</p>
-        
-        <h2>Table of Contents</h2>
+        <a href="../index.html" class="back-button">Back to Home</a>
+        <h1>Generative AI Interview Guide</h1>
+        <p class="subtitle">Comprehensive guide covering Generative AI interview questions with Python code examples</p>
+
         <div class="toc">
             <h3>Table of Contents</h3>
             <ol>
-                <li>LLM Fundamentals</li>
-                <li>Transformers & Architecture</li>
+                <li>Generative AI Fundamentals</li>
+                <li>Large Language Models</li>
+                <li>Transformer Architecture</li>
+                <li>Training and Fine-tuning</li>
                 <li>Prompt Engineering</li>
-                <li>RAG & Vector Databases</li>
-                <li>Fine-Tuning & RLHF</li>
-                <li>AI Safety & Ethics</li>
+                <li>RAG and Retrieval</li>
+                <li>GenAI Applications</li>
+                <li>GenAI Ethics and Safety</li>
+                <li>Advanced Topics</li>
             </ol>
         </div>
 
-        <h2>1. LLM Fundamentals</h2>
+        <h2>1. Generative AI Fundamentals</h2>
 
         <div class="question">
-            Q1: What is a Large Language Model (LLM)?
+            Q1: What is Generative AI?
         </div>
         <div class="answer">
-            <p><strong>LLM:</strong> Neural network trained on massive text data to understand and generate human-like text.</p>
-            <p><strong>Key Characteristics:</strong></p>
+            <p><strong>Generative AI</strong> is a type of artificial intelligence that can create new content, including text, images, audio, and code. Unlike traditional AI that classifies or predicts, generative AI generates novel outputs based on learned patterns from training data.</p>
+            
+            <h3>Key Characteristics:</h3>
             <ul>
-                <li>Billions of parameters</li>
-                <li>Trained on internet-scale data</li>
-                <li>Can perform various NLP tasks</li>
-                <li>Uses transformer architecture</li>
+                <li><strong>Creation:</strong> Generates new, original content</li>
+                <li><strong>Pattern-based:</strong> Learns patterns from training data</li>
+                <li><strong>Probabilistic:</strong> Uses probability distributions for generation</li>
+                <li><strong>Multi-modal:</strong> Can handle text, images, audio, video</li>
             </ul>
-            <p><strong>Examples:</strong> GPT-4, Claude, Gemini, LLaMA.</p>
         </div>
 
         <div class="question">
-            Q2: What is the difference between Generative AI and Traditional AI?
+            Q2: What is the difference between discriminative and generative models?
         </div>
         <div class="answer">
             <table>
                 <tr>
                     <th>Aspect</th>
-                    <th>Generative AI</th>
-                    <th>Traditional AI</th>
+                    <th>Discriminative</th>
+                    <th>Generative</th>
                 </tr>
                 <tr>
-                    <td>Output</td>
-                    <td>Creates new content</td>
-                    <td>Classifies/predicts existing data</td>
+                    <td><strong>Goal</strong></td>
+                    <td>Distinguish between classes</td>
+                    <td>Generate new samples</td>
                 </tr>
                 <tr>
-                    <td>Training</td>
-                    <td>Self-supervised on unlabeled data</td>
-                    <td>Supervised on labeled data</td>
+                    <td><strong>Output</strong></td>
+                    <td>P(Y|X)</td>
+                    <td>P(X,Y) or P(X)</td>
                 </tr>
                 <tr>
-                    <td>Use Cases</td>
-                    <td>Content creation, synthesis</td>
-                    <td>Classification, prediction</td>
-                </tr>
-                <tr>
-                    <td>Examples</td>
-                    <td>GPT, DALL-E, Midjourney</td>
-                    <td>Random Forest, SVM, CNN</td>
+                    <td><strong>Examples</th>
+                    <td>Classification, regression</td>
+                    <td>GANs, VAEs, LLMs</td>
                 </tr>
             </table>
         </div>
 
         <div class="question">
-            Q3: What are embeddings and why are they useful?
+            Q3: What are the main types of generative models?
         </div>
         <div class="answer">
-            <p><strong>Embeddings:</strong> Dense vector representations that capture semantic meaning of text.</p>
-            <p><strong>Benefits:</strong></p>
+            <h3>Types of Generative Models:</h3>
             <ul>
-                <li>Capture semantic relationships</li>
-                <li>Enable similarity search</li>
-                <li>Reduce dimensionality</li>
-                <li>Transfer learning across tasks</li>
-            </ul>
-            <p><strong>Applications:</strong> RAG, semantic search, recommendation systems, clustering.</p>
-        </div>
-
-        <div class="question">
-            Q4: What is a vector database?
-        </div>
-        <div class="answer">
-            <p><strong>Vector Database:</strong> Database optimized for storing and searching high-dimensional vectors.</p>
-            <p><strong>Key Features:</strong></p>
-            <ul>
-                <li>Approximate nearest neighbor search</li>
-                <li>High-dimensional indexing</li>
-                <li>Scalable storage</li>
-                <li>Real-time similarity search</li>
-            </ul>
-            <p><strong>Examples:</strong> Pinecone, Weaviate, Chroma, Milvus.</p>
-        </div>
-
-        <h2>2. Transformers & Architecture</h2>
-
-        <div class="question">
-            Q5: What is the transformer architecture?
-        </div>
-        <div class="answer">
-            <p><strong>Transformer:</strong> Neural network architecture using self-attention mechanism to process sequential data.</p>
-            <p><strong>Key Components:</strong></p>
-            <ul>
-                <li>Self-attention layers</li>
-                <li>Positional encoding</li>
-                <li>Multi-head attention</li>
-                <li>Feed-forward networks</li>
-            </ul>
-            <p><strong>Advantages:</strong> Parallel processing, long-range dependencies, no recurrence.</p>
-        </div>
-
-        <div class="question">
-            Q6: What is the attention mechanism?
-        </div>
-        <div class="answer">
-            <p><strong>Attention:</strong> Mechanism that allows model to focus on relevant parts of input when producing output.</p>
-            <p><strong>How it works:</strong></p>
-            <ol>
-                <li>Compute query, key, value vectors</li>
-                <li>Calculate attention scores (query · key)</li>
-                <li>Apply softmax to get weights</li>
-                <li>Weighted sum of values</li>
-            </ol>
-            <p><strong>Types:</strong> Self-attention, cross-attention, multi-head attention.</p>
-        </div>
-
-        <div class="question">
-            Q7: What is the difference between encoder-only, decoder-only, and encoder-decoder models?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Type</th>
-                    <th>Architecture</th>
-                    <th>Use Cases</th>
-                    <th>Examples</th>
-                </tr>
-                <tr>
-                    <td>Encoder-only</td>
-                    <td>Transformer encoder</td>
-                    <td>Understanding, classification</td>
-                    <td>BERT, RoBERTa</td>
-                </tr>
-                <tr>
-                    <td>Decoder-only</td>
-                    <td>Transformer decoder</td>
-                    <td>Generation, completion</td>
-                    <td>GPT, LLaMA</td>
-                </tr>
-                <tr>
-                    <td>Encoder-decoder</td>
-                    <td>Both encoder and decoder</td>
-                    <td>Translation, summarization</td>
-                    <td>T5, BART</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q8: What is positional encoding?
-        </div>
-        <div class="answer">
-            <p><strong>Positional Encoding:</strong> Technique to inject position information into transformer models.</p>
-            <p><strong>Why needed:</strong> Transformers process all tokens in parallel, losing sequential order.</p>
-            <p><strong>Types:</strong></p>
-            <ul>
-                <li>Sinusoidal (original transformer)</li>
-                <li>Learned embeddings</li>
-                <li>Relative position encoding</li>
-                <li>RoPE (Rotary Position Embedding)</li>
-            </ul>
-        </div>
-
-        <h2>3. Prompt Engineering</h2>
-
-        <div class="question">
-            Q9: What is prompt engineering?
-        </div>
-        <div class="answer">
-            <p><strong>Prompt Engineering:</strong> Art of crafting effective prompts to get desired outputs from LLMs.</p>
-            <p><strong>Techniques:</strong></p>
-            <ul>
-                <li>Zero-shot prompting</li>
-                <li>Few-shot prompting</li>
-                <li>Chain-of-thought prompting</li>
-                <li>Role-playing</li>
-                <li>Context injection</li>
+                <li><strong>Autoregressive Models:</strong> GPT, generate token by token</li>
+                <li><strong>VAEs:</strong> Variational Autoencoders, encode-decode architecture</li>
+                <li><strong>GANs:</strong> Generative Adversarial Networks, generator vs discriminator</li>
+                <li><strong>Diffusion Models:</strong> Gradual noise addition and removal</li>
+                <li><strong>Flow-based Models:</strong> Transform simple distributions to complex ones</li>
             </ul>
         </div>
 
         <div class="question">
-            Q10: What is the difference between zero-shot, one-shot, and few-shot prompting?
+            Q4: What is a GAN?
         </div>
         <div class="answer">
-            <p><strong>Zero-shot:</strong> No examples provided, only task description.</p>
-            <p><strong>One-shot:</strong> One example provided to guide the model.</p>
-            <p><strong>Few-shot:</strong> Multiple examples provided (typically 3-5) for better guidance.</p>
-            <p><strong>Tradeoff:</strong> More examples = better performance but higher token cost and latency.</p>
+            <p><strong>Generative Adversarial Network (GAN)</strong> consists of two neural networks: a generator that creates fake data and a discriminator that distinguishes real from fake. They compete in a game-theoretic framework.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">gan.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Simple GAN structure with PyTorch</span>
+<span class="keyword">import</span> <span class="variable">torch</span>
+<span class="keyword">import</span> <span class="variable">torch.nn</span> <span class="keyword">as</span> <span class="variable">nn</span>
+
+<span class="keyword">class</span> <span class="type">Generator</span>(<span class="type">nn.Module</span>):
+    <span class="keyword">def</span> <span class="method">__init__</span>(<span class="variable">self</span>):
+        <span class="keyword">super</span>().<span class="method">__init__</span>()
+        <span class="variable">self</span>.<span class="property">model</span> = <span class="variable">nn</span>.<span class="type">Sequential</span>(
+            <span class="variable">nn</span>.<span class="type">Linear</span>(<span class="number">100</span>, <span class="number">256</span>),
+            <span class="variable">nn</span>.<span class="type">ReLU</span>(),
+            <span class="variable">nn</span>.<span class="type">Linear</span>(<span class="number">256</span>, <span class="number">784</span>),
+            <span class="variable">nn</span>.<span class="type">Tanh</span>()
+        )
+    
+    <span class="keyword">def</span> <span class="method">forward</span>(<span class="variable">self</span>, <span class="variable">z</span>):
+        <span class="keyword">return</span> <span class="variable">self</span>.<span class="method">model</span>(<span class="variable">z</span>)
+
+<span class="keyword">class</span> <span class="type">Discriminator</span>(<span class="type">nn.Module</span>):
+    <span class="keyword">def</span> <span class="method">__init__</span>(<span class="variable">self</span>):
+        <span class="keyword">super</span>().<span class="method">__init__</span>()
+        <span class="variable">self</span>.<span class="property">model</span> = <span class="variable">nn</span>.<span class="type">Sequential</span>(
+            <span class="variable">nn</span>.<span class="type">Linear</span>(<span class="number">784</span>, <span class="number">256</span>),
+            <span class="variable">nn</span>.<span class="type">ReLU</span>(),
+            <span class="variable">nn</span>.<span class="type">Linear</span>(<span class="number">256</span>, <span class="number">1</span>),
+            <span class="variable">nn</span>.<span class="type">Sigmoid</span>()
+        )
+    
+    <span class="keyword">def</span> <span class="method">forward</span>(<span class="variable">self</span>, <span class="variable">x</span>):
+        <span class="keyword">return</span> <span class="variable">self</span>.<span class="method">model</span>(<span class="variable">x</span>)</code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
-            Q11: What is chain-of-thought prompting?
+            Q5: What is a VAE?
         </div>
         <div class="answer">
-            <p><strong>Chain-of-Thought (CoT):</strong> Prompting technique that encourages models to show reasoning steps.</p>
-            <p><strong>Benefits:</strong></p>
+            <p><strong>Variational Autoencoder (VAE)</strong> is a generative model that learns to encode data into a latent space and decode back. It uses probabilistic encoding to enable smooth interpolation and generation.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">vae.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># VAE encoder</span>
+<span class="keyword">class</span> <span class="type">VAEEncoder</span>(<span class="type">nn.Module</span>):
+    <span class="keyword">def</span> <span class="method">__init__</span>(<span class="variable">self</span>):
+        <span class="keyword">super</span>().<span class="method">__init__</span>()
+        <span class="variable">self</span>.<span class="property">fc1</span> = <span class="variable">nn</span>.<span class="type">Linear</span>(<span class="number">784</span>, <span class="number">400</span>)
+        <span class="variable">self</span>.<span class="property">fc_mu</span> = <span class="variable">nn</span>.<span class="type">Linear</span>(<span class="number">400</span>, <span class="number">20</span>)
+        <span class="variable">self</span>.<span class="property">fc_logvar</span> = <span class="variable">nn</span>.<span class="type">Linear</span>(<span class="number">400</span>, <span class="number">20</span>)
+    
+    <span class="keyword">def</span> <span class="method">forward</span>(<span class="variable">self</span>, <span class="variable">x</span>):
+        <span class="variable">h</span> = <span class="variable">torch</span>.<span class="method">relu</span>(<span class="variable">self</span>.<span class="method">fc1</span>(<span class="variable">x</span>))
+        <span class="variable">mu</span> = <span class="variable">self</span>.<span class="method">fc_mu</span>(<span class="variable">h</span>)
+        <span class="variable">logvar</span> = <span class="variable">self</span>.<span class="method">fc_logvar</span>(<span class="variable">h</span>)
+        <span class="keyword">return</span> <span class="variable">mu</span>, <span class="variable">logvar</span></code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q6: What is a diffusion model?
+        </div>
+        <div class="answer">
+            <p><strong>Diffusion Model</strong> generates data by gradually adding noise to training data and learning to reverse the process. It's the foundation for models like Stable Diffusion and DALL-E.</p>
+            
+            <h3>Key Components:</h3>
             <ul>
-                <li>Improves complex reasoning</li>
-                <li>Reduces errors</li>
-                <li>Provides interpretability</li>
+                <li><strong>Forward Process:</strong> Gradually add Gaussian noise</li>
+                <li><strong>Reverse Process:</strong> Learn to denoise step by step</li>
+                <li><strong>Training:</strong> Predict noise at each timestep</li>
+                <li><strong>Inference:</strong> Generate from pure noise</li>
             </ul>
-            <p><strong>Example:</strong> "Let's think step by step to solve this problem."</p>
         </div>
+
+        <h2>2. Large Language Models</h2>
 
         <div class="question">
-            Q12: What is temperature in LLM generation?
+            Q7: What is a Large Language Model (LLM)?
         </div>
         <div class="answer">
-            <p><strong>Temperature:</strong> Hyperparameter controlling randomness in token selection.</p>
-            <p><strong>Low temperature (0.1-0.3):</strong> More deterministic, focused outputs.</p>
-            <p><strong>High temperature (0.7-1.0):</strong> More random, creative outputs.</p>
-            <p><strong>Use cases:</strong> Low for factual answers, high for creative writing.</p>
-        </div>
-
-        <h2>4. RAG & Vector Databases</h2>
-
-        <div class="question">
-            Q13: What is RAG (Retrieval-Augmented Generation)?
-        </div>
-        <div class="answer">
-            <p><strong>RAG:</strong> Framework that combines retrieval systems with LLMs to improve accuracy and reduce hallucinations.</p>
-            <p><strong>Components:</strong></p>
-            <ol>
-                <li>Document ingestion and chunking</li>
-                <li>Embedding generation</li>
-                <li>Vector storage</li>
-                <li>Retrieval (similarity search)</li>
-                <li>Generation with retrieved context</li>
-            </ol>
-        </div>
-
-        <div class="question">
-            Q14: When should you use RAG vs fine-tuning?
-        </div>
-        <div class="answer">
-            <p><strong>Use RAG when:</strong></p>
+            <p><strong>Large Language Model (LLM)</strong> is a neural network trained on vast amounts of text data to understand and generate human-like text. Examples include GPT, BERT, LLaMA, and Claude.</p>
+            
+            <h3>Characteristics:</h3>
             <ul>
-                <li>Need access to dynamic information</li>
-                <li>Want to reduce hallucinations</li>
-                <li>Need to cite sources</li>
-                <li>Data changes frequently</li>
-            </ul>
-            <p><strong>Use fine-tuning when:</strong></p>
-            <ul>
-                <li>Need specific domain knowledge</li>
-                <li>Want to change model behavior/style</li>
-                <li>Have large domain-specific dataset</li>
-                <li>Need lower latency</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q15: What is semantic search vs keyword search?
-        </div>
-        <div class="answer">
-            <p><strong>Keyword Search:</strong> Matches exact words or phrases.</p>
-            <p><strong>Semantic Search:</strong> Matches meaning and intent using embeddings.</p>
-            <p><strong>Advantages of semantic:</strong></p>
-            <ul>
-                <li>Handles synonyms</li>
-                <li>Understands context</li>
-                <li>Better for natural language queries</li>
-            </ul>
-        </div>
-
-        <h2>5. Fine-Tuning & RLHF</h2>
-
-        <div class="question">
-            Q16: What is fine-tuning?
-        </div>
-        <div class="answer">
-            <p><strong>Fine-tuning:</strong> Process of adapting a pre-trained model to specific task or domain.</p>
-            <p><strong>Types:</strong></p>
-            <ul>
-                <li>Full fine-tuning (all parameters)</li>
-                <li>LoRA (Low-Rank Adaptation)</li>
-                <li>QLoRA (Quantized LoRA)</li>
-                <li>Adapter layers</li>
-            </ul>
-            <p><strong>Benefits:</strong> Improved performance on specific tasks, reduced latency, smaller model size.</p>
-        </div>
-
-        <div class="question">
-            Q17: What is LoRA?
-        </div>
-        <div class="answer">
-            <p><strong>LoRA (Low-Rank Adaptation):</strong> Parameter-efficient fine-tuning technique.</p>
-            <p><strong>How it works:</strong></p>
-            <ul>
-                <li>Freezes pre-trained weights</li>
-                <li>Adds trainable low-rank decomposition matrices</li>
-                <li>Dramatically reduces trainable parameters</li>
-            </ul>
-            <p><strong>Benefits:</strong> Faster training, less memory, easier to deploy multiple adapters.</p>
-        </div>
-
-        <div class="question">
-            Q18: What is RLHF (Reinforcement Learning from Human Feedback)?
-        </div>
-        <div class="answer">
-            <p><strong>RLHF:</strong> Technique to align LLMs with human preferences using reinforcement learning.</p>
-            <p><strong>Three stages:</strong></p>
-            <ol>
-                <li><strong>SFT:</strong> Supervised fine-tuning on human demonstrations</li>
-                <li><strong>Reward Model:</strong> Train model to predict human preferences</li>
-                <li><strong>PPO:</strong> Optimize policy using reward model</li>
-            </ol>
-            <p><strong>Goal:</strong> Make models helpful, harmless, and honest.</p>
-        </div>
-
-        <div class="question">
-            Q19: What is hallucination in LLMs?
-        </div>
-        <div class="answer">
-            <p><strong>Hallucination:</strong> When LLM generates false or fabricated information confidently.</p>
-            <p><strong>Causes:</strong></p>
-            <ul>
-                <li>Training data limitations</li>
-                <li>Model overconfidence</li>
-                <li>Lack of grounding</li>
-            </ul>
-            <p><strong>Mitigation:</strong> RAG, fact-checking, uncertainty quantification, human oversight.</p>
-        </div>
-
-        <h2>6. AI Safety & Ethics</h2>
-
-        <div class="question">
-            Q20: What is prompt injection?
-        </div>
-        <div class="answer">
-            <p><strong>Prompt Injection:</strong> Attack where users manipulate prompts to bypass safety measures.</p>
-            <p><strong>Examples:</strong></p>
-            <ul>
-                <li>Jailbreaking (bypassing restrictions)</li>
-                <li> DAN (Do Anything Now) prompts</li>
-                <li>Role-playing attacks</li>
-            </ul>
-            <p><strong>Defense:</strong> Input validation, output filtering, adversarial training.</p>
-        </div>
-
-        <div class="question">
-            Q21: What are the ethical considerations in generative AI?
-        </div>
-        <div class="answer">
-            <p><strong>Key Ethical Issues:</strong></p>
-            <ul>
-                <li>Copyright and data ownership</li>
-                <li>Deepfakes and misinformation</li>
-                <li>Bias and fairness</li>
-                <li>Privacy concerns</li>
-                <li>Environmental impact</li>
-                <li>Job displacement</li>
+                <li><strong>Scale:</strong> Billions of parameters</li>
+                <li><strong>Training Data:</strong> Trillions of tokens</li>
+                <li><strong>Capabilities:</strong> Translation, summarization, code generation</li>
+                <li><strong>Few-shot Learning:</strong> Learn from few examples</li>
             </ul>
         </div>
 
         <div class="question">
-            Q22: What is AI alignment?
-        </div>
-        <div class="answer">
-            <p><strong>AI Alignment:</strong> Field focused on ensuring AI systems act in accordance with human values and intentions.</p>
-            <p><strong>Challenges:</strong></p>
-            <ul>
-                <li>Defining human values</li>
-                <li>Specification problems</li>
-                <li>Robustness to distribution shift</li>
-                <li>Outer alignment vs inner alignment</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q23: What is the difference between GPT and BERT?
+            Q8: What is the difference between GPT and BERT?
         </div>
         <div class="answer">
             <table>
@@ -1088,910 +457,707 @@
                     <th>BERT</th>
                 </tr>
                 <tr>
-                    <td>Architecture</td>
+                    <td><strong>Architecture</strong></td>
                     <td>Decoder-only</td>
                     <td>Encoder-only</td>
                 </tr>
                 <tr>
-                    <td>Training Objective</td>
-                    <td>Causal language modeling</td>
-                    <td>Masked language modeling</td>
-                </tr>
-                <tr>
-                    <td>Attention</td>
-                    <td>Unidirectional (left-to-right)</td>
+                    <td><strong>Training</strong></td>
+                    <td>Causal (left-to-right)</td>
                     <td>Bidirectional</td>
                 </tr>
                 <tr>
-                    <td>Use case</td>
-                    <td>Text generation</td>
-                    <td>Text understanding, classification</td>
+                    <td><strong>Use Case</th>
+                    <td>Generation</td>
+                    <td>Understanding</td>
                 </tr>
             </table>
         </div>
 
         <div class="question">
-            Q24: What is the difference between T5 and BART?
+            Q9: What is the transformer architecture?
         </div>
         <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>T5</th>
-                    <th>BART</th>
-                </tr>
-                <tr>
-                    <td>Architecture</td>
-                    <td>Encoder-decoder</td>
-                    <td>Encoder-decoder</td>
-                </tr>
-                <tr>
-                    <td>Training Objective</td>
-                    <td>Span corruption (text-to-text)</td>
-                    <td>Denoising autoencoder</td>
-                </tr>
-                <tr>
-                    <td>Pretraining Data</td>
-                    <td>Colossal Clean Crawled Corpus (C4)</td>
-                    <td>Large text corpora</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>Text-to-text tasks</td>
-                    <td>Summarization, translation</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q25: What is the difference between GPT-3 and GPT-4?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>GPT-3</th>
-                    <th>GPT-4</th>
-                </tr>
-                <tr>
-                    <td>Parameters</td>
-                    <td>175B</td>
-                    <td>1.76T (estimated)</td>
-                </tr>
-                <tr>
-                    <td>Context Window</td>
-                    <td>2048 tokens</td>
-                    <td>128K tokens</td>
-                </tr>
-                <tr>
-                    <td>Capabilities</td>
-                    <td>Text generation</td>
-                    <td>Multimodal (text + images)</td>
-                </tr>
-                <tr>
-                    <td>Reasoning</td>
-                    <td>Basic</td>
-                    <td>Advanced reasoning</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q26: What is the difference between LLaMA and GPT?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>LLaMA</th>
-                    <th>GPT</th>
-                </tr>
-                <tr>
-                    <td>Developer</td>
-                    <td>Meta (open-source)</td>
-                    <td>OpenAI (proprietary)</td>
-                </tr>
-                <tr>
-                    <td>Training Data</td>
-                    <td>Publicly available data</td>
-                    <td>Proprietary data</td>
-                </tr>
-                <tr>
-                    <td>Accessibility</td>
-                    <td>Open weights</td>
-                    <td>API-only</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>Research, local deployment</td>
-                    <td>Commercial applications</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q27: What is the difference between Mistral and LLaMA?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Mistral</th>
-                    <th>LLaMA</th>
-                </tr>
-                <tr>
-                    <td>Developer</td>
-                    <td>Mistral AI</td>
-                    <td>Meta</td>
-                </tr>
-                <tr>
-                    <td>Architecture</td>
-                    <td>Sliding window attention</td>
-                    <td>Standard attention</td>
-                </tr>
-                <tr>
-                    <td>Efficiency</td>
-                    <td>More efficient</td>
-                    <td>Standard efficiency</td>
-                </tr>
-                <tr>
-                    <td>Context Window</td>
-                    <td>32K+</td>
-                    <td>4K-8K (varies by version)</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q28: What is the difference between FLAN and GPT?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>FLAN</th>
-                    <th>GPT</th>
-                </tr>
-                <tr>
-                    <td>Training</td>
-                    <td>Instruction-tuned</td>
-                    <td>Pretrained + instruction-tuned</td>
-                </tr>
-                <tr>
-                    <td>Base Model</td>
-                    <td>LaMDA</td>
-                    <td>GPT architecture</td>
-                </tr>
-                <tr>
-                    <td>Focus</td>
-                    <td>Instruction following</td>
-                    <td>General language modeling</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>Zero-shot tasks</td>
-                    <td>Few-shot tasks</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q29: What is the difference between instruction tuning and RLHF?
-        </div>
-        <div class="answer">
-            <p><strong>Instruction Tuning:</strong> Fine-tuning model on instruction-response pairs to follow instructions better.</p>
-            <p><strong>RLHF (Reinforcement Learning from Human Feedback):</strong> Using human feedback to train reward model, then optimizing policy with RL.</p>
-            <p><strong>Comparison:</strong></p>
+            <p><strong>Transformer</strong> is a neural network architecture introduced in "Attention Is All You Need" (2017). It uses self-attention mechanisms to process sequential data in parallel, enabling efficient training of large models.</p>
+            
+            <h3>Key Components:</h3>
             <ul>
-                <li>Instruction tuning: Supervised learning, faster, simpler</li>
-                <li>RLHF: Reinforcement learning, slower, more complex, better alignment</li>
-            </ul>
-            <p><strong>Use case:</strong> Often used together - instruction tuning first, then RLHF for fine alignment.</p>
-        </div>
-
-        <div class="question">
-            Q30: What is the difference between zero-shot, one-shot, and few-shot learning?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Learning Type</th>
-                    <th>Examples</th>
-                    <th>Description</th>
-                </tr>
-                <tr>
-                    <td>Zero-shot</td>
-                    <td>0</td>
-                    <td>Model uses pretraining knowledge without examples</td>
-                </tr>
-                <tr>
-                    <td>One-shot</td>
-                    <td>1</td>
-                    <td>Model learns from single example</td>
-                </tr>
-                <tr>
-                    <td>Few-shot</td>
-                    <td>Few (2-10)</td>
-                    <td>Model learns from multiple examples</td>
-                </tr>
-            </table>
-            <p><strong>Use case:</strong> Few-shot learning typically works best for LLMs due to their pretraining.</p>
-        </div>
-
-        <div class="question">
-            Q31: What is the difference between chain-of-thought and standard prompting?
-        </div>
-        <div class="answer">
-            <p><strong>Standard Prompting:</strong> Direct question-answer format without intermediate reasoning.</p>
-            <p><strong>Chain-of-Thought (CoT):</strong> Prompting model to show step-by-step reasoning before final answer.</p>
-            <p><strong>Benefits of CoT:</strong></p>
-            <ul>
-                <li>Improves reasoning on complex tasks</li>
-                <li>Reduces errors</li>
-                <li>More interpretable</li>
-            </ul>
-            <p><strong>Use case:</strong> Math, logic, multi-step reasoning tasks.</p>
-        </div>
-
-        <div class="question">
-            Q32: What is the difference between self-consistency and chain-of-thought?
-        </div>
-        <div class="answer">
-            <p><strong>Chain-of-Thought:</strong> Single reasoning path to answer.</p>
-            <p><strong>Self-Consistency:</strong> Generate multiple reasoning paths, choose most consistent answer.</p>
-            <p><strong>Process:</strong></p>
-            <ol>
-                <li>Generate multiple CoT responses</li>
-                <li>Aggregate answers (majority vote)</li>
-                <li>Select most consistent answer</li>
-            </ol>
-            <p><strong>Benefits:</strong> Reduces randomness, improves accuracy on reasoning tasks.</p>
-        </div>
-
-        <div class="question">
-            Q33: What is the difference between tree-of-thought and chain-of-thought?
-        </div>
-        <div class="answer">
-            <p><strong>Chain-of-Thought:</strong> Linear reasoning path.</p>
-            <p><strong>Tree-of-Thought (ToT):</strong> Explores multiple reasoning branches like a tree, can backtrack.</p>
-            <p><strong>Benefits of ToT:</strong></p>
-            <ul>
-                <li>Can explore alternative solutions</li>
-                <li>Can backtrack from wrong paths</li>
-                <li>Better for complex problem-solving</li>
-            </ul>
-            <p><strong>Tradeoff:</strong> More computationally expensive than CoT.</p>
-        </div>
-
-        <div class="question">
-            Q34: What is the difference between ReAct and chain-of-thought?
-        </div>
-        <div class="answer">
-            <p><strong>Chain-of-Thought:</strong> Pure reasoning without external actions.</p>
-            <p><strong>ReAct (Reasoning + Acting):</strong> Interleaves reasoning with external tool use/actions.</p>
-            <p><strong>Process:</strong></p>
-            <ol>
-                <li>Reason about task</li>
-                <li>Take action (use tool)</li>
-                <li>Observe result</li>
-                <li>Repeat until done</li>
-            </ol>
-            <p><strong>Use case:</strong> Agents that need to interact with external systems (APIs, databases).</p>
-        </div>
-
-        <div class="question">
-            Q35: What is the difference between RAG and fine-tuning?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>RAG</th>
-                    <th>Fine-tuning</th>
-                </tr>
-                <tr>
-                    <td>Knowledge</td>
-                    <td>External retrieval</td>
-                    <td>Internal model weights</td>
-                </tr>
-                <tr>
-                    <td>Update</td>
-                    <td>Easy (update vector DB)</td>
-                    <td>Requires retraining</td>
-                </tr>
-                <tr>
-                    <td>Cost</td>
-                    <td>Lower</td>
-                    <td>Higher</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>Dynamic knowledge</td>
-                    <td>Domain-specific knowledge</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q36: What is the difference between dense retrieval and sparse retrieval?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Sparse Retrieval</th>
-                    <th>Dense Retrieval</th>
-                </tr>
-                <tr>
-                    <td>Representation</td>
-                    <td>TF-IDF, BM25</td>
-                    <td>Embeddings</td>
-                </tr>
-                <tr>
-                    <td>Matching</td>
-                    <td>Keyword matching</td>
-                    <td>Semantic similarity</td>
-                </tr>
-                <tr>
-                    <td>Interpretability</td>
-                    <td>High</td>
-                    <td>Low</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>Keyword search</td>
-                    <td>Semantic search</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q37: What is the difference between hybrid retrieval and dense retrieval?
-        </div>
-        <div class="answer">
-            <p><strong>Dense Retrieval:</strong> Uses embeddings for semantic similarity search.</p>
-            <p><strong>Hybrid Retrieval:</strong> Combines sparse (keyword) and dense (semantic) retrieval.</p>
-            <p><strong>Benefits of Hybrid:</strong></p>
-            <ul>
-                <li>Best of both worlds - keyword precision + semantic understanding</li>
-                <li>Handles rare terms better</li>
-                <li>More robust to different query types</li>
-            </ul>
-            <p><strong>Methods:</strong> Score fusion, reciprocal rank fusion (RRF).</p>
-        </div>
-
-        <div class="question">
-            Q38: What is the difference between FAISS and Pinecone?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>FAISS</th>
-                    <th>Pinecone</th>
-                </tr>
-                <tr>
-                    <td>Type</td>
-                    <td>Open-source library</td>
-                    <td>Managed service</td>
-                </tr>
-                <tr>
-                    <td>Deployment</td>
-                    <td>Self-hosted</td>
-                    <td>Cloud-hosted</td>
-                </tr>
-                <tr>
-                    <td>Scalability</td>
-                    <td>Manual scaling</td>
-                    <td>Auto-scaling</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>Research, custom deployment</td>
-                    <td>Production applications</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q39: What is the difference between HNSW and IVF in vector search?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>HNSW</th>
-                    <th>IVF</th>
-                </tr>
-                <tr>
-                    <td>Algorithm</td>
-                    <td>Graph-based (hierarchical)</td>
-                    <td>Clustering-based</td>
-                </tr>
-                <tr>
-                    <td>Accuracy</td>
-                    <td>Higher</td>
-                    <td>Lower</td>
-                </tr>
-                <tr>
-                    <td>Speed</td>
-                    <td>Faster</td>
-                    <td>Slower</td>
-                </tr>
-                <tr>
-                    <td>Memory</td>
-                    <td>Higher</td>
-                    <td>Lower</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q40: What is the difference between chunking strategies in RAG?
-        </div>
-        <div class="answer">
-            <p><strong>Fixed-size chunking:</strong> Split text into fixed-size chunks (e.g., 512 tokens). Simple but may break context.</p>
-            <p><strong>Semantic chunking:</strong> Split at semantic boundaries (paragraphs, sections). Better context preservation.</p>
-            <p><strong>Recursive chunking:</strong> Hierarchical chunking for different granularity levels.</p>
-            <p><strong>Use case:</strong> Semantic chunking generally performs better for RAG as it preserves context better.</p>
-        </div>
-
-        <div class="question">
-            Q41: What is the difference between LoRA and full fine-tuning?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>LoRA</th>
-                    <th>Full Fine-tuning</th>
-                </tr>
-                <tr>
-                    <td>Parameters</td>
-                    <td>Low-rank adapters (1-5% of params)</td>
-                    <td>All parameters</td>
-                </tr>
-                <tr>
-                    <td>Memory</td>
-                    <td>Low</td>
-                    <td>High</td>
-                </tr>
-                <tr>
-                    <td>Storage</td>
-                    <td>Small (adapter weights)</td>
-                    <td>Large (full model)</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>Resource-constrained fine-tuning</td>
-                    <td>Maximum performance</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q42: What is the difference between LoRA and QLoRA?
-        </div>
-        <div class="answer">
-            <p><strong>LoRA:</strong> Low-Rank Adaptation - adds trainable low-rank matrices to model.</p>
-            <p><strong>QLoRA:</strong> Quantized LoRA - combines LoRA with 4-bit quantization.</p>
-            <p><strong>Benefits of QLoRA:</strong></p>
-            <ul>
-                <li>Even lower memory requirements</li>
-                <li>Can fine-tune large models on single GPU</li>
-                <li>Maintains performance close to full fine-tuning</li>
-            </ul>
-            <p><strong>Use case:</strong> Fine-tuning very large models (70B+) with limited resources.</p>
-        </div>
-
-        <div class="question">
-            Q43: What is the difference between prefix tuning and LoRA?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Prefix Tuning</th>
-                    <th>LoRA</th>
-                </tr>
-                <tr>
-                    <td>Method</td>
-                    <td>Adds trainable prefix tokens</td>
-                    <td>Adds trainable low-rank matrices</td>
-                </tr>
-                <tr>
-                    <td>Parameters</td>
-                    <td>Very few</td>
-                    <td>Few (1-5%)</td>
-                </tr>
-                <tr>
-                    <td>Performance</td>
-                    <td>Lower</td>
-                    <td>Higher</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>Extremely resource-constrained</td>
-                    <td>General fine-tuning</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q44: What is the difference between P-tuning and prompt tuning?
-        </div>
-        <div class="answer">
-            <p><strong>Prompt Tuning:</strong> Adds trainable prompt embeddings at input layer.</p>
-            <p><strong>P-tuning:</strong> Uses LSTM to generate prompt embeddings (more flexible).</p>
-            <p><strong>P-tuning v2:</strong> Improved version with deep prompt tuning across all layers.</p>
-            <p><strong>Comparison:</strong> P-tuning v2 generally outperforms prompt tuning, especially for small models.</p>
-        </div>
-
-        <div class="question">
-            Q45: What is the difference between 4-bit and 8-bit quantization?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>4-bit</th>
-                    <th>8-bit</th>
-                </tr>
-                <tr>
-                    <td>Memory</td>
-                    <td>~25% of original</td>
-                    <td>~50% of original</td>
-                </tr>
-                <tr>
-                    <td>Performance</td>
-                    <td>More degradation</td>
-                    <td>Less degradation</td>
-                </tr>
-                <tr>
-                    <td>Speed</td>
-                    <td>Faster inference</td>
-                    <td>Faster inference</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>Extreme memory constraints</td>
-                    <td>Balance of performance and memory</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q46: What is the difference between GPTQ and AWQ quantization?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>GPTQ</th>
-                    <th>AWQ</th>
-                </tr>
-                <tr>
-                    <td>Method</td>
-                    <td>Optimal quantization</td>
-                    <td>Activation-aware quantization</td>
-                </tr>
-                <tr>
-                    <td>Performance</td>
-                    <td>Good</td>
-                    <td>Better (especially for small models)</td>
-                </tr>
-                <tr>
-                    <td>Speed</td>
-                    <td>Slower quantization</td>
-                    <td>Faster quantization</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>General quantization</td>
-                    <td>Small models, better performance</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q47: What is the difference between vLLM and TGI?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>vLLM</th>
-                    <th>TGI (Text Generation Inference)</th>
-                </tr>
-                <tr>
-                    <td>Developer</td>
-                    <td>vLLM team</td>
-                    <td>Hugging Face</td>
-                </tr>
-                <tr>
-                    <td>Key Feature</td>
-                    <td>PagedAttention</td>
-                    <td>Flash Attention, quantization</td>
-                </tr>
-                <tr>
-                    <td>Ecosystem</td>
-                    <td>Wider model support</td>
-                    <td>Hugging Face integration</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>High-throughput serving</td>
-                    <td>Production serving</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q48: What is the difference between PagedAttention and standard attention?
-        </div>
-        <div class="answer">
-            <p><strong>Standard Attention:</strong> Stores entire KV cache in memory, limits batch size and sequence length.</p>
-            <p><strong>PagedAttention:</strong> Pages KV cache like virtual memory, allows dynamic allocation.</p>
-            <p><strong>Benefits of PagedAttention:</strong></p>
-            <ul>
-                <li>Higher batch sizes</li>
-                <li>Longer sequences</li>
-                <li>Better memory utilization</li>
-                <li>Reduced memory fragmentation</li>
-            </ul>
-            <p><strong>Use case:</strong> vLLM for high-throughput LLM serving.</p>
-        </div>
-
-        <div class="question">
-            Q49: What is the difference between Flash Attention and standard attention?
-        </div>
-        <div class="answer">
-            <p><strong>Standard Attention:</strong> Materializes attention matrix, O(n²) memory and time complexity.</p>
-            <p><strong>Flash Attention:</strong> IO-aware exact attention, avoids materializing full matrix.</p>
-            <p><strong>Benefits of Flash Attention:</strong></p>
-            <ul>
-                <li>Linear memory complexity</li>
-                <li>Faster computation (2-4x)</li>
-                <li>Exact attention (no approximation)</li>
-            </ul>
-            <p><strong>Use case:</strong> Training and inference of long-context models.</p>
-        </div>
-
-        <div class="question">
-            Q50: What is the difference between speculative decoding and standard decoding?
-        </div>
-        <div class="answer">
-            <p><strong>Standard Decoding:</strong> Generate tokens one at a time sequentially.</p>
-            <p><strong>Speculative Decoding:</strong> Use small model to draft tokens, large model to verify in parallel.</p>
-            <p><strong>Benefits:</strong></p>
-            <ul>
-                <li>Faster generation (2-3x speedup)</li>
-                <li>Same quality as original model</li>
-                <li>No accuracy loss</li>
-            </ul>
-            <p><strong>Use case:</strong> High-throughput text generation serving.</p>
-        </div>
-
-        <div class="question">
-            Q51: What is the difference between beam search and greedy decoding?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>Greedy Decoding</th>
-                    <th>Beam Search</th>
-                </tr>
-                <tr>
-                    <td>Selection</td>
-                    <td>Highest probability token</td>
-                    <td>Top-k sequences</td>
-                </tr>
-                <tr>
-                    <td>Quality</td>
-                    <td>Lower</td>
-                    <td>Higher</td>
-                </tr>
-                <tr>
-                    <td>Speed</td>
-                    <td>Faster</td>
-                    <td>Slower</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>Fast generation</td>
-                    <td>High-quality generation</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q52: What is the difference between top-k and top-p sampling?
-        </div>
-        <div class="answer">
-            <p><strong>Top-k Sampling:</strong> Sample from top-k most likely tokens.</p>
-            <p><strong>Top-p (Nucleus) Sampling:</strong> Sample from smallest set of tokens with cumulative probability ≥ p.</p>
-            <p><strong>Comparison:</strong></p>
-            <ul>
-                <li>Top-k: Fixed number of candidates, simpler</li>
-                <li>Top-p: Dynamic number, adapts to distribution</li>
-            </ul>
-            <p><strong>Use case:</strong> Often used together (top-k + top-p) for better diversity.</p>
-        </div>
-
-        <div class="question">
-            Q53: What is the difference between temperature and top-p sampling?
-        </div>
-        <div class="answer">
-            <p><strong>Temperature:</strong> Controls randomness by scaling logits. Higher = more random, lower = more deterministic.</p>
-            <p><strong>Top-p:</strong> Controls diversity by limiting token set.</p>
-            <p><strong>Comparison:</strong></p>
-            <ul>
-                <li>Temperature: Affects probability distribution shape</li>
-                <li>Top-p: Affects which tokens are considered</li>
-            </ul>
-            <p><strong>Use case:</strong> Often used together for controlled generation.</p>
-        </div>
-
-        <div class="question">
-            Q54: What is the difference between repetition penalty and presence penalty?
-        </div>
-        <div class="answer">
-            <p><strong>Repetition Penalty:</strong> Penalizes repeated tokens (including consecutive and non-consecutive).</p>
-            <p><strong>Presence Penalty:</strong> Penalizes tokens that have already appeared (regardless of repetition).</p>
-            <p><strong>Use case:</strong></p>
-            <ul>
-                <li>Repetition penalty: Reduce word/phrase repetition</li>
-                <li>Presence penalty: Encourage topic diversity</li>
+                <li><strong>Self-Attention:</strong> Captures relationships between all tokens</li>
+                <li><strong>Multi-head Attention:</strong> Multiple attention heads</li>
+                <li><strong>Position Encoding:</strong> Adds positional information</li>
+                <li><strong>Feed-forward Networks:</strong> Non-linear transformations</li>
             </ul>
         </div>
 
         <div class="question">
-            Q55: What is the difference between LangChain and LlamaIndex?
+            Q10: What is self-attention?
         </div>
         <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>LangChain</th>
-                    <th>LlamaIndex</th>
-                </tr>
-                <tr>
-                    <td>Focus</td>
-                    <td>General-purpose LLM orchestration</td>
-                    <td>Data indexing and retrieval</td>
-                </tr>
-                <tr>
-                    <td>Strength</td>
-                    <td>Chains, agents, tools</td>
-                    <td>RAG, data connectors</td>
-                </tr>
-                <tr>
-                    <td>Ecosystem</td>
-                    <td>Larger, more general</td>
-                    <td>Specialized for data</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>Complex workflows</td>
-                    <td>Data-heavy applications</td>
-                </tr>
-            </table>
+            <p><strong>Self-Attention</strong> allows each token to attend to all other tokens in the sequence, computing weighted sums based on similarity scores.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">self_attention.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Self-attention mechanism</span>
+<span class="keyword">import</span> <span class="variable">torch</span>
+<span class="keyword">import</span> <span class="variable">torch.nn.functional</span> <span class="keyword">as</span> <span class="variable">F</span>
+
+<span class="keyword">def</span> <span class="method">self_attention</span>(<span class="variable">query</span>, <span class="variable">key</span>, <span class="variable">value</span>):
+    <span class="comment"># Q, K, V: (batch, seq_len, d_model)</span>
+    <span class="variable">scores</span> = <span class="variable">torch</span>.<span class="method">matmul</span>(<span class="variable">query</span>, <span class="variable">key</span>.<span class="method">transpose</span>(<span class="number">-2</span>, <span class="number">-1</span>))
+    <span class="variable">scores</span> = <span class="variable">scores</span> / <span class="variable">torch</span>.<span class="method">sqrt</span>(<span class="variable">torch</span>.<span class="method">tensor</span>(<span class="variable">key</span>.<span class="method">size</span>(<span class="number">-1</span>), <span class="variable">dtype</span>=<span class="variable">torch</span>.<span class="property">float32</span>))
+    <span class="variable">attention_weights</span> = <span class="variable">F</span>.<span class="method">softmax</span>(<span class="variable">scores</span>, <span class="variable">dim</span>=<span class="number">-1</span>)
+    <span class="variable">output</span> = <span class="variable">torch</span>.<span class="method">matmul</span>(<span class="variable">attention_weights</span>, <span class="variable">value</span>)
+    <span class="keyword">return</span> <span class="variable">output</span></code>
+                </div>
+            </div>
         </div>
 
         <div class="question">
-            Q56: What is the difference between AutoGPT and BabyAGI?
+            Q11: What is multi-head attention?
         </div>
         <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>AutoGPT</th>
-                    <th>BabyAGI</th>
-                </tr>
-                <tr>
-                    <td>Focus</td>
-                    <td>Autonomous task execution</td>
-                    <td>Task management and execution</td>
-                </tr>
-                <tr>
-                    <td>Approach</td>
-                    <td>Goal-oriented</td>
-                    <td>Task-oriented</td>
-                </tr>
-                <tr>
-                    <td>Complexity</td>
-                    <td>More complex</td>
-                    <td>Simpler</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>Autonomous agents</td>
-                    <td>Task automation</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="question">
-            Q57: What is the difference between function calling and tool use?
-        </div>
-        <div class="answer">
-            <p><strong>Function Calling:</strong> Structured way for LLM to call external functions (OpenAI format).</p>
-            <p><strong>Tool Use:</strong> General concept of LLM using external tools/APIs.</p>
-            <p><strong>Relationship:</strong> Function calling is a specific implementation of tool use.</p>
-            <p><strong>Benefits of Function Calling:</strong></p>
-            <ul>
-                <li>Structured output</li>
-                <li>Type safety</li>
-                <li>Better error handling</li>
-            </ul>
-        </div>
-
-        <div class="question">
-            Q58: What is the difference between agents and chains?
-        </div>
-        <div class="answer">
-            <p><strong>Chains:</strong> Fixed sequence of operations. Deterministic flow.</p>
-            <p><strong>Agents:</strong> Autonomous decision-making. Can choose which tools/actions to take.</p>
-            <p><strong>Comparison:</strong></p>
-            <ul>
-                <li>Chains: Simpler, predictable, less flexible</li>
-                <li>Agents: More complex, adaptive, can handle dynamic tasks</li>
-            </ul>
-            <p><strong>Use case:</strong> Chains for fixed workflows, agents for dynamic problem-solving.</p>
-        </div>
-
-        <div class="question">
-            Q59: What is the difference between ReAct agent and Plan-and-Solve agent?
-        </div>
-        <div class="answer">
-            <p><strong>ReAct Agent:</strong> Interleaves reasoning and actions iteratively.</p>
-            <p><strong>Plan-and-Solve Agent:</strong> Plans entire sequence first, then executes.</p>
-            <p><strong>Comparison:</strong></p>
-            <ul>
-                <li>ReAct: More flexible, can adapt during execution</li>
-                <li>Plan-and-Solve: More efficient for known tasks, less adaptive</li>
-            </ul>
-            <p><strong>Use case:</strong> ReAct for exploration, Plan-and-Solve for structured tasks.</p>
-        </div>
-
-        <div class="question">
-            Q60: What is the difference between OpenAI function calling and Anthropic tool use?
-        </div>
-        <div class="answer">
-            <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>OpenAI</th>
-                    <th>Anthropic</th>
-                </tr>
-                <tr>
-                    <td>Format</td>
-                    <td>Function calling</td>
-                    <td>Tool use</td>
-                </tr>
-                <tr>
-                    <td>Parallel</td>
-                    <td>Multiple functions</td>
-                    <td>Multiple tools</td>
-                </tr>
-                <tr>
-                    <td>Control</td>
-                    <td>Developer controls</td>
-                    <td>Model controls</td>
-                </tr>
-                <tr>
-                    <td>Use case</td>
-                    <td>Structured output</td>
-                    <td>Flexible tool interaction</td>
-                </tr>
-            </table>
-        </div>
+            <p><strong>Multi-head Attention</strong> runs multiple self-attention operations in parallel, each learning different aspects of relationships. The outputs are concatenated and linearly transformed.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">multi_head_attention.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Multi-head attention</span>
+<span class="keyword">class</span> <span class="type">MultiHeadAttention</span>(<span class="type">nn.Module</span>):
+    <span class="keyword">def</span> <span class="method">__init__</span>(<span class="variable">self</span>, <span class="variable">d_model</span>, <span class="variable">num_heads</span>):
+        <span class="keyword">super</span>().<span class="method">__init__</span>()
+        <span class="variable">self</span>.<span class="property">num_heads</span> = <span class="variable">num_heads</span>
+        <span class="variable">self</span>.<span class="property">d_model</span> = <span class="variable">d_model</span>
+        <span class="variable">self</span>.<span class="property">d_k</span> = <span class="variable">d_model</span> // <span class="variable">num_heads</span>
         
+        <span class="variable">self</span>.<span class="property">W_q</span> = <span class="variable">nn</span>.<span class="type">Linear</span>(<span class="variable">d_model</span>, <span class="variable">d_model</span>)
+        <span class="variable">self</span>.<span class="property">W_k</span> = <span class="variable">nn</span>.<span class="type">Linear</span>(<span class="variable">d_model</span>, <span class="variable">d_model</span>)
+        <span class="variable">self</span>.<span class="property">W_v</span> = <span class="variable">nn</span>.<span class="type">Linear</span>(<span class="variable">d_model</span>, <span class="variable">d_model</span>)
+        <span class="variable">self</span>.<span class="property">W_o</span> = <span class="variable">nn</span>.<span class="type">Linear</span>(<span class="variable">d_model</span>, <span class="variable">d_model</span>)</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q12: What is position encoding?
+        </div>
+        <div class="answer">
+            <p><strong>Position Encoding</strong> adds positional information to tokens since transformers process all positions in parallel. It can be sinusoidal (fixed) or learned embeddings.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">positional_encoding.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Sinusoidal position encoding</span>
+<span class="keyword">import</span> <span class="variable">math</span>
+
+<span class="keyword">def</span> <span class="method">positional_encoding</span>(<span class="variable">seq_len</span>, <span class="variable">d_model</span>):
+    <span class="variable">pe</span> = <span class="variable">torch</span>.<span class="method">zeros</span>(<span class="variable">seq_len</span>, <span class="variable">d_model</span>)
+    <span class="variable">position</span> = <span class="variable">torch</span>.<span class="method">arange</span>(<span class="number">0</span>, <span class="variable">seq_len</span>).<span class="method">unsqueeze</span>(<span class="number">1</span>).<span class="method">float</span>()
+    <span class="variable">div_term</span> = <span class="variable">torch</span>.<span class="method">exp</span>(<span class="variable">torch</span>.<span class="method">arange</span>(<span class="number">0</span>, <span class="variable">d_model</span>, <span class="number">2</span>).<span class="method">float</span>() * 
+                         -(<span class="variable">math</span>.<span class="method">log</span>(<span class="number">10000.0</span>) / <span class="variable">d_model</span>))
+    
+    <span class="variable">pe</span>[:, <span class="number">0</span>::<span class="number">2</span>] = <span class="variable">torch</span>.<span class="method">sin</span>(<span class="variable">position</span> * <span class="variable">div_term</span>)
+    <span class="variable">pe</span>[:, <span class="number">1</span>::<span class="number">2</span>] = <span class="variable">torch</span>.<span class="method">cos</span>(<span class="variable">position</span> * <span class="variable">div_term</span>)
+    <span class="keyword">return</span> <span class="variable">pe</span></code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q13: What is the difference between encoder and decoder in transformers?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Encoder</th>
+                    <th>Decoder</th>
+                </tr>
+                <tr>
+                    <td><strong>Attention</strong></td>
+                    <td>Self-attention (bidirectional)</td>
+                    <td>Masked self-attention (unidirectional)</td>
+                </tr>
+                <tr>
+                    <td><strong>Cross-attention</th>
+                    <td>None</td>
+                    <td>Attends to encoder output</td>
+                </tr>
+                <tr>
+                    <td><strong>Use Case</th>
+                    <td>Understanding</td>
+                    <td>Generation</td>
+                </tr>
+            </table>
+        </div>
+
+        <h2>3. Training and Fine-tuning</h2>
+
+        <div class="question">
+            Q14: What is pre-training?
+        </div>
+        <div class="answer">
+            <p><strong>Pre-training</strong> is the initial training phase where a model learns from large, unlabeled datasets. For LLMs, this involves next-token prediction or masked language modeling on massive text corpora.</p>
+        </div>
+
+        <div class="question">
+            Q15: What is fine-tuning?
+        </div>
+        <div class="answer">
+            <p><strong>Fine-tuning</strong> is the process of adapting a pre-trained model to a specific task or domain by training on a smaller, task-specific dataset.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">finetuning.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># Fine-tuning with Hugging Face</code>
+<span class="keyword">from</span> <span class="variable">transformers</span> <span class="keyword">import</span> <span class="type">AutoModelForCausalLM</span>, <span class="type">AutoTokenizer</span>, <span class="type">TrainingArguments</span>, <span class="type">Trainer</span>
+
+<span class="variable">model</span> = <span class="type">AutoModelForCausalLM</span>.<span class="method">from_pretrained</span>(<span class="string">"gpt2"</span>)
+<span class="variable">tokenizer</span> = <span class="type">AutoTokenizer</span>.<span class="method">from_pretrained</span>(<span class="string">"gpt2"</span>)
+
+<span class="variable">training_args</span> = <span class="type">TrainingArguments</span>(
+    <span class="variable">output_dir</span>=<span class="string">"./results"</span>,
+    <span class="variable">num_train_epochs</span>=<span class="number">3</span>,
+    <span class="variable">per_device_train_batch_size</span>=<span class="number">4</span>
+)
+
+<span class="variable">trainer</span> = <span class="type">Trainer</span>(<span class="variable">model</span>=<span class="variable">model</span>, <span class="variable">args</span>=<span class="variable">training_args</span>, <span class="variable">train_dataset</span>=<span class="variable">dataset</span>)
+<span class="variable">trainer</span>.<span class="method">train</span>()</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q16: What is instruction tuning?
+        </div>
+        <div class="answer">
+            <p><strong>Instruction Tuning</strong> fine-tunes models on instruction-response pairs to improve their ability to follow natural language instructions. It's crucial for building helpful AI assistants.</p>
+        </div>
+
+        <div class="question">
+            Q17: What is RLHF?
+        </div>
+        <div class="answer">
+            <p><strong>Reinforcement Learning from Human Feedback (RLHF)</strong> uses human preferences to align model outputs with human values. It involves training a reward model from human feedback and using it to optimize the LLM.</p>
+            
+            <h3>RLHF Steps:</h3>
+            <ol>
+                <li>Collect human comparisons of model outputs</li>
+                <li>Train a reward model to predict human preferences</li>
+                <li>Use PPO to optimize the LLM with the reward model</li>
+            </ol>
+        </div>
+
+        <div class="question">
+            Q18: What is LoRA?
+        </div>
+        <div class="answer">
+            <p><strong>LoRA (Low-Rank Adaptation)</strong> is a parameter-efficient fine-tuning method that adds trainable low-rank matrices to existing weights, reducing the number of trainable parameters significantly.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">lora.py</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment"># LoRA with PEFT</span>
+<span class="keyword">from</span> <span class="variable">peft</span> <span class="keyword">import</span> <span class="type">LoraConfig</span>, <span class="method">get_peft_model</span>
+
+<span class="variable">lora_config</span> = <span class="type">LoraConfig</span>(
+    <span class="variable">r</span>=<span class="number">8</span>,
+    <span class="variable">lora_alpha</span>=<span class="number">32</span>,
+    <span class="variable">target_modules</span>=[<span class="string">"q_proj"</span>, <span class="string">"v_proj"</span>],
+    <span class="variable">lora_dropout</span>=<span class="number">0.05</span>
+)
+
+<span class="variable">model</span> = <span class="method">get_peft_model</span>(<span class="variable">model</span>, <span class="variable">lora_config</span>)
+<span class="variable">model</span>.<span class="method">print_trainable_parameters</span>()</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q19: What is the difference between full fine-tuning and PEFT?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Full Fine-tuning</th>
+                    <th>PEFT</th>
+                </tr>
+                <tr>
+                    <td><strong>Parameters</strong></td>
+                    <td>All parameters trainable</td>
+                    <td>Small subset trainable</td>
+                </tr>
+                <tr>
+                    <td><strong>Memory</th>
+                    <td>High</td>
+                    <td>Low</td>
+                </tr>
+                <tr>
+                    <td><strong>Storage</th>
+                    <td>Full model per task</td>
+                    <td>Small adapters per task</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q20: What is quantization?
+        </div>
+        <div class="answer">
+            <p><strong>Quantization</strong> reduces model size and memory usage by using lower precision (e.g., 8-bit instead of 32-bit) for weights and activations. It enables running large models on consumer hardware.</p>
+            
+            <div class="code-block"><pre><code># Quantization with bitsandbytes
+from transformers import BitsAndBytesConfig
+
+quantization_config = BitsAndBytesConfig(
+    load_in_8bit=True,
+    bnb_8bit_compute_dtype=torch.float16
+)
+
+model = AutoModelForCausalLM.from_pretrained(
+    "model_name",
+    quantization_config=quantization_config
+)</code></pre></div>
+        </div>
+
+        <h2>4. Prompt Engineering</h2>
+
+        <div class="question">
+            Q21: What is prompt engineering?
+        </div>
+        <div class="answer">
+            <p><strong>Prompt Engineering</strong> is the art of crafting effective prompts to elicit desired outputs from language models. It involves techniques like few-shot learning, chain-of-thought, and role-playing.</p>
+        </div>
+
+        <div class="question">
+            Q22: What is zero-shot learning?
+        </div>
+        <div class="answer">
+            <p><strong>Zero-shot Learning</strong> prompts the model to perform a task without providing any examples in the prompt. The model relies on its pre-training knowledge.</p>
+            
+            <div class="code-block"><pre><code># Zero-shot example
+prompt = "Classify the sentiment: 'I love this product!'"
+response = model.generate(prompt)</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q23: What is few-shot learning?
+        </div>
+        <div class="answer">
+            <p><strong>Few-shot Learning</strong> provides a few examples in the prompt to guide the model's behavior. It's more effective than zero-shot for complex tasks.</p>
+            
+            <div class="code-block"><pre><code># Few-shot example
+prompt = """
+Classify sentiment:
+"I hate this" -> Negative
+"I love this" -> Positive
+"This is okay" -> Neutral
+"This product is amazing" -> 
+"""</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q24: What is chain-of-thought prompting?
+        </div>
+        <div class="answer">
+            <p><strong>Chain-of-Thought (CoT)</strong> prompting encourages the model to show its reasoning process step-by-step, improving performance on complex reasoning tasks.</p>
+            
+            <div class="code-block"><pre><code># Chain-of-thought example
+prompt = """
+Solve: 23 * 17
+Let's think step by step:
+23 * 17 = 23 * (10 + 7)
+= 23 * 10 + 23 * 7
+= 230 + 161
+= 391
+"""</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q25: What is role prompting?
+        </div>
+        <div class="answer">
+            <p><strong>Role Prompting</strong> assigns a specific role or persona to the model, which influences its response style and content. Examples include "You are a helpful assistant" or "You are a Python expert."</p>
+        </div>
+
+        <div class="question">
+            Q26: What is temperature in LLM generation?
+        </div>
+        <div class="answer">
+            <p><strong>Temperature</strong> controls the randomness of generation. Lower temperature (0.1-0.3) produces more deterministic outputs, while higher temperature (0.7-1.0) produces more diverse and creative outputs.</p>
+            
+            <div class="code-block"><pre><code># Temperature control
+response = model.generate(
+    prompt,
+    temperature=0.7,
+    max_tokens=100
+)</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q27: What is top-p sampling?
+        </div>
+        <div class="answer">
+            <p><strong>Top-p (Nucleus) Sampling</strong> samples from the smallest set of tokens whose cumulative probability exceeds a threshold p. It balances quality and diversity better than pure sampling.</p>
+            
+            <div class="code-block"><pre><code># Top-p sampling
+response = model.generate(
+    prompt,
+    top_p=0.9,
+    do_sample=True
+)</code></pre></div>
+        </div>
+
+        <h2>5. RAG and Retrieval</h2>
+
+        <div class="question">
+            Q28: What is RAG?
+        </div>
+        <div class="answer">
+            <p><strong>Retrieval-Augmented Generation (RAG)</strong> combines retrieval of relevant documents with generation. It retrieves context from a knowledge base and uses it to generate more accurate and factual responses.</p>
+            
+            <h3>RAG Benefits:</h3>
+            <ul>
+                <li><strong>Accuracy:</strong> Reduces hallucinations</li>
+                <li><strong>Up-to-date:</strong> Can access current information</li>
+                <li><strong>Explainable:</strong> Sources can be cited</li>
+                <li><strong>Domain-specific:</strong> Can use custom knowledge bases</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q29: What is vector embedding?
+        </div>
+        <div class="answer">
+            <p><strong>Vector Embedding</strong> represents text, images, or other data as dense vectors in a high-dimensional space. Similar items have similar embeddings, enabling semantic search.</p>
+            
+            <div class="code-block"><pre><code># Text embedding with sentence-transformers
+from sentence_transformers import SentenceTransformer
+
+model = SentenceTransformer('all-MiniLM-L6-v2')
+embeddings = model.encode(["Hello world", "Hi there"])
+similarity = model.similarity(embeddings[0], embeddings[1])</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q30: What is a vector database?
+        </div>
+        <div class="answer">
+            <p><strong>Vector Database</strong> stores and indexes vector embeddings for efficient similarity search. Examples include Pinecone, Weaviate, Chroma, and FAISS.</p>
+            
+            <div class="code-block"><pre><code># Chroma vector database
+import chromadb
+
+client = chromadb.Client()
+collection = client.create_collection("documents")
+
+collection.add(
+    documents=["Hello world", "Hi there"],
+    embeddings=[[0.1, 0.2], [0.3, 0.4]],
+    ids=["doc1", "doc2"]
+)
+
+results = collection.query(
+    query_embeddings=[[0.15, 0.25]],
+    n_results=1
+)</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q31: What is semantic search?
+        </div>
+        <div class="answer">
+            <p><strong>Semantic Search</strong> finds documents based on meaning rather than keyword matching. It uses vector embeddings to measure semantic similarity between queries and documents.</p>
+        </div>
+
+        <div class="question">
+            Q32: What is the difference between keyword search and semantic search?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Keyword Search</th>
+                    <th>Semantic Search</th>
+                </tr>
+                <tr>
+                    <td><strong>Matching</strong></td>
+                    <td>Exact word matches</td>
+                    <td>Meaning similarity</td>
+                </tr>
+                <tr>
+                    <td><strong>Flexibility</th>
+                    <td>Rigid</td>
+                    <td>Flexible</td>
+                </tr>
+                <tr>
+                    <td><strong>Understanding</th>
+                    <td>Synonyms not recognized</td>
+                    <td>Understands context</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q33: What is chunking in RAG?
+        </div>
+        <div class="answer">
+            <p><strong>Chunking</strong> splits large documents into smaller pieces for embedding and retrieval. Good chunking balances context preservation with retrieval precision.</p>
+            
+            <div class="code-block"><pre><code># Text chunking
+def chunk_text(text, chunk_size=500, overlap=50):
+    chunks = []
+    for i in range(0, len(text), chunk_size - overlap):
+        chunk = text[i:i + chunk_size]
+        chunks.append(chunk)
+    return chunks</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q34: What is reranking in RAG?
+        </div>
+        <div class="answer">
+            <p><strong>Reranking</strong> refines initial retrieval results by scoring retrieved documents more precisely, often using cross-encoders or more sophisticated models to improve relevance.</p>
+        </div>
+
+        <h2>6. GenAI Applications</h2>
+
+        <div class="question">
+            Q35: What are common GenAI applications?
+        </div>
+        <div class="answer">
+            <h3>GenAI Applications:</h3>
+            <ul>
+                <li><strong>Content Creation:</strong> Writing, coding, image generation</li>
+                <li><strong>Customer Service:</strong> Chatbots, virtual assistants</li>
+                <li><strong>Education:</strong> Tutoring, explanation generation</li>
+                <li><strong>Healthcare:</strong> Medical report generation, diagnosis assistance</li>
+                <li><strong>Finance:</strong> Report generation, analysis</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q36: What is text generation?
+        </div>
+        <div class="answer">
+            <p><strong>Text Generation</strong> creates coherent text based on a prompt. Applications include article writing, story generation, code generation, and summarization.</p>
+            
+            <div class="code-block"><pre><code># Text generation with Hugging Face
+from transformers import pipeline
+
+generator = pipeline("text-generation", model="gpt2")
+output = generator("Once upon a time", max_length=100)</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q37: What is image generation?
+        </div>
+        <div class="answer">
+            <p><strong>Image Generation</strong> creates images from text descriptions using diffusion models like Stable Diffusion or DALL-E.</p>
+            
+            <div class="code-block"><pre><code># Image generation with Stable Diffusion
+from diffusers import StableDiffusionPipeline
+
+pipe = StableDiffusionPipeline.from_pretrained(
+    "runwayml/stable-diffusion-v1-5"
+)
+image = pipe("A beautiful sunset over mountains").images[0]</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q38: What is code generation?
+        </div>
+        <div class="answer">
+            <p><strong>Code Generation</strong> creates code from natural language descriptions. Models like GitHub Copilot and CodeLlama are trained on vast code repositories.</p>
+            
+            <div class="code-block"><pre><code># Code generation
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model = AutoModelForCausalLM.from_pretrained("bigcode/santacoder")
+prompt = "def fibonacci(n):"
+output = model.generate(prompt, max_tokens=100)</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q39: What is summarization?
+        </div>
+        <div class="answer">
+            <p><strong>Summarization</strong> condenses long documents into concise summaries while preserving key information. It can be extractive (selecting sentences) or abstractive (generating new text).</p>
+            
+            <div class="code-block"><pre><code># Summarization
+summarizer = pipeline("summarization")
+summary = summarizer(long_text, max_length=100)</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q40: What is translation?
+        </div>
+        <div class="answer">
+            <p><strong>Translation</strong> converts text from one language to another. Modern translation uses sequence-to-sequence models like T5 or mBART.</p>
+            
+            <div class="code-block"><pre><code># Translation
+translator = pipeline("translation", model="Helsinki-NLP/opus-mt-en-fr")
+result = translator("Hello world", src_lang="en", tgt_lang="fr")</code></pre></div>
+        </div>
+
+        <h2>7. GenAI Ethics and Safety</h2>
+
+        <div class="question">
+            Q41: What is hallucination in LLMs?
+        </div>
+        <div class="answer">
+            <p><strong>Hallucination</strong> occurs when LLMs generate plausible but factually incorrect information. It's a significant challenge for reliable AI systems.</p>
+            
+            <h3>Mitigation Strategies:</h3>
+            <ul>
+                <li><strong>RAG:</strong> Provide relevant context</li>
+                <li><strong>Few-shot:</strong> Provide accurate examples</li>
+                <li><strong>Fact-checking:</strong> Verify outputs</li>
+                <li><strong>Temperature:</strong> Use lower temperature</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q42: What is AI alignment?
+        </div>
+        <div class="answer">
+            <p><strong>AI Alignment</strong> ensures AI systems behave in accordance with human values and intentions. It's crucial for safe and beneficial AI development.</p>
+        </div>
+
+        <div class="question">
+            Q43: What is content moderation?
+        </div>
+        <div class="answer">
+            <p><strong>Content Moderation</strong> filters harmful content from AI outputs. It involves detecting and blocking hate speech, violence, self-harm, and other inappropriate content.</p>
+            
+            <div class="code-block"><pre><code># Content moderation with OpenAI
+from openai import Moderation
+
+moderation = Moderation()
+result = moderation.create(input="Your text here")
+if result.results[0].flagged:
+    print("Content flagged as inappropriate")</code></pre></div>
+        </div>
+
+        <div class="question">
+            Q44: What is data privacy in GenAI?
+        </div>
+        <div class="answer">
+            <p><strong>Data Privacy</strong> in GenAI involves protecting sensitive information in training data and outputs. Techniques include differential privacy, data anonymization, and secure training environments.</p>
+        </div>
+
+        <div class="question">
+            Q45: What is bias in GenAI?
+        </div>
+        <div class="answer">
+            <p><strong>Bias in GenAI</strong> occurs when models reflect and amplify biases present in training data. It can lead to unfair or discriminatory outputs.</p>
+            
+            <h3>Bias Mitigation:</h3>
+            <ul>
+                <li><strong>Diverse Training Data:</strong> Ensure representation</li>
+                <li><strong>Fairness Metrics:</strong> Measure and monitor bias</li>
+                <li><strong>Debiasing Techniques:</strong> Algorithmic interventions</li>
+                <li><strong>Human Review:</strong> Regular audits</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q46: What is responsible AI?
+        </div>
+        <div class="answer">
+            <p><strong>Responsible AI</strong> is an approach to AI development that considers ethical, social, and environmental impacts. It includes fairness, transparency, accountability, and privacy.</p>
+        </div>
+
+        <h2>8. Advanced Topics</h2>
+
+        <div class="question">
+            Q47: What is multimodal AI?
+        </div>
+        <div class="answer">
+            <p><strong>Multimodal AI</strong> processes and generates multiple types of data including text, images, audio, and video. Examples include GPT-4V, Gemini, and CLIP.</p>
+        </div>
+
+        <div class="question">
+            Q48: What is agent-based AI?
+        </div>
+        <div class="answer">
+            <p><strong>Agent-based AI</strong> uses autonomous agents that can perceive, reason, and act in environments. Agents can use tools, plan, and execute complex tasks autonomously.</p>
+        </div>
+
+        <div class="question">
+            Q49: What is the future of Generative AI?
+        </div>
+        <div class="answer">
+            <h3>Future Trends:</h3>
+            <ul>
+                <li><strong>More Capable Models:</strong> Larger, smarter models</li>
+                <li><strong>Better Efficiency:</strong> Smaller, faster models</li>
+                <li><strong>Specialized Models:</strong> Domain-specific AI</li>
+                <li><strong>Agent Systems:</strong> Autonomous AI agents</li>
+                <li><strong>Integration:</strong> AI in everyday applications</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q50: How to get started with Generative AI?
+        </div>
+        <div class="answer">
+            <h3>Getting Started:</h3>
+            <ol>
+                <li><strong>Learn Basics:</strong> Python, ML fundamentals</li>
+                <li><strong>Study Transformers:</strong> Attention mechanism</li>
+                <li><strong>Use APIs:</strong> OpenAI, Anthropic, Hugging Face</li>
+                <li><strong>Experiment:</strong> Build small projects</li>
+                <li><strong>Stay Updated:</strong> Follow research and blogs</li>
+                <li><strong>Join Community:</strong> Forums, Discord, Twitter</li>
+            </ol>
+        </div>
+
         <div class="footer">
             <p><span class="highlight">🎯 Ready for Your Generative AI Interview?</span></p>
-            <p>Master these 60 comprehensive Generative AI interview questions covering LLMs, transformers, prompt engineering, RAG, fine-tuning, and AI safety. GenAI is revolutionizing content creation and automation - understanding GenAI deeply will make you a better AI engineer and researcher.</p>
-            <p><span class="highlight">💡 Tip:</span> Focus on understanding transformer architecture, attention mechanisms, RAG systems, fine-tuning techniques (LoRA, QLoRA), and prompt engineering strategies. These are the areas where most GenAI interview questions focus. Practice building RAG systems and fine-tuning models with tools like Hugging Face Transformers, LangChain, and vLLM.</p>
+            <p>Master these 50 comprehensive Generative AI interview questions covering fundamentals, LLMs, transformers, training, prompt engineering, RAG, applications, and ethics. GenAI is a rapidly evolving field - understanding these concepts deeply will make you a better AI engineer and researcher.</p>
+            <p><span class="highlight">💡 Tip:</span> Focus on understanding transformer architecture, attention mechanisms, and practical techniques like RAG, fine-tuning, and prompt engineering. Be prepared to discuss current models (GPT, Claude, LLaMA) and their differences. Hands-on experience with Hugging Face and building RAG applications is highly valuable.</p>
         </div>
     </div>
 </body>

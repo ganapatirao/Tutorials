@@ -3,448 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Patterns Interview Questions</title>
+    <title>Design Patterns Interview Guide</title>
     <style>
-
-
-        @import url('https://fonts.googleapis.com/css2family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.7; color: #1a1a2e; background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%); background-size: 400% 400%; animation: gradientShift 20s ease infinite; min-height: 100vh; padding: 15px 15px; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .container { max-width: 1100px; margin: 0 auto; padding: 35px 40px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px); border-radius: 24px; box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3); }
+        .back-button { display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 30px; font-weight: 700; margin-bottom: 20px; }
+        h1 { color: #1a1a2e; font-size: 48px; font-weight: 800; text-align: center; margin-bottom: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { text-align: center; font-size: 17px; color: #4a4a68; margin-bottom: 30px; }
+        h2 { color: white; font-size: 24px; font-weight: 700; margin-top: 25px; margin-bottom: 15px; padding: 12px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; }
+        .question { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 20px; border-radius: 10px; margin: 14px 0 8px 0; font-weight: 600; font-size: 16px; }
+        .answer { background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%); padding: 18px 24px; border-radius: 10px; margin: 8px 0 14px 0; border-left: 5px solid #764ba2; }
+        .answer p { margin-bottom: 10px; color: #1a1a2e; }
+        .answer strong { color: #667eea; }
+        .answer ul { padding-left: 20px; margin-bottom: 10px; }
+        .answer h3 { color: #667eea; font-size: 18px; margin-top: 15px; margin-bottom: 10px; }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.7;
-            color: #1a1a2e;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #667eea 75%, #764ba2 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 20s ease infinite;
-            min-height: 100vh;
-            padding: 25px 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.2) 0%, transparent 50%);
-            animation: particleFloat 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 50px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(30px);
-            border-radius: 32px;
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            position: relative;
+        .code-editor {
+            background: #1e1e1e;
+            border-radius: 12px;
+            margin: 15px 0;
             overflow: hidden;
-            z-index: 1;
-            animation: containerFloat 6s ease-in-out infinite;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3e3e42;
         }
         
-        @keyframes containerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #764ba2 60%, 
-                #667eea 80%, 
-                #764ba2 100%);
-            background-size: 300% 100%;
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-        
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: orbFloat 8s ease-in-out infinite;
-        }
-        
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
-        }
-        
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 
-                0 8px 25px rgba(102, 126, 234, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-            animation: slideDown 0.8s ease;
-        }
-        
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-button:hover::before {
-            left: 100%;
-        }
-        
-        .back-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
-        }
-        
-        .back-button svg {
-            width: 22px;
-            height: 22px;
-            transition: transform 0.3s ease;
-        }
-        
-        .back-button:hover svg {
-            transform: translateX(-5px);
-        }
-        
-        h1 {
-            color: #1a1a2e;
-            font-size: 52px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 35px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-            animation: titleGlow 3s ease-in-out infinite, fadeIn 1s ease 0.2s both;
-        }
-        
-        @keyframes titleGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 140px;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #764ba2, #667eea);
-            background-size: 200% 100%;
-            border-radius: 3px;
-            animation: lineGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes lineGlow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .subtitle {
-            text-align: center;
-            font-size: 18px;
-            color: #4a4a68;
-            margin-bottom: 40px;
-            font-weight: 500;
-            animation: fadeIn 1s ease 0.4s both;
-        }
-        
-        h2 {
-            color: #1a1a2e;
-            font-size: 32px;
-            font-weight: 700;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 28px 35px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 8px solid #667eea;
-            border-radius: 0 20px 20px 0;
-            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.2);
+        .code-editor-header {
+            background: #2d2d2d;
+            padding: 10px 14px;
             display: flex;
             align-items: center;
-            gap: 18px;
-            animation: slideIn 0.6s ease both;
+            justify-content: space-between;
+            gap: 8px;
+            border-bottom: 1px solid #3e3e42;
         }
         
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+        .code-editor-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        h2::before {
-            content: '';
-            width: 5px;
-            height: 45px;
-            background: linear-gradient(180deg, #764ba2, #f093fb);
-            border-radius: 3px;
+        .code-editor-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
         }
         
-        h3 {
-            color: #1a1a2e;
-            font-size: 26px;
-            font-weight: 600;
-            margin-top: 35px;
-            margin-bottom: 20px;
-            padding-left: 25px;
-            border-left: 6px solid #764ba2;
-            animation: fadeIn 0.5s ease both;
+        .code-editor-dot.red { background: #ff5f56; }
+        .code-editor-dot.yellow { background: #ffbd2e; }
+        .code-editor-dot.green { background: #27ca40; }
+        
+        .code-editor-title {
+            color: #9cdcfe;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            margin-left: 12px;
         }
         
-        .chapter {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 40px;
-            margin: 35px 0;
-            border-radius: 20px;
-            border-left: 8px solid #28a745;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideUp 0.6s ease both;
+        .copy-button {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .copy-button:hover {
+            background: #4e4e52;
+            color: #ffffff;
         }
         
-        .chapter:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+        .copy-button.copied {
+            background: #27ca40;
+            color: #ffffff;
         }
         
-        .code-block {
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            color: #e0e0e0;
-            padding: 45px;
-            border-radius: 20px;
+        .language-selector {
+            background: #3e3e42;
+            color: #d4d4d4;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            margin-left: 8px;
+        }
+        
+        .language-selector:hover {
+            background: #4e4e52;
+            color: #ffffff;
+        }
+        
+        .code-editor-content {
+            padding: 16px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #d4d4d4;
             overflow-x: auto;
-            overflow-y: auto;
-            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
-            font-size: 15px;
-            margin: 35px 0;
-            line-height: 1.8;
-            border-left: 8px solid #dd0031;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            max-width: 100%;
-            animation: codeAppear 0.5s ease both;
+            background: #1e1e1e;
         }
         
-        @keyframes codeAppear {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
+        .code-editor-content code {
+            display: block;
+            white-space: pre;
         }
         
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-x: auto;
-        }
-        
+        .keyword { color: #569cd6; }
+        .type { color: #4ec9b0; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; font-style: italic; }
+        .number { color: #b5cea8; }
+        .method { color: #dcdcaa; }
+        .property { color: #9cdcfe; }
+        .variable { color: #9cdcfe; }
+        .operator { color: #d4d4d4; }
+        .decorator { color: #c586c0; }
         
         .toc {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 35px 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border-left: 8px solid #667eea;
+            padding: 25px 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+            border-left: 6px solid #667eea;
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
-            animation: slideUp 0.6s ease both;
         }
-        
-        .toc h3 {
-            color: #1a1a2e;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .toc ol {
-            padding-left: 25px;
-            color: #4a4a68;
-            line-height: 2;
-        }
-        
-        .toc ol li {
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .question {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            margin: 25px 0 15px 0;
-            font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            animation: slideIn 0.5s ease both;
-        }
-        
-        .answer {
-            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-            padding: 30px 35px;
-            border-radius: 15px;
-            margin: 15px 0 25px 0;
-            border-left: 6px solid #764ba2;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            animation: slideUp 0.5s ease both;
-        }
-        
-        .answer p {
-            margin-bottom: 15px;
-            color: #1a1a2e;
-            line-height: 1.8;
-        }
-        
-        .answer h3 {
-            color: #667eea;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            padding-left: 0;
-            border-left: none;
-        }
-        
-        .answer ul, .answer ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
-            color: #4a4a68;
-            line-height: 1.8;
-        }
-        
-        .answer ul li, .answer ol li {
-            margin-bottom: 8px;
-        }
-        
-        .answer strong {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .page-break {
-            page-break-after: always;
-            margin: 60px 0;
-            border-top: 2px dashed #e0e0e0;
-            padding-top: 40px;
-        }
-        
-        .important {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #ffc107;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
-        }
-        
-        .important strong {
-            color: #856404;
-        }
-        
-        .tip {
-            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 6px solid #17a2b8;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
-        }
-        
-        .tip strong {
-            color: #0c5460;
-        }
+        .toc h3 { color: #1a1a2e; font-size: 22px; font-weight: 700; margin-bottom: 15px; }
+        .toc ol { padding-left: 22px; color: #4a4a68; line-height: 1.8; }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
+            margin: 18px 0;
             background: white;
             border-radius: 12px;
             overflow: hidden;
@@ -454,14 +155,14 @@
         th {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 15px;
+            padding: 12px;
             text-align: left;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14px;
         }
         
         td {
-            padding: 15px;
+            padding: 12px;
             border-bottom: 1px solid #e9ecef;
             color: #4a4a68;
         }
@@ -474,378 +175,2080 @@
             background: #f8f9fa;
         }
         
-        p {
-            color: #1a1a2e;
-            line-height: 1.8;
-            margin-bottom: 15px;
+        .footer {
+            text-align: center;
+            margin-top: 35px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 50%, rgba(240, 147, 251, 0.12) 100%);
+            border-radius: 16px;
         }
         
-        ul, ol {
-            padding-left: 25px;
-            margin-bottom: 15px;
+        .footer p {
+            margin-bottom: 10px;
             color: #4a4a68;
-            line-height: 1.8;
         }
         
-        ul li, ol li {
-            margin-bottom: 8px;
+        .footer .highlight {
+            color: #667eea;
+            font-weight: 600;
         }
         
-                
         @media (max-width: 768px) {
-            body {
-                padding: 15px 10px;
-            }
-            
-            .container {
-                padding: 30px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 36px;
-                letter-spacing: -1px;
-                padding-bottom: 25px;
-            }
-            
-            h1::after {
-                width: 100px;
-                height: 4px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-                padding: 0 10px;
-            }
-            
-            h2 {
-                font-size: 24px;
-                padding: 20px 25px;
-                margin-top: 35px;
-                margin-bottom: 20px;
-            }
-            
-            h3 {
-                font-size: 20px;
-                padding-left: 20px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-            
-            .back-button {
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-            
-            .toc {
-                padding: 25px 20px;
-                margin: 30px 0;
-            }
-            
-            .toc h3 {
-                font-size: 20px;
-            }
-            
-            .toc ol {
-                padding-left: 20px;
-            }
-            
-            .question {
-                padding: 15px 20px;
-                font-size: 16px;
-                margin: 20px 0 12px 0;
-            }
-            
-            .answer {
-                padding: 20px 25px;
-                margin: 12px 0 20px 0;
-            }
-            
-            .answer h3 {
-                font-size: 18px;
-            }
-            
-            .answer ul, .answer ol {
-                padding-left: 20px;
-            }
-            
-            .code-block {
-                padding: 25px 20px;
-                font-size: 13px;
-                margin: 25px 0;
-                overflow-x: auto;
-            }
-            
-            table {
-                font-size: 14px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .chapter {
-                padding: 25px 20px;
-                margin: 25px 0;
-            }
-            
-            .important, .tip {
-                padding: 15px 20px;
-            }
+            body { padding: 12px 8px; }
+            .container { padding: 20px 18px; border-radius: 18px; }
+            h1 { font-size: 30px; }
+            .subtitle { font-size: 15px; margin-bottom: 20px; }
+            h2 { font-size: 18px; padding: 10px 16px; margin-top: 20px; margin-bottom: 12px; }
+            .question { font-size: 15px; padding: 14px 18px; margin: 12px 0 6px 0; }
+            .answer { padding: 16px 18px; margin: 6px 0 12px 0; }
+            .code-editor-content { padding: 12px; font-size: 12px; overflow-x: auto; }
+            .code-editor-title { font-size: 11px; }
+            .toc { padding: 20px 18px; margin: 25px 0; }
+            .toc h3 { font-size: 18px; margin-bottom: 12px; }
+            .toc ol { font-size: 14px; padding-left: 18px; }
+            .footer { padding: 20px 18px; margin-top: 25px; font-size: 14px; }
+            table { font-size: 13px; margin: 15px 0; }
+            th, td { padding: 10px 8px; font-size: 13px; }
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 26px; }
+            .subtitle { font-size: 14px; }
+            h2 { font-size: 16px; padding: 8px 14px; margin-top: 18px; margin-bottom: 10px; }
+            .question { font-size: 14px; padding: 12px 14px; margin: 10px 0 5px 0; }
+            .answer { padding: 14px 14px; margin: 5px 0 10px 0; }
+            .code-editor-content { padding: 10px; font-size: 11px; }
+            .code-editor-header { padding: 8px 10px; }
+            .copy-button { padding: 4px 8px; font-size: 10px; }
+            table { font-size: 12px; margin: 12px 0; }
+            th, td { padding: 8px 6px; font-size: 12px; }
         }
         
         @media (max-width: 480px) {
-            h1 {
-                font-size: 28px;
-                padding-bottom: 20px;
-            }
-            
-            h1::after {
-                width: 80px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
-            
-            h2 {
-                font-size: 20px;
-                padding: 15px 20px;
-            }
-            
-            h3 {
-                font-size: 18px;
-                padding-left: 15px;
-            }
-            
-            .back-button {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
-            
-            .back-button svg {
-                width: 18px;
-                height: 18px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-radius: 15px;
-            }
-            
-            .question {
-                padding: 12px 15px;
-                font-size: 15px;
-            }
-            
-            .answer {
-                padding: 15px 18px;
-            }
-            
-            .code-block {
-                padding: 20px 15px;
-                font-size: 12px;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 6px;
-                font-size: 11px;
-            }
-            
-            .toc {
-                padding: 20px 15px;
-            }
-            
-            .toc h3 {
-                font-size: 18px;
-            }
-            
-            .toc ol {
-                padding-left: 18px;
-            }
+            body { padding: 8px 4px; }
+            .container { padding: 16px 12px; border-radius: 14px; }
+            h1 { font-size: 22px; }
+            .subtitle { font-size: 13px; margin-bottom: 16px; }
+            h2 { font-size: 14px; padding: 8px 12px; margin-top: 16px; margin-bottom: 8px; }
+            .question { font-size: 13px; padding: 12px 12px; margin: 10px 0 5px 0; }
+            .answer { padding: 12px 12px; margin: 5px 0 10px 0; }
+            .code-editor-content { padding: 10px; font-size: 10px; line-height: 1.4; }
+            .code-editor-title { font-size: 9px; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .back-button { padding: 10px 16px; font-size: 13px; width: 100%; justify-content: center; }
+            table { font-size: 11px; margin: 10px 0; }
+            th, td { padding: 8px 5px; font-size: 11px; }
+            .toc { padding: 16px 12px; margin: 20px 0; }
+            .toc h3 { font-size: 16px; margin-bottom: 10px; }
+            .toc ol { font-size: 12px; padding-left: 16px; }
         }
-</style>
+        
+        @media (max-width: 360px) {
+            h1 { font-size: 20px; }
+            h2 { font-size: 13px; padding: 6px 10px; margin-top: 14px; margin-bottom: 6px; }
+            .question { font-size: 12px; padding: 10px 10px; margin: 8px 0 4px 0; }
+            .answer { padding: 10px 10px; margin: 4px 0 8px 0; }
+            .code-editor-content { padding: 8px; font-size: 9px; }
+            .copy-button { padding: 3px 5px; font-size: 9px; }
+            table { font-size: 10px; margin: 8px 0; }
+            th, td { padding: 6px 4px; font-size: 10px; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-        </a>
-        <h1>Design Patterns Interview Questions</h1>
-                <p class="subtitle">Comprehensive guide covering Design patterns interview questions covering creational, structural, behavioral patterns with detailed explanations and code examples</p>
-        
-        <h2>Table of Contents</h2>
+        <a href="../index.html" class="back-button">Back to Home</a>
+        <h1>Design Patterns Interview Guide</h1>
+        <p class="subtitle">Comprehensive guide covering design patterns interview questions with C# code examples</p>
+
         <div class="toc">
             <h3>Table of Contents</h3>
             <ol>
-                <li>Fundamentals</li>
-                <li>Core Concepts</li>
-                <li>Implementation</li>
-                <li>Best Practices</li>
-                <li>Advanced Topics</li>
+                <li>Design Patterns Fundamentals</li>
+                <li>Creational Patterns</li>
+                <li>Structural Patterns</li>
+                <li>Behavioral Patterns</li>
+                <li>SOLID Principles</li>
+                <li>Anti-Patterns</li>
+                <li>Pattern Selection</li>
             </ol>
         </div>
 
-        <h2>1. Fundamentals</h2>
+        <h2>1. Design Patterns Fundamentals</h2>
 
         <div class="question">
-            Q1: What are the fundamental concepts in this subject</div>
+            Q1: What are design patterns and why are they important?
+        </div>
         <div class="answer">
-            <p>The fundamental concepts form the foundation for understanding this subject. These include core terminology, basic principles, and essential knowledge required for advanced topics.</p>
-            <h3>Key Concepts:</h3>
+            <p><strong>Design Patterns</strong> are reusable solutions to common problems in software design. They represent best practices and provide a standard vocabulary for discussing design solutions.</p>
+            
+            <h3>Importance of Design Patterns:</h3>
             <ul>
-                <li>Concept 1: Description of first fundamental concept</li>
-                <li>Concept 2: Description of second fundamental concept</li>
-                <li>Concept 3: Description of third fundamental concept</li>
+                <li><strong>Reusability:</strong> Proven solutions that can be reused across projects</li>
+                <li><strong>Communication:</strong> Common vocabulary for developers to discuss designs</li>
+                <li><strong>Best Practices:</strong> Encourage proven, tested solutions</li>
+                <li><strong>Maintainability:</strong> Well-structured code that's easier to maintain</li>
+                <li><strong>Flexibility:</strong> Make code more flexible and easier to modify</li>
             </ul>
         </div>
 
-        <h2>2. Core Concepts</h2>
-
         <div class="question">
-            Q2: What are the core principles and patterns</div>
+            Q2: What are the categories of design patterns?
+        </div>
         <div class="answer">
-            <p>Understanding the core principles is essential for mastering this subject. This section explores the most important concepts and their applications in real-world scenarios.</p>
-            <h3>Key Principles:</h3>
-            <ul>
-                <li>Principle 1: Description of the first key principle</li>
-                <li>Principle 2: Description of the second key principle</li>
-                <li>Principle 3: Description of the third key principle</li>
-            </ul>
+            <h3>GoF (Gang of Four) Categories:</h3>
+            <ol>
+                <li><strong>Creational Patterns:</strong> Deal with object creation mechanisms (5 patterns)</li>
+                <li><strong>Structural Patterns:</strong> Deal with composition of classes and objects (7 patterns)</li>
+                <li><strong>Behavioral Patterns:</strong> Deal with communication between objects (11 patterns)</li>
+            </ol>
         </div>
 
-        <h2>3. Implementation</h2>
-
         <div class="question">
-            Q3: How do you implement these concepts in practice</div>
-        <div class="answer">
-            <p>This chapter provides practical implementation examples with code snippets and real-world scenarios to help you apply the concepts learned.</p>
-            <div class="code-block"><pre><code># Design Patterns interview example
-# Builder Pattern
-class Computer:
-    def __init__(self):
-        self.cpu = None
-        self.ram = None
-        self.storage = None
-
-class ComputerBuilder:
-    def __init__(self):
-        self.computer = Computer()
-    
-    def add_cpu(self, cpu):
-        self.computer.cpu = cpu
-        return self
-    
-    def add_ram(self, ram):
-        self.computer.ram = ram
-        return self
-    
-    def add_storage(self, storage):
-        self.computer.storage = storage
-        return self
-    
-    def build(self):
-        return self.computer
-
-# Strategy Pattern
-class PaymentStrategy:
-    def pay(self, amount):
-        pass
-
-class CreditCardPayment(PaymentStrategy):
-    def pay(self, amount):
-        print(f"Paid  with credit card")
-
-class PayPalPayment(PaymentStrategy):
-    def pay(self, amount):
-        print(f"Paid  with PayPal")
-
-class ShoppingCart:
-    def __init__(self, payment_strategy):
-        self.payment_strategy = payment_strategy
-    
-    def checkout(self, amount):
-        self.payment_strategy.pay(amount)</code></pre></div>
-
-        <h2>4. Best Practices</h2>
-
-        <div class="question">
-            Q4: What are the industry best practices and standards</div>
-        <div class="answer">
-            <p>Learn industry best practices and standards for professional development and production environments. These guidelines ensure code quality, maintainability, and scalability.</p>
-            <h3>Best Practices:</h3>
-            <ul>
-                <li>Use clear and descriptive naming conventions</li>
-                <li>Follow established coding standards</li>
-                <li>Write comprehensive documentation</li>
-                <li>Implement proper error handling</li>
-                <li>Optimize for performance and readability</li>
-            </ul>
+            Q3: What is the difference between design pattern and principle?
         </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Design Pattern</th>
+                    <th>Design Principle</th>
+                </tr>
+                <tr>
+                    <td><strong>Definition</strong></td>
+                    <td>Specific solution to a problem</td>
+                    <td>General guideline for design</td>
+                </tr>
+                <tr>
+                    <td><strong>Scope</strong></td>
+                    <td>Concrete implementation</td>
+                    <td>High-level concept</td>
+                </tr>
+                <tr>
+                    <td><strong>Example</th>
+                    <td>Singleton, Factory</td>
+                    <td>DRY, SOLID</td>
+                </tr>
+            </table>
+        </div>
+
+        <h2>2. Creational Patterns</h2>
+
+        <div class="question">
+            Q4: What is the Singleton pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Singleton Pattern</strong> ensures a class has only one instance and provides a global point of access to it.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Singleton.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public sealed class</span> <span class="type">Singleton</span>
+{
+    <span class="keyword">private static readonly</span> <span class="type">Lazy</span>&lt;<span class="type">Singleton</span>&gt; <span class="variable">_instance</span> =
+        <span class="keyword">new</span> <span class="type">Lazy</span>&lt;<span class="type">Singleton</span>&gt;(() => <span class="keyword">new</span> <span class="type">Singleton</span>());
+    
+    <span class="keyword">public static</span> <span class="type">Singleton</span> <span class="property">Instance</span> => <span class="variable">_instance</span>.<span class="property">Value</span>;
+    
+    <span class="keyword">private</span> <span class="type">Singleton</span>()
+    {
+    }
+    
+    <span class="keyword">public void</span> <span class="method">DoSomething</span>()
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Singleton instance working"</span>);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q5: What is the Factory Method pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Factory Method Pattern</strong> defines an interface for creating objects but lets subclasses decide which class to instantiate.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">FactoryMethod.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">IProduct</span>
+{
+    <span class="keyword">string</span> <span class="method">Operation</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">ConcreteProductA</span> : <span class="type">IProduct</span>
+{
+    <span class="keyword">public string</span> <span class="method">Operation</span>() => <span class="string">"Product A"</span>;
+}
+
+<span class="keyword">public abstract class</span> <span class="type">Creator</span>
+{
+    <span class="keyword">public abstract</span> <span class="type">IProduct</span> <span class="method">FactoryMethod</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">ConcreteCreatorA</span> : <span class="type">Creator</span>
+{
+    <span class="keyword">public override</span> <span class="type">IProduct</span> <span class="method">FactoryMethod</span>() => <span class="keyword">new</span> <span class="type">ConcreteProductA</span>();
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q6: What is the Abstract Factory pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Abstract Factory Pattern</strong> provides an interface for creating families of related objects without specifying their concrete classes.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">AbstractFactory.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">IGUIFactory</span>
+{
+    <span class="type">IButton</span> <span class="method">CreateButton</span>();
+    <span class="type">ICheckbox</span> <span class="method">CreateCheckbox</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">WindowsFactory</span> : <span class="type">IGUIFactory</span>
+{
+    <span class="keyword">public</span> <span class="type">IButton</span> <span class="method">CreateButton</span>() => <span class="keyword">new</span> <span class="type">WindowsButton</span>();
+    <span class="keyword">public</span> <span class="type">ICheckbox</span> <span class="method">CreateCheckbox</span>() => <span class="keyword">new</span> <span class="type">WindowsCheckbox</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">MacFactory</span> : <span class="type">IGUIFactory</span>
+{
+    <span class="keyword">public</span> <span class="type">IButton</span> <span class="method">CreateButton</span>() => <span class="keyword">new</span> <span class="type">MacButton</span>();
+    <span class="keyword">public</span> <span class="type">ICheckbox</span> <span class="method">CreateCheckbox</span>() => <span class="keyword">new</span> <span class="type">MacCheckbox</span>();
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q7: What is the Builder pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Builder Pattern</strong> separates the construction of complex objects from their representation, allowing the same construction process to create different representations.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Builder.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">Product</span>
+{
+    <span class="keyword">public string</span> <span class="property">PartA</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">PartB</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}
+
+<span class="keyword">public interface</span> <span class="type">IBuilder</span>
+{
+    <span class="type">IBuilder</span> <span class="method">BuildPartA</span>();
+    <span class="type">IBuilder</span> <span class="method">BuildPartB</span>();
+    <span class="type">Product</span> <span class="method">GetResult</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">ConcreteBuilder</span> : <span class="type">IBuilder</span>
+{
+    <span class="keyword">private</span> <span class="type">Product</span> <span class="variable">_product</span> = <span class="keyword">new</span> <span class="type">Product</span>();
+    
+    <span class="keyword">public</span> <span class="type">IBuilder</span> <span class="method">BuildPartA</span>()
+    {
+        <span class="variable">_product</span>.<span class="property">PartA</span> = <span class="string">"Part A"</span>;
+        <span class="keyword">return this</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="type">IBuilder</span> <span class="method">BuildPartB</span>()
+    {
+        <span class="variable">_product</span>.<span class="property">PartB</span> = <span class="string">"Part B"</span>;
+        <span class="keyword">return this</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="type">Product</span> <span class="method">GetResult</span>() => <span class="variable">_product</span>;
+}
+
+<span class="comment">// Usage</span>
+<span class="keyword">var</span> <span class="variable">product</span> = <span class="keyword">new</span> <span class="type">ConcreteBuilder</span>()
+    .<span class="method">BuildPartA</span>()
+    .<span class="method">BuildPartB</span>()
+    .<span class="method">GetResult</span>();</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q8: What is the Prototype pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Prototype Pattern</strong> specifies the kinds of objects to create using a prototypical instance and creates new objects by cloning this prototype.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Prototype.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">IPrototype</span>&lt;<span class="type">T</span>&gt;
+{
+    <span class="type">T</span> <span class="method">Clone</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">Employee</span> : <span class="type">IPrototype</span>&lt;<span class="type">Employee</span>&gt;
+{
+    <span class="keyword">public string</span> <span class="property">Name</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">Department</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    
+    <span class="keyword">public</span> <span class="type">Employee</span> <span class="method">Clone</span>()
+    {
+        <span class="keyword">return new</span> <span class="type">Employee</span>
+        {
+            <span class="property">Name</span> = <span class="keyword">this</span>.<span class="property">Name</span>,
+            <span class="property">Department</span> = <span class="keyword">this</span>.<span class="property">Department</span>
+        };
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>3. Structural Patterns</h2>
+
+        <div class="question">
+            Q9: What is the Adapter pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Adapter Pattern</strong> allows incompatible interfaces to work together. It acts as a bridge between two incompatible interfaces.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Adapter.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">ITarget</span>
+{
+    <span class="keyword">string</span> <span class="method">GetRequest</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">Adaptee</span>
+{
+    <span class="keyword">public string</span> <span class="method">GetSpecificRequest</span>()
+    {
+        <span class="keyword">return</span> <span class="string">"Specific request"</span>;
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">Adapter</span> : <span class="type">ITarget</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">Adaptee</span> <span class="variable">_adaptee</span>;
+    
+    <span class="keyword">public</span> <span class="type">Adapter</span>(<span class="type">Adaptee</span> <span class="variable">adaptee</span>)
+    {
+        <span class="variable">_adaptee</span> = <span class="variable">adaptee</span>;
+    }
+    
+    <span class="keyword">public string</span> <span class="method">GetRequest</span>()
+    {
+        <span class="keyword">return</span> <span class="string">$"Adapter: {_adaptee.GetSpecificRequest()}"</span>;
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q10: What is the Bridge pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Bridge Pattern</strong> decouples an abstraction from its implementation so that the two can vary independently.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Bridge.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">IRenderer</span>
+{
+    <span class="keyword">void</span> <span class="method">RenderCircle</span>(<span class="keyword">float</span> <span class="variable">radius</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">VectorRenderer</span> : <span class="type">IRenderer</span>
+{
+    <span class="keyword">public void</span> <span class="method">RenderCircle</span>(<span class="keyword">float</span> <span class="variable">radius</span>)
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Drawing circle with radius {radius} (vector)"</span>);
+    }
+}
+
+<span class="keyword">public abstract class</span> <span class="type">Shape</span>
+{
+    <span class="keyword">protected</span> <span class="type">IRenderer</span> <span class="property">Renderer</span>;
+    
+    <span class="keyword">public</span> <span class="type">Shape</span>(<span class="type">IRenderer</span> <span class="variable">renderer</span>)
+    {
+        <span class="property">Renderer</span> = <span class="variable">renderer</span>;
+    }
+    
+    <span class="keyword">public abstract void</span> <span class="method">Draw</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">Circle</span> : <span class="type">Shape</span>
+{
+    <span class="keyword">private float</span> <span class="variable">_radius</span>;
+    
+    <span class="keyword">public</span> <span class="type">Circle</span>(<span class="keyword">float</span> <span class="variable">radius</span>, <span class="type">IRenderer</span> <span class="variable">renderer</span>) : <span class="keyword">base</span>(<span class="variable">renderer</span>)
+    {
+        <span class="variable">_radius</span> = <span class="variable">radius</span>;
+    }
+    
+    <span class="keyword">public override void</span> <span class="method">Draw</span>()
+    {
+        <span class="property">Renderer</span>.<span class="method">RenderCircle</span>(<span class="variable">_radius</span>);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q11: What is the Composite pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Composite Pattern</strong> composes objects into tree structures to represent part-whole hierarchies. It lets clients treat individual objects and compositions uniformly.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Composite.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">IComponent</span>
+{
+    <span class="keyword">void</span> <span class="method">Operation</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">Leaf</span> : <span class="type">IComponent</span>
+{
+    <span class="keyword">public void</span> <span class="method">Operation</span>()
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Leaf operation"</span>);
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">Composite</span> : <span class="type">IComponent</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">List</span>&lt;<span class="type">IComponent</span>&gt; <span class="variable">_children</span> = <span class="keyword">new</span> <span class="type">List</span>&lt;<span class="type">IComponent</span>&gt;();
+    
+    <span class="keyword">public void</span> <span class="method">Add</span>(<span class="type">IComponent</span> <span class="variable">component</span>)
+    {
+        <span class="variable">_children</span>.<span class="method">Add</span>(<span class="variable">component</span>);
+    }
+    
+    <span class="keyword">public void</span> <span class="method">Operation</span>()
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Composite operation"</span>);
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> <span class="variable">child</span> <span class="keyword">in</span> <span class="variable">_children</span>)
+        {
+            <span class="variable">child</span>.<span class="method">Operation</span>();
+        }
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q12: What is the Decorator pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Decorator Pattern</strong> attaches additional responsibilities to an object dynamically. It provides a flexible alternative to subclassing for extending functionality.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Decorator.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">IComponent</span>
+{
+    <span class="keyword">string</span> <span class="method">Operation</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">ConcreteComponent</span> : <span class="type">IComponent</span>
+{
+    <span class="keyword">public string</span> <span class="method">Operation</span>() => <span class="string">"ConcreteComponent"</span>;
+}
+
+<span class="keyword">public abstract class</span> <span class="type">Decorator</span> : <span class="type">IComponent</span>
+{
+    <span class="keyword">protected</span> <span class="type">IComponent</span> <span class="variable">_component</span>;
+    
+    <span class="keyword">public</span> <span class="type">Decorator</span>(<span class="type">IComponent</span> <span class="variable">component</span>)
+    {
+        <span class="variable">_component</span> = <span class="variable">component</span>;
+    }
+    
+    <span class="keyword">public virtual string</span> <span class="method">Operation</span>()
+    {
+        <span class="keyword">return</span> <span class="variable">_component</span>.<span class="method">Operation</span>();
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">ConcreteDecoratorA</span> : <span class="type">Decorator</span>
+{
+    <span class="keyword">public</span> <span class="type">ConcreteDecoratorA</span>(<span class="type">IComponent</span> <span class="variable">component</span>) : <span class="keyword">base</span>(<span class="variable">component</span>) { }
+    
+    <span class="keyword">public override string</span> <span class="method">Operation</span>()
+    {
+        <span class="keyword">return</span> <span class="string">$"ConcreteDecoratorA({base.Operation()})"</span>;
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q13: What is the Facade pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Facade Pattern</strong> provides a simplified interface to a complex subsystem. It hides the complexities of the system and provides a simple interface to the client.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Facade.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">SubsystemA</span>
+{
+    <span class="keyword">public void</span> <span class="method">OperationA</span>() => <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Subsystem A operation"</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">SubsystemB</span>
+{
+    <span class="keyword">public void</span> <span class="method">OperationB</span>() => <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Subsystem B operation"</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">Facade</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">SubsystemA</span> <span class="variable">_subsystemA</span> = <span class="keyword">new</span> <span class="type">SubsystemA</span>();
+    <span class="keyword">private readonly</span> <span class="type">SubsystemB</span> <span class="variable">_subsystemB</span> = <span class="keyword">new</span> <span class="type">SubsystemB</span>();
+    
+    <span class="keyword">public void</span> <span class="method">Operation</span>()
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Facade initializes subsystems:"</span>);
+        <span class="variable">_subsystemA</span>.<span class="method">OperationA</span>();
+        <span class="variable">_subsystemB</span>.<span class="method">OperationB</span>();
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q14: What is the Flyweight pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Flyweight Pattern</strong> reduces memory usage by sharing common parts of object state among multiple objects. It's useful when many similar objects need to be created.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Flyweight.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">Flyweight</span>
+{
+    <span class="keyword">private readonly</span> <span class="keyword">string</span> <span class="variable">_intrinsicState</span>;
+    
+    <span class="keyword">public</span> <span class="type">Flyweight</span>(<span class="keyword">string</span> <span class="variable">intrinsicState</span>)
+    {
+        <span class="variable">_intrinsicState</span> = <span class="variable">intrinsicState</span>;
+    }
+    
+    <span class="keyword">public void</span> <span class="method">Operation</span>(<span class="keyword">string</span> <span class="variable">extrinsicState</span>)
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Intrinsic: {_intrinsicState}, Extrinsic: {extrinsicState}"</span>);
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">FlyweightFactory</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="type">Flyweight</span>&gt; <span class="variable">_flyweights</span> = <span class="keyword">new</span> <span class="type">Dictionary</span>&lt;<span class="keyword">string</span>, <span class="type">Flyweight</span>&gt;();
+    
+    <span class="keyword">public</span> <span class="type">Flyweight</span> <span class="method">GetFlyweight</span>(<span class="keyword">string</span> <span class="variable">key</span>)
+    {
+        <span class="keyword">if</span> (!<span class="variable">_flyweights</span>.<span class="method">ContainsKey</span>(<span class="variable">key</span>))
+        {
+            <span class="variable">_flyweights</span>[<span class="variable">key</span>] = <span class="keyword">new</span> <span class="type">Flyweight</span>(<span class="variable">key</span>);
+        }
+        <span class="keyword">return</span> <span class="variable">_flyweights</span>[<span class="variable">key</span>];
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q15: What is the Proxy pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Proxy Pattern</strong> provides a surrogate or placeholder for another object to control access to it. It can add functionality like lazy loading, access control, or logging.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Proxy.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">ISubject</span>
+{
+    <span class="keyword">void</span> <span class="method">Request</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">RealSubject</span> : <span class="type">ISubject</span>
+{
+    <span class="keyword">public void</span> <span class="method">Request</span>()
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"RealSubject: Handling request"</span>);
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">Proxy</span> : <span class="type">ISubject</span>
+{
+    <span class="keyword">private</span> <span class="type">RealSubject</span> <span class="variable">_realSubject</span>;
+    
+    <span class="keyword">public void</span> <span class="method">Request</span>()
+    {
+        <span class="keyword">if</span> (<span class="variable">_realSubject</span> == <span class="keyword">null</span>)
+        {
+            <span class="variable">_realSubject</span> = <span class="keyword">new</span> <span class="type">RealSubject</span>();
+        }
         
-        <h2>5. Advanced Topics</h2>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Proxy: Logging request"</span>);
+        <span class="variable">_realSubject</span>.<span class="method">Request</span>();
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Proxy: Request completed"</span>);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>4. Behavioral Patterns</h2>
 
         <div class="question">
-            Q5: What are the advanced techniques and optimizations</div>
+            Q16: What is the Observer pattern?
+        </div>
         <div class="answer">
-            <p>Explore advanced techniques, optimizations, and cutting-edge approaches in this field. These topics are essential for senior-level understanding and expert-level implementation.</p>
-            <div class="code-block"><pre><code># Design Patterns interview example
-# Builder Pattern
-class Computer:
-    def __init__(self):
-        self.cpu = None
-        self.ram = None
-        self.storage = None
+            <p><strong>Observer Pattern</strong> defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified automatically.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Observer.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">IObserver</span>
+{
+    <span class="keyword">void</span> <span class="method">Update</span>(<span class="keyword">string</span> <span class="variable">message</span>);
+}
 
-class ComputerBuilder:
-    def __init__(self):
-        self.computer = Computer()
-    
-    def add_cpu(self, cpu):
-        self.computer.cpu = cpu
-        return self
-    
-    def add_ram(self, ram):
-        self.computer.ram = ram
-        return self
-    
-    def add_storage(self, storage):
-        self.computer.storage = storage
-        return self
-    
-    def build(self):
-        return self.computer
+<span class="keyword">public interface</span> <span class="type">ISubject</span>
+{
+    <span class="keyword">void</span> <span class="method">Attach</span>(<span class="type">IObserver</span> <span class="variable">observer</span>);
+    <span class="keyword">void</span> <span class="method">Detach</span>(<span class="type">IObserver</span> <span class="variable">observer</span>);
+    <span class="keyword">void</span> <span class="method">Notify</span>(<span class="keyword">string</span> <span class="variable">message</span>);
+}
 
-# Strategy Pattern
-class PaymentStrategy:
-    def pay(self, amount):
-        pass
-
-class CreditCardPayment(PaymentStrategy):
-    def pay(self, amount):
-        print(f"Paid  with credit card")
-
-class PayPalPayment(PaymentStrategy):
-    def pay(self, amount):
-        print(f"Paid  with PayPal")
-
-class ShoppingCart:
-    def __init__(self, payment_strategy):
-        self.payment_strategy = payment_strategy
+<span class="keyword">public class</span> <span class="type">Subject</span> : <span class="type">ISubject</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">List</span>&lt;<span class="type">IObserver</span>&gt; <span class="variable">_observers</span> = <span class="keyword">new</span> <span class="type">List</span>&lt;<span class="type">IObserver</span>&gt;();
     
-    def checkout(self, amount):
-        self.payment_strategy.pay(amount)</code></pre></div>
+    <span class="keyword">public void</span> <span class="method">Attach</span>(<span class="type">IObserver</span> <span class="variable">observer</span>) => <span class="variable">_observers</span>.<span class="method">Add</span>(<span class="variable">observer</span>);
+    <span class="keyword">public void</span> <span class="method">Detach</span>(<span class="type">IObserver</span> <span class="variable">observer</span>) => <span class="variable">_observers</span>.<span class="method">Remove</span>(<span class="variable">observer</span>);
+    
+    <span class="keyword">public void</span> <span class="method">Notify</span>(<span class="keyword">string</span> <span class="variable">message</span>)
+    {
+        <span class="keyword">foreach</span> (<span class="keyword">var</span> <span class="variable">observer</span> <span class="keyword">in</span> <span class="variable">_observers</span>)
+        {
+            <span class="variable">observer</span>.<span class="method">Update</span>(<span class="variable">message</span>);
+        }
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q17: What is the Strategy pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Strategy Pattern</strong> defines a family of algorithms, encapsulates each one, and makes them interchangeable. Strategy lets the algorithm vary independently from clients.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Strategy.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">IStrategy</span>
+{
+    <span class="keyword">void</span> <span class="method">Execute</span>(<span class="keyword">int</span> <span class="variable">a</span>, <span class="keyword">int</span> <span class="variable">b</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">AddStrategy</span> : <span class="type">IStrategy</span>
+{
+    <span class="keyword">public void</span> <span class="method">Execute</span>(<span class="keyword">int</span> <span class="variable">a</span>, <span class="keyword">int</span> <span class="variable">b</span>) => <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Add: {a + b}"</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">SubtractStrategy</span> : <span class="type">IStrategy</span>
+{
+    <span class="keyword">public void</span> <span class="method">Execute</span>(<span class="keyword">int</span> <span class="variable">a</span>, <span class="keyword">int</span> <span class="variable">b</span>) => <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Subtract: {a - b}"</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">Context</span>
+{
+    <span class="keyword">private</span> <span class="type">IStrategy</span> <span class="variable">_strategy</span>;
+    
+    <span class="keyword">public</span> <span class="type">Context</span>(<span class="type">IStrategy</span> <span class="variable">strategy</span>)
+    {
+        <span class="variable">_strategy</span> = <span class="variable">strategy</span>;
+    }
+    
+    <span class="keyword">public void</span> <span class="method">SetStrategy</span>(<span class="type">IStrategy</span> <span class="variable">strategy</span>)
+    {
+        <span class="variable">_strategy</span> = <span class="variable">strategy</span>;
+    }
+    
+    <span class="keyword">public void</span> <span class="method">ExecuteStrategy</span>(<span class="keyword">int</span> <span class="variable">a</span>, <span class="keyword">int</span> <span class="variable">b</span>)
+    {
+        <span class="variable">_strategy</span>.<span class="method">Execute</span>(<span class="variable">a</span>, <span class="variable">b</span>);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q18: What is the Command pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Command Pattern</strong> encapsulates a request as an object, thereby allowing parameterization of clients with different requests, queuing of requests, and logging of operations.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Command.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">ICommand</span>
+{
+    <span class="keyword">void</span> <span class="method">Execute</span>();
+    <span class="keyword">void</span> <span class="method">Undo</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">Light</span>
+{
+    <span class="keyword">public void</span> <span class="method">TurnOn</span>() => <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Light is ON"</span>);
+    <span class="keyword">public void</span> <span class="method">TurnOff</span>() => <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Light is OFF"</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">LightOnCommand</span> : <span class="type">ICommand</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">Light</span> <span class="variable">_light</span>;
+    
+    <span class="keyword">public</span> <span class="type">LightOnCommand</span>(<span class="type">Light</span> <span class="variable">light</span>)
+    {
+        <span class="variable">_light</span> = <span class="variable">light</span>;
+    }
+    
+    <span class="keyword">public void</span> <span class="method">Execute</span>() => <span class="variable">_light</span>.<span class="method">TurnOn</span>();
+    <span class="keyword">public void</span> <span class="method">Undo</span>() => <span class="variable">_light</span>.<span class="method">TurnOff</span>();
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q19: What is the Chain of Responsibility pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Chain of Responsibility Pattern</strong> passes a request along a chain of handlers. Each handler decides either to process the request or to pass it to the next handler.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ChainOfResponsibility.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public abstract class</span> <span class="type">Handler</span>
+{
+    <span class="keyword">protected</span> <span class="type">Handler</span> <span class="variable">_nextHandler</span>;
+    
+    <span class="keyword">public</span> <span class="type">Handler</span> <span class="method">SetNext</span>(<span class="type">Handler</span> <span class="variable">handler</span>)
+    {
+        <span class="variable">_nextHandler</span> = <span class="variable">handler</span>;
+        <span class="keyword">return</span> <span class="variable">handler</span>;
+    }
+    
+    <span class="keyword">public abstract void</span> <span class="method">HandleRequest</span>(<span class="keyword">int</span> <span class="variable">request</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">ConcreteHandlerA</span> : <span class="type">Handler</span>
+{
+    <span class="keyword">public override void</span> <span class="method">HandleRequest</span>(<span class="keyword">int</span> <span class="variable">request</span>)
+    {
+        <span class="keyword">if</span> (<span class="variable">request</span> >= <span class="number">0</span> && <span class="variable">request</span> < <span class="number">10</span>)
+        {
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"HandlerA handled {request}"</span>);
+        }
+        <span class="keyword">else if</span> (<span class="variable">_nextHandler</span> != <span class="keyword">null</span>)
+        {
+            <span class="variable">_nextHandler</span>.<span class="method">HandleRequest</span>(<span class="variable">request</span>);
+        }
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q20: What is the Iterator pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Iterator Pattern</strong> provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Iterator.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">IIterator</span>&lt;<span class="type">T</span>&gt;
+{
+    <span class="keyword">bool</span> <span class="method">HasNext</span>();
+    <span class="type">T</span> <span class="method">Next</span>();
+}
+
+<span class="keyword">public interface</span> <span class="type">IAggregate</span>&lt;<span class="type">T</span>&gt;
+{
+    <span class="type">IIterator</span>&lt;<span class="type">T</span>&gt; <span class="method">CreateIterator</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">ConcreteAggregate</span> : <span class="type">IAggregate</span>&lt;<span class="keyword">string</span>&gt;
+{
+    <span class="keyword">private readonly</span> <span class="type">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">_items</span> = <span class="keyword">new</span> <span class="type">List</span>&lt;<span class="keyword">string</span>&gt;();
+    
+    <span class="keyword">public void</span> <span class="method">Add</span>(<span class="keyword">string</span> <span class="variable">item</span>) => <span class="variable">_items</span>.<span class="method">Add</span>(<span class="variable">item</span>);
+    
+    <span class="keyword">public</span> <span class="type">IIterator</span>&lt;<span class="keyword">string</span>&gt; <span class="method">CreateIterator</span>()
+    {
+        <span class="keyword">return new</span> <span class="type">ConcreteIterator</span>(<span class="variable">_items</span>);
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">ConcreteIterator</span> : <span class="type">IIterator</span>&lt;<span class="keyword">string</span>&gt;
+{
+    <span class="keyword">private readonly</span> <span class="type">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">_items</span>;
+    <span class="keyword">private int</span> <span class="variable">_position</span> = <span class="number">0</span>;
+    
+    <span class="keyword">public</span> <span class="type">ConcreteIterator</span>(<span class="type">List</span>&lt;<span class="keyword">string</span>&gt; <span class="variable">items</span>)
+    {
+        <span class="variable">_items</span> = <span class="variable">items</span>;
+    }
+    
+    <span class="keyword">public bool</span> <span class="method">HasNext</span>() => <span class="variable">_position</span> < <span class="variable">_items</span>.<span class="property">Count</span>;
+    
+    <span class="keyword">public string</span> <span class="method">Next</span>()
+    {
+        <span class="keyword">if</span> (!<span class="method">HasNext</span>()) <span class="keyword">return null</span>;
+        <span class="keyword">return</span> <span class="variable">_items</span>[<span class="variable">_position</span>++];
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q21: What is the Mediator pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Mediator Pattern</strong> defines an object that encapsulates how a set of objects interact. It promotes loose coupling by keeping objects from referring to each other explicitly.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Mediator.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">IMediator</span>
+{
+    <span class="keyword">void</span> <span class="method">SendMessage</span>(<span class="keyword">string</span> <span class="variable">message</span>, <span class="type">Colleague</span> <span class="variable">colleague</span>);
+}
+
+<span class="keyword">public abstract class</span> <span class="type">Colleague</span>
+{
+    <span class="keyword">protected</span> <span class="type">IMediator</span> <span class="variable">_mediator</span>;
+    
+    <span class="keyword">public</span> <span class="type">Colleague</span>(<span class="type">IMediator</span> <span class="variable">mediator</span>)
+    {
+        <span class="variable">_mediator</span> = <span class="variable">mediator</span>;
+    }
+    
+    <span class="keyword">public abstract void</span> <span class="method">Send</span>(<span class="keyword">string</span> <span class="variable">message</span>);
+    <span class="keyword">public abstract void</span> <span class="method">Receive</span>(<span class="keyword">string</span> <span class="variable">message</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">ConcreteMediator</span> : <span class="type">IMediator</span>
+{
+    <span class="keyword">private</span> <span class="type">ConcreteColleagueA</span> <span class="variable">_colleagueA</span>;
+    <span class="keyword">private</span> <span class="type">ConcreteColleagueB</span> <span class="variable">_colleagueB</span>;
+    
+    <span class="keyword">public void</span> <span class="method">SetColleagueA</span>(<span class="type">ConcreteColleagueA</span> <span class="variable">colleague</span>) => <span class="variable">_colleagueA</span> = <span class="variable">colleague</span>;
+    <span class="keyword">public void</span> <span class="method">SetColleagueB</span>(<span class="type">ConcreteColleagueB</span> <span class="variable">colleague</span>) => <span class="variable">_colleagueB</span> = <span class="variable">colleague</span>;
+    
+    <span class="keyword">public void</span> <span class="method">SendMessage</span>(<span class="keyword">string</span> <span class="variable">message</span>, <span class="type">Colleague</span> <span class="variable">colleague</span>)
+    {
+        <span class="keyword">if</span> (<span class="variable">colleague</span> == <span class="variable">_colleagueA</span>)
+        {
+            <span class="variable">_colleagueB</span>.<span class="method">Receive</span>(<span class="variable">message</span>);
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="variable">_colleagueA</span>.<span class="method">Receive</span>(<span class="variable">message</span>);
+        }
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q22: What is the Memento pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Memento Pattern</strong> captures and externalizes an object's internal state without violating encapsulation, allowing the object to be restored to this state later.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Memento.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public class</span> <span class="type">Memento</span>
+{
+    <span class="keyword">public string</span> <span class="property">State</span> { <span class="keyword">get</span>; }
+    
+    <span class="keyword">public</span> <span class="type">Memento</span>(<span class="keyword">string</span> <span class="variable">state</span>)
+    {
+        <span class="property">State</span> = <span class="variable">state</span>;
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">Originator</span>
+{
+    <span class="keyword">private string</span> <span class="variable">_state</span>;
+    
+    <span class="keyword">public string</span> <span class="property">State</span>
+    {
+        <span class="keyword">get</span> => <span class="variable">_state</span>;
+        <span class="keyword">set</span>
+        {
+            <span class="variable">_state</span> = <span class="variable">value</span>;
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"State set to: {_state}"</span>);
+        }
+    }
+    
+    <span class="keyword">public</span> <span class="type">Memento</span> <span class="method">CreateMemento</span>()
+    {
+        <span class="keyword">return new</span> <span class="type">Memento</span>(<span class="variable">_state</span>);
+    }
+    
+    <span class="keyword">public void</span> <span class="method">RestoreMemento</span>(<span class="type">Memento</span> <span class="variable">memento</span>)
+    {
+        <span class="variable">_state</span> = <span class="variable">memento</span>.<span class="property">State</span>;
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"State restored to: {_state}"</span>);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q23: What is the State pattern?
+        </div>
+        <div class="answer">
+            <p><strong>State Pattern</strong> allows an object to alter its behavior when its internal state changes. The object will appear to change its class.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">State.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">IState</span>
+{
+    <span class="keyword">void</span> <span class="method">Handle</span>(<span class="type">Context</span> <span class="variable">context</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">Context</span>
+{
+    <span class="keyword">private</span> <span class="type">IState</span> <span class="variable">_state</span>;
+    
+    <span class="keyword">public</span> <span class="type">Context</span>(<span class="type">IState</span> <span class="variable">state</span>)
+    {
+        <span class="variable">_state</span> = <span class="variable">state</span>;
+    }
+    
+    <span class="keyword">public</span> <span class="type">IState</span> <span class="property">State</span>
+    {
+        <span class="keyword">get</span> => <span class="variable">_state</span>;
+        <span class="keyword">set</span> => <span class="variable">_state</span> = <span class="variable">value</span>;
+    }
+    
+    <span class="keyword">public void</span> <span class="method">Request</span>()
+    {
+        <span class="variable">_state</span>.<span class="method">Handle</span>(<span class="keyword">this</span>);
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">ConcreteStateA</span> : <span class="type">IState</span>
+{
+    <span class="keyword">public void</span> <span class="method">Handle</span>(<span class="type">Context</span> <span class="variable">context</span>)
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"State A handling request"</span>);
+        <span class="variable">context</span>.<span class="property">State</span> = <span class="keyword">new</span> <span class="type">ConcreteStateB</span>();
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q24: What is the Template Method pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Template Method Pattern</strong> defines the skeleton of an algorithm in the base class but lets subclasses override specific steps of the algorithm without changing its structure.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">TemplateMethod.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public abstract class</span> <span class="type">AbstractClass</span>
+{
+    <span class="keyword">public void</span> <span class="method">TemplateMethod</span>()
+    {
+        <span class="method">BaseOperation1</span>();
+        <span class="method">RequiredOperation1</span>();
+        <span class="method">BaseOperation2</span>();
+        <span class="method">RequiredOperation2</span>();
+        <span class="method">Hook</span>();
+    }
+    
+    <span class="keyword">protected void</span> <span class="method">BaseOperation1</span>()
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Base Operation 1"</span>);
+    }
+    
+    <span class="keyword">protected abstract void</span> <span class="method">RequiredOperation1</span>();
+    <span class="keyword">protected abstract void</span> <span class="method">RequiredOperation2</span>();
+    
+    <span class="keyword">protected virtual void</span> <span class="method">Hook</span>()
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Default Hook"</span>);
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">ConcreteClass</span> : <span class="type">AbstractClass</span>
+{
+    <span class="keyword">protected override void</span> <span class="method">RequiredOperation1</span>()
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Concrete Operation 1"</span>);
+    }
+    
+    <span class="keyword">protected override void</span> <span class="method">RequiredOperation2</span>()
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Concrete Operation 2"</span>);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q25: What is the Visitor pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Visitor Pattern</strong> represents an operation to be performed on the elements of an object structure. It lets you define a new operation without changing the classes of the elements.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Visitor.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="keyword">public interface</span> <span class="type">IVisitor</span>
+{
+    <span class="keyword">void</span> <span class="method">Visit</span>(<span class="type">ElementA</span> <span class="variable">element</span>);
+    <span class="keyword">void</span> <span class="method">Visit</span>(<span class="type">ElementB</span> <span class="variable">element</span>);
+}
+
+<span class="keyword">public interface</span> <span class="type">IElement</span>
+{
+    <span class="keyword">void</span> <span class="method">Accept</span>(<span class="type">IVisitor</span> <span class="variable">visitor</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">ElementA</span> : <span class="type">IElement</span>
+{
+    <span class="keyword">public void</span> <span class="method">Accept</span>(<span class="type">IVisitor</span> <span class="variable">visitor</span>)
+    {
+        <span class="variable">visitor</span>.<span class="method">Visit</span>(<span class="keyword">this</span>);
+    }
+    
+    <span class="keyword">public void</span> <span class="method">OperationA</span>()
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Operation A"</span>);
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">ConcreteVisitor</span> : <span class="type">IVisitor</span>
+{
+    <span class="keyword">public void</span> <span class="method">Visit</span>(<span class="type">ElementA</span> <span class="variable">element</span>)
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Visitor processing ElementA"</span>);
+        <span class="variable">element</span>.<span class="method">OperationA</span>();
+    }
+    
+    <span class="keyword">public void</span> <span class="method">Visit</span>(<span class="type">ElementB</span> <span class="variable">element</span>)
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Visitor processing ElementB"</span>);
+        <span class="variable">element</span>.<span class="method">OperationB</span>();
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>5. SOLID Principles</h2>
+
+        <div class="question">
+            Q26: What are the SOLID principles?
+        </div>
+        <div class="answer">
+            <h3>SOLID Principles:</h3>
+            <ol>
+                <li><strong>S - Single Responsibility:</strong> A class should have one reason to change</li>
+                <li><strong>O - Open/Closed:</strong> Open for extension, closed for modification</li>
+                <li><strong>L - Liskov Substitution:</strong> Subtypes must be substitutable for base types</li>
+                <li><strong>I - Interface Segregation:</strong> Clients shouldn't depend on unused interfaces</li>
+                <li><strong>D - Dependency Inversion:</strong> Depend on abstractions, not concretions</li>
+            </ol>
+        </div>
+
+        <div class="question">
+            Q27: Explain the Single Responsibility Principle with example.
+        </div>
+        <div class="answer">
+            <p><strong>Single Responsibility Principle (SRP)</strong> states that a class should have only one reason to change, meaning it should have only one job.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">SRP.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Following SRP</span>
+<span class="keyword">public class</span> <span class="type">User</span>
+{
+    <span class="keyword">public string</span> <span class="property">Name</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">Email</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}
+
+<span class="keyword">public class</span> <span class="type">UserRepository</span>
+{
+    <span class="keyword">public void</span> <span class="method">Save</span>(<span class="type">User</span> <span class="variable">user</span>)
+    {
+        <span class="comment">// Database logic</span>
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">EmailService</span>
+{
+    <span class="keyword">public void</span> <span class="method">Send</span>(<span class="type">User</span> <span class="variable">user</span>, <span class="keyword">string</span> <span class="variable">message</span>)
+    {
+        <span class="comment">// Email logic</span>
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q28: Explain the Open/Closed Principle with example.
+        </div>
+        <div class="answer">
+            <p><strong>Open/Closed Principle (OCP)</strong> states that software entities should be open for extension but closed for modification.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">OCP.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Following OCP</span>
+<span class="keyword">public interface</span> <span class="type">IDiscount</span>
+{
+    <span class="keyword">double</span> <span class="method">Calculate</span>(<span class="keyword">double</span> <span class="variable">price</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">RegularDiscount</span> : <span class="type">IDiscount</span>
+{
+    <span class="keyword">public double</span> <span class="method">Calculate</span>(<span class="keyword">double</span> <span class="variable">price</span>) => <span class="variable">price</span> * <span class="number">0.9</span>;
+}
+
+<span class="keyword">public class</span> <span class="type">PremiumDiscount</span> : <span class="type">IDiscount</span>
+{
+    <span class="keyword">public double</span> <span class="method">Calculate</span>(<span class="keyword">double</span> <span class="variable">price</span>) => <span class="variable">price</span> * <span class="number">0.8</span>;
+}
+
+<span class="keyword">public class</span> <span class="type">DiscountCalculator</span>
+{
+    <span class="keyword">public double</span> <span class="method">CalculatePrice</span>(<span class="keyword">double</span> <span class="variable">price</span>, <span class="type">IDiscount</span> <span class="variable">discount</span>)
+    {
+        <span class="keyword">return</span> <span class="variable">discount</span>.<span class="method">Calculate</span>(<span class="variable">price</span>);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q29: Explain the Liskov Substitution Principle with example.
+        </div>
+        <div class="answer">
+            <p><strong>Liskov Substitution Principle (LSP)</strong> states that objects of a superclass should be replaceable with objects of a subclass without breaking the application.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">LSP.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Following LSP</span>
+<span class="keyword">public abstract class</span> <span class="type">Shape</span>
+{
+    <span class="keyword">public abstract double</span> <span class="method">Area</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">Rectangle</span> : <span class="type">Shape</span>
+{
+    <span class="keyword">public double</span> <span class="property">Width</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public double</span> <span class="property">Height</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    
+    <span class="keyword">public override double</span> <span class="method">Area</span>() => <span class="property">Width</span> * <span class="property">Height</span>;
+}
+
+<span class="keyword">public class</span> <span class="type">Square</span> : <span class="type">Shape</span>
+{
+    <span class="keyword">public double</span> <span class="property">Side</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    
+    <span class="keyword">public override double</span> <span class="method">Area</span>() => <span class="property">Side</span> * <span class="property">Side</span>;
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q30: Explain the Interface Segregation Principle with example.
+        </div>
+        <div class="answer">
+            <p><strong>Interface Segregation Principle (ISP)</strong> states that clients should not be forced to depend on interfaces they don't use. Split large interfaces into smaller, specific ones.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ISP.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Following ISP</span>
+<span class="keyword">public interface</span> <span class="type">IWorkable</span>
+{
+    <span class="keyword">void</span> <span class="method">Work</span>();
+}
+
+<span class="keyword">public interface</span> <span class="type">IEatable</span>
+{
+    <span class="keyword">void</span> <span class="method">Eat</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">Human</span> : <span class="type">IWorkable</span>, <span class="type">IEatable</span>
+{
+    <span class="keyword">public void</span> <span class="method">Work</span>() { }
+    <span class="keyword">public void</span> <span class="method">Eat</span>() { }
+}
+
+<span class="keyword">public class</span> <span class="type">Robot</span> : <span class="type">IWorkable</span>
+{
+    <span class="keyword">public void</span> <span class="method">Work</span>() { }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q31: Explain the Dependency Inversion Principle with example.
+        </div>
+        <div class="answer">
+            <p><strong>Dependency Inversion Principle (DIP)</strong> states that high-level modules should not depend on low-level modules. Both should depend on abstractions.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">DIP.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Following DIP</span>
+<span class="keyword">public interface</span> <span class="type">ISwitchable</span>
+{
+    <span class="keyword">void</span> <span class="method">TurnOn</span>();
+    <span class="keyword">void</span> <span class="method">TurnOff</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">LightBulb</span> : <span class="type">ISwitchable</span>
+{
+    <span class="keyword">public void</span> <span class="method">TurnOn</span>() => <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Bulb on"</span>);
+    <span class="keyword">public void</span> <span class="method">TurnOff</span>() => <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Bulb off"</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">Switch</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">ISwitchable</span> <span class="variable">_device</span>;
+    
+    <span class="keyword">public</span> <span class="type">Switch</span>(<span class="type">ISwitchable</span> <span class="variable">device</span>)
+    {
+        <span class="variable">_device</span> = <span class="variable">device</span>;
+    }
+    
+    <span class="keyword">public void</span> <span class="method">Operate</span>() => <span class="variable">_device</span>.<span class="method">TurnOn</span>();
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <h2>6. Anti-Patterns</h2>
+
+        <div class="question">
+            Q32: What is the God Object anti-pattern?
+        </div>
+        <div class="answer">
+            <p><strong>God Object</strong> is an anti-pattern where a single object knows too much or does too much. It violates the Single Responsibility Principle and makes the code hard to maintain.</p>
+            
+            <h3>Characteristics:</h3>
+            <ul>
+                <li>Too many responsibilities</li>
+                <li>Large number of methods</li>
+                <li>High coupling with other classes</li>
+                <li>Difficult to test and maintain</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q33: What is the Singleton anti-pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Singleton Anti-Pattern</strong> occurs when Singleton is used inappropriately, causing issues like global state, hidden dependencies, and difficulty in testing.</p>
+            
+            <h3>When Singleton Becomes Anti-Pattern:</h3>
+            <ul>
+                <li>Used for global state management</li>
+                <li>Creates hidden dependencies</li>
+                <li>Makes unit testing difficult</li>
+                <li>Causes concurrency issues</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q34: What is the Spaghetti Code anti-pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Spaghetti Code</strong> is code with a complex and tangled control structure, making it difficult to understand and maintain.</p>
+            
+            <h3>Characteristics:</h3>
+            <ul>
+                <li>Excessive use of GOTO statements</li>
+                <li>Deep nesting</li>
+                <li>Lack of structure</li>
+                <li>Difficult to follow logic</li>
+            </ul>
+        </div>
+
+        <h2>7. Pattern Selection</h2>
+
+        <div class="question">
+            Q35: When should you use the Singleton pattern?
+        </div>
+        <div class="answer">
+            <h3>Use Singleton When:</h3>
+            <ul>
+                <li>Exactly one instance of a class is needed</li>
+                <li>The instance should be accessible globally</li>
+                <li>Controlled access to shared resources (database connection, logging)</li>
+                <li>Configuration settings</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q36: When should you use the Factory pattern?
+        </div>
+        <div class="answer">
+            <h3>Use Factory When:</h3>
+            <ul>
+                <li>Object creation logic is complex</li>
+                <li>You want to decouple object creation from usage</li>
+                <li>You need to create objects based on runtime conditions</li>
+                <li>You want to centralize object creation</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q37: When should you use the Observer pattern?
+        </div>
+        <div class="answer">
+            <h3>Use Observer When:</h3>
+            <ul>
+                <li>Multiple objects need to be notified of changes</li>
+                <li>You want to implement event handling</li>
+                <li>You need a publish-subscribe model</li>
+                <li>Changes in one object should trigger updates in others</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q38: When should you use the Strategy pattern?
+        </div>
+        <div class="answer">
+            <h3>Use Strategy When:</h3>
+            <ul>
+                <li>You have multiple algorithms for a task</li>
+                <li>You need to switch algorithms at runtime</li>
+                <li>You want to eliminate conditional statements</li>
+                <li>Algorithms are complex and need to be isolated</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q39: When should you use the Decorator pattern?
+        </div>
+        <div class="answer">
+            <h3>Use Decorator When:</h3>
+            <ul>
+                <li>You need to add responsibilities dynamically</li>
+                <li>You want to extend functionality without subclassing</li>
+                <li>You have many independent extensions</li>
+                <li>You want to avoid class explosion</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q40: When should you use the Adapter pattern?
+        </div>
+        <div class="answer">
+            <h3>Use Adapter When:</h3>
+            <ul>
+                <li>You need to integrate with third-party code</li>
+                <li>Interfaces are incompatible</li>
+                <li>You want to reuse existing classes with new interfaces</li>
+                <li>You need to work with legacy code</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            Q41: What is the difference between Factory and Abstract Factory?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Factory Method</th>
+                    <th>Abstract Factory</th>
+                </tr>
+                <tr>
+                    <td><strong>Scope</strong></td>
+                    <td>Creates one type of product</td>
+                    <td>Creates families of related products</td>
+                </tr>
+                <tr>
+                    <td><strong>Level</strong></td>
+                    <td>Class-level pattern</td>
+                    <td>Object-level pattern</td>
+                </tr>
+                <tr>
+                    <td><strong>Complexity</strong></td>
+                    <td>Simpler</td>
+                    <td>More complex</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q42: What is the difference between Decorator and Proxy?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Decorator</th>
+                    <th>Proxy</th>
+                </tr>
+                <tr>
+                    <td><strong>Purpose</strong></td>
+                    <td>Add responsibilities dynamically</td>
+                    <td>Control access to object</td>
+                </tr>
+                <tr>
+                    <td><strong>Focus</strong></td>
+                    <td>Enhancing functionality</td>
+                    <td>Managing access</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q43: What is the difference between Adapter and Bridge?
+        </div>
+        <div class="answer">
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Adapter</th>
+                    <th>Bridge</th>
+                </tr>
+                <tr>
+                    <td><strong>Purpose</strong></td>
+                    <td>Make incompatible interfaces work</td>
+                    <td>Separate abstraction from implementation</td>
+                </tr>
+                <tr>
+                    <td><strong>Timing</th>
+                    <td>After design</td>
+                    <td>During design</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="question">
+            Q44: What is the Repository pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Repository Pattern</strong> mediates between the domain and data mapping layers, acting like an in-memory domain object collection. It provides a collection-like interface for accessing domain objects.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">Repository.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Repository in C#</span>
+<span class="keyword">public interface</span> <span class="type">IRepository</span>&lt;<span class="type">T</span>&gt; <span class="keyword">where</span> <span class="type">T</span> : <span class="keyword">class</span>
+{
+    <span class="type">Task</span>&lt;<span class="type">T</span>&gt; <span class="method">GetByIdAsync</span>(<span class="keyword">int</span> <span class="variable">id</span>);
+    <span class="type">Task</span>&lt;<span class="type">IEnumerable</span>&lt;<span class="type">T</span>&gt;&gt; <span class="method">GetAllAsync</span>();
+    <span class="type">Task</span> <span class="method">AddAsync</span>(<span class="type">T</span> <span class="variable">entity</span>);
+    <span class="type">Task</span> <span class="method">UpdateAsync</span>(<span class="type">T</span> <span class="variable">entity</span>);
+    <span class="type">Task</span> <span class="method">DeleteAsync</span>(<span class="type">T</span> <span class="variable">entity</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">Repository</span>&lt;<span class="type">T</span>&gt; : <span class="type">IRepository</span>&lt;<span class="type">T</span>&gt; <span class="keyword">where</span> <span class="type">T</span> : <span class="keyword">class</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">DbContext</span> <span class="variable">_context</span>;
+    <span class="keyword">private readonly</span> <span class="type">DbSet</span>&lt;<span class="type">T</span>&gt; <span class="variable">_dbSet</span>;
+    
+    <span class="keyword">public</span> <span class="type">Repository</span>(<span class="type">DbContext</span> <span class="variable">context</span>)
+    {
+        <span class="variable">_context</span> = <span class="variable">context</span>;
+        <span class="variable">_dbSet</span> = <span class="variable">context</span>.<span class="method">Set</span>&lt;<span class="type">T</span>&gt;();
+    }
+    
+    <span class="keyword">public async Task</span>&lt;<span class="type">T</span>&gt; <span class="method">GetByIdAsync</span>(<span class="keyword">int</span> <span class="variable">id</span>)
+    {
+        <span class="keyword">return await</span> <span class="variable">_dbSet</span>.<span class="method">FindAsync</span>(<span class="variable">id</span>);
+    }
+    
+    <span class="keyword">public async Task</span>&lt;<span class="type">IEnumerable</span>&lt;<span class="type">T</span>&gt;&gt; <span class="method">GetAllAsync</span>()
+    {
+        <span class="keyword">return await</span> <span class="variable">_dbSet</span>.<span class="method">ToListAsync</span>();
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q45: What is the Dependency Injection pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Dependency Injection (DI)</strong> is a design pattern where dependencies are injected into a class rather than the class creating them. It promotes loose coupling and testability.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">DependencyInjection.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Dependency Injection in C#</span>
+<span class="keyword">public class</span> <span class="type">UserService</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">IUserRepository</span> <span class="variable">_userRepository</span>;
+    <span class="keyword">private readonly</span> <span class="type">IEmailService</span> <span class="variable">_emailService</span>;
+    
+    <span class="keyword">public</span> <span class="type">UserService</span>(<span class="type">IUserRepository</span> <span class="variable">userRepository</span>, <span class="type">IEmailService</span> <span class="variable">emailService</span>)
+    {
+        <span class="variable">_userRepository</span> = <span class="variable">userRepository</span>;
+        <span class="variable">_emailService</span> = <span class="variable">emailService</span>;
+    }
+    
+    <span class="keyword">public void</span> <span class="method">RegisterUser</span>(<span class="type">User</span> <span class="variable">user</span>)
+    {
+        <span class="variable">_userRepository</span>.<span class="method">Add</span>(<span class="variable">user</span>);
+        <span class="variable">_emailService</span>.<span class="method">SendWelcomeEmail</span>(<span class="variable">user</span>.<span class="property">Email</span>);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q46: What is the Unit of Work pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Unit of Work Pattern</strong> maintains a list of objects affected by a business transaction and coordinates writing out changes as a single unit.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">UnitOfWork.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Unit of Work in C#</span>
+<span class="keyword">public interface</span> <span class="type">IUnitOfWork</span> : <span class="type">IDisposable</span>
+{
+    <span class="type">IUserRepository</span> <span class="property">Users</span> { <span class="keyword">get</span>; }
+    <span class="type">IOrderRepository</span> <span class="property">Orders</span> { <span class="keyword">get</span>; }
+    <span class="type">Task</span>&lt;<span class="keyword">int</span>&gt; <span class="method">SaveChangesAsync</span>();
+}
+
+<span class="keyword">public class</span> <span class="type">UnitOfWork</span> : <span class="type">IUnitOfWork</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">DbContext</span> <span class="variable">_context</span>;
+    
+    <span class="keyword">public</span> <span class="type">UnitOfWork</span>(<span class="type">DbContext</span> <span class="variable">context</span>)
+    {
+        <span class="variable">_context</span> = <span class="variable">context</span>;
+        <span class="property">Users</span> = <span class="keyword">new</span> <span class="type">UserRepository</span>(<span class="variable">_context</span>);
+        <span class="property">Orders</span> = <span class="keyword">new</span> <span class="type">OrderRepository</span>(<span class="variable">_context</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="type">IUserRepository</span> <span class="property">Users</span> { <span class="keyword">get</span>; }
+    <span class="keyword">public</span> <span class="type">IOrderRepository</span> <span class="property">Orders</span> { <span class="keyword">get</span>; }
+    
+    <span class="keyword">public async Task</span>&lt;<span class="keyword">int</span>&gt; <span class="method">SaveChangesAsync</span>()
+    {
+        <span class="keyword">return await</span> <span class="variable">_context</span>.<span class="method">SaveChangesAsync</span>();
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q47: What is the Service Layer pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Service Layer Pattern</strong> defines an application's boundary and its set of available operations from the perspective of interfacing client layers. It encapsulates application logic.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">ServiceLayer.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Service Layer in C#</span>
+<span class="keyword">public interface</span> <span class="type">IOrderService</span>
+{
+    <span class="type">Task</span>&lt;<span class="type">Order</span>&gt; <span class="method">CreateOrderAsync</span>(<span class="type">OrderDto</span> <span class="variable">orderDto</span>);
+    <span class="type">Task</span>&lt;<span class="type">Order</span>&gt; <span class="method">GetOrderAsync</span>(<span class="keyword">int</span> <span class="variable">orderId</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">OrderService</span> : <span class="type">IOrderService</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">IUnitOfWork</span> <span class="variable">_unitOfWork</span>;
+    <span class="keyword">private readonly</span> <span class="type">IMapper</span> <span class="variable">_mapper</span>;
+    
+    <span class="keyword">public</span> <span class="type">OrderService</span>(<span class="type">IUnitOfWork</span> <span class="variable">unitOfWork</span>, <span class="type">IMapper</span> <span class="variable">mapper</span>)
+    {
+        <span class="variable">_unitOfWork</span> = <span class="variable">unitOfWork</span>;
+        <span class="variable">_mapper</span> = <span class="variable">mapper</span>;
+    }
+    
+    <span class="keyword">public async Task</span>&lt;<span class="type">Order</span>&gt; <span class="method">CreateOrderAsync</span>(<span class="type">OrderDto</span> <span class="variable">orderDto</span>)
+    {
+        <span class="keyword">var</span> <span class="variable">order</span> = <span class="variable">_mapper</span>.<span class="method">Map</span>&lt;<span class="type">Order</span>&gt;(<span class="variable">orderDto</span>);
+        <span class="keyword">await</span> <span class="variable">_unitOfWork</span>.<span class="property">Orders</span>.<span class="method">AddAsync</span>(<span class="variable">order</span>);
+        <span class="keyword">await</span> <span class="variable">_unitOfWork</span>.<span class="method">SaveChangesAsync</span>();
+        <span class="keyword">return</span> <span class="variable">order</span>;
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q48: What is the Data Transfer Object (DTO) pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Data Transfer Object (DTO)</strong> is an object that carries data between processes. It's used to transfer data between layers or across network boundaries.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">DTO.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// DTO in C#</span>
+<span class="keyword">public class</span> <span class="type">UserDto</span>
+{
+    <span class="keyword">public int</span> <span class="property">Id</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">Name</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">Email</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}
+
+<span class="keyword">public class</span> <span class="type">OrderDto</span>
+{
+    <span class="keyword">public int</span> <span class="property">Id</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public</span> <span class="type">DateTime</span> <span class="property">OrderDate</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public</span> <span class="type">List</span>&lt;<span class="type">OrderItemDto</span>&gt; <span class="property">Items</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q49: What is the Null Object pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Null Object Pattern</strong> provides an object as a surrogate for the lack of an object of a given type. It eliminates null checks by providing a default behavior.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">NullObject.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Null Object in C#</span>
+<span class="keyword">public interface</span> <span class="type">ILogger</span>
+{
+    <span class="keyword">void</span> <span class="method">Log</span>(<span class="keyword">string</span> <span class="variable">message</span>);
+}
+
+<span class="keyword">public class</span> <span class="type">ConsoleLogger</span> : <span class="type">ILogger</span>
+{
+    <span class="keyword">public void</span> <span class="method">Log</span>(<span class="keyword">string</span> <span class="variable">message</span>)
+    {
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="variable">message</span>);
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">NullLogger</span> : <span class="type">ILogger</span>
+{
+    <span class="keyword">public void</span> <span class="method">Log</span>(<span class="keyword">string</span> <span class="variable">message</span>)
+    {
+        <span class="comment">// Do nothing</span>
+    }
+}
+
+<span class="keyword">public class</span> <span class="type">Service</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">ILogger</span> <span class="variable">_logger</span>;
+    
+    <span class="keyword">public</span> <span class="type">Service</span>(<span class="type">ILogger</span> <span class="variable">logger</span>)
+    {
+        <span class="variable">_logger</span> = <span class="variable">logger</span> ?? <span class="keyword">new</span> <span class="type">NullLogger</span>();
+    }
+    
+    <span class="keyword">public void</span> <span class="method">DoWork</span>()
+    {
+        <span class="variable">_logger</span>.<span class="method">Log</span>(<span class="string">"Work started"</span>);
+    }
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="question">
+            Q50: What is the Lazy Loading pattern?
+        </div>
+        <div class="answer">
+            <p><strong>Lazy Loading Pattern</strong> defers initialization of an object until it's needed. It improves performance by avoiding unnecessary initialization.</p>
+            
+            <div class="code-editor">
+                <div class="code-editor-header">
+                    <div class="code-editor-left">
+                        <div class="code-editor-dot red"></div>
+                        <div class="code-editor-dot yellow"></div>
+                        <div class="code-editor-dot green"></div>
+                        <span class="code-editor-title">LazyLoading.cs</span>
+                    </div>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-editor-content">
+                    <code><span class="comment">// Lazy Loading in C#</span>
+<span class="keyword">public class</span> <span class="type">Order</span>
+{
+    <span class="keyword">public int</span> <span class="property">Id</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> <span class="property">CustomerName</span> { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    
+    <span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">OrderItem</span>&gt; <span class="variable">_items</span>;
+    <span class="keyword">public</span> <span class="type">List</span>&lt;<span class="type">OrderItem</span>&gt; <span class="property">Items</span>
+    {
+        <span class="keyword">get</span>
+        {
+            <span class="keyword">if</span> (<span class="variable">_items</span> == <span class="keyword">null</span>)
+            {
+                <span class="variable">_items</span> = <span class="method">LoadItems</span>();
+            }
+            <span class="keyword">return</span> <span class="variable">_items</span>;
+        }
+    }
+    
+    <span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">OrderItem</span>&gt; <span class="method">LoadItems</span>()
+    {
+        <span class="comment">// Load from database</span>
+        <span class="keyword">return new</span> <span class="type">List</span>&lt;<span class="type">OrderItem</span>&gt;();
+    }
+}
+
+<span class="comment">// Using Lazy&lt;T&gt;</span>
+<span class="keyword">public class</span> <span class="type">Order</span>
+{
+    <span class="keyword">private readonly</span> <span class="type">Lazy</span>&lt;<span class="type">List</span>&lt;<span class="type">OrderItem</span>&gt;&gt; <span class="variable">_items</span>;
+    
+    <span class="keyword">public</span> <span class="type">Order</span>()
+    {
+        <span class="variable">_items</span> = <span class="keyword">new</span> <span class="type">Lazy</span>&lt;<span class="type">List</span>&lt;<span class="type">OrderItem</span>&gt;&gt;(() => <span class="method">LoadItems</span>());
+    }
+    
+    <span class="keyword">public</span> <span class="type">List</span>&lt;<span class="type">OrderItem</span>&gt; <span class="property">Items</span> => <span class="variable">_items</span>.<span class="property">Value</span>;
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><span class="highlight">🎯 Ready for Your Design Patterns Interview?</span></p>
+            <p>Master these 50 comprehensive design patterns interview questions covering fundamentals, creational patterns, structural patterns, behavioral patterns, SOLID principles, anti-patterns, and pattern selection. Design patterns are essential for writing maintainable and scalable code - understanding these concepts deeply will make you a better software architect.</p>
+            <p><span class="highlight">💡 Tip:</span> Focus on understanding the most commonly used patterns (Singleton, Factory, Observer, Strategy, Decorator, Adapter) and the SOLID principles. These are the areas where most design pattern interview questions focus. Practice implementing these patterns in C# with .NET Core.</p>
         </div>
     </div>
+    <script>
+        function copyCode(button) {
+            const codeEditor = button.closest('.code-editor');
+            const codeContent = codeEditor.querySelector('.code-editor-content code');
+            const text = codeContent.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
+    <script src="../code-converter.js"></script>
 </body>
 </html>
-
-
